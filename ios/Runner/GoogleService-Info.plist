@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyBkx-GKv4Cyp4X_8zqW7fVTsFO-Cda_PbU</string>
+	<key>GCM_SENDER_ID</key>
+	<string>455267850635</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.mycompany.crmapp</string>
+	<key>PROJECT_ID</key>
+	<string>mondaha-9r9wpx</string>
+	<key>STORAGE_BUCKET</key>
+	<string>mondaha-9r9wpx.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:455267850635:ios:c7fa8e11139f17365fb78e</string>
+</dict>
+</plist>

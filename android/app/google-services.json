@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "455267850635",
+    "project_id": "mondaha-9r9wpx",
+    "storage_bucket": "mondaha-9r9wpx.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:455267850635:android:95411c93251df0945fb78e",
+        "android_client_info": {
+          "package_name": "com.mycompany.crmapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAcibr4oxVzWyYhej93lxJBzZKpFIMadcM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

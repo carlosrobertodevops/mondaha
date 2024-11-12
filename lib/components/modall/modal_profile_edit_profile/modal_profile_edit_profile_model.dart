@@ -1,0 +1,69 @@
+import '/auth/supabase_auth/auth_util.dart';
+import '/backend/supabase/supabase.dart';
+import '/flutter_flow/flutter_flow_animations.dart';
+import '/flutter_flow/flutter_flow_drop_down.dart';
+import '/flutter_flow/flutter_flow_icon_button.dart';
+import '/flutter_flow/flutter_flow_theme.dart';
+import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/form_field_controller.dart';
+import '/flutter_flow/upload_data.dart';
+import 'dart:math';
+import 'dart:ui';
+import 'modal_profile_edit_profile_widget.dart'
+    show ModalProfileEditProfileWidget;
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+
+class ModalProfileEditProfileModel
+    extends FlutterFlowModel<ModalProfileEditProfileWidget> {
+  ///  Local state fields for this component.
+
+  bool uploadPerfilImagemTemp = false;
+
+  ///  State fields for stateful widgets in this component.
+
+  final formKey = GlobalKey<FormState>();
+  bool isDataUploading1 = false;
+  FFUploadedFile uploadedLocalFile1 =
+      FFUploadedFile(bytes: Uint8List.fromList([]));
+
+  // State field(s) for txt_nome_completo widget.
+  FocusNode? txtNomeCompletoFocusNode;
+  TextEditingController? txtNomeCompletoTextController;
+  String? Function(BuildContext, String?)?
+      txtNomeCompletoTextControllerValidator;
+  // State field(s) for txt_descricao widget.
+  FocusNode? txtDescricaoFocusNode;
+  TextEditingController? txtDescricaoTextController;
+  String? Function(BuildContext, String?)? txtDescricaoTextControllerValidator;
+  // State field(s) for ddw_agencia widget.
+  int? ddwAgenciaValue;
+  FormFieldController<int>? ddwAgenciaValueController;
+  bool isDataUploading2 = false;
+  FFUploadedFile uploadedLocalFile2 =
+      FFUploadedFile(bytes: Uint8List.fromList([]));
+  String uploadedFileUrl2 = '';
+
+  // Stores action output result for [Backend Call - Update Row(s)] action in Button widget.
+  List<UsuariosRow>? outputUpdateUsuarioPerfil1;
+  // Stores action output result for [Backend Call - Update Row(s)] action in Button widget.
+  List<UsuariosRow>? outputUpdateUsuarioPerfil2;
+
+  @override
+  void initState(BuildContext context) {}
+
+  @override
+  void dispose() {
+    txtNomeCompletoFocusNode?.dispose();
+    txtNomeCompletoTextController?.dispose();
+
+    txtDescricaoFocusNode?.dispose();
+    txtDescricaoTextController?.dispose();
+  }
+}
