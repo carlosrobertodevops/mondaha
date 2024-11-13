@@ -948,7 +948,7 @@ class _WebNavWidgetState extends State<WebNavWidget>
                                                             .info
                                                         : FlutterFlowTheme.of(
                                                                 context)
-                                                            .info,
+                                                            .secondaryText,
                                                     FlutterFlowTheme.of(context)
                                                         .info,
                                                   ),
