@@ -1106,7 +1106,7 @@ class _ModalProfileEditAdminWidgetState
                                             },
                                             matchingRows: (rows) => rows.eq(
                                               'usuario_id',
-                                              widget!.usuarioid?.usuarioId,
+                                              widget!.usuarioid!.usuarioId,
                                             ),
                                           );
                                         } else {
@@ -1126,7 +1126,7 @@ class _ModalProfileEditAdminWidgetState
                                             },
                                             matchingRows: (rows) => rows.eq(
                                               'usuario_id',
-                                              widget!.usuarioid?.usuarioId,
+                                              widget!.usuarioid!.usuarioId,
                                             ),
                                           );
                                         }

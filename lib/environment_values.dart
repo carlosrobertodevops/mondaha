@@ -5,7 +5,7 @@ import 'flutter_flow/flutter_flow_util.dart';
 class FFDevEnvironmentValues {
   static const String currentEnvironment = 'Development';
   static const String environmentValuesPath =
-      'assets/environment_values/development.json';
+      'assets/environment_values/environment.json';
 
   static final FFDevEnvironmentValues _instance =
       FFDevEnvironmentValues._internal();

@@ -1228,7 +1228,7 @@ class _ModalProfileEditProfileWidgetState
                                                 },
                                                 matchingRows: (rows) => rows.eq(
                                                   'usuario_id',
-                                                  overlayUsuariosRow?.usuarioId,
+                                                  overlayUsuariosRow!.usuarioId,
                                                 ),
                                               );
                                               // Atualizar o Peril no App I
@@ -1259,7 +1259,7 @@ class _ModalProfileEditProfileWidgetState
                                                 },
                                                 matchingRows: (rows) => rows.eq(
                                                   'usuario_id',
-                                                  overlayUsuariosRow?.usuarioId,
+                                                  overlayUsuariosRow!.usuarioId,
                                                 ),
                                               );
                                               // Atualizar o Peril no App II

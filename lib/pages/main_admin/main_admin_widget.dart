@@ -336,7 +336,7 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                           .primaryText,
                                       unselectedLabelColor:
                                           FlutterFlowTheme.of(context)
-                                              .primaryText,
+                                              .secondaryText,
                                       backgroundColor:
                                           FlutterFlowTheme.of(context).accent1,
                                       borderColor:
@@ -819,7 +819,7 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                                                         future: AgenciasTable().querySingleRow(
                                                                                           queryFn: (q) => q.eq(
                                                                                             'agencia_id',
-                                                                                            listViewUsuariosRow.agenciaId,
+                                                                                            listViewUsuariosRow.agenciaId!,
                                                                                           ),
                                                                                         ),
                                                                                         builder: (context, snapshot) {
@@ -926,7 +926,7 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                                                             future: TiposUsuariosTable().querySingleRow(
                                                                                               queryFn: (q) => q.eq(
                                                                                                 'tipo_usuario_id',
-                                                                                                listViewUsuariosRow.tipoUsuarioId,
+                                                                                                listViewUsuariosRow.tipoUsuarioId!,
                                                                                               ),
                                                                                             ),
                                                                                             builder: (context, snapshot) {
@@ -1445,7 +1445,7 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                                                       future: AgenciasTable().querySingleRow(
                                                                                         queryFn: (q) => q.eq(
                                                                                           'agencia_id',
-                                                                                          listViewUsuariosRow.agenciaId,
+                                                                                          listViewUsuariosRow.agenciaId!,
                                                                                         ),
                                                                                       ),
                                                                                       builder: (context, snapshot) {
@@ -1552,7 +1552,7 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                                                           future: TiposUsuariosTable().querySingleRow(
                                                                                             queryFn: (q) => q.eq(
                                                                                               'tipo_usuario_id',
-                                                                                              listViewUsuariosRow.tipoUsuarioId,
+                                                                                              listViewUsuariosRow.tipoUsuarioId!,
                                                                                             ),
                                                                                           ),
                                                                                           builder: (context, snapshot) {
@@ -2077,7 +2077,7 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                                                       future: AgenciasTable().querySingleRow(
                                                                                         queryFn: (q) => q.eq(
                                                                                           'agencia_id',
-                                                                                          listViewUsuariosRow.agenciaId,
+                                                                                          listViewUsuariosRow.agenciaId!,
                                                                                         ),
                                                                                       ),
                                                                                       builder: (context, snapshot) {
@@ -2184,7 +2184,7 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                                                           future: TiposUsuariosTable().querySingleRow(
                                                                                             queryFn: (q) => q.eq(
                                                                                               'tipo_usuario_id',
-                                                                                              listViewUsuariosRow.tipoUsuarioId,
+                                                                                              listViewUsuariosRow.tipoUsuarioId!,
                                                                                             ),
                                                                                           ),
                                                                                           builder: (context, snapshot) {

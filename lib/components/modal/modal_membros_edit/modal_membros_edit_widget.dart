@@ -2367,7 +2367,7 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                     future: MunicipiosTable().queryRows(
                                                                                       queryFn: (q) => q.eq(
                                                                                         'estado_id',
-                                                                                        _model.ddwEstadoValue,
+                                                                                        _model.ddwEstadoValue!,
                                                                                       ),
                                                                                     ),
                                                                                     builder: (context, snapshot) {
@@ -2505,6 +2505,7 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                                   if (_model.placePickerEnderecoValue.address != _model.txtMembrosEnderecosAddTextController.text) {
                                                                                                     safeSetState(() {
                                                                                                       _model.txtMembrosEnderecosAddTextController?.text = '${_model.placePickerEnderecoValue.address}';
+                                                                                                      _model.txtMembrosEnderecosAddFocusNode?.requestFocus();
                                                                                                     });
                                                                                                   }
                                                                                                 },
@@ -3774,6 +3775,7 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                         safeSetState(() {});
                                                                                         safeSetState(() {
                                                                                           _model.txtFaccaoTresLocaisAddTextController?.text = _model.membrosLimpar!;
+                                                                                          _model.txtFaccaoTresLocaisAddFocusNode?.requestFocus();
                                                                                         });
                                                                                       } else {
                                                                                         ScaffoldMessenger.of(context).showSnackBar(
@@ -4608,7 +4610,20 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                         _model.datePicked,
                                                                                         locale: FFLocalizations.of(context).languageCode,
                                                                                       );
-                                                                                      _model.txtProcedimentoDataTextController?.selection = TextSelection.collapsed(offset: _model.txtProcedimentoDataTextController!.text.length);
+                                                                                      _model.txtProcedimentoDataFocusNode?.requestFocus();
+                                                                                      WidgetsBinding.instance.addPostFrameCallback((_) {
+                                                                                        _model.txtProcedimentoDataTextController?.selection = TextSelection.collapsed(
+                                                                                          offset: _model.txtProcedimentoDataTextController!.text.length,
+                                                                                        );
+                                                                                      });
+                                                                                      _model.txtProcedimentoDataMask.updateMask(
+                                                                                        newValue: TextEditingValue(
+                                                                                          text: _model.txtProcedimentoDataTextController!.text,
+                                                                                          selection: TextSelection.collapsed(
+                                                                                            offset: _model.txtProcedimentoDataTextController!.text.length,
+                                                                                          ),
+                                                                                        ),
+                                                                                      );
                                                                                     });
                                                                                   }),
                                                                                   Future(() async {
@@ -6544,22 +6559,7 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                           '5hhyuasp' /*  */,
                                                                                         ))
                                                                                       ],
-                                                                                      onChanged: (val) async {
-                                                                                        safeSetState(() => _model.choiceChipsValidacoesValues = val);
-                                                                                        logFirebaseEvent('MODAL_MEMBROS_EDIT_ChoiceChipsValidacoes');
-                                                                                        if (_model.membrosPercetualValidacao <= 1.0) {
-                                                                                          if (!_model.choiceChipsValidacoesValues!.contains('') ? true : false) {
-                                                                                            _model.membrosPercetualValidacao = _model.membrosPercetualValidacao + 0.10;
-                                                                                            safeSetState(() {});
-                                                                                          } else {
-                                                                                            _model.membrosPercetualValidacao = _model.membrosPercetualValidacao + -0.10;
-                                                                                            safeSetState(() {});
-                                                                                          }
-                                                                                        } else {
-                                                                                          _model.membrosPercetualValidacao = _model.membrosPercetualValidacao + 0.0;
-                                                                                          safeSetState(() {});
-                                                                                        }
-                                                                                      },
+                                                                                      onChanged: (val) => safeSetState(() => _model.choiceChipsValidacoesValues = val),
                                                                                       selectedChipStyle: ChipStyle(
                                                                                         backgroundColor: FlutterFlowTheme.of(context).primary,
                                                                                         textStyle: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -6592,11 +6592,7 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                       initialized: _model.choiceChipsValidacoesValues != null,
                                                                                       alignment: WrapAlignment.start,
                                                                                       controller: _model.choiceChipsValidacoesValueController ??= FormFieldController<List<String>>(
-                                                                                        [
-                                                                                          FFLocalizations.of(context).getText(
-                                                                                            'pges7tjh' /* 0.1 */,
-                                                                                          )
-                                                                                        ],
+                                                                                        [],
                                                                                       ),
                                                                                       wrapped: true,
                                                                                     ),
@@ -6815,8 +6811,8 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                   q.eq(
                                                                 'faccao_id',
                                                                 _model
-                                                                    .retMembrosAdd
-                                                                    ?.faccaoId,
+                                                                    .retMembrosAdd!
+                                                                    .faccaoId!,
                                                               ),
                                                             ),
                                                             builder: (context,

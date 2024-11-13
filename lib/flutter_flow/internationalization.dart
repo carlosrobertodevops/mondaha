@@ -742,9 +742,9 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Please choose an option from the dropdown',
       'pt': 'Selecione uma opção no menu suspenso',
     },
-    '9lz7n6fv': {
+    '0oyc6zx2': {
       'en': 'Field is required!',
-      'pt': '',
+      'pt': 'Campo obrigatório!',
     },
     'dw2vhjan': {
       'en': 'Invalid email!',
@@ -754,15 +754,15 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Please choose an option from the dropdown',
       'pt': '',
     },
-    'fyc3auc8': {
+    '9lz7n6fv': {
       'en': 'Field is required',
-      'pt': 'Campo é obrigatório!',
+      'pt': '',
     },
     'jrjtliei': {
       'en': 'Please choose an option from the dropdown',
       'pt': 'Selecione uma opção no menu suspenso',
     },
-    'obaog0sx': {
+    'fyc3auc8': {
       'en': 'Field is required',
       'pt': 'Campo é obrigatório!',
     },
@@ -979,7 +979,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Please choose an option from the dropdown',
       'pt': '',
     },
-    'o2saz5hd': {
+    'obaog0sx': {
       'en': 'Field is required',
       'pt': 'Campo é obrigatório!',
     },
@@ -987,7 +987,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Please choose an option from the dropdown',
       'pt': 'Selecione uma opção no menu suspenso',
     },
-    'g9phgimm': {
+    'o2saz5hd': {
       'en': 'Field is required',
       'pt': 'Campo obrigatório!',
     },
@@ -995,7 +995,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Please choose an option from the dropdown',
       'pt': 'Selecione uma opção no menu suspenso',
     },
-    'zdm5barf': {
+    'g9phgimm': {
       'en': 'Field is required',
       'pt': 'Campo é obrigatório!',
     },
@@ -1003,7 +1003,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Please choose an option from the dropdown',
       'pt': 'Selecione uma opção no menu suspenso',
     },
-    'cmb3bj3a': {
+    'zdm5barf': {
       'en': 'Field is required',
       'pt': 'Campo é obrigatório!',
     },
@@ -1011,7 +1011,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Please choose an option from the dropdown',
       'pt': 'Selecione uma opção no menu suspenso',
     },
-    'yla4vwvu': {
+    'cmb3bj3a': {
       'en': 'Field is required',
       'pt': 'Campo é obrigatório',
     },
@@ -2536,10 +2536,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'v0fvpqeq': {
       'en': '',
       'pt': '',
-    },
-    '6ih49zhb': {
-      'en': '0.1',
-      'pt': '0,1',
     },
     'hu7rwf8m': {
       'en': 'Observação(ões)',
@@ -4100,10 +4096,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     '5hhyuasp': {
       'en': '',
       'pt': '',
-    },
-    'pges7tjh': {
-      'en': '0.1',
-      'pt': '0,1',
     },
     'z2ut6vuo': {
       'en': 'Observação(ões)',

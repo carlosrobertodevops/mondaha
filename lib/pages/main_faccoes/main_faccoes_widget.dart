@@ -291,7 +291,7 @@ class _MainFaccoesWidgetState extends State<MainFaccoesWidget>
                                           .primaryText,
                                       unselectedLabelColor:
                                           FlutterFlowTheme.of(context)
-                                              .primaryText,
+                                              .secondaryText,
                                       backgroundColor:
                                           FlutterFlowTheme.of(context).accent1,
                                       borderColor:

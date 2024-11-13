@@ -65,7 +65,7 @@ class _MainHomeWidgetState extends State<MainHomeWidget>
           _model.outputQueryTipoUsuarios = await TiposUsuariosTable().queryRows(
             queryFn: (q) => q.eq(
               'tipo_usuario_id',
-              _model.outputQueryUsuarios?.first?.tipoUsuarioId,
+              _model.outputQueryUsuarios!.first.tipoUsuarioId!,
             ),
           );
           FFAppState().UsuarioAtualTipoUsuarioNome =
@@ -77,7 +77,7 @@ class _MainHomeWidgetState extends State<MainHomeWidget>
           _model.outputQueryAgenciaNome = await AgenciasTable().queryRows(
             queryFn: (q) => q.eq(
               'agencia_id',
-              _model.outputQueryUsuarios?.first?.agenciaId,
+              _model.outputQueryUsuarios!.first.agenciaId!,
             ),
           );
           FFAppState().UsuarioAtualAgenciaNome =

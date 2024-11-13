@@ -9,7 +9,13 @@ import 'toast03_model.dart';
 export 'toast03_model.dart';
 
 class Toast03Widget extends StatefulWidget {
-  const Toast03Widget({super.key});
+  const Toast03Widget({
+    super.key,
+    String? texto,
+  }) : this.texto = texto ??
+            'Alguma cópia do corpo que está presente nesta pequena notificação.';
+
+  final String texto;
 
   @override
   State<Toast03Widget> createState() => _Toast03WidgetState();

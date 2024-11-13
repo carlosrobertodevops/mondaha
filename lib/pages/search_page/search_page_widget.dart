@@ -445,7 +445,7 @@ class _SearchPageWidgetState extends State<SearchPageWidget> {
                                           16.0, 4.0, 16.0, 8.0),
                                       child: FutureBuilder<List<MembrosRow>>(
                                         future: MembrosTable().queryRows(
-                                          queryFn: (q) => q.in_(
+                                          queryFn: (q) => q.inFilter(
                                             'nome_completo',
                                             _model.simpleSearchResults,
                                           ),

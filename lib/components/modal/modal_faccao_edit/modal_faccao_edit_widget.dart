@@ -706,7 +706,7 @@ class _ModalFaccaoEditWidgetState extends State<ModalFaccaoEditWidget>
                                         },
                                         matchingRows: (rows) => rows.eq(
                                           'faccao_id',
-                                          widget!.faccaoid?.faccaoId,
+                                          widget!.faccaoid!.faccaoId,
                                         ),
                                         returnRows: true,
                                       );

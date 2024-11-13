@@ -325,7 +325,7 @@ class _MainMembrosWidgetState extends State<MainMembrosWidget>
                                         .primaryText,
                                     unselectedLabelColor:
                                         FlutterFlowTheme.of(context)
-                                            .primaryText,
+                                            .secondaryText,
                                     backgroundColor:
                                         FlutterFlowTheme.of(context).accent1,
                                     borderColor:
@@ -623,273 +623,303 @@ class _MainMembrosWidgetState extends State<MainMembrosWidget>
                                                         ),
                                                       ),
                                                     ),
-                                                    content: FutureBuilder<
-                                                        List<MembrosRow>>(
-                                                      future:
-                                                          _model.qryMembrosMain(
-                                                        requestFn: () =>
-                                                            MembrosTable()
-                                                                .queryRows(
-                                                          queryFn: (q) => q.order(
-                                                              'nome_completo',
-                                                              ascending: true),
-                                                        ),
-                                                      ),
-                                                      builder:
-                                                          (context, snapshot) {
-                                                        // Customize what your widget looks like when it's loading.
-                                                        if (!snapshot.hasData) {
-                                                          return Center(
-                                                            child: SizedBox(
-                                                              width: 50.0,
-                                                              height: 50.0,
-                                                              child:
-                                                                  SpinKitFadingCircle(
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .tertiary,
-                                                                size: 50.0,
-                                                              ),
+                                                    content: Column(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
+                                                      children: [
+                                                        FutureBuilder<
+                                                            List<MembrosRow>>(
+                                                          future: _model
+                                                              .qryMembrosMain(
+                                                            requestFn: () =>
+                                                                MembrosTable()
+                                                                    .queryRows(
+                                                              queryFn: (q) =>
+                                                                  q.order(
+                                                                      'nome_completo',
+                                                                      ascending:
+                                                                          true),
                                                             ),
-                                                          );
-                                                        }
-                                                        List<MembrosRow>
-                                                            listViewMembrosRowList =
-                                                            snapshot.data!;
+                                                          ),
+                                                          builder: (context,
+                                                              snapshot) {
+                                                            // Customize what your widget looks like when it's loading.
+                                                            if (!snapshot
+                                                                .hasData) {
+                                                              return Center(
+                                                                child: SizedBox(
+                                                                  width: 50.0,
+                                                                  height: 50.0,
+                                                                  child:
+                                                                      SpinKitFadingCircle(
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .tertiary,
+                                                                    size: 50.0,
+                                                                  ),
+                                                                ),
+                                                              );
+                                                            }
+                                                            List<MembrosRow>
+                                                                listViewMembrosRowList =
+                                                                snapshot.data!;
 
-                                                        return ListView.builder(
-                                                          padding:
-                                                              EdgeInsets.zero,
-                                                          primary: false,
-                                                          shrinkWrap: true,
-                                                          scrollDirection:
-                                                              Axis.vertical,
-                                                          itemCount:
-                                                              listViewMembrosRowList
-                                                                  .length,
-                                                          itemBuilder: (context,
-                                                              listViewIndex) {
-                                                            final listViewMembrosRow =
-                                                                listViewMembrosRowList[
-                                                                    listViewIndex];
-                                                            return Builder(
-                                                              builder:
-                                                                  (context) =>
-                                                                      Padding(
-                                                                padding: EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        16.0,
-                                                                        8.0,
-                                                                        16.0,
-                                                                        0.0),
-                                                                child: InkWell(
-                                                                  splashColor:
-                                                                      Colors
-                                                                          .transparent,
-                                                                  focusColor: Colors
-                                                                      .transparent,
-                                                                  hoverColor: Colors
-                                                                      .transparent,
-                                                                  highlightColor:
-                                                                      Colors
-                                                                          .transparent,
-                                                                  onTap:
-                                                                      () async {
-                                                                    logFirebaseEvent(
-                                                                        'MAIN_MEMBROS_Container_sog06zkz_ON_TAP');
-                                                                    await showDialog(
-                                                                      context:
-                                                                          context,
-                                                                      builder:
-                                                                          (dialogContext) {
-                                                                        return Dialog(
-                                                                          elevation:
-                                                                              0,
-                                                                          insetPadding:
-                                                                              EdgeInsets.zero,
-                                                                          backgroundColor:
-                                                                              Colors.transparent,
-                                                                          alignment:
-                                                                              AlignmentDirectional(0.0, 0.0).resolve(Directionality.of(context)),
-                                                                          child:
-                                                                              GestureDetector(
-                                                                            onTap: () =>
-                                                                                FocusScope.of(dialogContext).unfocus(),
-                                                                            child:
-                                                                                ModalMembrosEditWidget(
-                                                                              membroId: listViewMembrosRow,
-                                                                            ),
-                                                                          ),
+                                                            return ListView
+                                                                .builder(
+                                                              padding:
+                                                                  EdgeInsets
+                                                                      .zero,
+                                                              primary: false,
+                                                              shrinkWrap: true,
+                                                              scrollDirection:
+                                                                  Axis.vertical,
+                                                              itemCount:
+                                                                  listViewMembrosRowList
+                                                                      .length,
+                                                              itemBuilder: (context,
+                                                                  listViewIndex) {
+                                                                final listViewMembrosRow =
+                                                                    listViewMembrosRowList[
+                                                                        listViewIndex];
+                                                                return Builder(
+                                                                  builder:
+                                                                      (context) =>
+                                                                          Padding(
+                                                                    padding: EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            16.0,
+                                                                            8.0,
+                                                                            16.0,
+                                                                            0.0),
+                                                                    child:
+                                                                        InkWell(
+                                                                      splashColor:
+                                                                          Colors
+                                                                              .transparent,
+                                                                      focusColor:
+                                                                          Colors
+                                                                              .transparent,
+                                                                      hoverColor:
+                                                                          Colors
+                                                                              .transparent,
+                                                                      highlightColor:
+                                                                          Colors
+                                                                              .transparent,
+                                                                      onTap:
+                                                                          () async {
+                                                                        logFirebaseEvent(
+                                                                            'MAIN_MEMBROS_Container_sog06zkz_ON_TAP');
+                                                                        await showDialog(
+                                                                          context:
+                                                                              context,
+                                                                          builder:
+                                                                              (dialogContext) {
+                                                                            return Dialog(
+                                                                              elevation: 0,
+                                                                              insetPadding: EdgeInsets.zero,
+                                                                              backgroundColor: Colors.transparent,
+                                                                              alignment: AlignmentDirectional(0.0, 0.0).resolve(Directionality.of(context)),
+                                                                              child: GestureDetector(
+                                                                                onTap: () => FocusScope.of(dialogContext).unfocus(),
+                                                                                child: ModalMembrosEditWidget(
+                                                                                  membroId: listViewMembrosRow,
+                                                                                ),
+                                                                              ),
+                                                                            );
+                                                                          },
                                                                         );
                                                                       },
-                                                                    );
-                                                                  },
-                                                                  child:
-                                                                      Container(
-                                                                    width: double
-                                                                        .infinity,
-                                                                    decoration:
-                                                                        BoxDecoration(
-                                                                      color: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .secondaryBackground,
-                                                                      boxShadow: [
-                                                                        BoxShadow(
-                                                                          blurRadius:
-                                                                              3.0,
-                                                                          color:
-                                                                              Color(0x20000000),
-                                                                          offset:
-                                                                              Offset(
-                                                                            0.0,
-                                                                            1.0,
-                                                                          ),
-                                                                        )
-                                                                      ],
-                                                                      borderRadius:
-                                                                          BorderRadius.circular(
-                                                                              12.0),
-                                                                    ),
-                                                                    child:
-                                                                        Padding(
-                                                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                                                          8.0,
-                                                                          8.0,
-                                                                          12.0,
-                                                                          8.0),
                                                                       child:
-                                                                          Row(
-                                                                        mainAxisSize:
-                                                                            MainAxisSize.max,
-                                                                        crossAxisAlignment:
-                                                                            CrossAxisAlignment.center,
-                                                                        children: [
-                                                                          ClipRRect(
-                                                                            borderRadius:
-                                                                                BorderRadius.circular(8.0),
-                                                                            child:
-                                                                                CachedNetworkImage(
-                                                                              fadeInDuration: Duration(milliseconds: 10),
-                                                                              fadeOutDuration: Duration(milliseconds: 10),
-                                                                              imageUrl: valueOrDefault<String>(
-                                                                                listViewMembrosRow.fotosPath.first != '' ? listViewMembrosRow.fotosPath.first : (Theme.of(context).brightness == Brightness.light ? FFAppState().MembrosImagePathLight : FFAppState().MembrosImagePathDark),
-                                                                                'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/rgxzhoyu6nbx/groups_96dp_99999_FILL0_wght400_GRAD0_opsz48.png',
+                                                                          Container(
+                                                                        width: double
+                                                                            .infinity,
+                                                                        decoration:
+                                                                            BoxDecoration(
+                                                                          color:
+                                                                              FlutterFlowTheme.of(context).secondaryBackground,
+                                                                          boxShadow: [
+                                                                            BoxShadow(
+                                                                              blurRadius: 3.0,
+                                                                              color: Color(0x20000000),
+                                                                              offset: Offset(
+                                                                                0.0,
+                                                                                1.0,
                                                                               ),
-                                                                              width: 50.0,
-                                                                              height: 50.0,
-                                                                              fit: BoxFit.contain,
-                                                                            ),
-                                                                          ),
-                                                                          Expanded(
-                                                                            child:
-                                                                                Row(
-                                                                              mainAxisSize: MainAxisSize.max,
-                                                                              children: [
-                                                                                Expanded(
-                                                                                  child: Padding(
-                                                                                    padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
-                                                                                    child: Text(
-                                                                                      valueOrDefault<String>(
-                                                                                        listViewMembrosRow.nomeCompleto == ''
-                                                                                            ? 'sem informação'
-                                                                                            : valueOrDefault<String>(
-                                                                                                listViewMembrosRow.nomeCompleto,
-                                                                                                'sem informação',
-                                                                                              ),
-                                                                                        'sem informação',
-                                                                                      ),
-                                                                                      style: FlutterFlowTheme.of(context).bodyLarge.override(
-                                                                                            fontFamily: FlutterFlowTheme.of(context).bodyLargeFamily,
-                                                                                            letterSpacing: 0.0,
-                                                                                            useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyLargeFamily),
-                                                                                          ),
-                                                                                    ),
+                                                                            )
+                                                                          ],
+                                                                          borderRadius:
+                                                                              BorderRadius.circular(12.0),
+                                                                        ),
+                                                                        child:
+                                                                            Padding(
+                                                                          padding: EdgeInsetsDirectional.fromSTEB(
+                                                                              8.0,
+                                                                              8.0,
+                                                                              12.0,
+                                                                              8.0),
+                                                                          child:
+                                                                              Row(
+                                                                            mainAxisSize:
+                                                                                MainAxisSize.max,
+                                                                            crossAxisAlignment:
+                                                                                CrossAxisAlignment.center,
+                                                                            children: [
+                                                                              ClipRRect(
+                                                                                borderRadius: BorderRadius.circular(8.0),
+                                                                                child: CachedNetworkImage(
+                                                                                  fadeInDuration: Duration(milliseconds: 10),
+                                                                                  fadeOutDuration: Duration(milliseconds: 10),
+                                                                                  imageUrl: valueOrDefault<String>(
+                                                                                    listViewMembrosRow.fotosPath.first != '' ? listViewMembrosRow.fotosPath.first : (Theme.of(context).brightness == Brightness.light ? FFAppState().MembrosImagePathLight : FFAppState().MembrosImagePathDark),
+                                                                                    'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/rgxzhoyu6nbx/groups_96dp_99999_FILL0_wght400_GRAD0_opsz48.png',
                                                                                   ),
+                                                                                  width: 50.0,
+                                                                                  height: 50.0,
+                                                                                  fit: BoxFit.contain,
                                                                                 ),
-                                                                                if (responsiveVisibility(
-                                                                                  context: context,
-                                                                                  phone: false,
-                                                                                  tablet: false,
-                                                                                ))
-                                                                                  Expanded(
-                                                                                    child: Padding(
-                                                                                      padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
-                                                                                      child: FutureBuilder<List<FuncoesRow>>(
-                                                                                        future: FuncoesTable().querySingleRow(
-                                                                                          queryFn: (q) => q.eq(
-                                                                                            'funcao_id',
-                                                                                            listViewMembrosRow.funcaoId,
+                                                                              ),
+                                                                              Expanded(
+                                                                                child: Row(
+                                                                                  mainAxisSize: MainAxisSize.max,
+                                                                                  children: [
+                                                                                    Expanded(
+                                                                                      child: Padding(
+                                                                                        padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
+                                                                                        child: Text(
+                                                                                          valueOrDefault<String>(
+                                                                                            listViewMembrosRow.nomeCompleto == ''
+                                                                                                ? 'sem informação'
+                                                                                                : valueOrDefault<String>(
+                                                                                                    listViewMembrosRow.nomeCompleto,
+                                                                                                    'sem informação',
+                                                                                                  ),
+                                                                                            'sem informação',
                                                                                           ),
-                                                                                        ),
-                                                                                        builder: (context, snapshot) {
-                                                                                          // Customize what your widget looks like when it's loading.
-                                                                                          if (!snapshot.hasData) {
-                                                                                            return Center(
-                                                                                              child: SizedBox(
-                                                                                                width: 50.0,
-                                                                                                height: 50.0,
-                                                                                                child: SpinKitFadingCircle(
-                                                                                                  color: FlutterFlowTheme.of(context).tertiary,
-                                                                                                  size: 50.0,
-                                                                                                ),
+                                                                                          style: FlutterFlowTheme.of(context).bodyLarge.override(
+                                                                                                fontFamily: FlutterFlowTheme.of(context).bodyLargeFamily,
+                                                                                                letterSpacing: 0.0,
+                                                                                                useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyLargeFamily),
                                                                                               ),
-                                                                                            );
-                                                                                          }
-                                                                                          List<FuncoesRow> textFuncoesRowList = snapshot.data!;
-
-                                                                                          final textFuncoesRow = textFuncoesRowList.isNotEmpty ? textFuncoesRowList.first : null;
-
-                                                                                          return Text(
-                                                                                            valueOrDefault<String>(
-                                                                                              textFuncoesRow?.descricao,
-                                                                                              'sem informação',
-                                                                                            ),
-                                                                                            style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                  fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                                  letterSpacing: 0.0,
-                                                                                                  useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                                                ),
-                                                                                          );
-                                                                                        },
+                                                                                        ),
                                                                                       ),
                                                                                     ),
-                                                                                  ),
-                                                                                if (responsiveVisibility(
-                                                                                  context: context,
-                                                                                  phone: false,
-                                                                                  tablet: false,
-                                                                                ))
-                                                                                  Expanded(
-                                                                                    child: Padding(
-                                                                                      padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
-                                                                                      child: FutureBuilder<List<FaccoesRow>>(
-                                                                                        future: FaccoesTable().querySingleRow(
-                                                                                          queryFn: (q) => q.eq(
-                                                                                            'faccao_id',
-                                                                                            listViewMembrosRow.faccaoId,
+                                                                                    if (responsiveVisibility(
+                                                                                      context: context,
+                                                                                      phone: false,
+                                                                                      tablet: false,
+                                                                                    ))
+                                                                                      Expanded(
+                                                                                        child: Padding(
+                                                                                          padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
+                                                                                          child: FutureBuilder<List<FuncoesRow>>(
+                                                                                            future: FuncoesTable().querySingleRow(
+                                                                                              queryFn: (q) => q.eq(
+                                                                                                'funcao_id',
+                                                                                                listViewMembrosRow.funcaoId!,
+                                                                                              ),
+                                                                                            ),
+                                                                                            builder: (context, snapshot) {
+                                                                                              // Customize what your widget looks like when it's loading.
+                                                                                              if (!snapshot.hasData) {
+                                                                                                return Center(
+                                                                                                  child: SizedBox(
+                                                                                                    width: 50.0,
+                                                                                                    height: 50.0,
+                                                                                                    child: SpinKitFadingCircle(
+                                                                                                      color: FlutterFlowTheme.of(context).tertiary,
+                                                                                                      size: 50.0,
+                                                                                                    ),
+                                                                                                  ),
+                                                                                                );
+                                                                                              }
+                                                                                              List<FuncoesRow> textFuncoesRowList = snapshot.data!;
+
+                                                                                              final textFuncoesRow = textFuncoesRowList.isNotEmpty ? textFuncoesRowList.first : null;
+
+                                                                                              return Text(
+                                                                                                valueOrDefault<String>(
+                                                                                                  textFuncoesRow?.descricao,
+                                                                                                  'sem informação',
+                                                                                                ),
+                                                                                                style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                      fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                                                      letterSpacing: 0.0,
+                                                                                                      useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                                                    ),
+                                                                                              );
+                                                                                            },
                                                                                           ),
                                                                                         ),
-                                                                                        builder: (context, snapshot) {
-                                                                                          // Customize what your widget looks like when it's loading.
-                                                                                          if (!snapshot.hasData) {
-                                                                                            return Center(
-                                                                                              child: SizedBox(
-                                                                                                width: 50.0,
-                                                                                                height: 50.0,
-                                                                                                child: SpinKitFadingCircle(
-                                                                                                  color: FlutterFlowTheme.of(context).tertiary,
-                                                                                                  size: 50.0,
-                                                                                                ),
+                                                                                      ),
+                                                                                    if (responsiveVisibility(
+                                                                                      context: context,
+                                                                                      phone: false,
+                                                                                      tablet: false,
+                                                                                    ))
+                                                                                      Expanded(
+                                                                                        child: Padding(
+                                                                                          padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
+                                                                                          child: FutureBuilder<List<FaccoesRow>>(
+                                                                                            future: FaccoesTable().querySingleRow(
+                                                                                              queryFn: (q) => q.eq(
+                                                                                                'faccao_id',
+                                                                                                listViewMembrosRow.faccaoId!,
                                                                                               ),
-                                                                                            );
-                                                                                          }
-                                                                                          List<FaccoesRow> textFaccoesRowList = snapshot.data!;
+                                                                                            ),
+                                                                                            builder: (context, snapshot) {
+                                                                                              // Customize what your widget looks like when it's loading.
+                                                                                              if (!snapshot.hasData) {
+                                                                                                return Center(
+                                                                                                  child: SizedBox(
+                                                                                                    width: 50.0,
+                                                                                                    height: 50.0,
+                                                                                                    child: SpinKitFadingCircle(
+                                                                                                      color: FlutterFlowTheme.of(context).tertiary,
+                                                                                                      size: 50.0,
+                                                                                                    ),
+                                                                                                  ),
+                                                                                                );
+                                                                                              }
+                                                                                              List<FaccoesRow> textFaccoesRowList = snapshot.data!;
 
-                                                                                          final textFaccoesRow = textFaccoesRowList.isNotEmpty ? textFaccoesRowList.first : null;
+                                                                                              final textFaccoesRow = textFaccoesRowList.isNotEmpty ? textFaccoesRowList.first : null;
 
-                                                                                          return Text(
+                                                                                              return Text(
+                                                                                                valueOrDefault<String>(
+                                                                                                  textFaccoesRow?.nome,
+                                                                                                  'sem informação',
+                                                                                                ),
+                                                                                                style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                      fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                                                      fontSize: 14.0,
+                                                                                                      letterSpacing: 0.0,
+                                                                                                      useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                                                    ),
+                                                                                              );
+                                                                                            },
+                                                                                          ),
+                                                                                        ),
+                                                                                      ),
+                                                                                    if (responsiveVisibility(
+                                                                                      context: context,
+                                                                                      phone: false,
+                                                                                      tablet: false,
+                                                                                    ))
+                                                                                      Expanded(
+                                                                                        child: Padding(
+                                                                                          padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
+                                                                                          child: Text(
                                                                                             valueOrDefault<String>(
-                                                                                              textFaccoesRow?.nome,
+                                                                                              listViewMembrosRow.alcunha.first ==
+                                                                                                      valueOrDefault<String>(
+                                                                                                        '',
+                                                                                                        'sem informação',
+                                                                                                      )
+                                                                                                  ? 'sem informação'
+                                                                                                  : valueOrDefault<String>(
+                                                                                                      listViewMembrosRow.alcunha.first,
+                                                                                                      'sem informação',
+                                                                                                    ),
                                                                                               'sem informação',
                                                                                             ),
                                                                                             style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -898,132 +928,99 @@ class _MainMembrosWidgetState extends State<MainMembrosWidget>
                                                                                                   letterSpacing: 0.0,
                                                                                                   useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
                                                                                                 ),
-                                                                                          );
-                                                                                        },
-                                                                                      ),
-                                                                                    ),
-                                                                                  ),
-                                                                                if (responsiveVisibility(
-                                                                                  context: context,
-                                                                                  phone: false,
-                                                                                  tablet: false,
-                                                                                ))
-                                                                                  Expanded(
-                                                                                    child: Padding(
-                                                                                      padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
-                                                                                      child: Text(
-                                                                                        valueOrDefault<String>(
-                                                                                          listViewMembrosRow.alcunha.first ==
-                                                                                                  valueOrDefault<String>(
-                                                                                                    '',
-                                                                                                    'sem informação',
-                                                                                                  )
-                                                                                              ? 'sem informação'
-                                                                                              : valueOrDefault<String>(
-                                                                                                  listViewMembrosRow.alcunha.first,
-                                                                                                  'sem informação',
-                                                                                                ),
-                                                                                          'sem informação',
-                                                                                        ),
-                                                                                        style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                              fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                              fontSize: 14.0,
-                                                                                              letterSpacing: 0.0,
-                                                                                              useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                                            ),
-                                                                                      ),
-                                                                                    ),
-                                                                                  ),
-                                                                                Expanded(
-                                                                                  child: Row(
-                                                                                    mainAxisSize: MainAxisSize.max,
-                                                                                    mainAxisAlignment: MainAxisAlignment.end,
-                                                                                    children: [
-                                                                                      Container(
-                                                                                        height: 32.0,
-                                                                                        decoration: BoxDecoration(
-                                                                                          color: FlutterFlowTheme.of(context).accent2,
-                                                                                          borderRadius: BorderRadius.circular(8.0),
-                                                                                          border: Border.all(
-                                                                                            color: FlutterFlowTheme.of(context).secondary,
                                                                                           ),
                                                                                         ),
-                                                                                        child: Align(
-                                                                                          alignment: AlignmentDirectional(0.0, 0.0),
-                                                                                          child: Padding(
-                                                                                            padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
-                                                                                            child: Text(
-                                                                                              valueOrDefault<String>(
-                                                                                                listViewMembrosRow.cpf,
-                                                                                                'cpf',
+                                                                                      ),
+                                                                                    Expanded(
+                                                                                      child: Row(
+                                                                                        mainAxisSize: MainAxisSize.max,
+                                                                                        mainAxisAlignment: MainAxisAlignment.end,
+                                                                                        children: [
+                                                                                          Container(
+                                                                                            height: 32.0,
+                                                                                            decoration: BoxDecoration(
+                                                                                              color: FlutterFlowTheme.of(context).accent2,
+                                                                                              borderRadius: BorderRadius.circular(8.0),
+                                                                                              border: Border.all(
+                                                                                                color: FlutterFlowTheme.of(context).secondary,
                                                                                               ),
-                                                                                              style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                    fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                                    letterSpacing: 0.0,
-                                                                                                    useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                                            ),
+                                                                                            child: Align(
+                                                                                              alignment: AlignmentDirectional(0.0, 0.0),
+                                                                                              child: Padding(
+                                                                                                padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
+                                                                                                child: Text(
+                                                                                                  valueOrDefault<String>(
+                                                                                                    listViewMembrosRow.cpf,
+                                                                                                    'cpf',
                                                                                                   ),
+                                                                                                  style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                        fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                                                        letterSpacing: 0.0,
+                                                                                                        useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                                                      ),
+                                                                                                ),
+                                                                                              ),
                                                                                             ),
                                                                                           ),
-                                                                                        ),
+                                                                                        ],
                                                                                       ),
-                                                                                    ],
-                                                                                  ),
-                                                                                ),
-                                                                              ],
-                                                                            ),
-                                                                          ),
-                                                                          Builder(
-                                                                            builder: (context) =>
-                                                                                Padding(
-                                                                              padding: EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 0.0, 0.0),
-                                                                              child: InkWell(
-                                                                                splashColor: Colors.transparent,
-                                                                                focusColor: Colors.transparent,
-                                                                                hoverColor: Colors.transparent,
-                                                                                highlightColor: Colors.transparent,
-                                                                                onTap: () async {
-                                                                                  logFirebaseEvent('MAIN_MEMBROS_PAGE_Icon_tjxgplxc_ON_TAP');
-                                                                                  await showAlignedDialog(
-                                                                                    barrierColor: Colors.transparent,
-                                                                                    context: context,
-                                                                                    isGlobal: false,
-                                                                                    avoidOverflow: true,
-                                                                                    targetAnchor: AlignmentDirectional(-1.0, 1.0).resolve(Directionality.of(context)),
-                                                                                    followerAnchor: AlignmentDirectional(1.0, -1.0).resolve(Directionality.of(context)),
-                                                                                    builder: (dialogContext) {
-                                                                                      return Material(
-                                                                                        color: Colors.transparent,
-                                                                                        child: GestureDetector(
-                                                                                          onTap: () => FocusScope.of(dialogContext).unfocus(),
-                                                                                          child: DropdownMemberEditWidget(
-                                                                                            membroId: listViewMembrosRow,
-                                                                                            paraIndex: 0,
-                                                                                          ),
-                                                                                        ),
-                                                                                      );
-                                                                                    },
-                                                                                  );
-                                                                                },
-                                                                                child: Icon(
-                                                                                  Icons.more_vert,
-                                                                                  color: FlutterFlowTheme.of(context).secondaryText,
-                                                                                  size: 24.0,
+                                                                                    ),
+                                                                                  ],
                                                                                 ),
                                                                               ),
-                                                                            ),
+                                                                              Builder(
+                                                                                builder: (context) => Padding(
+                                                                                  padding: EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 0.0, 0.0),
+                                                                                  child: InkWell(
+                                                                                    splashColor: Colors.transparent,
+                                                                                    focusColor: Colors.transparent,
+                                                                                    hoverColor: Colors.transparent,
+                                                                                    highlightColor: Colors.transparent,
+                                                                                    onTap: () async {
+                                                                                      logFirebaseEvent('MAIN_MEMBROS_PAGE_Icon_tjxgplxc_ON_TAP');
+                                                                                      await showAlignedDialog(
+                                                                                        barrierColor: Colors.transparent,
+                                                                                        context: context,
+                                                                                        isGlobal: false,
+                                                                                        avoidOverflow: true,
+                                                                                        targetAnchor: AlignmentDirectional(-1.0, 1.0).resolve(Directionality.of(context)),
+                                                                                        followerAnchor: AlignmentDirectional(1.0, -1.0).resolve(Directionality.of(context)),
+                                                                                        builder: (dialogContext) {
+                                                                                          return Material(
+                                                                                            color: Colors.transparent,
+                                                                                            child: GestureDetector(
+                                                                                              onTap: () => FocusScope.of(dialogContext).unfocus(),
+                                                                                              child: DropdownMemberEditWidget(
+                                                                                                membroId: listViewMembrosRow,
+                                                                                                paraIndex: 0,
+                                                                                              ),
+                                                                                            ),
+                                                                                          );
+                                                                                        },
+                                                                                      );
+                                                                                    },
+                                                                                    child: Icon(
+                                                                                      Icons.more_vert,
+                                                                                      color: FlutterFlowTheme.of(context).secondaryText,
+                                                                                      size: 24.0,
+                                                                                    ),
+                                                                                  ),
+                                                                                ),
+                                                                              ),
+                                                                            ],
                                                                           ),
-                                                                        ],
+                                                                        ),
                                                                       ),
-                                                                    ),
+                                                                    ).animateOnPageLoad(
+                                                                            animationsMap['containerOnPageLoadAnimation']!),
                                                                   ),
-                                                                ).animateOnPageLoad(
-                                                                    animationsMap[
-                                                                        'containerOnPageLoadAnimation']!),
-                                                              ),
+                                                                );
+                                                              },
                                                             );
                                                           },
-                                                        );
-                                                      },
+                                                        ),
+                                                      ],
                                                     ),
                                                   ),
                                                 ],

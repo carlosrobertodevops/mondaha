@@ -351,7 +351,7 @@ class _DropdownFaccaoEditWidgetState extends State<DropdownFaccaoEditWidget> {
                           await FaccoesTable().delete(
                             matchingRows: (rows) => rows.eq(
                               'faccao_id',
-                              widget!.faccaoid?.faccaoId,
+                              widget!.faccaoid!.faccaoId,
                             ),
                           );
                           ScaffoldMessenger.of(context).clearSnackBars();

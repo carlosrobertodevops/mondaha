@@ -408,8 +408,8 @@ class _MainProfileWidgetState extends State<MainProfileWidget>
                                                         .querySingleRow(
                                                       queryFn: (q) => q.eq(
                                                         'tipo_usuario_id',
-                                                        mainProfileUsuariosRow
-                                                            ?.tipoUsuarioId,
+                                                        mainProfileUsuariosRow!
+                                                            .tipoUsuarioId!,
                                                       ),
                                                     ),
                                                     builder:

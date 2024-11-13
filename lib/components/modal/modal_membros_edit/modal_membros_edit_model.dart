@@ -155,6 +155,8 @@ class ModalMembrosEditModel extends FlutterFlowModel<ModalMembrosEditWidget> {
 
   int? paramMembroId;
 
+  bool comoForamValidados = true;
+
   ///  State fields for stateful widgets in this component.
 
   final formKey3 = GlobalKey<FormState>();

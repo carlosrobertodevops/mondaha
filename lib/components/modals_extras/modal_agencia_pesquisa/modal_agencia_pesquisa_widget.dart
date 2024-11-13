@@ -491,7 +491,7 @@ class _ModalAgenciaPesquisaWidgetState extends State<ModalAgenciaPesquisaWidget>
                                                   List<AgenciasRow>>(
                                                 future:
                                                     AgenciasTable().queryRows(
-                                                  queryFn: (q) => q.in_(
+                                                  queryFn: (q) => q.inFilter(
                                                     'nome',
                                                     _model.simpleSearchResults,
                                                   ),

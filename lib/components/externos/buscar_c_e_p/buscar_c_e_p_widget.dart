@@ -333,13 +333,22 @@ class _BuscarCEPWidgetState extends State<BuscarCEPWidget>
                                                                     ?.jsonBody ??
                                                                 ''),
                                                           )!;
-                                                          _model.ruaAvTextController
-                                                                  ?.selection =
-                                                              TextSelection.collapsed(
-                                                                  offset: _model
-                                                                      .ruaAvTextController!
-                                                                      .text
-                                                                      .length);
+                                                          _model.ruaAvFocusNode
+                                                              ?.requestFocus();
+                                                          WidgetsBinding
+                                                              .instance
+                                                              .addPostFrameCallback(
+                                                                  (_) {
+                                                            _model.ruaAvTextController
+                                                                    ?.selection =
+                                                                TextSelection
+                                                                    .collapsed(
+                                                              offset: _model
+                                                                  .ruaAvTextController!
+                                                                  .text
+                                                                  .length,
+                                                            );
+                                                          });
                                                         });
                                                         // Bairro
                                                         safeSetState(() {
@@ -351,13 +360,22 @@ class _BuscarCEPWidgetState extends State<BuscarCEPWidget>
                                                                     ?.jsonBody ??
                                                                 ''),
                                                           )!;
-                                                          _model.bairroTextController
-                                                                  ?.selection =
-                                                              TextSelection.collapsed(
-                                                                  offset: _model
-                                                                      .bairroTextController!
-                                                                      .text
-                                                                      .length);
+                                                          _model.bairroFocusNode
+                                                              ?.requestFocus();
+                                                          WidgetsBinding
+                                                              .instance
+                                                              .addPostFrameCallback(
+                                                                  (_) {
+                                                            _model.bairroTextController
+                                                                    ?.selection =
+                                                                TextSelection
+                                                                    .collapsed(
+                                                              offset: _model
+                                                                  .bairroTextController!
+                                                                  .text
+                                                                  .length,
+                                                            );
+                                                          });
                                                         });
                                                         // cidade
                                                         safeSetState(() {
@@ -369,13 +387,22 @@ class _BuscarCEPWidgetState extends State<BuscarCEPWidget>
                                                                     ?.jsonBody ??
                                                                 ''),
                                                           )!;
-                                                          _model.cidadeTextController
-                                                                  ?.selection =
-                                                              TextSelection.collapsed(
-                                                                  offset: _model
-                                                                      .cidadeTextController!
-                                                                      .text
-                                                                      .length);
+                                                          _model.cidadeFocusNode
+                                                              ?.requestFocus();
+                                                          WidgetsBinding
+                                                              .instance
+                                                              .addPostFrameCallback(
+                                                                  (_) {
+                                                            _model.cidadeTextController
+                                                                    ?.selection =
+                                                                TextSelection
+                                                                    .collapsed(
+                                                              offset: _model
+                                                                  .cidadeTextController!
+                                                                  .text
+                                                                  .length,
+                                                            );
+                                                          });
                                                         });
                                                         safeSetState(() {
                                                           _model.estadoTextController
@@ -386,13 +413,22 @@ class _BuscarCEPWidgetState extends State<BuscarCEPWidget>
                                                                     ?.jsonBody ??
                                                                 ''),
                                                           )!;
-                                                          _model.estadoTextController
-                                                                  ?.selection =
-                                                              TextSelection.collapsed(
-                                                                  offset: _model
-                                                                      .estadoTextController!
-                                                                      .text
-                                                                      .length);
+                                                          _model.estadoFocusNode
+                                                              ?.requestFocus();
+                                                          WidgetsBinding
+                                                              .instance
+                                                              .addPostFrameCallback(
+                                                                  (_) {
+                                                            _model.estadoTextController
+                                                                    ?.selection =
+                                                                TextSelection
+                                                                    .collapsed(
+                                                              offset: _model
+                                                                  .estadoTextController!
+                                                                  .text
+                                                                  .length,
+                                                            );
+                                                          });
                                                         });
                                                       } else {
                                                         ScaffoldMessenger.of(
