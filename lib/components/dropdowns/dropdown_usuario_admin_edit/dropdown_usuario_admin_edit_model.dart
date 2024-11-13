@@ -1,6 +1,6 @@
 import '/auth/supabase_auth/auth_util.dart';
 import '/backend/supabase/supabase.dart';
-import '/components/modall/modal_profile_edit_admin/modal_profile_edit_admin_widget.dart';
+import '/components/modal/modal_profile_edit_admin/modal_profile_edit_admin_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'dropdown_usuario_admin_edit_widget.dart'

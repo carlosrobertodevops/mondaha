@@ -1,4 +1,4 @@
-import '/components/modall/project_details_alt/project_details_alt_widget.dart';
+import '/components/modal/project_details_alt/project_details_alt_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';

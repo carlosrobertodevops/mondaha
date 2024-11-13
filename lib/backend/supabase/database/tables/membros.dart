@@ -135,4 +135,8 @@ class MembrosRow extends SupabaseDataRow {
   List<String> get coordenadas => getListField<String>('coordenadas');
   set coordenadas(List<String>? value) =>
       setListField<String>('coordenadas', value);
+
+  String? get validacaoObservacao => getField<String>('validacao_observacao');
+  set validacaoObservacao(String? value) =>
+      setField<String>('validacao_observacao', value);
 }

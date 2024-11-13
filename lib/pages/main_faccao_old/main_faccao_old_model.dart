@@ -1,5 +1,5 @@
 import '/backend/supabase/supabase.dart';
-import '/components/modall/modal_faccao_add/modal_faccao_add_widget.dart';
+import '/components/modal/modal_faccao_add/modal_faccao_add_widget.dart';
 import '/components/modals_extras/modal_command_palette/modal_command_palette_widget.dart';
 import '/components/navs/web_nav/web_nav_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';

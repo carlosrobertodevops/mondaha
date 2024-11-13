@@ -2953,8 +2953,8 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'pt': 'Editar',
     },
     '27xaiak4': {
-      'en': 'Viewe',
-      'pt': 'Ver',
+      'en': 'View',
+      'pt': 'Visualizar',
     },
     'kp1omh4j': {
       'en': 'Share',
@@ -3160,6 +3160,974 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Some body copy that is present in this small notification.',
       'pt':
           'Alguma cópia do corpo que está presente nesta pequena notificação.',
+    },
+  },
+  // modal_membros_edit
+  {
+    'mrof6r0b': {
+      'en': 'Edit Member',
+      'pt': 'Editar membro',
+    },
+    'k9ah28wo': {
+      'en': 'Profile',
+      'pt': 'Perfil',
+    },
+    'ke0ta3px': {
+      'en':
+          'Upload images about the  member and fill out the information below.',
+      'pt': 'Carregue imagens sobre o membro e preencha as informações abaixo.',
+    },
+    'ur9hv9dp': {
+      'en': 'Add Photos',
+      'pt': 'Adicionar fotos',
+    },
+    '6p82su46': {
+      'en':
+          'Add one or more images about the Member.\nMaximum of 6 (six) images.',
+      'pt':
+          'Adicione uma ou mais imagens sobre o Membro. \nNo máximo de 6 (seis) imagens.',
+    },
+    '8o65ypej': {
+      'en': 'Apagar Fotos',
+      'pt': 'Apagar Fotos',
+    },
+    'e5cdst78': {
+      'en':
+          'ATTENTION: (1) Front Photo, (2) Left Side Photo, (3) Right Side Photo and (4) Tattoos. Maximum of 6 images (200px by 200px each).',
+      'pt':
+          'ATENÇÃO : (1) Foto Frente, (2) Foto Lateral Esquerda, (3) Foto Lateral Direira e (4) Tatuagens . No máximo de 6 imagens (200px por 200px cada).',
+    },
+    'w5sykx0y': {
+      'en': 'Nome completo',
+      'pt': 'Nome completo',
+    },
+    'nvqcp8ec': {
+      'en': 'Nome completo',
+      'pt': 'Nome completo',
+    },
+    '1vl7zf7v': {
+      'en': 'Alcunha',
+      'pt': 'Alcunha',
+    },
+    '4kwdolwf': {
+      'en': 'Alcunha',
+      'pt': 'Alcunha',
+    },
+    'w7cv57v9': {
+      'en':
+          'To add nickname(s) you need to fill in the Nickname Field and click on the (+) Button',
+      'pt':
+          'Para adicionar à(s) alcunha(s) precisa preencher o Campo Alcunha e clicar no Botão (+) ',
+    },
+    '5g8sploz': {
+      'en': 'Naturalidade',
+      'pt': 'Naturalidade',
+    },
+    'jtptkah7': {
+      'en': 'Naturalidade',
+      'pt': 'Naturalidade',
+    },
+    '3gd33q8z': {
+      'en': 'Solteiro',
+      'pt': 'Solteiro',
+    },
+    'erxv49wt': {
+      'en': 'Casado',
+      'pt': 'Casado',
+    },
+    'jz0yn8g9': {
+      'en': 'DIvorciado',
+      'pt': 'Divorciado',
+    },
+    'jysjhv84': {
+      'en': 'Viúvo(a)',
+      'pt': 'Viúvo(a)',
+    },
+    'hqhffu5x': {
+      'en': 'Separados legalmente',
+      'pt': 'Separados legalmente',
+    },
+    '97yj96r3': {
+      'en': 'União estável',
+      'pt': 'União estável',
+    },
+    '6xmmx845': {
+      'en': 'Nenhuma das opções',
+      'pt': 'Nenhuma das opções',
+    },
+    '376qkuj9': {
+      'en': 'Estado civil',
+      'pt': 'Estado civil',
+    },
+    'e0w5gu3g': {
+      'en': 'Estado civil',
+      'pt': 'Estado civil',
+    },
+    'mpy26dhu': {
+      'en': 'Identidade',
+      'pt': 'Identidade',
+    },
+    'i89lld2e': {
+      'en': 'Identidade',
+      'pt': 'Identidade',
+    },
+    'f9qpd698': {
+      'en': 'SSP-AL',
+      'pt': 'SSP-AL',
+    },
+    'igwvj967': {
+      'en': 'SSP-SE',
+      'pt': 'SSP-SE',
+    },
+    '4mwojz1l': {
+      'en': 'SSP-CE',
+      'pt': 'SSP-CE',
+    },
+    '2yolvy23': {
+      'en': 'SSP-PE',
+      'pt': 'SSP-PE',
+    },
+    '7b8nkrcy': {
+      'en': 'SSP-BA',
+      'pt': 'SSP-BA',
+    },
+    'kofpbic2': {
+      'en': 'SSP-RN',
+      'pt': 'SSP-RN',
+    },
+    'pb20k4aj': {
+      'en': 'None of the options',
+      'pt': 'Nenhuma das opções',
+    },
+    'dajccisl': {
+      'en': 'Issuing body',
+      'pt': 'Órgão expedidor',
+    },
+    'j0d9malw': {
+      'en': 'Issuing body',
+      'pt': 'Órgão expedidor',
+    },
+    'q6ctm4ot': {
+      'en': 'CPF',
+      'pt': 'CPF',
+    },
+    'c3zop9x3': {
+      'en': 'CPF',
+      'pt': 'CPF',
+    },
+    'vxoztmy6': {
+      'en': 'Infopen Registration',
+      'pt': 'Cadastro Infopen',
+    },
+    'j1yyavjl': {
+      'en': 'Infopen Registration',
+      'pt': 'Cadastro Infopen',
+    },
+    'krhrhn0s': {
+      'en': 'Mother\'s name',
+      'pt': 'Nome da mãe',
+    },
+    'tkiz3gkj': {
+      'en': 'Mother\'s name',
+      'pt': 'Nome da mãe',
+    },
+    'bplooifq': {
+      'en': 'Alive',
+      'pt': 'Viva',
+    },
+    'ep6ekmqj': {
+      'en': 'Deceased',
+      'pt': 'Falecida',
+    },
+    'i6z078qt': {
+      'en': 'Wheelchair user',
+      'pt': 'Cadeirante',
+    },
+    '1bwfl3hj': {
+      'en': 'No information',
+      'pt': 'Sem informação',
+    },
+    'xjs8q257': {
+      'en': 'Mother\'s situation',
+      'pt': 'Situação da Mãe',
+    },
+    'irjc2od7': {
+      'en': 'Mother\'s situation',
+      'pt': 'Situação da Mãe',
+    },
+    'ouy1c8ur': {
+      'en': 'Father\'s name',
+      'pt': 'Nome do pai',
+    },
+    'ix1jiwav': {
+      'en': 'Father\'s name',
+      'pt': 'Nome do pai',
+    },
+    '9xmfavbn': {
+      'en': 'Alive',
+      'pt': 'Vivo',
+    },
+    'jle1z10y': {
+      'en': 'Deceased',
+      'pt': 'Falecido',
+    },
+    'kb5u39m0': {
+      'en': 'Wheelchair user',
+      'pt': 'Cadeirante',
+    },
+    '6rfxzdzd': {
+      'en': 'No information',
+      'pt': 'Sem informação',
+    },
+    's6zvdxr8': {
+      'en': 'Father\'s situation',
+      'pt': 'Situação do Pai',
+    },
+    'ccj1ds3a': {
+      'en': 'Father\'s situation',
+      'pt': 'Situação do Pai',
+    },
+    '9329nqhh': {
+      'en': 'Alfabetizado',
+      'pt': 'Alfabetizado',
+    },
+    'h82r5ahb': {
+      'en': 'illiterate',
+      'pt': 'Não alfabetizado',
+    },
+    'b4hs4oir': {
+      'en': 'Completed elementary education',
+      'pt': 'Ensino fundamental completo',
+    },
+    'bmaqd70i': {
+      'en': 'Completed high school',
+      'pt': 'Ensino médio completo',
+    },
+    '84xcyv8t': {
+      'en': 'Completed higher education',
+      'pt': 'Ensino superior completo',
+    },
+    'r2u2ao1z': {
+      'en': 'Incomplete elementary education',
+      'pt': 'Ensino fundamental incompleto',
+    },
+    'lgo3vh2e': {
+      'en': 'Incomplete high school',
+      'pt': 'Ensino médio incompleto',
+    },
+    'ti25rp88': {
+      'en': 'Incomplete higher education',
+      'pt': 'Ensino superior incompleto',
+    },
+    'ct3cerf6': {
+      'en': 'No information',
+      'pt': 'Sem informação',
+    },
+    'zqm3dbsf': {
+      'en': 'Degree or Level of Education',
+      'pt': 'Grau ou Nível de instrução',
+    },
+    'tvx59t7r': {
+      'en': 'Degree or Level of Education',
+      'pt': 'Grau ou nível de educação',
+    },
+    'etcver8f': {
+      'en': 'Field is required',
+      'pt': 'Campo é obrigatório',
+    },
+    '6c48cxwl': {
+      'en': 'Please choose an option from the dropdown',
+      'pt': 'Selecione uma opção no menu suspenso',
+    },
+    'qt5i5hsx': {
+      'en': 'Field is required',
+      'pt': 'Campo é obrigatório',
+    },
+    'djed4ikp': {
+      'en': 'Please choose an option from the dropdown',
+      'pt': 'Selecione uma opção no menu suspenso',
+    },
+    '6xnlkqeo': {
+      'en': 'Field is required',
+      'pt': 'Campo é obrigatório',
+    },
+    '10cqseq5': {
+      'en': 'Please choose an option from the dropdown',
+      'pt': '',
+    },
+    '1a7ebfcb': {
+      'en': 'Field is required',
+      'pt': 'Campo é obrigatório',
+    },
+    'we6l8jc5': {
+      'en': 'Please choose an option from the dropdown',
+      'pt': '',
+    },
+    '2uhzzy2p': {
+      'en': 'Field is required',
+      'pt': 'Campo é obrigatório',
+    },
+    '99ppcp70': {
+      'en': 'Please choose an option from the dropdown',
+      'pt': '',
+    },
+    'o46nt9bq': {
+      'en': 'Field is required',
+      'pt': 'Campo é obrigatório',
+    },
+    '31iukh7t': {
+      'en': 'Please choose an option from the dropdown',
+      'pt': '',
+    },
+    'paqlhxt4': {
+      'en': 'Field is required',
+      'pt': 'Campo é obrigatório',
+    },
+    'diwwkcrg': {
+      'en': 'Please choose an option from the dropdown',
+      'pt': '',
+    },
+    'bosq1tkf': {
+      'en': 'Field is required',
+      'pt': 'Campo é obrigatório',
+    },
+    '70y2g5kv': {
+      'en': 'Please choose an option from the dropdown',
+      'pt': '',
+    },
+    '4ygu27wd': {
+      'en': 'Localization',
+      'pt': 'Localização',
+    },
+    'dwx4ys4r': {
+      'en': 'Nascido no Brasil',
+      'pt': 'Nascido no Brasil',
+    },
+    'atti464y': {
+      'en': 'Nascido no Brasil',
+      'pt': 'Nascido no Brasil',
+    },
+    '2de66lcq': {
+      'en': 'Naturalizado Brasileiro',
+      'pt': 'Naturalizado Brasileiro',
+    },
+    'm1flj4r8': {
+      'en': 'Estrangeiro',
+      'pt': 'Estrangeiro',
+    },
+    '56jt4v6k': {
+      'en': 'Estado',
+      'pt': 'Estado',
+    },
+    'hrqyl6i8': {
+      'en': 'Search...',
+      'pt': 'Procurar...',
+    },
+    'xy9a6m17': {
+      'en': 'Municipio',
+      'pt': 'Município',
+    },
+    'z4jtavfh': {
+      'en': 'Search...',
+      'pt': 'Procurar...',
+    },
+    'tlqbuxsg': {
+      'en': '',
+      'pt': '',
+    },
+    'fl5ul0pd': {
+      'en': 'Endereço Completo',
+      'pt': 'Endereço Completo',
+    },
+    'waagzovs': {
+      'en': 'Endereço Completo',
+      'pt': 'Endereço Completo',
+    },
+    'j0nmcvr2': {
+      'en':
+          'To add the address(es) you need to fill in\nthe Address field and click on the (+) button.',
+      'pt':
+          'Para adicionar o(s) endereço(s) precisa preencher \no campo Endereço e clicar no Botão (+) ',
+    },
+    'cnjcjjo2': {
+      'en': 'Facção',
+      'pt': 'Facção',
+    },
+    'qdml4d4b': {
+      'en':
+          'Informe os dados sobre o membro e a facção na qual o mesmo pertecem.',
+      'pt':
+          'Informe os dados sobre o membro e a facção sobre qual o mesmo pertecem.',
+    },
+    '7evk5sr5': {
+      'en': 'Option 1',
+      'pt': 'Opção 1',
+    },
+    '1e93v2o5': {
+      'en': 'Option 2',
+      'pt': 'Opção 2',
+    },
+    'y68vwuv6': {
+      'en': 'Option 3',
+      'pt': 'Opção 3',
+    },
+    'xl2fd0vq': {
+      'en': 'Facções',
+      'pt': 'Facções',
+    },
+    'aeh7s14i': {
+      'en': 'Search...',
+      'pt': 'Procurar...',
+    },
+    'xjptg11e': {
+      'en': 'Batismo',
+      'pt': 'Batismo',
+    },
+    '6v0cqlza': {
+      'en': 'Batismo',
+      'pt': 'Batismo',
+    },
+    'dogrlmh2': {
+      'en': 'Option 1',
+      'pt': 'Opção 1',
+    },
+    'cf5s57p2': {
+      'en': 'Local do Batismo',
+      'pt': 'Local do Batismo',
+    },
+    'cnje2664': {
+      'en': 'Local do Batismo',
+      'pt': 'Local do Batismo',
+    },
+    'hhjoqbhs': {
+      'en': 'Padrinho',
+      'pt': 'Padrinho',
+    },
+    '5riq3olw': {
+      'en': 'Padrinho',
+      'pt': 'Padrinho',
+    },
+    'e7yxmlgy': {
+      'en': 'Senha',
+      'pt': 'Senha',
+    },
+    'ditgfsol': {
+      'en': 'Senha',
+      'pt': 'Senha',
+    },
+    '59iro2id': {
+      'en': 'Cargo atual',
+      'pt': 'Carga atual',
+    },
+    'gngb08sa': {
+      'en': 'Marital status',
+      'pt': 'Estado civil',
+    },
+    'quuz7zye': {
+      'en': 'Cargo anterior',
+      'pt': 'Carga anterior',
+    },
+    'd3cmqj3p': {
+      'en': 'Marital status',
+      'pt': 'Estado civil',
+    },
+    'ko64ck8f': {
+      'en': 'Função atual',
+      'pt': 'Função atual',
+    },
+    'ny2qyhwa': {
+      'en': 'Mother\'s Situation',
+      'pt': 'Situação da Mãe',
+    },
+    'cef8iv8t': {
+      'en': 'Função anterior',
+      'pt': 'Função anterior',
+    },
+    'zcb0w779': {
+      'en': 'Função anterior',
+      'pt': 'Função anterior',
+    },
+    'ih41eqh3': {
+      'en': 'Três últimos locais onde esteve preso',
+      'pt': 'Três últimos locais onde esteve preso',
+    },
+    '2b3vlzt9': {
+      'en': 'Três últimos locais onde esteve preso',
+      'pt': 'Três últimos locais onde esteve preso',
+    },
+    'o0jo1yy1': {
+      'en':
+          'To add the name of the Prison(s) you need to fill in the \nlast three locations and click on the (+) button.',
+      'pt':
+          'Para adicionar o(s) nome de Presídio (s) precisa preencher \nos Três últimos locais e clicar no Botão (+) ',
+    },
+    'y51s0a4a': {
+      'en': 'Facção que integrou',
+      'pt': 'Facção que integrou',
+    },
+    's414x980': {
+      'en': 'Facção que integrou',
+      'pt': 'Facção que integrou',
+    },
+    'poxkn72j': {
+      'en': 'Facção aliada',
+      'pt': 'Facção aliada',
+    },
+    'lf0kdlrj': {
+      'en': 'Father\'s Situation',
+      'pt': 'Situação do Pai',
+    },
+    'qoaljcyj': {
+      'en': 'Facção Inimiga',
+      'pt': 'Facção Inimiga',
+    },
+    'kyck9l0a': {
+      'en': 'Facção Inimiga',
+      'pt': 'Facção Inimiga',
+    },
+    'yq89rx0y': {
+      'en': 'Field is required',
+      'pt': 'Campo é obrigatório!',
+    },
+    'dwe3seuo': {
+      'en': 'Please choose an option from the dropdown',
+      'pt': 'Selecione uma opção no menu suspenso',
+    },
+    '77j3hh2e': {
+      'en': 'Field is required',
+      'pt': 'Campo obrigatório!',
+    },
+    '7rps11ff': {
+      'en': 'Please choose an option from the dropdown',
+      'pt': 'Selecione uma opção no menu suspenso',
+    },
+    '9oxyncf0': {
+      'en': 'Field is required',
+      'pt': 'Campo é obrigatório!',
+    },
+    'dbmz2fo9': {
+      'en': 'Please choose an option from the dropdown',
+      'pt': 'Selecione uma opção no menu suspenso',
+    },
+    '3gy140nn': {
+      'en': 'Field is required',
+      'pt': 'Campo é obrigatório!',
+    },
+    '8yy2ivd5': {
+      'en': 'Please choose an option from the dropdown',
+      'pt': 'Selecione uma opção no menu suspenso',
+    },
+    'vesyvi1t': {
+      'en': 'Field is required',
+      'pt': 'Campo é obrigatório',
+    },
+    'su2rfik4': {
+      'en': 'Please choose an option from the dropdown',
+      'pt': 'Selecione uma opção no menu suspenso',
+    },
+    'psmcyd4s': {
+      'en': 'Procedimentos',
+      'pt': 'Procedimentos',
+    },
+    'abyvcswu': {
+      'en':
+          'Informe os dados sobre os Procedimentos que foram realizados contra esse membro.',
+      'pt':
+          'Informe os dados sobre os procedimentos que foram realizados contra esse membro.',
+    },
+    '8161octx': {
+      'en': 'Procedure',
+      'pt': 'Procedimento',
+    },
+    '8ntbb2dd': {
+      'en': 'Procedure',
+      'pt': 'Procedimento',
+    },
+    '9stqikkv': {
+      'en': 'None of the options',
+      'pt': 'Nenhuma das opções',
+    },
+    'rzqzpi0m': {
+      'en': 'Local Police Station',
+      'pt': 'Delegacia Local',
+    },
+    '2kwsxw2d': {
+      'en': 'Specialized Police Station',
+      'pt': 'Delegacia Especializada',
+    },
+    'tyhmh5h2': {
+      'en': 'Regional Police Station',
+      'pt': 'Delegacia Regional',
+    },
+    'lnka4hga': {
+      'en': 'Unit',
+      'pt': 'Unidade',
+    },
+    '3axxs613': {
+      'en': 'Search...',
+      'pt': 'Procurar...',
+    },
+    'fw17rxzs': {
+      'en': 'None of the options',
+      'pt': 'Nenhuma das opções',
+    },
+    'svxh2i0k': {
+      'en': 'IPL. Ordinance',
+      'pt': 'IPL. Portaria',
+    },
+    'ep4gxxhb': {
+      'en': 'IPL. Flagrant',
+      'pt': 'IPL. Flagrante',
+    },
+    's1n13x72': {
+      'en': 'T.C.O',
+      'pt': 'T.C.O',
+    },
+    'vo99wbnv': {
+      'en': 'Type of procedure',
+      'pt': 'Tipo de procedimento',
+    },
+    '7nlyqa72': {
+      'en': 'Search...',
+      'pt': 'Procurar...',
+    },
+    'nejyraec': {
+      'en': 'None of the options',
+      'pt': 'Nenhuma das opções',
+    },
+    '6c8g2qgh': {
+      'en': 'Drug trafficking',
+      'pt': 'Tráfico de drogas',
+    },
+    '9fs640vk': {
+      'en': 'Qualified Robbery',
+      'pt': 'Roubo Qualificado',
+    },
+    '1t1wiajk': {
+      'en': 'Bodily Injury',
+      'pt': 'Lesão Corporal',
+    },
+    '0xpzu6xy': {
+      'en': 'Murder',
+      'pt': 'Homicídio',
+    },
+    '87yw9sc4': {
+      'en': 'Crime',
+      'pt': 'Crime',
+    },
+    's6islip8': {
+      'en': 'Search...',
+      'pt': 'Procurar...',
+    },
+    'gtbdcue3': {
+      'en': 'Procedure Date',
+      'pt': 'Dados do Procedimento',
+    },
+    'e9e55r1p': {
+      'en': 'Procedure Date',
+      'pt': 'Dados do Procedimento',
+    },
+    '0o5d68l4': {
+      'en': 'Clear procedures below',
+      'pt': 'Limpar procedimentos abaixo',
+    },
+    'bb2ygjoo': {
+      'en': 'To add',
+      'pt': 'Adicionar',
+    },
+    'lzjlij0m': {
+      'en': 'Field is required',
+      'pt': 'Campo é obrigatório!',
+    },
+    'js0s294o': {
+      'en': 'Please choose an option from the dropdown',
+      'pt': 'Selecione uma opção no menu suspenso',
+    },
+    'givu4zvg': {
+      'en': 'Field is required',
+      'pt': 'Campo obrigatório!',
+    },
+    'urarl71z': {
+      'en': 'Please choose an option from the dropdown',
+      'pt': 'Selecione uma opção no menu suspenso',
+    },
+    '7kpx14gp': {
+      'en': 'Procedure',
+      'pt': 'Procedimento',
+    },
+    'psuhnkli': {
+      'en': 'Unit',
+      'pt': 'Unidade',
+    },
+    'pg5egvsq': {
+      'en': 'Type of procedure:',
+      'pt': 'Tipo de procedimento:',
+    },
+    'ubujkway': {
+      'en': 'Crime',
+      'pt': 'Crime',
+    },
+    'mujyix3r': {
+      'en': 'Data',
+      'pt': 'Dados',
+    },
+    'ea22z8qc': {
+      'en': 'Procedures',
+      'pt': 'Processos',
+    },
+    '5qynkae4': {
+      'en':
+          'Provide information about the Processes that were carried out against this member.',
+      'pt':
+          'Informe os dados sobre o Processo que foram realizados contra esse membro.',
+    },
+    '62989hh1': {
+      'en': 'Criminal action number',
+      'pt': 'Nº da ação Penal',
+    },
+    'upp3qvf0': {
+      'en': 'None of the options',
+      'pt': 'Nenhuma das opções',
+    },
+    'hzu0fzkn': {
+      'en': '1st CRIMINAL COURT',
+      'pt': '1ª VARA PENAL',
+    },
+    '9i0jp3ac': {
+      'en': '2nd CRIMINAL COURT',
+      'pt': '2ª VARA PENAL',
+    },
+    '7m7bafyl': {
+      'en': '3rd CRIMINAL COURT',
+      'pt': '3ª VARA PENAL',
+    },
+    'd8ym7f59': {
+      'en': 'Stick',
+      'pt': 'Vara',
+    },
+    'sux2mj4g': {
+      'en': 'Search ...',
+      'pt': 'Procurar ...',
+    },
+    '3dt7bl7g': {
+      'en': 'None of the options',
+      'pt': 'Nenhuma das opções',
+    },
+    'e3cup52w': {
+      'en': 'Convicted',
+      'pt': 'Condenado',
+    },
+    'xl37rsyl': {
+      'en': 'Provisional',
+      'pt': 'Provisório',
+    },
+    '0owqd6ik': {
+      'en': 'Awaiting sentence',
+      'pt': 'Aguardando Sentença',
+    },
+    '2i43ea12': {
+      'en': 'Legal status',
+      'pt': 'Situação jurídica',
+    },
+    '86516smn': {
+      'en': 'Search...',
+      'pt': 'Procurar...',
+    },
+    'q307dahv': {
+      'en': 'None of the options',
+      'pt': 'Nenhuma das opções',
+    },
+    'pubameot': {
+      'en': 'Closed',
+      'pt': 'Fechado',
+    },
+    '0piz3utr': {
+      'en': 'Semi-open',
+      'pt': 'Semi-aberto',
+    },
+    'qew87o7p': {
+      'en': 'Regime',
+      'pt': 'Regime',
+    },
+    '1ttdhadk': {
+      'en': 'Search...',
+      'pt': 'Procurar...',
+    },
+    'vd2b0ckv': {
+      'en': '',
+      'pt': '',
+    },
+    'w1mu87ma': {
+      'en': 'Nenhuma das opções',
+      'pt': 'Nenhuma das opções',
+    },
+    'yxaa283n': {
+      'en': 'Arrested',
+      'pt': 'Preso',
+    },
+    '56ucvksh': {
+      'en': 'Loose',
+      'pt': 'Solto',
+    },
+    'vopttfks': {
+      'en': 'Defendant situation',
+      'pt': 'Situação real',
+    },
+    'lib0adfj': {
+      'en': 'Search...',
+      'pt': 'Procurar...',
+    },
+    'add23mws': {
+      'en': 'To clean',
+      'pt': 'Limpar',
+    },
+    'nqn14w73': {
+      'en': 'To add',
+      'pt': 'Adicionar',
+    },
+    'cil8rboj': {
+      'en': 'Criminal action number',
+      'pt': 'Nº da ação Penal',
+    },
+    'sotrzfwa': {
+      'en': 'Stick',
+      'pt': 'Vara',
+    },
+    '6kbxtojl': {
+      'en': 'Legal status',
+      'pt': 'Situação jurídica',
+    },
+    '8uiacmac': {
+      'en': 'Regime',
+      'pt': 'Regime',
+    },
+    'bhnywtws': {
+      'en': 'Defendant situation',
+      'pt': 'Situação real',
+    },
+    'wmjb2mvz': {
+      'en': 'Performance',
+      'pt': 'Atuação',
+    },
+    'uzc0tzm0': {
+      'en': 'Make a summary of the main criminal actions of this member.',
+      'pt': 'Faça um resumo das principais atuações criminais deste membro.',
+    },
+    '9v9xmx2i': {
+      'en': 'Historic',
+      'pt': 'Histórico',
+    },
+    '35ss44a6': {
+      'en': 'Historic',
+      'pt': 'Histórico',
+    },
+    'sebzaqjl': {
+      'en': 'Crime Action',
+      'pt': 'Atuação no Crime',
+    },
+    'bjt0xhvz': {
+      'en': 'Crime Action',
+      'pt': 'Atuação no Crime',
+    },
+    'ms29ykns': {
+      'en': 'Alert',
+      'pt': 'Alerta',
+    },
+    'qs8w0isl': {
+      'en': 'Enable alert',
+      'pt': 'Ativar alerta',
+    },
+    'hlhbysfx': {
+      'en': 'Alert',
+      'pt': 'Alerta',
+    },
+    'v1t3mhpt': {
+      'en': 'Alert',
+      'pt': 'Alerta',
+    },
+    '1xvu8k21': {
+      'en': 'Validation',
+      'pt': 'Validação',
+    },
+    'z55xn7vr': {
+      'en': 'Percentage of data validations',
+      'pt': 'Percentual de validações dos dados',
+    },
+    'mcn2wj30': {
+      'en': 'How were the data and information validated?',
+      'pt': 'Como foram validados os dados e informações ?',
+    },
+    'xt0zviie': {
+      'en': 'Local validation or area of ​​operation',
+      'pt': 'Validação Local ou área de atuação',
+    },
+    '6nicg6vo': {
+      'en': 'Only through open sources',
+      'pt': 'Apenas através de fontes abertas',
+    },
+    'u1ezmrh7': {
+      'en': 'Only through restricted sources',
+      'pt': 'Apenas através de fontes restristas',
+    },
+    'hw7vp3j2': {
+      'en': 'Through other intelligence agency(ies)',
+      'pt': 'Através de outra(s) agência de inteligência',
+    },
+    '52d8lpad': {
+      'en': 'Through other bodies such as: PP, MP, etc.',
+      'pt': 'Atráves de outro(s) órgãos como: PP, MP e etc.',
+    },
+    'pz4sv7me': {
+      'en': 'Only through report(s)',
+      'pt': 'Apenas através de informe(s)',
+    },
+    '2egm47bd': {
+      'en': 'Inside a State Prison Facility',
+      'pt': 'Dentro de um Estabelecimento Prisional Estadual',
+    },
+    '3jd5uz4f': {
+      'en': 'Dentro de um Estabelecimento Prisional Federal',
+      'pt': 'Dentro de um Estabelecimento Prisional Federal',
+    },
+    'xrgn3bxr': {
+      'en': 'Apenas através de informante(s)',
+      'pt': 'Apenas através de informante(s)',
+    },
+    'iw3ihap7': {
+      'en': 'Apenas através de Coolaborador(es)',
+      'pt': 'Apenas através de Colaborador(es)',
+    },
+    '5hhyuasp': {
+      'en': '',
+      'pt': '',
+    },
+    'pges7tjh': {
+      'en': '0.1',
+      'pt': '0,1',
+    },
+    'z2ut6vuo': {
+      'en': 'Observação(ões)',
+      'pt': 'Observação(ões)',
+    },
+    'wthvc7v1': {
+      'en': 'Observação(ões)',
+      'pt': 'Observação(ões)',
+    },
+    'zn1gyuvw': {
+      'en': 'Relations',
+      'pt': 'Relações',
+    },
+    'o95p4ebi': {
+      'en': 'Groups',
+      'pt': 'Grupos',
+    },
+    '9pqk83pj': {
+      'en': 'Cancel',
+      'pt': 'Cancelar',
+    },
+    'dterjvu7': {
+      'en': 'Save Member',
+      'pt': 'Salvar Membro',
     },
   },
   // Miscellaneous

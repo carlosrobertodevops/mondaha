@@ -1,3 +1,5 @@
+import '/backend/supabase/supabase.dart';
+import '/components/modal/modal_membros_edit/modal_membros_edit_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +10,14 @@ import 'dropdown_member_edit_model.dart';
 export 'dropdown_member_edit_model.dart';
 
 class DropdownMemberEditWidget extends StatefulWidget {
-  const DropdownMemberEditWidget({super.key});
+  const DropdownMemberEditWidget({
+    super.key,
+    required this.membroId,
+    required this.paraIndex,
+  });
+
+  final MembrosRow? membroId;
+  final int? paraIndex;
 
   @override
   State<DropdownMemberEditWidget> createState() =>
@@ -91,56 +100,86 @@ class _DropdownMemberEditWidgetState extends State<DropdownMemberEditWidget> {
                     child: MouseRegion(
                       opaque: false,
                       cursor: SystemMouseCursors.click ?? MouseCursor.defer,
-                      child: AnimatedContainer(
-                        duration: Duration(milliseconds: 150),
-                        curve: Curves.easeInOut,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: _model.mouseRegionHovered1!
-                              ? FlutterFlowTheme.of(context).primaryBackground
-                              : FlutterFlowTheme.of(context)
-                                  .secondaryBackground,
-                        ),
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              0.0, 8.0, 0.0, 8.0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    12.0, 0.0, 0.0, 0.0),
-                                child: Icon(
-                                  Icons.edit_sharp,
-                                  color:
-                                      FlutterFlowTheme.of(context).primaryText,
-                                  size: 20.0,
-                                ),
-                              ),
-                              Expanded(
-                                child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      12.0, 0.0, 0.0, 0.0),
-                                  child: Text(
-                                    FFLocalizations.of(context).getText(
-                                      '3mts0ojl' /* Edit */,
-                                    ),
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          fontFamily:
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyMediumFamily,
-                                          letterSpacing: 0.0,
-                                          useGoogleFonts: GoogleFonts.asMap()
-                                              .containsKey(
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMediumFamily),
-                                        ),
+                      child: Builder(
+                        builder: (context) => InkWell(
+                          splashColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          onTap: () async {
+                            logFirebaseEvent(
+                                'DROPDOWN_MEMBER_EDIT_replaceWidget_ON_TA');
+                            await showDialog(
+                              context: context,
+                              builder: (dialogContext) {
+                                return Dialog(
+                                  elevation: 0,
+                                  insetPadding: EdgeInsets.zero,
+                                  backgroundColor: Colors.transparent,
+                                  alignment: AlignmentDirectional(0.0, 0.0)
+                                      .resolve(Directionality.of(context)),
+                                  child: ModalMembrosEditWidget(
+                                    membroId: widget!.membroId!,
                                   ),
-                                ),
+                                );
+                              },
+                            );
+                          },
+                          child: AnimatedContainer(
+                            duration: Duration(milliseconds: 150),
+                            curve: Curves.easeInOut,
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              color: _model.mouseRegionHovered1!
+                                  ? FlutterFlowTheme.of(context)
+                                      .primaryBackground
+                                  : FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
+                            ),
+                            child: Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 8.0, 0.0, 8.0),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        12.0, 0.0, 0.0, 0.0),
+                                    child: Icon(
+                                      Icons.edit_sharp,
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryText,
+                                      size: 20.0,
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          12.0, 0.0, 0.0, 0.0),
+                                      child: Text(
+                                        FFLocalizations.of(context).getText(
+                                          '3mts0ojl' /* Edit */,
+                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMediumFamily,
+                                              letterSpacing: 0.0,
+                                              useGoogleFonts: GoogleFonts
+                                                      .asMap()
+                                                  .containsKey(
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMediumFamily),
+                                            ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ],
+                            ),
                           ),
                         ),
                       ),

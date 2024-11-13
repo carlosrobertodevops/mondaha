@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
 
-import '/components/modall/modal_membros_add/modal_membros_add_widget.dart';
+import '/components/modal/modal_membros_add/modal_membros_add_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 

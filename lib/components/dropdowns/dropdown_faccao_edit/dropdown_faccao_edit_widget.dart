@@ -1,5 +1,5 @@
 import '/backend/supabase/supabase.dart';
-import '/components/modall/modal_faccao_edit/modal_faccao_edit_widget.dart';
+import '/components/modal/modal_faccao_edit/modal_faccao_edit_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
@@ -222,7 +222,7 @@ class _DropdownFaccaoEditWidgetState extends State<DropdownFaccaoEditWidget> {
                                     12.0, 0.0, 0.0, 0.0),
                                 child: Text(
                                   FFLocalizations.of(context).getText(
-                                    '27xaiak4' /* Viewe */,
+                                    '27xaiak4' /* View */,
                                   ),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium

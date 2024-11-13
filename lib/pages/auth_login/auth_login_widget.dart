@@ -1,7 +1,7 @@
 import '/auth/base_auth_user_provider.dart';
 import '/auth/supabase_auth/auth_util.dart';
 import '/backend/supabase/supabase.dart';
-import '/components/modall/modal_message_ok/modal_message_ok_widget.dart';
+import '/components/modal/modal_message_ok/modal_message_ok_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
