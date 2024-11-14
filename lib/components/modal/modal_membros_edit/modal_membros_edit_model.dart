@@ -23,6 +23,7 @@ import '/flutter_flow/custom_functions.dart' as functions;
 import 'modal_membros_edit_widget.dart' show ModalMembrosEditWidget;
 import 'package:aligned_tooltip/aligned_tooltip.dart';
 import 'package:sticky_headers/sticky_headers.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -158,6 +159,8 @@ class ModalMembrosEditModel extends FlutterFlowModel<ModalMembrosEditWidget> {
   bool comoForamValidados = true;
 
   MembrosRow? membros;
+
+  bool uploadImageTemp = false;
 
   ///  State fields for stateful widgets in this component.
 

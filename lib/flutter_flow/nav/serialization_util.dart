@@ -232,6 +232,8 @@ dynamic deserializeParam<T>(
             return ProcedimentosRow(data);
           case ProcessosRow:
             return ProcessosRow(data);
+          case ViewMembrosRow:
+            return ViewMembrosRow(data);
           case CargosRow:
             return CargosRow(data);
           case UsuariosRow:
@@ -244,6 +246,8 @@ dynamic deserializeParam<T>(
             return RelacionamentosMembrosRow(data);
           case CountMembrosViewRow:
             return CountMembrosViewRow(data);
+          case ViewMembrosGetAllRow:
+            return ViewMembrosGetAllRow(data);
           case FuncoesRow:
             return FuncoesRow(data);
           case VaraRow:
@@ -260,6 +264,8 @@ dynamic deserializeParam<T>(
             return AgenciasRow(data);
           case FaccoesRow:
             return FaccoesRow(data);
+          case ViewMembrosAllRow:
+            return ViewMembrosAllRow(data);
           default:
             return null;
         }
