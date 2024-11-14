@@ -7378,7 +7378,7 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                     1;
                                                             safeSetState(() {});
                                                             _model.apiResultProcedimentos =
-                                                                await ProcedimentosADDCall
+                                                                await ProcedimentosAddCall
                                                                     .call(
                                                               membroId: _model
                                                                   .retMembrosAdd
@@ -7474,7 +7474,7 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                     1;
                                                             safeSetState(() {});
                                                             _model.apiResultProcessos =
-                                                                await ProcessosADDCall
+                                                                await ProcessosAddCall
                                                                     .call(
                                                               membroId: _model
                                                                   .retMembrosAdd

@@ -70,35 +70,56 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
       length: 8,
       initialIndex: 0,
     )..addListener(() => safeSetState(() {}));
-    _model.txtNomeCompletoTextController ??=
-        TextEditingController(text: widget!.membroId?.nomeCompleto);
+    _model.txtNomeCompletoTextController ??= TextEditingController(
+        text: valueOrDefault<String>(
+      widget!.membroId?.nomeCompleto,
+      'não informado',
+    ));
     _model.txtNomeCompletoFocusNode ??= FocusNode();
 
     _model.txtAlcunhaAddTextController ??= TextEditingController();
     _model.txtAlcunhaAddFocusNode ??= FocusNode();
 
-    _model.txtMembroNaturalidadeTextController ??=
-        TextEditingController(text: widget!.membroId?.naturalidade);
+    _model.txtMembroNaturalidadeTextController ??= TextEditingController(
+        text: valueOrDefault<String>(
+      widget!.membroId?.naturalidade,
+      'não informado',
+    ));
     _model.txtMembroNaturalidadeFocusNode ??= FocusNode();
 
-    _model.txtNoIdentidadeTextController ??=
-        TextEditingController(text: widget!.membroId?.identidade);
+    _model.txtNoIdentidadeTextController ??= TextEditingController(
+        text: valueOrDefault<String>(
+      widget!.membroId?.identidade,
+      'não informado',
+    ));
     _model.txtNoIdentidadeFocusNode ??= FocusNode();
 
-    _model.txtNoCpfTextController ??=
-        TextEditingController(text: widget!.membroId?.cpf);
+    _model.txtNoCpfTextController ??= TextEditingController(
+        text: valueOrDefault<String>(
+      widget!.membroId?.cpf,
+      'não informado',
+    ));
     _model.txtNoCpfFocusNode ??= FocusNode();
 
-    _model.txtNoInfopenTextController ??=
-        TextEditingController(text: widget!.membroId?.infopen);
+    _model.txtNoInfopenTextController ??= TextEditingController(
+        text: valueOrDefault<String>(
+      widget!.membroId?.infopen,
+      'não informado',
+    ));
     _model.txtNoInfopenFocusNode ??= FocusNode();
 
-    _model.txtFiliacaoMaeTextController ??=
-        TextEditingController(text: widget!.membroId?.filiacaoMae);
+    _model.txtFiliacaoMaeTextController ??= TextEditingController(
+        text: valueOrDefault<String>(
+      widget!.membroId?.filiacaoMae,
+      'não informado',
+    ));
     _model.txtFiliacaoMaeFocusNode ??= FocusNode();
 
-    _model.txtFiliacaoPaiTextController ??=
-        TextEditingController(text: widget!.membroId?.filiacaoPai);
+    _model.txtFiliacaoPaiTextController ??= TextEditingController(
+        text: valueOrDefault<String>(
+      widget!.membroId?.filiacaoPai,
+      'não informado',
+    ));
     _model.txtFiliacaoPaiFocusNode ??= FocusNode();
 
     _model.txtMembrosEnderecosAddTextController ??= TextEditingController();
@@ -107,16 +128,25 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
     _model.txtFaccaoBastismoTextController ??=
         TextEditingController(text: widget!.membroId?.batismo);
 
-    _model.txtFacaoLocalBastismoTextController ??=
-        TextEditingController(text: widget!.membroId?.batismoLocal);
+    _model.txtFacaoLocalBastismoTextController ??= TextEditingController(
+        text: valueOrDefault<String>(
+      widget!.membroId?.batismoLocal,
+      'não informado',
+    ));
     _model.txtFacaoLocalBastismoFocusNode ??= FocusNode();
 
-    _model.txtMembrosFaccaoPadrinhoTextController ??=
-        TextEditingController(text: widget!.membroId?.padrinho);
+    _model.txtMembrosFaccaoPadrinhoTextController ??= TextEditingController(
+        text: valueOrDefault<String>(
+      widget!.membroId?.padrinho,
+      'não informado',
+    ));
     _model.txtMembrosFaccaoPadrinhoFocusNode ??= FocusNode();
 
-    _model.txtMembroFaccaoSenhaTextController ??=
-        TextEditingController(text: widget!.membroId?.faccaoSenha);
+    _model.txtMembroFaccaoSenhaTextController ??= TextEditingController(
+        text: valueOrDefault<String>(
+      widget!.membroId?.faccaoSenha,
+      'não informado',
+    ));
     _model.txtMembroFaccaoSenhaFocusNode ??= FocusNode();
 
     _model.txtFaccaoTresLocaisAddTextController ??= TextEditingController();
@@ -131,21 +161,33 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
     _model.txtProcessoNoAcaoPenalTextController ??= TextEditingController();
     _model.txtProcessoNoAcaoPenalFocusNode ??= FocusNode();
 
-    _model.txtHistoricoTextController ??=
-        TextEditingController(text: widget!.membroId?.historico);
+    _model.txtHistoricoTextController ??= TextEditingController(
+        text: valueOrDefault<String>(
+      widget!.membroId?.historico,
+      'não informado',
+    ));
     _model.txtHistoricoFocusNode ??= FocusNode();
 
-    _model.txtMembroAtuacaoTextController ??=
-        TextEditingController(text: widget!.membroId?.atuacaoCrime);
+    _model.txtMembroAtuacaoTextController ??= TextEditingController(
+        text: valueOrDefault<String>(
+      widget!.membroId?.atuacaoCrime,
+      'não informado',
+    ));
     _model.txtMembroAtuacaoFocusNode ??= FocusNode();
 
     _model.switchAlertaValue = false;
-    _model.txtMembroAlertaTextController ??=
-        TextEditingController(text: widget!.membroId?.alerta?.toString());
+    _model.txtMembroAlertaTextController ??= TextEditingController(
+        text: valueOrDefault<String>(
+      widget!.membroId?.alerta?.toString(),
+      'não informado',
+    ));
     _model.txtMembroAlertaFocusNode ??= FocusNode();
 
-    _model.txtValidacoesObservacoesTextController ??=
-        TextEditingController(text: widget!.membroId?.validacaoObservacao);
+    _model.txtValidacoesObservacoesTextController ??= TextEditingController(
+        text: valueOrDefault<String>(
+      widget!.membroId?.validacaoObservacao,
+      'não informado',
+    ));
     _model.txtValidacoesObservacoesFocusNode ??= FocusNode();
 
     animationsMap.addAll({
@@ -693,7 +735,7 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                             children: [
                                                                                               Builder(
                                                                                                 builder: (context) {
-                                                                                                  final fotosMembroPaths = _model.membrosFotosTemp.toList().take(6).toList();
+                                                                                                  final fotosMembroPaths = _model.membrosFotosTemp.map((e) => e).toList().take(6).toList();
 
                                                                                                   return SingleChildScrollView(
                                                                                                     scrollDirection: Axis.horizontal,
@@ -1400,7 +1442,10 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
 
                                                                                         return FlutterFlowDropDown<String>(
                                                                                           controller: _model.ddwEstadoCivilValueController ??= FormFieldController<String>(
-                                                                                            _model.ddwEstadoCivilValue ??= widget!.membroId?.estadoCivil,
+                                                                                            _model.ddwEstadoCivilValue ??= valueOrDefault<String>(
+                                                                                              widget!.membroId?.estadoCivil,
+                                                                                              '0',
+                                                                                            ),
                                                                                           ),
                                                                                           options: [
                                                                                             FFLocalizations.of(context).getText(
@@ -1919,7 +1964,10 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                     flex: 3,
                                                                                     child: FlutterFlowDropDown<String>(
                                                                                       controller: _model.ddwSituacaoMaeValueController ??= FormFieldController<String>(
-                                                                                        _model.ddwSituacaoMaeValue ??= widget!.membroId?.situacaoMae,
+                                                                                        _model.ddwSituacaoMaeValue ??= valueOrDefault<String>(
+                                                                                          widget!.membroId?.situacaoMae,
+                                                                                          '0',
+                                                                                        ),
                                                                                       ),
                                                                                       options: [
                                                                                         FFLocalizations.of(context).getText(
@@ -2068,7 +2116,10 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                     flex: 3,
                                                                                     child: FlutterFlowDropDown<String>(
                                                                                       controller: _model.ddwSituacaoPaiValueController ??= FormFieldController<String>(
-                                                                                        _model.ddwSituacaoPaiValue ??= widget!.membroId?.situacaoPai,
+                                                                                        _model.ddwSituacaoPaiValue ??= valueOrDefault<String>(
+                                                                                          widget!.membroId?.situacaoPai,
+                                                                                          '0',
+                                                                                        ),
                                                                                       ),
                                                                                       options: [
                                                                                         FFLocalizations.of(context).getText(
@@ -2133,7 +2184,10 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                     flex: 3,
                                                                                     child: FlutterFlowDropDown<String>(
                                                                                       controller: _model.ddwNivelInstrucaoValueController ??= FormFieldController<String>(
-                                                                                        _model.ddwNivelInstrucaoValue ??= widget!.membroId?.nivelInstrucao,
+                                                                                        _model.ddwNivelInstrucaoValue ??= valueOrDefault<String>(
+                                                                                          widget!.membroId?.nivelInstrucao,
+                                                                                          '0',
+                                                                                        ),
                                                                                       ),
                                                                                       options: [
                                                                                         FFLocalizations.of(context).getText(
@@ -2315,7 +2369,10 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
 
                                                                                       return FlutterFlowDropDown<int>(
                                                                                         controller: _model.ddwEstadoValueController ??= FormFieldController<int>(
-                                                                                          _model.ddwEstadoValue ??= widget!.membroId?.estadoId,
+                                                                                          _model.ddwEstadoValue ??= valueOrDefault<int>(
+                                                                                            widget!.membroId?.estadoId,
+                                                                                            0,
+                                                                                          ),
                                                                                         ),
                                                                                         options: List<int>.from(ddwEstadoEstadosRowList.map((e) => e.estadoId).toList()),
                                                                                         optionLabels: ddwEstadoEstadosRowList.map((e) => e.sigla).withoutNulls.toList(),
@@ -2388,7 +2445,10 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
 
                                                                                       return FlutterFlowDropDown<int>(
                                                                                         controller: _model.ddwMunicipioValueController ??= FormFieldController<int>(
-                                                                                          _model.ddwMunicipioValue ??= widget!.membroId?.municipioId,
+                                                                                          _model.ddwMunicipioValue ??= valueOrDefault<int>(
+                                                                                            widget!.membroId?.municipioId,
+                                                                                            0,
+                                                                                          ),
                                                                                         ),
                                                                                         options: List<int>.from(ddwMunicipioMunicipiosRowList.map((e) => e.id).toList()),
                                                                                         optionLabels: ddwMunicipioMunicipiosRowList.map((e) => e.nome).withoutNulls.toList(),
@@ -2938,7 +2998,10 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
 
                                                                                         return FlutterFlowDropDown<int>(
                                                                                           controller: _model.ddwMembroFaccaoValueController ??= FormFieldController<int>(
-                                                                                            _model.ddwMembroFaccaoValue ??= widget!.membroId?.faccaoId,
+                                                                                            _model.ddwMembroFaccaoValue ??= valueOrDefault<int>(
+                                                                                              widget!.membroId?.faccaoId,
+                                                                                              0,
+                                                                                            ),
                                                                                           ),
                                                                                           options: List<int>.from(ddwMembroFaccaoFaccoesRowList.map((e) => e.faccaoId).toList()),
                                                                                           optionLabels: ddwMembroFaccaoFaccoesRowList
@@ -3410,7 +3473,10 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
 
                                                                                         return FlutterFlowDropDown<int>(
                                                                                           controller: _model.ddwMembroFaccaoCargoAtualValueController ??= FormFieldController<int>(
-                                                                                            _model.ddwMembroFaccaoCargoAtualValue ??= widget!.membroId?.cargoId,
+                                                                                            _model.ddwMembroFaccaoCargoAtualValue ??= valueOrDefault<int>(
+                                                                                              widget!.membroId?.cargoId,
+                                                                                              0,
+                                                                                            ),
                                                                                           ),
                                                                                           options: List<int>.from(ddwMembroFaccaoCargoAtualCargosRowList.map((e) => e.cargoId).toList()),
                                                                                           optionLabels: ddwMembroFaccaoCargoAtualCargosRowList.map((e) => e.nome).withoutNulls.toList(),
@@ -3480,7 +3546,10 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
 
                                                                                         return FlutterFlowDropDown<int>(
                                                                                           controller: _model.ddwMembroFaccaoCargoAnteriorValueController ??= FormFieldController<int>(
-                                                                                            _model.ddwMembroFaccaoCargoAnteriorValue ??= widget!.membroId?.cargoAntId,
+                                                                                            _model.ddwMembroFaccaoCargoAnteriorValue ??= valueOrDefault<int>(
+                                                                                              widget!.membroId?.cargoAntId,
+                                                                                              0,
+                                                                                            ),
                                                                                           ),
                                                                                           options: List<int>.from(ddwMembroFaccaoCargoAnteriorCargosRowList.map((e) => e.cargoId).toList()),
                                                                                           optionLabels: ddwMembroFaccaoCargoAnteriorCargosRowList.map((e) => e.nome).withoutNulls.toList(),
@@ -3555,7 +3624,10 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
 
                                                                                         return FlutterFlowDropDown<int>(
                                                                                           controller: _model.ddwFaccaoFuncaoAtualValueController ??= FormFieldController<int>(
-                                                                                            _model.ddwFaccaoFuncaoAtualValue ??= widget!.membroId?.funcaoId,
+                                                                                            _model.ddwFaccaoFuncaoAtualValue ??= valueOrDefault<int>(
+                                                                                              widget!.membroId?.funcaoId,
+                                                                                              0,
+                                                                                            ),
                                                                                           ),
                                                                                           options: List<int>.from(ddwFaccaoFuncaoAtualFuncoesRowList.map((e) => e.funcaoId).toList()),
                                                                                           optionLabels: ddwFaccaoFuncaoAtualFuncoesRowList.map((e) => e.nome).withoutNulls.toList(),
@@ -3625,7 +3697,10 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
 
                                                                                         return FlutterFlowDropDown<int>(
                                                                                           controller: _model.ddwFaccaoFuncaoAnteriorValueController ??= FormFieldController<int>(
-                                                                                            _model.ddwFaccaoFuncaoAnteriorValue ??= widget!.membroId?.funcaoAntId,
+                                                                                            _model.ddwFaccaoFuncaoAnteriorValue ??= valueOrDefault<int>(
+                                                                                              widget!.membroId?.funcaoAntId,
+                                                                                              0,
+                                                                                            ),
                                                                                           ),
                                                                                           options: List<int>.from(ddwFaccaoFuncaoAnteriorFuncoesRowList.map((e) => e.funcaoId).toList()),
                                                                                           optionLabels: ddwFaccaoFuncaoAnteriorFuncoesRowList.map((e) => e.nome).withoutNulls.toList(),
@@ -3942,7 +4017,10 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
 
                                                                                         return FlutterFlowDropDown<int>(
                                                                                           controller: _model.ddwFaccaoIntegrouValueController ??= FormFieldController<int>(
-                                                                                            _model.ddwFaccaoIntegrouValue ??= widget!.membroId?.faccaoIntegrou,
+                                                                                            _model.ddwFaccaoIntegrouValue ??= valueOrDefault<int>(
+                                                                                              widget!.membroId?.faccaoIntegrou,
+                                                                                              0,
+                                                                                            ),
                                                                                           ),
                                                                                           options: List<int>.from(ddwFaccaoIntegrouFaccoesRowList.map((e) => e.faccaoId).toList()),
                                                                                           optionLabels: ddwFaccaoIntegrouFaccoesRowList.map((e) => e.nome).withoutNulls.toList(),
@@ -4012,7 +4090,10 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
 
                                                                                         return FlutterFlowDropDown<int>(
                                                                                           controller: _model.ddwFaccaoAliadaValueController ??= FormFieldController<int>(
-                                                                                            _model.ddwFaccaoAliadaValue ??= widget!.membroId?.faccaoAliada,
+                                                                                            _model.ddwFaccaoAliadaValue ??= valueOrDefault<int>(
+                                                                                              widget!.membroId?.faccaoAliada,
+                                                                                              0,
+                                                                                            ),
                                                                                           ),
                                                                                           options: List<int>.from(ddwFaccaoAliadaFaccoesRowList.map((e) => e.faccaoId).toList()),
                                                                                           optionLabels: ddwFaccaoAliadaFaccoesRowList.map((e) => e.nome).withoutNulls.toList(),
@@ -4087,7 +4168,10 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
 
                                                                                         return FlutterFlowDropDown<int>(
                                                                                           controller: _model.ddwFaccaoInimigaValueController ??= FormFieldController<int>(
-                                                                                            _model.ddwFaccaoInimigaValue ??= widget!.membroId?.faccaoInimiga,
+                                                                                            _model.ddwFaccaoInimigaValue ??= valueOrDefault<int>(
+                                                                                              widget!.membroId?.faccaoInimiga,
+                                                                                              0,
+                                                                                            ),
                                                                                           ),
                                                                                           options: List<int>.from(ddwFaccaoInimigaFaccoesRowList.map((e) => e.faccaoId).toList()),
                                                                                           optionLabels: ddwFaccaoInimigaFaccoesRowList.map((e) => e.nome).withoutNulls.toList(),
@@ -6209,27 +6293,23 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                 useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).titleLargeFamily),
                                                                               ),
                                                                         ),
-                                                                        Align(
-                                                                          alignment: AlignmentDirectional(
-                                                                              -1.0,
-                                                                              -1.0),
-                                                                          child:
-                                                                              Switch.adaptive(
-                                                                            value:
-                                                                                _model.switchAlertaValue!,
-                                                                            onChanged:
-                                                                                (newValue) async {
-                                                                              safeSetState(() => _model.switchAlertaValue = newValue!);
-                                                                            },
-                                                                            activeColor:
-                                                                                FlutterFlowTheme.of(context).error,
-                                                                            activeTrackColor:
-                                                                                FlutterFlowTheme.of(context).error,
-                                                                            inactiveTrackColor:
-                                                                                FlutterFlowTheme.of(context).alternate,
-                                                                            inactiveThumbColor:
-                                                                                FlutterFlowTheme.of(context).secondaryBackground,
-                                                                          ),
+                                                                        Switch
+                                                                            .adaptive(
+                                                                          value:
+                                                                              _model.switchAlertaValue!,
+                                                                          onChanged:
+                                                                              (newValue) async {
+                                                                            safeSetState(() =>
+                                                                                _model.switchAlertaValue = newValue!);
+                                                                          },
+                                                                          activeColor:
+                                                                              FlutterFlowTheme.of(context).error,
+                                                                          activeTrackColor:
+                                                                              FlutterFlowTheme.of(context).error,
+                                                                          inactiveTrackColor:
+                                                                              FlutterFlowTheme.of(context).alternate,
+                                                                          inactiveThumbColor:
+                                                                              FlutterFlowTheme.of(context).secondaryBackground,
                                                                         ),
                                                                       ].divide(SizedBox(
                                                                               width: 16.0)),
@@ -6592,7 +6672,7 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                       initialized: _model.choiceChipsValidacoesValues != null,
                                                                                       alignment: WrapAlignment.start,
                                                                                       controller: _model.choiceChipsValidacoesValueController ??= FormFieldController<List<String>>(
-                                                                                        [],
+                                                                                        widget!.membroId?.validacoes,
                                                                                       ),
                                                                                       wrapped: true,
                                                                                     ),
@@ -7402,7 +7482,7 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                     1;
                                                             safeSetState(() {});
                                                             _model.apiResultProcedimentos =
-                                                                await ProcedimentosADDCall
+                                                                await ProcedimentosAddCall
                                                                     .call(
                                                               membroId: _model
                                                                   .retMembrosAdd
@@ -7498,7 +7578,7 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                     1;
                                                             safeSetState(() {});
                                                             _model.apiResultProcessos =
-                                                                await ProcessosADDCall
+                                                                await ProcessosAddCall
                                                                     .call(
                                                               membroId: _model
                                                                   .retMembrosAdd

@@ -157,6 +157,8 @@ class ModalMembrosEditModel extends FlutterFlowModel<ModalMembrosEditWidget> {
 
   bool comoForamValidados = true;
 
+  MembrosRow? membros;
+
   ///  State fields for stateful widgets in this component.
 
   final formKey3 = GlobalKey<FormState>();
@@ -379,9 +381,9 @@ class ModalMembrosEditModel extends FlutterFlowModel<ModalMembrosEditWidget> {
 
   // Stores action output result for [Backend Call - Insert Row] action in Button widget.
   MembrosRow? retMembrosAdd;
-  // Stores action output result for [Backend Call - API (ProcedimentosADD)] action in Button widget.
+  // Stores action output result for [Backend Call - API (ProcedimentosAdd)] action in Button widget.
   ApiCallResponse? apiResultProcedimentos;
-  // Stores action output result for [Backend Call - API (ProcessosADD)] action in Button widget.
+  // Stores action output result for [Backend Call - API (ProcessosAdd)] action in Button widget.
   ApiCallResponse? apiResultProcessos;
 
   @override
