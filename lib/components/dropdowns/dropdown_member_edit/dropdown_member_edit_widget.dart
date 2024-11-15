@@ -14,10 +14,12 @@ class DropdownMemberEditWidget extends StatefulWidget {
     super.key,
     required this.membroId,
     required this.paraIndex,
+    required this.membrosRow,
   });
 
-  final MembrosRow? membroId;
+  final int? membroId;
   final int? paraIndex;
+  final ViewMembrosRow? membrosRow;
 
   @override
   State<DropdownMemberEditWidget> createState() =>
@@ -120,7 +122,8 @@ class _DropdownMemberEditWidgetState extends State<DropdownMemberEditWidget> {
                                       .resolve(Directionality.of(context)),
                                   child: ModalMembrosEditWidget(
                                     membroId: widget!.membroId!,
-                                    membroFotos: widget!.membroId!.fotosPath,
+                                    membrosFotos: widget!.membrosRow!.fotosPath,
+                                    membrosRow: widget!.membrosRow!,
                                   ),
                                 );
                               },

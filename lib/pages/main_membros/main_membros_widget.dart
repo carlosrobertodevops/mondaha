@@ -628,11 +628,12 @@ class _MainMembrosWidgetState extends State<MainMembrosWidget>
                                                           MainAxisSize.max,
                                                       children: [
                                                         FutureBuilder<
-                                                            List<MembrosRow>>(
+                                                            List<
+                                                                ViewMembrosRow>>(
                                                           future: _model
                                                               .qryMembrosMain(
                                                             requestFn: () =>
-                                                                MembrosTable()
+                                                                ViewMembrosTable()
                                                                     .queryRows(
                                                               queryFn: (q) =>
                                                                   q.order(
@@ -660,8 +661,8 @@ class _MainMembrosWidgetState extends State<MainMembrosWidget>
                                                                 ),
                                                               );
                                                             }
-                                                            List<MembrosRow>
-                                                                listViewMembrosRowList =
+                                                            List<ViewMembrosRow>
+                                                                listViewViewMembrosRowList =
                                                                 snapshot.data!;
 
                                                             return ListView
@@ -674,12 +675,12 @@ class _MainMembrosWidgetState extends State<MainMembrosWidget>
                                                               scrollDirection:
                                                                   Axis.vertical,
                                                               itemCount:
-                                                                  listViewMembrosRowList
+                                                                  listViewViewMembrosRowList
                                                                       .length,
                                                               itemBuilder: (context,
                                                                   listViewIndex) {
-                                                                final listViewMembrosRow =
-                                                                    listViewMembrosRowList[
+                                                                final listViewViewMembrosRow =
+                                                                    listViewViewMembrosRowList[
                                                                         listViewIndex];
                                                                 return Builder(
                                                                   builder:
@@ -722,8 +723,9 @@ class _MainMembrosWidgetState extends State<MainMembrosWidget>
                                                                               child: GestureDetector(
                                                                                 onTap: () => FocusScope.of(dialogContext).unfocus(),
                                                                                 child: ModalMembrosEditWidget(
-                                                                                  membroId: listViewMembrosRow,
-                                                                                  membroFotos: listViewMembrosRow.fotosPath,
+                                                                                  membroId: listViewViewMembrosRow.membroId!,
+                                                                                  membrosFotos: listViewViewMembrosRow.fotosPath,
+                                                                                  membrosRow: listViewViewMembrosRow,
                                                                                 ),
                                                                               ),
                                                                             );
@@ -771,7 +773,7 @@ class _MainMembrosWidgetState extends State<MainMembrosWidget>
                                                                                   fadeInDuration: Duration(milliseconds: 10),
                                                                                   fadeOutDuration: Duration(milliseconds: 10),
                                                                                   imageUrl: valueOrDefault<String>(
-                                                                                    listViewMembrosRow.fotosPath.first != '' ? listViewMembrosRow.fotosPath.first : (Theme.of(context).brightness == Brightness.light ? FFAppState().MembrosImagePathLight : FFAppState().MembrosImagePathDark),
+                                                                                    listViewViewMembrosRow.fotosPath.first != '' ? listViewViewMembrosRow.fotosPath.first : (Theme.of(context).brightness == Brightness.light ? FFAppState().MembrosImagePathLight : FFAppState().MembrosImagePathDark),
                                                                                     'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/rgxzhoyu6nbx/groups_96dp_99999_FILL0_wght400_GRAD0_opsz48.png',
                                                                                   ),
                                                                                   width: 50.0,
@@ -788,10 +790,10 @@ class _MainMembrosWidgetState extends State<MainMembrosWidget>
                                                                                         padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
                                                                                         child: Text(
                                                                                           valueOrDefault<String>(
-                                                                                            listViewMembrosRow.nomeCompleto == ''
+                                                                                            listViewViewMembrosRow.nomeCompleto == ''
                                                                                                 ? 'sem informação'
                                                                                                 : valueOrDefault<String>(
-                                                                                                    listViewMembrosRow.nomeCompleto,
+                                                                                                    listViewViewMembrosRow.nomeCompleto,
                                                                                                     'sem informação',
                                                                                                   ),
                                                                                             'sem informação',
@@ -816,7 +818,7 @@ class _MainMembrosWidgetState extends State<MainMembrosWidget>
                                                                                             future: FuncoesTable().querySingleRow(
                                                                                               queryFn: (q) => q.eq(
                                                                                                 'funcao_id',
-                                                                                                listViewMembrosRow.funcaoId!,
+                                                                                                listViewViewMembrosRow.funcaoId!,
                                                                                               ),
                                                                                             ),
                                                                                             builder: (context, snapshot) {
@@ -864,7 +866,7 @@ class _MainMembrosWidgetState extends State<MainMembrosWidget>
                                                                                             future: FaccoesTable().querySingleRow(
                                                                                               queryFn: (q) => q.eq(
                                                                                                 'faccao_id',
-                                                                                                listViewMembrosRow.faccaoId!,
+                                                                                                listViewViewMembrosRow.faccaoId!,
                                                                                               ),
                                                                                             ),
                                                                                             builder: (context, snapshot) {
@@ -911,14 +913,14 @@ class _MainMembrosWidgetState extends State<MainMembrosWidget>
                                                                                           padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
                                                                                           child: Text(
                                                                                             valueOrDefault<String>(
-                                                                                              listViewMembrosRow.alcunha.first ==
+                                                                                              listViewViewMembrosRow.alcunha.first ==
                                                                                                       valueOrDefault<String>(
                                                                                                         '',
                                                                                                         'sem informação',
                                                                                                       )
                                                                                                   ? 'sem informação'
                                                                                                   : valueOrDefault<String>(
-                                                                                                      listViewMembrosRow.alcunha.first,
+                                                                                                      listViewViewMembrosRow.alcunha.first,
                                                                                                       'sem informação',
                                                                                                     ),
                                                                                               'sem informação',
@@ -952,7 +954,7 @@ class _MainMembrosWidgetState extends State<MainMembrosWidget>
                                                                                                 padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
                                                                                                 child: Text(
                                                                                                   valueOrDefault<String>(
-                                                                                                    listViewMembrosRow.cpf,
+                                                                                                    listViewViewMembrosRow.cpf,
                                                                                                     'cpf',
                                                                                                   ),
                                                                                                   style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -993,8 +995,9 @@ class _MainMembrosWidgetState extends State<MainMembrosWidget>
                                                                                             child: GestureDetector(
                                                                                               onTap: () => FocusScope.of(dialogContext).unfocus(),
                                                                                               child: DropdownMemberEditWidget(
-                                                                                                membroId: listViewMembrosRow,
+                                                                                                membroId: listViewViewMembrosRow.membroId!,
                                                                                                 paraIndex: 0,
+                                                                                                membrosRow: listViewViewMembrosRow,
                                                                                               ),
                                                                                             ),
                                                                                           );

@@ -28,6 +28,20 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class MainMembrosModel extends FlutterFlowModel<MainMembrosWidget> {
+  ///  Local state fields for this page.
+
+  int? membroId;
+
+  List<String> membroFotoPath = [];
+  void addToMembroFotoPath(String item) => membroFotoPath.add(item);
+  void removeFromMembroFotoPath(String item) => membroFotoPath.remove(item);
+  void removeAtIndexFromMembroFotoPath(int index) =>
+      membroFotoPath.removeAt(index);
+  void insertAtIndexInMembroFotoPath(int index, String item) =>
+      membroFotoPath.insert(index, item);
+  void updateMembroFotoPathAtIndex(int index, Function(String) updateFn) =>
+      membroFotoPath[index] = updateFn(membroFotoPath[index]);
+
   ///  State fields for stateful widgets in this page.
 
   TutorialCoachMark? adicionarMembrosController;
@@ -40,11 +54,11 @@ class MainMembrosModel extends FlutterFlowModel<MainMembrosWidget> {
 
   /// Query cache managers for this widget.
 
-  final _qryMembrosMainManager = FutureRequestManager<List<MembrosRow>>();
-  Future<List<MembrosRow>> qryMembrosMain({
+  final _qryMembrosMainManager = FutureRequestManager<List<ViewMembrosRow>>();
+  Future<List<ViewMembrosRow>> qryMembrosMain({
     String? uniqueQueryKey,
     bool? overrideCache,
-    required Future<List<MembrosRow>> Function() requestFn,
+    required Future<List<ViewMembrosRow>> Function() requestFn,
   }) =>
       _qryMembrosMainManager.performRequest(
         uniqueQueryKey: uniqueQueryKey,
