@@ -769,57 +769,52 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                                                                               ),
                                                                                                                             ),
                                                                                                                           ),
-                                                                                                                        ],
-                                                                                                                      ),
-                                                                                                                    ),
-                                                                                                                    Column(
-                                                                                                                      mainAxisSize: MainAxisSize.max,
-                                                                                                                      children: [
-                                                                                                                        if (_model.uploadedLocalFiles1.length >= 1)
-                                                                                                                          Expanded(
-                                                                                                                            child: Padding(
-                                                                                                                              padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 1.0),
-                                                                                                                              child: InkWell(
-                                                                                                                                splashColor: Colors.transparent,
-                                                                                                                                focusColor: Colors.transparent,
-                                                                                                                                hoverColor: Colors.transparent,
-                                                                                                                                highlightColor: Colors.transparent,
-                                                                                                                                onTap: () async {
-                                                                                                                                  logFirebaseEvent('MODAL_MEMBROS_ADD_Icon_gn1akpon_ON_TAP');
-                                                                                                                                  var confirmDialogResponse = await showDialog<bool>(
-                                                                                                                                        context: context,
-                                                                                                                                        builder: (alertDialogContext) {
-                                                                                                                                          return AlertDialog(
-                                                                                                                                            title: Text('Apagar Foto'),
-                                                                                                                                            content: Text('Deseja apagar esta foto ?'),
-                                                                                                                                            actions: [
-                                                                                                                                              TextButton(
-                                                                                                                                                onPressed: () => Navigator.pop(alertDialogContext, false),
-                                                                                                                                                child: Text('Cancelar'),
-                                                                                                                                              ),
-                                                                                                                                              TextButton(
-                                                                                                                                                onPressed: () => Navigator.pop(alertDialogContext, true),
-                                                                                                                                                child: Text('Confirmar'),
-                                                                                                                                              ),
-                                                                                                                                            ],
-                                                                                                                                          );
-                                                                                                                                        },
-                                                                                                                                      ) ??
-                                                                                                                                      false;
-                                                                                                                                  if (confirmDialogResponse) {
-                                                                                                                                    _model.removeAtIndexFromMembrosFotosTemp(fotosMembroPathsIndex);
-                                                                                                                                    safeSetState(() {});
-                                                                                                                                  }
-                                                                                                                                },
-                                                                                                                                child: Icon(
-                                                                                                                                  Icons.do_not_disturb_on_rounded,
-                                                                                                                                  color: FlutterFlowTheme.of(context).error,
-                                                                                                                                  size: 24.0,
+                                                                                                                          if (_model.uploadedLocalFiles1.length >= 1)
+                                                                                                                            Expanded(
+                                                                                                                              child: Padding(
+                                                                                                                                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 1.0),
+                                                                                                                                child: InkWell(
+                                                                                                                                  splashColor: Colors.transparent,
+                                                                                                                                  focusColor: Colors.transparent,
+                                                                                                                                  hoverColor: Colors.transparent,
+                                                                                                                                  highlightColor: Colors.transparent,
+                                                                                                                                  onTap: () async {
+                                                                                                                                    logFirebaseEvent('MODAL_MEMBROS_ADD_Icon_gn1akpon_ON_TAP');
+                                                                                                                                    var confirmDialogResponse = await showDialog<bool>(
+                                                                                                                                          context: context,
+                                                                                                                                          builder: (alertDialogContext) {
+                                                                                                                                            return AlertDialog(
+                                                                                                                                              title: Text('Apagar Foto'),
+                                                                                                                                              content: Text('Deseja apagar esta foto ?'),
+                                                                                                                                              actions: [
+                                                                                                                                                TextButton(
+                                                                                                                                                  onPressed: () => Navigator.pop(alertDialogContext, false),
+                                                                                                                                                  child: Text('Cancelar'),
+                                                                                                                                                ),
+                                                                                                                                                TextButton(
+                                                                                                                                                  onPressed: () => Navigator.pop(alertDialogContext, true),
+                                                                                                                                                  child: Text('Confirmar'),
+                                                                                                                                                ),
+                                                                                                                                              ],
+                                                                                                                                            );
+                                                                                                                                          },
+                                                                                                                                        ) ??
+                                                                                                                                        false;
+                                                                                                                                    if (confirmDialogResponse) {
+                                                                                                                                      _model.removeAtIndexFromMembrosFotosTemp(fotosMembroPathsIndex);
+                                                                                                                                      safeSetState(() {});
+                                                                                                                                    }
+                                                                                                                                  },
+                                                                                                                                  child: Icon(
+                                                                                                                                    Icons.do_not_disturb_on_rounded,
+                                                                                                                                    color: FlutterFlowTheme.of(context).error,
+                                                                                                                                    size: 24.0,
+                                                                                                                                  ),
                                                                                                                                 ),
                                                                                                                               ),
                                                                                                                             ),
-                                                                                                                          ),
-                                                                                                                      ],
+                                                                                                                        ],
+                                                                                                                      ),
                                                                                                                     ),
                                                                                                                   ].divide(SizedBox(height: 1.0)),
                                                                                                                 ),

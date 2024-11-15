@@ -41,9 +41,11 @@ class ModalMembrosEditWidget extends StatefulWidget {
   const ModalMembrosEditWidget({
     super.key,
     required this.membroId,
+    required this.membroFotos,
   });
 
   final MembrosRow? membroId;
+  final List<String>? membroFotos;
 
   @override
   State<ModalMembrosEditWidget> createState() => _ModalMembrosEditWidgetState();
@@ -742,231 +744,345 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                                   child: Column(
                                                                                                     mainAxisSize: MainAxisSize.max,
                                                                                                     children: [
-                                                                                                      Builder(
-                                                                                                        builder: (context) {
-                                                                                                          final fotosMembroPaths = _model.membrosFotosTemp.map((e) => e).toList().take(6).toList();
+                                                                                                      Stack(
+                                                                                                        children: [
+                                                                                                          if (_model.uploadImageTemp == false)
+                                                                                                            Builder(
+                                                                                                              builder: (context) {
+                                                                                                                final fotosMembroPaths = widget!.membroFotos!.toList().take(6).toList();
 
-                                                                                                          return SingleChildScrollView(
-                                                                                                            scrollDirection: Axis.horizontal,
-                                                                                                            child: Row(
-                                                                                                              mainAxisSize: MainAxisSize.max,
-                                                                                                              mainAxisAlignment: MainAxisAlignment.start,
-                                                                                                              crossAxisAlignment: CrossAxisAlignment.center,
-                                                                                                              children: List.generate(fotosMembroPaths.length, (fotosMembroPathsIndex) {
-                                                                                                                final fotosMembroPathsItem = fotosMembroPaths[fotosMembroPathsIndex];
-                                                                                                                return Visibility(
-                                                                                                                  visible: _model.uploadedLocalFiles1.length >= 1,
-                                                                                                                  child: Align(
-                                                                                                                    alignment: AlignmentDirectional(-1.0, 0.0),
-                                                                                                                    child: Container(
-                                                                                                                      width: 100.0,
-                                                                                                                      height: 100.0,
-                                                                                                                      decoration: BoxDecoration(
-                                                                                                                        color: FlutterFlowTheme.of(context).accent1,
-                                                                                                                        borderRadius: BorderRadius.circular(12.0),
-                                                                                                                        shape: BoxShape.rectangle,
-                                                                                                                        border: Border.all(
-                                                                                                                          color: FlutterFlowTheme.of(context).primary,
-                                                                                                                          width: 2.0,
-                                                                                                                        ),
-                                                                                                                      ),
-                                                                                                                      child: SingleChildScrollView(
-                                                                                                                        primary: false,
-                                                                                                                        child: Column(
-                                                                                                                          mainAxisSize: MainAxisSize.max,
-                                                                                                                          mainAxisAlignment: MainAxisAlignment.center,
-                                                                                                                          children: [
-                                                                                                                            Expanded(
+                                                                                                                return SingleChildScrollView(
+                                                                                                                  scrollDirection: Axis.horizontal,
+                                                                                                                  child: Row(
+                                                                                                                    mainAxisSize: MainAxisSize.max,
+                                                                                                                    mainAxisAlignment: MainAxisAlignment.start,
+                                                                                                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                                                                                                    children: List.generate(fotosMembroPaths.length, (fotosMembroPathsIndex) {
+                                                                                                                      final fotosMembroPathsItem = fotosMembroPaths[fotosMembroPathsIndex];
+                                                                                                                      return Visibility(
+                                                                                                                        visible: widget!.membroFotos!.length >= 1,
+                                                                                                                        child: Align(
+                                                                                                                          alignment: AlignmentDirectional(-1.0, 0.0),
+                                                                                                                          child: Container(
+                                                                                                                            width: 100.0,
+                                                                                                                            height: 100.0,
+                                                                                                                            decoration: BoxDecoration(
+                                                                                                                              color: FlutterFlowTheme.of(context).accent1,
+                                                                                                                              borderRadius: BorderRadius.circular(12.0),
+                                                                                                                              shape: BoxShape.rectangle,
+                                                                                                                              border: Border.all(
+                                                                                                                                color: FlutterFlowTheme.of(context).primary,
+                                                                                                                                width: 2.0,
+                                                                                                                              ),
+                                                                                                                            ),
+                                                                                                                            child: SingleChildScrollView(
+                                                                                                                              primary: false,
                                                                                                                               child: Column(
-                                                                                                                                mainAxisSize: MainAxisSize.min,
+                                                                                                                                mainAxisSize: MainAxisSize.max,
+                                                                                                                                mainAxisAlignment: MainAxisAlignment.center,
                                                                                                                                 children: [
                                                                                                                                   Expanded(
-                                                                                                                                    child: Container(
-                                                                                                                                      height: 100.0,
-                                                                                                                                      child: Stack(
-                                                                                                                                        children: [
-                                                                                                                                          if (_model.uploadImageTemp == false)
-                                                                                                                                            Padding(
-                                                                                                                                              padding: EdgeInsets.all(1.0),
-                                                                                                                                              child: InkWell(
-                                                                                                                                                splashColor: Colors.transparent,
-                                                                                                                                                focusColor: Colors.transparent,
-                                                                                                                                                hoverColor: Colors.transparent,
-                                                                                                                                                highlightColor: Colors.transparent,
-                                                                                                                                                onTap: () async {
-                                                                                                                                                  logFirebaseEvent('MODAL_MEMBROS_EDIT_membro_foto_ON_TAP');
-                                                                                                                                                  await Navigator.push(
-                                                                                                                                                    context,
-                                                                                                                                                    PageTransition(
-                                                                                                                                                      type: PageTransitionType.fade,
-                                                                                                                                                      child: FlutterFlowExpandedImageView(
-                                                                                                                                                        image: CachedNetworkImage(
-                                                                                                                                                          fadeInDuration: Duration(milliseconds: 500),
-                                                                                                                                                          fadeOutDuration: Duration(milliseconds: 500),
-                                                                                                                                                          imageUrl: widget!.membroId!.fotosPath[fotosMembroPathsIndex],
+                                                                                                                                    child: Column(
+                                                                                                                                      mainAxisSize: MainAxisSize.min,
+                                                                                                                                      children: [
+                                                                                                                                        Expanded(
+                                                                                                                                          child: Container(
+                                                                                                                                            height: 100.0,
+                                                                                                                                            child: Stack(
+                                                                                                                                              children: [
+                                                                                                                                                Padding(
+                                                                                                                                                  padding: EdgeInsets.all(1.0),
+                                                                                                                                                  child: InkWell(
+                                                                                                                                                    splashColor: Colors.transparent,
+                                                                                                                                                    focusColor: Colors.transparent,
+                                                                                                                                                    hoverColor: Colors.transparent,
+                                                                                                                                                    highlightColor: Colors.transparent,
+                                                                                                                                                    onTap: () async {
+                                                                                                                                                      logFirebaseEvent('MODAL_MEMBROS_EDIT_membro_foto_ON_TAP');
+                                                                                                                                                      await Navigator.push(
+                                                                                                                                                        context,
+                                                                                                                                                        PageTransition(
+                                                                                                                                                          type: PageTransitionType.fade,
+                                                                                                                                                          child: FlutterFlowExpandedImageView(
+                                                                                                                                                            image: CachedNetworkImage(
+                                                                                                                                                              fadeInDuration: Duration(milliseconds: 10),
+                                                                                                                                                              fadeOutDuration: Duration(milliseconds: 10),
+                                                                                                                                                              imageUrl: fotosMembroPathsItem,
+                                                                                                                                                              fit: BoxFit.contain,
+                                                                                                                                                              alignment: Alignment(0.0, 0.0),
+                                                                                                                                                              errorWidget: (context, error, stackTrace) => Image.asset(
+                                                                                                                                                                'assets/images/error_image.png',
+                                                                                                                                                                fit: BoxFit.contain,
+                                                                                                                                                                alignment: Alignment(0.0, 0.0),
+                                                                                                                                                              ),
+                                                                                                                                                            ),
+                                                                                                                                                            allowRotation: false,
+                                                                                                                                                            tag: fotosMembroPathsItem,
+                                                                                                                                                            useHeroAnimation: true,
+                                                                                                                                                          ),
+                                                                                                                                                        ),
+                                                                                                                                                      );
+                                                                                                                                                    },
+                                                                                                                                                    child: Hero(
+                                                                                                                                                      tag: fotosMembroPathsItem,
+                                                                                                                                                      transitionOnUserGestures: true,
+                                                                                                                                                      child: ClipRRect(
+                                                                                                                                                        borderRadius: BorderRadius.circular(10.0),
+                                                                                                                                                        child: CachedNetworkImage(
+                                                                                                                                                          fadeInDuration: Duration(milliseconds: 10),
+                                                                                                                                                          fadeOutDuration: Duration(milliseconds: 10),
+                                                                                                                                                          imageUrl: fotosMembroPathsItem,
+                                                                                                                                                          width: 100.0,
+                                                                                                                                                          height: 68.0,
                                                                                                                                                           fit: BoxFit.contain,
                                                                                                                                                           alignment: Alignment(0.0, 0.0),
                                                                                                                                                           errorWidget: (context, error, stackTrace) => Image.asset(
                                                                                                                                                             'assets/images/error_image.png',
+                                                                                                                                                            width: 100.0,
+                                                                                                                                                            height: 68.0,
                                                                                                                                                             fit: BoxFit.contain,
                                                                                                                                                             alignment: Alignment(0.0, 0.0),
                                                                                                                                                           ),
                                                                                                                                                         ),
-                                                                                                                                                        allowRotation: false,
-                                                                                                                                                        tag: widget!.membroId!.fotosPath[fotosMembroPathsIndex],
-                                                                                                                                                        useHeroAnimation: true,
-                                                                                                                                                      ),
-                                                                                                                                                    ),
-                                                                                                                                                  );
-                                                                                                                                                },
-                                                                                                                                                child: Hero(
-                                                                                                                                                  tag: widget!.membroId!.fotosPath[fotosMembroPathsIndex],
-                                                                                                                                                  transitionOnUserGestures: true,
-                                                                                                                                                  child: ClipRRect(
-                                                                                                                                                    borderRadius: BorderRadius.circular(10.0),
-                                                                                                                                                    child: CachedNetworkImage(
-                                                                                                                                                      fadeInDuration: Duration(milliseconds: 500),
-                                                                                                                                                      fadeOutDuration: Duration(milliseconds: 500),
-                                                                                                                                                      imageUrl: widget!.membroId!.fotosPath[fotosMembroPathsIndex],
-                                                                                                                                                      width: 100.0,
-                                                                                                                                                      height: 68.0,
-                                                                                                                                                      fit: BoxFit.contain,
-                                                                                                                                                      alignment: Alignment(0.0, 0.0),
-                                                                                                                                                      errorWidget: (context, error, stackTrace) => Image.asset(
-                                                                                                                                                        'assets/images/error_image.png',
-                                                                                                                                                        width: 100.0,
-                                                                                                                                                        height: 68.0,
-                                                                                                                                                        fit: BoxFit.contain,
-                                                                                                                                                        alignment: Alignment(0.0, 0.0),
                                                                                                                                                       ),
                                                                                                                                                     ),
                                                                                                                                                   ),
                                                                                                                                                 ),
-                                                                                                                                              ),
+                                                                                                                                                Align(
+                                                                                                                                                  alignment: AlignmentDirectional(0.0, 1.0),
+                                                                                                                                                  child: Padding(
+                                                                                                                                                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 1.0),
+                                                                                                                                                    child: InkWell(
+                                                                                                                                                      splashColor: Colors.transparent,
+                                                                                                                                                      focusColor: Colors.transparent,
+                                                                                                                                                      hoverColor: Colors.transparent,
+                                                                                                                                                      highlightColor: Colors.transparent,
+                                                                                                                                                      onTap: () async {
+                                                                                                                                                        logFirebaseEvent('MODAL_MEMBROS_EDIT_Icon_v2y7m4d9_ON_TAP');
+                                                                                                                                                        var confirmDialogResponse = await showDialog<bool>(
+                                                                                                                                                              context: context,
+                                                                                                                                                              builder: (alertDialogContext) {
+                                                                                                                                                                return AlertDialog(
+                                                                                                                                                                  title: Text('Apagar Foto'),
+                                                                                                                                                                  content: Text('Deseja apagar esta foto ?'),
+                                                                                                                                                                  actions: [
+                                                                                                                                                                    TextButton(
+                                                                                                                                                                      onPressed: () => Navigator.pop(alertDialogContext, false),
+                                                                                                                                                                      child: Text('Cancelar'),
+                                                                                                                                                                    ),
+                                                                                                                                                                    TextButton(
+                                                                                                                                                                      onPressed: () => Navigator.pop(alertDialogContext, true),
+                                                                                                                                                                      child: Text('Confirmar'),
+                                                                                                                                                                    ),
+                                                                                                                                                                  ],
+                                                                                                                                                                );
+                                                                                                                                                              },
+                                                                                                                                                            ) ??
+                                                                                                                                                            false;
+                                                                                                                                                        if (confirmDialogResponse) {
+                                                                                                                                                          _model.removeFromMembrosFotoEdit(fotosMembroPathsItem);
+                                                                                                                                                          safeSetState(() {});
+                                                                                                                                                        }
+                                                                                                                                                      },
+                                                                                                                                                      child: Icon(
+                                                                                                                                                        Icons.do_not_disturb_on_rounded,
+                                                                                                                                                        color: FlutterFlowTheme.of(context).error,
+                                                                                                                                                        size: 24.0,
+                                                                                                                                                      ),
+                                                                                                                                                    ),
+                                                                                                                                                  ),
+                                                                                                                                                ),
+                                                                                                                                              ],
                                                                                                                                             ),
-                                                                                                                                          if (_model.uploadImageTemp == true)
-                                                                                                                                            Padding(
-                                                                                                                                              padding: EdgeInsets.all(1.0),
-                                                                                                                                              child: InkWell(
-                                                                                                                                                splashColor: Colors.transparent,
-                                                                                                                                                focusColor: Colors.transparent,
-                                                                                                                                                hoverColor: Colors.transparent,
-                                                                                                                                                highlightColor: Colors.transparent,
-                                                                                                                                                onTap: () async {
-                                                                                                                                                  logFirebaseEvent('MODAL_MEMBROS_EDIT_membro_foto_edit_ON_T');
-                                                                                                                                                  await Navigator.push(
-                                                                                                                                                    context,
-                                                                                                                                                    PageTransition(
-                                                                                                                                                      type: PageTransitionType.fade,
-                                                                                                                                                      child: FlutterFlowExpandedImageView(
-                                                                                                                                                        image: Image.memory(
-                                                                                                                                                          _model.uploadedLocalFiles1[fotosMembroPathsIndex].bytes ?? Uint8List.fromList([]),
+                                                                                                                                          ),
+                                                                                                                                        ),
+                                                                                                                                      ],
+                                                                                                                                    ),
+                                                                                                                                  ),
+                                                                                                                                ].divide(SizedBox(height: 1.0)),
+                                                                                                                              ),
+                                                                                                                            ),
+                                                                                                                          ),
+                                                                                                                        ),
+                                                                                                                      );
+                                                                                                                    }).divide(
+                                                                                                                      SizedBox(width: 12.0),
+                                                                                                                      filterFn: (fotosMembroPathsIndex) {
+                                                                                                                        final fotosMembroPathsItem = fotosMembroPaths[fotosMembroPathsIndex];
+                                                                                                                        return widget!.membroFotos!.length >= 1;
+                                                                                                                      },
+                                                                                                                    ),
+                                                                                                                  ),
+                                                                                                                );
+                                                                                                              },
+                                                                                                            ),
+                                                                                                          if (_model.uploadImageTemp == true)
+                                                                                                            Builder(
+                                                                                                              builder: (context) {
+                                                                                                                final fotosMembroPathsEdit = _model.uploadedLocalFiles1.toList().take(6).toList();
+
+                                                                                                                return SingleChildScrollView(
+                                                                                                                  scrollDirection: Axis.horizontal,
+                                                                                                                  child: Row(
+                                                                                                                    mainAxisSize: MainAxisSize.max,
+                                                                                                                    mainAxisAlignment: MainAxisAlignment.start,
+                                                                                                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                                                                                                    children: List.generate(fotosMembroPathsEdit.length, (fotosMembroPathsEditIndex) {
+                                                                                                                      final fotosMembroPathsEditItem = fotosMembroPathsEdit[fotosMembroPathsEditIndex];
+                                                                                                                      return Visibility(
+                                                                                                                        visible: _model.uploadedLocalFiles1.length >= 1,
+                                                                                                                        child: Align(
+                                                                                                                          alignment: AlignmentDirectional(-1.0, 0.0),
+                                                                                                                          child: Container(
+                                                                                                                            width: 100.0,
+                                                                                                                            height: 100.0,
+                                                                                                                            decoration: BoxDecoration(
+                                                                                                                              color: FlutterFlowTheme.of(context).accent1,
+                                                                                                                              borderRadius: BorderRadius.circular(12.0),
+                                                                                                                              shape: BoxShape.rectangle,
+                                                                                                                              border: Border.all(
+                                                                                                                                color: FlutterFlowTheme.of(context).primary,
+                                                                                                                                width: 2.0,
+                                                                                                                              ),
+                                                                                                                            ),
+                                                                                                                            child: SingleChildScrollView(
+                                                                                                                              primary: false,
+                                                                                                                              child: Column(
+                                                                                                                                mainAxisSize: MainAxisSize.max,
+                                                                                                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                                                                                                children: [
+                                                                                                                                  Expanded(
+                                                                                                                                    child: Column(
+                                                                                                                                      mainAxisSize: MainAxisSize.min,
+                                                                                                                                      children: [
+                                                                                                                                        Expanded(
+                                                                                                                                          child: Container(
+                                                                                                                                            height: 100.0,
+                                                                                                                                            child: Stack(
+                                                                                                                                              children: [
+                                                                                                                                                Padding(
+                                                                                                                                                  padding: EdgeInsets.all(1.0),
+                                                                                                                                                  child: InkWell(
+                                                                                                                                                    splashColor: Colors.transparent,
+                                                                                                                                                    focusColor: Colors.transparent,
+                                                                                                                                                    hoverColor: Colors.transparent,
+                                                                                                                                                    highlightColor: Colors.transparent,
+                                                                                                                                                    onTap: () async {
+                                                                                                                                                      logFirebaseEvent('MODAL_MEMBROS_EDIT_membro_foto_edit_ON_T');
+                                                                                                                                                      await Navigator.push(
+                                                                                                                                                        context,
+                                                                                                                                                        PageTransition(
+                                                                                                                                                          type: PageTransitionType.fade,
+                                                                                                                                                          child: FlutterFlowExpandedImageView(
+                                                                                                                                                            image: Image.memory(
+                                                                                                                                                              fotosMembroPathsEditItem.bytes ?? Uint8List.fromList([]),
+                                                                                                                                                              fit: BoxFit.contain,
+                                                                                                                                                              alignment: Alignment(0.0, 0.0),
+                                                                                                                                                              errorBuilder: (context, error, stackTrace) => Image.asset(
+                                                                                                                                                                'assets/images/error_image.png',
+                                                                                                                                                                fit: BoxFit.contain,
+                                                                                                                                                                alignment: Alignment(0.0, 0.0),
+                                                                                                                                                              ),
+                                                                                                                                                            ),
+                                                                                                                                                            allowRotation: false,
+                                                                                                                                                            tag: 'membroFotoEditTag',
+                                                                                                                                                            useHeroAnimation: true,
+                                                                                                                                                          ),
+                                                                                                                                                        ),
+                                                                                                                                                      );
+                                                                                                                                                    },
+                                                                                                                                                    child: Hero(
+                                                                                                                                                      tag: 'membroFotoEditTag',
+                                                                                                                                                      transitionOnUserGestures: true,
+                                                                                                                                                      child: ClipRRect(
+                                                                                                                                                        borderRadius: BorderRadius.circular(10.0),
+                                                                                                                                                        child: Image.memory(
+                                                                                                                                                          fotosMembroPathsEditItem.bytes ?? Uint8List.fromList([]),
+                                                                                                                                                          width: 100.0,
+                                                                                                                                                          height: 68.0,
                                                                                                                                                           fit: BoxFit.contain,
                                                                                                                                                           alignment: Alignment(0.0, 0.0),
                                                                                                                                                           errorBuilder: (context, error, stackTrace) => Image.asset(
                                                                                                                                                             'assets/images/error_image.png',
+                                                                                                                                                            width: 100.0,
+                                                                                                                                                            height: 68.0,
                                                                                                                                                             fit: BoxFit.contain,
                                                                                                                                                             alignment: Alignment(0.0, 0.0),
                                                                                                                                                           ),
                                                                                                                                                         ),
-                                                                                                                                                        allowRotation: false,
-                                                                                                                                                        tag: 'membroFotoEditTag',
-                                                                                                                                                        useHeroAnimation: true,
-                                                                                                                                                      ),
-                                                                                                                                                    ),
-                                                                                                                                                  );
-                                                                                                                                                },
-                                                                                                                                                child: Hero(
-                                                                                                                                                  tag: 'membroFotoEditTag',
-                                                                                                                                                  transitionOnUserGestures: true,
-                                                                                                                                                  child: ClipRRect(
-                                                                                                                                                    borderRadius: BorderRadius.circular(10.0),
-                                                                                                                                                    child: Image.memory(
-                                                                                                                                                      _model.uploadedLocalFiles1[fotosMembroPathsIndex].bytes ?? Uint8List.fromList([]),
-                                                                                                                                                      width: 100.0,
-                                                                                                                                                      height: 68.0,
-                                                                                                                                                      fit: BoxFit.contain,
-                                                                                                                                                      alignment: Alignment(0.0, 0.0),
-                                                                                                                                                      errorBuilder: (context, error, stackTrace) => Image.asset(
-                                                                                                                                                        'assets/images/error_image.png',
-                                                                                                                                                        width: 100.0,
-                                                                                                                                                        height: 68.0,
-                                                                                                                                                        fit: BoxFit.contain,
-                                                                                                                                                        alignment: Alignment(0.0, 0.0),
                                                                                                                                                       ),
                                                                                                                                                     ),
                                                                                                                                                   ),
                                                                                                                                                 ),
-                                                                                                                                              ),
-                                                                                                                                            ),
-                                                                                                                                          if (_model.uploadedLocalFiles1.length >= 1)
-                                                                                                                                            Align(
-                                                                                                                                              alignment: AlignmentDirectional(0.0, 1.0),
-                                                                                                                                              child: Padding(
-                                                                                                                                                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 1.0),
-                                                                                                                                                child: InkWell(
-                                                                                                                                                  splashColor: Colors.transparent,
-                                                                                                                                                  focusColor: Colors.transparent,
-                                                                                                                                                  hoverColor: Colors.transparent,
-                                                                                                                                                  highlightColor: Colors.transparent,
-                                                                                                                                                  onTap: () async {
-                                                                                                                                                    logFirebaseEvent('MODAL_MEMBROS_EDIT_Icon_v2y7m4d9_ON_TAP');
-                                                                                                                                                    var confirmDialogResponse = await showDialog<bool>(
-                                                                                                                                                          context: context,
-                                                                                                                                                          builder: (alertDialogContext) {
-                                                                                                                                                            return AlertDialog(
-                                                                                                                                                              title: Text('Apagar Foto'),
-                                                                                                                                                              content: Text('Deseja apagar esta foto ?'),
-                                                                                                                                                              actions: [
-                                                                                                                                                                TextButton(
-                                                                                                                                                                  onPressed: () => Navigator.pop(alertDialogContext, false),
-                                                                                                                                                                  child: Text('Cancelar'),
-                                                                                                                                                                ),
-                                                                                                                                                                TextButton(
-                                                                                                                                                                  onPressed: () => Navigator.pop(alertDialogContext, true),
-                                                                                                                                                                  child: Text('Confirmar'),
-                                                                                                                                                                ),
-                                                                                                                                                              ],
-                                                                                                                                                            );
-                                                                                                                                                          },
-                                                                                                                                                        ) ??
-                                                                                                                                                        false;
-                                                                                                                                                    if (confirmDialogResponse) {
-                                                                                                                                                      _model.removeAtIndexFromMembrosFotosTemp(fotosMembroPathsIndex);
-                                                                                                                                                      safeSetState(() {});
-                                                                                                                                                    }
-                                                                                                                                                  },
-                                                                                                                                                  child: Icon(
-                                                                                                                                                    Icons.do_not_disturb_on_rounded,
-                                                                                                                                                    color: FlutterFlowTheme.of(context).error,
-                                                                                                                                                    size: 24.0,
+                                                                                                                                                Align(
+                                                                                                                                                  alignment: AlignmentDirectional(0.0, 1.0),
+                                                                                                                                                  child: Padding(
+                                                                                                                                                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 1.0),
+                                                                                                                                                    child: InkWell(
+                                                                                                                                                      splashColor: Colors.transparent,
+                                                                                                                                                      focusColor: Colors.transparent,
+                                                                                                                                                      hoverColor: Colors.transparent,
+                                                                                                                                                      highlightColor: Colors.transparent,
+                                                                                                                                                      onTap: () async {
+                                                                                                                                                        logFirebaseEvent('MODAL_MEMBROS_EDIT_Icon_fl32acvt_ON_TAP');
+                                                                                                                                                        var confirmDialogResponse = await showDialog<bool>(
+                                                                                                                                                              context: context,
+                                                                                                                                                              builder: (alertDialogContext) {
+                                                                                                                                                                return AlertDialog(
+                                                                                                                                                                  title: Text('Apagar Foto'),
+                                                                                                                                                                  content: Text('Deseja apagar esta foto ?'),
+                                                                                                                                                                  actions: [
+                                                                                                                                                                    TextButton(
+                                                                                                                                                                      onPressed: () => Navigator.pop(alertDialogContext, false),
+                                                                                                                                                                      child: Text('Cancelar'),
+                                                                                                                                                                    ),
+                                                                                                                                                                    TextButton(
+                                                                                                                                                                      onPressed: () => Navigator.pop(alertDialogContext, true),
+                                                                                                                                                                      child: Text('Confirmar'),
+                                                                                                                                                                    ),
+                                                                                                                                                                  ],
+                                                                                                                                                                );
+                                                                                                                                                              },
+                                                                                                                                                            ) ??
+                                                                                                                                                            false;
+                                                                                                                                                        if (confirmDialogResponse) {
+                                                                                                                                                          _model.removeAtIndexFromMembrosFotosTemp(fotosMembroPathsEditIndex);
+                                                                                                                                                          safeSetState(() {});
+                                                                                                                                                        }
+                                                                                                                                                      },
+                                                                                                                                                      child: Icon(
+                                                                                                                                                        Icons.do_not_disturb_on_rounded,
+                                                                                                                                                        color: FlutterFlowTheme.of(context).error,
+                                                                                                                                                        size: 24.0,
+                                                                                                                                                      ),
+                                                                                                                                                    ),
                                                                                                                                                   ),
                                                                                                                                                 ),
-                                                                                                                                              ),
+                                                                                                                                              ],
                                                                                                                                             ),
-                                                                                                                                        ],
-                                                                                                                                      ),
+                                                                                                                                          ),
+                                                                                                                                        ),
+                                                                                                                                      ],
                                                                                                                                     ),
                                                                                                                                   ),
-                                                                                                                                ],
+                                                                                                                                ].divide(SizedBox(height: 1.0)),
                                                                                                                               ),
                                                                                                                             ),
-                                                                                                                          ].divide(SizedBox(height: 1.0)),
+                                                                                                                          ),
                                                                                                                         ),
-                                                                                                                      ),
+                                                                                                                      );
+                                                                                                                    }).divide(
+                                                                                                                      SizedBox(width: 12.0),
+                                                                                                                      filterFn: (fotosMembroPathsEditIndex) {
+                                                                                                                        final fotosMembroPathsEditItem = fotosMembroPathsEdit[fotosMembroPathsEditIndex];
+                                                                                                                        return _model.uploadedLocalFiles1.length >= 1;
+                                                                                                                      },
                                                                                                                     ),
                                                                                                                   ),
                                                                                                                 );
-                                                                                                              }).divide(
-                                                                                                                SizedBox(width: 12.0),
-                                                                                                                filterFn: (fotosMembroPathsIndex) {
-                                                                                                                  final fotosMembroPathsItem = fotosMembroPaths[fotosMembroPathsIndex];
-                                                                                                                  return _model.uploadedLocalFiles1.length >= 1;
-                                                                                                                },
-                                                                                                              ),
+                                                                                                              },
                                                                                                             ),
-                                                                                                          );
-                                                                                                        },
+                                                                                                        ],
                                                                                                       ),
                                                                                                     ],
                                                                                                   ),
@@ -1006,6 +1122,8 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                                         });
 
                                                                                                         _model.membrosFotosTemp = _model.uploadedLocalFiles1.toList().cast<FFUploadedFile>();
+                                                                                                        _model.uploadImageTemp = false;
+                                                                                                        _model.membrosFotoEdit = widget!.membroFotos!.toList().cast<String>();
                                                                                                         safeSetState(() {});
                                                                                                       }
                                                                                                     },

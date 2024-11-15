@@ -158,7 +158,15 @@ class ModalMembrosEditModel extends FlutterFlowModel<ModalMembrosEditWidget> {
 
   bool comoForamValidados = true;
 
-  MembrosRow? membros;
+  List<String> membrosFotoEdit = [];
+  void addToMembrosFotoEdit(String item) => membrosFotoEdit.add(item);
+  void removeFromMembrosFotoEdit(String item) => membrosFotoEdit.remove(item);
+  void removeAtIndexFromMembrosFotoEdit(int index) =>
+      membrosFotoEdit.removeAt(index);
+  void insertAtIndexInMembrosFotoEdit(int index, String item) =>
+      membrosFotoEdit.insert(index, item);
+  void updateMembrosFotoEditAtIndex(int index, Function(String) updateFn) =>
+      membrosFotoEdit[index] = updateFn(membrosFotoEdit[index]);
 
   bool uploadImageTemp = false;
 

@@ -723,6 +723,7 @@ class _MainMembrosWidgetState extends State<MainMembrosWidget>
                                                                                 onTap: () => FocusScope.of(dialogContext).unfocus(),
                                                                                 child: ModalMembrosEditWidget(
                                                                                   membroId: listViewMembrosRow,
+                                                                                  membroFotos: listViewMembrosRow.fotosPath,
                                                                                 ),
                                                                               ),
                                                                             );

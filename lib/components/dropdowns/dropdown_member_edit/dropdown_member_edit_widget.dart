@@ -120,6 +120,7 @@ class _DropdownMemberEditWidgetState extends State<DropdownMemberEditWidget> {
                                       .resolve(Directionality.of(context)),
                                   child: ModalMembrosEditWidget(
                                     membroId: widget!.membroId!,
+                                    membroFotos: widget!.membroId!.fotosPath,
                                   ),
                                 );
                               },
