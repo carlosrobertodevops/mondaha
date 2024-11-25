@@ -20,10 +20,10 @@ export 'modal_faccao_edit_model.dart';
 class ModalFaccaoEditWidget extends StatefulWidget {
   const ModalFaccaoEditWidget({
     super.key,
-    this.faccaoid,
+    this.faccaoRow,
   });
 
-  final FaccoesRow? faccaoid;
+  final FaccoesRow? faccaoRow;
 
   @override
   State<ModalFaccaoEditWidget> createState() => _ModalFaccaoEditWidgetState();
@@ -47,11 +47,11 @@ class _ModalFaccaoEditWidgetState extends State<ModalFaccaoEditWidget>
     _model = createModel(context, () => ModalFaccaoEditModel());
 
     _model.txtNomeFaccaoTextController ??=
-        TextEditingController(text: widget!.faccaoid?.nome);
+        TextEditingController(text: widget!.faccaoRow?.nome);
     _model.txtNomeFaccaoFocusNode ??= FocusNode();
 
     _model.txtDescriptionTextController ??=
-        TextEditingController(text: widget!.faccaoid?.descricao);
+        TextEditingController(text: widget!.faccaoRow?.descricao);
     _model.txtDescriptionFocusNode ??= FocusNode();
 
     animationsMap.addAll({
@@ -378,8 +378,8 @@ class _ModalFaccaoEditWidgetState extends State<ModalFaccaoEditWidget>
                                                           10.0),
                                                   child: Image.network(
                                                     valueOrDefault<String>(
-                                                      widget!
-                                                          .faccaoid?.imagemPath,
+                                                      widget!.faccaoRow
+                                                          ?.imagemPath,
                                                       'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/5wht3hcncm24/imagem.png',
                                                     ),
                                                     width: double.infinity,
@@ -704,9 +704,9 @@ class _ModalFaccaoEditWidgetState extends State<ModalFaccaoEditWidget>
                                           'imagem_path':
                                               _model.uploadedFileUrl2,
                                         },
-                                        matchingRows: (rows) => rows.eq(
+                                        matchingRows: (rows) => rows.eqOrNull(
                                           'faccao_id',
-                                          widget!.faccaoid!.faccaoId,
+                                          widget!.faccaoRow?.faccaoId,
                                         ),
                                         returnRows: true,
                                       );

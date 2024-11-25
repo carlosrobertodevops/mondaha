@@ -3495,51 +3495,47 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Localization',
       'pt': 'Localização',
     },
-    'dwx4ys4r': {
+    'rv30tq8h': {
       'en': 'Nascido no Brasil',
       'pt': 'Nascido no Brasil',
     },
-    'atti464y': {
-      'en': 'Nascido no Brasil',
-      'pt': 'Nascido no Brasil',
-    },
-    '2de66lcq': {
+    'c7le5m4q': {
       'en': 'Naturalizado Brasileiro',
       'pt': 'Naturalizado Brasileiro',
     },
-    'm1flj4r8': {
+    'dxpi3ilr': {
       'en': 'Estrangeiro',
       'pt': 'Estrangeiro',
     },
-    '56jt4v6k': {
+    'cs1z62f2': {
       'en': 'Estado',
       'pt': 'Estado',
     },
-    'hrqyl6i8': {
+    'r00quxoo': {
       'en': 'Search...',
       'pt': 'Procurar...',
     },
-    'xy9a6m17': {
+    'ahnx5j5c': {
       'en': 'Municipio',
       'pt': 'Município',
     },
-    'z4jtavfh': {
+    '9cu0wlw8': {
       'en': 'Search...',
       'pt': 'Procurar...',
     },
-    'tlqbuxsg': {
+    'hnm8bibm': {
       'en': '',
       'pt': '',
     },
-    'fl5ul0pd': {
+    'ly0oxbkr': {
       'en': 'Endereço Completo',
       'pt': 'Endereço Completo',
     },
-    'waagzovs': {
+    'rra20pji': {
       'en': 'Endereço Completo',
       'pt': 'Endereço Completo',
     },
-    'j0nmcvr2': {
+    'oq7cugr2': {
       'en':
           'To add the address(es) you need to fill in\nthe Address field and click on the (+) button.',
       'pt':
@@ -4118,6 +4114,181 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'pt': 'Cancelar',
     },
     'dterjvu7': {
+      'en': 'Save Member',
+      'pt': 'Salvar Membro',
+    },
+  },
+  // modal_membros_edit_testes
+  {
+    '9pnkgty8': {
+      'en': 'Edit Member',
+      'pt': 'Editar membro',
+    },
+    'o1zk495g': {
+      'en': 'TextField',
+      'pt': '',
+    },
+    'epcexdlu': {
+      'en': 'TextField',
+      'pt': '',
+    },
+    '1wts0z6h': {
+      'en': 'TextField',
+      'pt': '',
+    },
+    'h3sifahr': {
+      'en': 'TextField',
+      'pt': '',
+    },
+    '73j5i6tr': {
+      'en': 'TextField',
+      'pt': '',
+    },
+    'o92kmb95': {
+      'en': 'TextField',
+      'pt': '',
+    },
+    '3kr4xgpj': {
+      'en': 'TextField',
+      'pt': '',
+    },
+    '8tgrxq03': {
+      'en': 'TextField',
+      'pt': '',
+    },
+    'v035rycd': {
+      'en': 'TextField',
+      'pt': '',
+    },
+    '7yx3izhl': {
+      'en': 'TextField',
+      'pt': '',
+    },
+    'lfgegldy': {
+      'en': 'TextField',
+      'pt': '',
+    },
+    'yauolzz9': {
+      'en': 'TextField',
+      'pt': '',
+    },
+    'x8iduyfy': {
+      'en': 'TextField',
+      'pt': '',
+    },
+    'zd06y2vp': {
+      'en': 'TextField',
+      'pt': '',
+    },
+    'aidm3d4l': {
+      'en': 'TextField',
+      'pt': '',
+    },
+    'qhkcwfn6': {
+      'en': 'TextField',
+      'pt': '',
+    },
+    'hxbh9x9b': {
+      'en': 'TextField',
+      'pt': '',
+    },
+    'b89ztsz7': {
+      'en': 'TextField',
+      'pt': '',
+    },
+    '078ynkx4': {
+      'en': 'TextField',
+      'pt': '',
+    },
+    '67x6pefd': {
+      'en': 'TextField',
+      'pt': '',
+    },
+    '5vfisjsu': {
+      'en': 'TextField',
+      'pt': '',
+    },
+    'ecy99p8q': {
+      'en': 'TextField',
+      'pt': '',
+    },
+    'za05ib0r': {
+      'en': 'TextField',
+      'pt': '',
+    },
+    'dset6m38': {
+      'en': 'TextField',
+      'pt': '',
+    },
+    'wtpgawre': {
+      'en': 'TextField',
+      'pt': '',
+    },
+    '1w78rn3o': {
+      'en': 'TextField',
+      'pt': '',
+    },
+    '9jrzfhdz': {
+      'en': 'TextField',
+      'pt': '',
+    },
+    'ikdwca28': {
+      'en': 'TextField',
+      'pt': '',
+    },
+    '2o5rd92p': {
+      'en': 'TextField',
+      'pt': '',
+    },
+    'lhgg7ddq': {
+      'en': 'TextField',
+      'pt': '',
+    },
+    'dq9v91tc': {
+      'en': 'TextField',
+      'pt': '',
+    },
+    'uampxpi7': {
+      'en': 'TextField',
+      'pt': '',
+    },
+    'yfv23lsn': {
+      'en': 'TextField',
+      'pt': '',
+    },
+    'g3mzgu4l': {
+      'en': 'TextField',
+      'pt': '',
+    },
+    'h33zu0lq': {
+      'en': 'TextField',
+      'pt': '',
+    },
+    'pyizhygb': {
+      'en': 'TextField',
+      'pt': '',
+    },
+    '17eguora': {
+      'en': 'TextField',
+      'pt': '',
+    },
+    '993nwzmd': {
+      'en': 'TextField',
+      'pt': '',
+    },
+    'okb1ok4b': {
+      'en': 'TextField',
+      'pt': '',
+    },
+    '7x4g6frl': {
+      'en': 'TextField',
+      'pt': '',
+    },
+    'lekc2ylz': {
+      'en': 'Cancel',
+      'pt': 'Cancelar',
+    },
+    '9d9it6ua': {
       'en': 'Save Member',
       'pt': 'Salvar Membro',
     },

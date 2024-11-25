@@ -57,7 +57,7 @@ class _ModalProfileEditPhotoWidgetState
             padding: EdgeInsets.all(16.0),
             child: FutureBuilder<List<UsuariosRow>>(
               future: UsuariosTable().queryRows(
-                queryFn: (q) => q.eq(
+                queryFn: (q) => q.eqOrNull(
                   'user_id',
                   currentUserUid,
                 ),

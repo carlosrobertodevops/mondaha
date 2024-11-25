@@ -88,6 +88,11 @@ class FFAppState extends ChangeNotifier {
     await _safeInitAsync(() async {
       _CountMaps = await secureStorage.getInt('ff_CountMaps') ?? _CountMaps;
     });
+    await _safeInitAsync(() async {
+      _NordesteLngLat = latLngFromString(
+              await secureStorage.getString('ff_NordesteLngLat')) ??
+          _NordesteLngLat;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -320,6 +325,19 @@ class FFAppState extends ChangeNotifier {
   String get FaccoesImagePathDark => _FaccoesImagePathDark;
   set FaccoesImagePathDark(String value) {
     _FaccoesImagePathDark = value;
+  }
+
+  LatLng? _NordesteLngLat = LatLng(-10.08, -40.577);
+  LatLng? get NordesteLngLat => _NordesteLngLat;
+  set NordesteLngLat(LatLng? value) {
+    _NordesteLngLat = value;
+    value != null
+        ? secureStorage.setString('ff_NordesteLngLat', value.serialize())
+        : secureStorage.remove('ff_NordesteLngLat');
+  }
+
+  void deleteNordesteLngLat() {
+    secureStorage.delete(key: 'ff_NordesteLngLat');
   }
 }
 

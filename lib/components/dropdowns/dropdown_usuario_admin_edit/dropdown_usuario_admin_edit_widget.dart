@@ -52,7 +52,7 @@ class _DropdownUsuarioAdminEditWidgetState
   Widget build(BuildContext context) {
     return FutureBuilder<List<UsuariosRow>>(
       future: UsuariosTable().querySingleRow(
-        queryFn: (q) => q.eq(
+        queryFn: (q) => q.eqOrNull(
           'user_id',
           currentUserUid,
         ),
@@ -149,7 +149,7 @@ class _DropdownUsuarioAdminEditWidgetState
                                       alignment: AlignmentDirectional(0.0, 0.0)
                                           .resolve(Directionality.of(context)),
                                       child: ModalProfileEditAdminWidget(
-                                        usuarioid: widget!.usuarioid!,
+                                        usuariosRow: widget!.usuarioid,
                                       ),
                                     );
                                   },
@@ -402,9 +402,9 @@ class _DropdownUsuarioAdminEditWidgetState
                                 data: {
                                   'tipo_usuario_id': 8,
                                 },
-                                matchingRows: (rows) => rows.eq(
+                                matchingRows: (rows) => rows.eqOrNull(
                                   'usuario_id',
-                                  widget!.usuarioid!.usuarioId,
+                                  widget!.usuarioid?.usuarioId,
                                 ),
                               );
 
@@ -511,9 +511,9 @@ class _DropdownUsuarioAdminEditWidgetState
                               data: {
                                 'tipo_usuario_id': 4,
                               },
-                              matchingRows: (rows) => rows.eq(
+                              matchingRows: (rows) => rows.eqOrNull(
                                 'usuario_id',
-                                widget!.usuarioid!.usuarioId,
+                                widget!.usuarioid?.usuarioId,
                               ),
                             );
 
@@ -619,9 +619,9 @@ class _DropdownUsuarioAdminEditWidgetState
                               data: {
                                 'tipo_usuario_id': 3,
                               },
-                              matchingRows: (rows) => rows.eq(
+                              matchingRows: (rows) => rows.eqOrNull(
                                 'usuario_id',
-                                widget!.usuarioid!.usuarioId,
+                                widget!.usuarioid?.usuarioId,
                               ),
                             );
 
@@ -729,9 +729,9 @@ class _DropdownUsuarioAdminEditWidgetState
                                 data: {
                                   'tipo_usuario_id': 1,
                                 },
-                                matchingRows: (rows) => rows.eq(
+                                matchingRows: (rows) => rows.eqOrNull(
                                   'usuario_id',
-                                  widget!.usuarioid!.usuarioId,
+                                  widget!.usuarioid?.usuarioId,
                                 ),
                               );
 
@@ -840,9 +840,9 @@ class _DropdownUsuarioAdminEditWidgetState
                                 data: {
                                   'tipo_usuario_id': 2,
                                 },
-                                matchingRows: (rows) => rows.eq(
+                                matchingRows: (rows) => rows.eqOrNull(
                                   'usuario_id',
-                                  widget!.usuarioid!.usuarioId,
+                                  widget!.usuarioid?.usuarioId,
                                 ),
                               );
 

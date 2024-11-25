@@ -630,7 +630,7 @@ class _MainFaccoesWidgetState extends State<MainFaccoesWidget>
                                                                                 GestureDetector(
                                                                               onTap: () => FocusScope.of(dialogContext).unfocus(),
                                                                               child: ModalFaccaoEditWidget(
-                                                                                faccaoid: listViewFaccoesRow,
+                                                                                faccaoRow: listViewFaccoesRow,
                                                                               ),
                                                                             ),
                                                                           );

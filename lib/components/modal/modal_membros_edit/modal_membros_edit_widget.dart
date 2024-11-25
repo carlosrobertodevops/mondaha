@@ -1,4 +1,3 @@
-import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
 import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
@@ -40,14 +39,12 @@ export 'modal_membros_edit_model.dart';
 class ModalMembrosEditWidget extends StatefulWidget {
   const ModalMembrosEditWidget({
     super.key,
-    required this.membroId,
-    required this.membrosFotos,
     required this.membrosRow,
+    required this.membrosFotos,
   });
 
-  final int? membroId;
+  final MembrosViewRow? membrosRow;
   final List<String>? membrosFotos;
-  final ViewMembrosRow? membrosRow;
 
   @override
   State<ModalMembrosEditWidget> createState() => _ModalMembrosEditWidgetState();
@@ -69,6 +66,38 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
   void initState() {
     super.initState();
     _model = createModel(context, () => ModalMembrosEditModel());
+
+    // On component load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('MODAL_MEMBROS_EDIT_modal_membros_edit_ON');
+      await _model.googleMapMembrosController.future.then(
+        (c) => c.animateCamera(
+          CameraUpdate.newLatLng(FFAppState().NordesteLngLat!.toGoogleMaps()),
+        ),
+      );
+      _model.membrosFotoEdit = widget!.membrosFotos!.toList().cast<String>();
+      _model.membrosAlcunhas =
+          widget!.membrosRow!.alcunha.toList().cast<String>();
+      _model.membrosEnderecos =
+          widget!.membrosRow!.membroEndereco.toList().cast<String>();
+      _model.membroAlerta = valueOrDefault<bool>(
+        widget!.membrosRow?.alerta,
+        false,
+      );
+      _model.membrosFaccaoTresLocais =
+          widget!.membrosRow!.tresUltimoLocaisPreso.toList().cast<String>();
+      _model.membrosPercetualValidacao = valueOrDefault<double>(
+        widget!.membrosRow?.validacaoPrecentual,
+        0.0,
+      );
+      _model.membrosLatLng = functions
+          .convertStringsListToLngLatList(
+              widget!.membrosRow!.coordenadas.toList())
+          .toList()
+          .cast<LatLng>();
+      _model.uploadImageTemp = false;
+      safeSetState(() {});
+    });
 
     _model.tabBarController = TabController(
       vsync: this,
@@ -183,7 +212,7 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
     ));
     _model.txtMembroAtuacaoFocusNode ??= FocusNode();
 
-    _model.switchAlertaValue = false;
+    _model.switchAlertaValue = _model.membroAlerta;
     _model.txtMembroAlertaTextController ??= TextEditingController(
         text: valueOrDefault<String>(
       widget!.membrosRow?.alerta?.toString(),
@@ -231,6 +260,8 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Align(
       alignment: AlignmentDirectional(0.0, 0.0),
       child: ClipRRect(
@@ -603,7 +634,7 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                             Align(
                                                                               alignment: AlignmentDirectional(0.0, 0.0),
                                                                               child: Form(
-                                                                                key: _model.formKey3,
+                                                                                key: _model.formKey2,
                                                                                 autovalidateMode: AutovalidateMode.always,
                                                                                 child: SingleChildScrollView(
                                                                                   primary: false,
@@ -645,7 +676,7 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                                   showDuration: Duration(milliseconds: 100),
                                                                                                   triggerMode: TooltipTriggerMode.tap,
                                                                                                   child: Visibility(
-                                                                                                    visible: _model.uploadedLocalFiles1.length < 1,
+                                                                                                    visible: _model.uploadedLocalFiles.length < 1,
                                                                                                     child: InkWell(
                                                                                                       splashColor: Colors.transparent,
                                                                                                       focusColor: Colors.transparent,
@@ -660,7 +691,7 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                                           multiImage: true,
                                                                                                         );
                                                                                                         if (selectedMedia != null && selectedMedia.every((m) => validateFileFormat(m.storagePath, context))) {
-                                                                                                          safeSetState(() => _model.isDataUploading1 = true);
+                                                                                                          safeSetState(() => _model.isDataUploading = true);
                                                                                                           var selectedUploadedFiles = <FFUploadedFile>[];
 
                                                                                                           try {
@@ -680,11 +711,11 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                                                 .toList();
                                                                                                           } finally {
                                                                                                             ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                                                                                                            _model.isDataUploading1 = false;
+                                                                                                            _model.isDataUploading = false;
                                                                                                           }
                                                                                                           if (selectedUploadedFiles.length == selectedMedia.length) {
                                                                                                             safeSetState(() {
-                                                                                                              _model.uploadedLocalFiles1 = selectedUploadedFiles;
+                                                                                                              _model.uploadedLocalFiles = selectedUploadedFiles;
                                                                                                             });
                                                                                                             showUploadMessage(context, 'Success!');
                                                                                                           } else {
@@ -696,7 +727,7 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
 
                                                                                                         _model.uploadImageTemp = true;
                                                                                                         safeSetState(() {});
-                                                                                                        _model.membrosFotosTemp = _model.uploadedLocalFiles1.toList().cast<FFUploadedFile>();
+                                                                                                        _model.membrosFotosTemp = _model.uploadedLocalFiles.toList().cast<FFUploadedFile>();
                                                                                                         _model.updatePage(() {});
                                                                                                       },
                                                                                                       child: Container(
@@ -754,7 +785,7 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                                           if (_model.uploadImageTemp == false)
                                                                                                             Builder(
                                                                                                               builder: (context) {
-                                                                                                                final fotosMembroPaths = widget!.membrosFotos!.toList().take(6).toList();
+                                                                                                                final fotosMembroPaths = _model.membrosFotoEdit.toList().take(6).toList();
 
                                                                                                                 return SingleChildScrollView(
                                                                                                                   scrollDirection: Axis.horizontal,
@@ -812,7 +843,12 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                                                                                             image: CachedNetworkImage(
                                                                                                                                                               fadeInDuration: Duration(milliseconds: 10),
                                                                                                                                                               fadeOutDuration: Duration(milliseconds: 10),
-                                                                                                                                                              imageUrl: fotosMembroPathsItem,
+                                                                                                                                                              imageUrl: widget!.membrosFotos != null && (widget!.membrosFotos)!.isNotEmpty
+                                                                                                                                                                  ? valueOrDefault<String>(
+                                                                                                                                                                      fotosMembroPathsItem,
+                                                                                                                                                                      'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/rgxzhoyu6nbx/groups_96dp_99999_FILL0_wght400_GRAD0_opsz48.png',
+                                                                                                                                                                    )
+                                                                                                                                                                  : 'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/rgxzhoyu6nbx/groups_96dp_99999_FILL0_wght400_GRAD0_opsz48.png',
                                                                                                                                                               fit: BoxFit.contain,
                                                                                                                                                               alignment: Alignment(0.0, 0.0),
                                                                                                                                                               errorWidget: (context, error, stackTrace) => Image.asset(
@@ -822,21 +858,36 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                                                                                               ),
                                                                                                                                                             ),
                                                                                                                                                             allowRotation: false,
-                                                                                                                                                            tag: fotosMembroPathsItem,
+                                                                                                                                                            tag: widget!.membrosFotos != null && (widget!.membrosFotos)!.isNotEmpty
+                                                                                                                                                                ? valueOrDefault<String>(
+                                                                                                                                                                    fotosMembroPathsItem,
+                                                                                                                                                                    'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/rgxzhoyu6nbx/groups_96dp_99999_FILL0_wght400_GRAD0_opsz48.png' + '$fotosMembroPathsIndex',
+                                                                                                                                                                  )
+                                                                                                                                                                : 'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/rgxzhoyu6nbx/groups_96dp_99999_FILL0_wght400_GRAD0_opsz48.png',
                                                                                                                                                             useHeroAnimation: true,
                                                                                                                                                           ),
                                                                                                                                                         ),
                                                                                                                                                       );
                                                                                                                                                     },
                                                                                                                                                     child: Hero(
-                                                                                                                                                      tag: fotosMembroPathsItem,
+                                                                                                                                                      tag: widget!.membrosFotos != null && (widget!.membrosFotos)!.isNotEmpty
+                                                                                                                                                          ? valueOrDefault<String>(
+                                                                                                                                                              fotosMembroPathsItem,
+                                                                                                                                                              'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/rgxzhoyu6nbx/groups_96dp_99999_FILL0_wght400_GRAD0_opsz48.png' + '$fotosMembroPathsIndex',
+                                                                                                                                                            )
+                                                                                                                                                          : 'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/rgxzhoyu6nbx/groups_96dp_99999_FILL0_wght400_GRAD0_opsz48.png',
                                                                                                                                                       transitionOnUserGestures: true,
                                                                                                                                                       child: ClipRRect(
                                                                                                                                                         borderRadius: BorderRadius.circular(10.0),
                                                                                                                                                         child: CachedNetworkImage(
                                                                                                                                                           fadeInDuration: Duration(milliseconds: 10),
                                                                                                                                                           fadeOutDuration: Duration(milliseconds: 10),
-                                                                                                                                                          imageUrl: fotosMembroPathsItem,
+                                                                                                                                                          imageUrl: widget!.membrosFotos != null && (widget!.membrosFotos)!.isNotEmpty
+                                                                                                                                                              ? valueOrDefault<String>(
+                                                                                                                                                                  fotosMembroPathsItem,
+                                                                                                                                                                  'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/rgxzhoyu6nbx/groups_96dp_99999_FILL0_wght400_GRAD0_opsz48.png',
+                                                                                                                                                                )
+                                                                                                                                                              : 'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/rgxzhoyu6nbx/groups_96dp_99999_FILL0_wght400_GRAD0_opsz48.png',
                                                                                                                                                           width: 100.0,
                                                                                                                                                           height: 68.0,
                                                                                                                                                           fit: BoxFit.contain,
@@ -863,7 +914,7 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                                                                                       hoverColor: Colors.transparent,
                                                                                                                                                       highlightColor: Colors.transparent,
                                                                                                                                                       onTap: () async {
-                                                                                                                                                        logFirebaseEvent('MODAL_MEMBROS_EDIT_Icon_v2y7m4d9_ON_TAP');
+                                                                                                                                                        logFirebaseEvent('MODAL_MEMBROS_EDIT_COMP_IconAtual_ON_TAP');
                                                                                                                                                         var confirmDialogResponse = await showDialog<bool>(
                                                                                                                                                               context: context,
                                                                                                                                                               builder: (alertDialogContext) {
@@ -885,7 +936,7 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                                                                                             ) ??
                                                                                                                                                             false;
                                                                                                                                                         if (confirmDialogResponse) {
-                                                                                                                                                          _model.removeFromMembrosFotoEdit(fotosMembroPathsItem);
+                                                                                                                                                          _model.removeFromMembrosFotoEdit(_model.membrosFotoEdit[fotosMembroPathsIndex]);
                                                                                                                                                           safeSetState(() {});
                                                                                                                                                         }
                                                                                                                                                       },
@@ -924,7 +975,7 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                                           if (_model.uploadImageTemp == true)
                                                                                                             Builder(
                                                                                                               builder: (context) {
-                                                                                                                final fotosMembroPathsEdit = _model.uploadedLocalFiles1.toList().take(6).toList();
+                                                                                                                final fotosMembroPathsEdit = _model.uploadedLocalFiles.toList().take(6).toList();
 
                                                                                                                 return SingleChildScrollView(
                                                                                                                   scrollDirection: Axis.horizontal,
@@ -935,7 +986,7 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                                                     children: List.generate(fotosMembroPathsEdit.length, (fotosMembroPathsEditIndex) {
                                                                                                                       final fotosMembroPathsEditItem = fotosMembroPathsEdit[fotosMembroPathsEditIndex];
                                                                                                                       return Visibility(
-                                                                                                                        visible: _model.uploadedLocalFiles1.length >= 1,
+                                                                                                                        visible: _model.uploadedLocalFiles.length >= 1,
                                                                                                                         child: Align(
                                                                                                                           alignment: AlignmentDirectional(-1.0, 0.0),
                                                                                                                           child: Container(
@@ -1029,7 +1080,7 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                                                                                       hoverColor: Colors.transparent,
                                                                                                                                                       highlightColor: Colors.transparent,
                                                                                                                                                       onTap: () async {
-                                                                                                                                                        logFirebaseEvent('MODAL_MEMBROS_EDIT_Icon_fl32acvt_ON_TAP');
+                                                                                                                                                        logFirebaseEvent('MODAL_MEMBROS_EDIT_COMP_IconEdit_ON_TAP');
                                                                                                                                                         var confirmDialogResponse = await showDialog<bool>(
                                                                                                                                                               context: context,
                                                                                                                                                               builder: (alertDialogContext) {
@@ -1080,7 +1131,7 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                                                       SizedBox(width: 12.0),
                                                                                                                       filterFn: (fotosMembroPathsEditIndex) {
                                                                                                                         final fotosMembroPathsEditItem = fotosMembroPathsEdit[fotosMembroPathsEditIndex];
-                                                                                                                        return _model.uploadedLocalFiles1.length >= 1;
+                                                                                                                        return _model.uploadedLocalFiles.length >= 1;
                                                                                                                       },
                                                                                                                     ),
                                                                                                                   ),
@@ -1092,7 +1143,7 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                                     ],
                                                                                                   ),
                                                                                                 ),
-                                                                                                if (_model.uploadedLocalFiles1.length >= 2)
+                                                                                                if (_model.uploadedLocalFiles.length >= 2)
                                                                                                   InkWell(
                                                                                                     splashColor: Colors.transparent,
                                                                                                     focusColor: Colors.transparent,
@@ -1122,11 +1173,11 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                                           false;
                                                                                                       if (confirmDialogResponse) {
                                                                                                         safeSetState(() {
-                                                                                                          _model.isDataUploading1 = false;
-                                                                                                          _model.uploadedLocalFiles1 = [];
+                                                                                                          _model.isDataUploading = false;
+                                                                                                          _model.uploadedLocalFiles = [];
                                                                                                         });
 
-                                                                                                        _model.membrosFotosTemp = _model.uploadedLocalFiles1.toList().cast<FFUploadedFile>();
+                                                                                                        _model.membrosFotosTemp = _model.uploadedLocalFiles.toList().cast<FFUploadedFile>();
                                                                                                         _model.uploadImageTemp = false;
                                                                                                         _model.membrosFotoEdit = widget!.membrosFotos!.toList().cast<String>();
                                                                                                         safeSetState(() {});
@@ -1442,87 +1493,94 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                           ),
                                                                                           Expanded(
                                                                                             flex: 16,
-                                                                                            child: Builder(
-                                                                                              builder: (context) {
-                                                                                                final tagAlcunha = _model.membrosAlcunhas.map((e) => e).toList().take(4).toList();
+                                                                                            child: Stack(
+                                                                                              children: [
+                                                                                                Builder(
+                                                                                                  builder: (context) {
+                                                                                                    final tagAlcunhaAtual = _model.membrosAlcunhas.toList().take(4).toList();
 
-                                                                                                return Row(
-                                                                                                  mainAxisSize: MainAxisSize.max,
-                                                                                                  mainAxisAlignment: MainAxisAlignment.center,
-                                                                                                  children: List.generate(tagAlcunha.length, (tagAlcunhaIndex) {
-                                                                                                    final tagAlcunhaItem = tagAlcunha[tagAlcunhaIndex];
-                                                                                                    return Expanded(
-                                                                                                      child: Container(
-                                                                                                        constraints: BoxConstraints(
-                                                                                                          minHeight: 40.0,
-                                                                                                          maxWidth: 40.0,
-                                                                                                          maxHeight: 40.0,
-                                                                                                        ),
-                                                                                                        decoration: BoxDecoration(
-                                                                                                          color: FlutterFlowTheme.of(context).primaryBackground,
-                                                                                                          borderRadius: BorderRadius.circular(12.0),
-                                                                                                          border: Border.all(
-                                                                                                            color: FlutterFlowTheme.of(context).primary,
-                                                                                                            width: 2.0,
-                                                                                                          ),
-                                                                                                        ),
-                                                                                                        child: Column(
-                                                                                                          mainAxisSize: MainAxisSize.max,
-                                                                                                          mainAxisAlignment: MainAxisAlignment.center,
-                                                                                                          children: [
-                                                                                                            Align(
-                                                                                                              alignment: AlignmentDirectional(0.0, 0.0),
-                                                                                                              child: Row(
-                                                                                                                mainAxisSize: MainAxisSize.max,
-                                                                                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                                                                                children: [
-                                                                                                                  Expanded(
-                                                                                                                    child: Align(
-                                                                                                                      alignment: AlignmentDirectional(0.0, 0.0),
-                                                                                                                      child: Padding(
-                                                                                                                        padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 3.0, 0.0),
-                                                                                                                        child: SelectionArea(
-                                                                                                                            child: Text(
-                                                                                                                          tagAlcunhaItem,
-                                                                                                                          textAlign: TextAlign.center,
-                                                                                                                          style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                                                fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                                                                letterSpacing: 0.0,
-                                                                                                                                useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                                                                              ),
-                                                                                                                        )),
-                                                                                                                      ),
-                                                                                                                    ),
-                                                                                                                  ),
-                                                                                                                  Align(
-                                                                                                                    alignment: AlignmentDirectional(0.0, 0.0),
-                                                                                                                    child: InkWell(
-                                                                                                                      splashColor: Colors.transparent,
-                                                                                                                      focusColor: Colors.transparent,
-                                                                                                                      hoverColor: Colors.transparent,
-                                                                                                                      highlightColor: Colors.transparent,
-                                                                                                                      onTap: () async {
-                                                                                                                        logFirebaseEvent('MODAL_MEMBROS_EDIT_Icon_l66sgap2_ON_TAP');
-                                                                                                                        _model.removeAtIndexFromMembrosAlcunhas(tagAlcunhaIndex);
-                                                                                                                        safeSetState(() {});
-                                                                                                                      },
-                                                                                                                      child: Icon(
-                                                                                                                        Icons.do_not_disturb_on_rounded,
-                                                                                                                        color: FlutterFlowTheme.of(context).error,
-                                                                                                                        size: 24.0,
-                                                                                                                      ),
-                                                                                                                    ),
-                                                                                                                  ),
-                                                                                                                ],
+                                                                                                    return Row(
+                                                                                                      mainAxisSize: MainAxisSize.max,
+                                                                                                      mainAxisAlignment: MainAxisAlignment.center,
+                                                                                                      children: List.generate(tagAlcunhaAtual.length, (tagAlcunhaAtualIndex) {
+                                                                                                        final tagAlcunhaAtualItem = tagAlcunhaAtual[tagAlcunhaAtualIndex];
+                                                                                                        return Expanded(
+                                                                                                          child: Container(
+                                                                                                            constraints: BoxConstraints(
+                                                                                                              minHeight: 40.0,
+                                                                                                              maxWidth: 40.0,
+                                                                                                              maxHeight: 40.0,
+                                                                                                            ),
+                                                                                                            decoration: BoxDecoration(
+                                                                                                              color: FlutterFlowTheme.of(context).primaryBackground,
+                                                                                                              borderRadius: BorderRadius.circular(12.0),
+                                                                                                              border: Border.all(
+                                                                                                                color: FlutterFlowTheme.of(context).primary,
+                                                                                                                width: 2.0,
                                                                                                               ),
                                                                                                             ),
-                                                                                                          ],
-                                                                                                        ),
-                                                                                                      ),
+                                                                                                            child: Column(
+                                                                                                              mainAxisSize: MainAxisSize.max,
+                                                                                                              mainAxisAlignment: MainAxisAlignment.center,
+                                                                                                              children: [
+                                                                                                                Align(
+                                                                                                                  alignment: AlignmentDirectional(0.0, 0.0),
+                                                                                                                  child: Row(
+                                                                                                                    mainAxisSize: MainAxisSize.max,
+                                                                                                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                                                                                    children: [
+                                                                                                                      Expanded(
+                                                                                                                        child: Align(
+                                                                                                                          alignment: AlignmentDirectional(0.0, 0.0),
+                                                                                                                          child: Padding(
+                                                                                                                            padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 3.0, 0.0),
+                                                                                                                            child: SelectionArea(
+                                                                                                                                child: Text(
+                                                                                                                              valueOrDefault<String>(
+                                                                                                                                tagAlcunhaAtualItem,
+                                                                                                                                'sem informação',
+                                                                                                                              ),
+                                                                                                                              textAlign: TextAlign.center,
+                                                                                                                              style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                                                    fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                                                                                    letterSpacing: 0.0,
+                                                                                                                                    useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                                                                                  ),
+                                                                                                                            )),
+                                                                                                                          ),
+                                                                                                                        ),
+                                                                                                                      ),
+                                                                                                                      Align(
+                                                                                                                        alignment: AlignmentDirectional(0.0, 0.0),
+                                                                                                                        child: InkWell(
+                                                                                                                          splashColor: Colors.transparent,
+                                                                                                                          focusColor: Colors.transparent,
+                                                                                                                          hoverColor: Colors.transparent,
+                                                                                                                          highlightColor: Colors.transparent,
+                                                                                                                          onTap: () async {
+                                                                                                                            logFirebaseEvent('MODAL_MEMBROS_EDIT_Icon_l66sgap2_ON_TAP');
+                                                                                                                            _model.removeAtIndexFromMembrosAlcunhas(tagAlcunhaAtualIndex);
+                                                                                                                            safeSetState(() {});
+                                                                                                                          },
+                                                                                                                          child: Icon(
+                                                                                                                            Icons.do_not_disturb_on_rounded,
+                                                                                                                            color: FlutterFlowTheme.of(context).error,
+                                                                                                                            size: 24.0,
+                                                                                                                          ),
+                                                                                                                        ),
+                                                                                                                      ),
+                                                                                                                    ],
+                                                                                                                  ),
+                                                                                                                ),
+                                                                                                              ],
+                                                                                                            ),
+                                                                                                          ),
+                                                                                                        );
+                                                                                                      }).divide(SizedBox(width: 5.0)),
                                                                                                     );
-                                                                                                  }).divide(SizedBox(width: 5.0)),
-                                                                                                );
-                                                                                              },
+                                                                                                  },
+                                                                                                ),
+                                                                                              ],
                                                                                             ),
                                                                                           ),
                                                                                         ].divide(SizedBox(width: 10.0)),
@@ -2478,7 +2536,7 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                             [
                                                                           Form(
                                                                             key:
-                                                                                _model.formKey2,
+                                                                                _model.formKey4,
                                                                             autovalidateMode:
                                                                                 AutovalidateMode.disabled,
                                                                             child:
@@ -2496,18 +2554,19 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                         FlutterFlowRadioButton(
                                                                                           options: [
                                                                                             FFLocalizations.of(context).getText(
-                                                                                              'atti464y' /* Nascido no Brasil */,
+                                                                                              'rv30tq8h' /* Nascido no Brasil */,
                                                                                             ),
                                                                                             FFLocalizations.of(context).getText(
-                                                                                              '2de66lcq' /* Naturalizado Brasileiro */,
+                                                                                              'c7le5m4q' /* Naturalizado Brasileiro */,
                                                                                             ),
                                                                                             FFLocalizations.of(context).getText(
-                                                                                              'm1flj4r8' /* Estrangeiro */,
+                                                                                              'dxpi3ilr' /* Estrangeiro */,
                                                                                             )
                                                                                           ].toList(),
                                                                                           onChanged: (val) => safeSetState(() {}),
-                                                                                          controller: _model.rbNacionalidadeValueController ??= FormFieldController<String>(FFLocalizations.of(context).getText(
-                                                                                            'dwx4ys4r' /* Nascido no Brasil */,
+                                                                                          controller: _model.rbNacionalidadeValueController ??= FormFieldController<String>(valueOrDefault<String>(
+                                                                                            widget!.membrosRow?.nacionalidade,
+                                                                                            'Nascido no Brasil',
                                                                                           )),
                                                                                           optionHeight: 32.0,
                                                                                           textStyle: FlutterFlowTheme.of(context).labelMedium.override(
@@ -2554,7 +2613,7 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                                 controller: _model.ddwEstadoValueController ??= FormFieldController<int>(
                                                                                                   _model.ddwEstadoValue ??= valueOrDefault<int>(
                                                                                                     widget!.membrosRow?.estadoId,
-                                                                                                    0,
+                                                                                                    27,
                                                                                                   ),
                                                                                                 ),
                                                                                                 options: List<int>.from(ddwEstadoEstadosRowList.map((e) => e.estadoId).toList()),
@@ -2577,10 +2636,10 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                                       useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
                                                                                                     ),
                                                                                                 hintText: FFLocalizations.of(context).getText(
-                                                                                                  '56jt4v6k' /* Estado */,
+                                                                                                  'cs1z62f2' /* Estado */,
                                                                                                 ),
                                                                                                 searchHintText: FFLocalizations.of(context).getText(
-                                                                                                  'hrqyl6i8' /* Search... */,
+                                                                                                  'r00quxoo' /* Search... */,
                                                                                                 ),
                                                                                                 icon: Icon(
                                                                                                   Icons.keyboard_arrow_down_rounded,
@@ -2605,9 +2664,12 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                           flex: 4,
                                                                                           child: FutureBuilder<List<MunicipiosRow>>(
                                                                                             future: MunicipiosTable().queryRows(
-                                                                                              queryFn: (q) => q.eq(
+                                                                                              queryFn: (q) => q.eqOrNull(
                                                                                                 'estado_id',
-                                                                                                _model.ddwEstadoValue!,
+                                                                                                valueOrDefault<int>(
+                                                                                                  _model.ddwEstadoValue,
+                                                                                                  27,
+                                                                                                ),
                                                                                               ),
                                                                                             ),
                                                                                             builder: (context, snapshot) {
@@ -2630,7 +2692,7 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                                 controller: _model.ddwMunicipioValueController ??= FormFieldController<int>(
                                                                                                   _model.ddwMunicipioValue ??= valueOrDefault<int>(
                                                                                                     widget!.membrosRow?.municipioId,
-                                                                                                    0,
+                                                                                                    1697,
                                                                                                   ),
                                                                                                 ),
                                                                                                 options: List<int>.from(ddwMunicipioMunicipiosRowList.map((e) => e.id).toList()),
@@ -2653,10 +2715,10 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                                       useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
                                                                                                     ),
                                                                                                 hintText: FFLocalizations.of(context).getText(
-                                                                                                  'xy9a6m17' /* Municipio */,
+                                                                                                  'ahnx5j5c' /* Municipio */,
                                                                                                 ),
                                                                                                 searchHintText: FFLocalizations.of(context).getText(
-                                                                                                  'z4jtavfh' /* Search... */,
+                                                                                                  '9cu0wlw8' /* Search... */,
                                                                                                 ),
                                                                                                 icon: Icon(
                                                                                                   Icons.keyboard_arrow_down_rounded,
@@ -2712,7 +2774,7 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                                           safeSetState(() => _model.placePickerEnderecoValue = place);
                                                                                                         },
                                                                                                         defaultText: FFLocalizations.of(context).getText(
-                                                                                                          'tlqbuxsg' /*  */,
+                                                                                                          'hnm8bibm' /*  */,
                                                                                                         ),
                                                                                                         icon: Icon(
                                                                                                           Icons.place,
@@ -2744,7 +2806,7 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                                         hoverColor: Colors.transparent,
                                                                                                         highlightColor: Colors.transparent,
                                                                                                         onTap: () async {
-                                                                                                          logFirebaseEvent('MODAL_MEMBROS_EDIT_Icon_06t6w2gv_ON_TAP');
+                                                                                                          logFirebaseEvent('MODAL_MEMBROS_EDIT_Icon_k0jh7728_ON_TAP');
                                                                                                           if (_model.placePickerEnderecoValue.address != _model.txtMembrosEnderecosAddTextController.text) {
                                                                                                             safeSetState(() {
                                                                                                               _model.txtMembrosEnderecosAddTextController?.text = '${_model.placePickerEnderecoValue.address}';
@@ -2782,7 +2844,7 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                                 decoration: InputDecoration(
                                                                                                   isDense: true,
                                                                                                   labelText: FFLocalizations.of(context).getText(
-                                                                                                    'fl5ul0pd' /* Endereço Completo */,
+                                                                                                    'ly0oxbkr' /* Endereço Completo */,
                                                                                                   ),
                                                                                                   labelStyle: FlutterFlowTheme.of(context).labelMedium.override(
                                                                                                         fontFamily: FlutterFlowTheme.of(context).labelMediumFamily,
@@ -2790,7 +2852,7 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                                         useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).labelMediumFamily),
                                                                                                       ),
                                                                                                   hintText: FFLocalizations.of(context).getText(
-                                                                                                    'waagzovs' /* Endereço Completo */,
+                                                                                                    'rra20pji' /* Endereço Completo */,
                                                                                                   ),
                                                                                                   hintStyle: FlutterFlowTheme.of(context).labelMedium.override(
                                                                                                         fontFamily: FlutterFlowTheme.of(context).labelMediumFamily,
@@ -2853,6 +2915,7 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                             ),
                                                                                           ),
                                                                                           FlutterFlowIconButton(
+                                                                                            borderColor: Colors.transparent,
                                                                                             borderRadius: 30.0,
                                                                                             buttonSize: 40.0,
                                                                                             fillColor: FlutterFlowTheme.of(context).primary,
@@ -2898,7 +2961,7 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                                   padding: EdgeInsets.all(12.0),
                                                                                                   child: Text(
                                                                                                     FFLocalizations.of(context).getText(
-                                                                                                      'j0nmcvr2' /* To add the address(es) you nee... */,
+                                                                                                      'oq7cugr2' /* To add the address(es) you nee... */,
                                                                                                     ),
                                                                                                     style: FlutterFlowTheme.of(context).bodySmall.override(
                                                                                                           fontFamily: FlutterFlowTheme.of(context).bodySmallFamily,
@@ -2931,7 +2994,7 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                     ),
                                                                                     Builder(
                                                                                       builder: (context) {
-                                                                                        final listMembrosEnderecos = _model.membrosEnderecos.toList().take(4).toList();
+                                                                                        final listMembrosEnderecos = (widget!.membrosRow?.membroEndereco?.map((e) => e).toList()?.toList() ?? []).take(4).toList();
 
                                                                                         return SingleChildScrollView(
                                                                                           scrollDirection: Axis.horizontal,
@@ -2969,7 +3032,10 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                                                   child: Padding(
                                                                                                                     padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 3.0, 0.0),
                                                                                                                     child: Text(
-                                                                                                                      listMembrosEnderecosItem,
+                                                                                                                      valueOrDefault<String>(
+                                                                                                                        listMembrosEnderecosItem,
+                                                                                                                        'sem informação',
+                                                                                                                      ),
                                                                                                                       style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                                                             fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
                                                                                                                             color: FlutterFlowTheme.of(context).primaryText,
@@ -2987,7 +3053,7 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                                                     hoverColor: Colors.transparent,
                                                                                                                     highlightColor: Colors.transparent,
                                                                                                                     onTap: () async {
-                                                                                                                      logFirebaseEvent('MODAL_MEMBROS_EDIT_Icon_ef3ml0lb_ON_TAP');
+                                                                                                                      logFirebaseEvent('MODAL_MEMBROS_EDIT_Icon_0zi6c35d_ON_TAP');
                                                                                                                       _model.removeAtIndexFromMembrosEnderecos(listMembrosEnderecosIndex);
                                                                                                                       _model.removeAtIndexFromMembrosLatLng(listMembrosEnderecosIndex);
                                                                                                                       safeSetState(() {});
@@ -4067,7 +4133,7 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                             flex: 7,
                                                                                             child: Builder(
                                                                                               builder: (context) {
-                                                                                                final childenTresLocais = _model.membrosFaccaoTresLocais.toList().take(3).toList();
+                                                                                                final childenTresLocais = (widget!.membrosRow?.tresUltimoLocaisPreso?.map((e) => e).toList()?.toList() ?? []).take(3).toList();
 
                                                                                                 return Row(
                                                                                                   mainAxisSize: MainAxisSize.max,
@@ -4105,7 +4171,10 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                                                       padding: EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 3.0, 0.0),
                                                                                                                       child: SelectionArea(
                                                                                                                           child: Text(
-                                                                                                                        childenTresLocaisItem,
+                                                                                                                        valueOrDefault<String>(
+                                                                                                                          childenTresLocaisItem,
+                                                                                                                          'sem informação',
+                                                                                                                        ),
                                                                                                                         textAlign: TextAlign.center,
                                                                                                                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                                                               fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
@@ -5133,7 +5202,10 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                                                   child: Padding(
                                                                                                                     padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
                                                                                                                     child: Text(
-                                                                                                                      childrenProcedimentosItem.procedimentoNo,
+                                                                                                                      valueOrDefault<String>(
+                                                                                                                        childrenProcedimentosItem.procedimentoNo,
+                                                                                                                        'sem informação',
+                                                                                                                      ),
                                                                                                                       style: FlutterFlowTheme.of(context).bodyLarge.override(
                                                                                                                             fontFamily: FlutterFlowTheme.of(context).bodyLargeFamily,
                                                                                                                             letterSpacing: 0.0,
@@ -5159,7 +5231,10 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                                                       child: Padding(
                                                                                                                         padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
                                                                                                                         child: Text(
-                                                                                                                          childrenProcedimentosItem.unidade,
+                                                                                                                          valueOrDefault<String>(
+                                                                                                                            childrenProcedimentosItem.unidade,
+                                                                                                                            'sem informação',
+                                                                                                                          ),
                                                                                                                           style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                                                                 fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
                                                                                                                                 letterSpacing: 0.0,
@@ -5179,7 +5254,10 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                                                     child: Padding(
                                                                                                                       padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
                                                                                                                       child: Text(
-                                                                                                                        childrenProcedimentosItem.procedimentoTipo,
+                                                                                                                        valueOrDefault<String>(
+                                                                                                                          childrenProcedimentosItem.procedimentoTipo,
+                                                                                                                          'sem informação',
+                                                                                                                        ),
                                                                                                                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                                                               fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
                                                                                                                               fontSize: 14.0,
@@ -5198,7 +5276,10 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                                                     child: Padding(
                                                                                                                       padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
                                                                                                                       child: Text(
-                                                                                                                        childrenProcedimentosItem.crime,
+                                                                                                                        valueOrDefault<String>(
+                                                                                                                          childrenProcedimentosItem.crime,
+                                                                                                                          'sem informação',
+                                                                                                                        ),
                                                                                                                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                                                               fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
                                                                                                                               fontSize: 14.0,
@@ -5228,10 +5309,13 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                                                           child: Padding(
                                                                                                                             padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
                                                                                                                             child: Text(
-                                                                                                                              dateTimeFormat(
-                                                                                                                                "d/M/y",
-                                                                                                                                childrenProcedimentosItem.data!,
-                                                                                                                                locale: FFLocalizations.of(context).languageCode,
+                                                                                                                              valueOrDefault<String>(
+                                                                                                                                dateTimeFormat(
+                                                                                                                                  "d/M/y",
+                                                                                                                                  childrenProcedimentosItem.data,
+                                                                                                                                  locale: FFLocalizations.of(context).languageCode,
+                                                                                                                                ),
+                                                                                                                                'sem informação',
                                                                                                                               ),
                                                                                                                               style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                                                                     fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
@@ -5920,7 +6004,10 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                                                   child: Padding(
                                                                                                                     padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
                                                                                                                     child: Text(
-                                                                                                                      childrenProcessosItem.noAcaoPenal,
+                                                                                                                      valueOrDefault<String>(
+                                                                                                                        childrenProcessosItem.noAcaoPenal,
+                                                                                                                        'sem informação',
+                                                                                                                      ),
                                                                                                                       style: FlutterFlowTheme.of(context).bodyLarge.override(
                                                                                                                             fontFamily: FlutterFlowTheme.of(context).bodyLargeFamily,
                                                                                                                             letterSpacing: 0.0,
@@ -5946,7 +6033,10 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                                                       child: Padding(
                                                                                                                         padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
                                                                                                                         child: Text(
-                                                                                                                          childrenProcessosItem.vara,
+                                                                                                                          valueOrDefault<String>(
+                                                                                                                            childrenProcessosItem.vara,
+                                                                                                                            'sem informação',
+                                                                                                                          ),
                                                                                                                           style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                                                                 fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
                                                                                                                                 letterSpacing: 0.0,
@@ -5966,7 +6056,10 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                                                     child: Padding(
                                                                                                                       padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
                                                                                                                       child: Text(
-                                                                                                                        childrenProcessosItem.situacaoJuridica,
+                                                                                                                        valueOrDefault<String>(
+                                                                                                                          childrenProcessosItem.situacaoJuridica,
+                                                                                                                          'sem informação',
+                                                                                                                        ),
                                                                                                                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                                                               fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
                                                                                                                               fontSize: 14.0,
@@ -5985,7 +6078,10 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                                                     child: Padding(
                                                                                                                       padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
                                                                                                                       child: Text(
-                                                                                                                        childrenProcessosItem.regime,
+                                                                                                                        valueOrDefault<String>(
+                                                                                                                          childrenProcessosItem.regime,
+                                                                                                                          'sem informação',
+                                                                                                                        ),
                                                                                                                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                                                               fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
                                                                                                                               fontSize: 14.0,
@@ -6015,7 +6111,10 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                                                             child: Padding(
                                                                                                                               padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 0.0, 0.0),
                                                                                                                               child: Text(
-                                                                                                                                childrenProcessosItem.situacaoReu,
+                                                                                                                                valueOrDefault<String>(
+                                                                                                                                  childrenProcessosItem.situacaoReu,
+                                                                                                                                  'sem informação',
+                                                                                                                                ),
                                                                                                                                 style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                                                                       fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
                                                                                                                                       letterSpacing: 0.0,
@@ -6543,7 +6642,7 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                         ),
                                                                                       ),
                                                                                       Form(
-                                                                                        key: _model.formKey4,
+                                                                                        key: _model.formKey3,
                                                                                         autovalidateMode: AutovalidateMode.disabled,
                                                                                         child: Column(
                                                                                           mainAxisSize: MainAxisSize.max,
@@ -6584,7 +6683,20 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                                   '5hhyuasp' /*  */,
                                                                                                 ))
                                                                                               ],
-                                                                                              onChanged: (val) => safeSetState(() => _model.choiceChipsValidacoesValues = val),
+                                                                                              onChanged: (val) async {
+                                                                                                safeSetState(() => _model.choiceChipsValidacoesValues = val);
+                                                                                                logFirebaseEvent('MODAL_MEMBROS_EDIT_ChoiceChipsValidacoes');
+                                                                                                if (widget!.membrosRow!.validacaoPrecentual! >= 0.0) {
+                                                                                                  _model.selectedCountValidados = widget!.membrosRow?.validacoes?.length;
+                                                                                                  _model.updatePage(() {});
+                                                                                                } else {
+                                                                                                  _model.membrosPercetualValidacao = 0.0;
+                                                                                                  _model.updatePage(() {});
+                                                                                                }
+
+                                                                                                _model.membrosPercetualValidacao = functions.funcGetPercentualValidado(_model.selectedCountValidados)!;
+                                                                                                safeSetState(() {});
+                                                                                              },
                                                                                               selectedChipStyle: ChipStyle(
                                                                                                 backgroundColor: FlutterFlowTheme.of(context).primary,
                                                                                                 textStyle: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -6828,98 +6940,55 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                   ),
                                                                 ),
                                                                 Expanded(
-                                                                  child: FutureBuilder<
-                                                                      List<
-                                                                          MembrosRow>>(
-                                                                    future: MembrosTable()
-                                                                        .queryRows(
-                                                                      queryFn:
-                                                                          (q) =>
-                                                                              q.eq(
-                                                                        'faccao_id',
-                                                                        _model
-                                                                            .retMembrosAdd!
-                                                                            .faccaoId!,
-                                                                      ),
-                                                                    ),
-                                                                    builder:
-                                                                        (context,
-                                                                            snapshot) {
-                                                                      // Customize what your widget looks like when it's loading.
-                                                                      if (!snapshot
-                                                                          .hasData) {
-                                                                        return Center(
+                                                                  child: Column(
+                                                                    mainAxisSize:
+                                                                        MainAxisSize
+                                                                            .max,
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .center,
+                                                                    crossAxisAlignment:
+                                                                        CrossAxisAlignment
+                                                                            .center,
+                                                                    children: [
+                                                                      Expanded(
+                                                                        child:
+                                                                            Align(
+                                                                          alignment: AlignmentDirectional(
+                                                                              0.0,
+                                                                              0.0),
                                                                           child:
-                                                                              SizedBox(
-                                                                            width:
-                                                                                50.0,
-                                                                            height:
-                                                                                50.0,
-                                                                            child:
-                                                                                SpinKitFadingCircle(
-                                                                              color: FlutterFlowTheme.of(context).tertiary,
-                                                                              size: 50.0,
+                                                                              GridView(
+                                                                            padding:
+                                                                                EdgeInsets.zero,
+                                                                            gridDelegate:
+                                                                                SliverGridDelegateWithFixedCrossAxisCount(
+                                                                              crossAxisCount: 3,
+                                                                              crossAxisSpacing: 10.0,
+                                                                              mainAxisSpacing: 10.0,
+                                                                              childAspectRatio: 1.0,
                                                                             ),
-                                                                          ),
-                                                                        );
-                                                                      }
-                                                                      List<MembrosRow>
-                                                                          columnMembrosRowList =
-                                                                          snapshot
-                                                                              .data!;
-
-                                                                      return Column(
-                                                                        mainAxisSize:
-                                                                            MainAxisSize.max,
-                                                                        mainAxisAlignment:
-                                                                            MainAxisAlignment.center,
-                                                                        crossAxisAlignment:
-                                                                            CrossAxisAlignment.center,
-                                                                        children: List.generate(
-                                                                            columnMembrosRowList.length,
-                                                                            (columnIndex) {
-                                                                          final columnMembrosRow =
-                                                                              columnMembrosRowList[columnIndex];
-                                                                          return Expanded(
-                                                                            child:
-                                                                                Align(
-                                                                              alignment: AlignmentDirectional(0.0, 0.0),
-                                                                              child: Builder(
-                                                                                builder: (context) {
-                                                                                  final childrenRolMembrosRelacoes = _model.membrosRelacoes.map((e) => e).toList().take(3).toList();
-
-                                                                                  return GridView.builder(
-                                                                                    padding: EdgeInsets.zero,
-                                                                                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                                                                                      crossAxisCount: 3,
-                                                                                      crossAxisSpacing: 10.0,
-                                                                                      mainAxisSpacing: 10.0,
-                                                                                      childAspectRatio: 1.0,
-                                                                                    ),
-                                                                                    primary: false,
-                                                                                    shrinkWrap: true,
-                                                                                    scrollDirection: Axis.vertical,
-                                                                                    itemCount: childrenRolMembrosRelacoes.length,
-                                                                                    itemBuilder: (context, childrenRolMembrosRelacoesIndex) {
-                                                                                      final childrenRolMembrosRelacoesItem = childrenRolMembrosRelacoes[childrenRolMembrosRelacoesIndex];
-                                                                                      return ClipRRect(
-                                                                                        borderRadius: BorderRadius.circular(12.0),
-                                                                                        child: Image.network(
-                                                                                          columnMembrosRow.fotosPath.first,
-                                                                                          width: 200.0,
-                                                                                          height: 200.0,
-                                                                                          fit: BoxFit.cover,
-                                                                                        ),
-                                                                                      );
-                                                                                    },
-                                                                                  );
-                                                                                },
+                                                                            primary:
+                                                                                false,
+                                                                            shrinkWrap:
+                                                                                true,
+                                                                            scrollDirection:
+                                                                                Axis.vertical,
+                                                                            children: [
+                                                                              ClipRRect(
+                                                                                borderRadius: BorderRadius.circular(12.0),
+                                                                                child: Image.network(
+                                                                                  'https://picsum.photos/seed/379/600',
+                                                                                  width: 200.0,
+                                                                                  height: 200.0,
+                                                                                  fit: BoxFit.cover,
+                                                                                ),
                                                                               ),
-                                                                            ),
-                                                                          );
-                                                                        }),
-                                                                      );
-                                                                    },
+                                                                            ],
+                                                                          ),
+                                                                        ),
+                                                                      ),
+                                                                    ],
                                                                   ),
                                                                 ),
                                                               ],
@@ -7005,64 +7074,50 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                   ),
                                                                 ),
                                                                 Expanded(
-                                                                  child:
-                                                                      Builder(
-                                                                    builder:
-                                                                        (context) {
-                                                                      final childrenColMembrosGrupos = _model
-                                                                          .membrosGrupos
-                                                                          .toList()
-                                                                          .take(
-                                                                              9)
-                                                                          .toList();
-
-                                                                      return Column(
-                                                                        mainAxisSize:
-                                                                            MainAxisSize.max,
-                                                                        mainAxisAlignment:
-                                                                            MainAxisAlignment.center,
-                                                                        children: List.generate(
-                                                                            childrenColMembrosGrupos.length,
-                                                                            (childrenColMembrosGruposIndex) {
-                                                                          final childrenColMembrosGruposItem =
-                                                                              childrenColMembrosGrupos[childrenColMembrosGruposIndex];
-                                                                          return Expanded(
-                                                                            child:
-                                                                                Builder(
-                                                                              builder: (context) {
-                                                                                final childrenRolMembrosGrupos = _model.membrosGrupos.toList().take(3).toList();
-
-                                                                                return GridView.builder(
-                                                                                  padding: EdgeInsets.zero,
-                                                                                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                                                                                    crossAxisCount: 3,
-                                                                                    crossAxisSpacing: 10.0,
-                                                                                    mainAxisSpacing: 10.0,
-                                                                                    childAspectRatio: 1.0,
-                                                                                  ),
-                                                                                  primary: false,
-                                                                                  shrinkWrap: true,
-                                                                                  scrollDirection: Axis.vertical,
-                                                                                  itemCount: childrenRolMembrosGrupos.length,
-                                                                                  itemBuilder: (context, childrenRolMembrosGruposIndex) {
-                                                                                    final childrenRolMembrosGruposItem = childrenRolMembrosGrupos[childrenRolMembrosGruposIndex];
-                                                                                    return ClipRRect(
-                                                                                      borderRadius: BorderRadius.circular(8.0),
-                                                                                      child: Image.network(
-                                                                                        'https://picsum.photos/seed/79/600',
-                                                                                        width: 200.0,
-                                                                                        height: 200.0,
-                                                                                        fit: BoxFit.cover,
-                                                                                      ),
-                                                                                    );
-                                                                                  },
-                                                                                );
-                                                                              },
+                                                                  child: Column(
+                                                                    mainAxisSize:
+                                                                        MainAxisSize
+                                                                            .max,
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .center,
+                                                                    children: [
+                                                                      Expanded(
+                                                                        child:
+                                                                            GridView(
+                                                                          padding:
+                                                                              EdgeInsets.zero,
+                                                                          gridDelegate:
+                                                                              SliverGridDelegateWithFixedCrossAxisCount(
+                                                                            crossAxisCount:
+                                                                                3,
+                                                                            crossAxisSpacing:
+                                                                                10.0,
+                                                                            mainAxisSpacing:
+                                                                                10.0,
+                                                                            childAspectRatio:
+                                                                                1.0,
+                                                                          ),
+                                                                          primary:
+                                                                              false,
+                                                                          shrinkWrap:
+                                                                              true,
+                                                                          scrollDirection:
+                                                                              Axis.vertical,
+                                                                          children: [
+                                                                            ClipRRect(
+                                                                              borderRadius: BorderRadius.circular(8.0),
+                                                                              child: Image.network(
+                                                                                'https://picsum.photos/seed/79/600',
+                                                                                width: 200.0,
+                                                                                height: 200.0,
+                                                                                fit: BoxFit.cover,
+                                                                              ),
                                                                             ),
-                                                                          );
-                                                                        }),
-                                                                      );
-                                                                    },
+                                                                          ],
+                                                                        ),
+                                                                      ),
+                                                                    ],
                                                                   ),
                                                                 ),
                                                               ],
@@ -7122,9 +7177,14 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                           AlignmentDirectional(
                                                               0.0, 0.05),
                                                       child: FFButtonWidget(
-                                                        onPressed: () {
-                                                          print(
-                                                              'ButtonCancelar pressed ...');
+                                                        onPressed: () async {
+                                                          logFirebaseEvent(
+                                                              'MODAL_MEMBROS_EDIT_ButtonCancelar_ON_TAP');
+                                                          Navigator.pop(
+                                                              context);
+
+                                                          context.pushNamed(
+                                                              'main_membros');
                                                         },
                                                         text:
                                                             FFLocalizations.of(
@@ -7199,413 +7259,9 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                           AlignmentDirectional(
                                                               0.0, 0.05),
                                                       child: FFButtonWidget(
-                                                        onPressed: () async {
-                                                          logFirebaseEvent(
-                                                              'MODAL_MEMBROS_EDIT_SAVE_MEMBER_BTN_ON_TA');
-                                                          var _shouldSetState =
-                                                              false;
-                                                          var confirmDialogResponse =
-                                                              await showDialog<
-                                                                      bool>(
-                                                                    context:
-                                                                        context,
-                                                                    builder:
-                                                                        (alertDialogContext) {
-                                                                      return AlertDialog(
-                                                                        title: Text(
-                                                                            'Salvar dados'),
-                                                                        content:
-                                                                            Text('Deseja salvar os  dados ?'),
-                                                                        actions: [
-                                                                          TextButton(
-                                                                            onPressed: () =>
-                                                                                Navigator.pop(alertDialogContext, false),
-                                                                            child:
-                                                                                Text('Cancelar'),
-                                                                          ),
-                                                                          TextButton(
-                                                                            onPressed: () =>
-                                                                                Navigator.pop(alertDialogContext, true),
-                                                                            child:
-                                                                                Text('Confirmar'),
-                                                                          ),
-                                                                        ],
-                                                                      );
-                                                                    },
-                                                                  ) ??
-                                                                  false;
-                                                          if (confirmDialogResponse) {
-                                                            {
-                                                              safeSetState(() =>
-                                                                  _model.isDataUploading2 =
-                                                                      true);
-                                                              var selectedUploadedFiles =
-                                                                  <FFUploadedFile>[];
-                                                              var selectedMedia =
-                                                                  <SelectedFile>[];
-                                                              var downloadUrls =
-                                                                  <String>[];
-                                                              try {
-                                                                selectedUploadedFiles =
-                                                                    _model
-                                                                        .membrosFotosTemp;
-                                                                selectedMedia =
-                                                                    selectedFilesFromUploadedFiles(
-                                                                  selectedUploadedFiles,
-                                                                  storageFolderPath:
-                                                                      'membros',
-                                                                  isMultiData:
-                                                                      true,
-                                                                );
-                                                                downloadUrls =
-                                                                    await uploadSupabaseStorageFiles(
-                                                                  bucketName:
-                                                                      'uploads',
-                                                                  selectedFiles:
-                                                                      selectedMedia,
-                                                                );
-                                                              } finally {
-                                                                _model.isDataUploading2 =
-                                                                    false;
-                                                              }
-                                                              if (selectedUploadedFiles
-                                                                          .length ==
-                                                                      selectedMedia
-                                                                          .length &&
-                                                                  downloadUrls
-                                                                          .length ==
-                                                                      selectedMedia
-                                                                          .length) {
-                                                                safeSetState(
-                                                                    () {
-                                                                  _model.uploadedLocalFiles2 =
-                                                                      selectedUploadedFiles;
-                                                                  _model.uploadedFileUrls2 =
-                                                                      downloadUrls;
-                                                                });
-                                                              } else {
-                                                                safeSetState(
-                                                                    () {});
-                                                                return;
-                                                              }
-                                                            }
-
-                                                            _model.retMembrosAdd =
-                                                                await MembrosTable()
-                                                                    .insert({
-                                                              'nome_completo':
-                                                                  _model
-                                                                      .txtNomeCompletoTextController
-                                                                      .text,
-                                                              'fotos_path': _model
-                                                                  .uploadedFileUrls2,
-                                                              'alcunha': _model
-                                                                  .membrosAlcunhas,
-                                                              'cpf': _model
-                                                                  .txtNoCpfTextController
-                                                                  .text,
-                                                              'identidade': _model
-                                                                  .txtNoIdentidadeTextController
-                                                                  .text,
-                                                              'naturalidade': _model
-                                                                  .txtMembroNaturalidadeTextController
-                                                                  .text,
-                                                              'filiacao_mae': _model
-                                                                  .txtFiliacaoMaeTextController
-                                                                  .text,
-                                                              'filiacao_pai': _model
-                                                                  .txtFiliacaoPaiTextController
-                                                                  .text,
-                                                              'situacao_mae': _model
-                                                                  .ddwSituacaoMaeValue,
-                                                              'situacao_pai': _model
-                                                                  .ddwSituacaoPaiValue,
-                                                              'nivel_instrucao':
-                                                                  _model
-                                                                      .ddwNivelInstrucaoValue,
-                                                              'estado_civil': _model
-                                                                  .ddwEstadoCivilValue,
-                                                              'membro_endereco':
-                                                                  _model
-                                                                      .membrosEnderecos,
-                                                              'estado_id': _model
-                                                                  .ddwEstadoValue,
-                                                              'historico': _model
-                                                                  .txtHistoricoTextController
-                                                                  .text,
-                                                              'faccao_id': _model
-                                                                  .ddwMembroFaccaoValue,
-                                                              'batismo': _model
-                                                                  .txtFaccaoBastismoTextController
-                                                                  .text,
-                                                              'batismo_local':
-                                                                  _model
-                                                                      .txtFacaoLocalBastismoTextController
-                                                                      .text,
-                                                              'padrinho': _model
-                                                                  .txtMembrosFaccaoPadrinhoTextController
-                                                                  .text,
-                                                              'faccao_senha': _model
-                                                                  .txtMembroFaccaoSenhaTextController
-                                                                  .text,
-                                                              'cargo_id': _model
-                                                                  .ddwMembroFaccaoCargoAtualValue,
-                                                              'funcao_id': _model
-                                                                  .ddwFaccaoFuncaoAtualValue,
-                                                              'cargo_ant_id': _model
-                                                                  .ddwMembroFaccaoCargoAnteriorValue,
-                                                              'faccao_inimiga':
-                                                                  _model
-                                                                      .ddwFaccaoInimigaValue,
-                                                              'faccao_aliada':
-                                                                  _model
-                                                                      .ddwFaccaoAliadaValue,
-                                                              'nacionalidade':
-                                                                  _model
-                                                                      .rbNacionalidadeValue,
-                                                              'funcao_ant_id':
-                                                                  _model
-                                                                      .ddwFaccaoFuncaoAnteriorValue,
-                                                              'faccao_integrou':
-                                                                  _model
-                                                                      .ddwFaccaoIntegrouValue,
-                                                              'municipio_id': _model
-                                                                  .ddwMunicipioValue,
-                                                              'infopen': _model
-                                                                  .txtNoInfopenTextController
-                                                                  .text,
-                                                              'tres_ultimo_locais_preso':
-                                                                  _model
-                                                                      .membrosFaccaoTresLocais,
-                                                              'alerta': _model
-                                                                  .switchAlertaValue,
-                                                              'atuacao_crime':
-                                                                  _model
-                                                                      .txtMembroAtuacaoTextController
-                                                                      .text,
-                                                              'validacao_precentual':
-                                                                  valueOrDefault<
-                                                                      double>(
-                                                                _model
-                                                                    .membrosPercetualValidacao,
-                                                                0.10,
-                                                              ),
-                                                              'validacoes': _model
-                                                                  .choiceChipsValidacoesValues,
-                                                              'coordenadas': functions
-                                                                  .latLngListToStringList(_model
-                                                                      .membrosLatLng
-                                                                      .toList()),
-                                                            });
-                                                            _shouldSetState =
-                                                                true;
-                                                            await Future.delayed(
-                                                                const Duration(
-                                                                    milliseconds:
-                                                                        100));
-                                                            await Future.wait([
-                                                              Future(() async {
-                                                                if (_model
-                                                                        .membrosProcedimentos
-                                                                        .length >=
-                                                                    1) {
-                                                                  _model.membrosProcedimentosCount =
-                                                                      -1;
-                                                                  safeSetState(
-                                                                      () {});
-                                                                  while (_model
-                                                                          .membrosProcedimentosCount! <=
-                                                                      _model
-                                                                          .membrosProcedimentos
-                                                                          .length) {
-                                                                    _model.membrosProcedimentosCount =
-                                                                        _model.membrosProcedimentosCount! +
-                                                                            1;
-                                                                    safeSetState(
-                                                                        () {});
-                                                                    _model.apiResultProcedimentos =
-                                                                        await ProcedimentosAddCall
-                                                                            .call(
-                                                                      membroId: _model
-                                                                          .retMembrosAdd
-                                                                          ?.membroId,
-                                                                      procedimentoNo: _model
-                                                                          .membrosProcedimentos[
-                                                                              _model.membrosProcedimentosCount!]
-                                                                          .procedimentoNo,
-                                                                      unidade: _model
-                                                                          .membrosProcedimentos[
-                                                                              _model.membrosProcedimentosCount!]
-                                                                          .unidade,
-                                                                      procedimentoTipo: _model
-                                                                          .membrosProcedimentos[
-                                                                              _model.membrosProcedimentosCount!]
-                                                                          .procedimentoTipo,
-                                                                      crime: _model
-                                                                          .membrosProcedimentos[
-                                                                              _model.membrosProcedimentosCount!]
-                                                                          .crime,
-                                                                      data:
-                                                                          dateTimeFormat(
-                                                                        "d/M/y",
-                                                                        _model
-                                                                            .membrosProcedimentos[_model.membrosProcedimentosCount!]
-                                                                            .data,
-                                                                        locale:
-                                                                            FFLocalizations.of(context).languageCode,
-                                                                      ),
-                                                                    );
-
-                                                                    _shouldSetState =
-                                                                        true;
-                                                                    if ((_model
-                                                                            .apiResultProcedimentos
-                                                                            ?.succeeded ??
-                                                                        true)) {
-                                                                      ScaffoldMessenger.of(
-                                                                              context)
-                                                                          .clearSnackBars();
-                                                                      ScaffoldMessenger.of(
-                                                                              context)
-                                                                          .showSnackBar(
-                                                                        SnackBar(
-                                                                          content:
-                                                                              Text(
-                                                                            'Dados dos procedimentos salvos !',
-                                                                            style:
-                                                                                TextStyle(
-                                                                              color: FlutterFlowTheme.of(context).primaryText,
-                                                                            ),
-                                                                          ),
-                                                                          duration:
-                                                                              Duration(milliseconds: 1000),
-                                                                          backgroundColor:
-                                                                              FlutterFlowTheme.of(context).success,
-                                                                        ),
-                                                                      );
-                                                                    }
-                                                                  }
-                                                                } else {
-                                                                  if (_shouldSetState)
-                                                                    safeSetState(
-                                                                        () {});
-                                                                  return;
-                                                                }
-                                                              }),
-                                                              Future(() async {
-                                                                if (_model
-                                                                        .membrosProcessos
-                                                                        .length >=
-                                                                    1) {
-                                                                  _model.membrosProcessosCount =
-                                                                      -1;
-                                                                  safeSetState(
-                                                                      () {});
-                                                                  while (_model
-                                                                          .membrosProcessosCount! <=
-                                                                      _model
-                                                                          .membrosProcessos
-                                                                          .length) {
-                                                                    _model.membrosProcessosCount =
-                                                                        _model.membrosProcessosCount! +
-                                                                            1;
-                                                                    safeSetState(
-                                                                        () {});
-                                                                    _model.apiResultProcessos =
-                                                                        await ProcessosAddCall
-                                                                            .call(
-                                                                      membroId: _model
-                                                                          .retMembrosAdd
-                                                                          ?.membroId,
-                                                                      acaoPenalNo: _model
-                                                                          .membrosProcessos[
-                                                                              _model.membrosProcessosCount!]
-                                                                          .noAcaoPenal,
-                                                                      vara: _model
-                                                                          .membrosProcessos[
-                                                                              _model.membrosProcessosCount!]
-                                                                          .vara,
-                                                                      situacaoJuridica: _model
-                                                                          .membrosProcessos[
-                                                                              _model.membrosProcessosCount!]
-                                                                          .situacaoJuridica,
-                                                                      regime: _model
-                                                                          .membrosProcessos[
-                                                                              _model.membrosProcessosCount!]
-                                                                          .regime,
-                                                                      situacaoReu: _model
-                                                                          .membrosProcessos[
-                                                                              _model.membrosProcessosCount!]
-                                                                          .situacaoReu,
-                                                                    );
-
-                                                                    _shouldSetState =
-                                                                        true;
-                                                                    if ((_model
-                                                                            .apiResultProcessos
-                                                                            ?.succeeded ??
-                                                                        true)) {
-                                                                      ScaffoldMessenger.of(
-                                                                              context)
-                                                                          .clearSnackBars();
-                                                                      ScaffoldMessenger.of(
-                                                                              context)
-                                                                          .showSnackBar(
-                                                                        SnackBar(
-                                                                          content:
-                                                                              Text(
-                                                                            'Dados dos processos salvos !',
-                                                                            style:
-                                                                                TextStyle(
-                                                                              color: FlutterFlowTheme.of(context).primaryText,
-                                                                            ),
-                                                                          ),
-                                                                          duration:
-                                                                              Duration(milliseconds: 4000),
-                                                                          backgroundColor:
-                                                                              FlutterFlowTheme.of(context).success,
-                                                                        ),
-                                                                      );
-                                                                    }
-                                                                  }
-                                                                } else {
-                                                                  if (_shouldSetState)
-                                                                    safeSetState(
-                                                                        () {});
-                                                                  return;
-                                                                }
-                                                              }),
-                                                            ]);
-                                                            await showDialog(
-                                                              context: context,
-                                                              builder:
-                                                                  (alertDialogContext) {
-                                                                return AlertDialog(
-                                                                  title: Text(
-                                                                      'Adicionar Membros'),
-                                                                  content: Text(
-                                                                      'Dados dos membros adicionados com sucesso !'),
-                                                                  actions: [
-                                                                    TextButton(
-                                                                      onPressed:
-                                                                          () =>
-                                                                              Navigator.pop(alertDialogContext),
-                                                                      child: Text(
-                                                                          'Ok'),
-                                                                    ),
-                                                                  ],
-                                                                );
-                                                              },
-                                                            );
-                                                          } else {
-                                                            if (_shouldSetState)
-                                                              safeSetState(
-                                                                  () {});
-                                                            return;
-                                                          }
-
-                                                          if (_shouldSetState)
-                                                            safeSetState(() {});
+                                                        onPressed: () {
+                                                          print(
+                                                              'Button pressed ...');
                                                         },
                                                         text:
                                                             FFLocalizations.of(

@@ -591,7 +591,7 @@ class _BuscarCEPWidgetState extends State<BuscarCEPWidget>
                                               labelText:
                                                   FFLocalizations.of(context)
                                                       .getText(
-                                                'l6amd7pf' /* Rua/Av */,
+                                                'l6amd7pf' /* RuaAv */,
                                               ),
                                               labelStyle:
                                                   FlutterFlowTheme.of(context)

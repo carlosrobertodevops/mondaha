@@ -12,8 +12,6 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/walkthroughs/adicionar_membros.dart';
 import 'dart:math';
-import '/flutter_flow/request_manager.dart';
-
 import 'main_membros_widget.dart' show MainMembrosWidget;
 import 'package:sticky_headers/sticky_headers.dart';
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart'
@@ -28,20 +26,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class MainMembrosModel extends FlutterFlowModel<MainMembrosWidget> {
-  ///  Local state fields for this page.
-
-  int? membroId;
-
-  List<String> membroFotoPath = [];
-  void addToMembroFotoPath(String item) => membroFotoPath.add(item);
-  void removeFromMembroFotoPath(String item) => membroFotoPath.remove(item);
-  void removeAtIndexFromMembroFotoPath(int index) =>
-      membroFotoPath.removeAt(index);
-  void insertAtIndexInMembroFotoPath(int index, String item) =>
-      membroFotoPath.insert(index, item);
-  void updateMembroFotoPathAtIndex(int index, Function(String) updateFn) =>
-      membroFotoPath[index] = updateFn(membroFotoPath[index]);
-
   ///  State fields for stateful widgets in this page.
 
   TutorialCoachMark? adicionarMembrosController;
@@ -52,22 +36,7 @@ class MainMembrosModel extends FlutterFlowModel<MainMembrosWidget> {
   int get tabBarCurrentIndex =>
       tabBarController != null ? tabBarController!.index : 0;
 
-  /// Query cache managers for this widget.
-
-  final _qryMembrosMainManager = FutureRequestManager<List<ViewMembrosRow>>();
-  Future<List<ViewMembrosRow>> qryMembrosMain({
-    String? uniqueQueryKey,
-    bool? overrideCache,
-    required Future<List<ViewMembrosRow>> Function() requestFn,
-  }) =>
-      _qryMembrosMainManager.performRequest(
-        uniqueQueryKey: uniqueQueryKey,
-        overrideCache: overrideCache,
-        requestFn: requestFn,
-      );
-  void clearQryMembrosMainCache() => _qryMembrosMainManager.clear();
-  void clearQryMembrosMainCacheKey(String? uniqueKey) =>
-      _qryMembrosMainManager.clearRequest(uniqueKey);
+  Stream<List<MembrosViewRow>>? listViewSupabaseStream;
 
   @override
   void initState(BuildContext context) {
@@ -79,9 +48,5 @@ class MainMembrosModel extends FlutterFlowModel<MainMembrosWidget> {
     adicionarMembrosController?.finish();
     webNavModel.dispose();
     tabBarController?.dispose();
-
-    /// Dispose query cache managers for this widget.
-
-    clearQryMembrosMainCache();
   }
 }

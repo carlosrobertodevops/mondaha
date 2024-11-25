@@ -1,4 +1,3 @@
-import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
 import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
@@ -154,8 +153,6 @@ class ModalMembrosEditModel extends FlutterFlowModel<ModalMembrosEditWidget> {
   void updateMembrosLatLngAtIndex(int index, Function(LatLng) updateFn) =>
       membrosLatLng[index] = updateFn(membrosLatLng[index]);
 
-  int? paramMembroId;
-
   bool comoForamValidados = true;
 
   List<String> membrosFotoEdit = [];
@@ -170,23 +167,25 @@ class ModalMembrosEditModel extends FlutterFlowModel<ModalMembrosEditWidget> {
 
   bool uploadImageTemp = false;
 
+  int? selectedCountValidados;
+
   ///  State fields for stateful widgets in this component.
 
-  final formKey3 = GlobalKey<FormState>();
   final formKey2 = GlobalKey<FormState>();
+  final formKey4 = GlobalKey<FormState>();
   final formKey6 = GlobalKey<FormState>();
   final formKey7 = GlobalKey<FormState>();
   final formKey5 = GlobalKey<FormState>();
   final formKey8 = GlobalKey<FormState>();
   final formKey1 = GlobalKey<FormState>();
-  final formKey4 = GlobalKey<FormState>();
+  final formKey3 = GlobalKey<FormState>();
   // State field(s) for TabBar widget.
   TabController? tabBarController;
   int get tabBarCurrentIndex =>
       tabBarController != null ? tabBarController!.index : 0;
 
-  bool isDataUploading1 = false;
-  List<FFUploadedFile> uploadedLocalFiles1 = [];
+  bool isDataUploading = false;
+  List<FFUploadedFile> uploadedLocalFiles = [];
 
   // State field(s) for txt_nome_completo widget.
   FocusNode? txtNomeCompletoFocusNode;
@@ -386,16 +385,6 @@ class ModalMembrosEditModel extends FlutterFlowModel<ModalMembrosEditWidget> {
   TextEditingController? txtValidacoesObservacoesTextController;
   String? Function(BuildContext, String?)?
       txtValidacoesObservacoesTextControllerValidator;
-  bool isDataUploading2 = false;
-  List<FFUploadedFile> uploadedLocalFiles2 = [];
-  List<String> uploadedFileUrls2 = [];
-
-  // Stores action output result for [Backend Call - Insert Row] action in Button widget.
-  MembrosRow? retMembrosAdd;
-  // Stores action output result for [Backend Call - API (ProcedimentosAdd)] action in Button widget.
-  ApiCallResponse? apiResultProcedimentos;
-  // Stores action output result for [Backend Call - API (ProcessosAdd)] action in Button widget.
-  ApiCallResponse? apiResultProcessos;
 
   @override
   void initState(BuildContext context) {

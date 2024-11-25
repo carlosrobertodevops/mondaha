@@ -22,10 +22,10 @@ export 'modal_profile_edit_admin_model.dart';
 class ModalProfileEditAdminWidget extends StatefulWidget {
   const ModalProfileEditAdminWidget({
     super.key,
-    required this.usuarioid,
+    this.usuariosRow,
   });
 
-  final UsuariosRow? usuarioid;
+  final UsuariosRow? usuariosRow;
 
   @override
   State<ModalProfileEditAdminWidget> createState() =>
@@ -49,12 +49,18 @@ class _ModalProfileEditAdminWidgetState
     super.initState();
     _model = createModel(context, () => ModalProfileEditAdminModel());
 
-    _model.txtNomeCompletoTextController ??=
-        TextEditingController(text: widget!.usuarioid?.nomeCompleto);
+    _model.txtNomeCompletoTextController ??= TextEditingController(
+        text: valueOrDefault<String>(
+      widget!.usuariosRow?.nomeCompleto,
+      'sem informação',
+    ));
     _model.txtNomeCompletoFocusNode ??= FocusNode();
 
-    _model.txtDescricaoTextController ??=
-        TextEditingController(text: widget!.usuarioid?.descricao);
+    _model.txtDescricaoTextController ??= TextEditingController(
+        text: valueOrDefault<String>(
+      widget!.usuariosRow?.descricao,
+      'sem informação',
+    ));
     _model.txtDescricaoFocusNode ??= FocusNode();
 
     animationsMap.addAll({
@@ -344,8 +350,8 @@ class _ModalProfileEditAdminWidgetState
                                                         milliseconds: 10),
                                                     imageUrl:
                                                         valueOrDefault<String>(
-                                                      widget!
-                                                          .usuarioid?.fotoPath,
+                                                      widget!.usuariosRow
+                                                          ?.fotoPath,
                                                       'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/fg8v0c6ta78d/account_circle_outline_icon_140062.png',
                                                     ),
                                                     fit: BoxFit.fitWidth,
@@ -621,7 +627,7 @@ class _ModalProfileEditAdminWidgetState
                                                 FormFieldController<int>(
                                               _model.ddwAgenciaValue ??=
                                                   valueOrDefault<int>(
-                                                widget!.usuarioid?.agenciaId,
+                                                widget!.usuariosRow?.agenciaId,
                                                 0,
                                               ),
                                             ),
@@ -774,7 +780,7 @@ class _ModalProfileEditAdminWidgetState
                                             child: SelectionArea(
                                                 child: Text(
                                               valueOrDefault<String>(
-                                                widget!.usuarioid?.email,
+                                                widget!.usuariosRow?.email,
                                                 'email',
                                               ),
                                               style:
@@ -841,7 +847,7 @@ class _ModalProfileEditAdminWidgetState
                                                 child: Text(
                                               dateTimeFormat(
                                                 "d/M/y",
-                                                widget!.usuarioid!.createdAt,
+                                                widget!.usuariosRow!.createdAt,
                                                 locale:
                                                     FFLocalizations.of(context)
                                                         .languageCode,
@@ -910,7 +916,7 @@ class _ModalProfileEditAdminWidgetState
                                                 child: Text(
                                               dateTimeFormat(
                                                 "relative",
-                                                widget!.usuarioid!.acessoAt!,
+                                                widget!.usuariosRow!.acessoAt!,
                                                 locale:
                                                     FFLocalizations.of(context)
                                                         .languageCode,
@@ -1041,8 +1047,10 @@ class _ModalProfileEditAdminWidgetState
                                       if (confirmDialogResponse) {
                                         if (_model.uploadiAdminImagemTemp) {
                                           await deleteSupabaseFileFromPublicUrl(
-                                              widget!.usuarioid?.fotoPath != ''
-                                                  ? widget!.usuarioid!.fotoPath!
+                                              widget!.usuariosRow?.fotoPath !=
+                                                      ''
+                                                  ? widget!
+                                                      .usuariosRow!.fotoPath!
                                                   : '');
                                           {
                                             safeSetState(() =>
@@ -1104,9 +1112,10 @@ class _ModalProfileEditAdminWidgetState
                                                   supaSerialize<DateTime>(
                                                       getCurrentTimestamp),
                                             },
-                                            matchingRows: (rows) => rows.eq(
+                                            matchingRows: (rows) =>
+                                                rows.eqOrNull(
                                               'usuario_id',
-                                              widget!.usuarioid!.usuarioId,
+                                              widget!.usuariosRow?.usuarioId,
                                             ),
                                           );
                                         } else {
@@ -1124,9 +1133,10 @@ class _ModalProfileEditAdminWidgetState
                                                   supaSerialize<DateTime>(
                                                       getCurrentTimestamp),
                                             },
-                                            matchingRows: (rows) => rows.eq(
+                                            matchingRows: (rows) =>
+                                                rows.eqOrNull(
                                               'usuario_id',
-                                              widget!.usuarioid!.usuarioId,
+                                              widget!.usuariosRow?.usuarioId,
                                             ),
                                           );
                                         }

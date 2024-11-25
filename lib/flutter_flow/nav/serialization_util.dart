@@ -228,6 +228,8 @@ dynamic deserializeParam<T>(
             return CountUsuariosAtivosViewRow(data);
           case WapplerMigrationsRow:
             return WapplerMigrationsRow(data);
+          case MembrosViewRow:
+            return MembrosViewRow(data);
           case ProcedimentosRow:
             return ProcedimentosRow(data);
           case ProcessosRow:

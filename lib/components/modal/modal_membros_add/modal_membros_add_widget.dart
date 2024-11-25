@@ -60,6 +60,16 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
     super.initState();
     _model = createModel(context, () => ModalMembrosAddModel());
 
+    // On component load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('MODAL_MEMBROS_ADD_modal_membros_add_ON_I');
+      await _model.googleMapMembrosController.future.then(
+        (c) => c.animateCamera(
+          CameraUpdate.newLatLng(FFAppState().NordesteLngLat!.toGoogleMaps()),
+        ),
+      );
+    });
+
     _model.tabBarController = TabController(
       vsync: this,
       length: 8,
@@ -165,6 +175,8 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Align(
       alignment: AlignmentDirectional(0.0, 0.0),
       child: ClipRRect(
@@ -2336,9 +2348,9 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                                   flex: 4,
                                                                                   child: FutureBuilder<List<MunicipiosRow>>(
                                                                                     future: MunicipiosTable().queryRows(
-                                                                                      queryFn: (q) => q.eq(
+                                                                                      queryFn: (q) => q.eqOrNull(
                                                                                         'estado_id',
-                                                                                        _model.ddwEstadoValue!,
+                                                                                        _model.ddwEstadoValue,
                                                                                       ),
                                                                                     ),
                                                                                     builder: (context, snapshot) {
@@ -6530,7 +6542,14 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                                           'v0fvpqeq' /*  */,
                                                                                         ))
                                                                                       ],
-                                                                                      onChanged: (val) => safeSetState(() => _model.choiceChipsValidacoesValues = val),
+                                                                                      onChanged: (val) async {
+                                                                                        safeSetState(() => _model.choiceChipsValidacoesValues = val);
+                                                                                        logFirebaseEvent('MODAL_MEMBROS_ADD_ChoiceChipsValidacoes_');
+                                                                                        _model.selectedCountValidados = _model.choiceChipsValidacoesValues?.length;
+                                                                                        safeSetState(() {});
+                                                                                        _model.membrosPercetualValidacao = functions.funcGetPercentualValidado(_model.selectedCountValidados)!;
+                                                                                        safeSetState(() {});
+                                                                                      },
                                                                                       selectedChipStyle: ChipStyle(
                                                                                         backgroundColor: FlutterFlowTheme.of(context).primary,
                                                                                         textStyle: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -6773,121 +6792,82 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                           ),
                                                         ),
                                                         Expanded(
-                                                          child: FutureBuilder<
-                                                              List<MembrosRow>>(
-                                                            future:
-                                                                MembrosTable()
-                                                                    .queryRows(
-                                                              queryFn: (q) =>
-                                                                  q.eq(
-                                                                'faccao_id',
-                                                                _model
-                                                                    .retMembrosAdd!
-                                                                    .faccaoId!,
-                                                              ),
-                                                            ),
-                                                            builder: (context,
-                                                                snapshot) {
-                                                              // Customize what your widget looks like when it's loading.
-                                                              if (!snapshot
-                                                                  .hasData) {
-                                                                return Center(
+                                                          child: Column(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .max,
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .center,
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .center,
+                                                            children: [
+                                                              Expanded(
+                                                                child: Align(
+                                                                  alignment:
+                                                                      AlignmentDirectional(
+                                                                          0.0,
+                                                                          0.0),
                                                                   child:
-                                                                      SizedBox(
-                                                                    width: 50.0,
-                                                                    height:
-                                                                        50.0,
-                                                                    child:
-                                                                        SpinKitFadingCircle(
-                                                                      color: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .tertiary,
-                                                                      size:
-                                                                          50.0,
-                                                                    ),
-                                                                  ),
-                                                                );
-                                                              }
-                                                              List<MembrosRow>
-                                                                  columnMembrosRowList =
-                                                                  snapshot
-                                                                      .data!;
+                                                                      Builder(
+                                                                    builder:
+                                                                        (context) {
+                                                                      final childrenRolMembrosRelacoes = _model
+                                                                          .membrosRelacoes
+                                                                          .map((e) =>
+                                                                              e)
+                                                                          .toList()
+                                                                          .take(
+                                                                              3)
+                                                                          .toList();
 
-                                                              return Column(
-                                                                mainAxisSize:
-                                                                    MainAxisSize
-                                                                        .max,
-                                                                mainAxisAlignment:
-                                                                    MainAxisAlignment
-                                                                        .center,
-                                                                crossAxisAlignment:
-                                                                    CrossAxisAlignment
-                                                                        .center,
-                                                                children: List.generate(
-                                                                    columnMembrosRowList
-                                                                        .length,
-                                                                    (columnIndex) {
-                                                                  final columnMembrosRow =
-                                                                      columnMembrosRowList[
-                                                                          columnIndex];
-                                                                  return Expanded(
-                                                                    child:
-                                                                        Align(
-                                                                      alignment:
-                                                                          AlignmentDirectional(
-                                                                              0.0,
-                                                                              0.0),
-                                                                      child:
-                                                                          Builder(
-                                                                        builder:
-                                                                            (context) {
-                                                                          final childrenRolMembrosRelacoes = _model
-                                                                              .membrosRelacoes
-                                                                              .map((e) => e)
-                                                                              .toList()
-                                                                              .take(3)
-                                                                              .toList();
-
-                                                                          return GridView
-                                                                              .builder(
-                                                                            padding:
-                                                                                EdgeInsets.zero,
-                                                                            gridDelegate:
-                                                                                SliverGridDelegateWithFixedCrossAxisCount(
-                                                                              crossAxisCount: 3,
-                                                                              crossAxisSpacing: 10.0,
-                                                                              mainAxisSpacing: 10.0,
-                                                                              childAspectRatio: 1.0,
+                                                                      return GridView
+                                                                          .builder(
+                                                                        padding:
+                                                                            EdgeInsets.zero,
+                                                                        gridDelegate:
+                                                                            SliverGridDelegateWithFixedCrossAxisCount(
+                                                                          crossAxisCount:
+                                                                              3,
+                                                                          crossAxisSpacing:
+                                                                              10.0,
+                                                                          mainAxisSpacing:
+                                                                              10.0,
+                                                                          childAspectRatio:
+                                                                              1.0,
+                                                                        ),
+                                                                        primary:
+                                                                            false,
+                                                                        shrinkWrap:
+                                                                            true,
+                                                                        scrollDirection:
+                                                                            Axis.vertical,
+                                                                        itemCount:
+                                                                            childrenRolMembrosRelacoes.length,
+                                                                        itemBuilder:
+                                                                            (context,
+                                                                                childrenRolMembrosRelacoesIndex) {
+                                                                          final childrenRolMembrosRelacoesItem =
+                                                                              childrenRolMembrosRelacoes[childrenRolMembrosRelacoesIndex];
+                                                                          return ClipRRect(
+                                                                            borderRadius:
+                                                                                BorderRadius.circular(12.0),
+                                                                            child:
+                                                                                Image.network(
+                                                                              'https://picsum.photos/seed/379/600',
+                                                                              width: 200.0,
+                                                                              height: 200.0,
+                                                                              fit: BoxFit.cover,
                                                                             ),
-                                                                            primary:
-                                                                                false,
-                                                                            shrinkWrap:
-                                                                                true,
-                                                                            scrollDirection:
-                                                                                Axis.vertical,
-                                                                            itemCount:
-                                                                                childrenRolMembrosRelacoes.length,
-                                                                            itemBuilder:
-                                                                                (context, childrenRolMembrosRelacoesIndex) {
-                                                                              final childrenRolMembrosRelacoesItem = childrenRolMembrosRelacoes[childrenRolMembrosRelacoesIndex];
-                                                                              return ClipRRect(
-                                                                                borderRadius: BorderRadius.circular(12.0),
-                                                                                child: Image.network(
-                                                                                  columnMembrosRow.fotosPath.first,
-                                                                                  width: 200.0,
-                                                                                  height: 200.0,
-                                                                                  fit: BoxFit.cover,
-                                                                                ),
-                                                                              );
-                                                                            },
                                                                           );
                                                                         },
-                                                                      ),
-                                                                    ),
-                                                                  );
-                                                                }),
-                                                              );
-                                                            },
+                                                                      );
+                                                                    },
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ],
                                                           ),
                                                         ),
                                                       ],
@@ -7345,7 +7325,7 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                       'validacoes': _model
                                                           .choiceChipsValidacoesValues,
                                                       'coordenadas': functions
-                                                          .latLngListToStringList(
+                                                          .convertLatLngListToStringList(
                                                               _model
                                                                   .membrosLatLng
                                                                   .toList()),

@@ -1,5 +1,6 @@
 import '/backend/supabase/supabase.dart';
 import '/components/dropdowns/dropdown_usuario_admin_edit/dropdown_usuario_admin_edit_widget.dart';
+import '/components/modal/modal_profile_edit_admin/modal_profile_edit_admin_widget.dart';
 import '/components/modals_extras/modal_command_palette/modal_command_palette_widget.dart';
 import '/components/navs/web_nav/web_nav_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';

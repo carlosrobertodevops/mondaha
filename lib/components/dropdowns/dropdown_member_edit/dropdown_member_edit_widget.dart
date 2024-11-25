@@ -12,14 +12,10 @@ export 'dropdown_member_edit_model.dart';
 class DropdownMemberEditWidget extends StatefulWidget {
   const DropdownMemberEditWidget({
     super.key,
-    required this.membroId,
-    required this.paraIndex,
-    required this.membrosRow,
+    this.membrosRow,
   });
 
-  final int? membroId;
-  final int? paraIndex;
-  final ViewMembrosRow? membrosRow;
+  final MembrosViewRow? membrosRow;
 
   @override
   State<DropdownMemberEditWidget> createState() =>
@@ -121,9 +117,8 @@ class _DropdownMemberEditWidgetState extends State<DropdownMemberEditWidget> {
                                   alignment: AlignmentDirectional(0.0, 0.0)
                                       .resolve(Directionality.of(context)),
                                   child: ModalMembrosEditWidget(
-                                    membroId: widget!.membroId!,
-                                    membrosFotos: widget!.membrosRow!.fotosPath,
                                     membrosRow: widget!.membrosRow!,
+                                    membrosFotos: widget!.membrosRow!.fotosPath,
                                   ),
                                 );
                               },

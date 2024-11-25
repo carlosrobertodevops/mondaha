@@ -692,16 +692,17 @@ class _AuthLoginWidgetState extends State<AuthLoginWidget>
                                                                 _model.usuarioDiferenteNove =
                                                                     await UsuariosTable()
                                                                         .queryRows(
-                                                                  queryFn:
-                                                                      (q) => q
-                                                                          .eq(
-                                                                            'email',
-                                                                            _model.txtLoginEmailTextController.text,
-                                                                          )
-                                                                          .neq(
-                                                                            'tipo_usuario_id',
-                                                                            9,
-                                                                          ),
+                                                                  queryFn: (q) => q
+                                                                      .eqOrNull(
+                                                                        'email',
+                                                                        _model
+                                                                            .txtLoginEmailTextController
+                                                                            .text,
+                                                                      )
+                                                                      .neqOrNull(
+                                                                        'tipo_usuario_id',
+                                                                        9,
+                                                                      ),
                                                                 );
                                                                 if ((_model.usuarioDiferenteNove !=
                                                                             null &&

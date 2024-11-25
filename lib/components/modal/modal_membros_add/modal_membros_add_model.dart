@@ -153,6 +153,8 @@ class ModalMembrosAddModel extends FlutterFlowModel<ModalMembrosAddWidget> {
   void updateMembrosLatLngAtIndex(int index, Function(LatLng) updateFn) =>
       membrosLatLng[index] = updateFn(membrosLatLng[index]);
 
+  int? selectedCountValidados;
+
   ///  State fields for stateful widgets in this component.
 
   final formKey3 = GlobalKey<FormState>();

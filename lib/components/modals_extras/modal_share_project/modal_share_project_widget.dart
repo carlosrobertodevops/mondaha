@@ -73,7 +73,7 @@ class _ModalShareProjectWidgetState extends State<ModalShareProjectWidget>
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {
           _model.yourNameTextController?.text =
               FFLocalizations.of(context).getText(
-            'jzdr6k9x' /* https://project.flutterflow.io... */,
+            'jzdr6k9x' /* https:project.flutterflow.io... */,
           );
         }));
   }

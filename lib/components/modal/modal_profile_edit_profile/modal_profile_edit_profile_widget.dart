@@ -101,7 +101,7 @@ class _ModalProfileEditProfileWidgetState
         ),
         child: FutureBuilder<List<UsuariosRow>>(
           future: UsuariosTable().querySingleRow(
-            queryFn: (q) => q.eq(
+            queryFn: (q) => q.eqOrNull(
               'user_id',
               currentUserUid,
             ),
@@ -1226,9 +1226,10 @@ class _ModalProfileEditProfileWidgetState
                                                       supaSerialize<DateTime>(
                                                           getCurrentTimestamp),
                                                 },
-                                                matchingRows: (rows) => rows.eq(
+                                                matchingRows: (rows) =>
+                                                    rows.eqOrNull(
                                                   'usuario_id',
-                                                  overlayUsuariosRow!.usuarioId,
+                                                  overlayUsuariosRow?.usuarioId,
                                                 ),
                                               );
                                               // Atualizar o Peril no App I
@@ -1257,9 +1258,10 @@ class _ModalProfileEditProfileWidgetState
                                                       supaSerialize<DateTime>(
                                                           getCurrentTimestamp),
                                                 },
-                                                matchingRows: (rows) => rows.eq(
+                                                matchingRows: (rows) =>
+                                                    rows.eqOrNull(
                                                   'usuario_id',
-                                                  overlayUsuariosRow!.usuarioId,
+                                                  overlayUsuariosRow?.usuarioId,
                                                 ),
                                               );
                                               // Atualizar o Peril no App II

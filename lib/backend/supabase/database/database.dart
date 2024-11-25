@@ -10,6 +10,7 @@ export 'tables/estados.dart';
 export 'tables/grupos_membros.dart';
 export 'tables/count_usuarios_ativos_view.dart';
 export 'tables/wappler_migrations.dart';
+export 'tables/membros_view.dart';
 export 'tables/procedimentos.dart';
 export 'tables/processos.dart';
 export 'tables/view_membros.dart';

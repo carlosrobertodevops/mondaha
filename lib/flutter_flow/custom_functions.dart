@@ -12,7 +12,7 @@ import '/backend/schema/structs/index.dart';
 import '/backend/supabase/supabase.dart';
 import '/auth/supabase_auth/auth_util.dart';
 
-List<dynamic> stringtJsonToLatLng(
+List<dynamic> convertStringtJsonToLatLng(
   String jsonString,
   List<String> camposCoordenadas,
 ) {
@@ -38,11 +38,11 @@ List<dynamic> stringtJsonToLatLng(
   return List<Map<String, dynamic>>.from(jsonList);
 }
 
-String latlngToString(LatLng location) {
+String convertLatlngToString(LatLng location) {
   return '${location.latitude.toStringAsFixed(6)}, ${location.longitude.toStringAsFixed(6)}';
 }
 
-LatLng stringToLatLng(String coordinates) {
+LatLng convertStringToLatLng(String coordinates) {
   try {
     final parts = coordinates.split(',');
     final latitude = double.parse(parts[0].trim());
@@ -53,7 +53,7 @@ LatLng stringToLatLng(String coordinates) {
   }
 }
 
-List<String> latLngListToStringList(List<LatLng> locations) {
+List<String> convertLatLngListToStringList(List<LatLng> locations) {
   return locations
       .map((location) =>
           '${location.latitude.toStringAsFixed(6)}, ${location.longitude.toStringAsFixed(6)}')
@@ -312,4 +312,45 @@ List<String> getCountryFlag() {
 DateTime getFirstOfMonth() {
   // returns the first of the month
   return DateTime(DateTime.now().year, DateTime.now().month, 1);
+}
+
+double? funcGetPercentualValidado(int? numValidados) {
+  if (numValidados != null) {
+    return (numValidados * 0.1);
+  } else {
+    return 0.0;
+  }
+}
+
+List<LatLng> convertStringsListToLngLatList(List<String> stringList) {
+  // Se a lista estiver vazia ou for nula, retorne uma lista vazia.
+  if (stringList == null || stringList.isEmpty) {
+    return [];
+  }
+
+  // Inicializa uma lista para armazenar os objetos LatLng.
+  List<LatLng> latLngList = [];
+
+  for (String str in stringList) {
+    try {
+      // Divide a string para extrair latitude e longitude.
+      final parts = str.split(',');
+      if (parts.length != 2) {
+        throw Exception('String mal formatada: $str');
+      }
+
+      // Converte as partes em double.
+      final double lat = double.parse(parts[0].trim());
+      final double lng = double.parse(parts[1].trim());
+
+      // Adiciona o objeto LatLng à lista.
+      latLngList.add(LatLng(lat, lng));
+    } catch (e) {
+      // Log ou ignore strings inválidas, se necessário.
+      print('Erro ao processar a string: $str. Detalhes: $e');
+    }
+  }
+
+  // Retorna a lista de LatLng.
+  return latLngList;
 }

@@ -101,7 +101,7 @@ class _MainProfileWidgetState extends State<MainProfileWidget>
 
     return FutureBuilder<List<UsuariosRow>>(
       future: UsuariosTable().querySingleRow(
-        queryFn: (q) => q.eq(
+        queryFn: (q) => q.eqOrNull(
           'user_id',
           currentUserUid,
         ),
@@ -406,10 +406,11 @@ class _MainProfileWidgetState extends State<MainProfileWidget>
                                                       List<TiposUsuariosRow>>(
                                                     future: TiposUsuariosTable()
                                                         .querySingleRow(
-                                                      queryFn: (q) => q.eq(
+                                                      queryFn: (q) =>
+                                                          q.eqOrNull(
                                                         'tipo_usuario_id',
-                                                        mainProfileUsuariosRow!
-                                                            .tipoUsuarioId!,
+                                                        mainProfileUsuariosRow
+                                                            ?.tipoUsuarioId,
                                                       ),
                                                     ),
                                                     builder:

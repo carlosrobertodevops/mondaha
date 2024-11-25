@@ -172,7 +172,7 @@ class _WebNavWidgetState extends State<WebNavWidget>
                               safeSetState(() {});
                             },
                             child: Icon(
-                              Icons.arrow_back_ios_outlined,
+                              Icons.first_page_outlined,
                               color: FlutterFlowTheme.of(context).primaryText,
                               size: 24.0,
                             ),
@@ -1237,7 +1237,7 @@ class _WebNavWidgetState extends State<WebNavWidget>
                               safeSetState(() {});
                             },
                             child: Icon(
-                              Icons.arrow_forward_ios_outlined,
+                              Icons.last_page_outlined,
                               color: FlutterFlowTheme.of(context).primaryText,
                               size: 24.0,
                             ),

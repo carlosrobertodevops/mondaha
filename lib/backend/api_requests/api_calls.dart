@@ -284,7 +284,7 @@ class MembrosGetCall {
     return ApiManager.instance.makeApiCall(
       callName: 'MembrosGet',
       apiUrl:
-          'https://lwbmyeixfxysrddcvnjo.supabase.co/rest/v1/view_membros?select=*',
+          'https://lwbmyeixfxysrddcvnjo.supabase.co/rest/v1/membros_view?select=*',
       callType: ApiCallType.GET,
       headers: {
         'apikey':
@@ -295,7 +295,7 @@ class MembrosGetCall {
       params: {},
       returnBody: true,
       encodeBodyUtf8: false,
-      decodeUtf8: false,
+      decodeUtf8: true,
       cache: false,
       isStreamingApi: false,
       alwaysAllowBody: false,
@@ -310,7 +310,7 @@ class MembrosGetUniqueCall {
     return ApiManager.instance.makeApiCall(
       callName: 'MembrosGetUnique',
       apiUrl:
-          'https://lwbmyeixfxysrddcvnjo.supabase.co/rest/v1/view_membros?membro_id=eq.${id}&select=*',
+          'https://lwbmyeixfxysrddcvnjo.supabase.co/rest/v1/membros_view?membro_id=eq.${id}&select=*',
       callType: ApiCallType.GET,
       headers: {
         'apikey':

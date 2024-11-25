@@ -44,7 +44,7 @@ class _MainHomeWidgetState extends State<MainHomeWidget>
       // Action Usuarios
       _model.outputQueryUsuarios = await UsuariosTable().queryRows(
         queryFn: (q) => q
-            .eq(
+            .eqOrNull(
               'user_id',
               currentUserUid,
             )
@@ -63,9 +63,9 @@ class _MainHomeWidgetState extends State<MainHomeWidget>
         Future(() async {
           // Action Usuarios
           _model.outputQueryTipoUsuarios = await TiposUsuariosTable().queryRows(
-            queryFn: (q) => q.eq(
+            queryFn: (q) => q.eqOrNull(
               'tipo_usuario_id',
-              _model.outputQueryUsuarios!.first.tipoUsuarioId!,
+              _model.outputQueryUsuarios?.first?.tipoUsuarioId,
             ),
           );
           FFAppState().UsuarioAtualTipoUsuarioNome =
@@ -75,9 +75,9 @@ class _MainHomeWidgetState extends State<MainHomeWidget>
         Future(() async {
           // Action Usuarios
           _model.outputQueryAgenciaNome = await AgenciasTable().queryRows(
-            queryFn: (q) => q.eq(
+            queryFn: (q) => q.eqOrNull(
               'agencia_id',
-              _model.outputQueryUsuarios!.first.agenciaId!,
+              _model.outputQueryUsuarios?.first?.agenciaId,
             ),
           );
           FFAppState().UsuarioAtualAgenciaNome =
@@ -1084,7 +1084,7 @@ class _MainHomeWidgetState extends State<MainHomeWidget>
                 : null,
             body: FutureBuilder<List<UsuariosRow>>(
               future: UsuariosTable().querySingleRow(
-                queryFn: (q) => q.eq(
+                queryFn: (q) => q.eqOrNull(
                   'user_id',
                   currentUserUid,
                 ),
@@ -1145,803 +1145,811 @@ class _MainHomeWidgetState extends State<MainHomeWidget>
                                           .secondaryBackground,
                                     ),
                                   ),
-                                  Container(
-                                    height: 230.0,
-                                    child: Stack(
+                                  SingleChildScrollView(
+                                    primary: false,
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.max,
                                       children: [
                                         Container(
-                                          width:
-                                              MediaQuery.sizeOf(context).width *
-                                                  1.0,
-                                          height: 110.0,
-                                          decoration: BoxDecoration(
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryBackground,
-                                          ),
-                                          child: Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0.0, 12.0, 0.0, 0.0),
-                                            child: Column(
-                                              mainAxisSize: MainAxisSize.max,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Padding(
+                                          height: 230.0,
+                                          child: Stack(
+                                            children: [
+                                              Container(
+                                                width:
+                                                    MediaQuery.sizeOf(context)
+                                                            .width *
+                                                        1.0,
+                                                height: 110.0,
+                                                decoration: BoxDecoration(
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .secondaryBackground,
+                                                ),
+                                                child: Padding(
                                                   padding: EdgeInsetsDirectional
                                                       .fromSTEB(
-                                                          16.0, 0.0, 0.0, 8.0),
-                                                  child: Text(
-                                                    FFLocalizations.of(context)
-                                                        .getText(
-                                                      '3bi54x5g' /* Dashboard */,
-                                                    ),
-                                                    textAlign: TextAlign.start,
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .displaySmall
-                                                        .override(
-                                                          fontFamily:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .displaySmallFamily,
-                                                          letterSpacing: 0.0,
-                                                          useGoogleFonts: GoogleFonts
-                                                                  .asMap()
-                                                              .containsKey(
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .displaySmallFamily),
-                                                        ),
-                                                  ).animateOnPageLoad(animationsMap[
-                                                      'textOnPageLoadAnimation1']!),
+                                                          0.0, 12.0, 0.0, 0.0),
+                                                  child: Column(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Padding(
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    16.0,
+                                                                    0.0,
+                                                                    0.0,
+                                                                    8.0),
+                                                        child: Text(
+                                                          FFLocalizations.of(
+                                                                  context)
+                                                              .getText(
+                                                            '3bi54x5g' /* Dashboard */,
+                                                          ),
+                                                          textAlign:
+                                                              TextAlign.start,
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .displaySmall
+                                                              .override(
+                                                                fontFamily: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .displaySmallFamily,
+                                                                letterSpacing:
+                                                                    0.0,
+                                                                useGoogleFonts: GoogleFonts
+                                                                        .asMap()
+                                                                    .containsKey(
+                                                                        FlutterFlowTheme.of(context)
+                                                                            .displaySmallFamily),
+                                                              ),
+                                                        ).animateOnPageLoad(
+                                                            animationsMap[
+                                                                'textOnPageLoadAnimation1']!),
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    16.0,
+                                                                    0.0,
+                                                                    16.0,
+                                                                    16.0),
+                                                        child: Text(
+                                                          FFLocalizations.of(
+                                                                  context)
+                                                              .getText(
+                                                            'nnv46x35' /* Below is a summary of your App... */,
+                                                          ),
+                                                          textAlign:
+                                                              TextAlign.start,
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .labelMedium
+                                                              .override(
+                                                                fontFamily: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .labelMediumFamily,
+                                                                letterSpacing:
+                                                                    0.0,
+                                                                useGoogleFonts: GoogleFonts
+                                                                        .asMap()
+                                                                    .containsKey(
+                                                                        FlutterFlowTheme.of(context)
+                                                                            .labelMediumFamily),
+                                                              ),
+                                                        ).animateOnPageLoad(
+                                                            animationsMap[
+                                                                'textOnPageLoadAnimation2']!),
+                                                      ),
+                                                    ],
+                                                  ),
                                                 ),
-                                                Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(16.0, 0.0, 16.0,
-                                                          16.0),
-                                                  child: Text(
-                                                    FFLocalizations.of(context)
-                                                        .getText(
-                                                      'nnv46x35' /* Below is a summary of your App... */,
-                                                    ),
-                                                    textAlign: TextAlign.start,
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .labelMedium
-                                                        .override(
-                                                          fontFamily:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .labelMediumFamily,
-                                                          letterSpacing: 0.0,
-                                                          useGoogleFonts: GoogleFonts
-                                                                  .asMap()
-                                                              .containsKey(
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .labelMediumFamily),
-                                                        ),
-                                                  ).animateOnPageLoad(animationsMap[
-                                                      'textOnPageLoadAnimation2']!),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                        Align(
-                                          alignment:
-                                              AlignmentDirectional(0.0, 1.0),
-                                          child: Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0.0, 30.0, 0.0, 0.0),
-                                            child: Container(
-                                              width: double.infinity,
-                                              height: 140.0,
-                                              decoration: BoxDecoration(),
-                                              child: ListView(
-                                                padding: EdgeInsets.fromLTRB(
-                                                  0,
-                                                  0,
-                                                  44.0,
-                                                  0,
-                                                ),
-                                                primary: false,
-                                                shrinkWrap: true,
-                                                scrollDirection:
-                                                    Axis.horizontal,
-                                                children: [
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(16.0, 0.0,
-                                                                0.0, 12.0),
-                                                    child: AnimatedContainer(
-                                                      duration: Duration(
-                                                          milliseconds: 100),
-                                                      curve: Curves.easeInOut,
-                                                      width: double.infinity,
-                                                      constraints:
-                                                          BoxConstraints(
-                                                        minHeight: 70.0,
-                                                        maxWidth: 250.0,
-                                                      ),
-                                                      decoration: BoxDecoration(
-                                                        color: FlutterFlowTheme
-                                                                .of(context)
-                                                            .secondaryBackground,
-                                                        boxShadow: [
-                                                          BoxShadow(
-                                                            blurRadius: 3.0,
-                                                            color: Color(
-                                                                0x33000000),
-                                                            offset: Offset(
-                                                              0.0,
-                                                              1.0,
-                                                            ),
-                                                          )
-                                                        ],
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(12.0),
-                                                        border: Border.all(
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .alternate,
-                                                          width: 1.0,
-                                                        ),
-                                                      ),
-                                                      child: Padding(
-                                                        padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    12.0,
-                                                                    0.0,
-                                                                    12.0,
-                                                                    0.0),
-                                                        child: Row(
-                                                          mainAxisSize:
-                                                              MainAxisSize.max,
-                                                          children: [
-                                                            Container(
-                                                              width: 60.0,
-                                                              height: 60.0,
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .primaryBackground,
-                                                                shape: BoxShape
-                                                                    .circle,
-                                                              ),
-                                                              alignment:
-                                                                  AlignmentDirectional(
-                                                                      0.0, 0.0),
-                                                              child: Card(
-                                                                clipBehavior: Clip
-                                                                    .antiAliasWithSaveLayer,
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .primary,
-                                                                shape:
-                                                                    RoundedRectangleBorder(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              40.0),
-                                                                ),
-                                                                child: Padding(
-                                                                  padding:
-                                                                      EdgeInsets
-                                                                          .all(
-                                                                              12.0),
-                                                                  child: Icon(
-                                                                    Icons
-                                                                        .groups_2_outlined,
-                                                                    color: Colors
-                                                                        .white,
-                                                                    size: 24.0,
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ).animateOnPageLoad(
-                                                                animationsMap[
-                                                                    'containerOnPageLoadAnimation2']!),
-                                                            Padding(
-                                                              padding:
-                                                                  EdgeInsets
-                                                                      .all(
-                                                                          12.0),
-                                                              child: Column(
-                                                                mainAxisSize:
-                                                                    MainAxisSize
-                                                                        .max,
-                                                                mainAxisAlignment:
-                                                                    MainAxisAlignment
-                                                                        .center,
-                                                                crossAxisAlignment:
-                                                                    CrossAxisAlignment
-                                                                        .start,
-                                                                children: [
-                                                                  Text(
-                                                                    FFLocalizations.of(
-                                                                            context)
-                                                                        .getText(
-                                                                      'jqevo63s' /* New Members */,
-                                                                    ),
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .labelMedium
-                                                                        .override(
-                                                                          fontFamily:
-                                                                              FlutterFlowTheme.of(context).labelMediumFamily,
-                                                                          letterSpacing:
-                                                                              0.0,
-                                                                          useGoogleFonts:
-                                                                              GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).labelMediumFamily),
-                                                                        ),
-                                                                  ).animateOnPageLoad(
-                                                                      animationsMap[
-                                                                          'textOnPageLoadAnimation3']!),
-                                                                  Padding(
-                                                                    padding: EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            0.0,
-                                                                            8.0,
-                                                                            0.0,
-                                                                            0.0),
-                                                                    child: Text(
-                                                                      valueOrDefault<
-                                                                          String>(
-                                                                        FFAppState()
-                                                                            .CountMembros
-                                                                            .toString(),
-                                                                        '0',
-                                                                      ),
-                                                                      style: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .displaySmall
-                                                                          .override(
-                                                                            fontFamily:
-                                                                                FlutterFlowTheme.of(context).displaySmallFamily,
-                                                                            letterSpacing:
-                                                                                0.0,
-                                                                            useGoogleFonts:
-                                                                                GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).displaySmallFamily),
-                                                                          ),
-                                                                    ).animateOnPageLoad(
-                                                                        animationsMap[
-                                                                            'textOnPageLoadAnimation4']!),
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                    ).animateOnPageLoad(
-                                                        animationsMap[
-                                                            'containerOnPageLoadAnimation1']!),
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(16.0, 0.0,
-                                                                0.0, 12.0),
-                                                    child: AnimatedContainer(
-                                                      duration: Duration(
-                                                          milliseconds: 100),
-                                                      curve: Curves.easeInOut,
-                                                      constraints:
-                                                          BoxConstraints(
-                                                        minHeight: 70.0,
-                                                        maxWidth: 250.0,
-                                                      ),
-                                                      decoration: BoxDecoration(
-                                                        color: FlutterFlowTheme
-                                                                .of(context)
-                                                            .secondaryBackground,
-                                                        boxShadow: [
-                                                          BoxShadow(
-                                                            blurRadius: 3.0,
-                                                            color: Color(
-                                                                0x33000000),
-                                                            offset: Offset(
-                                                              0.0,
-                                                              1.0,
-                                                            ),
-                                                          )
-                                                        ],
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(12.0),
-                                                        border: Border.all(
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .alternate,
-                                                          width: 1.0,
-                                                        ),
-                                                      ),
-                                                      child: Padding(
-                                                        padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    12.0,
-                                                                    0.0,
-                                                                    12.0,
-                                                                    0.0),
-                                                        child: Row(
-                                                          mainAxisSize:
-                                                              MainAxisSize.max,
-                                                          children: [
-                                                            Container(
-                                                              width: 60.0,
-                                                              height: 60.0,
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .primaryBackground,
-                                                                shape: BoxShape
-                                                                    .circle,
-                                                              ),
-                                                              alignment:
-                                                                  AlignmentDirectional(
-                                                                      0.0, 0.0),
-                                                              child: Card(
-                                                                clipBehavior: Clip
-                                                                    .antiAliasWithSaveLayer,
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .primary,
-                                                                shape:
-                                                                    RoundedRectangleBorder(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              40.0),
-                                                                ),
-                                                                child: Padding(
-                                                                  padding:
-                                                                      EdgeInsets
-                                                                          .all(
-                                                                              12.0),
-                                                                  child: Icon(
-                                                                    Icons
-                                                                        .account_tree_outlined,
-                                                                    color: Colors
-                                                                        .white,
-                                                                    size: 24.0,
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ).animateOnPageLoad(
-                                                                animationsMap[
-                                                                    'containerOnPageLoadAnimation4']!),
-                                                            Padding(
-                                                              padding:
-                                                                  EdgeInsets
-                                                                      .all(
-                                                                          12.0),
-                                                              child: Column(
-                                                                mainAxisSize:
-                                                                    MainAxisSize
-                                                                        .max,
-                                                                mainAxisAlignment:
-                                                                    MainAxisAlignment
-                                                                        .center,
-                                                                crossAxisAlignment:
-                                                                    CrossAxisAlignment
-                                                                        .start,
-                                                                children: [
-                                                                  Text(
-                                                                    FFLocalizations.of(
-                                                                            context)
-                                                                        .getText(
-                                                                      '8vot9bzj' /* New Factions */,
-                                                                    ),
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .labelMedium
-                                                                        .override(
-                                                                          fontFamily:
-                                                                              FlutterFlowTheme.of(context).labelMediumFamily,
-                                                                          letterSpacing:
-                                                                              0.0,
-                                                                          useGoogleFonts:
-                                                                              GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).labelMediumFamily),
-                                                                        ),
-                                                                  ).animateOnPageLoad(
-                                                                      animationsMap[
-                                                                          'textOnPageLoadAnimation5']!),
-                                                                  Padding(
-                                                                    padding: EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            0.0,
-                                                                            8.0,
-                                                                            0.0,
-                                                                            0.0),
-                                                                    child: Text(
-                                                                      valueOrDefault<
-                                                                          String>(
-                                                                        FFAppState()
-                                                                            .CountFaccoes
-                                                                            .toString(),
-                                                                        '0',
-                                                                      ),
-                                                                      style: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .displaySmall
-                                                                          .override(
-                                                                            fontFamily:
-                                                                                FlutterFlowTheme.of(context).displaySmallFamily,
-                                                                            letterSpacing:
-                                                                                0.0,
-                                                                            useGoogleFonts:
-                                                                                GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).displaySmallFamily),
-                                                                          ),
-                                                                    ).animateOnPageLoad(
-                                                                        animationsMap[
-                                                                            'textOnPageLoadAnimation6']!),
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                    ).animateOnPageLoad(
-                                                        animationsMap[
-                                                            'containerOnPageLoadAnimation3']!),
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(16.0, 0.0,
-                                                                0.0, 12.0),
-                                                    child: AnimatedContainer(
-                                                      duration: Duration(
-                                                          milliseconds: 100),
-                                                      curve: Curves.easeInOut,
-                                                      constraints:
-                                                          BoxConstraints(
-                                                        minHeight: 70.0,
-                                                        maxWidth: 250.0,
-                                                      ),
-                                                      decoration: BoxDecoration(
-                                                        color: FlutterFlowTheme
-                                                                .of(context)
-                                                            .secondaryBackground,
-                                                        boxShadow: [
-                                                          BoxShadow(
-                                                            blurRadius: 3.0,
-                                                            color: Color(
-                                                                0x33000000),
-                                                            offset: Offset(
-                                                              0.0,
-                                                              1.0,
-                                                            ),
-                                                          )
-                                                        ],
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(12.0),
-                                                        border: Border.all(
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .alternate,
-                                                          width: 1.0,
-                                                        ),
-                                                      ),
-                                                      child: Padding(
-                                                        padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    12.0,
-                                                                    0.0,
-                                                                    12.0,
-                                                                    0.0),
-                                                        child: Row(
-                                                          mainAxisSize:
-                                                              MainAxisSize.max,
-                                                          children: [
-                                                            Container(
-                                                              width: 60.0,
-                                                              height: 60.0,
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .primaryBackground,
-                                                                shape: BoxShape
-                                                                    .circle,
-                                                              ),
-                                                              alignment:
-                                                                  AlignmentDirectional(
-                                                                      0.0, 0.0),
-                                                              child: Card(
-                                                                clipBehavior: Clip
-                                                                    .antiAliasWithSaveLayer,
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .primary,
-                                                                shape:
-                                                                    RoundedRectangleBorder(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              40.0),
-                                                                ),
-                                                                child: Padding(
-                                                                  padding:
-                                                                      EdgeInsets
-                                                                          .all(
-                                                                              12.0),
-                                                                  child: Icon(
-                                                                    Icons
-                                                                        .add_location_alt_outlined,
-                                                                    color: Colors
-                                                                        .white,
-                                                                    size: 24.0,
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ).animateOnPageLoad(
-                                                                animationsMap[
-                                                                    'containerOnPageLoadAnimation6']!),
-                                                            Padding(
-                                                              padding:
-                                                                  EdgeInsets
-                                                                      .all(
-                                                                          12.0),
-                                                              child: Column(
-                                                                mainAxisSize:
-                                                                    MainAxisSize
-                                                                        .max,
-                                                                mainAxisAlignment:
-                                                                    MainAxisAlignment
-                                                                        .center,
-                                                                crossAxisAlignment:
-                                                                    CrossAxisAlignment
-                                                                        .start,
-                                                                children: [
-                                                                  Text(
-                                                                    FFLocalizations.of(
-                                                                            context)
-                                                                        .getText(
-                                                                      'saxskj92' /* Add in the Map */,
-                                                                    ),
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .labelMedium
-                                                                        .override(
-                                                                          fontFamily:
-                                                                              FlutterFlowTheme.of(context).labelMediumFamily,
-                                                                          letterSpacing:
-                                                                              0.0,
-                                                                          useGoogleFonts:
-                                                                              GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).labelMediumFamily),
-                                                                        ),
-                                                                  ).animateOnPageLoad(
-                                                                      animationsMap[
-                                                                          'textOnPageLoadAnimation7']!),
-                                                                  Padding(
-                                                                    padding: EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            0.0,
-                                                                            8.0,
-                                                                            0.0,
-                                                                            0.0),
-                                                                    child: Text(
-                                                                      valueOrDefault<
-                                                                          String>(
-                                                                        FFAppState()
-                                                                            .CountMaps
-                                                                            .toString(),
-                                                                        '0',
-                                                                      ),
-                                                                      style: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .displaySmall
-                                                                          .override(
-                                                                            fontFamily:
-                                                                                FlutterFlowTheme.of(context).displaySmallFamily,
-                                                                            letterSpacing:
-                                                                                0.0,
-                                                                            useGoogleFonts:
-                                                                                GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).displaySmallFamily),
-                                                                          ),
-                                                                    ).animateOnPageLoad(
-                                                                        animationsMap[
-                                                                            'textOnPageLoadAnimation8']!),
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                    ).animateOnPageLoad(
-                                                        animationsMap[
-                                                            'containerOnPageLoadAnimation5']!),
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(16.0, 0.0,
-                                                                0.0, 12.0),
-                                                    child: AnimatedContainer(
-                                                      duration: Duration(
-                                                          milliseconds: 100),
-                                                      curve: Curves.easeInOut,
-                                                      constraints:
-                                                          BoxConstraints(
-                                                        minHeight: 70.0,
-                                                        maxWidth: 250.0,
-                                                      ),
-                                                      decoration: BoxDecoration(
-                                                        color: FlutterFlowTheme
-                                                                .of(context)
-                                                            .secondaryBackground,
-                                                        boxShadow: [
-                                                          BoxShadow(
-                                                            blurRadius: 3.0,
-                                                            color: Color(
-                                                                0x33000000),
-                                                            offset: Offset(
-                                                              0.0,
-                                                              1.0,
-                                                            ),
-                                                          )
-                                                        ],
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(12.0),
-                                                        border: Border.all(
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .alternate,
-                                                          width: 1.0,
-                                                        ),
-                                                      ),
-                                                      child: Padding(
-                                                        padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    12.0,
-                                                                    0.0,
-                                                                    12.0,
-                                                                    0.0),
-                                                        child: Row(
-                                                          mainAxisSize:
-                                                              MainAxisSize.max,
-                                                          children: [
-                                                            Container(
-                                                              width: 60.0,
-                                                              height: 60.0,
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .primaryBackground,
-                                                                shape: BoxShape
-                                                                    .circle,
-                                                              ),
-                                                              alignment:
-                                                                  AlignmentDirectional(
-                                                                      0.0, 0.0),
-                                                              child: Card(
-                                                                clipBehavior: Clip
-                                                                    .antiAliasWithSaveLayer,
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .primary,
-                                                                shape:
-                                                                    RoundedRectangleBorder(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              40.0),
-                                                                ),
-                                                                child: Padding(
-                                                                  padding:
-                                                                      EdgeInsets
-                                                                          .all(
-                                                                              12.0),
-                                                                  child: Icon(
-                                                                    Icons
-                                                                        .account_circle_outlined,
-                                                                    color: Colors
-                                                                        .white,
-                                                                    size: 24.0,
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ).animateOnPageLoad(
-                                                                animationsMap[
-                                                                    'containerOnPageLoadAnimation8']!),
-                                                            Padding(
-                                                              padding:
-                                                                  EdgeInsets
-                                                                      .all(
-                                                                          12.0),
-                                                              child: Column(
-                                                                mainAxisSize:
-                                                                    MainAxisSize
-                                                                        .max,
-                                                                mainAxisAlignment:
-                                                                    MainAxisAlignment
-                                                                        .center,
-                                                                crossAxisAlignment:
-                                                                    CrossAxisAlignment
-                                                                        .start,
-                                                                children: [
-                                                                  Text(
-                                                                    FFLocalizations.of(
-                                                                            context)
-                                                                        .getText(
-                                                                      'n9k8nozn' /* Active users */,
-                                                                    ),
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .labelMedium
-                                                                        .override(
-                                                                          fontFamily:
-                                                                              FlutterFlowTheme.of(context).labelMediumFamily,
-                                                                          letterSpacing:
-                                                                              0.0,
-                                                                          useGoogleFonts:
-                                                                              GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).labelMediumFamily),
-                                                                        ),
-                                                                  ).animateOnPageLoad(
-                                                                      animationsMap[
-                                                                          'textOnPageLoadAnimation9']!),
-                                                                  Padding(
-                                                                    padding: EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            0.0,
-                                                                            8.0,
-                                                                            0.0,
-                                                                            0.0),
-                                                                    child: Text(
-                                                                      valueOrDefault<
-                                                                          String>(
-                                                                        FFAppState()
-                                                                            .CountUsuariosAtivos
-                                                                            .toString(),
-                                                                        '0',
-                                                                      ),
-                                                                      style: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .displaySmall
-                                                                          .override(
-                                                                            fontFamily:
-                                                                                FlutterFlowTheme.of(context).displaySmallFamily,
-                                                                            letterSpacing:
-                                                                                0.0,
-                                                                            useGoogleFonts:
-                                                                                GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).displaySmallFamily),
-                                                                          ),
-                                                                    ).animateOnPageLoad(
-                                                                        animationsMap[
-                                                                            'textOnPageLoadAnimation10']!),
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                    ).animateOnPageLoad(
-                                                        animationsMap[
-                                                            'containerOnPageLoadAnimation7']!),
-                                                  ),
-                                                ],
                                               ),
-                                            ),
+                                              Align(
+                                                alignment: AlignmentDirectional(
+                                                    0.0, 1.0),
+                                                child: Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          0.0, 30.0, 0.0, 0.0),
+                                                  child: Container(
+                                                    width: double.infinity,
+                                                    height: 140.0,
+                                                    decoration: BoxDecoration(),
+                                                    child: ListView(
+                                                      padding:
+                                                          EdgeInsets.fromLTRB(
+                                                        0,
+                                                        0,
+                                                        44.0,
+                                                        0,
+                                                      ),
+                                                      primary: false,
+                                                      shrinkWrap: true,
+                                                      scrollDirection:
+                                                          Axis.horizontal,
+                                                      children: [
+                                                        Padding(
+                                                          padding:
+                                                              EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                      16.0,
+                                                                      0.0,
+                                                                      0.0,
+                                                                      12.0),
+                                                          child:
+                                                              AnimatedContainer(
+                                                            duration: Duration(
+                                                                milliseconds:
+                                                                    100),
+                                                            curve: Curves
+                                                                .easeInOut,
+                                                            width:
+                                                                double.infinity,
+                                                            constraints:
+                                                                BoxConstraints(
+                                                              minHeight: 70.0,
+                                                              maxWidth: 250.0,
+                                                            ),
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              color: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .secondaryBackground,
+                                                              boxShadow: [
+                                                                BoxShadow(
+                                                                  blurRadius:
+                                                                      3.0,
+                                                                  color: Color(
+                                                                      0x33000000),
+                                                                  offset:
+                                                                      Offset(
+                                                                    0.0,
+                                                                    1.0,
+                                                                  ),
+                                                                )
+                                                              ],
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          12.0),
+                                                              border:
+                                                                  Border.all(
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .alternate,
+                                                                width: 1.0,
+                                                              ),
+                                                            ),
+                                                            child: Padding(
+                                                              padding:
+                                                                  EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          12.0,
+                                                                          0.0,
+                                                                          12.0,
+                                                                          0.0),
+                                                              child: Row(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                children: [
+                                                                  Container(
+                                                                    width: 60.0,
+                                                                    height:
+                                                                        60.0,
+                                                                    decoration:
+                                                                        BoxDecoration(
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .primaryBackground,
+                                                                      shape: BoxShape
+                                                                          .circle,
+                                                                    ),
+                                                                    alignment:
+                                                                        AlignmentDirectional(
+                                                                            0.0,
+                                                                            0.0),
+                                                                    child: Card(
+                                                                      clipBehavior:
+                                                                          Clip.antiAliasWithSaveLayer,
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .primary,
+                                                                      shape:
+                                                                          RoundedRectangleBorder(
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(40.0),
+                                                                      ),
+                                                                      child:
+                                                                          Padding(
+                                                                        padding:
+                                                                            EdgeInsets.all(12.0),
+                                                                        child:
+                                                                            Icon(
+                                                                          Icons
+                                                                              .groups_2_outlined,
+                                                                          color:
+                                                                              Colors.white,
+                                                                          size:
+                                                                              24.0,
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                  ).animateOnPageLoad(
+                                                                      animationsMap[
+                                                                          'containerOnPageLoadAnimation2']!),
+                                                                  Padding(
+                                                                    padding:
+                                                                        EdgeInsets.all(
+                                                                            12.0),
+                                                                    child:
+                                                                        Column(
+                                                                      mainAxisSize:
+                                                                          MainAxisSize
+                                                                              .max,
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .center,
+                                                                      crossAxisAlignment:
+                                                                          CrossAxisAlignment
+                                                                              .start,
+                                                                      children: [
+                                                                        Text(
+                                                                          FFLocalizations.of(context)
+                                                                              .getText(
+                                                                            'jqevo63s' /* New Members */,
+                                                                          ),
+                                                                          style: FlutterFlowTheme.of(context)
+                                                                              .labelMedium
+                                                                              .override(
+                                                                                fontFamily: FlutterFlowTheme.of(context).labelMediumFamily,
+                                                                                letterSpacing: 0.0,
+                                                                                useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).labelMediumFamily),
+                                                                              ),
+                                                                        ).animateOnPageLoad(
+                                                                            animationsMap['textOnPageLoadAnimation3']!),
+                                                                        Padding(
+                                                                          padding: EdgeInsetsDirectional.fromSTEB(
+                                                                              0.0,
+                                                                              8.0,
+                                                                              0.0,
+                                                                              0.0),
+                                                                          child:
+                                                                              Text(
+                                                                            valueOrDefault<String>(
+                                                                              FFAppState().CountMembros.toString(),
+                                                                              '0',
+                                                                            ),
+                                                                            style: FlutterFlowTheme.of(context).displaySmall.override(
+                                                                                  fontFamily: FlutterFlowTheme.of(context).displaySmallFamily,
+                                                                                  letterSpacing: 0.0,
+                                                                                  useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).displaySmallFamily),
+                                                                                ),
+                                                                          ).animateOnPageLoad(animationsMap['textOnPageLoadAnimation4']!),
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                          ).animateOnPageLoad(
+                                                                  animationsMap[
+                                                                      'containerOnPageLoadAnimation1']!),
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                      16.0,
+                                                                      0.0,
+                                                                      0.0,
+                                                                      12.0),
+                                                          child:
+                                                              AnimatedContainer(
+                                                            duration: Duration(
+                                                                milliseconds:
+                                                                    100),
+                                                            curve: Curves
+                                                                .easeInOut,
+                                                            constraints:
+                                                                BoxConstraints(
+                                                              minHeight: 70.0,
+                                                              maxWidth: 250.0,
+                                                            ),
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              color: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .secondaryBackground,
+                                                              boxShadow: [
+                                                                BoxShadow(
+                                                                  blurRadius:
+                                                                      3.0,
+                                                                  color: Color(
+                                                                      0x33000000),
+                                                                  offset:
+                                                                      Offset(
+                                                                    0.0,
+                                                                    1.0,
+                                                                  ),
+                                                                )
+                                                              ],
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          12.0),
+                                                              border:
+                                                                  Border.all(
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .alternate,
+                                                                width: 1.0,
+                                                              ),
+                                                            ),
+                                                            child: Padding(
+                                                              padding:
+                                                                  EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          12.0,
+                                                                          0.0,
+                                                                          12.0,
+                                                                          0.0),
+                                                              child: Row(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                children: [
+                                                                  Container(
+                                                                    width: 60.0,
+                                                                    height:
+                                                                        60.0,
+                                                                    decoration:
+                                                                        BoxDecoration(
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .primaryBackground,
+                                                                      shape: BoxShape
+                                                                          .circle,
+                                                                    ),
+                                                                    alignment:
+                                                                        AlignmentDirectional(
+                                                                            0.0,
+                                                                            0.0),
+                                                                    child: Card(
+                                                                      clipBehavior:
+                                                                          Clip.antiAliasWithSaveLayer,
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .primary,
+                                                                      shape:
+                                                                          RoundedRectangleBorder(
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(40.0),
+                                                                      ),
+                                                                      child:
+                                                                          Padding(
+                                                                        padding:
+                                                                            EdgeInsets.all(12.0),
+                                                                        child:
+                                                                            Icon(
+                                                                          Icons
+                                                                              .account_tree_outlined,
+                                                                          color:
+                                                                              Colors.white,
+                                                                          size:
+                                                                              24.0,
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                  ).animateOnPageLoad(
+                                                                      animationsMap[
+                                                                          'containerOnPageLoadAnimation4']!),
+                                                                  Padding(
+                                                                    padding:
+                                                                        EdgeInsets.all(
+                                                                            12.0),
+                                                                    child:
+                                                                        Column(
+                                                                      mainAxisSize:
+                                                                          MainAxisSize
+                                                                              .max,
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .center,
+                                                                      crossAxisAlignment:
+                                                                          CrossAxisAlignment
+                                                                              .start,
+                                                                      children: [
+                                                                        Text(
+                                                                          FFLocalizations.of(context)
+                                                                              .getText(
+                                                                            '8vot9bzj' /* New Factions */,
+                                                                          ),
+                                                                          style: FlutterFlowTheme.of(context)
+                                                                              .labelMedium
+                                                                              .override(
+                                                                                fontFamily: FlutterFlowTheme.of(context).labelMediumFamily,
+                                                                                letterSpacing: 0.0,
+                                                                                useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).labelMediumFamily),
+                                                                              ),
+                                                                        ).animateOnPageLoad(
+                                                                            animationsMap['textOnPageLoadAnimation5']!),
+                                                                        Padding(
+                                                                          padding: EdgeInsetsDirectional.fromSTEB(
+                                                                              0.0,
+                                                                              8.0,
+                                                                              0.0,
+                                                                              0.0),
+                                                                          child:
+                                                                              Text(
+                                                                            valueOrDefault<String>(
+                                                                              FFAppState().CountFaccoes.toString(),
+                                                                              '0',
+                                                                            ),
+                                                                            style: FlutterFlowTheme.of(context).displaySmall.override(
+                                                                                  fontFamily: FlutterFlowTheme.of(context).displaySmallFamily,
+                                                                                  letterSpacing: 0.0,
+                                                                                  useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).displaySmallFamily),
+                                                                                ),
+                                                                          ).animateOnPageLoad(animationsMap['textOnPageLoadAnimation6']!),
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                          ).animateOnPageLoad(
+                                                                  animationsMap[
+                                                                      'containerOnPageLoadAnimation3']!),
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                      16.0,
+                                                                      0.0,
+                                                                      0.0,
+                                                                      12.0),
+                                                          child:
+                                                              AnimatedContainer(
+                                                            duration: Duration(
+                                                                milliseconds:
+                                                                    100),
+                                                            curve: Curves
+                                                                .easeInOut,
+                                                            constraints:
+                                                                BoxConstraints(
+                                                              minHeight: 70.0,
+                                                              maxWidth: 250.0,
+                                                            ),
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              color: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .secondaryBackground,
+                                                              boxShadow: [
+                                                                BoxShadow(
+                                                                  blurRadius:
+                                                                      3.0,
+                                                                  color: Color(
+                                                                      0x33000000),
+                                                                  offset:
+                                                                      Offset(
+                                                                    0.0,
+                                                                    1.0,
+                                                                  ),
+                                                                )
+                                                              ],
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          12.0),
+                                                              border:
+                                                                  Border.all(
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .alternate,
+                                                                width: 1.0,
+                                                              ),
+                                                            ),
+                                                            child: Padding(
+                                                              padding:
+                                                                  EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          12.0,
+                                                                          0.0,
+                                                                          12.0,
+                                                                          0.0),
+                                                              child:
+                                                                  SingleChildScrollView(
+                                                                scrollDirection:
+                                                                    Axis.horizontal,
+                                                                child: Row(
+                                                                  mainAxisSize:
+                                                                      MainAxisSize
+                                                                          .max,
+                                                                  children: [
+                                                                    Container(
+                                                                      width:
+                                                                          60.0,
+                                                                      height:
+                                                                          60.0,
+                                                                      decoration:
+                                                                          BoxDecoration(
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .primaryBackground,
+                                                                        shape: BoxShape
+                                                                            .circle,
+                                                                      ),
+                                                                      alignment:
+                                                                          AlignmentDirectional(
+                                                                              0.0,
+                                                                              0.0),
+                                                                      child:
+                                                                          Card(
+                                                                        clipBehavior:
+                                                                            Clip.antiAliasWithSaveLayer,
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .primary,
+                                                                        shape:
+                                                                            RoundedRectangleBorder(
+                                                                          borderRadius:
+                                                                              BorderRadius.circular(40.0),
+                                                                        ),
+                                                                        child:
+                                                                            Padding(
+                                                                          padding:
+                                                                              EdgeInsets.all(12.0),
+                                                                          child:
+                                                                              Icon(
+                                                                            Icons.add_location_alt_outlined,
+                                                                            color:
+                                                                                Colors.white,
+                                                                            size:
+                                                                                24.0,
+                                                                          ),
+                                                                        ),
+                                                                      ),
+                                                                    ).animateOnPageLoad(
+                                                                        animationsMap[
+                                                                            'containerOnPageLoadAnimation6']!),
+                                                                    Padding(
+                                                                      padding:
+                                                                          EdgeInsets.all(
+                                                                              12.0),
+                                                                      child:
+                                                                          Column(
+                                                                        mainAxisSize:
+                                                                            MainAxisSize.max,
+                                                                        mainAxisAlignment:
+                                                                            MainAxisAlignment.center,
+                                                                        crossAxisAlignment:
+                                                                            CrossAxisAlignment.start,
+                                                                        children: [
+                                                                          Text(
+                                                                            FFLocalizations.of(context).getText(
+                                                                              'saxskj92' /* Add in the Map */,
+                                                                            ),
+                                                                            style: FlutterFlowTheme.of(context).labelMedium.override(
+                                                                                  fontFamily: FlutterFlowTheme.of(context).labelMediumFamily,
+                                                                                  letterSpacing: 0.0,
+                                                                                  useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).labelMediumFamily),
+                                                                                ),
+                                                                          ).animateOnPageLoad(
+                                                                              animationsMap['textOnPageLoadAnimation7']!),
+                                                                          Padding(
+                                                                            padding: EdgeInsetsDirectional.fromSTEB(
+                                                                                0.0,
+                                                                                8.0,
+                                                                                0.0,
+                                                                                0.0),
+                                                                            child:
+                                                                                Text(
+                                                                              valueOrDefault<String>(
+                                                                                FFAppState().CountMaps.toString(),
+                                                                                '0',
+                                                                              ),
+                                                                              style: FlutterFlowTheme.of(context).displaySmall.override(
+                                                                                    fontFamily: FlutterFlowTheme.of(context).displaySmallFamily,
+                                                                                    letterSpacing: 0.0,
+                                                                                    useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).displaySmallFamily),
+                                                                                  ),
+                                                                            ).animateOnPageLoad(animationsMap['textOnPageLoadAnimation8']!),
+                                                                          ),
+                                                                        ],
+                                                                      ),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ).animateOnPageLoad(
+                                                                  animationsMap[
+                                                                      'containerOnPageLoadAnimation5']!),
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                      16.0,
+                                                                      0.0,
+                                                                      0.0,
+                                                                      12.0),
+                                                          child:
+                                                              AnimatedContainer(
+                                                            duration: Duration(
+                                                                milliseconds:
+                                                                    100),
+                                                            curve: Curves
+                                                                .easeInOut,
+                                                            constraints:
+                                                                BoxConstraints(
+                                                              minHeight: 70.0,
+                                                              maxWidth: 250.0,
+                                                            ),
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              color: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .secondaryBackground,
+                                                              boxShadow: [
+                                                                BoxShadow(
+                                                                  blurRadius:
+                                                                      3.0,
+                                                                  color: Color(
+                                                                      0x33000000),
+                                                                  offset:
+                                                                      Offset(
+                                                                    0.0,
+                                                                    1.0,
+                                                                  ),
+                                                                )
+                                                              ],
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          12.0),
+                                                              border:
+                                                                  Border.all(
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .alternate,
+                                                                width: 1.0,
+                                                              ),
+                                                            ),
+                                                            child: Padding(
+                                                              padding:
+                                                                  EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          12.0,
+                                                                          0.0,
+                                                                          12.0,
+                                                                          0.0),
+                                                              child: Row(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                children: [
+                                                                  Container(
+                                                                    width: 60.0,
+                                                                    height:
+                                                                        60.0,
+                                                                    decoration:
+                                                                        BoxDecoration(
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .primaryBackground,
+                                                                      shape: BoxShape
+                                                                          .circle,
+                                                                    ),
+                                                                    alignment:
+                                                                        AlignmentDirectional(
+                                                                            0.0,
+                                                                            0.0),
+                                                                    child: Card(
+                                                                      clipBehavior:
+                                                                          Clip.antiAliasWithSaveLayer,
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .primary,
+                                                                      shape:
+                                                                          RoundedRectangleBorder(
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(40.0),
+                                                                      ),
+                                                                      child:
+                                                                          Padding(
+                                                                        padding:
+                                                                            EdgeInsets.all(12.0),
+                                                                        child:
+                                                                            Icon(
+                                                                          Icons
+                                                                              .account_circle_outlined,
+                                                                          color:
+                                                                              Colors.white,
+                                                                          size:
+                                                                              24.0,
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                  ).animateOnPageLoad(
+                                                                      animationsMap[
+                                                                          'containerOnPageLoadAnimation8']!),
+                                                                  Padding(
+                                                                    padding:
+                                                                        EdgeInsets.all(
+                                                                            12.0),
+                                                                    child:
+                                                                        Column(
+                                                                      mainAxisSize:
+                                                                          MainAxisSize
+                                                                              .max,
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .center,
+                                                                      crossAxisAlignment:
+                                                                          CrossAxisAlignment
+                                                                              .start,
+                                                                      children: [
+                                                                        Text(
+                                                                          FFLocalizations.of(context)
+                                                                              .getText(
+                                                                            'n9k8nozn' /* Active users */,
+                                                                          ),
+                                                                          style: FlutterFlowTheme.of(context)
+                                                                              .labelMedium
+                                                                              .override(
+                                                                                fontFamily: FlutterFlowTheme.of(context).labelMediumFamily,
+                                                                                letterSpacing: 0.0,
+                                                                                useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).labelMediumFamily),
+                                                                              ),
+                                                                        ).animateOnPageLoad(
+                                                                            animationsMap['textOnPageLoadAnimation9']!),
+                                                                        Padding(
+                                                                          padding: EdgeInsetsDirectional.fromSTEB(
+                                                                              0.0,
+                                                                              8.0,
+                                                                              0.0,
+                                                                              0.0),
+                                                                          child:
+                                                                              Text(
+                                                                            valueOrDefault<String>(
+                                                                              FFAppState().CountUsuariosAtivos.toString(),
+                                                                              '0',
+                                                                            ),
+                                                                            style: FlutterFlowTheme.of(context).displaySmall.override(
+                                                                                  fontFamily: FlutterFlowTheme.of(context).displaySmallFamily,
+                                                                                  letterSpacing: 0.0,
+                                                                                  useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).displaySmallFamily),
+                                                                                ),
+                                                                          ).animateOnPageLoad(animationsMap['textOnPageLoadAnimation10']!),
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                          ).animateOnPageLoad(
+                                                                  animationsMap[
+                                                                      'containerOnPageLoadAnimation7']!),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                         ),
                                       ],

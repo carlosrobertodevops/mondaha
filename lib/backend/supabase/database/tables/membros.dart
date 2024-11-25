@@ -139,4 +139,7 @@ class MembrosRow extends SupabaseDataRow {
   String? get validacaoObservacao => getField<String>('validacao_observacao');
   set validacaoObservacao(String? value) =>
       setField<String>('validacao_observacao', value);
+
+  int? get identidadeOrgao => getField<int>('identidade_orgao');
+  set identidadeOrgao(int? value) => setField<int>('identidade_orgao', value);
 }

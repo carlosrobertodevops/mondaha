@@ -117,7 +117,7 @@ class _DropdownFaccaoEditWidgetState extends State<DropdownFaccaoEditWidget> {
                                   alignment: AlignmentDirectional(0.0, 0.0)
                                       .resolve(Directionality.of(context)),
                                   child: ModalFaccaoEditWidget(
-                                    faccaoid: widget!.faccaoid,
+                                    faccaoRow: widget!.faccaoid,
                                   ),
                                 );
                               },
@@ -349,9 +349,9 @@ class _DropdownFaccaoEditWidgetState extends State<DropdownFaccaoEditWidget> {
                             false;
                         if (confirmDialogResponse) {
                           await FaccoesTable().delete(
-                            matchingRows: (rows) => rows.eq(
+                            matchingRows: (rows) => rows.eqOrNull(
                               'faccao_id',
-                              widget!.faccaoid!.faccaoId,
+                              widget!.faccaoid?.faccaoId,
                             ),
                           );
                           ScaffoldMessenger.of(context).clearSnackBars();
