@@ -133,6 +133,10 @@ class MembrosViewRow extends SupabaseDataRow {
   bool? get alerta => getField<bool>('alerta');
   set alerta(bool? value) => setField<bool>('alerta', value);
 
+  String? get alertaObservacao => getField<String>('alerta_observacao');
+  set alertaObservacao(String? value) =>
+      setField<String>('alerta_observacao', value);
+
   String? get atuacaoCrime => getField<String>('atuacao_crime');
   set atuacaoCrime(String? value) => setField<String>('atuacao_crime', value);
 
@@ -154,4 +158,8 @@ class MembrosViewRow extends SupabaseDataRow {
 
   int? get identidadeOrgao => getField<int>('identidade_orgao');
   set identidadeOrgao(int? value) => setField<int>('identidade_orgao', value);
+
+  List<double> get membroLngLat => getListField<double>('membroLngLat');
+  set membroLngLat(List<double>? value) =>
+      setListField<double>('membroLngLat', value);
 }

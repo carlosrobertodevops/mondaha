@@ -60,16 +60,6 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
     super.initState();
     _model = createModel(context, () => ModalMembrosAddModel());
 
-    // On component load action.
-    SchedulerBinding.instance.addPostFrameCallback((_) async {
-      logFirebaseEvent('MODAL_MEMBROS_ADD_modal_membros_add_ON_I');
-      await _model.googleMapMembrosController.future.then(
-        (c) => c.animateCamera(
-          CameraUpdate.newLatLng(FFAppState().NordesteLngLat!.toGoogleMaps()),
-        ),
-      );
-    });
-
     _model.tabBarController = TabController(
       vsync: this,
       length: 8,
@@ -175,8 +165,6 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Align(
       alignment: AlignmentDirectional(0.0, 0.0),
       child: ClipRRect(
@@ -2455,7 +2443,7 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                                                   'sc0bhfzq' /*  */,
                                                                                                 ),
                                                                                                 icon: Icon(
-                                                                                                  Icons.place,
+                                                                                                  Icons.place_outlined,
                                                                                                   color: FlutterFlowTheme.of(context).info,
                                                                                                   size: 24.0,
                                                                                                 ),
@@ -2730,7 +2718,7 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                                                               logFirebaseEvent('MODAL_MEMBROS_ADD_Icon_9l4zc2l7_ON_TAP');
                                                                                                               _model.removeAtIndexFromMembrosEnderecos(listMembrosEnderecosIndex);
                                                                                                               _model.removeAtIndexFromMembrosLatLng(listMembrosEnderecosIndex);
-                                                                                                              safeSetState(() {});
+                                                                                                              _model.updatePage(() {});
                                                                                                             },
                                                                                                             child: Icon(
                                                                                                               Icons.do_not_disturb_on_rounded,
@@ -2881,7 +2869,7 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                         key: _model
                                                                             .formKey8,
                                                                         autovalidateMode:
-                                                                            AutovalidateMode.disabled,
+                                                                            AutovalidateMode.always,
                                                                         child:
                                                                             SingleChildScrollView(
                                                                           primary:
@@ -7158,7 +7146,7 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                 title: Text(
                                                                     'Salvar dados'),
                                                                 content: Text(
-                                                                    'Deseja salvar os  dados ?'),
+                                                                    'Deseja salvar os  dados adicionados ?'),
                                                                 actions: [
                                                                   TextButton(
                                                                     onPressed: () =>
@@ -7329,6 +7317,16 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                               _model
                                                                   .membrosLatLng
                                                                   .toList()),
+                                                      'membroLngLat': functions
+                                                          .convertLatLngToDouble(
+                                                              _model
+                                                                  .membrosLatLng
+                                                                  .toList()),
+                                                      'identidade_orgao': _model
+                                                          .ddwOrgaoExpedidorValue,
+                                                      'alerta_observacao': _model
+                                                          .txtMembroAlertaTextController
+                                                          .text,
                                                     });
                                                     _shouldSetState = true;
                                                     await Future.delayed(
@@ -7527,7 +7525,7 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                           (alertDialogContext) {
                                                         return AlertDialog(
                                                           title: Text(
-                                                              'Adicionar Membros'),
+                                                              'Adicionar membro'),
                                                           content: Text(
                                                               'Dados dos membros adicionados com sucesso !'),
                                                           actions: [
@@ -7546,6 +7544,11 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                       safeSetState(() {});
                                                     return;
                                                   }
+
+                                                  Navigator.pop(context);
+
+                                                  context.pushNamed(
+                                                      'main_membros');
 
                                                   if (_shouldSetState)
                                                     safeSetState(() {});

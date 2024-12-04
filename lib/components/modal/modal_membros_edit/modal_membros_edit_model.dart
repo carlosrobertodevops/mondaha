@@ -1,3 +1,4 @@
+import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
 import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
@@ -38,17 +39,18 @@ import 'package:provider/provider.dart';
 class ModalMembrosEditModel extends FlutterFlowModel<ModalMembrosEditWidget> {
   ///  Local state fields for this component.
 
-  List<FFUploadedFile> membrosFotosTemp = [];
-  void addToMembrosFotosTemp(FFUploadedFile item) => membrosFotosTemp.add(item);
-  void removeFromMembrosFotosTemp(FFUploadedFile item) =>
-      membrosFotosTemp.remove(item);
-  void removeAtIndexFromMembrosFotosTemp(int index) =>
-      membrosFotosTemp.removeAt(index);
-  void insertAtIndexInMembrosFotosTemp(int index, FFUploadedFile item) =>
-      membrosFotosTemp.insert(index, item);
-  void updateMembrosFotosTempAtIndex(
+  List<FFUploadedFile> membrosFotosFileTemp = [];
+  void addToMembrosFotosFileTemp(FFUploadedFile item) =>
+      membrosFotosFileTemp.add(item);
+  void removeFromMembrosFotosFileTemp(FFUploadedFile item) =>
+      membrosFotosFileTemp.remove(item);
+  void removeAtIndexFromMembrosFotosFileTemp(int index) =>
+      membrosFotosFileTemp.removeAt(index);
+  void insertAtIndexInMembrosFotosFileTemp(int index, FFUploadedFile item) =>
+      membrosFotosFileTemp.insert(index, item);
+  void updateMembrosFotosFileTempAtIndex(
           int index, Function(FFUploadedFile) updateFn) =>
-      membrosFotosTemp[index] = updateFn(membrosFotosTemp[index]);
+      membrosFotosFileTemp[index] = updateFn(membrosFotosFileTemp[index]);
 
   List<String> membrosAlcunhas = [];
   void addToMembrosAlcunhas(String item) => membrosAlcunhas.add(item);
@@ -155,15 +157,16 @@ class ModalMembrosEditModel extends FlutterFlowModel<ModalMembrosEditWidget> {
 
   bool comoForamValidados = true;
 
-  List<String> membrosFotoEdit = [];
-  void addToMembrosFotoEdit(String item) => membrosFotoEdit.add(item);
-  void removeFromMembrosFotoEdit(String item) => membrosFotoEdit.remove(item);
-  void removeAtIndexFromMembrosFotoEdit(int index) =>
-      membrosFotoEdit.removeAt(index);
-  void insertAtIndexInMembrosFotoEdit(int index, String item) =>
-      membrosFotoEdit.insert(index, item);
-  void updateMembrosFotoEditAtIndex(int index, Function(String) updateFn) =>
-      membrosFotoEdit[index] = updateFn(membrosFotoEdit[index]);
+  List<String> membrosFotoPathEdit = [];
+  void addToMembrosFotoPathEdit(String item) => membrosFotoPathEdit.add(item);
+  void removeFromMembrosFotoPathEdit(String item) =>
+      membrosFotoPathEdit.remove(item);
+  void removeAtIndexFromMembrosFotoPathEdit(int index) =>
+      membrosFotoPathEdit.removeAt(index);
+  void insertAtIndexInMembrosFotoPathEdit(int index, String item) =>
+      membrosFotoPathEdit.insert(index, item);
+  void updateMembrosFotoPathEditAtIndex(int index, Function(String) updateFn) =>
+      membrosFotoPathEdit[index] = updateFn(membrosFotoPathEdit[index]);
 
   bool uploadImageTemp = false;
 
@@ -184,8 +187,8 @@ class ModalMembrosEditModel extends FlutterFlowModel<ModalMembrosEditWidget> {
   int get tabBarCurrentIndex =>
       tabBarController != null ? tabBarController!.index : 0;
 
-  bool isDataUploading = false;
-  List<FFUploadedFile> uploadedLocalFiles = [];
+  bool isDataUploading1 = false;
+  List<FFUploadedFile> uploadedLocalFiles1 = [];
 
   // State field(s) for txt_nome_completo widget.
   FocusNode? txtNomeCompletoFocusNode;
@@ -385,6 +388,18 @@ class ModalMembrosEditModel extends FlutterFlowModel<ModalMembrosEditWidget> {
   TextEditingController? txtValidacoesObservacoesTextController;
   String? Function(BuildContext, String?)?
       txtValidacoesObservacoesTextControllerValidator;
+  bool isDataUploading2 = false;
+  List<FFUploadedFile> uploadedLocalFiles2 = [];
+  List<String> uploadedFileUrls2 = [];
+
+  // Stores action output result for [Backend Call - Update Row(s)] action in Button widget.
+  List<MembrosRow>? retMembrosEdit;
+  // Stores action output result for [Backend Call - Update Row(s)] action in Button widget.
+  List<MembrosRow>? retMembrosEditPath;
+  // Stores action output result for [Backend Call - API (ProcedimentosAdd)] action in Button widget.
+  ApiCallResponse? apiResultProcedimentosEdit;
+  // Stores action output result for [Backend Call - API (ProcessosAdd)] action in Button widget.
+  ApiCallResponse? apiResultProcessosEdit;
 
   @override
   void initState(BuildContext context) {

@@ -36,7 +36,18 @@ class ModalFaccaoAddModel extends FlutterFlowModel<ModalFaccaoAddWidget> {
       BuildContext context, String? val) {
     if (val == null || val.isEmpty) {
       return FFLocalizations.of(context).getText(
-        '4spmowtt' /* Please enter a project name... */,
+        '4spmowtt' /* Please enter a faction name... */,
+      );
+    }
+
+    if (val.length < 2) {
+      return FFLocalizations.of(context).getText(
+        'k8todo97' /* Minimum of 2 characters entere... */,
+      );
+    }
+    if (val.length > 50) {
+      return FFLocalizations.of(context).getText(
+        'i135rulk' /* More than 50 characters typed */,
       );
     }
 

@@ -136,12 +136,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                   : MainProfileWidget(),
             ),
             FFRoute(
-              name: 'project_details_health_ai',
-              path: 'projectDetailsHealthAi',
-              requireAuth: true,
-              builder: (context, params) => ProjectDetailsHealthAiWidget(),
-            ),
-            FFRoute(
               name: 'project_details',
               path: 'projectDetails',
               requireAuth: true,

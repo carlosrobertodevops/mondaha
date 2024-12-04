@@ -1,3 +1,4 @@
+import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
 import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
@@ -70,12 +71,8 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
     // On component load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       logFirebaseEvent('MODAL_MEMBROS_EDIT_modal_membros_edit_ON');
-      await _model.googleMapMembrosController.future.then(
-        (c) => c.animateCamera(
-          CameraUpdate.newLatLng(FFAppState().NordesteLngLat!.toGoogleMaps()),
-        ),
-      );
-      _model.membrosFotoEdit = widget!.membrosFotos!.toList().cast<String>();
+      _model.membrosFotoPathEdit =
+          widget!.membrosFotos!.toList().cast<String>();
       _model.membrosAlcunhas =
           widget!.membrosRow!.alcunha.toList().cast<String>();
       _model.membrosEnderecos =
@@ -96,7 +93,15 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
           .toList()
           .cast<LatLng>();
       _model.uploadImageTemp = false;
-      safeSetState(() {});
+      _model.updatePage(() {});
+      await _model.googleMapMembrosController.future.then(
+        (c) => c.animateCamera(
+          CameraUpdate.newLatLng(functions
+              .convertDoubleToLatLng(widget!.membrosRow!.membroLngLat.toList())
+              .last
+              .toGoogleMaps()),
+        ),
+      );
     });
 
     _model.tabBarController = TabController(
@@ -215,7 +220,7 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
     _model.switchAlertaValue = _model.membroAlerta;
     _model.txtMembroAlertaTextController ??= TextEditingController(
         text: valueOrDefault<String>(
-      widget!.membrosRow?.alerta?.toString(),
+      widget!.membrosRow?.alertaObservacao,
       'sem informação',
     ));
     _model.txtMembroAlertaFocusNode ??= FocusNode();
@@ -260,8 +265,6 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Align(
       alignment: AlignmentDirectional(0.0, 0.0),
       child: ClipRRect(
@@ -655,7 +658,7 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                                     padding: EdgeInsets.all(12.0),
                                                                                                     child: Text(
                                                                                                       FFLocalizations.of(context).getText(
-                                                                                                        '6p82su46' /* Add one or more images about t... */,
+                                                                                                        '6p82su46' /* Edit one or more images about ... */,
                                                                                                       ),
                                                                                                       style: FlutterFlowTheme.of(context).bodySmall.override(
                                                                                                             fontFamily: FlutterFlowTheme.of(context).bodySmallFamily,
@@ -676,7 +679,7 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                                   showDuration: Duration(milliseconds: 100),
                                                                                                   triggerMode: TooltipTriggerMode.tap,
                                                                                                   child: Visibility(
-                                                                                                    visible: _model.uploadedLocalFiles.length < 1,
+                                                                                                    visible: _model.uploadedLocalFiles1.length < 1,
                                                                                                     child: InkWell(
                                                                                                       splashColor: Colors.transparent,
                                                                                                       focusColor: Colors.transparent,
@@ -691,7 +694,7 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                                           multiImage: true,
                                                                                                         );
                                                                                                         if (selectedMedia != null && selectedMedia.every((m) => validateFileFormat(m.storagePath, context))) {
-                                                                                                          safeSetState(() => _model.isDataUploading = true);
+                                                                                                          safeSetState(() => _model.isDataUploading1 = true);
                                                                                                           var selectedUploadedFiles = <FFUploadedFile>[];
 
                                                                                                           try {
@@ -711,11 +714,11 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                                                 .toList();
                                                                                                           } finally {
                                                                                                             ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                                                                                                            _model.isDataUploading = false;
+                                                                                                            _model.isDataUploading1 = false;
                                                                                                           }
                                                                                                           if (selectedUploadedFiles.length == selectedMedia.length) {
                                                                                                             safeSetState(() {
-                                                                                                              _model.uploadedLocalFiles = selectedUploadedFiles;
+                                                                                                              _model.uploadedLocalFiles1 = selectedUploadedFiles;
                                                                                                             });
                                                                                                             showUploadMessage(context, 'Success!');
                                                                                                           } else {
@@ -727,7 +730,7 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
 
                                                                                                         _model.uploadImageTemp = true;
                                                                                                         safeSetState(() {});
-                                                                                                        _model.membrosFotosTemp = _model.uploadedLocalFiles.toList().cast<FFUploadedFile>();
+                                                                                                        _model.membrosFotosFileTemp = _model.uploadedLocalFiles1.toList().cast<FFUploadedFile>();
                                                                                                         _model.updatePage(() {});
                                                                                                       },
                                                                                                       child: Container(
@@ -785,7 +788,7 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                                           if (_model.uploadImageTemp == false)
                                                                                                             Builder(
                                                                                                               builder: (context) {
-                                                                                                                final fotosMembroPaths = _model.membrosFotoEdit.toList().take(6).toList();
+                                                                                                                final fotosMembroPaths = _model.membrosFotoPathEdit.toList().take(6).toList();
 
                                                                                                                 return SingleChildScrollView(
                                                                                                                   scrollDirection: Axis.horizontal,
@@ -907,7 +910,7 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                                                                                 Align(
                                                                                                                                                   alignment: AlignmentDirectional(0.0, 1.0),
                                                                                                                                                   child: Padding(
-                                                                                                                                                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 1.0),
+                                                                                                                                                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 5.0),
                                                                                                                                                     child: InkWell(
                                                                                                                                                       splashColor: Colors.transparent,
                                                                                                                                                       focusColor: Colors.transparent,
@@ -936,7 +939,7 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                                                                                             ) ??
                                                                                                                                                             false;
                                                                                                                                                         if (confirmDialogResponse) {
-                                                                                                                                                          _model.removeFromMembrosFotoEdit(_model.membrosFotoEdit[fotosMembroPathsIndex]);
+                                                                                                                                                          _model.removeFromMembrosFotoPathEdit(_model.membrosFotoPathEdit[fotosMembroPathsIndex]);
                                                                                                                                                           safeSetState(() {});
                                                                                                                                                         }
                                                                                                                                                       },
@@ -975,7 +978,7 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                                           if (_model.uploadImageTemp == true)
                                                                                                             Builder(
                                                                                                               builder: (context) {
-                                                                                                                final fotosMembroPathsEdit = _model.uploadedLocalFiles.toList().take(6).toList();
+                                                                                                                final fotosMembroPathsEdit = _model.uploadedLocalFiles1.toList().take(6).toList();
 
                                                                                                                 return SingleChildScrollView(
                                                                                                                   scrollDirection: Axis.horizontal,
@@ -986,7 +989,7 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                                                     children: List.generate(fotosMembroPathsEdit.length, (fotosMembroPathsEditIndex) {
                                                                                                                       final fotosMembroPathsEditItem = fotosMembroPathsEdit[fotosMembroPathsEditIndex];
                                                                                                                       return Visibility(
-                                                                                                                        visible: _model.uploadedLocalFiles.length >= 1,
+                                                                                                                        visible: _model.uploadedLocalFiles1.length >= 1,
                                                                                                                         child: Align(
                                                                                                                           alignment: AlignmentDirectional(-1.0, 0.0),
                                                                                                                           child: Container(
@@ -1073,7 +1076,7 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                                                                                 Align(
                                                                                                                                                   alignment: AlignmentDirectional(0.0, 1.0),
                                                                                                                                                   child: Padding(
-                                                                                                                                                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 1.0),
+                                                                                                                                                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 5.0),
                                                                                                                                                     child: InkWell(
                                                                                                                                                       splashColor: Colors.transparent,
                                                                                                                                                       focusColor: Colors.transparent,
@@ -1102,7 +1105,7 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                                                                                             ) ??
                                                                                                                                                             false;
                                                                                                                                                         if (confirmDialogResponse) {
-                                                                                                                                                          _model.removeAtIndexFromMembrosFotosTemp(fotosMembroPathsEditIndex);
+                                                                                                                                                          _model.removeAtIndexFromMembrosFotosFileTemp(fotosMembroPathsEditIndex);
                                                                                                                                                           safeSetState(() {});
                                                                                                                                                         }
                                                                                                                                                       },
@@ -1131,7 +1134,7 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                                                       SizedBox(width: 12.0),
                                                                                                                       filterFn: (fotosMembroPathsEditIndex) {
                                                                                                                         final fotosMembroPathsEditItem = fotosMembroPathsEdit[fotosMembroPathsEditIndex];
-                                                                                                                        return _model.uploadedLocalFiles.length >= 1;
+                                                                                                                        return _model.uploadedLocalFiles1.length >= 1;
                                                                                                                       },
                                                                                                                     ),
                                                                                                                   ),
@@ -1143,7 +1146,7 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                                     ],
                                                                                                   ),
                                                                                                 ),
-                                                                                                if (_model.uploadedLocalFiles.length >= 2)
+                                                                                                if (_model.uploadedLocalFiles1.length >= 2)
                                                                                                   InkWell(
                                                                                                     splashColor: Colors.transparent,
                                                                                                     focusColor: Colors.transparent,
@@ -1173,13 +1176,13 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                                           false;
                                                                                                       if (confirmDialogResponse) {
                                                                                                         safeSetState(() {
-                                                                                                          _model.isDataUploading = false;
-                                                                                                          _model.uploadedLocalFiles = [];
+                                                                                                          _model.isDataUploading1 = false;
+                                                                                                          _model.uploadedLocalFiles1 = [];
                                                                                                         });
 
-                                                                                                        _model.membrosFotosTemp = _model.uploadedLocalFiles.toList().cast<FFUploadedFile>();
+                                                                                                        _model.membrosFotosFileTemp = _model.uploadedLocalFiles1.toList().cast<FFUploadedFile>();
                                                                                                         _model.uploadImageTemp = false;
-                                                                                                        _model.membrosFotoEdit = widget!.membrosFotos!.toList().cast<String>();
+                                                                                                        _model.membrosFotoPathEdit = widget!.membrosFotos!.toList().cast<String>();
                                                                                                         safeSetState(() {});
                                                                                                       }
                                                                                                     },
@@ -2777,7 +2780,7 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                                           'hnm8bibm' /*  */,
                                                                                                         ),
                                                                                                         icon: Icon(
-                                                                                                          Icons.place,
+                                                                                                          Icons.place_outlined,
                                                                                                           color: FlutterFlowTheme.of(context).info,
                                                                                                           size: 24.0,
                                                                                                         ),
@@ -3056,7 +3059,7 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                                                       logFirebaseEvent('MODAL_MEMBROS_EDIT_Icon_0zi6c35d_ON_TAP');
                                                                                                                       _model.removeAtIndexFromMembrosEnderecos(listMembrosEnderecosIndex);
                                                                                                                       _model.removeAtIndexFromMembrosLatLng(listMembrosEnderecosIndex);
-                                                                                                                      safeSetState(() {});
+                                                                                                                      _model.updatePage(() {});
                                                                                                                     },
                                                                                                                     child: Icon(
                                                                                                                       Icons.do_not_disturb_on_rounded,
@@ -7259,9 +7262,613 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                           AlignmentDirectional(
                                                               0.0, 0.05),
                                                       child: FFButtonWidget(
-                                                        onPressed: () {
-                                                          print(
-                                                              'Button pressed ...');
+                                                        onPressed: () async {
+                                                          logFirebaseEvent(
+                                                              'MODAL_MEMBROS_EDIT_SAVE_MEMBER_BTN_ON_TA');
+                                                          var _shouldSetState =
+                                                              false;
+                                                          var confirmDialogResponse =
+                                                              await showDialog<
+                                                                      bool>(
+                                                                    context:
+                                                                        context,
+                                                                    builder:
+                                                                        (alertDialogContext) {
+                                                                      return AlertDialog(
+                                                                        title: Text(
+                                                                            'Salvar  dados'),
+                                                                        content:
+                                                                            Text('Deseja salvar os  dados editados ?'),
+                                                                        actions: [
+                                                                          TextButton(
+                                                                            onPressed: () =>
+                                                                                Navigator.pop(alertDialogContext, false),
+                                                                            child:
+                                                                                Text('Cancelar'),
+                                                                          ),
+                                                                          TextButton(
+                                                                            onPressed: () =>
+                                                                                Navigator.pop(alertDialogContext, true),
+                                                                            child:
+                                                                                Text('Confirmar'),
+                                                                          ),
+                                                                        ],
+                                                                      );
+                                                                    },
+                                                                  ) ??
+                                                                  false;
+                                                          if (confirmDialogResponse) {
+                                                            {
+                                                              safeSetState(() =>
+                                                                  _model.isDataUploading2 =
+                                                                      true);
+                                                              var selectedUploadedFiles =
+                                                                  <FFUploadedFile>[];
+                                                              var selectedMedia =
+                                                                  <SelectedFile>[];
+                                                              var downloadUrls =
+                                                                  <String>[];
+                                                              try {
+                                                                selectedUploadedFiles =
+                                                                    _model
+                                                                        .membrosFotosFileTemp;
+                                                                selectedMedia =
+                                                                    selectedFilesFromUploadedFiles(
+                                                                  selectedUploadedFiles,
+                                                                  storageFolderPath:
+                                                                      'membros',
+                                                                  isMultiData:
+                                                                      true,
+                                                                );
+                                                                downloadUrls =
+                                                                    await uploadSupabaseStorageFiles(
+                                                                  bucketName:
+                                                                      'uploads',
+                                                                  selectedFiles:
+                                                                      selectedMedia,
+                                                                );
+                                                              } finally {
+                                                                _model.isDataUploading2 =
+                                                                    false;
+                                                              }
+                                                              if (selectedUploadedFiles
+                                                                          .length ==
+                                                                      selectedMedia
+                                                                          .length &&
+                                                                  downloadUrls
+                                                                          .length ==
+                                                                      selectedMedia
+                                                                          .length) {
+                                                                safeSetState(
+                                                                    () {
+                                                                  _model.uploadedLocalFiles2 =
+                                                                      selectedUploadedFiles;
+                                                                  _model.uploadedFileUrls2 =
+                                                                      downloadUrls;
+                                                                });
+                                                              } else {
+                                                                safeSetState(
+                                                                    () {});
+                                                                return;
+                                                              }
+                                                            }
+
+                                                            if (_model
+                                                                    .uploadImageTemp ==
+                                                                true) {
+                                                              await MembrosTable()
+                                                                  .update(
+                                                                data: {
+                                                                  'nome_completo':
+                                                                      _model
+                                                                          .txtNomeCompletoTextController
+                                                                          .text,
+                                                                  'fotos_path':
+                                                                      _model
+                                                                          .uploadedFileUrls2,
+                                                                  'alcunha': _model
+                                                                      .membrosAlcunhas,
+                                                                  'cpf': _model
+                                                                      .txtNoCpfTextController
+                                                                      .text,
+                                                                  'identidade':
+                                                                      _model
+                                                                          .txtNoIdentidadeTextController
+                                                                          .text,
+                                                                  'naturalidade':
+                                                                      _model
+                                                                          .txtMembroNaturalidadeTextController
+                                                                          .text,
+                                                                  'filiacao_mae':
+                                                                      _model
+                                                                          .txtFiliacaoMaeTextController
+                                                                          .text,
+                                                                  'filiacao_pai':
+                                                                      _model
+                                                                          .txtFiliacaoPaiTextController
+                                                                          .text,
+                                                                  'situacao_mae':
+                                                                      _model
+                                                                          .ddwSituacaoMaeValue,
+                                                                  'situacao_pai':
+                                                                      _model
+                                                                          .txtFiliacaoPaiTextController
+                                                                          .text,
+                                                                  'nivel_instrucao':
+                                                                      _model
+                                                                          .ddwNivelInstrucaoValue,
+                                                                  'estado_civil':
+                                                                      _model
+                                                                          .ddwEstadoCivilValue,
+                                                                  'membro_endereco':
+                                                                      _model
+                                                                          .membrosEnderecos,
+                                                                  'estado_id':
+                                                                      _model
+                                                                          .ddwEstadoValue,
+                                                                  'historico':
+                                                                      _model
+                                                                          .txtHistoricoTextController
+                                                                          .text,
+                                                                  'faccao_id':
+                                                                      _model
+                                                                          .ddwMembroFaccaoValue,
+                                                                  'batismo': _model
+                                                                      .txtFaccaoBastismoTextController
+                                                                      .text,
+                                                                  'batismo_local':
+                                                                      _model
+                                                                          .txtFacaoLocalBastismoTextController
+                                                                          .text,
+                                                                  'padrinho': _model
+                                                                      .txtMembrosFaccaoPadrinhoTextController
+                                                                      .text,
+                                                                  'faccao_senha':
+                                                                      _model
+                                                                          .txtMembroFaccaoSenhaTextController
+                                                                          .text,
+                                                                  'cargo_id': _model
+                                                                      .ddwMembroFaccaoCargoAtualValue,
+                                                                  'funcao_id':
+                                                                      _model
+                                                                          .ddwFaccaoFuncaoAtualValue,
+                                                                  'cargo_ant_id':
+                                                                      _model
+                                                                          .ddwMembroFaccaoCargoAnteriorValue,
+                                                                  'faccao_inimiga':
+                                                                      _model
+                                                                          .ddwFaccaoInimigaValue,
+                                                                  'faccao_aliada':
+                                                                      _model
+                                                                          .ddwFaccaoAliadaValue,
+                                                                  'nacionalidade':
+                                                                      _model
+                                                                          .rbNacionalidadeValue,
+                                                                  'funcao_ant_id':
+                                                                      _model
+                                                                          .ddwFaccaoFuncaoAnteriorValue,
+                                                                  'faccao_integrou':
+                                                                      _model
+                                                                          .ddwFaccaoIntegrouValue,
+                                                                  'municipio_id':
+                                                                      _model
+                                                                          .ddwMunicipioValue,
+                                                                  'infopen': _model
+                                                                      .txtNoInfopenTextController
+                                                                      .text,
+                                                                  'tres_ultimo_locais_preso':
+                                                                      _model
+                                                                          .membrosFaccaoTresLocais,
+                                                                  'alerta': _model
+                                                                      .switchAlertaValue,
+                                                                  'atuacao_crime':
+                                                                      _model
+                                                                          .txtMembroAtuacaoTextController
+                                                                          .text,
+                                                                  'validacao_precentual':
+                                                                      _model
+                                                                          .membrosPercetualValidacao,
+                                                                  'validacoes':
+                                                                      _model
+                                                                          .choiceChipsValidacoesValues,
+                                                                  'coordenadas':
+                                                                      functions.convertLatLngListToStringList(_model
+                                                                          .membrosLatLng
+                                                                          .toList()),
+                                                                  'membroLngLat':
+                                                                      functions.convertLatLngToDouble(_model
+                                                                          .membrosLatLng
+                                                                          .toList()),
+                                                                  'identidade_orgao':
+                                                                      _model
+                                                                          .ddwOrgaoExpedidorValue,
+                                                                  'alerta_observacao':
+                                                                      _model
+                                                                          .txtMembroAlertaTextController
+                                                                          .text,
+                                                                },
+                                                                matchingRows:
+                                                                    (rows) => rows
+                                                                        .eqOrNull(
+                                                                  'membro_id',
+                                                                  widget!
+                                                                      .membrosRow
+                                                                      ?.membroId,
+                                                                ),
+                                                              );
+                                                              _shouldSetState =
+                                                                  true;
+                                                            } else {
+                                                              await MembrosTable()
+                                                                  .update(
+                                                                data: {
+                                                                  'nome_completo':
+                                                                      _model
+                                                                          .txtNomeCompletoTextController
+                                                                          .text,
+                                                                  'fotos_path':
+                                                                      _model
+                                                                          .membrosFotoPathEdit,
+                                                                  'alcunha': _model
+                                                                      .membrosAlcunhas,
+                                                                  'cpf': _model
+                                                                      .txtNoCpfTextController
+                                                                      .text,
+                                                                  'identidade':
+                                                                      _model
+                                                                          .txtNoIdentidadeTextController
+                                                                          .text,
+                                                                  'naturalidade':
+                                                                      _model
+                                                                          .txtMembroNaturalidadeTextController
+                                                                          .text,
+                                                                  'filiacao_mae':
+                                                                      _model
+                                                                          .txtFiliacaoMaeTextController
+                                                                          .text,
+                                                                  'filiacao_pai':
+                                                                      _model
+                                                                          .txtFiliacaoPaiTextController
+                                                                          .text,
+                                                                  'situacao_mae':
+                                                                      _model
+                                                                          .ddwSituacaoMaeValue,
+                                                                  'situacao_pai':
+                                                                      _model
+                                                                          .txtFiliacaoPaiTextController
+                                                                          .text,
+                                                                  'nivel_instrucao':
+                                                                      _model
+                                                                          .ddwNivelInstrucaoValue,
+                                                                  'estado_civil':
+                                                                      _model
+                                                                          .ddwEstadoCivilValue,
+                                                                  'membro_endereco':
+                                                                      _model
+                                                                          .membrosEnderecos,
+                                                                  'estado_id':
+                                                                      _model
+                                                                          .ddwEstadoValue,
+                                                                  'historico':
+                                                                      _model
+                                                                          .txtHistoricoTextController
+                                                                          .text,
+                                                                  'faccao_id':
+                                                                      valueOrDefault<
+                                                                          int>(
+                                                                    _model.ddwMembroFaccaoValue !=
+                                                                            null
+                                                                        ? _model
+                                                                            .ddwMembroFaccaoValue
+                                                                        : valueOrDefault<
+                                                                            int>(
+                                                                            widget!.membrosRow?.funcaoId,
+                                                                            0,
+                                                                          ),
+                                                                    0,
+                                                                  ),
+                                                                  'batismo': _model
+                                                                      .txtFaccaoBastismoTextController
+                                                                      .text,
+                                                                  'batismo_local':
+                                                                      _model
+                                                                          .txtFacaoLocalBastismoTextController
+                                                                          .text,
+                                                                  'padrinho': _model
+                                                                      .txtMembrosFaccaoPadrinhoTextController
+                                                                      .text,
+                                                                  'faccao_senha':
+                                                                      _model
+                                                                          .txtMembroFaccaoSenhaTextController
+                                                                          .text,
+                                                                  'cargo_id': _model
+                                                                      .ddwMembroFaccaoCargoAtualValue,
+                                                                  'funcao_id':
+                                                                      _model
+                                                                          .ddwFaccaoFuncaoAtualValue,
+                                                                  'cargo_ant_id':
+                                                                      _model
+                                                                          .ddwMembroFaccaoCargoAnteriorValue,
+                                                                  'faccao_inimiga':
+                                                                      _model
+                                                                          .ddwFaccaoInimigaValue,
+                                                                  'faccao_aliada':
+                                                                      _model
+                                                                          .ddwFaccaoAliadaValue,
+                                                                  'nacionalidade':
+                                                                      _model
+                                                                          .rbNacionalidadeValue,
+                                                                  'funcao_ant_id':
+                                                                      _model
+                                                                          .ddwFaccaoFuncaoAnteriorValue,
+                                                                  'faccao_integrou':
+                                                                      _model
+                                                                          .ddwFaccaoIntegrouValue,
+                                                                  'municipio_id':
+                                                                      _model
+                                                                          .ddwMunicipioValue,
+                                                                  'infopen': _model
+                                                                      .txtNoInfopenTextController
+                                                                      .text,
+                                                                  'tres_ultimo_locais_preso':
+                                                                      _model
+                                                                          .membrosFaccaoTresLocais,
+                                                                  'alerta': _model
+                                                                      .switchAlertaValue,
+                                                                  'atuacao_crime':
+                                                                      _model
+                                                                          .txtMembroAtuacaoTextController
+                                                                          .text,
+                                                                  'validacao_precentual':
+                                                                      _model
+                                                                          .membrosPercetualValidacao,
+                                                                  'validacoes':
+                                                                      _model
+                                                                          .choiceChipsValidacoesValues,
+                                                                  'coordenadas':
+                                                                      functions.convertLatLngListToStringList(_model
+                                                                          .membrosLatLng
+                                                                          .toList()),
+                                                                  'membroLngLat':
+                                                                      functions.convertLatLngToDouble(_model
+                                                                          .membrosLatLng
+                                                                          .toList()),
+                                                                  'identidade_orgao':
+                                                                      _model
+                                                                          .ddwOrgaoExpedidorValue,
+                                                                  'alerta_observacao':
+                                                                      _model
+                                                                          .txtMembroAlertaTextController
+                                                                          .text,
+                                                                },
+                                                                matchingRows:
+                                                                    (rows) => rows
+                                                                        .eqOrNull(
+                                                                  'membro_id',
+                                                                  widget!
+                                                                      .membrosRow
+                                                                      ?.membroId,
+                                                                ),
+                                                              );
+                                                              _shouldSetState =
+                                                                  true;
+                                                            }
+
+                                                            await Future.delayed(
+                                                                const Duration(
+                                                                    milliseconds:
+                                                                        100));
+                                                            await Future.wait([
+                                                              Future(() async {
+                                                                if (_model
+                                                                        .membrosProcedimentos
+                                                                        .length >=
+                                                                    1) {
+                                                                  _model.membrosProcedimentosCount =
+                                                                      -1;
+                                                                  safeSetState(
+                                                                      () {});
+                                                                  while (_model
+                                                                          .membrosProcedimentosCount! <=
+                                                                      _model
+                                                                          .membrosProcedimentos
+                                                                          .length) {
+                                                                    _model.membrosProcedimentosCount =
+                                                                        _model.membrosProcedimentosCount! +
+                                                                            1;
+                                                                    safeSetState(
+                                                                        () {});
+                                                                    _model.apiResultProcedimentosEdit =
+                                                                        await ProcedimentosAddCall
+                                                                            .call(
+                                                                      membroId: _model
+                                                                          .retMembrosEdit?[
+                                                                              _model.membrosProcedimentosCount!]
+                                                                          ?.membroId,
+                                                                      procedimentoNo: _model
+                                                                          .membrosProcedimentos[
+                                                                              _model.membrosProcedimentosCount!]
+                                                                          .procedimentoNo,
+                                                                      unidade: _model
+                                                                          .membrosProcedimentos[
+                                                                              _model.membrosProcedimentosCount!]
+                                                                          .unidade,
+                                                                      procedimentoTipo: _model
+                                                                          .membrosProcedimentos[
+                                                                              _model.membrosProcedimentosCount!]
+                                                                          .procedimentoTipo,
+                                                                      crime: _model
+                                                                          .membrosProcedimentos[
+                                                                              _model.membrosProcedimentosCount!]
+                                                                          .crime,
+                                                                      data:
+                                                                          dateTimeFormat(
+                                                                        "d/M/y",
+                                                                        _model
+                                                                            .membrosProcedimentos[_model.membrosProcedimentosCount!]
+                                                                            .data,
+                                                                        locale:
+                                                                            FFLocalizations.of(context).languageCode,
+                                                                      ),
+                                                                    );
+
+                                                                    _shouldSetState =
+                                                                        true;
+                                                                    if ((_model
+                                                                            .apiResultProcedimentosEdit
+                                                                            ?.succeeded ??
+                                                                        true)) {
+                                                                      ScaffoldMessenger.of(
+                                                                              context)
+                                                                          .clearSnackBars();
+                                                                      ScaffoldMessenger.of(
+                                                                              context)
+                                                                          .showSnackBar(
+                                                                        SnackBar(
+                                                                          content:
+                                                                              Text(
+                                                                            'Dados dos procedimentos salvos !',
+                                                                            style:
+                                                                                TextStyle(
+                                                                              color: FlutterFlowTheme.of(context).primaryText,
+                                                                            ),
+                                                                          ),
+                                                                          duration:
+                                                                              Duration(milliseconds: 1000),
+                                                                          backgroundColor:
+                                                                              FlutterFlowTheme.of(context).success,
+                                                                        ),
+                                                                      );
+                                                                    }
+                                                                  }
+                                                                } else {
+                                                                  if (_shouldSetState)
+                                                                    safeSetState(
+                                                                        () {});
+                                                                  return;
+                                                                }
+                                                              }),
+                                                              Future(() async {
+                                                                if (_model
+                                                                        .membrosProcessos
+                                                                        .length >=
+                                                                    1) {
+                                                                  _model.membrosProcessosCount =
+                                                                      -1;
+                                                                  safeSetState(
+                                                                      () {});
+                                                                  while (_model
+                                                                          .membrosProcessosCount! <=
+                                                                      _model
+                                                                          .membrosProcessos
+                                                                          .length) {
+                                                                    _model.membrosProcessosCount =
+                                                                        _model.membrosProcessosCount! +
+                                                                            1;
+                                                                    safeSetState(
+                                                                        () {});
+                                                                    _model.apiResultProcessosEdit =
+                                                                        await ProcessosAddCall
+                                                                            .call(
+                                                                      membroId: _model
+                                                                          .retMembrosEdit?[
+                                                                              _model.membrosProcessosCount!]
+                                                                          ?.membroId,
+                                                                      acaoPenalNo: _model
+                                                                          .membrosProcessos[
+                                                                              _model.membrosProcessosCount!]
+                                                                          .noAcaoPenal,
+                                                                      vara: _model
+                                                                          .membrosProcessos[
+                                                                              _model.membrosProcessosCount!]
+                                                                          .vara,
+                                                                      situacaoJuridica: _model
+                                                                          .membrosProcessos[
+                                                                              _model.membrosProcessosCount!]
+                                                                          .situacaoJuridica,
+                                                                      regime: _model
+                                                                          .membrosProcessos[
+                                                                              _model.membrosProcessosCount!]
+                                                                          .regime,
+                                                                      situacaoReu: _model
+                                                                          .membrosProcessos[
+                                                                              _model.membrosProcessosCount!]
+                                                                          .situacaoReu,
+                                                                    );
+
+                                                                    _shouldSetState =
+                                                                        true;
+                                                                    if ((_model
+                                                                            .apiResultProcessosEdit
+                                                                            ?.succeeded ??
+                                                                        true)) {
+                                                                      ScaffoldMessenger.of(
+                                                                              context)
+                                                                          .clearSnackBars();
+                                                                      ScaffoldMessenger.of(
+                                                                              context)
+                                                                          .showSnackBar(
+                                                                        SnackBar(
+                                                                          content:
+                                                                              Text(
+                                                                            'Dados dos processos salvos !',
+                                                                            style:
+                                                                                TextStyle(
+                                                                              color: FlutterFlowTheme.of(context).primaryText,
+                                                                            ),
+                                                                          ),
+                                                                          duration:
+                                                                              Duration(milliseconds: 4000),
+                                                                          backgroundColor:
+                                                                              FlutterFlowTheme.of(context).success,
+                                                                        ),
+                                                                      );
+                                                                    }
+                                                                  }
+                                                                } else {
+                                                                  if (_shouldSetState)
+                                                                    safeSetState(
+                                                                        () {});
+                                                                  return;
+                                                                }
+                                                              }),
+                                                            ]);
+                                                            await showDialog(
+                                                              context: context,
+                                                              builder:
+                                                                  (alertDialogContext) {
+                                                                return AlertDialog(
+                                                                  title: Text(
+                                                                      'Editar membro'),
+                                                                  content: Text(
+                                                                      'Dados editados com sucesso !'),
+                                                                  actions: [
+                                                                    TextButton(
+                                                                      onPressed:
+                                                                          () =>
+                                                                              Navigator.pop(alertDialogContext),
+                                                                      child: Text(
+                                                                          'Ok'),
+                                                                    ),
+                                                                  ],
+                                                                );
+                                                              },
+                                                            );
+                                                          } else {
+                                                            if (_shouldSetState)
+                                                              safeSetState(
+                                                                  () {});
+                                                            return;
+                                                          }
+
+                                                          Navigator.pop(
+                                                              context);
+
+                                                          context.pushNamed(
+                                                              'main_membros');
+
+                                                          if (_shouldSetState)
+                                                            safeSetState(() {});
                                                         },
                                                         text:
                                                             FFLocalizations.of(

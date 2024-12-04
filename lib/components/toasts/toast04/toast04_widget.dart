@@ -9,7 +9,16 @@ import 'toast04_model.dart';
 export 'toast04_model.dart';
 
 class Toast04Widget extends StatefulWidget {
-  const Toast04Widget({super.key});
+  const Toast04Widget({
+    super.key,
+    String? toast04Titulo,
+    String? toast04Notificacao,
+  })  : this.toast04Titulo = toast04Titulo ?? 'Título da notificação',
+        this.toast04Notificacao = toast04Notificacao ??
+            'Alguma cópia do corpo que está presente nesta pequena notificação.';
+
+  final String toast04Titulo;
+  final String toast04Notificacao;
 
   @override
   State<Toast04Widget> createState() => _Toast04WidgetState();
@@ -84,9 +93,7 @@ class _Toast04WidgetState extends State<Toast04Widget> {
                         ),
                       ),
                       Text(
-                        FFLocalizations.of(context).getText(
-                          'ozz9h0eu' /* Notification Title */,
-                        ),
+                        widget!.toast04Titulo,
                         style: FlutterFlowTheme.of(context).titleSmall.override(
                               fontFamily:
                                   FlutterFlowTheme.of(context).titleSmallFamily,
@@ -99,9 +106,7 @@ class _Toast04WidgetState extends State<Toast04Widget> {
                     ].divide(SizedBox(width: 8.0)),
                   ),
                   Text(
-                    FFLocalizations.of(context).getText(
-                      'a87zklx8' /* Some body copy that is present... */,
-                    ),
+                    widget!.toast04Notificacao,
                     style: FlutterFlowTheme.of(context).labelMedium.override(
                           fontFamily:
                               FlutterFlowTheme.of(context).labelMediumFamily,

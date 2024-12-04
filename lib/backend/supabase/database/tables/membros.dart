@@ -142,4 +142,12 @@ class MembrosRow extends SupabaseDataRow {
 
   int? get identidadeOrgao => getField<int>('identidade_orgao');
   set identidadeOrgao(int? value) => setField<int>('identidade_orgao', value);
+
+  List<double> get membroLngLat => getListField<double>('membroLngLat');
+  set membroLngLat(List<double>? value) =>
+      setListField<double>('membroLngLat', value);
+
+  String? get alertaObservacao => getField<String>('alerta_observacao');
+  set alertaObservacao(String? value) =>
+      setField<String>('alerta_observacao', value);
 }

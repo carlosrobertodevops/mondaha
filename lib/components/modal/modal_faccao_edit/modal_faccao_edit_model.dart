@@ -1,4 +1,5 @@
 import '/backend/supabase/supabase.dart';
+import '/components/toasts/toast04/toast04_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -36,7 +37,18 @@ class ModalFaccaoEditModel extends FlutterFlowModel<ModalFaccaoEditWidget> {
       BuildContext context, String? val) {
     if (val == null || val.isEmpty) {
       return FFLocalizations.of(context).getText(
-        'yg28k56i' /* Please enter a project name... */,
+        'yg28k56i' /* Please enter a faction name... */,
+      );
+    }
+
+    if (val.length < 2) {
+      return FFLocalizations.of(context).getText(
+        '2bgiqjty' /* Minimum of 2 characters entere... */,
+      );
+    }
+    if (val.length > 50) {
+      return FFLocalizations.of(context).getText(
+        'ysfp5vt3' /* More than 50 characters typed */,
       );
     }
 
@@ -65,7 +77,9 @@ class ModalFaccaoEditModel extends FlutterFlowModel<ModalFaccaoEditWidget> {
   String uploadedFileUrl2 = '';
 
   // Stores action output result for [Backend Call - Update Row(s)] action in Button widget.
-  List<FaccoesRow>? outputFaccaoEdit;
+  List<FaccoesRow>? outputFaccaoFileEdit;
+  // Stores action output result for [Backend Call - Update Row(s)] action in Button widget.
+  List<FaccoesRow>? outputFaccaoPathEdit;
 
   @override
   void initState(BuildContext context) {

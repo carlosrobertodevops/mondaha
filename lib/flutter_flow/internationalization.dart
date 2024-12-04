@@ -498,69 +498,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'pt': '__',
     },
   },
-  // project_details_health_ai
-  {
-    'mxf4vrjw': {
-      'en': 'HealthAi',
-      'pt': 'SaúdeAi',
-    },
-    'wsgonkz2': {
-      'en': 'Client Acquisition for Q3',
-      'pt': 'Aquisição de clientes para o terceiro trimestre',
-    },
-    'ynyuwhqo': {
-      'en': 'Next Action',
-      'pt': 'Próxima ação',
-    },
-    'zk7z07v0': {
-      'en': 'Tuesday, 10:00am',
-      'pt': 'Terça-feira, 10:00 da manhã',
-    },
-    'xmahzs1v': {
-      'en': 'In Progress',
-      'pt': 'Em andamento',
-    },
-    'ry6jvd0g': {
-      'en': 'Contract Details',
-      'pt': 'Detalhes do contrato',
-    },
-    'hu32scl5': {
-      'en': '\$125,000',
-      'pt': '\$ 125.000',
-    },
-    'sfu6o269': {
-      'en':
-          'Additional Details around this contract and who is working on it in this card!',
-      'pt':
-          'Detalhes adicionais sobre este contrato e quem está trabalhando nele neste card!',
-    },
-    '5sv9a4ka': {
-      'en': 'Mark as Complete',
-      'pt': 'Marcar como concluído',
-    },
-    'rrgcwkj1': {
-      'en': 'Contract Details',
-      'pt': 'Detalhes do contrato',
-    },
-    '8bwk4oui': {
-      'en': '\$67,000',
-      'pt': '\$ 67.000',
-    },
-    'p2hoxaq9': {
-      'en':
-          'Additional Details around this contract and who is working on it in this card!',
-      'pt':
-          'Detalhes adicionais sobre este contrato e quem está trabalhando nele neste card!',
-    },
-    'ww95wm3k': {
-      'en': 'Mark as Complete',
-      'pt': 'Marcar como concluído',
-    },
-    '54l7ivhw': {
-      'en': 'Home',
-      'pt': 'Lar',
-    },
-  },
   // project_details
   {
     'c0s3jdsy': {
@@ -1411,8 +1348,16 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'pt': 'Salvar',
     },
     '4spmowtt': {
-      'en': 'Please enter a project name...',
-      'pt': 'Por favor, insira um nome de projeto...',
+      'en': 'Please enter a faction name...',
+      'pt': 'Por favor, insira um nome de facção...',
+    },
+    'k8todo97': {
+      'en': 'Minimum of 2 characters entered',
+      'pt': 'Mínimo de 2 caracteres inseridos',
+    },
+    'i135rulk': {
+      'en': 'More than 50 characters typed',
+      'pt': 'Mais de 50 caracteres digitados',
     },
     '32kj9709': {
       'en': 'Please choose an option from the dropdown',
@@ -2898,9 +2843,33 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Save',
       'pt': 'Salvar',
     },
+    '6q6ela0n': {
+      'en': 'Factons',
+      'pt': 'Facções',
+    },
+    '8cm49dh7': {
+      'en': 'Information saved successfully!',
+      'pt': 'Informações salvas com sucesso !',
+    },
+    'e3wa81po': {
+      'en': 'Factons',
+      'pt': 'Facções',
+    },
+    'dd30lzu8': {
+      'en': 'Information saved successfully!',
+      'pt': 'Informações salvas com sucesso !',
+    },
     'yg28k56i': {
-      'en': 'Please enter a project name...',
-      'pt': 'Por favor, insira um nome de projeto...',
+      'en': 'Please enter a faction name...',
+      'pt': 'Por favor, insira um nome de facção...',
+    },
+    '2bgiqjty': {
+      'en': 'Minimum of 2 characters entered',
+      'pt': 'Mínimo de 2 caracteres inseridos',
+    },
+    'ysfp5vt3': {
+      'en': 'More than 50 characters typed',
+      'pt': 'Mais de 50 caracteres digitados',
     },
     '59ol7bwt': {
       'en': 'Please choose an option from the dropdown',
@@ -3122,18 +3091,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
           'Alguma cópia do corpo que está presente nesta pequena notificação.',
     },
   },
-  // Toast04
-  {
-    'ozz9h0eu': {
-      'en': 'Notification Title',
-      'pt': 'Título da notificação',
-    },
-    'a87zklx8': {
-      'en': 'Some body copy that is present in this small notification.',
-      'pt':
-          'Alguma cópia do corpo que está presente nesta pequena notificação.',
-    },
-  },
   // Toast02
   {
     'rve5awza': {
@@ -3179,9 +3136,9 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '6p82su46': {
       'en':
-          'Add one or more images about the Member.\nMaximum of 6 (six) images.',
+          'Edit one or more images about the Member.\nMaximum of 6 (six) images.',
       'pt':
-          'Adicione uma ou mais imagens sobre o Membro. \nNo máximo de 6 (seis) imagens.',
+          'Edite uma ou mais imagens sobre o Membro. \nNo máximo de 6 (seis) imagens.',
     },
     '8o65ypej': {
       'en': 'Apagar Fotos',
@@ -3677,6 +3634,14 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Facção Inimiga',
       'pt': 'Facção Inimiga',
     },
+    'lnqhc09w': {
+      'en': 'Faction',
+      'pt': 'Facção',
+    },
+    'tik2j8uw': {
+      'en': 'Member Faction not informed',
+      'pt': 'Membro Facção não informado',
+    },
     'yq89rx0y': {
       'en': 'Field is required',
       'pt': 'Campo é obrigatório!',
@@ -4118,179 +4083,35 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'pt': 'Salvar Membro',
     },
   },
-  // modal_membros_edit_testes
+  // user_details_membro_view
   {
-    '9pnkgty8': {
-      'en': 'Edit Member',
-      'pt': 'Editar membro',
+    '90wvcqaa': {
+      'en': 'Full Name',
+      'pt': 'Nome completo',
     },
-    'o1zk495g': {
-      'en': 'TextField',
-      'pt': '',
+    'canze480': {
+      'en': 'Alert',
+      'pt': 'Alerta',
     },
-    'epcexdlu': {
-      'en': 'TextField',
-      'pt': '',
+    'iddqb69y': {
+      'en': 'Nike name',
+      'pt': 'Alcunha',
     },
-    '1wts0z6h': {
-      'en': 'TextField',
-      'pt': '',
+    'jru5al7u': {
+      'en': 'Faction',
+      'pt': 'Facção',
     },
-    'h3sifahr': {
-      'en': 'TextField',
-      'pt': '',
+    'e4b6j4nl': {
+      'en': 'Dates',
+      'pt': 'Dados',
     },
-    '73j5i6tr': {
-      'en': 'TextField',
-      'pt': '',
+    '9sgyajs5': {
+      'en': 'Historic',
+      'pt': 'Histórico',
     },
-    'o92kmb95': {
-      'en': 'TextField',
-      'pt': '',
-    },
-    '3kr4xgpj': {
-      'en': 'TextField',
-      'pt': '',
-    },
-    '8tgrxq03': {
-      'en': 'TextField',
-      'pt': '',
-    },
-    'v035rycd': {
-      'en': 'TextField',
-      'pt': '',
-    },
-    '7yx3izhl': {
-      'en': 'TextField',
-      'pt': '',
-    },
-    'lfgegldy': {
-      'en': 'TextField',
-      'pt': '',
-    },
-    'yauolzz9': {
-      'en': 'TextField',
-      'pt': '',
-    },
-    'x8iduyfy': {
-      'en': 'TextField',
-      'pt': '',
-    },
-    'zd06y2vp': {
-      'en': 'TextField',
-      'pt': '',
-    },
-    'aidm3d4l': {
-      'en': 'TextField',
-      'pt': '',
-    },
-    'qhkcwfn6': {
-      'en': 'TextField',
-      'pt': '',
-    },
-    'hxbh9x9b': {
-      'en': 'TextField',
-      'pt': '',
-    },
-    'b89ztsz7': {
-      'en': 'TextField',
-      'pt': '',
-    },
-    '078ynkx4': {
-      'en': 'TextField',
-      'pt': '',
-    },
-    '67x6pefd': {
-      'en': 'TextField',
-      'pt': '',
-    },
-    '5vfisjsu': {
-      'en': 'TextField',
-      'pt': '',
-    },
-    'ecy99p8q': {
-      'en': 'TextField',
-      'pt': '',
-    },
-    'za05ib0r': {
-      'en': 'TextField',
-      'pt': '',
-    },
-    'dset6m38': {
-      'en': 'TextField',
-      'pt': '',
-    },
-    'wtpgawre': {
-      'en': 'TextField',
-      'pt': '',
-    },
-    '1w78rn3o': {
-      'en': 'TextField',
-      'pt': '',
-    },
-    '9jrzfhdz': {
-      'en': 'TextField',
-      'pt': '',
-    },
-    'ikdwca28': {
-      'en': 'TextField',
-      'pt': '',
-    },
-    '2o5rd92p': {
-      'en': 'TextField',
-      'pt': '',
-    },
-    'lhgg7ddq': {
-      'en': 'TextField',
-      'pt': '',
-    },
-    'dq9v91tc': {
-      'en': 'TextField',
-      'pt': '',
-    },
-    'uampxpi7': {
-      'en': 'TextField',
-      'pt': '',
-    },
-    'yfv23lsn': {
-      'en': 'TextField',
-      'pt': '',
-    },
-    'g3mzgu4l': {
-      'en': 'TextField',
-      'pt': '',
-    },
-    'h33zu0lq': {
-      'en': 'TextField',
-      'pt': '',
-    },
-    'pyizhygb': {
-      'en': 'TextField',
-      'pt': '',
-    },
-    '17eguora': {
-      'en': 'TextField',
-      'pt': '',
-    },
-    '993nwzmd': {
-      'en': 'TextField',
-      'pt': '',
-    },
-    'okb1ok4b': {
-      'en': 'TextField',
-      'pt': '',
-    },
-    '7x4g6frl': {
-      'en': 'TextField',
-      'pt': '',
-    },
-    'lekc2ylz': {
-      'en': 'Cancel',
-      'pt': 'Cancelar',
-    },
-    '9d9it6ua': {
-      'en': 'Save Member',
-      'pt': 'Salvar Membro',
+    'g7txvjhx': {
+      'en': 'Direcciones',
+      'pt': 'Endereços',
     },
   },
   // Miscellaneous

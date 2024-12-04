@@ -354,3 +354,22 @@ List<LatLng> convertStringsListToLngLatList(List<String> stringList) {
   // Retorna a lista de LatLng.
   return latLngList;
 }
+
+List<LatLng> convertDoubleToLatLng(List<double> doubles) {
+  List<LatLng> latLngList = [];
+  for (int i = 0; i < doubles.length; i += 2) {
+    if (i + 1 < doubles.length) {
+      latLngList.add(LatLng(doubles[i], doubles[i + 1]));
+    }
+  }
+  return latLngList;
+}
+
+List<double> convertLatLngToDouble(List<LatLng> latLngList) {
+  List<double> doubleList = [];
+  for (var latLng in latLngList) {
+    doubleList.add(latLng.latitude);
+    doubleList.add(latLng.longitude);
+  }
+  return doubleList;
+}

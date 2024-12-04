@@ -1,4 +1,5 @@
 import '/backend/supabase/supabase.dart';
+import '/components/toasts/toast04/toast04_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -606,180 +607,257 @@ class _ModalFaccaoEditWidgetState extends State<ModalFaccaoEditWidget>
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
-                                FFButtonWidget(
-                                  onPressed: () async {
-                                    logFirebaseEvent(
-                                        'MODAL_FACCAO_EDIT_COMP_SAVE_BTN_ON_TAP');
-                                    var confirmDialogResponse =
-                                        await showDialog<bool>(
-                                              context: context,
-                                              builder: (alertDialogContext) {
-                                                return AlertDialog(
-                                                  title: Text('SALVAR'),
-                                                  content: Text(
-                                                      'Deseja SALVAR os dados alterados ?'),
-                                                  actions: [
-                                                    TextButton(
-                                                      onPressed: () =>
-                                                          Navigator.pop(
-                                                              alertDialogContext,
-                                                              false),
-                                                      child: Text('Cancelar'),
-                                                    ),
-                                                    TextButton(
-                                                      onPressed: () =>
-                                                          Navigator.pop(
-                                                              alertDialogContext,
-                                                              true),
-                                                      child: Text('Confirmar'),
-                                                    ),
-                                                  ],
-                                                );
-                                              },
-                                            ) ??
-                                            false;
-                                    if (confirmDialogResponse) {
-                                      {
-                                        safeSetState(() =>
-                                            _model.isDataUploading2 = true);
-                                        var selectedUploadedFiles =
-                                            <FFUploadedFile>[];
-                                        var selectedMedia = <SelectedFile>[];
-                                        var downloadUrls = <String>[];
-                                        try {
-                                          showUploadMessage(
-                                            context,
-                                            'Uploading file...',
-                                            showLoading: true,
+                                Builder(
+                                  builder: (context) => FFButtonWidget(
+                                    onPressed: () async {
+                                      logFirebaseEvent(
+                                          'MODAL_FACCAO_EDIT_COMP_SAVE_BTN_ON_TAP');
+                                      var confirmDialogResponse =
+                                          await showDialog<bool>(
+                                                context: context,
+                                                builder: (alertDialogContext) {
+                                                  return AlertDialog(
+                                                    title: Text('SALVAR'),
+                                                    content: Text(
+                                                        'Deseja SALVAR os dados alterados ?'),
+                                                    actions: [
+                                                      TextButton(
+                                                        onPressed: () =>
+                                                            Navigator.pop(
+                                                                alertDialogContext,
+                                                                false),
+                                                        child: Text('Cancelar'),
+                                                      ),
+                                                      TextButton(
+                                                        onPressed: () =>
+                                                            Navigator.pop(
+                                                                alertDialogContext,
+                                                                true),
+                                                        child:
+                                                            Text('Confirmar'),
+                                                      ),
+                                                    ],
+                                                  );
+                                                },
+                                              ) ??
+                                              false;
+                                      if (confirmDialogResponse) {
+                                        if (_model.uploadImagemTemp == true) {
+                                          {
+                                            safeSetState(() =>
+                                                _model.isDataUploading2 = true);
+                                            var selectedUploadedFiles =
+                                                <FFUploadedFile>[];
+                                            var selectedMedia =
+                                                <SelectedFile>[];
+                                            var downloadUrls = <String>[];
+                                            try {
+                                              showUploadMessage(
+                                                context,
+                                                'Uploading file...',
+                                                showLoading: true,
+                                              );
+                                              selectedUploadedFiles = _model
+                                                      .uploadedLocalFile1
+                                                      .bytes!
+                                                      .isNotEmpty
+                                                  ? [_model.uploadedLocalFile1]
+                                                  : <FFUploadedFile>[];
+                                              selectedMedia =
+                                                  selectedFilesFromUploadedFiles(
+                                                selectedUploadedFiles,
+                                                storageFolderPath: 'faccoes',
+                                              );
+                                              downloadUrls =
+                                                  await uploadSupabaseStorageFiles(
+                                                bucketName: 'uploads',
+                                                selectedFiles: selectedMedia,
+                                              );
+                                            } finally {
+                                              ScaffoldMessenger.of(context)
+                                                  .hideCurrentSnackBar();
+                                              _model.isDataUploading2 = false;
+                                            }
+                                            if (selectedUploadedFiles.length ==
+                                                    selectedMedia.length &&
+                                                downloadUrls.length ==
+                                                    selectedMedia.length) {
+                                              safeSetState(() {
+                                                _model.uploadedLocalFile2 =
+                                                    selectedUploadedFiles.first;
+                                                _model.uploadedFileUrl2 =
+                                                    downloadUrls.first;
+                                              });
+                                              showUploadMessage(
+                                                  context, 'Success!');
+                                            } else {
+                                              safeSetState(() {});
+                                              showUploadMessage(context,
+                                                  'Failed to upload data');
+                                              return;
+                                            }
+                                          }
+
+                                          _model.outputFaccaoFileEdit =
+                                              await FaccoesTable().update(
+                                            data: {
+                                              'nome': _model
+                                                  .txtNomeFaccaoTextController
+                                                  .text,
+                                              'descricao': _model
+                                                  .txtDescriptionTextController
+                                                  .text,
+                                              'imagem_path':
+                                                  _model.uploadedFileUrl2,
+                                            },
+                                            matchingRows: (rows) =>
+                                                rows.eqOrNull(
+                                              'faccao_id',
+                                              widget!.faccaoRow?.faccaoId,
+                                            ),
+                                            returnRows: true,
                                           );
-                                          selectedUploadedFiles = _model
-                                                  .uploadedLocalFile1
-                                                  .bytes!
-                                                  .isNotEmpty
-                                              ? [_model.uploadedLocalFile1]
-                                              : <FFUploadedFile>[];
-                                          selectedMedia =
-                                              selectedFilesFromUploadedFiles(
-                                            selectedUploadedFiles,
-                                            storageFolderPath: 'faccoes',
+                                          Navigator.pop(context);
+
+                                          context.pushNamed('main_faccoes');
+
+                                          await showDialog(
+                                            context: context,
+                                            builder: (dialogContext) {
+                                              return Dialog(
+                                                elevation: 0,
+                                                insetPadding: EdgeInsets.zero,
+                                                backgroundColor:
+                                                    Colors.transparent,
+                                                alignment: AlignmentDirectional(
+                                                        0.0, 0.0)
+                                                    .resolve(Directionality.of(
+                                                        context)),
+                                                child: Toast04Widget(
+                                                  toast04Titulo:
+                                                      FFLocalizations.of(
+                                                              context)
+                                                          .getText(
+                                                    'e3wa81po' /* Factons */,
+                                                  ),
+                                                  toast04Notificacao:
+                                                      FFLocalizations.of(
+                                                              context)
+                                                          .getText(
+                                                    'dd30lzu8' /* Information saved successfully... */,
+                                                  ),
+                                                ),
+                                              );
+                                            },
                                           );
-                                          downloadUrls =
-                                              await uploadSupabaseStorageFiles(
-                                            bucketName: 'uploads',
-                                            selectedFiles: selectedMedia,
-                                          );
-                                        } finally {
-                                          ScaffoldMessenger.of(context)
-                                              .hideCurrentSnackBar();
-                                          _model.isDataUploading2 = false;
-                                        }
-                                        if (selectedUploadedFiles.length ==
-                                                selectedMedia.length &&
-                                            downloadUrls.length ==
-                                                selectedMedia.length) {
-                                          safeSetState(() {
-                                            _model.uploadedLocalFile2 =
-                                                selectedUploadedFiles.first;
-                                            _model.uploadedFileUrl2 =
-                                                downloadUrls.first;
-                                          });
-                                          showUploadMessage(
-                                              context, 'Success!');
+
+                                          await Future.delayed(const Duration(
+                                              milliseconds: 1000));
                                         } else {
-                                          safeSetState(() {});
-                                          showUploadMessage(
-                                              context, 'Failed to upload data');
-                                          return;
+                                          _model.outputFaccaoPathEdit =
+                                              await FaccoesTable().update(
+                                            data: {
+                                              'nome': _model
+                                                  .txtNomeFaccaoTextController
+                                                  .text,
+                                              'descricao': _model
+                                                  .txtDescriptionTextController
+                                                  .text,
+                                            },
+                                            matchingRows: (rows) =>
+                                                rows.eqOrNull(
+                                              'faccao_id',
+                                              widget!.faccaoRow?.faccaoId,
+                                            ),
+                                            returnRows: true,
+                                          );
+                                          Navigator.pop(context);
+
+                                          context.pushNamed('main_faccoes');
+
+                                          await showDialog(
+                                            context: context,
+                                            builder: (dialogContext) {
+                                              return Dialog(
+                                                elevation: 0,
+                                                insetPadding: EdgeInsets.zero,
+                                                backgroundColor:
+                                                    Colors.transparent,
+                                                alignment: AlignmentDirectional(
+                                                        0.0, 0.0)
+                                                    .resolve(Directionality.of(
+                                                        context)),
+                                                child: Toast04Widget(
+                                                  toast04Titulo:
+                                                      FFLocalizations.of(
+                                                              context)
+                                                          .getText(
+                                                    '6q6ela0n' /* Factons */,
+                                                  ),
+                                                  toast04Notificacao:
+                                                      FFLocalizations.of(
+                                                              context)
+                                                          .getText(
+                                                    '8cm49dh7' /* Information saved successfully... */,
+                                                  ),
+                                                ),
+                                              );
+                                            },
+                                          );
+
+                                          await Future.delayed(const Duration(
+                                              milliseconds: 1000));
                                         }
+                                      } else {
+                                        Navigator.pop(context);
+
+                                        context.pushNamed('main_faccoes');
                                       }
 
-                                      _model.outputFaccaoEdit =
-                                          await FaccoesTable().update(
-                                        data: {
-                                          'nome': _model
-                                              .txtNomeFaccaoTextController.text,
-                                          'descricao': _model
-                                              .txtDescriptionTextController
-                                              .text,
-                                          'imagem_path':
-                                              _model.uploadedFileUrl2,
-                                        },
-                                        matchingRows: (rows) => rows.eqOrNull(
-                                          'faccao_id',
-                                          widget!.faccaoRow?.faccaoId,
-                                        ),
-                                        returnRows: true,
-                                      );
-                                      Navigator.pop(context);
-                                      Navigator.pop(context);
-
-                                      context.pushNamed('main_faccoes');
-
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(
-                                        SnackBar(
-                                          content: Text(
-                                            'Daddos  atualizados com sucesso !',
-                                            style: TextStyle(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryText,
-                                            ),
-                                          ),
-                                          duration:
-                                              Duration(milliseconds: 1000),
-                                          backgroundColor:
-                                              FlutterFlowTheme.of(context)
-                                                  .success,
-                                        ),
-                                      );
-                                    } else {
-                                      Navigator.pop(context);
-                                      Navigator.pop(context);
-
-                                      context.pushNamed('main_faccoes');
-                                    }
-
-                                    safeSetState(() {});
-                                  },
-                                  text: FFLocalizations.of(context).getText(
-                                    'ntyay3mi' /* Save */,
-                                  ),
-                                  options: FFButtonOptions(
-                                    height: 40.0,
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        44.0, 0.0, 44.0, 0.0),
-                                    iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 0.0),
-                                    color: FlutterFlowTheme.of(context).primary,
-                                    textStyle: FlutterFlowTheme.of(context)
-                                        .titleMedium
-                                        .override(
-                                          fontFamily:
-                                              FlutterFlowTheme.of(context)
-                                                  .titleMediumFamily,
-                                          letterSpacing: 0.0,
-                                          useGoogleFonts: GoogleFonts.asMap()
-                                              .containsKey(
-                                                  FlutterFlowTheme.of(context)
-                                                      .titleMediumFamily),
-                                        ),
-                                    elevation: 3.0,
-                                    borderSide: BorderSide(
-                                      color: Colors.transparent,
-                                      width: 1.0,
+                                      safeSetState(() {});
+                                    },
+                                    text: FFLocalizations.of(context).getText(
+                                      'ntyay3mi' /* Save */,
                                     ),
-                                    borderRadius: BorderRadius.circular(12.0),
-                                    hoverColor:
-                                        FlutterFlowTheme.of(context).accent1,
-                                    hoverBorderSide: BorderSide(
+                                    options: FFButtonOptions(
+                                      height: 40.0,
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          44.0, 0.0, 44.0, 0.0),
+                                      iconPadding:
+                                          EdgeInsetsDirectional.fromSTEB(
+                                              0.0, 0.0, 0.0, 0.0),
                                       color:
                                           FlutterFlowTheme.of(context).primary,
-                                      width: 1.0,
+                                      textStyle: FlutterFlowTheme.of(context)
+                                          .titleMedium
+                                          .override(
+                                            fontFamily:
+                                                FlutterFlowTheme.of(context)
+                                                    .titleMediumFamily,
+                                            letterSpacing: 0.0,
+                                            useGoogleFonts: GoogleFonts.asMap()
+                                                .containsKey(
+                                                    FlutterFlowTheme.of(context)
+                                                        .titleMediumFamily),
+                                          ),
+                                      elevation: 3.0,
+                                      borderSide: BorderSide(
+                                        color: Colors.transparent,
+                                        width: 1.0,
+                                      ),
+                                      borderRadius: BorderRadius.circular(12.0),
+                                      hoverColor:
+                                          FlutterFlowTheme.of(context).accent1,
+                                      hoverBorderSide: BorderSide(
+                                        color: FlutterFlowTheme.of(context)
+                                            .primary,
+                                        width: 1.0,
+                                      ),
+                                      hoverTextColor:
+                                          FlutterFlowTheme.of(context)
+                                              .primaryText,
+                                      hoverElevation: 0.0,
                                     ),
-                                    hoverTextColor: FlutterFlowTheme.of(context)
-                                        .primaryText,
-                                    hoverElevation: 0.0,
                                   ),
                                 ),
                               ].divide(SizedBox(width: 50.0)),
