@@ -689,11 +689,11 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '2lyoeqrf': {
       'en': 'Please choose an option from the dropdown',
-      'pt': '',
+      'pt': 'Selecione uma opção no menu suspenso',
     },
     '9lz7n6fv': {
       'en': 'Field is required',
-      'pt': '',
+      'pt': 'Campo é obrigatório',
     },
     'jrjtliei': {
       'en': 'Please choose an option from the dropdown',
@@ -958,14 +958,35 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'mt85wjgb': {
       'en': 'Field is required',
-      'pt': '',
+      'pt': 'Campo é obrigatório',
     },
     '91qggjq8': {
       'en': 'Please choose an option from the dropdown',
-      'pt': '',
+      'pt': 'Selecione uma opção no menu suspenso',
     },
     'z7p3pi6i': {
       'en': '__',
+      'pt': '',
+    },
+  },
+  // WelcomePage
+  {
+    'ha2maz9c': {
+      'en': 'Winter \nVacation Trips',
+      'pt': 'Viagens de férias de inverno',
+    },
+    'yzx7mtyu': {
+      'en':
+          'Enjoy your winter vacations with warmth\nand amazing sightseeing on the mountains.\nEnjoy the best experience with us!',
+      'pt':
+          'Aproveite suas férias de inverno com calor\ne vistas incríveis nas montanhas.\nAproveite a melhor experiência conosco!',
+    },
+    'pwwog3fj': {
+      'en': 'Let’s Go!',
+      'pt': 'Vamos!',
+    },
+    'j0nfxam4': {
+      'en': 'Home',
       'pt': '',
     },
   },
@@ -1128,11 +1149,11 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'kmbyse66': {
       'en': 'Light Mode',
-      'pt': '',
+      'pt': 'Modo de luz',
     },
     'jcne973r': {
       'en': 'Dark Mode',
-      'pt': '',
+      'pt': 'Modo escuro',
     },
   },
   // modal_command_palette
@@ -1333,7 +1354,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'cxlzs5tl': {
       'en': 'Nome da facção',
-      'pt': ' Nome da facção',
+      'pt': 'Nome da facção',
     },
     'gvgwcy4p': {
       'en': 'Descrição ou Biografia',
@@ -1498,7 +1519,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en':
           'Additional Details around this contract and who is working on it in this card!',
       'pt':
-          'Detalhes adicionais sobre este contrato e quem está trabalhando nele neste card!',
+          'Detalhes adicionais sobre este contrato e quem está trabalhando nele neste cartão!',
     },
     'f3u7xqx4': {
       'en': 'Contract Details',
@@ -1562,7 +1583,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en':
           'Add one or more images about the Member.\nMaximum of 6 (six) images.',
       'pt':
-          'Adicione uma ou mais imagens sobre o Membro. \nNo máximo de 6 (seis) imagens.',
+          'Adicione uma ou mais imagens sobre o Membro.\nMáximo de 6 (seis) imagens.',
     },
     'szzdveit': {
       'en': 'Apagar Fotos',
@@ -1594,7 +1615,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en':
           'To add nickname(s) you need to fill in the Nickname Field and click on the (+) Button',
       'pt':
-          'Para adicionar à(s) alcunha(s) precisa preencher o Campo Alcunha e clicar no Botão (+) ',
+          'Para adicionar apelido(s), você precisa preencher o campo Apelido e clicar no botão (+)',
     },
     'deg0fdow': {
       'en': 'Naturalidade',
@@ -1678,11 +1699,11 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'ia9zkanc': {
       'en': 'Issuing body',
-      'pt': 'Órgão expedidor',
+      'pt': 'Órgão emissor',
     },
     'h3ykxfak': {
       'en': 'Issuing body',
-      'pt': 'Órgão expedidor',
+      'pt': 'Órgão emissor',
     },
     'k3o15zmt': {
       'en': 'CPF',
@@ -1694,11 +1715,11 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'f434de4i': {
       'en': 'Infopen Registration',
-      'pt': 'Cadastro Infopen',
+      'pt': 'Inscrição Infopen',
     },
     '1yyjhbj8': {
       'en': 'Infopen Registration',
-      'pt': 'Cadastro Infopen',
+      'pt': 'Inscrição Infopen',
     },
     'cjy846zr': {
       'en': 'Mother\'s name',
@@ -1710,27 +1731,27 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '4ebn7u9d': {
       'en': 'Alive',
-      'pt': 'Viva',
+      'pt': 'Vivo',
     },
     'vte6onee': {
       'en': 'Deceased',
-      'pt': 'Falecida',
+      'pt': 'Morto',
     },
     '188nb78m': {
       'en': 'Wheelchair user',
-      'pt': 'Cadeirante',
+      'pt': 'Usuário de cadeira de rodas',
     },
     'aw1z7gel': {
       'en': 'No information',
-      'pt': 'Sem informação',
+      'pt': 'Nenhuma informação',
     },
     'gc3vbmj4': {
       'en': 'Mother\'s situation',
-      'pt': 'Situação da Mãe',
+      'pt': 'Situação da mãe',
     },
     'bj72hiw8': {
       'en': 'Mother\'s situation',
-      'pt': 'Situação da Mãe',
+      'pt': 'Situação da mãe',
     },
     'lbcdz337': {
       'en': 'Father\'s name',
@@ -1750,23 +1771,23 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '7ygxf6rh': {
       'en': 'Deceased',
-      'pt': 'Falecido',
+      'pt': 'Morto',
     },
     'wmbvp74d': {
       'en': 'Wheelchair user',
-      'pt': 'Cadeirante',
+      'pt': 'Usuário de cadeira de rodas',
     },
     'r9rah6gc': {
       'en': 'No information',
-      'pt': 'Sem informação',
+      'pt': 'Nenhuma informação',
     },
     'cnn9tddw': {
       'en': 'Father\'s situation',
-      'pt': 'Situação do Pai',
+      'pt': 'Situação do pai',
     },
     'bsvzf3cx': {
       'en': 'Father\'s situation',
-      'pt': 'Situação do Pai',
+      'pt': 'Situação do pai',
     },
     'r2g2yo2p': {
       'en': 'Alfabetizado',
@@ -1774,7 +1795,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'y7i4eicy': {
       'en': 'illiterate',
-      'pt': 'Não alfabetizado',
+      'pt': 'analfabeto',
     },
     'xmduvdwh': {
       'en': 'Completed elementary education',
@@ -1782,11 +1803,11 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'lvynt86i': {
       'en': 'Completed high school',
-      'pt': 'Ensino médio completo',
+      'pt': 'Ensino médio concluído',
     },
     'eur8h0kh': {
       'en': 'Completed higher education',
-      'pt': 'Ensino superior completo',
+      'pt': 'Ensino superior concluído',
     },
     'm10ha0nj': {
       'en': 'Incomplete elementary education',
@@ -1802,11 +1823,11 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'm23r6x4v': {
       'en': 'No information',
-      'pt': 'Sem informação',
+      'pt': 'Nenhuma informação',
     },
     '0wrilaus': {
       'en': 'Degree or Level of Education',
-      'pt': 'Grau ou Nível de instrução',
+      'pt': 'Grau ou nível de educação',
     },
     '4thgagtf': {
       'en': 'Degree or Level of Education',
@@ -1834,7 +1855,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'ig5z8pao': {
       'en': 'Please choose an option from the dropdown',
-      'pt': '',
+      'pt': 'Selecione uma opção no menu suspenso',
     },
     'wb25vyk9': {
       'en': 'Field is required',
@@ -1842,7 +1863,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'swo0b7np': {
       'en': 'Please choose an option from the dropdown',
-      'pt': '',
+      'pt': 'Selecione uma opção no menu suspenso',
     },
     'nfcv23yd': {
       'en': 'Field is required',
@@ -1850,7 +1871,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'm3wl1tny': {
       'en': 'Please choose an option from the dropdown',
-      'pt': '',
+      'pt': 'Selecione uma opção no menu suspenso',
     },
     'hmz6g9kq': {
       'en': 'Field is required',
@@ -1858,7 +1879,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'dl0iqn1k': {
       'en': 'Please choose an option from the dropdown',
-      'pt': '',
+      'pt': 'Selecione uma opção no menu suspenso',
     },
     'aajuf6zo': {
       'en': 'Field is required',
@@ -1866,7 +1887,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'kb47qv7h': {
       'en': 'Please choose an option from the dropdown',
-      'pt': '',
+      'pt': 'Selecione uma opção no menu suspenso',
     },
     '2wgvagjr': {
       'en': 'Field is required',
@@ -1874,7 +1895,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'f7drazjt': {
       'en': 'Please choose an option from the dropdown',
-      'pt': '',
+      'pt': 'Selecione uma opção no menu suspenso',
     },
     'nvxntirq': {
       'en': 'Localization',
@@ -1928,7 +1949,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en':
           'To add the address(es) you need to fill in\nthe Address field and click on the (+) button.',
       'pt':
-          'Para adicionar o(s) endereço(s) precisa preencher \no campo Endereço e clicar no Botão (+) ',
+          'Para adicionar o(s) endereço(s), você precisa preencher\no campo Endereço e clicar no botão (+).',
     },
     'zo5mhuuq': {
       'en': 'Facção',
@@ -2040,7 +2061,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en':
           'To add the name of the Prison(s) you need to fill in the \nlast three locations and click on the (+) button.',
       'pt':
-          'Para adicionar o(s) nome de Presídio (s) precisa preencher \nos Três últimos locais e clicar no Botão (+) ',
+          'Para adicionar o nome da(s) Prisão(ões), você precisa preencher os últimos três locais e clicar no botão (+).',
     },
     '8uf1jitv': {
       'en': 'Facção que integrou',
@@ -2130,7 +2151,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'ptm9fsnl': {
       'en': 'Local Police Station',
-      'pt': 'Delegacia Local',
+      'pt': 'Delegacia de polícia local',
     },
     'ewv0wp4u': {
       'en': 'Specialized Police Station',
@@ -2138,7 +2159,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'tfba3ok1': {
       'en': 'Regional Police Station',
-      'pt': 'Delegacia Regional',
+      'pt': 'Delegacia de Polícia Regional',
     },
     'p4l0yjdk': {
       'en': 'Unit',
@@ -2154,7 +2175,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'fqtt5evw': {
       'en': 'IPL. Ordinance',
-      'pt': 'IPL. Portaria',
+      'pt': 'Portaria IPL',
     },
     'nlsyfr82': {
       'en': 'IPL. Flagrant',
@@ -2730,11 +2751,11 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   {
     '7zctnlpm': {
       'en': 'Edit Profile  (Now)',
-      'pt': 'Editar Perfil (Atual)',
+      'pt': 'Editar perfil (agora)',
     },
     'r1bwui0z': {
       'en': 'Please enter the information below to edit the Profile.',
-      'pt': 'Insira as informações abaixo para editar o Perfil.',
+      'pt': 'Insira as informações abaixo para editar o perfil.',
     },
     '99oumm34': {
       'en': 'Your Name',
@@ -2750,7 +2771,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'o7m2i6p2': {
       'en': 'illiterate',
-      'pt': 'Não alfabetizado',
+      'pt': 'analfabeto',
     },
     'l7wk3lrd': {
       'en': 'Completed elementary education',
@@ -2758,11 +2779,11 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'qos44j9c': {
       'en': 'Completed high school',
-      'pt': 'Ensino médio completo',
+      'pt': 'Ensino médio concluído',
     },
     'heufihw9': {
       'en': 'Completed higher education',
-      'pt': 'Ensino superior completo',
+      'pt': 'Ensino superior concluído',
     },
     '49xtgad1': {
       'en': 'Incomplete elementary education',
@@ -2778,7 +2799,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'jo2xcd1b': {
       'en': 'No information',
-      'pt': 'Sem informação',
+      'pt': 'Nenhuma informação',
     },
     '3krya23z': {
       'en': 'Agency',
@@ -2821,7 +2842,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'xscprapi': {
       'en': 'Update foto',
-      'pt': 'Atararr foto',
+      'pt': 'Atualizar foto',
     },
     'rq3zqf7i': {
       'en': 'Nome da facção',
@@ -2849,7 +2870,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '8cm49dh7': {
       'en': 'Information saved successfully!',
-      'pt': 'Informações salvas com sucesso !',
+      'pt': 'Informações salvas com sucesso!',
     },
     'e3wa81po': {
       'en': 'Factons',
@@ -2857,7 +2878,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'dd30lzu8': {
       'en': 'Information saved successfully!',
-      'pt': 'Informações salvas com sucesso !',
+      'pt': 'Informações salvas com sucesso!',
     },
     'yg28k56i': {
       'en': 'Please enter a faction name...',
@@ -4166,7 +4187,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '9zk4wopm': {
       'en': 'Not Called',
-      'pt': 'Não chamado',
+      'pt': 'Não Chamado',
     },
     'xn2fkope': {
       'en': 'Pending Review',

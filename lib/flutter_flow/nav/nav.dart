@@ -184,6 +184,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               path: 'buscarCEP',
               requireAuth: true,
               builder: (context, params) => BuscarCEPWidget(),
+            ),
+            FFRoute(
+              name: 'WelcomePage',
+              path: 'welcomePage',
+              requireAuth: true,
+              builder: (context, params) => WelcomePageWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ),
