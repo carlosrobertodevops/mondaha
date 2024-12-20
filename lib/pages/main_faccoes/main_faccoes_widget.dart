@@ -9,6 +9,7 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:ui';
 import 'package:sticky_headers/sticky_headers.dart';
 import 'package:aligned_dialog/aligned_dialog.dart';
 import 'package:flutter/material.dart';
@@ -61,7 +62,10 @@ class _MainFaccoesWidgetState extends State<MainFaccoesWidget>
         title: 'main_faccoes',
         color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
         child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
+          onTap: () {
+            FocusScope.of(context).unfocus();
+            FocusManager.instance.primaryFocus?.unfocus();
+          },
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -165,9 +169,13 @@ class _MainFaccoesWidgetState extends State<MainFaccoesWidget>
                                                 .resolve(
                                                     Directionality.of(context)),
                                             child: GestureDetector(
-                                              onTap: () =>
-                                                  FocusScope.of(dialogContext)
-                                                      .unfocus(),
+                                              onTap: () {
+                                                FocusScope.of(dialogContext)
+                                                    .unfocus();
+                                                FocusManager
+                                                    .instance.primaryFocus
+                                                    ?.unfocus();
+                                              },
                                               child: ModalFaccaoAddWidget(),
                                             ),
                                           );
@@ -241,8 +249,11 @@ class _MainFaccoesWidgetState extends State<MainFaccoesWidget>
                                     context: context,
                                     builder: (context) {
                                       return GestureDetector(
-                                        onTap: () =>
-                                            FocusScope.of(context).unfocus(),
+                                        onTap: () {
+                                          FocusScope.of(context).unfocus();
+                                          FocusManager.instance.primaryFocus
+                                              ?.unfocus();
+                                        },
                                         child: Padding(
                                           padding:
                                               MediaQuery.viewInsetsOf(context),
@@ -628,7 +639,10 @@ class _MainFaccoesWidgetState extends State<MainFaccoesWidget>
                                                                                 AlignmentDirectional(0.0, 0.0).resolve(Directionality.of(context)),
                                                                             child:
                                                                                 GestureDetector(
-                                                                              onTap: () => FocusScope.of(dialogContext).unfocus(),
+                                                                              onTap: () {
+                                                                                FocusScope.of(dialogContext).unfocus();
+                                                                                FocusManager.instance.primaryFocus?.unfocus();
+                                                                              },
                                                                               child: ModalFaccaoEditWidget(
                                                                                 faccaoRow: listViewFaccoesRow,
                                                                               ),
@@ -827,7 +841,10 @@ class _MainFaccoesWidgetState extends State<MainFaccoesWidget>
                                                                                         return Material(
                                                                                           color: Colors.transparent,
                                                                                           child: GestureDetector(
-                                                                                            onTap: () => FocusScope.of(dialogContext).unfocus(),
+                                                                                            onTap: () {
+                                                                                              FocusScope.of(dialogContext).unfocus();
+                                                                                              FocusManager.instance.primaryFocus?.unfocus();
+                                                                                            },
                                                                                             child: DropdownFaccaoEditWidget(
                                                                                               faccaoid: listViewFaccoesRow,
                                                                                             ),

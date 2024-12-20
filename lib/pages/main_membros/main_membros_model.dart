@@ -12,6 +12,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/walkthroughs/adicionar_membros.dart';
 import 'dart:math';
+import 'dart:ui';
 import 'main_membros_widget.dart' show MainMembrosWidget;
 import 'package:sticky_headers/sticky_headers.dart';
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart'

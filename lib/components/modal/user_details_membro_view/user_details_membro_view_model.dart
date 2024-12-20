@@ -5,6 +5,7 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'dart:math';
+import 'dart:ui';
 import 'user_details_membro_view_widget.dart' show UserDetailsMembroViewWidget;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';

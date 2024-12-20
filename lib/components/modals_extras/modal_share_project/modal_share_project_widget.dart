@@ -4,6 +4,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:math';
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -73,7 +74,7 @@ class _ModalShareProjectWidgetState extends State<ModalShareProjectWidget>
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {
           _model.yourNameTextController?.text =
               FFLocalizations.of(context).getText(
-            'jzdr6k9x' /* https:project.flutterflow.io... */,
+            'jzdr6k9x' /* https://project.flutterflow.io... */,
           );
         }));
   }

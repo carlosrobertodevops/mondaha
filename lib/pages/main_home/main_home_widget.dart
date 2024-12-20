@@ -7,6 +7,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:math';
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -50,14 +51,16 @@ class _MainHomeWidgetState extends State<MainHomeWidget>
             )
             .order('user_id'),
       );
-      FFAppState().UsuarioAtualId = _model.outputQueryUsuarios!.first.usuarioId;
+      FFAppState().UsuarioAtualId =
+          _model.outputQueryUsuarios!.firstOrNull!.usuarioId;
       FFAppState().UsuarioAtualTipoUsuarioId =
-          _model.outputQueryUsuarios!.first.tipoUsuarioId!;
+          _model.outputQueryUsuarios!.firstOrNull!.tipoUsuarioId!;
       FFAppState().UsuarioAtualNomeCompleto =
-          _model.outputQueryUsuarios!.first.nomeCompleto!;
+          _model.outputQueryUsuarios!.firstOrNull!.nomeCompleto!;
       FFAppState().UsuarioAtualFoto =
-          _model.outputQueryUsuarios!.first.fotoPath!;
-      FFAppState().UsuarioAtualEmail = _model.outputQueryUsuarios!.first.email!;
+          _model.outputQueryUsuarios!.firstOrNull!.fotoPath!;
+      FFAppState().UsuarioAtualEmail =
+          _model.outputQueryUsuarios!.firstOrNull!.email!;
       safeSetState(() {});
       await Future.wait([
         Future(() async {
@@ -65,11 +68,11 @@ class _MainHomeWidgetState extends State<MainHomeWidget>
           _model.outputQueryTipoUsuarios = await TiposUsuariosTable().queryRows(
             queryFn: (q) => q.eqOrNull(
               'tipo_usuario_id',
-              _model.outputQueryUsuarios?.first?.tipoUsuarioId,
+              _model.outputQueryUsuarios?.firstOrNull?.tipoUsuarioId,
             ),
           );
           FFAppState().UsuarioAtualTipoUsuarioNome =
-              _model.outputQueryTipoUsuarios!.first.descricao!;
+              _model.outputQueryTipoUsuarios!.firstOrNull!.descricao!;
           safeSetState(() {});
         }),
         Future(() async {
@@ -77,11 +80,11 @@ class _MainHomeWidgetState extends State<MainHomeWidget>
           _model.outputQueryAgenciaNome = await AgenciasTable().queryRows(
             queryFn: (q) => q.eqOrNull(
               'agencia_id',
-              _model.outputQueryUsuarios?.first?.agenciaId,
+              _model.outputQueryUsuarios?.firstOrNull?.agenciaId,
             ),
           );
           FFAppState().UsuarioAtualAgenciaNome =
-              _model.outputQueryAgenciaNome!.first.nome!;
+              _model.outputQueryAgenciaNome!.firstOrNull!.nome!;
           safeSetState(() {});
         }),
         Future(() async {
@@ -1054,7 +1057,10 @@ class _MainHomeWidgetState extends State<MainHomeWidget>
         title: 'main_home',
         color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
         child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
+          onTap: () {
+            FocusScope.of(context).unfocus();
+            FocusManager.instance.primaryFocus?.unfocus();
+          },
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,

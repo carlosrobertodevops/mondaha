@@ -4,6 +4,7 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:ui';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -76,7 +77,10 @@ class _SearchPageWidgetState extends State<SearchPageWidget> {
             title: 'search_page',
             color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
             child: GestureDetector(
-              onTap: () => FocusScope.of(context).unfocus(),
+              onTap: () {
+                FocusScope.of(context).unfocus();
+                FocusManager.instance.primaryFocus?.unfocus();
+              },
               child: Scaffold(
                 key: scaffoldKey,
                 backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -503,9 +507,9 @@ class _SearchPageWidgetState extends State<SearchPageWidget> {
                                                             8.0),
                                                     child: Image.network(
                                                       userList5MembrosRowList
-                                                          .first
+                                                          .firstOrNull!
                                                           .fotosPath
-                                                          .first,
+                                                          .firstOrNull!,
                                                       width: 44.0,
                                                       height: 44.0,
                                                       fit: BoxFit.cover,
@@ -534,8 +538,8 @@ class _SearchPageWidgetState extends State<SearchPageWidget> {
                                                             valueOrDefault<
                                                                 String>(
                                                               userList5MembrosRowList
-                                                                  .first
-                                                                  .nomeCompleto,
+                                                                  .firstOrNull
+                                                                  ?.nomeCompleto,
                                                               'nome_completo',
                                                             ),
                                                             style: FlutterFlowTheme

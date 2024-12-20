@@ -5,6 +5,7 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'dart:math';
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -349,14 +350,16 @@ class _UserDetailsMembroViewWidgetState
                                     child: FlutterFlowExpandedImageView(
                                       image: Image.network(
                                         valueOrDefault<String>(
-                                          widget!.membroRow?.fotosPath?.first,
+                                          widget!.membroRow?.fotosPath
+                                              ?.firstOrNull,
                                           'sem informação',
                                         ),
                                         fit: BoxFit.contain,
                                       ),
                                       allowRotation: false,
                                       tag: valueOrDefault<String>(
-                                        widget!.membroRow?.fotosPath?.first,
+                                        widget!
+                                            .membroRow?.fotosPath?.firstOrNull,
                                         'sem informação',
                                       ),
                                       useHeroAnimation: true,
@@ -366,13 +369,13 @@ class _UserDetailsMembroViewWidgetState
                               },
                               child: Hero(
                                 tag: valueOrDefault<String>(
-                                  widget!.membroRow?.fotosPath?.first,
+                                  widget!.membroRow?.fotosPath?.firstOrNull,
                                   'sem informação',
                                 ),
                                 transitionOnUserGestures: true,
                                 child: Image.network(
                                   valueOrDefault<String>(
-                                    widget!.membroRow?.fotosPath?.first,
+                                    widget!.membroRow?.fotosPath?.firstOrNull,
                                     'sem informação',
                                   ),
                                   width: double.infinity,
@@ -595,7 +598,7 @@ class _UserDetailsMembroViewWidgetState
                                 0.0, 4.0, 0.0, 0.0),
                             child: Text(
                               valueOrDefault<String>(
-                                widget!.membroRow?.alcunha?.first,
+                                widget!.membroRow?.alcunha?.firstOrNull,
                                 'sem informação',
                               ),
                               textAlign: TextAlign.start,
@@ -928,9 +931,11 @@ class _UserDetailsMembroViewWidgetState
                                                                 Text(
                                                                   valueOrDefault<
                                                                       String>(
-                                                                    widget!.membroRow
-                                                                            ?.membroEndereco?[
-                                                                        childreenEnderecosIndex],
+                                                                    widget!
+                                                                        .membroRow
+                                                                        ?.membroEndereco
+                                                                        ?.elementAtOrNull(
+                                                                            childreenEnderecosIndex),
                                                                     'sem informação',
                                                                   ),
                                                                   style: FlutterFlowTheme.of(
@@ -957,7 +962,9 @@ class _UserDetailsMembroViewWidgetState
                                                                         String>(
                                                                       widget!
                                                                           .membroRow
-                                                                          ?.coordenadas?[childreenEnderecosIndex],
+                                                                          ?.coordenadas
+                                                                          ?.elementAtOrNull(
+                                                                              childreenEnderecosIndex),
                                                                       'sem informação',
                                                                     ),
                                                                     style: FlutterFlowTheme.of(

@@ -4,6 +4,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:math';
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -69,7 +70,10 @@ class _BuscarCEPWidgetState extends State<BuscarCEPWidget>
         title: 'BuscarCEP',
         color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
         child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
+          onTap: () {
+            FocusScope.of(context).unfocus();
+            FocusManager.instance.primaryFocus?.unfocus();
+          },
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: Color(0xFFF9FAFF),
@@ -333,22 +337,6 @@ class _BuscarCEPWidgetState extends State<BuscarCEPWidget>
                                                                     ?.jsonBody ??
                                                                 ''),
                                                           )!;
-                                                          _model.ruaAvFocusNode
-                                                              ?.requestFocus();
-                                                          WidgetsBinding
-                                                              .instance
-                                                              .addPostFrameCallback(
-                                                                  (_) {
-                                                            _model.ruaAvTextController
-                                                                    ?.selection =
-                                                                TextSelection
-                                                                    .collapsed(
-                                                              offset: _model
-                                                                  .ruaAvTextController!
-                                                                  .text
-                                                                  .length,
-                                                            );
-                                                          });
                                                         });
                                                         // Bairro
                                                         safeSetState(() {
@@ -360,22 +348,6 @@ class _BuscarCEPWidgetState extends State<BuscarCEPWidget>
                                                                     ?.jsonBody ??
                                                                 ''),
                                                           )!;
-                                                          _model.bairroFocusNode
-                                                              ?.requestFocus();
-                                                          WidgetsBinding
-                                                              .instance
-                                                              .addPostFrameCallback(
-                                                                  (_) {
-                                                            _model.bairroTextController
-                                                                    ?.selection =
-                                                                TextSelection
-                                                                    .collapsed(
-                                                              offset: _model
-                                                                  .bairroTextController!
-                                                                  .text
-                                                                  .length,
-                                                            );
-                                                          });
                                                         });
                                                         // cidade
                                                         safeSetState(() {
@@ -387,22 +359,6 @@ class _BuscarCEPWidgetState extends State<BuscarCEPWidget>
                                                                     ?.jsonBody ??
                                                                 ''),
                                                           )!;
-                                                          _model.cidadeFocusNode
-                                                              ?.requestFocus();
-                                                          WidgetsBinding
-                                                              .instance
-                                                              .addPostFrameCallback(
-                                                                  (_) {
-                                                            _model.cidadeTextController
-                                                                    ?.selection =
-                                                                TextSelection
-                                                                    .collapsed(
-                                                              offset: _model
-                                                                  .cidadeTextController!
-                                                                  .text
-                                                                  .length,
-                                                            );
-                                                          });
                                                         });
                                                         safeSetState(() {
                                                           _model.estadoTextController
@@ -413,22 +369,6 @@ class _BuscarCEPWidgetState extends State<BuscarCEPWidget>
                                                                     ?.jsonBody ??
                                                                 ''),
                                                           )!;
-                                                          _model.estadoFocusNode
-                                                              ?.requestFocus();
-                                                          WidgetsBinding
-                                                              .instance
-                                                              .addPostFrameCallback(
-                                                                  (_) {
-                                                            _model.estadoTextController
-                                                                    ?.selection =
-                                                                TextSelection
-                                                                    .collapsed(
-                                                              offset: _model
-                                                                  .estadoTextController!
-                                                                  .text
-                                                                  .length,
-                                                            );
-                                                          });
                                                         });
                                                       } else {
                                                         ScaffoldMessenger.of(
@@ -591,7 +531,7 @@ class _BuscarCEPWidgetState extends State<BuscarCEPWidget>
                                               labelText:
                                                   FFLocalizations.of(context)
                                                       .getText(
-                                                'l6amd7pf' /* RuaAv */,
+                                                'l6amd7pf' /* Rua/Av */,
                                               ),
                                               labelStyle:
                                                   FlutterFlowTheme.of(context)

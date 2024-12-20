@@ -12,6 +12,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/walkthroughs/adicionar_membros.dart';
 import 'dart:math';
+import 'dart:ui';
 import 'package:sticky_headers/sticky_headers.dart';
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart'
     show TutorialCoachMark;
@@ -100,7 +101,10 @@ class _MainMembrosWidgetState extends State<MainMembrosWidget>
         title: 'main_membros',
         color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
         child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
+          onTap: () {
+            FocusScope.of(context).unfocus();
+            FocusManager.instance.primaryFocus?.unfocus();
+          },
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -201,9 +205,12 @@ class _MainMembrosWidgetState extends State<MainMembrosWidget>
                                               .resolve(
                                                   Directionality.of(context)),
                                           child: GestureDetector(
-                                            onTap: () =>
-                                                FocusScope.of(dialogContext)
-                                                    .unfocus(),
+                                            onTap: () {
+                                              FocusScope.of(dialogContext)
+                                                  .unfocus();
+                                              FocusManager.instance.primaryFocus
+                                                  ?.unfocus();
+                                            },
                                             child: ModalMembrosAddWidget(),
                                           ),
                                         );
@@ -275,8 +282,11 @@ class _MainMembrosWidgetState extends State<MainMembrosWidget>
                                   context: context,
                                   builder: (context) {
                                     return GestureDetector(
-                                      onTap: () =>
-                                          FocusScope.of(context).unfocus(),
+                                      onTap: () {
+                                        FocusScope.of(context).unfocus();
+                                        FocusManager.instance.primaryFocus
+                                            ?.unfocus();
+                                      },
                                       child: Padding(
                                         padding:
                                             MediaQuery.viewInsetsOf(context),
@@ -726,7 +736,10 @@ class _MainMembrosWidgetState extends State<MainMembrosWidget>
                                                                               backgroundColor: Colors.transparent,
                                                                               alignment: AlignmentDirectional(0.0, 0.0).resolve(Directionality.of(context)),
                                                                               child: GestureDetector(
-                                                                                onTap: () => FocusScope.of(dialogContext).unfocus(),
+                                                                                onTap: () {
+                                                                                  FocusScope.of(dialogContext).unfocus();
+                                                                                  FocusManager.instance.primaryFocus?.unfocus();
+                                                                                },
                                                                                 child: ModalMembrosEditWidget(
                                                                                   membrosRow: listViewMembrosViewRow,
                                                                                   membrosFotos: listViewMembrosViewRow.fotosPath,
@@ -777,7 +790,7 @@ class _MainMembrosWidgetState extends State<MainMembrosWidget>
                                                                                   fadeInDuration: Duration(milliseconds: 10),
                                                                                   fadeOutDuration: Duration(milliseconds: 10),
                                                                                   imageUrl: valueOrDefault<String>(
-                                                                                    listViewMembrosViewRow.fotosPath.first != '' ? listViewMembrosViewRow.fotosPath.first : (Theme.of(context).brightness == Brightness.light ? FFAppState().MembrosImagePathLight : FFAppState().MembrosImagePathDark),
+                                                                                    listViewMembrosViewRow.fotosPath.firstOrNull != '' ? listViewMembrosViewRow.fotosPath.firstOrNull : (Theme.of(context).brightness == Brightness.light ? FFAppState().MembrosImagePathLight : FFAppState().MembrosImagePathDark),
                                                                                     'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/rgxzhoyu6nbx/groups_96dp_99999_FILL0_wght400_GRAD0_opsz48.png',
                                                                                   ),
                                                                                   width: 50.0,
@@ -863,14 +876,14 @@ class _MainMembrosWidgetState extends State<MainMembrosWidget>
                                                                                           padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
                                                                                           child: Text(
                                                                                             valueOrDefault<String>(
-                                                                                              listViewMembrosViewRow.alcunha.first ==
+                                                                                              listViewMembrosViewRow.alcunha.firstOrNull ==
                                                                                                       valueOrDefault<String>(
                                                                                                         '',
                                                                                                         'sem informação',
                                                                                                       )
                                                                                                   ? 'sem informação'
                                                                                                   : valueOrDefault<String>(
-                                                                                                      listViewMembrosViewRow.alcunha.first,
+                                                                                                      listViewMembrosViewRow.alcunha.firstOrNull,
                                                                                                       'sem informação',
                                                                                                     ),
                                                                                               'sem informação',
@@ -943,7 +956,10 @@ class _MainMembrosWidgetState extends State<MainMembrosWidget>
                                                                                           return Material(
                                                                                             color: Colors.transparent,
                                                                                             child: GestureDetector(
-                                                                                              onTap: () => FocusScope.of(dialogContext).unfocus(),
+                                                                                              onTap: () {
+                                                                                                FocusScope.of(dialogContext).unfocus();
+                                                                                                FocusManager.instance.primaryFocus?.unfocus();
+                                                                                              },
                                                                                               child: DropdownMemberEditWidget(
                                                                                                 membrosRow: listViewMembrosViewRow,
                                                                                               ),

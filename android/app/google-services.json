@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "455267850635",
-    "project_id": "mondaha-9r9wpx",
-    "storage_bucket": "mondaha-9r9wpx.appspot.com"
+    "project_number": "970782100600",
+    "project_id": "mondaha-be2293",
+    "storage_bucket": "mondaha-be2293.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:455267850635:android:95411c93251df0945fb78e",
+        "mobilesdk_app_id": "1:970782100600:android:fd849e08272fa129f2b18d",
         "android_client_info": {
           "package_name": "com.mycompany.crmapp"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAcibr4oxVzWyYhej93lxJBzZKpFIMadcM"
+          "current_key": "AIzaSyA9uhs5MTlKOVpy2d3JGtNQyaCuEY6kav8"
         }
       ],
       "services": {

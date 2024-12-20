@@ -1269,7 +1269,7 @@ class _ModalProfileEditProfileWidgetState
                                                       .UsuarioAtualNomeCompleto =
                                                   _model
                                                       .outputUpdateUsuarioPerfil2!
-                                                      .first
+                                                      .firstOrNull!
                                                       .nomeCompleto!;
                                               FFAppState().UsuarioAtualAgencia =
                                                   _model.ddwAgenciaValue!;

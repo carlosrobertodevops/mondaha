@@ -18,10 +18,10 @@
   },
   "scripts": {
     "lint": "./node_modules/.bin/eslint --max-warnings=0 .",
-    "serve": "firebase -P mondaha-9r9wpx emulators:start --only functions",
-    "shell": "firebase -P mondaha-9r9wpx functions:shell",
+    "serve": "firebase -P mondaha-be2293 emulators:start --only functions",
+    "shell": "firebase -P mondaha-be2293 functions:shell",
     "start": "npm run shell",
-    "logs": "firebase -P mondaha-9r9wpx functions:log",
+    "logs": "firebase -P mondaha-be2293 functions:log",
     "compile": "cp ../../tsconfig.template.json ./tsconfig-compile.json && tsc --project tsconfig-compile.json"
   },
   "engines": {

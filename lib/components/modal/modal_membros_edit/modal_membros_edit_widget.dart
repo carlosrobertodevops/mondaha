@@ -98,7 +98,7 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
         (c) => c.animateCamera(
           CameraUpdate.newLatLng(functions
               .convertDoubleToLatLng(widget!.membrosRow!.membroLngLat.toList())
-              .last
+              .lastOrNull!
               .toGoogleMaps()),
         ),
       );
@@ -939,7 +939,7 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                                                                                             ) ??
                                                                                                                                                             false;
                                                                                                                                                         if (confirmDialogResponse) {
-                                                                                                                                                          _model.removeFromMembrosFotoPathEdit(_model.membrosFotoPathEdit[fotosMembroPathsIndex]);
+                                                                                                                                                          _model.removeFromMembrosFotoPathEdit(_model.membrosFotoPathEdit.elementAtOrNull(fotosMembroPathsIndex)!);
                                                                                                                                                           safeSetState(() {});
                                                                                                                                                         }
                                                                                                                                                       },
@@ -2813,7 +2813,6 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                                           if (_model.placePickerEnderecoValue.address != _model.txtMembrosEnderecosAddTextController.text) {
                                                                                                             safeSetState(() {
                                                                                                               _model.txtMembrosEnderecosAddTextController?.text = '${_model.placePickerEnderecoValue.address}';
-                                                                                                              _model.txtMembrosEnderecosAddFocusNode?.requestFocus();
                                                                                                             });
                                                                                                           }
                                                                                                         },
@@ -2936,7 +2935,7 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                                 _model.updatePage(() {});
                                                                                                 await _model.googleMapMembrosController.future.then(
                                                                                                   (c) => c.animateCamera(
-                                                                                                    CameraUpdate.newLatLng(_model.membrosLatLng.last.toGoogleMaps()),
+                                                                                                    CameraUpdate.newLatLng(_model.membrosLatLng.lastOrNull!.toGoogleMaps()),
                                                                                                   ),
                                                                                                 );
                                                                                               } else {
@@ -4077,7 +4076,6 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                                 safeSetState(() {});
                                                                                                 safeSetState(() {
                                                                                                   _model.txtFaccaoTresLocaisAddTextController?.text = _model.membrosLimpar!;
-                                                                                                  _model.txtFaccaoTresLocaisAddFocusNode?.requestFocus();
                                                                                                 });
                                                                                               } else {
                                                                                                 ScaffoldMessenger.of(context).showSnackBar(
@@ -4907,18 +4905,9 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                                 _model.datePicked,
                                                                                                 locale: FFLocalizations.of(context).languageCode,
                                                                                               );
-                                                                                              _model.txtProcedimentoDataFocusNode?.requestFocus();
-                                                                                              WidgetsBinding.instance.addPostFrameCallback((_) {
-                                                                                                _model.txtProcedimentoDataTextController?.selection = TextSelection.collapsed(
-                                                                                                  offset: _model.txtProcedimentoDataTextController!.text.length,
-                                                                                                );
-                                                                                              });
                                                                                               _model.txtProcedimentoDataMask.updateMask(
                                                                                                 newValue: TextEditingValue(
                                                                                                   text: _model.txtProcedimentoDataTextController!.text,
-                                                                                                  selection: TextSelection.collapsed(
-                                                                                                    offset: _model.txtProcedimentoDataTextController!.text.length,
-                                                                                                  ),
                                                                                                 ),
                                                                                               );
                                                                                             });
@@ -7682,31 +7671,37 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                         await ProcedimentosAddCall
                                                                             .call(
                                                                       membroId: _model
-                                                                          .retMembrosEdit?[
-                                                                              _model.membrosProcedimentosCount!]
+                                                                          .retMembrosEdit
+                                                                          ?.elementAtOrNull(
+                                                                              _model.membrosProcedimentosCount!)
                                                                           ?.membroId,
                                                                       procedimentoNo: _model
-                                                                          .membrosProcedimentos[
-                                                                              _model.membrosProcedimentosCount!]
-                                                                          .procedimentoNo,
+                                                                          .membrosProcedimentos
+                                                                          .elementAtOrNull(
+                                                                              _model.membrosProcedimentosCount!)
+                                                                          ?.procedimentoNo,
                                                                       unidade: _model
-                                                                          .membrosProcedimentos[
-                                                                              _model.membrosProcedimentosCount!]
-                                                                          .unidade,
+                                                                          .membrosProcedimentos
+                                                                          .elementAtOrNull(
+                                                                              _model.membrosProcedimentosCount!)
+                                                                          ?.unidade,
                                                                       procedimentoTipo: _model
-                                                                          .membrosProcedimentos[
-                                                                              _model.membrosProcedimentosCount!]
-                                                                          .procedimentoTipo,
+                                                                          .membrosProcedimentos
+                                                                          .elementAtOrNull(
+                                                                              _model.membrosProcedimentosCount!)
+                                                                          ?.procedimentoTipo,
                                                                       crime: _model
-                                                                          .membrosProcedimentos[
-                                                                              _model.membrosProcedimentosCount!]
-                                                                          .crime,
+                                                                          .membrosProcedimentos
+                                                                          .elementAtOrNull(
+                                                                              _model.membrosProcedimentosCount!)
+                                                                          ?.crime,
                                                                       data:
                                                                           dateTimeFormat(
                                                                         "d/M/y",
                                                                         _model
-                                                                            .membrosProcedimentos[_model.membrosProcedimentosCount!]
-                                                                            .data,
+                                                                            .membrosProcedimentos
+                                                                            .elementAtOrNull(_model.membrosProcedimentosCount!)
+                                                                            ?.data,
                                                                         locale:
                                                                             FFLocalizations.of(context).languageCode,
                                                                       ),
@@ -7771,29 +7766,35 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                         await ProcessosAddCall
                                                                             .call(
                                                                       membroId: _model
-                                                                          .retMembrosEdit?[
-                                                                              _model.membrosProcessosCount!]
+                                                                          .retMembrosEdit
+                                                                          ?.elementAtOrNull(
+                                                                              _model.membrosProcessosCount!)
                                                                           ?.membroId,
                                                                       acaoPenalNo: _model
-                                                                          .membrosProcessos[
-                                                                              _model.membrosProcessosCount!]
-                                                                          .noAcaoPenal,
+                                                                          .membrosProcessos
+                                                                          .elementAtOrNull(
+                                                                              _model.membrosProcessosCount!)
+                                                                          ?.noAcaoPenal,
                                                                       vara: _model
-                                                                          .membrosProcessos[
-                                                                              _model.membrosProcessosCount!]
-                                                                          .vara,
+                                                                          .membrosProcessos
+                                                                          .elementAtOrNull(
+                                                                              _model.membrosProcessosCount!)
+                                                                          ?.vara,
                                                                       situacaoJuridica: _model
-                                                                          .membrosProcessos[
-                                                                              _model.membrosProcessosCount!]
-                                                                          .situacaoJuridica,
+                                                                          .membrosProcessos
+                                                                          .elementAtOrNull(
+                                                                              _model.membrosProcessosCount!)
+                                                                          ?.situacaoJuridica,
                                                                       regime: _model
-                                                                          .membrosProcessos[
-                                                                              _model.membrosProcessosCount!]
-                                                                          .regime,
+                                                                          .membrosProcessos
+                                                                          .elementAtOrNull(
+                                                                              _model.membrosProcessosCount!)
+                                                                          ?.regime,
                                                                       situacaoReu: _model
-                                                                          .membrosProcessos[
-                                                                              _model.membrosProcessosCount!]
-                                                                          .situacaoReu,
+                                                                          .membrosProcessos
+                                                                          .elementAtOrNull(
+                                                                              _model.membrosProcessosCount!)
+                                                                          ?.situacaoReu,
                                                                     );
 
                                                                     _shouldSetState =

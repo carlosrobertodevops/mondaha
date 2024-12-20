@@ -10,6 +10,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:math';
+import 'dart:ui';
 import 'package:sticky_headers/sticky_headers.dart';
 import 'package:aligned_dialog/aligned_dialog.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -140,7 +141,10 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
         title: 'main_admin',
         color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
         child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
+          onTap: () {
+            FocusScope.of(context).unfocus();
+            FocusManager.instance.primaryFocus?.unfocus();
+          },
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -287,8 +291,11 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                     context: context,
                                     builder: (context) {
                                       return GestureDetector(
-                                        onTap: () =>
-                                            FocusScope.of(context).unfocus(),
+                                        onTap: () {
+                                          FocusScope.of(context).unfocus();
+                                          FocusManager.instance.primaryFocus
+                                              ?.unfocus();
+                                        },
                                         child: Padding(
                                           padding:
                                               MediaQuery.viewInsetsOf(context),
@@ -728,7 +735,10 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                                                 AlignmentDirectional(0.0, 0.0).resolve(Directionality.of(context)),
                                                                             child:
                                                                                 GestureDetector(
-                                                                              onTap: () => FocusScope.of(dialogContext).unfocus(),
+                                                                              onTap: () {
+                                                                                FocusScope.of(dialogContext).unfocus();
+                                                                                FocusManager.instance.primaryFocus?.unfocus();
+                                                                              },
                                                                               child: ModalProfileEditAdminWidget(
                                                                                 usuariosRow: listViewUsuariosRow,
                                                                               ),
@@ -1023,7 +1033,10 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                                                         return Material(
                                                                                           color: Colors.transparent,
                                                                                           child: GestureDetector(
-                                                                                            onTap: () => FocusScope.of(dialogContext).unfocus(),
+                                                                                            onTap: () {
+                                                                                              FocusScope.of(dialogContext).unfocus();
+                                                                                              FocusManager.instance.primaryFocus?.unfocus();
+                                                                                            },
                                                                                             child: DropdownUsuarioAdminEditWidget(
                                                                                               usuarioid: listViewUsuariosRow,
                                                                                             ),
@@ -1657,7 +1670,10 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                                                   return Material(
                                                                                     color: Colors.transparent,
                                                                                     child: GestureDetector(
-                                                                                      onTap: () => FocusScope.of(dialogContext).unfocus(),
+                                                                                      onTap: () {
+                                                                                        FocusScope.of(dialogContext).unfocus();
+                                                                                        FocusManager.instance.primaryFocus?.unfocus();
+                                                                                      },
                                                                                       child: DropdownUsuarioAdminEditWidget(
                                                                                         usuarioid: listViewUsuariosRow,
                                                                                       ),
@@ -2289,7 +2305,10 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                                                   return Material(
                                                                                     color: Colors.transparent,
                                                                                     child: GestureDetector(
-                                                                                      onTap: () => FocusScope.of(dialogContext).unfocus(),
+                                                                                      onTap: () {
+                                                                                        FocusScope.of(dialogContext).unfocus();
+                                                                                        FocusManager.instance.primaryFocus?.unfocus();
+                                                                                      },
                                                                                       child: DropdownUsuarioAdminEditWidget(
                                                                                         usuarioid: listViewUsuariosRow,
                                                                                       ),

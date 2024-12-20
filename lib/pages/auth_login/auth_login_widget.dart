@@ -7,6 +7,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:math';
+import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
@@ -135,7 +136,10 @@ class _AuthLoginWidgetState extends State<AuthLoginWidget>
         title: 'auth_login',
         color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
         child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
+          onTap: () {
+            FocusScope.of(context).unfocus();
+            FocusManager.instance.primaryFocus?.unfocus();
+          },
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
@@ -1687,8 +1691,11 @@ class _AuthLoginWidgetState extends State<AuthLoginWidget>
                                                                               AlignmentDirectional(0.0, 0.0).resolve(Directionality.of(context)),
                                                                           child:
                                                                               GestureDetector(
-                                                                            onTap: () =>
-                                                                                FocusScope.of(dialogContext).unfocus(),
+                                                                            onTap:
+                                                                                () {
+                                                                              FocusScope.of(dialogContext).unfocus();
+                                                                              FocusManager.instance.primaryFocus?.unfocus();
+                                                                            },
                                                                             child:
                                                                                 ModalMessageOkWidget(),
                                                                           ),

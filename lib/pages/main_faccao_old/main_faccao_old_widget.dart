@@ -6,6 +6,7 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:ui';
 import 'package:sticky_headers/sticky_headers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -49,7 +50,10 @@ class _MainFaccaoOldWidgetState extends State<MainFaccaoOldWidget> {
         title: 'main_faccao_old',
         color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
         child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
+          onTap: () {
+            FocusScope.of(context).unfocus();
+            FocusManager.instance.primaryFocus?.unfocus();
+          },
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -184,10 +188,15 @@ class _MainFaccaoOldWidgetState extends State<MainFaccaoOldWidget> {
                                                                       context)),
                                                           child:
                                                               GestureDetector(
-                                                            onTap: () =>
-                                                                FocusScope.of(
-                                                                        dialogContext)
-                                                                    .unfocus(),
+                                                            onTap: () {
+                                                              FocusScope.of(
+                                                                      dialogContext)
+                                                                  .unfocus();
+                                                              FocusManager
+                                                                  .instance
+                                                                  .primaryFocus
+                                                                  ?.unfocus();
+                                                            },
                                                             child:
                                                                 ModalFaccaoAddWidget(),
                                                           ),
@@ -268,10 +277,13 @@ class _MainFaccaoOldWidgetState extends State<MainFaccaoOldWidget> {
                                                     context: context,
                                                     builder: (context) {
                                                       return GestureDetector(
-                                                        onTap: () =>
-                                                            FocusScope.of(
-                                                                    context)
-                                                                .unfocus(),
+                                                        onTap: () {
+                                                          FocusScope.of(context)
+                                                              .unfocus();
+                                                          FocusManager.instance
+                                                              .primaryFocus
+                                                              ?.unfocus();
+                                                        },
                                                         child: Padding(
                                                           padding: MediaQuery
                                                               .viewInsetsOf(
@@ -1111,7 +1123,7 @@ class _MainFaccaoOldWidgetState extends State<MainFaccaoOldWidget> {
                                                                           child:
                                                                               Text(
                                                                             valueOrDefault<String>(
-                                                                              listViewFaccoesRow.fundadores.first,
+                                                                              listViewFaccoesRow.fundadores.firstOrNull,
                                                                               'sem informação',
                                                                             ),
                                                                             style: FlutterFlowTheme.of(context).bodyMedium.override(

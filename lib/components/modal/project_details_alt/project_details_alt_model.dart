@@ -5,6 +5,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:math';
+import 'dart:ui';
 import 'project_details_alt_widget.dart' show ProjectDetailsAltWidget;
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';

@@ -13,6 +13,7 @@ export 'tables/wappler_migrations.dart';
 export 'tables/membros_view.dart';
 export 'tables/procedimentos.dart';
 export 'tables/processos.dart';
+export 'tables/faccoes_view.dart';
 export 'tables/cargos.dart';
 export 'tables/usuarios.dart';
 export 'tables/membros.dart';
