@@ -870,8 +870,9 @@ class _WebNavWidgetState extends State<WebNavWidget>
                                                                       .light
                                                               ? Color(
                                                                   0xFF14181B)
-                                                              : Color(
-                                                                  0xFF57636C),
+                                                              : FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .primaryText,
                                                           fontSize: 14.0,
                                                           letterSpacing: 0.0,
                                                           fontWeight:
@@ -940,19 +941,15 @@ class _WebNavWidgetState extends State<WebNavWidget>
                                               children: [
                                                 Icon(
                                                   Icons.nightlight_round,
-                                                  color: valueOrDefault<Color>(
-                                                    Theme.of(context)
-                                                                .brightness ==
-                                                            Brightness.dark
-                                                        ? FlutterFlowTheme.of(
-                                                                context)
-                                                            .info
-                                                        : FlutterFlowTheme.of(
-                                                                context)
-                                                            .secondaryText,
-                                                    FlutterFlowTheme.of(context)
-                                                        .info,
-                                                  ),
+                                                  color: Theme.of(context)
+                                                              .brightness ==
+                                                          Brightness.light
+                                                      ? FlutterFlowTheme.of(
+                                                              context)
+                                                          .primaryText
+                                                      : FlutterFlowTheme.of(
+                                                              context)
+                                                          .secondaryText,
                                                   size: 16.0,
                                                 ),
                                                 Padding(
@@ -972,11 +969,12 @@ class _WebNavWidgetState extends State<WebNavWidget>
                                                           color: Theme.of(context)
                                                                       .brightness ==
                                                                   Brightness
-                                                                      .dark
+                                                                      .light
                                                               ? Color(
                                                                   0xFF14181B)
-                                                              : Color(
-                                                                  0xFF57636C),
+                                                              : FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .primaryText,
                                                           fontSize: 14.0,
                                                           letterSpacing: 0.0,
                                                           fontWeight:

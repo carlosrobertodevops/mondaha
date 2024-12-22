@@ -708,11 +708,10 @@ class _AuthLoginWidgetState extends State<AuthLoginWidget>
                                                                         9,
                                                                       ),
                                                                 );
-                                                                if ((_model.usuarioDiferenteNove !=
-                                                                            null &&
-                                                                        (_model.usuarioDiferenteNove)!
-                                                                            .isNotEmpty) ==
-                                                                    false) {
+                                                                if (!_model
+                                                                    .usuarioDiferenteNove!
+                                                                    .contains(
+                                                                        null)) {
                                                                   FFAppState()
                                                                           .UsuarioLiberado =
                                                                       true;

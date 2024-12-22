@@ -45,7 +45,7 @@ class BuscarEmAuthUsersNoSUPABASECall {
   }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'Buscar em Auth Users no SUPABASE ',
-      apiUrl: 'https://https://buzlazhtcndpegsnijcw.supabase.co/auth/v1/user',
+      apiUrl: 'https://buzlazhtcndpegsnijcw.supabase.co/auth/v1/user',
       callType: ApiCallType.GET,
       headers: {
         'apikey':
@@ -148,8 +148,7 @@ class UsuarioAddCall {
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'UsuarioAdd',
-      apiUrl:
-          'https://https://buzlazhtcndpegsnijcw.supabase.co/rest/v1/usuarios',
+      apiUrl: 'https://buzlazhtcndpegsnijcw.supabase.co/rest/v1/usuarios',
       callType: ApiCallType.POST,
       headers: {
         'Content-Type': 'application/json',
@@ -192,8 +191,7 @@ class ProcedimentosAddCall {
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'ProcedimentosAdd',
-      apiUrl:
-          'https://https://buzlazhtcndpegsnijcw.supabase.co/rest/v1/procedimentos',
+      apiUrl: 'https://buzlazhtcndpegsnijcw.supabase.co/rest/v1/procedimentos',
       callType: ApiCallType.POST,
       headers: {
         'apikey':
