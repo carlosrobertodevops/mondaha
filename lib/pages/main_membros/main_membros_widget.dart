@@ -787,8 +787,8 @@ class _MainMembrosWidgetState extends State<MainMembrosWidget>
                                                                               ClipRRect(
                                                                                 borderRadius: BorderRadius.circular(8.0),
                                                                                 child: CachedNetworkImage(
-                                                                                  fadeInDuration: Duration(milliseconds: 10),
-                                                                                  fadeOutDuration: Duration(milliseconds: 10),
+                                                                                  fadeInDuration: Duration(milliseconds: 100),
+                                                                                  fadeOutDuration: Duration(milliseconds: 100),
                                                                                   imageUrl: valueOrDefault<String>(
                                                                                     listViewMembrosViewRow.fotosPath.firstOrNull != '' ? listViewMembrosViewRow.fotosPath.firstOrNull : (Theme.of(context).brightness == Brightness.light ? FFAppState().MembrosImagePathLight : FFAppState().MembrosImagePathDark),
                                                                                     'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/rgxzhoyu6nbx/groups_96dp_99999_FILL0_wght400_GRAD0_opsz48.png',

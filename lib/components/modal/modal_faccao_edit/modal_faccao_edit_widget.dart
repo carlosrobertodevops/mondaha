@@ -328,47 +328,51 @@ class _ModalFaccaoEditWidgetState extends State<ModalFaccaoEditWidget>
                                           alignment:
                                               AlignmentDirectional(0.0, 0.0),
                                           children: [
-                                            Column(
-                                              mainAxisSize: MainAxisSize.max,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Icon(
-                                                  Icons.add_a_photo_outlined,
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .secondaryText,
-                                                  size: 72.0,
-                                                ),
-                                                Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          0.0, 12.0, 0.0, 0.0),
-                                                  child: Text(
-                                                    FFLocalizations.of(context)
-                                                        .getText(
-                                                      'xscprapi' /* Update foto */,
-                                                    ),
-                                                    style: FlutterFlowTheme.of(
+                                            if (_model.uploadImagemTemp ==
+                                                false)
+                                              Column(
+                                                mainAxisSize: MainAxisSize.max,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Icon(
+                                                    Icons.add_a_photo_outlined,
+                                                    color: FlutterFlowTheme.of(
                                                             context)
-                                                        .labelMedium
-                                                        .override(
-                                                          fontFamily:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .labelMediumFamily,
-                                                          letterSpacing: 0.0,
-                                                          useGoogleFonts: GoogleFonts
-                                                                  .asMap()
-                                                              .containsKey(
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .labelMediumFamily),
-                                                        ),
+                                                        .secondaryText,
+                                                    size: 72.0,
                                                   ),
-                                                ),
-                                              ],
-                                            ),
+                                                  Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(0.0, 12.0,
+                                                                0.0, 0.0),
+                                                    child: Text(
+                                                      FFLocalizations.of(
+                                                              context)
+                                                          .getText(
+                                                        'xscprapi' /* Update foto */,
+                                                      ),
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .labelMedium
+                                                              .override(
+                                                                fontFamily: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .labelMediumFamily,
+                                                                letterSpacing:
+                                                                    0.0,
+                                                                useGoogleFonts: GoogleFonts
+                                                                        .asMap()
+                                                                    .containsKey(
+                                                                        FlutterFlowTheme.of(context)
+                                                                            .labelMediumFamily),
+                                                              ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
                                             if (_model.uploadImagemTemp ==
                                                 false)
                                               Padding(
@@ -417,7 +421,7 @@ class _ModalFaccaoEditWidgetState extends State<ModalFaccaoEditWidget>
                           ),
                           Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 8.0, 0.0, 0.0),
+                                0.0, 16.0, 0.0, 0.0),
                             child: TextFormField(
                               controller: _model.txtNomeFaccaoTextController,
                               focusNode: _model.txtNomeFaccaoFocusNode,
@@ -427,78 +431,78 @@ class _ModalFaccaoEditWidgetState extends State<ModalFaccaoEditWidget>
                                 labelText: FFLocalizations.of(context).getText(
                                   'rq3zqf7i' /* Nome da facção */,
                                 ),
+                                labelStyle: FlutterFlowTheme.of(context)
+                                    .labelMedium
+                                    .override(
+                                      fontFamily: FlutterFlowTheme.of(context)
+                                          .labelMediumFamily,
+                                      letterSpacing: 0.0,
+                                      useGoogleFonts: GoogleFonts.asMap()
+                                          .containsKey(
+                                              FlutterFlowTheme.of(context)
+                                                  .labelMediumFamily),
+                                    ),
                                 hintText: FFLocalizations.of(context).getText(
                                   '2huj2jzx' /* Faction Name */,
                                 ),
                                 hintStyle: FlutterFlowTheme.of(context)
-                                    .headlineMedium
+                                    .labelMedium
                                     .override(
                                       fontFamily: FlutterFlowTheme.of(context)
-                                          .headlineMediumFamily,
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryText,
+                                          .labelMediumFamily,
                                       letterSpacing: 0.0,
-                                      fontWeight: FontWeight.normal,
                                       useGoogleFonts: GoogleFonts.asMap()
                                           .containsKey(
                                               FlutterFlowTheme.of(context)
-                                                  .headlineMediumFamily),
+                                                  .labelMediumFamily),
                                     ),
-                                enabledBorder: UnderlineInputBorder(
+                                enabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color:
                                         FlutterFlowTheme.of(context).alternate,
                                     width: 2.0,
                                   ),
-                                  borderRadius: const BorderRadius.only(
-                                    topLeft: Radius.circular(4.0),
-                                    topRight: Radius.circular(4.0),
-                                  ),
+                                  borderRadius: BorderRadius.circular(12.0),
                                 ),
-                                focusedBorder: UnderlineInputBorder(
+                                focusedBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color: FlutterFlowTheme.of(context).primary,
                                     width: 2.0,
                                   ),
-                                  borderRadius: const BorderRadius.only(
-                                    topLeft: Radius.circular(4.0),
-                                    topRight: Radius.circular(4.0),
-                                  ),
+                                  borderRadius: BorderRadius.circular(12.0),
                                 ),
-                                errorBorder: UnderlineInputBorder(
+                                errorBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color: FlutterFlowTheme.of(context).error,
                                     width: 2.0,
                                   ),
-                                  borderRadius: const BorderRadius.only(
-                                    topLeft: Radius.circular(4.0),
-                                    topRight: Radius.circular(4.0),
-                                  ),
+                                  borderRadius: BorderRadius.circular(12.0),
                                 ),
-                                focusedErrorBorder: UnderlineInputBorder(
+                                focusedErrorBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color: FlutterFlowTheme.of(context).error,
                                     width: 2.0,
                                   ),
-                                  borderRadius: const BorderRadius.only(
-                                    topLeft: Radius.circular(4.0),
-                                    topRight: Radius.circular(4.0),
-                                  ),
+                                  borderRadius: BorderRadius.circular(12.0),
                                 ),
+                                filled: true,
+                                fillColor: FlutterFlowTheme.of(context)
+                                    .secondaryBackground,
                                 contentPadding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 24.0, 0.0, 24.0),
+                                    20.0, 24.0, 20.0, 24.0),
                               ),
                               style: FlutterFlowTheme.of(context)
-                                  .headlineMedium
+                                  .bodyMedium
                                   .override(
                                     fontFamily: FlutterFlowTheme.of(context)
-                                        .headlineMediumFamily,
+                                        .bodyMediumFamily,
                                     letterSpacing: 0.0,
                                     useGoogleFonts: GoogleFonts.asMap()
                                         .containsKey(
                                             FlutterFlowTheme.of(context)
-                                                .headlineMediumFamily),
+                                                .bodyMediumFamily),
                                   ),
+                              cursorColor: FlutterFlowTheme.of(context).primary,
                               validator: _model
                                   .txtNomeFaccaoTextControllerValidator
                                   .asValidator(context),
@@ -506,7 +510,7 @@ class _ModalFaccaoEditWidgetState extends State<ModalFaccaoEditWidget>
                           ),
                           Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 12.0, 0.0, 12.0),
+                                0.0, 16.0, 0.0, 0.0),
                             child: TextFormField(
                               controller: _model.txtDescriptionTextController,
                               focusNode: _model.txtDescriptionFocusNode,
@@ -517,84 +521,78 @@ class _ModalFaccaoEditWidgetState extends State<ModalFaccaoEditWidget>
                                   '0lr3g0go' /* Descrição ou Biografia */,
                                 ),
                                 labelStyle: FlutterFlowTheme.of(context)
-                                    .labelLarge
+                                    .labelMedium
                                     .override(
                                       fontFamily: FlutterFlowTheme.of(context)
-                                          .labelLargeFamily,
+                                          .labelMediumFamily,
                                       letterSpacing: 0.0,
                                       useGoogleFonts: GoogleFonts.asMap()
                                           .containsKey(
                                               FlutterFlowTheme.of(context)
-                                                  .labelLargeFamily),
+                                                  .labelMediumFamily),
                                     ),
                                 hintText: FFLocalizations.of(context).getText(
                                   'krgsdp6s' /* Description here... */,
                                 ),
                                 hintStyle: FlutterFlowTheme.of(context)
-                                    .labelLarge
+                                    .labelMedium
                                     .override(
                                       fontFamily: FlutterFlowTheme.of(context)
-                                          .labelLargeFamily,
+                                          .labelMediumFamily,
                                       letterSpacing: 0.0,
                                       useGoogleFonts: GoogleFonts.asMap()
                                           .containsKey(
                                               FlutterFlowTheme.of(context)
-                                                  .labelLargeFamily),
+                                                  .labelMediumFamily),
                                     ),
-                                enabledBorder: UnderlineInputBorder(
+                                enabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color:
                                         FlutterFlowTheme.of(context).alternate,
                                     width: 2.0,
                                   ),
-                                  borderRadius: const BorderRadius.only(
-                                    topLeft: Radius.circular(4.0),
-                                    topRight: Radius.circular(4.0),
-                                  ),
+                                  borderRadius: BorderRadius.circular(12.0),
                                 ),
-                                focusedBorder: UnderlineInputBorder(
+                                focusedBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color: FlutterFlowTheme.of(context).primary,
                                     width: 2.0,
                                   ),
-                                  borderRadius: const BorderRadius.only(
-                                    topLeft: Radius.circular(4.0),
-                                    topRight: Radius.circular(4.0),
-                                  ),
+                                  borderRadius: BorderRadius.circular(12.0),
                                 ),
-                                errorBorder: UnderlineInputBorder(
+                                errorBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color: FlutterFlowTheme.of(context).error,
                                     width: 2.0,
                                   ),
-                                  borderRadius: const BorderRadius.only(
-                                    topLeft: Radius.circular(4.0),
-                                    topRight: Radius.circular(4.0),
-                                  ),
+                                  borderRadius: BorderRadius.circular(12.0),
                                 ),
-                                focusedErrorBorder: UnderlineInputBorder(
+                                focusedErrorBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color: FlutterFlowTheme.of(context).error,
                                     width: 2.0,
                                   ),
-                                  borderRadius: const BorderRadius.only(
-                                    topLeft: Radius.circular(4.0),
-                                    topRight: Radius.circular(4.0),
-                                  ),
+                                  borderRadius: BorderRadius.circular(12.0),
                                 ),
+                                filled: true,
+                                fillColor: FlutterFlowTheme.of(context)
+                                    .secondaryBackground,
+                                contentPadding: EdgeInsetsDirectional.fromSTEB(
+                                    20.0, 24.0, 20.0, 24.0),
                               ),
                               style: FlutterFlowTheme.of(context)
-                                  .bodyLarge
+                                  .bodyMedium
                                   .override(
                                     fontFamily: FlutterFlowTheme.of(context)
-                                        .bodyLargeFamily,
+                                        .bodyMediumFamily,
                                     letterSpacing: 0.0,
                                     useGoogleFonts: GoogleFonts.asMap()
                                         .containsKey(
                                             FlutterFlowTheme.of(context)
-                                                .bodyLargeFamily),
+                                                .bodyMediumFamily),
                                   ),
-                              maxLines: 5,
+                              maxLines: 3,
+                              cursorColor: FlutterFlowTheme.of(context).primary,
                               validator: _model
                                   .txtDescriptionTextControllerValidator
                                   .asValidator(context),

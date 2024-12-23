@@ -12,6 +12,7 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:ui';
 import 'package:sticky_headers/sticky_headers.dart';
 import 'package:aligned_dialog/aligned_dialog.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -56,8 +57,6 @@ class _MainFaccoesWidgetState extends State<MainFaccoesWidget>
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Title(
         title: 'main_faccoes',
         color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
@@ -691,10 +690,20 @@ class _MainFaccoesWidgetState extends State<MainFaccoesWidget>
                                                                           children: [
                                                                             ClipRRect(
                                                                               borderRadius: BorderRadius.circular(8.0),
-                                                                              child: Image.network(
-                                                                                valueOrDefault<String>(
-                                                                                  listViewFaccoesRow.imagemPath != '' ? listViewFaccoesRow.imagemPath : (Theme.of(context).brightness == Brightness.light ? FFAppState().FaccoesImagePathLight : FFAppState().FaccoesImagePathDark),
-                                                                                  'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/gqts8womzdbd/account_tree_96dp_99999_FILL0_wght400_GRAD0_opsz48.png',
+                                                                              child: CachedNetworkImage(
+                                                                                fadeInDuration: Duration(milliseconds: 100),
+                                                                                fadeOutDuration: Duration(milliseconds: 100),
+                                                                                imageUrl: valueOrDefault<String>(
+                                                                                  listViewFaccoesRow.imagemPath != ''
+                                                                                      ? valueOrDefault<String>(
+                                                                                          listViewFaccoesRow.imagemPath,
+                                                                                          'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/8dptd6ulegwr/account_tree_24dp_00000_FILL0_wght400_GRAD0_opsz24.png',
+                                                                                        )
+                                                                                      : valueOrDefault<String>(
+                                                                                          Theme.of(context).brightness == Brightness.light ? 'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/0p4owp0uortf/account_circle_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.png' : 'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/ry2lp3jfmynn/account_tree_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.png',
+                                                                                          'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/ry2lp3jfmynn/account_tree_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.png',
+                                                                                        ),
+                                                                                  'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/8dptd6ulegwr/account_tree_24dp_00000_FILL0_wght400_GRAD0_opsz24.png',
                                                                                 ),
                                                                                 width: 50.0,
                                                                                 height: 50.0,

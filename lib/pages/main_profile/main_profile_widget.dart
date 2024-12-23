@@ -326,17 +326,28 @@ class _MainProfileWidgetState extends State<MainProfileWidget>
                                                         fadeInDuration:
                                                             Duration(
                                                                 milliseconds:
-                                                                    10),
+                                                                    100),
                                                         fadeOutDuration:
                                                             Duration(
                                                                 milliseconds:
-                                                                    10),
+                                                                    100),
                                                         imageUrl:
                                                             valueOrDefault<
                                                                 String>(
-                                                          FFAppState()
-                                                              .UsuarioAtualFoto,
-                                                          'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/fg8v0c6ta78d/account_circle_outline_icon_140062.png',
+                                                          FFAppState().UsuarioAtualFoto !=
+                                                                      null &&
+                                                                  FFAppState()
+                                                                          .UsuarioAtualFoto !=
+                                                                      ''
+                                                              ? FFAppState()
+                                                                  .UsuarioAtualFoto
+                                                              : (Theme.of(context)
+                                                                          .brightness ==
+                                                                      Brightness
+                                                                          .light
+                                                                  ? 'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/knv28f1mlohg/account_circle_24dp_99999_FILL0_wght400_GRAD0_opsz24.png'
+                                                                  : 'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/0p4owp0uortf/account_circle_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.png'),
+                                                          'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/knv28f1mlohg/account_circle_24dp_99999_FILL0_wght400_GRAD0_opsz24.png',
                                                         ),
                                                         fit: BoxFit.cover,
                                                         errorWidget: (context,

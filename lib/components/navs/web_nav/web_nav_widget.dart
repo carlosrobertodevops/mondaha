@@ -1070,8 +1070,18 @@ class _WebNavWidgetState extends State<WebNavWidget>
                                           fadeOutDuration:
                                               Duration(milliseconds: 500),
                                           imageUrl: valueOrDefault<String>(
-                                            FFAppState().UsuarioAtualFoto,
-                                            'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/79wfovohiaq7/account_circle_96dp_99999_FILL0_wght400_GRAD0_opsz48.png',
+                                            FFAppState().UsuarioAtualFoto !=
+                                                        null &&
+                                                    FFAppState()
+                                                            .UsuarioAtualFoto !=
+                                                        ''
+                                                ? FFAppState().UsuarioAtualFoto
+                                                : (Theme.of(context)
+                                                            .brightness ==
+                                                        Brightness.light
+                                                    ? 'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/knv28f1mlohg/account_circle_24dp_99999_FILL0_wght400_GRAD0_opsz24.png'
+                                                    : 'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/0p4owp0uortf/account_circle_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.png'),
+                                            'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/knv28f1mlohg/account_circle_24dp_99999_FILL0_wght400_GRAD0_opsz24.png',
                                           ),
                                           width: 44.0,
                                           height: 44.0,
@@ -1853,12 +1863,23 @@ class _WebNavWidgetState extends State<WebNavWidget>
                                               BorderRadius.circular(50.0),
                                           child: CachedNetworkImage(
                                             fadeInDuration:
-                                                Duration(milliseconds: 10),
+                                                Duration(milliseconds: 100),
                                             fadeOutDuration:
-                                                Duration(milliseconds: 10),
+                                                Duration(milliseconds: 100),
                                             imageUrl: valueOrDefault<String>(
-                                              FFAppState().UsuarioAtualFoto,
-                                              'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/79wfovohiaq7/account_circle_96dp_99999_FILL0_wght400_GRAD0_opsz48.png',
+                                              FFAppState().UsuarioAtualFoto !=
+                                                          null &&
+                                                      FFAppState()
+                                                              .UsuarioAtualFoto !=
+                                                          ''
+                                                  ? FFAppState()
+                                                      .UsuarioAtualFoto
+                                                  : (Theme.of(context)
+                                                              .brightness ==
+                                                          Brightness.light
+                                                      ? 'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/knv28f1mlohg/account_circle_24dp_99999_FILL0_wght400_GRAD0_opsz24.png'
+                                                      : 'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/0p4owp0uortf/account_circle_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.png'),
+                                              'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/knv28f1mlohg/account_circle_24dp_99999_FILL0_wght400_GRAD0_opsz24.png',
                                             ),
                                             width: 44.0,
                                             height: 44.0,

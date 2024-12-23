@@ -1653,6 +1653,10 @@ class _AuthLoginWidgetState extends State<AuthLoginWidget>
                                                                     return;
                                                                   }
 
+                                                                  await Future.delayed(
+                                                                      const Duration(
+                                                                          milliseconds:
+                                                                              1000));
                                                                   if (loggedIn ==
                                                                       true) {
                                                                     _model.outputUsuarioAdd =

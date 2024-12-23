@@ -89,6 +89,11 @@ class FFAppState extends ChangeNotifier {
       _CountMaps = await secureStorage.getInt('ff_CountMaps') ?? _CountMaps;
     });
     await _safeInitAsync(() async {
+      _FaccoesImagePathLight =
+          await secureStorage.getString('ff_FaccoesImagePathLight') ??
+              _FaccoesImagePathLight;
+    });
+    await _safeInitAsync(() async {
       _NordesteLngLat = latLngFromString(
               await secureStorage.getString('ff_NordesteLngLat')) ??
           _NordesteLngLat;
@@ -318,6 +323,11 @@ class FFAppState extends ChangeNotifier {
   String get FaccoesImagePathLight => _FaccoesImagePathLight;
   set FaccoesImagePathLight(String value) {
     _FaccoesImagePathLight = value;
+    secureStorage.setString('ff_FaccoesImagePathLight', value);
+  }
+
+  void deleteFaccoesImagePathLight() {
+    secureStorage.delete(key: 'ff_FaccoesImagePathLight');
   }
 
   String _FaccoesImagePathDark =

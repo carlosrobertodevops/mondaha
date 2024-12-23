@@ -804,15 +804,15 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                                                             (Theme.of(context).brightness == Brightness.light) == true
                                                                                                 ? valueOrDefault<String>(
                                                                                                     FFAppState().UsuariosImagePathLight,
-                                                                                                    'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/79wfovohiaq7/account_circle_96dp_99999_FILL0_wght400_GRAD0_opsz48.png',
+                                                                                                    'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/knv28f1mlohg/account_circle_24dp_99999_FILL0_wght400_GRAD0_opsz24.png',
                                                                                                   )
                                                                                                 : valueOrDefault<String>(
                                                                                                     FFAppState().UsuariosImagePathDark,
-                                                                                                    'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/z72pv79eas1j/account_circle_96dp_E8EAED_FILL0_wght400_GRAD0_opsz48.png',
+                                                                                                    'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/0p4owp0uortf/account_circle_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.png',
                                                                                                   ),
                                                                                             'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/79wfovohiaq7/account_circle_96dp_99999_FILL0_wght400_GRAD0_opsz48.png',
                                                                                           ),
-                                                                                    'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/79wfovohiaq7/account_circle_96dp_99999_FILL0_wght400_GRAD0_opsz48.png',
+                                                                                    'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/knv28f1mlohg/account_circle_24dp_99999_FILL0_wght400_GRAD0_opsz24.png',
                                                                                   ),
                                                                                   fit: BoxFit.cover,
                                                                                   errorWidget: (context, error, stackTrace) => Image.asset(
