@@ -1,6 +1,7 @@
 import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
 import '/backend/supabase/supabase.dart';
+import '/components/toasts/toast03/toast03_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_autocomplete_options_list.dart';
 import '/flutter_flow/flutter_flow_choice_chips.dart';
@@ -189,6 +190,8 @@ class ModalMembrosAddModel extends FlutterFlowModel<ModalMembrosAddWidget> {
     return null;
   }
 
+  // Stores action output result for [Backend Call - Query Rows] action in txt_nome_completo widget.
+  List<MembrosRow>? existeMmbro;
   // State field(s) for txt_alcunha_add widget.
   FocusNode? txtAlcunhaAddFocusNode;
   TextEditingController? txtAlcunhaAddTextController;

@@ -1,4 +1,3 @@
-import '/auth/base_auth_user_provider.dart';
 import '/auth/supabase_auth/auth_util.dart';
 import '/backend/supabase/supabase.dart';
 import '/components/modal/modal_message_ok/modal_message_ok_widget.dart';
@@ -140,6 +139,8 @@ class AuthLoginModel extends FlutterFlowModel<AuthLoginWidget> {
     return null;
   }
 
+  // Stores action output result for [Backend Call - Query Rows] action in btn-signin widget.
+  List<UsuariosRow>? usuarioExiste;
   // Stores action output result for [Backend Call - Insert Row] action in btn-signin widget.
   UsuariosRow? outputUsuarioAdd;
 

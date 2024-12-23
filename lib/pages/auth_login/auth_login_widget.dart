@@ -1,4 +1,3 @@
-import '/auth/base_auth_user_provider.dart';
 import '/auth/supabase_auth/auth_util.dart';
 import '/backend/supabase/supabase.dart';
 import '/components/modal/modal_message_ok/modal_message_ok_widget.dart';
@@ -1615,50 +1614,62 @@ class _AuthLoginWidgetState extends State<AuthLoginWidget>
                                                                     () async {
                                                                   logFirebaseEvent(
                                                                       'AUTH_LOGIN_PAGE_btn-signin_ON_TAP');
-                                                                  GoRouter.of(
-                                                                          context)
-                                                                      .prepareAuthEvent();
-                                                                  if (_model
-                                                                          .txtSignupPasswordTextController
-                                                                          .text !=
+                                                                  _model.usuarioExiste =
+                                                                      await UsuariosTable()
+                                                                          .queryRows(
+                                                                    queryFn: (q) =>
+                                                                        q.eqOrNull(
+                                                                      'email',
                                                                       _model
-                                                                          .txtSignupConfirmTextController
-                                                                          .text) {
-                                                                    ScaffoldMessenger.of(
-                                                                            context)
-                                                                        .showSnackBar(
-                                                                      SnackBar(
-                                                                        content:
-                                                                            Text(
-                                                                          'Passwords don\'t match!',
-                                                                        ),
-                                                                      ),
-                                                                    );
-                                                                    return;
-                                                                  }
-
-                                                                  final user =
-                                                                      await authManager
-                                                                          .createAccountWithEmail(
-                                                                    context,
-                                                                    _model
-                                                                        .txtSignupEmailTextController
-                                                                        .text,
-                                                                    _model
-                                                                        .txtSignupPasswordTextController
-                                                                        .text,
+                                                                          .txtSignupEmailTextController
+                                                                          .text,
+                                                                    ),
                                                                   );
-                                                                  if (user ==
-                                                                      null) {
-                                                                    return;
-                                                                  }
+                                                                  if (!_model
+                                                                      .usuarioExiste!
+                                                                      .contains(
+                                                                          null)) {
+                                                                    GoRouter.of(
+                                                                            context)
+                                                                        .prepareAuthEvent();
+                                                                    if (_model
+                                                                            .txtSignupPasswordTextController
+                                                                            .text !=
+                                                                        _model
+                                                                            .txtSignupConfirmTextController
+                                                                            .text) {
+                                                                      ScaffoldMessenger.of(
+                                                                              context)
+                                                                          .showSnackBar(
+                                                                        SnackBar(
+                                                                          content:
+                                                                              Text(
+                                                                            'Passwords don\'t match!',
+                                                                          ),
+                                                                        ),
+                                                                      );
+                                                                      return;
+                                                                    }
 
-                                                                  await Future.delayed(
-                                                                      const Duration(
-                                                                          milliseconds:
-                                                                              1000));
-                                                                  if (loggedIn ==
-                                                                      true) {
+                                                                    final user =
+                                                                        await authManager
+                                                                            .createAccountWithEmail(
+                                                                      context,
+                                                                      _model
+                                                                          .txtSignupEmailTextController
+                                                                          .text,
+                                                                      _model
+                                                                          .txtSignupPasswordTextController
+                                                                          .text,
+                                                                    );
+                                                                    if (user ==
+                                                                        null) {
+                                                                      return;
+                                                                    }
+
+                                                                    await Future.delayed(const Duration(
+                                                                        milliseconds:
+                                                                            1000));
                                                                     _model.outputUsuarioAdd =
                                                                         await UsuariosTable()
                                                                             .insert({
@@ -1742,6 +1753,11 @@ class _AuthLoginWidgetState extends State<AuthLoginWidget>
                                                                           ?.clear();
                                                                     });
                                                                   } else {
+                                                                    context.pushNamedAuth(
+                                                                        'auth_login',
+                                                                        context
+                                                                            .mounted);
+
                                                                     await showDialog(
                                                                       context:
                                                                           context,
@@ -1751,7 +1767,7 @@ class _AuthLoginWidgetState extends State<AuthLoginWidget>
                                                                           title:
                                                                               Text('ERRO !'),
                                                                           content:
-                                                                              Text('Infelizmente, o cadastro não foi realizado. Por favor, tente novamente.'),
+                                                                              Text('Infelizmente, o cadastro não foi realizado. Por favor, tente novamente.  Usuário já existe.'),
                                                                           actions: [
                                                                             TextButton(
                                                                               onPressed: () => Navigator.pop(alertDialogContext),
@@ -1761,11 +1777,6 @@ class _AuthLoginWidgetState extends State<AuthLoginWidget>
                                                                         );
                                                                       },
                                                                     );
-
-                                                                    context.pushNamedAuth(
-                                                                        'auth_login',
-                                                                        context
-                                                                            .mounted);
                                                                   }
 
                                                                   safeSetState(

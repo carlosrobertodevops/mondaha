@@ -1,6 +1,7 @@
 import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
 import '/backend/supabase/supabase.dart';
+import '/components/toasts/toast03/toast03_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_autocomplete_options_list.dart';
 import '/flutter_flow/flutter_flow_choice_chips.dart';
@@ -67,7 +68,38 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
     )..addListener(() => safeSetState(() {}));
     _model.txtNomeCompletoTextController ??= TextEditingController();
     _model.txtNomeCompletoFocusNode ??= FocusNode();
+    _model.txtNomeCompletoFocusNode!.addListener(
+      () async {
+        logFirebaseEvent('MODAL_MEMBROS_ADD_txt_nome_completo_ON_F');
+        _model.existeMmbro = await MembrosTable().queryRows(
+          queryFn: (q) => q
+              .eqOrNull(
+                'nome_completo',
+                _model.txtNomeCompletoTextController.text,
+              )
+              .order('nome_completo'),
+        );
+        if (_model.existeMmbro?.contains(null) != false) {
+          await showDialog(
+            context: context,
+            builder: (dialogContext) {
+              return Dialog(
+                elevation: 0,
+                insetPadding: EdgeInsets.zero,
+                backgroundColor: Colors.transparent,
+                alignment: AlignmentDirectional(0.0, 0.0)
+                    .resolve(Directionality.of(context)),
+                child: Toast03Widget(
+                  texto: 'Nome  já existe  !!!',
+                ),
+              );
+            },
+          );
+        }
 
+        safeSetState(() {});
+      },
+    );
     _model.txtAlcunhaAddTextController ??= TextEditingController();
     _model.txtAlcunhaAddFocusNode ??= FocusNode();
 
@@ -942,87 +974,89 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                                 children: [
                                                                                   Expanded(
                                                                                     flex: 10,
-                                                                                    child: TextFormField(
-                                                                                      controller: _model.txtNomeCompletoTextController,
-                                                                                      focusNode: _model.txtNomeCompletoFocusNode,
-                                                                                      onChanged: (_) => EasyDebounce.debounce(
-                                                                                        '_model.txtNomeCompletoTextController',
-                                                                                        Duration(milliseconds: 2000),
-                                                                                        () => safeSetState(() {}),
-                                                                                      ),
-                                                                                      autofocus: false,
-                                                                                      textCapitalization: TextCapitalization.words,
-                                                                                      obscureText: false,
-                                                                                      decoration: InputDecoration(
-                                                                                        labelText: FFLocalizations.of(context).getText(
-                                                                                          'npcbcpl9' /* Nome completo */,
+                                                                                    child: Builder(
+                                                                                      builder: (context) => TextFormField(
+                                                                                        controller: _model.txtNomeCompletoTextController,
+                                                                                        focusNode: _model.txtNomeCompletoFocusNode,
+                                                                                        onChanged: (_) => EasyDebounce.debounce(
+                                                                                          '_model.txtNomeCompletoTextController',
+                                                                                          Duration(milliseconds: 2000),
+                                                                                          () => safeSetState(() {}),
                                                                                         ),
-                                                                                        labelStyle: FlutterFlowTheme.of(context).labelMedium.override(
-                                                                                              fontFamily: FlutterFlowTheme.of(context).labelMediumFamily,
-                                                                                              letterSpacing: 0.0,
-                                                                                              useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).labelMediumFamily),
+                                                                                        autofocus: false,
+                                                                                        textCapitalization: TextCapitalization.words,
+                                                                                        obscureText: false,
+                                                                                        decoration: InputDecoration(
+                                                                                          labelText: FFLocalizations.of(context).getText(
+                                                                                            'npcbcpl9' /* Nome completo */,
+                                                                                          ),
+                                                                                          labelStyle: FlutterFlowTheme.of(context).labelMedium.override(
+                                                                                                fontFamily: FlutterFlowTheme.of(context).labelMediumFamily,
+                                                                                                letterSpacing: 0.0,
+                                                                                                useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).labelMediumFamily),
+                                                                                              ),
+                                                                                          alignLabelWithHint: true,
+                                                                                          hintText: FFLocalizations.of(context).getText(
+                                                                                            'eyhgaf81' /* Nome completo */,
+                                                                                          ),
+                                                                                          hintStyle: FlutterFlowTheme.of(context).labelMedium.override(
+                                                                                                fontFamily: FlutterFlowTheme.of(context).labelMediumFamily,
+                                                                                                letterSpacing: 0.0,
+                                                                                                useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).labelMediumFamily),
+                                                                                              ),
+                                                                                          enabledBorder: OutlineInputBorder(
+                                                                                            borderSide: BorderSide(
+                                                                                              color: FlutterFlowTheme.of(context).alternate,
+                                                                                              width: 2.0,
                                                                                             ),
-                                                                                        alignLabelWithHint: true,
-                                                                                        hintText: FFLocalizations.of(context).getText(
-                                                                                          'eyhgaf81' /* Nome completo */,
-                                                                                        ),
-                                                                                        hintStyle: FlutterFlowTheme.of(context).labelMedium.override(
-                                                                                              fontFamily: FlutterFlowTheme.of(context).labelMediumFamily,
-                                                                                              letterSpacing: 0.0,
-                                                                                              useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).labelMediumFamily),
+                                                                                            borderRadius: BorderRadius.circular(12.0),
+                                                                                          ),
+                                                                                          focusedBorder: OutlineInputBorder(
+                                                                                            borderSide: BorderSide(
+                                                                                              color: FlutterFlowTheme.of(context).primary,
+                                                                                              width: 2.0,
                                                                                             ),
-                                                                                        enabledBorder: OutlineInputBorder(
-                                                                                          borderSide: BorderSide(
-                                                                                            color: FlutterFlowTheme.of(context).alternate,
-                                                                                            width: 2.0,
+                                                                                            borderRadius: BorderRadius.circular(12.0),
                                                                                           ),
-                                                                                          borderRadius: BorderRadius.circular(12.0),
-                                                                                        ),
-                                                                                        focusedBorder: OutlineInputBorder(
-                                                                                          borderSide: BorderSide(
-                                                                                            color: FlutterFlowTheme.of(context).primary,
-                                                                                            width: 2.0,
+                                                                                          errorBorder: OutlineInputBorder(
+                                                                                            borderSide: BorderSide(
+                                                                                              color: FlutterFlowTheme.of(context).error,
+                                                                                              width: 2.0,
+                                                                                            ),
+                                                                                            borderRadius: BorderRadius.circular(12.0),
                                                                                           ),
-                                                                                          borderRadius: BorderRadius.circular(12.0),
-                                                                                        ),
-                                                                                        errorBorder: OutlineInputBorder(
-                                                                                          borderSide: BorderSide(
-                                                                                            color: FlutterFlowTheme.of(context).error,
-                                                                                            width: 2.0,
+                                                                                          focusedErrorBorder: OutlineInputBorder(
+                                                                                            borderSide: BorderSide(
+                                                                                              color: FlutterFlowTheme.of(context).error,
+                                                                                              width: 2.0,
+                                                                                            ),
+                                                                                            borderRadius: BorderRadius.circular(12.0),
                                                                                           ),
-                                                                                          borderRadius: BorderRadius.circular(12.0),
+                                                                                          filled: true,
+                                                                                          fillColor: FlutterFlowTheme.of(context).secondaryBackground,
+                                                                                          contentPadding: EdgeInsetsDirectional.fromSTEB(20.0, 24.0, 20.0, 24.0),
+                                                                                          suffixIcon: _model.txtNomeCompletoTextController!.text.isNotEmpty
+                                                                                              ? InkWell(
+                                                                                                  onTap: () async {
+                                                                                                    _model.txtNomeCompletoTextController?.clear();
+                                                                                                    safeSetState(() {});
+                                                                                                  },
+                                                                                                  child: Icon(
+                                                                                                    Icons.clear,
+                                                                                                    color: FlutterFlowTheme.of(context).secondaryText,
+                                                                                                    size: 24.0,
+                                                                                                  ),
+                                                                                                )
+                                                                                              : null,
                                                                                         ),
-                                                                                        focusedErrorBorder: OutlineInputBorder(
-                                                                                          borderSide: BorderSide(
-                                                                                            color: FlutterFlowTheme.of(context).error,
-                                                                                            width: 2.0,
-                                                                                          ),
-                                                                                          borderRadius: BorderRadius.circular(12.0),
-                                                                                        ),
-                                                                                        filled: true,
-                                                                                        fillColor: FlutterFlowTheme.of(context).secondaryBackground,
-                                                                                        contentPadding: EdgeInsetsDirectional.fromSTEB(20.0, 24.0, 20.0, 24.0),
-                                                                                        suffixIcon: _model.txtNomeCompletoTextController!.text.isNotEmpty
-                                                                                            ? InkWell(
-                                                                                                onTap: () async {
-                                                                                                  _model.txtNomeCompletoTextController?.clear();
-                                                                                                  safeSetState(() {});
-                                                                                                },
-                                                                                                child: Icon(
-                                                                                                  Icons.clear,
-                                                                                                  color: FlutterFlowTheme.of(context).secondaryText,
-                                                                                                  size: 24.0,
-                                                                                                ),
-                                                                                              )
-                                                                                            : null,
+                                                                                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                              fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                                              letterSpacing: 0.0,
+                                                                                              useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                                            ),
+                                                                                        cursorColor: FlutterFlowTheme.of(context).primary,
+                                                                                        validator: _model.txtNomeCompletoTextControllerValidator.asValidator(context),
                                                                                       ),
-                                                                                      style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                            fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                            letterSpacing: 0.0,
-                                                                                            useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                                          ),
-                                                                                      cursorColor: FlutterFlowTheme.of(context).primary,
-                                                                                      validator: _model.txtNomeCompletoTextControllerValidator.asValidator(context),
                                                                                     ),
                                                                                   ),
                                                                                 ].divide(SizedBox(width: 10.0)),

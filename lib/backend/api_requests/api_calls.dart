@@ -14,11 +14,10 @@ const _kPrivateApiFunctionName = 'ffPrivateApiCall';
 class DeletarUserAuthNoSUPABASECall {
   static Future<ApiCallResponse> call({
     String? email = '',
-    String? uid = '',
   }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'Deletar User Auth no SUPABASE',
-      apiUrl: 'https://buzlazhtcndpegsnijcw.supabase.co',
+      apiUrl: 'https://buzlazhtcndpegsnijcw.supabase.co/auth/v1/user',
       callType: ApiCallType.DELETE,
       headers: {
         'Content-Type': 'application/json',
@@ -41,7 +40,6 @@ class DeletarUserAuthNoSUPABASECall {
 class BuscarEmAuthUsersNoSUPABASECall {
   static Future<ApiCallResponse> call({
     String? email = '',
-    String? password = '',
   }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'Buscar em Auth Users no SUPABASE ',
