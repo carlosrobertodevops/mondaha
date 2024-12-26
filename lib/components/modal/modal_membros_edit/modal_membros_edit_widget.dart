@@ -265,6 +265,8 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Align(
       alignment: AlignmentDirectional(0.0, 0.0),
       child: ClipRRect(
@@ -698,11 +700,6 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                                           var selectedUploadedFiles = <FFUploadedFile>[];
 
                                                                                                           try {
-                                                                                                            showUploadMessage(
-                                                                                                              context,
-                                                                                                              'Uploading file...',
-                                                                                                              showLoading: true,
-                                                                                                            );
                                                                                                             selectedUploadedFiles = selectedMedia
                                                                                                                 .map((m) => FFUploadedFile(
                                                                                                                       name: m.storagePath.split('/').last,
@@ -713,23 +710,18 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                                                     ))
                                                                                                                 .toList();
                                                                                                           } finally {
-                                                                                                            ScaffoldMessenger.of(context).hideCurrentSnackBar();
                                                                                                             _model.isDataUploading1 = false;
                                                                                                           }
                                                                                                           if (selectedUploadedFiles.length == selectedMedia.length) {
                                                                                                             safeSetState(() {
                                                                                                               _model.uploadedLocalFiles1 = selectedUploadedFiles;
                                                                                                             });
-                                                                                                            showUploadMessage(context, 'Success!');
                                                                                                           } else {
                                                                                                             safeSetState(() {});
-                                                                                                            showUploadMessage(context, 'Failed to upload data');
                                                                                                             return;
                                                                                                           }
                                                                                                         }
 
-                                                                                                        _model.uploadImageTemp = true;
-                                                                                                        safeSetState(() {});
                                                                                                         _model.membrosFotosFileTemp = _model.uploadedLocalFiles1.toList().cast<FFUploadedFile>();
                                                                                                         _model.updatePage(() {});
                                                                                                       },
@@ -785,197 +777,196 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                                     children: [
                                                                                                       Stack(
                                                                                                         children: [
-                                                                                                          if (_model.uploadImageTemp == false)
-                                                                                                            Builder(
-                                                                                                              builder: (context) {
-                                                                                                                final fotosMembroPaths = _model.membrosFotoPathEdit.toList().take(6).toList();
+                                                                                                          Builder(
+                                                                                                            builder: (context) {
+                                                                                                              final fotosMembroPaths = _model.membrosFotoPathEdit.toList().take(6).toList();
 
-                                                                                                                return SingleChildScrollView(
-                                                                                                                  scrollDirection: Axis.horizontal,
-                                                                                                                  child: Row(
-                                                                                                                    mainAxisSize: MainAxisSize.max,
-                                                                                                                    mainAxisAlignment: MainAxisAlignment.start,
-                                                                                                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                                                                                                    children: List.generate(fotosMembroPaths.length, (fotosMembroPathsIndex) {
-                                                                                                                      final fotosMembroPathsItem = fotosMembroPaths[fotosMembroPathsIndex];
-                                                                                                                      return Visibility(
-                                                                                                                        visible: widget!.membrosFotos!.length >= 1,
-                                                                                                                        child: Align(
-                                                                                                                          alignment: AlignmentDirectional(-1.0, 0.0),
-                                                                                                                          child: Container(
-                                                                                                                            width: 100.0,
-                                                                                                                            height: 100.0,
-                                                                                                                            decoration: BoxDecoration(
-                                                                                                                              color: FlutterFlowTheme.of(context).accent1,
-                                                                                                                              borderRadius: BorderRadius.circular(12.0),
-                                                                                                                              shape: BoxShape.rectangle,
-                                                                                                                              border: Border.all(
-                                                                                                                                color: FlutterFlowTheme.of(context).primary,
-                                                                                                                                width: 2.0,
-                                                                                                                              ),
+                                                                                                              return SingleChildScrollView(
+                                                                                                                scrollDirection: Axis.horizontal,
+                                                                                                                child: Row(
+                                                                                                                  mainAxisSize: MainAxisSize.max,
+                                                                                                                  mainAxisAlignment: MainAxisAlignment.start,
+                                                                                                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                                                                                                  children: List.generate(fotosMembroPaths.length, (fotosMembroPathsIndex) {
+                                                                                                                    final fotosMembroPathsItem = fotosMembroPaths[fotosMembroPathsIndex];
+                                                                                                                    return Visibility(
+                                                                                                                      visible: widget!.membrosFotos!.length >= 0,
+                                                                                                                      child: Align(
+                                                                                                                        alignment: AlignmentDirectional(-1.0, 0.0),
+                                                                                                                        child: Container(
+                                                                                                                          width: 100.0,
+                                                                                                                          height: 100.0,
+                                                                                                                          decoration: BoxDecoration(
+                                                                                                                            color: FlutterFlowTheme.of(context).accent1,
+                                                                                                                            borderRadius: BorderRadius.circular(12.0),
+                                                                                                                            shape: BoxShape.rectangle,
+                                                                                                                            border: Border.all(
+                                                                                                                              color: FlutterFlowTheme.of(context).primary,
+                                                                                                                              width: 2.0,
                                                                                                                             ),
-                                                                                                                            child: SingleChildScrollView(
-                                                                                                                              primary: false,
-                                                                                                                              child: Column(
-                                                                                                                                mainAxisSize: MainAxisSize.max,
-                                                                                                                                mainAxisAlignment: MainAxisAlignment.center,
-                                                                                                                                children: [
-                                                                                                                                  Expanded(
-                                                                                                                                    child: Column(
-                                                                                                                                      mainAxisSize: MainAxisSize.min,
-                                                                                                                                      children: [
-                                                                                                                                        Expanded(
-                                                                                                                                          child: Container(
-                                                                                                                                            height: 100.0,
-                                                                                                                                            child: Stack(
-                                                                                                                                              children: [
-                                                                                                                                                Padding(
-                                                                                                                                                  padding: EdgeInsets.all(1.0),
+                                                                                                                          ),
+                                                                                                                          child: SingleChildScrollView(
+                                                                                                                            primary: false,
+                                                                                                                            child: Column(
+                                                                                                                              mainAxisSize: MainAxisSize.max,
+                                                                                                                              mainAxisAlignment: MainAxisAlignment.center,
+                                                                                                                              children: [
+                                                                                                                                Expanded(
+                                                                                                                                  child: Column(
+                                                                                                                                    mainAxisSize: MainAxisSize.min,
+                                                                                                                                    children: [
+                                                                                                                                      Expanded(
+                                                                                                                                        child: Container(
+                                                                                                                                          height: 100.0,
+                                                                                                                                          child: Stack(
+                                                                                                                                            children: [
+                                                                                                                                              Padding(
+                                                                                                                                                padding: EdgeInsets.all(1.0),
+                                                                                                                                                child: InkWell(
+                                                                                                                                                  splashColor: Colors.transparent,
+                                                                                                                                                  focusColor: Colors.transparent,
+                                                                                                                                                  hoverColor: Colors.transparent,
+                                                                                                                                                  highlightColor: Colors.transparent,
+                                                                                                                                                  onTap: () async {
+                                                                                                                                                    logFirebaseEvent('MODAL_MEMBROS_EDIT_membro_foto_ON_TAP');
+                                                                                                                                                    await Navigator.push(
+                                                                                                                                                      context,
+                                                                                                                                                      PageTransition(
+                                                                                                                                                        type: PageTransitionType.fade,
+                                                                                                                                                        child: FlutterFlowExpandedImageView(
+                                                                                                                                                          image: CachedNetworkImage(
+                                                                                                                                                            fadeInDuration: Duration(milliseconds: 10),
+                                                                                                                                                            fadeOutDuration: Duration(milliseconds: 10),
+                                                                                                                                                            imageUrl: widget!.membrosFotos != null && (widget!.membrosFotos)!.isNotEmpty
+                                                                                                                                                                ? valueOrDefault<String>(
+                                                                                                                                                                    fotosMembroPathsItem,
+                                                                                                                                                                    'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/rgxzhoyu6nbx/groups_96dp_99999_FILL0_wght400_GRAD0_opsz48.png',
+                                                                                                                                                                  )
+                                                                                                                                                                : 'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/rgxzhoyu6nbx/groups_96dp_99999_FILL0_wght400_GRAD0_opsz48.png',
+                                                                                                                                                            fit: BoxFit.contain,
+                                                                                                                                                            alignment: Alignment(0.0, 0.0),
+                                                                                                                                                            errorWidget: (context, error, stackTrace) => Image.asset(
+                                                                                                                                                              'assets/images/error_image.png',
+                                                                                                                                                              fit: BoxFit.contain,
+                                                                                                                                                              alignment: Alignment(0.0, 0.0),
+                                                                                                                                                            ),
+                                                                                                                                                          ),
+                                                                                                                                                          allowRotation: false,
+                                                                                                                                                          tag: widget!.membrosFotos != null && (widget!.membrosFotos)!.isNotEmpty
+                                                                                                                                                              ? valueOrDefault<String>(
+                                                                                                                                                                  fotosMembroPathsItem,
+                                                                                                                                                                  'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/rgxzhoyu6nbx/groups_96dp_99999_FILL0_wght400_GRAD0_opsz48.png' + '$fotosMembroPathsIndex',
+                                                                                                                                                                )
+                                                                                                                                                              : 'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/rgxzhoyu6nbx/groups_96dp_99999_FILL0_wght400_GRAD0_opsz48.png',
+                                                                                                                                                          useHeroAnimation: true,
+                                                                                                                                                        ),
+                                                                                                                                                      ),
+                                                                                                                                                    );
+                                                                                                                                                  },
+                                                                                                                                                  child: Hero(
+                                                                                                                                                    tag: widget!.membrosFotos != null && (widget!.membrosFotos)!.isNotEmpty
+                                                                                                                                                        ? valueOrDefault<String>(
+                                                                                                                                                            fotosMembroPathsItem,
+                                                                                                                                                            'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/rgxzhoyu6nbx/groups_96dp_99999_FILL0_wght400_GRAD0_opsz48.png' + '$fotosMembroPathsIndex',
+                                                                                                                                                          )
+                                                                                                                                                        : 'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/rgxzhoyu6nbx/groups_96dp_99999_FILL0_wght400_GRAD0_opsz48.png',
+                                                                                                                                                    transitionOnUserGestures: true,
+                                                                                                                                                    child: ClipRRect(
+                                                                                                                                                      borderRadius: BorderRadius.circular(10.0),
+                                                                                                                                                      child: CachedNetworkImage(
+                                                                                                                                                        fadeInDuration: Duration(milliseconds: 10),
+                                                                                                                                                        fadeOutDuration: Duration(milliseconds: 10),
+                                                                                                                                                        imageUrl: widget!.membrosFotos != null && (widget!.membrosFotos)!.isNotEmpty
+                                                                                                                                                            ? valueOrDefault<String>(
+                                                                                                                                                                fotosMembroPathsItem,
+                                                                                                                                                                'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/rgxzhoyu6nbx/groups_96dp_99999_FILL0_wght400_GRAD0_opsz48.png',
+                                                                                                                                                              )
+                                                                                                                                                            : 'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/rgxzhoyu6nbx/groups_96dp_99999_FILL0_wght400_GRAD0_opsz48.png',
+                                                                                                                                                        width: 100.0,
+                                                                                                                                                        height: 68.0,
+                                                                                                                                                        fit: BoxFit.contain,
+                                                                                                                                                        alignment: Alignment(0.0, 0.0),
+                                                                                                                                                        errorWidget: (context, error, stackTrace) => Image.asset(
+                                                                                                                                                          'assets/images/error_image.png',
+                                                                                                                                                          width: 100.0,
+                                                                                                                                                          height: 68.0,
+                                                                                                                                                          fit: BoxFit.contain,
+                                                                                                                                                          alignment: Alignment(0.0, 0.0),
+                                                                                                                                                        ),
+                                                                                                                                                      ),
+                                                                                                                                                    ),
+                                                                                                                                                  ),
+                                                                                                                                                ),
+                                                                                                                                              ),
+                                                                                                                                              Align(
+                                                                                                                                                alignment: AlignmentDirectional(0.0, 1.0),
+                                                                                                                                                child: Padding(
+                                                                                                                                                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 5.0),
                                                                                                                                                   child: InkWell(
                                                                                                                                                     splashColor: Colors.transparent,
                                                                                                                                                     focusColor: Colors.transparent,
                                                                                                                                                     hoverColor: Colors.transparent,
                                                                                                                                                     highlightColor: Colors.transparent,
                                                                                                                                                     onTap: () async {
-                                                                                                                                                      logFirebaseEvent('MODAL_MEMBROS_EDIT_membro_foto_ON_TAP');
-                                                                                                                                                      await Navigator.push(
-                                                                                                                                                        context,
-                                                                                                                                                        PageTransition(
-                                                                                                                                                          type: PageTransitionType.fade,
-                                                                                                                                                          child: FlutterFlowExpandedImageView(
-                                                                                                                                                            image: CachedNetworkImage(
-                                                                                                                                                              fadeInDuration: Duration(milliseconds: 10),
-                                                                                                                                                              fadeOutDuration: Duration(milliseconds: 10),
-                                                                                                                                                              imageUrl: widget!.membrosFotos != null && (widget!.membrosFotos)!.isNotEmpty
-                                                                                                                                                                  ? valueOrDefault<String>(
-                                                                                                                                                                      fotosMembroPathsItem,
-                                                                                                                                                                      'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/rgxzhoyu6nbx/groups_96dp_99999_FILL0_wght400_GRAD0_opsz48.png',
-                                                                                                                                                                    )
-                                                                                                                                                                  : 'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/rgxzhoyu6nbx/groups_96dp_99999_FILL0_wght400_GRAD0_opsz48.png',
-                                                                                                                                                              fit: BoxFit.contain,
-                                                                                                                                                              alignment: Alignment(0.0, 0.0),
-                                                                                                                                                              errorWidget: (context, error, stackTrace) => Image.asset(
-                                                                                                                                                                'assets/images/error_image.png',
-                                                                                                                                                                fit: BoxFit.contain,
-                                                                                                                                                                alignment: Alignment(0.0, 0.0),
-                                                                                                                                                              ),
-                                                                                                                                                            ),
-                                                                                                                                                            allowRotation: false,
-                                                                                                                                                            tag: widget!.membrosFotos != null && (widget!.membrosFotos)!.isNotEmpty
-                                                                                                                                                                ? valueOrDefault<String>(
-                                                                                                                                                                    fotosMembroPathsItem,
-                                                                                                                                                                    'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/rgxzhoyu6nbx/groups_96dp_99999_FILL0_wght400_GRAD0_opsz48.png' + '$fotosMembroPathsIndex',
-                                                                                                                                                                  )
-                                                                                                                                                                : 'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/rgxzhoyu6nbx/groups_96dp_99999_FILL0_wght400_GRAD0_opsz48.png',
-                                                                                                                                                            useHeroAnimation: true,
-                                                                                                                                                          ),
-                                                                                                                                                        ),
-                                                                                                                                                      );
+                                                                                                                                                      logFirebaseEvent('MODAL_MEMBROS_EDIT_COMP_IconAtual_ON_TAP');
+                                                                                                                                                      var confirmDialogResponse = await showDialog<bool>(
+                                                                                                                                                            context: context,
+                                                                                                                                                            builder: (alertDialogContext) {
+                                                                                                                                                              return AlertDialog(
+                                                                                                                                                                title: Text('Apagar Foto'),
+                                                                                                                                                                content: Text('Deseja apagar esta foto ?'),
+                                                                                                                                                                actions: [
+                                                                                                                                                                  TextButton(
+                                                                                                                                                                    onPressed: () => Navigator.pop(alertDialogContext, false),
+                                                                                                                                                                    child: Text('Cancelar'),
+                                                                                                                                                                  ),
+                                                                                                                                                                  TextButton(
+                                                                                                                                                                    onPressed: () => Navigator.pop(alertDialogContext, true),
+                                                                                                                                                                    child: Text('Confirmar'),
+                                                                                                                                                                  ),
+                                                                                                                                                                ],
+                                                                                                                                                              );
+                                                                                                                                                            },
+                                                                                                                                                          ) ??
+                                                                                                                                                          false;
+                                                                                                                                                      if (confirmDialogResponse) {
+                                                                                                                                                        _model.removeFromMembrosFotoPathEdit(_model.membrosFotoPathEdit.elementAtOrNull(fotosMembroPathsIndex)!);
+                                                                                                                                                        safeSetState(() {});
+                                                                                                                                                      }
                                                                                                                                                     },
-                                                                                                                                                    child: Hero(
-                                                                                                                                                      tag: widget!.membrosFotos != null && (widget!.membrosFotos)!.isNotEmpty
-                                                                                                                                                          ? valueOrDefault<String>(
-                                                                                                                                                              fotosMembroPathsItem,
-                                                                                                                                                              'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/rgxzhoyu6nbx/groups_96dp_99999_FILL0_wght400_GRAD0_opsz48.png' + '$fotosMembroPathsIndex',
-                                                                                                                                                            )
-                                                                                                                                                          : 'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/rgxzhoyu6nbx/groups_96dp_99999_FILL0_wght400_GRAD0_opsz48.png',
-                                                                                                                                                      transitionOnUserGestures: true,
-                                                                                                                                                      child: ClipRRect(
-                                                                                                                                                        borderRadius: BorderRadius.circular(10.0),
-                                                                                                                                                        child: CachedNetworkImage(
-                                                                                                                                                          fadeInDuration: Duration(milliseconds: 10),
-                                                                                                                                                          fadeOutDuration: Duration(milliseconds: 10),
-                                                                                                                                                          imageUrl: widget!.membrosFotos != null && (widget!.membrosFotos)!.isNotEmpty
-                                                                                                                                                              ? valueOrDefault<String>(
-                                                                                                                                                                  fotosMembroPathsItem,
-                                                                                                                                                                  'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/rgxzhoyu6nbx/groups_96dp_99999_FILL0_wght400_GRAD0_opsz48.png',
-                                                                                                                                                                )
-                                                                                                                                                              : 'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/rgxzhoyu6nbx/groups_96dp_99999_FILL0_wght400_GRAD0_opsz48.png',
-                                                                                                                                                          width: 100.0,
-                                                                                                                                                          height: 68.0,
-                                                                                                                                                          fit: BoxFit.contain,
-                                                                                                                                                          alignment: Alignment(0.0, 0.0),
-                                                                                                                                                          errorWidget: (context, error, stackTrace) => Image.asset(
-                                                                                                                                                            'assets/images/error_image.png',
-                                                                                                                                                            width: 100.0,
-                                                                                                                                                            height: 68.0,
-                                                                                                                                                            fit: BoxFit.contain,
-                                                                                                                                                            alignment: Alignment(0.0, 0.0),
-                                                                                                                                                          ),
-                                                                                                                                                        ),
-                                                                                                                                                      ),
+                                                                                                                                                    child: Icon(
+                                                                                                                                                      Icons.do_not_disturb_on_rounded,
+                                                                                                                                                      color: FlutterFlowTheme.of(context).error,
+                                                                                                                                                      size: 24.0,
                                                                                                                                                     ),
                                                                                                                                                   ),
                                                                                                                                                 ),
-                                                                                                                                                Align(
-                                                                                                                                                  alignment: AlignmentDirectional(0.0, 1.0),
-                                                                                                                                                  child: Padding(
-                                                                                                                                                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 5.0),
-                                                                                                                                                    child: InkWell(
-                                                                                                                                                      splashColor: Colors.transparent,
-                                                                                                                                                      focusColor: Colors.transparent,
-                                                                                                                                                      hoverColor: Colors.transparent,
-                                                                                                                                                      highlightColor: Colors.transparent,
-                                                                                                                                                      onTap: () async {
-                                                                                                                                                        logFirebaseEvent('MODAL_MEMBROS_EDIT_COMP_IconAtual_ON_TAP');
-                                                                                                                                                        var confirmDialogResponse = await showDialog<bool>(
-                                                                                                                                                              context: context,
-                                                                                                                                                              builder: (alertDialogContext) {
-                                                                                                                                                                return AlertDialog(
-                                                                                                                                                                  title: Text('Apagar Foto'),
-                                                                                                                                                                  content: Text('Deseja apagar esta foto ?'),
-                                                                                                                                                                  actions: [
-                                                                                                                                                                    TextButton(
-                                                                                                                                                                      onPressed: () => Navigator.pop(alertDialogContext, false),
-                                                                                                                                                                      child: Text('Cancelar'),
-                                                                                                                                                                    ),
-                                                                                                                                                                    TextButton(
-                                                                                                                                                                      onPressed: () => Navigator.pop(alertDialogContext, true),
-                                                                                                                                                                      child: Text('Confirmar'),
-                                                                                                                                                                    ),
-                                                                                                                                                                  ],
-                                                                                                                                                                );
-                                                                                                                                                              },
-                                                                                                                                                            ) ??
-                                                                                                                                                            false;
-                                                                                                                                                        if (confirmDialogResponse) {
-                                                                                                                                                          _model.removeFromMembrosFotoPathEdit(_model.membrosFotoPathEdit.elementAtOrNull(fotosMembroPathsIndex)!);
-                                                                                                                                                          safeSetState(() {});
-                                                                                                                                                        }
-                                                                                                                                                      },
-                                                                                                                                                      child: Icon(
-                                                                                                                                                        Icons.do_not_disturb_on_rounded,
-                                                                                                                                                        color: FlutterFlowTheme.of(context).error,
-                                                                                                                                                        size: 24.0,
-                                                                                                                                                      ),
-                                                                                                                                                    ),
-                                                                                                                                                  ),
-                                                                                                                                                ),
-                                                                                                                                              ],
-                                                                                                                                            ),
+                                                                                                                                              ),
+                                                                                                                                            ],
                                                                                                                                           ),
                                                                                                                                         ),
-                                                                                                                                      ],
-                                                                                                                                    ),
+                                                                                                                                      ),
+                                                                                                                                    ],
                                                                                                                                   ),
-                                                                                                                                ].divide(SizedBox(height: 1.0)),
-                                                                                                                              ),
+                                                                                                                                ),
+                                                                                                                              ].divide(SizedBox(height: 1.0)),
                                                                                                                             ),
                                                                                                                           ),
                                                                                                                         ),
-                                                                                                                      );
-                                                                                                                    }).divide(
-                                                                                                                      SizedBox(width: 12.0),
-                                                                                                                      filterFn: (fotosMembroPathsIndex) {
-                                                                                                                        final fotosMembroPathsItem = fotosMembroPaths[fotosMembroPathsIndex];
-                                                                                                                        return widget!.membrosFotos!.length >= 1;
-                                                                                                                      },
-                                                                                                                    ),
+                                                                                                                      ),
+                                                                                                                    );
+                                                                                                                  }).divide(
+                                                                                                                    SizedBox(width: 12.0),
+                                                                                                                    filterFn: (fotosMembroPathsIndex) {
+                                                                                                                      final fotosMembroPathsItem = fotosMembroPaths[fotosMembroPathsIndex];
+                                                                                                                      return widget!.membrosFotos!.length >= 0;
+                                                                                                                    },
                                                                                                                   ),
-                                                                                                                );
-                                                                                                              },
-                                                                                                            ),
-                                                                                                          if (_model.uploadImageTemp == true)
+                                                                                                                ),
+                                                                                                              );
+                                                                                                            },
+                                                                                                          ),
+                                                                                                          if (false)
                                                                                                             Builder(
                                                                                                               builder: (context) {
                                                                                                                 final fotosMembroPathsEdit = _model.uploadedLocalFiles1.toList().take(6).toList();
@@ -2933,6 +2924,9 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                                 _model.updatePage(() {});
                                                                                                 _model.addToMembrosLatLng(_model.placePickerEnderecoValue.latLng);
                                                                                                 _model.updatePage(() {});
+                                                                                                safeSetState(() {
+                                                                                                  _model.txtMembrosEnderecosAddTextController?.clear();
+                                                                                                });
                                                                                                 await _model.googleMapMembrosController.future.then(
                                                                                                   (c) => c.animateCamera(
                                                                                                     CameraUpdate.newLatLng(_model.membrosLatLng.lastOrNull!.toGoogleMaps()),
@@ -3091,7 +3085,7 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                               borderRadius: BorderRadius.circular(12.0),
                                                                                               child: Container(
                                                                                                 width: 1084.0,
-                                                                                                height: 490.0,
+                                                                                                height: 480.0,
                                                                                                 decoration: BoxDecoration(
                                                                                                   color: FlutterFlowTheme.of(context).secondaryBackground,
                                                                                                   borderRadius: BorderRadius.circular(12.0),
@@ -3107,30 +3101,33 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                                     tablet: false,
                                                                                                     tabletLandscape: false,
                                                                                                   ),
-                                                                                                  child: FlutterFlowGoogleMap(
-                                                                                                    controller: _model.googleMapMembrosController,
-                                                                                                    onCameraIdle: (latLng) => _model.googleMapMembrosCenter = latLng,
-                                                                                                    initialLocation: _model.googleMapMembrosCenter ??= LatLng(-8.77, -70.55),
-                                                                                                    markers: _model.membrosLatLng
-                                                                                                        .map(
-                                                                                                          (marker) => FlutterFlowMarker(
-                                                                                                            marker.serialize(),
-                                                                                                            marker,
-                                                                                                          ),
-                                                                                                        )
-                                                                                                        .toList(),
-                                                                                                    markerColor: GoogleMarkerColor.violet,
-                                                                                                    mapType: MapType.normal,
-                                                                                                    style: GoogleMapStyle.standard,
-                                                                                                    initialZoom: 9.0,
-                                                                                                    allowInteraction: true,
-                                                                                                    allowZoom: true,
-                                                                                                    showZoomControls: true,
-                                                                                                    showLocation: true,
-                                                                                                    showCompass: false,
-                                                                                                    showMapToolbar: false,
-                                                                                                    showTraffic: false,
-                                                                                                    centerMapOnMarkerTap: true,
+                                                                                                  child: Padding(
+                                                                                                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                                                                                                    child: FlutterFlowGoogleMap(
+                                                                                                      controller: _model.googleMapMembrosController,
+                                                                                                      onCameraIdle: (latLng) => _model.googleMapMembrosCenter = latLng,
+                                                                                                      initialLocation: _model.googleMapMembrosCenter ??= LatLng(-8.77, -70.55),
+                                                                                                      markers: _model.membrosLatLng
+                                                                                                          .map(
+                                                                                                            (marker) => FlutterFlowMarker(
+                                                                                                              marker.serialize(),
+                                                                                                              marker,
+                                                                                                            ),
+                                                                                                          )
+                                                                                                          .toList(),
+                                                                                                      markerColor: GoogleMarkerColor.violet,
+                                                                                                      mapType: MapType.normal,
+                                                                                                      style: GoogleMapStyle.standard,
+                                                                                                      initialZoom: 9.0,
+                                                                                                      allowInteraction: true,
+                                                                                                      allowZoom: true,
+                                                                                                      showZoomControls: true,
+                                                                                                      showLocation: true,
+                                                                                                      showCompass: false,
+                                                                                                      showMapToolbar: false,
+                                                                                                      showTraffic: false,
+                                                                                                      centerMapOnMarkerTap: true,
+                                                                                                    ),
                                                                                                   ),
                                                                                                 ),
                                                                                               ),
@@ -6678,14 +6675,8 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                               onChanged: (val) async {
                                                                                                 safeSetState(() => _model.choiceChipsValidacoesValues = val);
                                                                                                 logFirebaseEvent('MODAL_MEMBROS_EDIT_ChoiceChipsValidacoes');
-                                                                                                if (widget!.membrosRow!.validacaoPrecentual! >= 0.0) {
-                                                                                                  _model.selectedCountValidados = widget!.membrosRow?.validacoes?.length;
-                                                                                                  _model.updatePage(() {});
-                                                                                                } else {
-                                                                                                  _model.membrosPercetualValidacao = 0.0;
-                                                                                                  _model.updatePage(() {});
-                                                                                                }
-
+                                                                                                _model.selectedCountValidados = _model.choiceChipsValidacoesValues?.length;
+                                                                                                safeSetState(() {});
                                                                                                 _model.membrosPercetualValidacao = functions.funcGetPercentualValidado(_model.selectedCountValidados)!;
                                                                                                 safeSetState(() {});
                                                                                               },
@@ -6970,7 +6961,7 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                               ClipRRect(
                                                                                 borderRadius: BorderRadius.circular(12.0),
                                                                                 child: Image.network(
-                                                                                  'https://picsum.photos/seed/379/600',
+                                                                                  FFAppState().FaccoesImagePathDark,
                                                                                   width: 200.0,
                                                                                   height: 200.0,
                                                                                   fit: BoxFit.cover,
@@ -7100,7 +7091,7 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                             ClipRRect(
                                                                               borderRadius: BorderRadius.circular(8.0),
                                                                               child: Image.network(
-                                                                                'https://picsum.photos/seed/79/600',
+                                                                                FFAppState().FaccoesImagePathDark,
                                                                                 width: 200.0,
                                                                                 height: 200.0,
                                                                                 fit: BoxFit.cover,
@@ -7298,6 +7289,12 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                               var downloadUrls =
                                                                   <String>[];
                                                               try {
+                                                                showUploadMessage(
+                                                                  context,
+                                                                  'Uploading file...',
+                                                                  showLoading:
+                                                                      true,
+                                                                );
                                                                 selectedUploadedFiles =
                                                                     _model
                                                                         .membrosFotosFileTemp;
@@ -7317,6 +7314,9 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                       selectedMedia,
                                                                 );
                                                               } finally {
+                                                                ScaffoldMessenger.of(
+                                                                        context)
+                                                                    .hideCurrentSnackBar();
                                                                 _model.isDataUploading2 =
                                                                     false;
                                                               }
@@ -7335,318 +7335,198 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                   _model.uploadedFileUrls2 =
                                                                       downloadUrls;
                                                                 });
+                                                                showUploadMessage(
+                                                                    context,
+                                                                    'Success!');
                                                               } else {
                                                                 safeSetState(
                                                                     () {});
+                                                                showUploadMessage(
+                                                                    context,
+                                                                    'Failed to upload data');
                                                                 return;
                                                               }
-                                                            }
-
-                                                            if (_model
-                                                                    .uploadImageTemp ==
-                                                                true) {
-                                                              await MembrosTable()
-                                                                  .update(
-                                                                data: {
-                                                                  'nome_completo':
-                                                                      _model
-                                                                          .txtNomeCompletoTextController
-                                                                          .text,
-                                                                  'fotos_path':
-                                                                      _model
-                                                                          .uploadedFileUrls2,
-                                                                  'alcunha': _model
-                                                                      .membrosAlcunhas,
-                                                                  'cpf': _model
-                                                                      .txtNoCpfTextController
-                                                                      .text,
-                                                                  'identidade':
-                                                                      _model
-                                                                          .txtNoIdentidadeTextController
-                                                                          .text,
-                                                                  'naturalidade':
-                                                                      _model
-                                                                          .txtMembroNaturalidadeTextController
-                                                                          .text,
-                                                                  'filiacao_mae':
-                                                                      _model
-                                                                          .txtFiliacaoMaeTextController
-                                                                          .text,
-                                                                  'filiacao_pai':
-                                                                      _model
-                                                                          .txtFiliacaoPaiTextController
-                                                                          .text,
-                                                                  'situacao_mae':
-                                                                      _model
-                                                                          .ddwSituacaoMaeValue,
-                                                                  'situacao_pai':
-                                                                      _model
-                                                                          .txtFiliacaoPaiTextController
-                                                                          .text,
-                                                                  'nivel_instrucao':
-                                                                      _model
-                                                                          .ddwNivelInstrucaoValue,
-                                                                  'estado_civil':
-                                                                      _model
-                                                                          .ddwEstadoCivilValue,
-                                                                  'membro_endereco':
-                                                                      _model
-                                                                          .membrosEnderecos,
-                                                                  'estado_id':
-                                                                      _model
-                                                                          .ddwEstadoValue,
-                                                                  'historico':
-                                                                      _model
-                                                                          .txtHistoricoTextController
-                                                                          .text,
-                                                                  'faccao_id':
-                                                                      _model
-                                                                          .ddwMembroFaccaoValue,
-                                                                  'batismo': _model
-                                                                      .txtFaccaoBastismoTextController
-                                                                      .text,
-                                                                  'batismo_local':
-                                                                      _model
-                                                                          .txtFacaoLocalBastismoTextController
-                                                                          .text,
-                                                                  'padrinho': _model
-                                                                      .txtMembrosFaccaoPadrinhoTextController
-                                                                      .text,
-                                                                  'faccao_senha':
-                                                                      _model
-                                                                          .txtMembroFaccaoSenhaTextController
-                                                                          .text,
-                                                                  'cargo_id': _model
-                                                                      .ddwMembroFaccaoCargoAtualValue,
-                                                                  'funcao_id':
-                                                                      _model
-                                                                          .ddwFaccaoFuncaoAtualValue,
-                                                                  'cargo_ant_id':
-                                                                      _model
-                                                                          .ddwMembroFaccaoCargoAnteriorValue,
-                                                                  'faccao_inimiga':
-                                                                      _model
-                                                                          .ddwFaccaoInimigaValue,
-                                                                  'faccao_aliada':
-                                                                      _model
-                                                                          .ddwFaccaoAliadaValue,
-                                                                  'nacionalidade':
-                                                                      _model
-                                                                          .rbNacionalidadeValue,
-                                                                  'funcao_ant_id':
-                                                                      _model
-                                                                          .ddwFaccaoFuncaoAnteriorValue,
-                                                                  'faccao_integrou':
-                                                                      _model
-                                                                          .ddwFaccaoIntegrouValue,
-                                                                  'municipio_id':
-                                                                      _model
-                                                                          .ddwMunicipioValue,
-                                                                  'infopen': _model
-                                                                      .txtNoInfopenTextController
-                                                                      .text,
-                                                                  'tres_ultimo_locais_preso':
-                                                                      _model
-                                                                          .membrosFaccaoTresLocais,
-                                                                  'alerta': _model
-                                                                      .switchAlertaValue,
-                                                                  'atuacao_crime':
-                                                                      _model
-                                                                          .txtMembroAtuacaoTextController
-                                                                          .text,
-                                                                  'validacao_precentual':
-                                                                      _model
-                                                                          .membrosPercetualValidacao,
-                                                                  'validacoes':
-                                                                      _model
-                                                                          .choiceChipsValidacoesValues,
-                                                                  'coordenadas':
-                                                                      functions.convertLatLngListToStringList(_model
-                                                                          .membrosLatLng
-                                                                          .toList()),
-                                                                  'membroLngLat':
-                                                                      functions.convertLatLngToDouble(_model
-                                                                          .membrosLatLng
-                                                                          .toList()),
-                                                                  'identidade_orgao':
-                                                                      _model
-                                                                          .ddwOrgaoExpedidorValue,
-                                                                  'alerta_observacao':
-                                                                      _model
-                                                                          .txtMembroAlertaTextController
-                                                                          .text,
-                                                                },
-                                                                matchingRows:
-                                                                    (rows) => rows
-                                                                        .eqOrNull(
-                                                                  'membro_id',
-                                                                  widget!
-                                                                      .membrosRow
-                                                                      ?.membroId,
-                                                                ),
-                                                              );
-                                                              _shouldSetState =
-                                                                  true;
-                                                            } else {
-                                                              await MembrosTable()
-                                                                  .update(
-                                                                data: {
-                                                                  'nome_completo':
-                                                                      _model
-                                                                          .txtNomeCompletoTextController
-                                                                          .text,
-                                                                  'fotos_path':
-                                                                      _model
-                                                                          .membrosFotoPathEdit,
-                                                                  'alcunha': _model
-                                                                      .membrosAlcunhas,
-                                                                  'cpf': _model
-                                                                      .txtNoCpfTextController
-                                                                      .text,
-                                                                  'identidade':
-                                                                      _model
-                                                                          .txtNoIdentidadeTextController
-                                                                          .text,
-                                                                  'naturalidade':
-                                                                      _model
-                                                                          .txtMembroNaturalidadeTextController
-                                                                          .text,
-                                                                  'filiacao_mae':
-                                                                      _model
-                                                                          .txtFiliacaoMaeTextController
-                                                                          .text,
-                                                                  'filiacao_pai':
-                                                                      _model
-                                                                          .txtFiliacaoPaiTextController
-                                                                          .text,
-                                                                  'situacao_mae':
-                                                                      _model
-                                                                          .ddwSituacaoMaeValue,
-                                                                  'situacao_pai':
-                                                                      _model
-                                                                          .txtFiliacaoPaiTextController
-                                                                          .text,
-                                                                  'nivel_instrucao':
-                                                                      _model
-                                                                          .ddwNivelInstrucaoValue,
-                                                                  'estado_civil':
-                                                                      _model
-                                                                          .ddwEstadoCivilValue,
-                                                                  'membro_endereco':
-                                                                      _model
-                                                                          .membrosEnderecos,
-                                                                  'estado_id':
-                                                                      _model
-                                                                          .ddwEstadoValue,
-                                                                  'historico':
-                                                                      _model
-                                                                          .txtHistoricoTextController
-                                                                          .text,
-                                                                  'faccao_id':
-                                                                      valueOrDefault<
-                                                                          int>(
-                                                                    _model.ddwMembroFaccaoValue !=
-                                                                            null
-                                                                        ? _model
-                                                                            .ddwMembroFaccaoValue
-                                                                        : valueOrDefault<
-                                                                            int>(
-                                                                            widget!.membrosRow?.funcaoId,
-                                                                            0,
-                                                                          ),
-                                                                    0,
-                                                                  ),
-                                                                  'batismo': _model
-                                                                      .txtFaccaoBastismoTextController
-                                                                      .text,
-                                                                  'batismo_local':
-                                                                      _model
-                                                                          .txtFacaoLocalBastismoTextController
-                                                                          .text,
-                                                                  'padrinho': _model
-                                                                      .txtMembrosFaccaoPadrinhoTextController
-                                                                      .text,
-                                                                  'faccao_senha':
-                                                                      _model
-                                                                          .txtMembroFaccaoSenhaTextController
-                                                                          .text,
-                                                                  'cargo_id': _model
-                                                                      .ddwMembroFaccaoCargoAtualValue,
-                                                                  'funcao_id':
-                                                                      _model
-                                                                          .ddwFaccaoFuncaoAtualValue,
-                                                                  'cargo_ant_id':
-                                                                      _model
-                                                                          .ddwMembroFaccaoCargoAnteriorValue,
-                                                                  'faccao_inimiga':
-                                                                      _model
-                                                                          .ddwFaccaoInimigaValue,
-                                                                  'faccao_aliada':
-                                                                      _model
-                                                                          .ddwFaccaoAliadaValue,
-                                                                  'nacionalidade':
-                                                                      _model
-                                                                          .rbNacionalidadeValue,
-                                                                  'funcao_ant_id':
-                                                                      _model
-                                                                          .ddwFaccaoFuncaoAnteriorValue,
-                                                                  'faccao_integrou':
-                                                                      _model
-                                                                          .ddwFaccaoIntegrouValue,
-                                                                  'municipio_id':
-                                                                      _model
-                                                                          .ddwMunicipioValue,
-                                                                  'infopen': _model
-                                                                      .txtNoInfopenTextController
-                                                                      .text,
-                                                                  'tres_ultimo_locais_preso':
-                                                                      _model
-                                                                          .membrosFaccaoTresLocais,
-                                                                  'alerta': _model
-                                                                      .switchAlertaValue,
-                                                                  'atuacao_crime':
-                                                                      _model
-                                                                          .txtMembroAtuacaoTextController
-                                                                          .text,
-                                                                  'validacao_precentual':
-                                                                      _model
-                                                                          .membrosPercetualValidacao,
-                                                                  'validacoes':
-                                                                      _model
-                                                                          .choiceChipsValidacoesValues,
-                                                                  'coordenadas':
-                                                                      functions.convertLatLngListToStringList(_model
-                                                                          .membrosLatLng
-                                                                          .toList()),
-                                                                  'membroLngLat':
-                                                                      functions.convertLatLngToDouble(_model
-                                                                          .membrosLatLng
-                                                                          .toList()),
-                                                                  'identidade_orgao':
-                                                                      _model
-                                                                          .ddwOrgaoExpedidorValue,
-                                                                  'alerta_observacao':
-                                                                      _model
-                                                                          .txtMembroAlertaTextController
-                                                                          .text,
-                                                                },
-                                                                matchingRows:
-                                                                    (rows) => rows
-                                                                        .eqOrNull(
-                                                                  'membro_id',
-                                                                  widget!
-                                                                      .membrosRow
-                                                                      ?.membroId,
-                                                                ),
-                                                              );
-                                                              _shouldSetState =
-                                                                  true;
                                                             }
 
                                                             await Future.delayed(
                                                                 const Duration(
                                                                     milliseconds:
                                                                         100));
+                                                            _model.outputMembrosEdit =
+                                                                await MembrosTable()
+                                                                    .update(
+                                                              data: {
+                                                                'nome_completo':
+                                                                    _model
+                                                                        .txtNomeCompletoTextController
+                                                                        .text,
+                                                                'fotos_path': _model
+                                                                        .membrosFotoPathEdit
+                                                                        .isNotEmpty
+                                                                    ? _model
+                                                                        .membrosFotoPathEdit
+                                                                    : widget!
+                                                                        .membrosFotos,
+                                                                'alcunha': _model
+                                                                    .membrosAlcunhas,
+                                                                'cpf': _model
+                                                                    .txtNoCpfTextController
+                                                                    .text,
+                                                                'identidade': _model
+                                                                    .txtNoIdentidadeTextController
+                                                                    .text,
+                                                                'naturalidade':
+                                                                    _model
+                                                                        .txtMembroNaturalidadeTextController
+                                                                        .text,
+                                                                'filiacao_mae':
+                                                                    _model
+                                                                        .txtFiliacaoMaeTextController
+                                                                        .text,
+                                                                'filiacao_pai':
+                                                                    _model
+                                                                        .txtFiliacaoPaiTextController
+                                                                        .text,
+                                                                'situacao_mae':
+                                                                    _model
+                                                                        .ddwSituacaoMaeValue,
+                                                                'situacao_pai':
+                                                                    _model
+                                                                        .txtFiliacaoPaiTextController
+                                                                        .text,
+                                                                'nivel_instrucao':
+                                                                    _model
+                                                                        .ddwNivelInstrucaoValue,
+                                                                'estado_civil':
+                                                                    _model
+                                                                        .ddwEstadoCivilValue,
+                                                                'membro_endereco': _model
+                                                                        .membrosEnderecos
+                                                                        .isNotEmpty
+                                                                    ? _model
+                                                                        .membrosEnderecos
+                                                                    : widget!
+                                                                        .membrosRow
+                                                                        ?.membroEndereco,
+                                                                'estado_id': _model
+                                                                    .ddwEstadoValue,
+                                                                'historico': _model
+                                                                    .txtHistoricoTextController
+                                                                    .text,
+                                                                'faccao_id':
+                                                                    valueOrDefault<
+                                                                        int>(
+                                                                  _model.ddwMembroFaccaoValue !=
+                                                                          null
+                                                                      ? _model
+                                                                          .ddwMembroFaccaoValue
+                                                                      : valueOrDefault<
+                                                                          int>(
+                                                                          widget!
+                                                                              .membrosRow
+                                                                              ?.funcaoId,
+                                                                          0,
+                                                                        ),
+                                                                  0,
+                                                                ),
+                                                                'batismo': _model
+                                                                    .txtFaccaoBastismoTextController
+                                                                    .text,
+                                                                'batismo_local':
+                                                                    _model
+                                                                        .txtFacaoLocalBastismoTextController
+                                                                        .text,
+                                                                'padrinho': _model
+                                                                    .txtMembrosFaccaoPadrinhoTextController
+                                                                    .text,
+                                                                'faccao_senha':
+                                                                    _model
+                                                                        .txtMembroFaccaoSenhaTextController
+                                                                        .text,
+                                                                'cargo_id': _model
+                                                                    .ddwMembroFaccaoCargoAtualValue,
+                                                                'funcao_id': _model
+                                                                    .ddwFaccaoFuncaoAtualValue,
+                                                                'cargo_ant_id':
+                                                                    _model
+                                                                        .ddwMembroFaccaoCargoAnteriorValue,
+                                                                'faccao_inimiga':
+                                                                    _model
+                                                                        .ddwFaccaoInimigaValue,
+                                                                'faccao_aliada':
+                                                                    _model
+                                                                        .ddwFaccaoAliadaValue,
+                                                                'nacionalidade':
+                                                                    _model
+                                                                        .rbNacionalidadeValue,
+                                                                'funcao_ant_id':
+                                                                    _model
+                                                                        .ddwFaccaoFuncaoAnteriorValue,
+                                                                'faccao_integrou':
+                                                                    _model
+                                                                        .ddwFaccaoIntegrouValue,
+                                                                'municipio_id':
+                                                                    _model
+                                                                        .ddwMunicipioValue,
+                                                                'infopen': _model
+                                                                    .txtNoInfopenTextController
+                                                                    .text,
+                                                                'tres_ultimo_locais_preso':
+                                                                    _model
+                                                                        .membrosFaccaoTresLocais,
+                                                                'alerta': _model
+                                                                    .switchAlertaValue,
+                                                                'atuacao_crime':
+                                                                    _model
+                                                                        .txtMembroAtuacaoTextController
+                                                                        .text,
+                                                                'validacao_precentual':
+                                                                    _model
+                                                                        .membrosPercetualValidacao,
+                                                                'validacoes': _model
+                                                                    .choiceChipsValidacoesValues,
+                                                                'coordenadas': _model
+                                                                        .membrosEnderecos
+                                                                        .isNotEmpty
+                                                                    ? functions.convertLatLngListToStringList(_model
+                                                                        .membrosLatLng
+                                                                        .toList())
+                                                                    : widget!
+                                                                        .membrosRow
+                                                                        ?.coordenadas,
+                                                                'membroLngLat': _model
+                                                                        .membrosEnderecos
+                                                                        .isNotEmpty
+                                                                    ? functions.convertLatLngToDouble(_model
+                                                                        .membrosLatLng
+                                                                        .toList())
+                                                                    : widget!
+                                                                        .membrosRow
+                                                                        ?.membroLngLat,
+                                                                'identidade_orgao':
+                                                                    _model
+                                                                        .ddwOrgaoExpedidorValue,
+                                                                'alerta_observacao':
+                                                                    valueOrDefault<
+                                                                        String>(
+                                                                  _model
+                                                                      .txtMembroAlertaTextController
+                                                                      .text,
+                                                                  'sem informação',
+                                                                ),
+                                                              },
+                                                              matchingRows:
+                                                                  (rows) => rows
+                                                                      .eqOrNull(
+                                                                'membro_id',
+                                                                widget!
+                                                                    .membrosRow
+                                                                    ?.membroId,
+                                                              ),
+                                                              returnRows: true,
+                                                            );
+                                                            _shouldSetState =
+                                                                true;
                                                             await Future.wait([
                                                               Future(() async {
                                                                 if (_model
@@ -7668,12 +7548,10 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                     safeSetState(
                                                                         () {});
                                                                     _model.apiResultProcedimentosEdit =
-                                                                        await ProcedimentosAddCall
+                                                                        await ProcedimentosEditCall
                                                                             .call(
-                                                                      membroId: _model
-                                                                          .retMembrosEdit
-                                                                          ?.elementAtOrNull(
-                                                                              _model.membrosProcedimentosCount!)
+                                                                      membroId: widget!
+                                                                          .membrosRow
                                                                           ?.membroId,
                                                                       procedimentoNo: _model
                                                                           .membrosProcedimentos
@@ -7736,11 +7614,6 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                       );
                                                                     }
                                                                   }
-                                                                } else {
-                                                                  if (_shouldSetState)
-                                                                    safeSetState(
-                                                                        () {});
-                                                                  return;
                                                                 }
                                                               }),
                                                               Future(() async {
@@ -7763,12 +7636,10 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                     safeSetState(
                                                                         () {});
                                                                     _model.apiResultProcessosEdit =
-                                                                        await ProcessosAddCall
+                                                                        await ProcessosEditCall
                                                                             .call(
-                                                                      membroId: _model
-                                                                          .retMembrosEdit
-                                                                          ?.elementAtOrNull(
-                                                                              _model.membrosProcessosCount!)
+                                                                      membroId: widget!
+                                                                          .membrosRow
                                                                           ?.membroId,
                                                                       acaoPenalNo: _model
                                                                           .membrosProcessos
@@ -7826,11 +7697,6 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                       );
                                                                     }
                                                                   }
-                                                                } else {
-                                                                  if (_shouldSetState)
-                                                                    safeSetState(
-                                                                        () {});
-                                                                  return;
                                                                 }
                                                               }),
                                                             ]);

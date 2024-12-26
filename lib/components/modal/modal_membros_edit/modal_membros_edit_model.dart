@@ -393,12 +393,10 @@ class ModalMembrosEditModel extends FlutterFlowModel<ModalMembrosEditWidget> {
   List<String> uploadedFileUrls2 = [];
 
   // Stores action output result for [Backend Call - Update Row(s)] action in Button widget.
-  List<MembrosRow>? retMembrosEdit;
-  // Stores action output result for [Backend Call - Update Row(s)] action in Button widget.
-  List<MembrosRow>? retMembrosEditPath;
-  // Stores action output result for [Backend Call - API (ProcedimentosAdd)] action in Button widget.
+  List<MembrosRow>? outputMembrosEdit;
+  // Stores action output result for [Backend Call - API (ProcedimentosEdit)] action in Button widget.
   ApiCallResponse? apiResultProcedimentosEdit;
-  // Stores action output result for [Backend Call - API (ProcessosAdd)] action in Button widget.
+  // Stores action output result for [Backend Call - API (ProcessosEdit)] action in Button widget.
   ApiCallResponse? apiResultProcessosEdit;
 
   @override

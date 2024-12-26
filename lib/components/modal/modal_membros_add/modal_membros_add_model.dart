@@ -380,9 +380,9 @@ class ModalMembrosAddModel extends FlutterFlowModel<ModalMembrosAddWidget> {
 
   // Stores action output result for [Backend Call - Insert Row] action in Button widget.
   MembrosRow? retMembrosAdd;
-  // Stores action output result for [Backend Call - API (ProcedimentosAdd)] action in Button widget.
+  // Stores action output result for [Backend Call - API (ProcedimentosEdit)] action in Button widget.
   ApiCallResponse? apiResultProcedimentos;
-  // Stores action output result for [Backend Call - API (ProcessosAdd)] action in Button widget.
+  // Stores action output result for [Backend Call - API (ProcessosEdit)] action in Button widget.
   ApiCallResponse? apiResultProcessos;
 
   @override

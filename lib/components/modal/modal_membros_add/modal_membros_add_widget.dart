@@ -2629,6 +2629,9 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                                         _model.updatePage(() {});
                                                                                         _model.addToMembrosLatLng(_model.placePickerEnderecoValue.latLng);
                                                                                         _model.updatePage(() {});
+                                                                                        safeSetState(() {
+                                                                                          _model.txtMembrosEnderecosAddTextController?.clear();
+                                                                                        });
                                                                                         await _model.googleMapMembrosController.future.then(
                                                                                           (c) => c.animateCamera(
                                                                                             CameraUpdate.newLatLng(_model.membrosLatLng.lastOrNull!.toGoogleMaps()),
@@ -7374,7 +7377,7 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                     1;
                                                             safeSetState(() {});
                                                             _model.apiResultProcedimentos =
-                                                                await ProcedimentosAddCall
+                                                                await ProcedimentosEditCall
                                                                     .call(
                                                               membroId: _model
                                                                   .retMembrosAdd
@@ -7451,10 +7454,6 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                               );
                                                             }
                                                           }
-                                                        } else {
-                                                          if (_shouldSetState)
-                                                            safeSetState(() {});
-                                                          return;
                                                         }
                                                       }),
                                                       Future(() async {
@@ -7475,7 +7474,7 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                     1;
                                                             safeSetState(() {});
                                                             _model.apiResultProcessos =
-                                                                await ProcessosAddCall
+                                                                await ProcessosEditCall
                                                                     .call(
                                                               membroId: _model
                                                                   .retMembrosAdd
@@ -7545,10 +7544,6 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                               );
                                                             }
                                                           }
-                                                        } else {
-                                                          if (_shouldSetState)
-                                                            safeSetState(() {});
-                                                          return;
                                                         }
                                                       }),
                                                     ]);
