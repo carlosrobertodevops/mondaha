@@ -709,7 +709,7 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                                             children: [
                                                                                               Builder(
                                                                                                 builder: (context) {
-                                                                                                  final fotosMembroPaths = _model.membrosFotosTemp.toList().take(6).toList();
+                                                                                                  final fotosMembroTemp = _model.membrosFotosTemp.toList().take(6).toList();
 
                                                                                                   return SingleChildScrollView(
                                                                                                     scrollDirection: Axis.horizontal,
@@ -717,8 +717,8 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                                                       mainAxisSize: MainAxisSize.max,
                                                                                                       mainAxisAlignment: MainAxisAlignment.start,
                                                                                                       crossAxisAlignment: CrossAxisAlignment.center,
-                                                                                                      children: List.generate(fotosMembroPaths.length, (fotosMembroPathsIndex) {
-                                                                                                        final fotosMembroPathsItem = fotosMembroPaths[fotosMembroPathsIndex];
+                                                                                                      children: List.generate(fotosMembroTemp.length, (fotosMembroTempIndex) {
+                                                                                                        final fotosMembroTempItem = fotosMembroTemp[fotosMembroTempIndex];
                                                                                                         return Visibility(
                                                                                                           visible: _model.uploadedLocalFiles1.length >= 1,
                                                                                                           child: Align(
@@ -761,7 +761,7 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                                                                                       type: PageTransitionType.fade,
                                                                                                                                       child: FlutterFlowExpandedImageView(
                                                                                                                                         image: Image.memory(
-                                                                                                                                          fotosMembroPathsItem.bytes ?? Uint8List.fromList([]),
+                                                                                                                                          fotosMembroTempItem.bytes ?? Uint8List.fromList([]),
                                                                                                                                           fit: BoxFit.contain,
                                                                                                                                           alignment: Alignment(0.0, 0.0),
                                                                                                                                           errorBuilder: (context, error, stackTrace) => Image.asset(
@@ -783,7 +783,7 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                                                                                   child: ClipRRect(
                                                                                                                                     borderRadius: BorderRadius.circular(10.0),
                                                                                                                                     child: Image.memory(
-                                                                                                                                      fotosMembroPathsItem.bytes ?? Uint8List.fromList([]),
+                                                                                                                                      fotosMembroTempItem.bytes ?? Uint8List.fromList([]),
                                                                                                                                       width: 100.0,
                                                                                                                                       height: 68.0,
                                                                                                                                       fit: BoxFit.contain,
@@ -833,7 +833,7 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                                                                                         ) ??
                                                                                                                                         false;
                                                                                                                                     if (confirmDialogResponse) {
-                                                                                                                                      _model.removeAtIndexFromMembrosFotosTemp(fotosMembroPathsIndex);
+                                                                                                                                      _model.removeAtIndexFromMembrosFotosTemp(fotosMembroTempIndex);
                                                                                                                                       safeSetState(() {});
                                                                                                                                     }
                                                                                                                                   },
@@ -856,8 +856,8 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                                                         );
                                                                                                       }).divide(
                                                                                                         SizedBox(width: 12.0),
-                                                                                                        filterFn: (fotosMembroPathsIndex) {
-                                                                                                          final fotosMembroPathsItem = fotosMembroPaths[fotosMembroPathsIndex];
+                                                                                                        filterFn: (fotosMembroTempIndex) {
+                                                                                                          final fotosMembroTempItem = fotosMembroTemp[fotosMembroTempIndex];
                                                                                                           return _model.uploadedLocalFiles1.length >= 1;
                                                                                                         },
                                                                                                       ),
@@ -1162,6 +1162,9 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                                       if (_model.txtAlcunhaAddTextController.text != '') {
                                                                                         _model.addToMembrosAlcunhas(_model.txtAlcunhaAddTextController.text);
                                                                                         safeSetState(() {});
+                                                                                        safeSetState(() {
+                                                                                          _model.txtAlcunhaAddTextController?.clear();
+                                                                                        });
                                                                                       } else {
                                                                                         ScaffoldMessenger.of(context).showSnackBar(
                                                                                           SnackBar(
@@ -2733,7 +2736,10 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                                                           child: Padding(
                                                                                                             padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 3.0, 0.0),
                                                                                                             child: Text(
-                                                                                                              listMembrosEnderecosItem,
+                                                                                                              valueOrDefault<String>(
+                                                                                                                listMembrosEnderecosItem,
+                                                                                                                'sem informação',
+                                                                                                              ),
                                                                                                               style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                                                     fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
                                                                                                                     color: FlutterFlowTheme.of(context).primaryText,
@@ -2754,7 +2760,7 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                                                               logFirebaseEvent('MODAL_MEMBROS_ADD_Icon_9l4zc2l7_ON_TAP');
                                                                                                               _model.removeAtIndexFromMembrosEnderecos(listMembrosEnderecosIndex);
                                                                                                               _model.removeAtIndexFromMembrosLatLng(listMembrosEnderecosIndex);
-                                                                                                              _model.updatePage(() {});
+                                                                                                              safeSetState(() {});
                                                                                                             },
                                                                                                             child: Icon(
                                                                                                               Icons.do_not_disturb_on_rounded,
@@ -3781,7 +3787,7 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                                         _model.addToMembrosFaccaoTresLocais(_model.txtFaccaoTresLocaisAddTextController.text);
                                                                                         safeSetState(() {});
                                                                                         safeSetState(() {
-                                                                                          _model.txtFaccaoTresLocaisAddTextController?.text = _model.membrosLimpar!;
+                                                                                          _model.txtFaccaoTresLocaisAddTextController?.clear();
                                                                                         });
                                                                                       } else {
                                                                                         ScaffoldMessenger.of(context).showSnackBar(
@@ -7352,6 +7358,9 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                           .ddwOrgaoExpedidorValue,
                                                       'alerta_observacao': _model
                                                           .txtMembroAlertaTextController
+                                                          .text,
+                                                      'validacao_observacao': _model
+                                                          .txtValidacoesObservacoesTextController
                                                           .text,
                                                     });
                                                     _shouldSetState = true;
