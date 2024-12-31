@@ -25,7 +25,7 @@ class ModalProfileEditAdminWidget extends StatefulWidget {
     this.usuariosRow,
   });
 
-  final UsuariosRow? usuariosRow;
+  final UsuariosViewRow? usuariosRow;
 
   @override
   State<ModalProfileEditAdminWidget> createState() =>
@@ -314,7 +314,7 @@ class _ModalProfileEditAdminWidgetState
                                           }
                                         }
 
-                                        _model.uploadiAdminImagemTemp = true;
+                                        _model.uploadAdminImagemTemp = true;
                                         _model.updatePage(() {});
                                       },
                                       child: Container(
@@ -332,7 +332,7 @@ class _ModalProfileEditAdminWidgetState
                                         ),
                                         child: Stack(
                                           children: [
-                                            if (_model.uploadiAdminImagemTemp ==
+                                            if (_model.uploadAdminImagemTemp ==
                                                 false)
                                               Padding(
                                                 padding: EdgeInsets.all(2.0),
@@ -365,7 +365,7 @@ class _ModalProfileEditAdminWidgetState
                                                   ),
                                                 ),
                                               ),
-                                            if (_model.uploadiAdminImagemTemp ==
+                                            if (_model.uploadAdminImagemTemp ==
                                                 true)
                                               Padding(
                                                 padding: EdgeInsets.all(2.0),
@@ -847,7 +847,7 @@ class _ModalProfileEditAdminWidgetState
                                                 child: Text(
                                               dateTimeFormat(
                                                 "d/M/y",
-                                                widget!.usuariosRow!.createdAt,
+                                                widget!.usuariosRow!.createdAt!,
                                                 locale:
                                                     FFLocalizations.of(context)
                                                         .languageCode,
@@ -1045,7 +1045,7 @@ class _ModalProfileEditAdminWidgetState
                                               ) ??
                                               false;
                                       if (confirmDialogResponse) {
-                                        if (_model.uploadiAdminImagemTemp) {
+                                        if (_model.uploadAdminImagemTemp) {
                                           await deleteSupabaseFileFromPublicUrl(
                                               widget!.usuariosRow?.fotoPath !=
                                                       ''

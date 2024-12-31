@@ -326,7 +326,7 @@ class _AuthLoginWidgetState extends State<AuthLoginWidget>
                                                 Form(
                                                   key: _model.formKey1,
                                                   autovalidateMode:
-                                                      AutovalidateMode.disabled,
+                                                      AutovalidateMode.always,
                                                   child: Container(
                                                     decoration: BoxDecoration(),
                                                     alignment:
@@ -399,7 +399,7 @@ class _AuthLoginWidgetState extends State<AuthLoginWidget>
                                                                     FFLocalizations.of(
                                                                             context)
                                                                         .getText(
-                                                                  'bqvjzpge' /* Email */,
+                                                                  'bqvjzpge' /* email */,
                                                                 ),
                                                                 labelStyle: FlutterFlowTheme.of(
                                                                         context)
@@ -1614,170 +1614,132 @@ class _AuthLoginWidgetState extends State<AuthLoginWidget>
                                                                     () async {
                                                                   logFirebaseEvent(
                                                                       'AUTH_LOGIN_PAGE_btn-signin_ON_TAP');
-                                                                  _model.usuarioExiste =
-                                                                      await UsuariosTable()
-                                                                          .queryRows(
-                                                                    queryFn: (q) =>
-                                                                        q.eqOrNull(
-                                                                      'email',
-                                                                      _model
-                                                                          .txtSignupEmailTextController
-                                                                          .text,
-                                                                    ),
-                                                                  );
-                                                                  if (!_model
-                                                                      .usuarioExiste!
-                                                                      .contains(
-                                                                          null)) {
-                                                                    GoRouter.of(
-                                                                            context)
-                                                                        .prepareAuthEvent();
-                                                                    if (_model
-                                                                            .txtSignupPasswordTextController
-                                                                            .text !=
-                                                                        _model
-                                                                            .txtSignupConfirmTextController
-                                                                            .text) {
-                                                                      ScaffoldMessenger.of(
-                                                                              context)
-                                                                          .showSnackBar(
-                                                                        SnackBar(
-                                                                          content:
-                                                                              Text(
-                                                                            'Passwords don\'t match!',
-                                                                          ),
-                                                                        ),
-                                                                      );
-                                                                      return;
-                                                                    }
-
-                                                                    final user =
-                                                                        await authManager
-                                                                            .createAccountWithEmail(
-                                                                      context,
-                                                                      _model
-                                                                          .txtSignupEmailTextController
-                                                                          .text,
-                                                                      _model
+                                                                  GoRouter.of(
+                                                                          context)
+                                                                      .prepareAuthEvent();
+                                                                  if (_model
                                                                           .txtSignupPasswordTextController
-                                                                          .text,
-                                                                    );
-                                                                    if (user ==
-                                                                        null) {
-                                                                      return;
-                                                                    }
-
-                                                                    await Future.delayed(const Duration(
-                                                                        milliseconds:
-                                                                            1000));
-                                                                    _model.outputUsuarioAdd =
-                                                                        await UsuariosTable()
-                                                                            .insert({
-                                                                      'user_id':
-                                                                          currentUserUid,
-                                                                      'email':
-                                                                          currentUserEmail,
-                                                                      'nome_completo': _model
-                                                                          .txtSignupNomeTextController
-                                                                          .text,
-                                                                      'tipo_usuario_id':
-                                                                          9,
-                                                                      'agencia_id':
-                                                                          26,
-                                                                      'foto_path': (Theme.of(context).brightness == Brightness.light) ==
-                                                                              false
-                                                                          ? 'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/fg8v0c6ta78d/account_circle_outline_icon_140062.png'
-                                                                          : 'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/wvfh9ab6exyb/botao-redondo-da-conta-com-o-usuario-dentro.png',
-                                                                    });
-                                                                    await showDialog(
-                                                                      context:
-                                                                          context,
-                                                                      builder:
-                                                                          (dialogContext) {
-                                                                        return Dialog(
-                                                                          elevation:
-                                                                              0,
-                                                                          insetPadding:
-                                                                              EdgeInsets.zero,
-                                                                          backgroundColor:
-                                                                              Colors.transparent,
-                                                                          alignment:
-                                                                              AlignmentDirectional(0.0, 0.0).resolve(Directionality.of(context)),
-                                                                          child:
-                                                                              GestureDetector(
-                                                                            onTap:
-                                                                                () {
-                                                                              FocusScope.of(dialogContext).unfocus();
-                                                                              FocusManager.instance.primaryFocus?.unfocus();
-                                                                            },
-                                                                            child:
-                                                                                ModalMessageOkWidget(),
-                                                                          ),
-                                                                        );
-                                                                      },
-                                                                    );
-
-                                                                    GoRouter.of(
-                                                                            context)
-                                                                        .prepareAuthEvent();
-                                                                    await authManager
-                                                                        .signOut();
-                                                                    GoRouter.of(
-                                                                            context)
-                                                                        .clearRedirectLocation();
-
-                                                                    context.pushNamedAuth(
-                                                                        'auth_login',
-                                                                        context
-                                                                            .mounted);
-
-                                                                    safeSetState(
-                                                                        () {
-                                                                      _model
-                                                                          .txtLoginEmailTextController
-                                                                          ?.clear();
-                                                                      _model
-                                                                          .txtLoginPasswordTextController
-                                                                          ?.clear();
-                                                                      _model
-                                                                          .txtSignupNomeTextController
-                                                                          ?.clear();
-                                                                      _model
-                                                                          .txtSignupEmailTextController
-                                                                          ?.clear();
-                                                                      _model
-                                                                          .txtSignupPasswordTextController
-                                                                          ?.clear();
+                                                                          .text !=
                                                                       _model
                                                                           .txtSignupConfirmTextController
-                                                                          ?.clear();
-                                                                    });
-                                                                  } else {
-                                                                    context.pushNamedAuth(
-                                                                        'auth_login',
-                                                                        context
-                                                                            .mounted);
-
-                                                                    await showDialog(
-                                                                      context:
-                                                                          context,
-                                                                      builder:
-                                                                          (alertDialogContext) {
-                                                                        return AlertDialog(
-                                                                          title:
-                                                                              Text('ERRO !'),
-                                                                          content:
-                                                                              Text('Infelizmente, o cadastro não foi realizado. Por favor, tente novamente.  Usuário já existe.'),
-                                                                          actions: [
-                                                                            TextButton(
-                                                                              onPressed: () => Navigator.pop(alertDialogContext),
-                                                                              child: Text('Ok'),
-                                                                            ),
-                                                                          ],
-                                                                        );
-                                                                      },
+                                                                          .text) {
+                                                                    ScaffoldMessenger.of(
+                                                                            context)
+                                                                        .showSnackBar(
+                                                                      SnackBar(
+                                                                        content:
+                                                                            Text(
+                                                                          'Passwords don\'t match!',
+                                                                        ),
+                                                                      ),
                                                                     );
+                                                                    return;
                                                                   }
+
+                                                                  final user =
+                                                                      await authManager
+                                                                          .createAccountWithEmail(
+                                                                    context,
+                                                                    _model
+                                                                        .txtLoginEmailTextController
+                                                                        .text,
+                                                                    _model
+                                                                        .txtSignupPasswordTextController
+                                                                        .text,
+                                                                  );
+                                                                  if (user ==
+                                                                      null) {
+                                                                    return;
+                                                                  }
+
+                                                                  _model.outputUsuarioAdd =
+                                                                      await UsuariosTable()
+                                                                          .insert({
+                                                                    'user_id':
+                                                                        currentUserUid,
+                                                                    'email': _model
+                                                                        .txtSignupEmailTextController
+                                                                        .text,
+                                                                    'nome_completo':
+                                                                        _model
+                                                                            .txtSignupNomeTextController
+                                                                            .text,
+                                                                    'tipo_usuario_id':
+                                                                        9,
+                                                                    'agencia_id':
+                                                                        26,
+                                                                    'foto_path':
+                                                                        valueOrDefault<
+                                                                            String>(
+                                                                      (Theme.of(context).brightness == Brightness.light) ==
+                                                                              false
+                                                                          ? 'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/knv28f1mlohg/account_circle_24dp_99999_FILL0_wght400_GRAD0_opsz24.png'
+                                                                          : 'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/knv28f1mlohg/account_circle_24dp_99999_FILL0_wght400_GRAD0_opsz24.png',
+                                                                      'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/knv28f1mlohg/account_circle_24dp_99999_FILL0_wght400_GRAD0_opsz24.png',
+                                                                    ),
+                                                                  });
+                                                                  await showDialog(
+                                                                    context:
+                                                                        context,
+                                                                    builder:
+                                                                        (dialogContext) {
+                                                                      return Dialog(
+                                                                        elevation:
+                                                                            0,
+                                                                        insetPadding:
+                                                                            EdgeInsets.zero,
+                                                                        backgroundColor:
+                                                                            Colors.transparent,
+                                                                        alignment:
+                                                                            AlignmentDirectional(0.0, 0.0).resolve(Directionality.of(context)),
+                                                                        child:
+                                                                            GestureDetector(
+                                                                          onTap:
+                                                                              () {
+                                                                            FocusScope.of(dialogContext).unfocus();
+                                                                            FocusManager.instance.primaryFocus?.unfocus();
+                                                                          },
+                                                                          child:
+                                                                              ModalMessageOkWidget(),
+                                                                        ),
+                                                                      );
+                                                                    },
+                                                                  );
+
+                                                                  safeSetState(
+                                                                      () {
+                                                                    _model
+                                                                        .txtLoginEmailTextController
+                                                                        ?.clear();
+                                                                    _model
+                                                                        .txtLoginPasswordTextController
+                                                                        ?.clear();
+                                                                    _model
+                                                                        .txtSignupNomeTextController
+                                                                        ?.clear();
+                                                                    _model
+                                                                        .txtSignupEmailTextController
+                                                                        ?.clear();
+                                                                    _model
+                                                                        .txtSignupPasswordTextController
+                                                                        ?.clear();
+                                                                    _model
+                                                                        .txtSignupConfirmTextController
+                                                                        ?.clear();
+                                                                  });
+                                                                  GoRouter.of(
+                                                                          context)
+                                                                      .prepareAuthEvent();
+                                                                  await authManager
+                                                                      .signOut();
+                                                                  GoRouter.of(
+                                                                          context)
+                                                                      .clearRedirectLocation();
+
+                                                                  context.pushNamedAuth(
+                                                                      'auth_login',
+                                                                      context
+                                                                          .mounted);
 
                                                                   safeSetState(
                                                                       () {});

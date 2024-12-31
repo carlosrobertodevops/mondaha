@@ -14,10 +14,10 @@ export 'dropdown_usuario_admin_edit_model.dart';
 class DropdownUsuarioAdminEditWidget extends StatefulWidget {
   const DropdownUsuarioAdminEditWidget({
     super.key,
-    required this.usuarioid,
+    this.usuariosView,
   });
 
-  final UsuariosRow? usuarioid;
+  final UsuariosViewRow? usuariosView;
 
   @override
   State<DropdownUsuarioAdminEditWidget> createState() =>
@@ -150,7 +150,7 @@ class _DropdownUsuarioAdminEditWidgetState
                                       alignment: AlignmentDirectional(0.0, 0.0)
                                           .resolve(Directionality.of(context)),
                                       child: ModalProfileEditAdminWidget(
-                                        usuariosRow: widget!.usuarioid,
+                                        usuariosRow: widget!.usuariosView,
                                       ),
                                     );
                                   },
@@ -293,63 +293,128 @@ class _DropdownUsuarioAdminEditWidgetState
                       MouseRegion(
                         opaque: false,
                         cursor: MouseCursor.defer ?? MouseCursor.defer,
-                        child: AnimatedContainer(
-                          duration: Duration(milliseconds: 150),
-                          curve: Curves.easeInOut,
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            color: _model.mouseRegionHovered3!
-                                ? FlutterFlowTheme.of(context).primaryBackground
-                                : FlutterFlowTheme.of(context)
-                                    .secondaryBackground,
-                            borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(4.0),
-                              bottomRight: Radius.circular(4.0),
-                              topLeft: Radius.circular(0.0),
-                              topRight: Radius.circular(0.0),
-                            ),
-                          ),
-                          child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 8.0, 0.0, 8.0),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      12.0, 0.0, 0.0, 0.0),
-                                  child: Icon(
-                                    Icons.delete_outline_rounded,
-                                    color: FlutterFlowTheme.of(context).error,
-                                    size: 20.0,
-                                  ),
+                        child: InkWell(
+                          splashColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          onTap: () async {
+                            logFirebaseEvent(
+                                'DROPDOWN_USUARIO_ADMIN_EDIT_component_ON');
+                            var confirmDialogResponse = await showDialog<bool>(
+                                  context: context,
+                                  builder: (alertDialogContext) {
+                                    return AlertDialog(
+                                      title: Text('Excluir Usuário'),
+                                      content: Text(
+                                          'Deseja excluir o usuário selecionado ?'),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () => Navigator.pop(
+                                              alertDialogContext, false),
+                                          child: Text('Cancelar'),
+                                        ),
+                                        TextButton(
+                                          onPressed: () => Navigator.pop(
+                                              alertDialogContext, true),
+                                          child: Text('Confirmar'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                ) ??
+                                false;
+                            if (confirmDialogResponse) {
+                              await UsuariosTable().update(
+                                data: {
+                                  'excluido': true,
+                                },
+                                matchingRows: (rows) => rows.eqOrNull(
+                                  'usuario_id',
+                                  widget!.usuariosView?.usuarioId,
                                 ),
-                                Expanded(
-                                  child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        12.0, 0.0, 0.0, 0.0),
-                                    child: Text(
-                                      FFLocalizations.of(context).getText(
-                                        '9qkfsg85' /* Delete */,
-                                      ),
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .override(
-                                            fontFamily:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyMediumFamily,
-                                            color: FlutterFlowTheme.of(context)
-                                                .error,
-                                            letterSpacing: 0.0,
-                                            useGoogleFonts: GoogleFonts.asMap()
-                                                .containsKey(
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMediumFamily),
-                                          ),
+                              );
+                              Navigator.pop(context);
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    'Usuário excluído com sucesso !!!',
+                                    style: TextStyle(
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryText,
                                     ),
                                   ),
+                                  duration: Duration(milliseconds: 3000),
+                                  backgroundColor:
+                                      FlutterFlowTheme.of(context).secondary,
                                 ),
-                              ],
+                              );
+
+                              context.pushNamed('main_admin');
+                            }
+                          },
+                          child: AnimatedContainer(
+                            duration: Duration(milliseconds: 150),
+                            curve: Curves.easeInOut,
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              color: _model.mouseRegionHovered3!
+                                  ? FlutterFlowTheme.of(context)
+                                      .primaryBackground
+                                  : FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
+                              borderRadius: BorderRadius.only(
+                                bottomLeft: Radius.circular(4.0),
+                                bottomRight: Radius.circular(4.0),
+                                topLeft: Radius.circular(0.0),
+                                topRight: Radius.circular(0.0),
+                              ),
+                            ),
+                            child: Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 8.0, 0.0, 8.0),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        12.0, 0.0, 0.0, 0.0),
+                                    child: Icon(
+                                      Icons.delete_outline_rounded,
+                                      color: FlutterFlowTheme.of(context).error,
+                                      size: 20.0,
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          12.0, 0.0, 0.0, 0.0),
+                                      child: Text(
+                                        FFLocalizations.of(context).getText(
+                                          '9qkfsg85' /* Delete */,
+                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMediumFamily,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .error,
+                                              letterSpacing: 0.0,
+                                              useGoogleFonts: GoogleFonts
+                                                      .asMap()
+                                                  .containsKey(
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMediumFamily),
+                                            ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
@@ -405,7 +470,7 @@ class _DropdownUsuarioAdminEditWidgetState
                                 },
                                 matchingRows: (rows) => rows.eqOrNull(
                                   'usuario_id',
-                                  widget!.usuarioid?.usuarioId,
+                                  widget!.usuariosView?.usuarioId,
                                 ),
                               );
 
@@ -514,7 +579,7 @@ class _DropdownUsuarioAdminEditWidgetState
                               },
                               matchingRows: (rows) => rows.eqOrNull(
                                 'usuario_id',
-                                widget!.usuarioid?.usuarioId,
+                                widget!.usuariosView?.usuarioId,
                               ),
                             );
 
@@ -622,7 +687,7 @@ class _DropdownUsuarioAdminEditWidgetState
                               },
                               matchingRows: (rows) => rows.eqOrNull(
                                 'usuario_id',
-                                widget!.usuarioid?.usuarioId,
+                                widget!.usuariosView?.usuarioId,
                               ),
                             );
 
@@ -732,7 +797,7 @@ class _DropdownUsuarioAdminEditWidgetState
                                 },
                                 matchingRows: (rows) => rows.eqOrNull(
                                   'usuario_id',
-                                  widget!.usuarioid?.usuarioId,
+                                  widget!.usuariosView?.usuarioId,
                                 ),
                               );
 
@@ -843,7 +908,7 @@ class _DropdownUsuarioAdminEditWidgetState
                                 },
                                 matchingRows: (rows) => rows.eqOrNull(
                                   'usuario_id',
-                                  widget!.usuarioid?.usuarioId,
+                                  widget!.usuariosView?.usuarioId,
                                 ),
                               );
 

@@ -162,4 +162,13 @@ class MembrosViewRow extends SupabaseDataRow {
   List<double> get membroLngLat => getListField<double>('membroLngLat');
   set membroLngLat(List<double>? value) =>
       setListField<double>('membroLngLat', value);
+
+  bool? get excluido => getField<bool>('excluido');
+  set excluido(bool? value) => setField<bool>('excluido', value);
+
+  bool? get bloqueado => getField<bool>('bloqueado');
+  set bloqueado(bool? value) => setField<bool>('bloqueado', value);
+
+  int? get situacao => getField<int>('situacao');
+  set situacao(int? value) => setField<int>('situacao', value);
 }

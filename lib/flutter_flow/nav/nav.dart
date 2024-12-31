@@ -172,6 +172,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                         'mainAdminTipoUsuario',
                         ParamType.int,
                       ),
+                      ususariosView: params.getParam<UsuariosViewRow>(
+                        'ususariosView',
+                        ParamType.SupabaseRow,
+                      ),
                     ),
             ),
             FFRoute(

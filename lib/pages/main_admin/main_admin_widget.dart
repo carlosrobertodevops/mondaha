@@ -27,9 +27,11 @@ class MainAdminWidget extends StatefulWidget {
   const MainAdminWidget({
     super.key,
     int? mainAdminTipoUsuario,
+    this.ususariosView,
   }) : this.mainAdminTipoUsuario = mainAdminTipoUsuario ?? 1;
 
   final int mainAdminTipoUsuario;
+  final UsuariosViewRow? ususariosView;
 
   @override
   State<MainAdminWidget> createState() => _MainAdminWidgetState();
@@ -646,9 +648,11 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                         ),
                                                       ),
                                                       content: FutureBuilder<
-                                                          List<UsuariosRow>>(
-                                                        future: UsuariosTable()
-                                                            .queryRows(
+                                                          List<
+                                                              UsuariosViewRow>>(
+                                                        future:
+                                                            UsuariosViewTable()
+                                                                .queryRows(
                                                           queryFn: (q) => q.order(
                                                               'nome_completo',
                                                               ascending: true),
@@ -672,8 +676,8 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                               ),
                                                             );
                                                           }
-                                                          List<UsuariosRow>
-                                                              listViewUsuariosRowList =
+                                                          List<UsuariosViewRow>
+                                                              listViewUsuariosViewRowList =
                                                               snapshot.data!;
 
                                                           return ListView
@@ -684,12 +688,12 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                             scrollDirection:
                                                                 Axis.vertical,
                                                             itemCount:
-                                                                listViewUsuariosRowList
+                                                                listViewUsuariosViewRowList
                                                                     .length,
                                                             itemBuilder: (context,
                                                                 listViewIndex) {
-                                                              final listViewUsuariosRow =
-                                                                  listViewUsuariosRowList[
+                                                              final listViewUsuariosViewRow =
+                                                                  listViewUsuariosViewRowList[
                                                                       listViewIndex];
                                                               return Builder(
                                                                 builder:
@@ -740,7 +744,7 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                                                 FocusManager.instance.primaryFocus?.unfocus();
                                                                               },
                                                                               child: ModalProfileEditAdminWidget(
-                                                                                usuariosRow: listViewUsuariosRow,
+                                                                                usuariosRow: listViewUsuariosViewRow,
                                                                               ),
                                                                             ),
                                                                           );
@@ -798,8 +802,8 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                                                   fadeInDuration: Duration(milliseconds: 10),
                                                                                   fadeOutDuration: Duration(milliseconds: 10),
                                                                                   imageUrl: valueOrDefault<String>(
-                                                                                    listViewUsuariosRow.fotoPath != ''
-                                                                                        ? listViewUsuariosRow.fotoPath
+                                                                                    listViewUsuariosViewRow.fotoPath != ''
+                                                                                        ? listViewUsuariosViewRow.fotoPath
                                                                                         : valueOrDefault<String>(
                                                                                             (Theme.of(context).brightness == Brightness.light) == true
                                                                                                 ? valueOrDefault<String>(
@@ -831,8 +835,8 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                                                       padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
                                                                                       child: Text(
                                                                                         valueOrDefault<String>(
-                                                                                          listViewUsuariosRow.nomeCompleto,
-                                                                                          'sem informacao',
+                                                                                          listViewUsuariosViewRow.nomeCompleto,
+                                                                                          'sem informação',
                                                                                         ),
                                                                                         style: FlutterFlowTheme.of(context).bodyLarge.override(
                                                                                               fontFamily: FlutterFlowTheme.of(context).bodyLargeFamily,
@@ -858,43 +862,16 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                                                         ),
                                                                                         child: Padding(
                                                                                           padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
-                                                                                          child: FutureBuilder<List<AgenciasRow>>(
-                                                                                            future: AgenciasTable().querySingleRow(
-                                                                                              queryFn: (q) => q.eqOrNull(
-                                                                                                'agencia_id',
-                                                                                                listViewUsuariosRow.agenciaId,
-                                                                                              ),
+                                                                                          child: Text(
+                                                                                            valueOrDefault<String>(
+                                                                                              listViewUsuariosViewRow.agenciaNome,
+                                                                                              'sem informação',
                                                                                             ),
-                                                                                            builder: (context, snapshot) {
-                                                                                              // Customize what your widget looks like when it's loading.
-                                                                                              if (!snapshot.hasData) {
-                                                                                                return Center(
-                                                                                                  child: SizedBox(
-                                                                                                    width: 50.0,
-                                                                                                    height: 50.0,
-                                                                                                    child: SpinKitFadingCircle(
-                                                                                                      color: FlutterFlowTheme.of(context).tertiary,
-                                                                                                      size: 50.0,
-                                                                                                    ),
-                                                                                                  ),
-                                                                                                );
-                                                                                              }
-                                                                                              List<AgenciasRow> textAgenciasRowList = snapshot.data!;
-
-                                                                                              final textAgenciasRow = textAgenciasRowList.isNotEmpty ? textAgenciasRowList.first : null;
-
-                                                                                              return Text(
-                                                                                                valueOrDefault<String>(
-                                                                                                  textAgenciasRow?.nome,
-                                                                                                  'sem informacao',
+                                                                                            style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                  fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                                                  letterSpacing: 0.0,
+                                                                                                  useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
                                                                                                 ),
-                                                                                                style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                      fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                                      letterSpacing: 0.0,
-                                                                                                      useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                                                    ),
-                                                                                              );
-                                                                                            },
                                                                                           ),
                                                                                         ),
                                                                                       ),
@@ -910,7 +887,7 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                                                         padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
                                                                                         child: Text(
                                                                                           valueOrDefault<String>(
-                                                                                            listViewUsuariosRow.descricao,
+                                                                                            listViewUsuariosViewRow.descricao,
                                                                                             'sem informação',
                                                                                           ),
                                                                                           style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -932,7 +909,7 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                                                         padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
                                                                                         child: Text(
                                                                                           valueOrDefault<String>(
-                                                                                            listViewUsuariosRow.email,
+                                                                                            listViewUsuariosViewRow.email,
                                                                                             'sem informacao',
                                                                                           ),
                                                                                           style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -953,7 +930,7 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                                                           height: 32.0,
                                                                                           decoration: BoxDecoration(
                                                                                             color: valueOrDefault<Color>(
-                                                                                              listViewUsuariosRow.tipoUsuarioId == 9 ? FlutterFlowTheme.of(context).accent3 : FlutterFlowTheme.of(context).accent2,
+                                                                                              listViewUsuariosViewRow.tipoUsuarioId == 9 ? FlutterFlowTheme.of(context).accent3 : FlutterFlowTheme.of(context).accent2,
                                                                                               FlutterFlowTheme.of(context).accent2,
                                                                                             ),
                                                                                             borderRadius: BorderRadius.circular(8.0),
@@ -965,43 +942,16 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                                                             alignment: AlignmentDirectional(0.0, 0.0),
                                                                                             child: Padding(
                                                                                               padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
-                                                                                              child: FutureBuilder<List<TiposUsuariosRow>>(
-                                                                                                future: TiposUsuariosTable().querySingleRow(
-                                                                                                  queryFn: (q) => q.eqOrNull(
-                                                                                                    'tipo_usuario_id',
-                                                                                                    listViewUsuariosRow.tipoUsuarioId,
-                                                                                                  ),
+                                                                                              child: Text(
+                                                                                                valueOrDefault<String>(
+                                                                                                  listViewUsuariosViewRow.tipoUsuarioDescricao,
+                                                                                                  'sem informação',
                                                                                                 ),
-                                                                                                builder: (context, snapshot) {
-                                                                                                  // Customize what your widget looks like when it's loading.
-                                                                                                  if (!snapshot.hasData) {
-                                                                                                    return Center(
-                                                                                                      child: SizedBox(
-                                                                                                        width: 50.0,
-                                                                                                        height: 50.0,
-                                                                                                        child: SpinKitFadingCircle(
-                                                                                                          color: FlutterFlowTheme.of(context).tertiary,
-                                                                                                          size: 50.0,
-                                                                                                        ),
-                                                                                                      ),
-                                                                                                    );
-                                                                                                  }
-                                                                                                  List<TiposUsuariosRow> textTiposUsuariosRowList = snapshot.data!;
-
-                                                                                                  final textTiposUsuariosRow = textTiposUsuariosRowList.isNotEmpty ? textTiposUsuariosRowList.first : null;
-
-                                                                                                  return Text(
-                                                                                                    valueOrDefault<String>(
-                                                                                                      textTiposUsuariosRow?.descricao,
-                                                                                                      'sem informacao',
+                                                                                                style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                      fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                                                      letterSpacing: 0.0,
+                                                                                                      useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
                                                                                                     ),
-                                                                                                    style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                          fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                                          letterSpacing: 0.0,
-                                                                                                          useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                                                        ),
-                                                                                                  );
-                                                                                                },
                                                                                               ),
                                                                                             ),
                                                                                           ),
@@ -1038,7 +988,7 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                                                               FocusManager.instance.primaryFocus?.unfocus();
                                                                                             },
                                                                                             child: DropdownUsuarioAdminEditWidget(
-                                                                                              usuarioid: listViewUsuariosRow,
+                                                                                              usuariosView: listViewUsuariosViewRow,
                                                                                             ),
                                                                                           ),
                                                                                         );
@@ -1675,7 +1625,7 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                                                         FocusManager.instance.primaryFocus?.unfocus();
                                                                                       },
                                                                                       child: DropdownUsuarioAdminEditWidget(
-                                                                                        usuarioid: listViewUsuariosRow,
+                                                                                        usuariosView: widget!.ususariosView,
                                                                                       ),
                                                                                     ),
                                                                                   );
@@ -2310,7 +2260,7 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                                                         FocusManager.instance.primaryFocus?.unfocus();
                                                                                       },
                                                                                       child: DropdownUsuarioAdminEditWidget(
-                                                                                        usuarioid: listViewUsuariosRow,
+                                                                                        usuariosView: widget!.ususariosView,
                                                                                       ),
                                                                                     ),
                                                                                   );

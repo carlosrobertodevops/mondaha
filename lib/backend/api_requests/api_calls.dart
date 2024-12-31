@@ -169,7 +169,7 @@ class UsuarioAddCall {
   }
 }
 
-class ProcedimentosEditCall {
+class ProcedimentosAddCall {
   static Future<ApiCallResponse> call({
     int? membroId,
     String? procedimentoNo = '',
@@ -188,50 +188,7 @@ class ProcedimentosEditCall {
   "data": "${data}"
 }''';
     return ApiManager.instance.makeApiCall(
-      callName: 'ProcedimentosEdit',
-      apiUrl:
-          'https://buzlazhtcndpegsnijcw.supabase.co/rest/v1/procedimentos?membro_id=eq.${membroId}',
-      callType: ApiCallType.PATCH,
-      headers: {
-        'apikey':
-            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ1emxhemh0Y25kcGVnc25pamN3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQ2OTI2OTksImV4cCI6MjA1MDI2ODY5OX0.myFxYtm5Q3WF1WlV0AJzPoRLKK8W0et8MnKUk4e-nPU',
-        'Authorization':
-            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ1emxhemh0Y25kcGVnc25pamN3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQ2OTI2OTksImV4cCI6MjA1MDI2ODY5OX0.myFxYtm5Q3WF1WlV0AJzPoRLKK8W0et8MnKUk4e-nPU',
-        'Content-Type': 'application/json',
-      },
-      params: {},
-      body: ffApiRequestBody,
-      bodyType: BodyType.JSON,
-      returnBody: true,
-      encodeBodyUtf8: false,
-      decodeUtf8: false,
-      cache: false,
-      isStreamingApi: false,
-      alwaysAllowBody: false,
-    );
-  }
-}
-
-class ProcedimentosAddCopyCall {
-  static Future<ApiCallResponse> call({
-    int? membroId,
-    String? procedimentoNo = '',
-    String? unidade = '',
-    String? procedimentoTipo = '',
-    String? crime = '',
-    String? data = '',
-  }) async {
-    final ffApiRequestBody = '''
-{
-  "membro_id": "${membroId}",
-  "procedimento_no": "${procedimentoNo}",
-  "unidade": "${unidade}",
-  "procedimento_tipo": "${procedimentoTipo}",
-  "crime": "${crime}",
-  "data": "${data}"
-}''';
-    return ApiManager.instance.makeApiCall(
-      callName: 'ProcedimentosAdd Copy',
+      callName: 'ProcedimentosAdd',
       apiUrl: 'https://buzlazhtcndpegsnijcw.supabase.co/rest/v1/procedimentos',
       callType: ApiCallType.POST,
       headers: {
@@ -255,11 +212,13 @@ class ProcedimentosAddCopyCall {
 }
 
 class ProcedimentosGetCall {
-  static Future<ApiCallResponse> call() async {
+  static Future<ApiCallResponse> call({
+    int? membroId,
+  }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'ProcedimentosGet',
       apiUrl:
-          'https://buzlazhtcndpegsnijcw.supabase.co/rest/v1/procedimentos?select=*',
+          'https://buzlazhtcndpegsnijcw.supabase.co/rest/v1/procedimentos?membro_id=eq.${membroId}&select=*',
       callType: ApiCallType.GET,
       headers: {
         'apikey':
@@ -270,51 +229,8 @@ class ProcedimentosGetCall {
       params: {},
       returnBody: true,
       encodeBodyUtf8: false,
-      decodeUtf8: false,
-      cache: false,
-      isStreamingApi: false,
-      alwaysAllowBody: false,
-    );
-  }
-}
-
-class ProcessosEditCall {
-  static Future<ApiCallResponse> call({
-    int? membroId,
-    String? acaoPenalNo = '',
-    String? vara = '',
-    String? situacaoJuridica = '',
-    String? regime = '',
-    String? situacaoReu = '',
-  }) async {
-    final ffApiRequestBody = '''
-{
-  "membro_id": "${membroId}",
-  "acao_penal_no": "${acaoPenalNo}",
-  "vara": "${vara}",
-  "situaco_juridica": "${situacaoJuridica}",
-  "regime": "${regime}",
-  "situacao_reu": "${situacaoReu}"
-}''';
-    return ApiManager.instance.makeApiCall(
-      callName: 'ProcessosEdit',
-      apiUrl:
-          'https://buzlazhtcndpegsnijcw.supabase.co/rest/v1/processos?membro_id=eq.${membroId}',
-      callType: ApiCallType.PUT,
-      headers: {
-        'apikey':
-            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ1emxhemh0Y25kcGVnc25pamN3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQ2OTI2OTksImV4cCI6MjA1MDI2ODY5OX0.myFxYtm5Q3WF1WlV0AJzPoRLKK8W0et8MnKUk4e-nPU',
-        'Authorization':
-            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ1emxhemh0Y25kcGVnc25pamN3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQ2OTI2OTksImV4cCI6MjA1MDI2ODY5OX0.myFxYtm5Q3WF1WlV0AJzPoRLKK8W0et8MnKUk4e-nPU',
-        'Content-Type': 'application/json',
-      },
-      params: {},
-      body: ffApiRequestBody,
-      bodyType: BodyType.JSON,
-      returnBody: true,
-      encodeBodyUtf8: false,
-      decodeUtf8: false,
-      cache: false,
+      decodeUtf8: true,
+      cache: true,
       isStreamingApi: false,
       alwaysAllowBody: false,
     );
@@ -364,7 +280,9 @@ class ProcessosAddCall {
 }
 
 class MembrosGetCall {
-  static Future<ApiCallResponse> call() async {
+  static Future<ApiCallResponse> call({
+    int? membroId = 18,
+  }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'MembrosGet',
       apiUrl:
@@ -414,11 +332,13 @@ class MembrosGetUniqueCall {
 }
 
 class ProcessosGetCall {
-  static Future<ApiCallResponse> call() async {
+  static Future<ApiCallResponse> call({
+    int? membroId,
+  }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'ProcessosGet',
       apiUrl:
-          'https://buzlazhtcndpegsnijcw.supabase.co/rest/v1/processos?select=*',
+          'https://buzlazhtcndpegsnijcw.supabase.co/rest/v1/processos?membro_id.eq.${membroId}&select=*',
       callType: ApiCallType.GET,
       headers: {
         'apikey':

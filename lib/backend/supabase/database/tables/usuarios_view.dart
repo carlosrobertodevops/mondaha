@@ -1,33 +1,36 @@
 import '../database.dart';
 
-class UsuariosTable extends SupabaseTable<UsuariosRow> {
+class UsuariosViewTable extends SupabaseTable<UsuariosViewRow> {
   @override
-  String get tableName => 'usuarios';
+  String get tableName => 'usuarios_view';
 
   @override
-  UsuariosRow createRow(Map<String, dynamic> data) => UsuariosRow(data);
+  UsuariosViewRow createRow(Map<String, dynamic> data) => UsuariosViewRow(data);
 }
 
-class UsuariosRow extends SupabaseDataRow {
-  UsuariosRow(Map<String, dynamic> data) : super(data);
+class UsuariosViewRow extends SupabaseDataRow {
+  UsuariosViewRow(Map<String, dynamic> data) : super(data);
 
   @override
-  SupabaseTable get table => UsuariosTable();
+  SupabaseTable get table => UsuariosViewTable();
 
-  DateTime get createdAt => getField<DateTime>('created_at')!;
-  set createdAt(DateTime value) => setField<DateTime>('created_at', value);
+  int? get usuarioId => getField<int>('usuario_id');
+  set usuarioId(int? value) => setField<int>('usuario_id', value);
+
+  DateTime? get createdAt => getField<DateTime>('created_at');
+  set createdAt(DateTime? value) => setField<DateTime>('created_at', value);
+
+  String? get userId => getField<String>('user_id');
+  set userId(String? value) => setField<String>('user_id', value);
 
   String? get nomeCompleto => getField<String>('nome_completo');
   set nomeCompleto(String? value) => setField<String>('nome_completo', value);
 
+  String? get agenciaNome => getField<String>('agencia_nome');
+  set agenciaNome(String? value) => setField<String>('agencia_nome', value);
+
   String? get email => getField<String>('email');
   set email(String? value) => setField<String>('email', value);
-
-  String get userId => getField<String>('user_id')!;
-  set userId(String value) => setField<String>('user_id', value);
-
-  int get usuarioId => getField<int>('usuario_id')!;
-  set usuarioId(int value) => setField<int>('usuario_id', value);
 
   String? get fotoPath => getField<String>('foto_path');
   set fotoPath(String? value) => setField<String>('foto_path', value);
@@ -40,6 +43,11 @@ class UsuariosRow extends SupabaseDataRow {
 
   int? get tipoUsuarioId => getField<int>('tipo_usuario_id');
   set tipoUsuarioId(int? value) => setField<int>('tipo_usuario_id', value);
+
+  String? get tipoUsuarioDescricao =>
+      getField<String>('tipo_usuario_descricao');
+  set tipoUsuarioDescricao(String? value) =>
+      setField<String>('tipo_usuario_descricao', value);
 
   int? get agenciaId => getField<int>('agencia_id');
   set agenciaId(int? value) => setField<int>('agencia_id', value);

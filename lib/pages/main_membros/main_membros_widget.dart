@@ -95,8 +95,6 @@ class _MainMembrosWidgetState extends State<MainMembrosWidget>
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Title(
         title: 'main_membros',
         color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
@@ -790,7 +788,12 @@ class _MainMembrosWidgetState extends State<MainMembrosWidget>
                                                                                   fadeInDuration: Duration(milliseconds: 100),
                                                                                   fadeOutDuration: Duration(milliseconds: 100),
                                                                                   imageUrl: valueOrDefault<String>(
-                                                                                    listViewMembrosViewRow.fotosPath.firstOrNull != '' ? listViewMembrosViewRow.fotosPath.firstOrNull : (Theme.of(context).brightness == Brightness.light ? FFAppState().MembrosImagePathLight : FFAppState().MembrosImagePathDark),
+                                                                                    listViewMembrosViewRow.fotosPath.firstOrNull != ''
+                                                                                        ? listViewMembrosViewRow.fotosPath.firstOrNull
+                                                                                        : valueOrDefault<String>(
+                                                                                            Theme.of(context).brightness == Brightness.light ? 'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/h99rv77ta7i5/groups_24dp_00000_FILL0_wght400_GRAD0_opsz24.png' : 'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/cjwx21vtk3oj/groups_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.png',
+                                                                                            'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/h99rv77ta7i5/groups_24dp_00000_FILL0_wght400_GRAD0_opsz24.png',
+                                                                                          ),
                                                                                     'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/rgxzhoyu6nbx/groups_96dp_99999_FILL0_wght400_GRAD0_opsz48.png',
                                                                                   ),
                                                                                   width: 50.0,
@@ -962,6 +965,7 @@ class _MainMembrosWidgetState extends State<MainMembrosWidget>
                                                                                               },
                                                                                               child: DropdownMemberEditWidget(
                                                                                                 membrosRow: listViewMembrosViewRow,
+                                                                                                membrosFotos: listViewMembrosViewRow.fotosPath,
                                                                                               ),
                                                                                             ),
                                                                                           );

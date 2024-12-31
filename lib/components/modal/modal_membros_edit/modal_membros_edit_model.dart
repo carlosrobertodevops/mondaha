@@ -157,35 +157,22 @@ class ModalMembrosEditModel extends FlutterFlowModel<ModalMembrosEditWidget> {
 
   bool comoForamValidados = true;
 
-  List<String> membrosFotoPathAtual = [];
-  void addToMembrosFotoPathAtual(String item) => membrosFotoPathAtual.add(item);
-  void removeFromMembrosFotoPathAtual(String item) =>
-      membrosFotoPathAtual.remove(item);
-  void removeAtIndexFromMembrosFotoPathAtual(int index) =>
-      membrosFotoPathAtual.removeAt(index);
-  void insertAtIndexInMembrosFotoPathAtual(int index, String item) =>
-      membrosFotoPathAtual.insert(index, item);
-  void updateMembrosFotoPathAtualAtIndex(
-          int index, Function(String) updateFn) =>
-      membrosFotoPathAtual[index] = updateFn(membrosFotoPathAtual[index]);
+  List<String> membrosFotoPathEdit = [];
+  void addToMembrosFotoPathEdit(String item) => membrosFotoPathEdit.add(item);
+  void removeFromMembrosFotoPathEdit(String item) =>
+      membrosFotoPathEdit.remove(item);
+  void removeAtIndexFromMembrosFotoPathEdit(int index) =>
+      membrosFotoPathEdit.removeAt(index);
+  void insertAtIndexInMembrosFotoPathEdit(int index, String item) =>
+      membrosFotoPathEdit.insert(index, item);
+  void updateMembrosFotoPathEditAtIndex(int index, Function(String) updateFn) =>
+      membrosFotoPathEdit[index] = updateFn(membrosFotoPathEdit[index]);
 
   bool uploadImageTemp = false;
 
   int? selectedCountValidados;
 
-  List<String> membrosFotoPathAtualString = [];
-  void addToMembrosFotoPathAtualString(String item) =>
-      membrosFotoPathAtualString.add(item);
-  void removeFromMembrosFotoPathAtualString(String item) =>
-      membrosFotoPathAtualString.remove(item);
-  void removeAtIndexFromMembrosFotoPathAtualString(int index) =>
-      membrosFotoPathAtualString.removeAt(index);
-  void insertAtIndexInMembrosFotoPathAtualString(int index, String item) =>
-      membrosFotoPathAtualString.insert(index, item);
-  void updateMembrosFotoPathAtualStringAtIndex(
-          int index, Function(String) updateFn) =>
-      membrosFotoPathAtualString[index] =
-          updateFn(membrosFotoPathAtualString[index]);
+  LatLng? centerMaps;
 
   ///  State fields for stateful widgets in this component.
 
@@ -197,6 +184,10 @@ class ModalMembrosEditModel extends FlutterFlowModel<ModalMembrosEditWidget> {
   final formKey8 = GlobalKey<FormState>();
   final formKey1 = GlobalKey<FormState>();
   final formKey3 = GlobalKey<FormState>();
+  // Stores action output result for [Backend Call - API (ProcedimentosGet)] action in modal_membros_edit widget.
+  ApiCallResponse? apiOutputProcedimentosGet;
+  // Stores action output result for [Backend Call - API (ProcessosGet)] action in modal_membros_edit widget.
+  ApiCallResponse? apiOutputProcessosGet;
   // State field(s) for TabBar widget.
   TabController? tabBarController;
   int get tabBarCurrentIndex =>
@@ -408,13 +399,17 @@ class ModalMembrosEditModel extends FlutterFlowModel<ModalMembrosEditWidget> {
   List<String> uploadedFileUrls2 = [];
 
   // Stores action output result for [Backend Call - Update Row(s)] action in Button widget.
-  List<MembrosRow>? outputMembrosFotoEdit;
-  // Stores action output result for [Backend Call - Update Row(s)] action in Button widget.
   List<MembrosRow>? outputMembrosEdit;
-  // Stores action output result for [Backend Call - API (ProcedimentosEdit)] action in Button widget.
-  ApiCallResponse? apiresultProcedimentosEdit;
-  // Stores action output result for [Backend Call - API (ProcessosEdit)] action in Button widget.
-  ApiCallResponse? apiresultProcessosEdit;
+  // Stores action output result for [Backend Call - Update Row(s)] action in Button widget.
+  List<MembrosRow>? outputMembrosEditPath;
+  // Stores action output result for [Backend Call - Delete Row(s)] action in Button widget.
+  List<ProcedimentosRow>? outputDeleteProcedimentos;
+  // Stores action output result for [Backend Call - API (ProcedimentosAdd)] action in Button widget.
+  ApiCallResponse? apiResultProcedimentosEdit;
+  // Stores action output result for [Backend Call - Delete Row(s)] action in Button widget.
+  List<ProcessosRow>? outputDeleteProcessos;
+  // Stores action output result for [Backend Call - API (ProcessosAdd)] action in Button widget.
+  ApiCallResponse? apiResultProcessosEdit;
 
   @override
   void initState(BuildContext context) {

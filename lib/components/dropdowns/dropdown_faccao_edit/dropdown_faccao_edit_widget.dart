@@ -370,10 +370,11 @@ class _DropdownFaccaoEditWidgetState extends State<DropdownFaccaoEditWidget> {
                                   FlutterFlowTheme.of(context).secondary,
                             ),
                           );
-                        }
-                        Navigator.pop(context);
 
-                        context.pushNamed('main_faccoes');
+                          context.pushNamed('main_faccoes');
+                        } else {
+                          context.pushNamed('main_faccoes');
+                        }
                       },
                       child: AnimatedContainer(
                         duration: Duration(milliseconds: 150),

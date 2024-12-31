@@ -373,3 +373,28 @@ List<double> convertLatLngToDouble(List<LatLng> latLngList) {
   }
   return doubleList;
 }
+
+LatLng extractCoordenadasListToLatLng(List<String> coordinatesList) {
+  // Verifique se a lista está vazia
+  if (coordinatesList.isEmpty) {
+    return LatLng(0, 0); // Retorna null se a lista estiver vazia
+  }
+
+  // Pegue a última string da lista
+  String lastLine = coordinatesList.last;
+
+  // Divida a string para separar latitude e longitude
+  List<String> parts = lastLine.split(',');
+
+  if (parts.length != 2) {
+    throw Exception(
+        'Formato inválido. A string deve estar no formato "latitude, longitude".');
+  }
+
+  // Converta as partes para double
+  double latitude = double.parse(parts[0].trim());
+  double longitude = double.parse(parts[1].trim());
+
+  // Retorne o objeto LatLng
+  return LatLng(latitude, longitude);
+}

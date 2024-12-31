@@ -35,6 +35,6 @@ class ProcedimentosRow extends SupabaseDataRow {
   String? get crime => getField<String>('crime');
   set crime(String? value) => setField<String>('crime', value);
 
-  DateTime? get dataField => getField<DateTime>('data');
-  set dataField(DateTime? value) => setField<DateTime>('data', value);
+  String? get dataField => getField<String>('data');
+  set dataField(String? value) => setField<String>('data', value);
 }

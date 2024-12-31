@@ -26,9 +26,9 @@ class ProcessosRow extends SupabaseDataRow {
   String? get vara => getField<String>('vara');
   set vara(String? value) => setField<String>('vara', value);
 
-  String? get situacoJuridica => getField<String>('situaco_juridica');
-  set situacoJuridica(String? value) =>
-      setField<String>('situaco_juridica', value);
+  String? get situacaoJuridica => getField<String>('situacao_juridica');
+  set situacaoJuridica(String? value) =>
+      setField<String>('situacao_juridica', value);
 
   String? get regime => getField<String>('regime');
   set regime(String? value) => setField<String>('regime', value);

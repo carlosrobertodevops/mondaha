@@ -150,4 +150,13 @@ class MembrosRow extends SupabaseDataRow {
   String? get alertaObservacao => getField<String>('alerta_observacao');
   set alertaObservacao(String? value) =>
       setField<String>('alerta_observacao', value);
+
+  bool? get excluido => getField<bool>('excluido');
+  set excluido(bool? value) => setField<bool>('excluido', value);
+
+  bool? get bloqueado => getField<bool>('bloqueado');
+  set bloqueado(bool? value) => setField<bool>('bloqueado', value);
+
+  int? get situacao => getField<int>('situacao');
+  set situacao(int? value) => setField<int>('situacao', value);
 }

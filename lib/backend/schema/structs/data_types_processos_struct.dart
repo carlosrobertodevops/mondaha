@@ -7,23 +7,45 @@ import '/flutter_flow/flutter_flow_util.dart';
 
 class DataTypesProcessosStruct extends BaseStruct {
   DataTypesProcessosStruct({
-    String? noAcaoPenal,
+    int? processoId,
+    int? membroId,
+    String? acaoPenalNo,
     String? vara,
     String? situacaoJuridica,
     String? regime,
     String? situacaoReu,
-  })  : _noAcaoPenal = noAcaoPenal,
+  })  : _processoId = processoId,
+        _membroId = membroId,
+        _acaoPenalNo = acaoPenalNo,
         _vara = vara,
         _situacaoJuridica = situacaoJuridica,
         _regime = regime,
         _situacaoReu = situacaoReu;
 
-  // "no_acao_penal" field.
-  String? _noAcaoPenal;
-  String get noAcaoPenal => _noAcaoPenal ?? '';
-  set noAcaoPenal(String? val) => _noAcaoPenal = val;
+  // "processo_id" field.
+  int? _processoId;
+  int get processoId => _processoId ?? 0;
+  set processoId(int? val) => _processoId = val;
 
-  bool hasNoAcaoPenal() => _noAcaoPenal != null;
+  void incrementProcessoId(int amount) => processoId = processoId + amount;
+
+  bool hasProcessoId() => _processoId != null;
+
+  // "membro_id" field.
+  int? _membroId;
+  int get membroId => _membroId ?? 0;
+  set membroId(int? val) => _membroId = val;
+
+  void incrementMembroId(int amount) => membroId = membroId + amount;
+
+  bool hasMembroId() => _membroId != null;
+
+  // "acao_penal_no" field.
+  String? _acaoPenalNo;
+  String get acaoPenalNo => _acaoPenalNo ?? '';
+  set acaoPenalNo(String? val) => _acaoPenalNo = val;
+
+  bool hasAcaoPenalNo() => _acaoPenalNo != null;
 
   // "vara" field.
   String? _vara;
@@ -55,7 +77,9 @@ class DataTypesProcessosStruct extends BaseStruct {
 
   static DataTypesProcessosStruct fromMap(Map<String, dynamic> data) =>
       DataTypesProcessosStruct(
-        noAcaoPenal: data['no_acao_penal'] as String?,
+        processoId: castToType<int>(data['processo_id']),
+        membroId: castToType<int>(data['membro_id']),
+        acaoPenalNo: data['acao_penal_no'] as String?,
         vara: data['vara'] as String?,
         situacaoJuridica: data['situacao_juridica'] as String?,
         regime: data['regime'] as String?,
@@ -67,7 +91,9 @@ class DataTypesProcessosStruct extends BaseStruct {
       : null;
 
   Map<String, dynamic> toMap() => {
-        'no_acao_penal': _noAcaoPenal,
+        'processo_id': _processoId,
+        'membro_id': _membroId,
+        'acao_penal_no': _acaoPenalNo,
         'vara': _vara,
         'situacao_juridica': _situacaoJuridica,
         'regime': _regime,
@@ -76,8 +102,16 @@ class DataTypesProcessosStruct extends BaseStruct {
 
   @override
   Map<String, dynamic> toSerializableMap() => {
-        'no_acao_penal': serializeParam(
-          _noAcaoPenal,
+        'processo_id': serializeParam(
+          _processoId,
+          ParamType.int,
+        ),
+        'membro_id': serializeParam(
+          _membroId,
+          ParamType.int,
+        ),
+        'acao_penal_no': serializeParam(
+          _acaoPenalNo,
           ParamType.String,
         ),
         'vara': serializeParam(
@@ -101,8 +135,18 @@ class DataTypesProcessosStruct extends BaseStruct {
   static DataTypesProcessosStruct fromSerializableMap(
           Map<String, dynamic> data) =>
       DataTypesProcessosStruct(
-        noAcaoPenal: deserializeParam(
-          data['no_acao_penal'],
+        processoId: deserializeParam(
+          data['processo_id'],
+          ParamType.int,
+          false,
+        ),
+        membroId: deserializeParam(
+          data['membro_id'],
+          ParamType.int,
+          false,
+        ),
+        acaoPenalNo: deserializeParam(
+          data['acao_penal_no'],
           ParamType.String,
           false,
         ),
@@ -134,7 +178,9 @@ class DataTypesProcessosStruct extends BaseStruct {
   @override
   bool operator ==(Object other) {
     return other is DataTypesProcessosStruct &&
-        noAcaoPenal == other.noAcaoPenal &&
+        processoId == other.processoId &&
+        membroId == other.membroId &&
+        acaoPenalNo == other.acaoPenalNo &&
         vara == other.vara &&
         situacaoJuridica == other.situacaoJuridica &&
         regime == other.regime &&
@@ -142,19 +188,30 @@ class DataTypesProcessosStruct extends BaseStruct {
   }
 
   @override
-  int get hashCode => const ListEquality()
-      .hash([noAcaoPenal, vara, situacaoJuridica, regime, situacaoReu]);
+  int get hashCode => const ListEquality().hash([
+        processoId,
+        membroId,
+        acaoPenalNo,
+        vara,
+        situacaoJuridica,
+        regime,
+        situacaoReu
+      ]);
 }
 
 DataTypesProcessosStruct createDataTypesProcessosStruct({
-  String? noAcaoPenal,
+  int? processoId,
+  int? membroId,
+  String? acaoPenalNo,
   String? vara,
   String? situacaoJuridica,
   String? regime,
   String? situacaoReu,
 }) =>
     DataTypesProcessosStruct(
-      noAcaoPenal: noAcaoPenal,
+      processoId: processoId,
+      membroId: membroId,
+      acaoPenalNo: acaoPenalNo,
       vara: vara,
       situacaoJuridica: situacaoJuridica,
       regime: regime,

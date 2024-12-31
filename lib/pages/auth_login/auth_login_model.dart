@@ -139,8 +139,6 @@ class AuthLoginModel extends FlutterFlowModel<AuthLoginWidget> {
     return null;
   }
 
-  // Stores action output result for [Backend Call - Query Rows] action in btn-signin widget.
-  List<UsuariosRow>? usuarioExiste;
   // Stores action output result for [Backend Call - Insert Row] action in btn-signin widget.
   UsuariosRow? outputUsuarioAdd;
 
