@@ -2691,93 +2691,97 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                                 ].divide(SizedBox(width: 10.0)),
                                                                               ),
                                                                             ),
-                                                                            Builder(
-                                                                              builder: (context) {
-                                                                                final listMembrosEnderecos = _model.membrosEnderecos.toList().take(4).toList();
+                                                                            if (valueOrDefault<bool>(
+                                                                              (_model.membrosEnderecos.isNotEmpty) == true,
+                                                                              false,
+                                                                            ))
+                                                                              Builder(
+                                                                                builder: (context) {
+                                                                                  final listMembrosEnderecos = _model.membrosEnderecos.toList().take(4).toList();
 
-                                                                                return SingleChildScrollView(
-                                                                                  scrollDirection: Axis.horizontal,
-                                                                                  child: Row(
-                                                                                    mainAxisSize: MainAxisSize.max,
-                                                                                    children: List.generate(listMembrosEnderecos.length, (listMembrosEnderecosIndex) {
-                                                                                      final listMembrosEnderecosItem = listMembrosEnderecos[listMembrosEnderecosIndex];
-                                                                                      return Align(
-                                                                                        alignment: AlignmentDirectional(0.0, 0.0),
-                                                                                        child: Container(
-                                                                                          decoration: BoxDecoration(
-                                                                                            borderRadius: BorderRadius.circular(10.0),
-                                                                                            shape: BoxShape.rectangle,
-                                                                                            border: Border.all(
-                                                                                              color: FlutterFlowTheme.of(context).primary,
-                                                                                              width: 2.0,
-                                                                                            ),
-                                                                                          ),
+                                                                                  return SingleChildScrollView(
+                                                                                    scrollDirection: Axis.horizontal,
+                                                                                    child: Row(
+                                                                                      mainAxisSize: MainAxisSize.max,
+                                                                                      children: List.generate(listMembrosEnderecos.length, (listMembrosEnderecosIndex) {
+                                                                                        final listMembrosEnderecosItem = listMembrosEnderecos[listMembrosEnderecosIndex];
+                                                                                        return Align(
                                                                                           alignment: AlignmentDirectional(0.0, 0.0),
-                                                                                          child: Align(
+                                                                                          child: Container(
+                                                                                            decoration: BoxDecoration(
+                                                                                              borderRadius: BorderRadius.circular(10.0),
+                                                                                              shape: BoxShape.rectangle,
+                                                                                              border: Border.all(
+                                                                                                color: FlutterFlowTheme.of(context).primary,
+                                                                                                width: 2.0,
+                                                                                              ),
+                                                                                            ),
                                                                                             alignment: AlignmentDirectional(0.0, 0.0),
-                                                                                            child: Column(
-                                                                                              mainAxisSize: MainAxisSize.max,
-                                                                                              children: [
-                                                                                                Align(
-                                                                                                  alignment: AlignmentDirectional(0.0, 0.0),
-                                                                                                  child: SingleChildScrollView(
-                                                                                                    scrollDirection: Axis.horizontal,
-                                                                                                    child: Row(
-                                                                                                      mainAxisSize: MainAxisSize.max,
-                                                                                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                                                                      children: [
-                                                                                                        Align(
-                                                                                                          alignment: AlignmentDirectional(0.0, 0.0),
-                                                                                                          child: Padding(
-                                                                                                            padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 3.0, 0.0),
-                                                                                                            child: Text(
-                                                                                                              valueOrDefault<String>(
-                                                                                                                listMembrosEnderecosItem,
-                                                                                                                'sem informação',
+                                                                                            child: Align(
+                                                                                              alignment: AlignmentDirectional(0.0, 0.0),
+                                                                                              child: Column(
+                                                                                                mainAxisSize: MainAxisSize.max,
+                                                                                                children: [
+                                                                                                  Align(
+                                                                                                    alignment: AlignmentDirectional(0.0, 0.0),
+                                                                                                    child: SingleChildScrollView(
+                                                                                                      scrollDirection: Axis.horizontal,
+                                                                                                      child: Row(
+                                                                                                        mainAxisSize: MainAxisSize.max,
+                                                                                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                                                                        children: [
+                                                                                                          Align(
+                                                                                                            alignment: AlignmentDirectional(0.0, 0.0),
+                                                                                                            child: Padding(
+                                                                                                              padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 3.0, 0.0),
+                                                                                                              child: Text(
+                                                                                                                valueOrDefault<String>(
+                                                                                                                  listMembrosEnderecosItem,
+                                                                                                                  'sem informação',
+                                                                                                                ),
+                                                                                                                style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                                      fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                                                                      color: FlutterFlowTheme.of(context).primaryText,
+                                                                                                                      letterSpacing: 0.0,
+                                                                                                                      useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                                                                    ),
                                                                                                               ),
-                                                                                                              style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                                    fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                                                    color: FlutterFlowTheme.of(context).primaryText,
-                                                                                                                    letterSpacing: 0.0,
-                                                                                                                    useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                                                                  ),
                                                                                                             ),
                                                                                                           ),
-                                                                                                        ),
-                                                                                                        Align(
-                                                                                                          alignment: AlignmentDirectional(0.0, 0.0),
-                                                                                                          child: InkWell(
-                                                                                                            splashColor: Colors.transparent,
-                                                                                                            focusColor: Colors.transparent,
-                                                                                                            hoverColor: Colors.transparent,
-                                                                                                            highlightColor: Colors.transparent,
-                                                                                                            onTap: () async {
-                                                                                                              logFirebaseEvent('MODAL_MEMBROS_ADD_Icon_9l4zc2l7_ON_TAP');
-                                                                                                              _model.removeAtIndexFromMembrosEnderecos(listMembrosEnderecosIndex);
-                                                                                                              _model.removeAtIndexFromMembrosLatLng(listMembrosEnderecosIndex);
-                                                                                                              _model.updatePage(() {});
-                                                                                                            },
-                                                                                                            child: Icon(
-                                                                                                              Icons.do_not_disturb_on_rounded,
-                                                                                                              color: FlutterFlowTheme.of(context).error,
-                                                                                                              size: 24.0,
+                                                                                                          Align(
+                                                                                                            alignment: AlignmentDirectional(0.0, 0.0),
+                                                                                                            child: InkWell(
+                                                                                                              splashColor: Colors.transparent,
+                                                                                                              focusColor: Colors.transparent,
+                                                                                                              hoverColor: Colors.transparent,
+                                                                                                              highlightColor: Colors.transparent,
+                                                                                                              onTap: () async {
+                                                                                                                logFirebaseEvent('MODAL_MEMBROS_ADD_Icon_9l4zc2l7_ON_TAP');
+                                                                                                                _model.removeAtIndexFromMembrosEnderecos(listMembrosEnderecosIndex);
+                                                                                                                _model.removeAtIndexFromMembrosLatLng(listMembrosEnderecosIndex);
+                                                                                                                _model.updatePage(() {});
+                                                                                                              },
+                                                                                                              child: Icon(
+                                                                                                                Icons.do_not_disturb_on_rounded,
+                                                                                                                color: FlutterFlowTheme.of(context).error,
+                                                                                                                size: 24.0,
+                                                                                                              ),
                                                                                                             ),
                                                                                                           ),
-                                                                                                        ),
-                                                                                                      ],
+                                                                                                        ],
+                                                                                                      ),
                                                                                                     ),
                                                                                                   ),
-                                                                                                ),
-                                                                                              ],
+                                                                                                ],
+                                                                                              ),
                                                                                             ),
                                                                                           ),
-                                                                                        ),
-                                                                                      );
-                                                                                    }).divide(SizedBox(width: 10.0)),
-                                                                                  ),
-                                                                                );
-                                                                              },
-                                                                            ),
+                                                                                        );
+                                                                                      }).divide(SizedBox(width: 10.0)),
+                                                                                    ),
+                                                                                  );
+                                                                                },
+                                                                              ),
                                                                             SingleChildScrollView(
                                                                               scrollDirection: Axis.horizontal,
                                                                               child: Row(

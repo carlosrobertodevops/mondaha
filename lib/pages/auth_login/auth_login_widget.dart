@@ -849,8 +849,24 @@ class _AuthLoginWidgetState extends State<AuthLoginWidget>
                                                                 logFirebaseEvent(
                                                                     'AUTH_LOGIN_FORGOT_PASSWORD_BTN_ON_TAP');
 
-                                                                context.pushNamed(
-                                                                    'auth_forgot_password');
+                                                                context
+                                                                    .pushNamed(
+                                                                  'auth_forgot_password',
+                                                                  extra: <String,
+                                                                      dynamic>{
+                                                                    kTransitionInfoKey:
+                                                                        TransitionInfo(
+                                                                      hasTransition:
+                                                                          true,
+                                                                      transitionType:
+                                                                          PageTransitionType
+                                                                              .fade,
+                                                                      duration: Duration(
+                                                                          milliseconds:
+                                                                              0),
+                                                                    ),
+                                                                  },
+                                                                );
                                                               },
                                                               text: FFLocalizations
                                                                       .of(context)

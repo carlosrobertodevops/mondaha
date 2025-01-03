@@ -537,7 +537,18 @@ class _MainProfileWidgetState extends State<MainProfileWidget>
                                                   'MAIN_PROFILE_Container_geiuas93_ON_TAP');
 
                                               context.pushNamed(
-                                                  'auth_forgot_password');
+                                                'auth_forgot_password',
+                                                extra: <String, dynamic>{
+                                                  kTransitionInfoKey:
+                                                      TransitionInfo(
+                                                    hasTransition: true,
+                                                    transitionType:
+                                                        PageTransitionType.fade,
+                                                    duration: Duration(
+                                                        milliseconds: 0),
+                                                  ),
+                                                },
+                                              );
                                             },
                                             child: AnimatedContainer(
                                               duration:
