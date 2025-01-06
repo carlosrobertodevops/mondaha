@@ -990,6 +990,81 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'pt': '',
     },
   },
+  // auth_recover
+  {
+    '1wq5pp7h': {
+      'en': 'Recover password',
+      'pt': 'Recuperar senha',
+    },
+    'jh9qy90n': {
+      'en': 'Enter your new password to regain access.',
+      'pt': 'Digite sua nova senha para recuperar o acesso.',
+    },
+    '9zj7eekt': {
+      'en': 'Password',
+      'pt': 'Senha',
+    },
+    '32eu8vvh': {
+      'en': 'Confirm Password',
+      'pt': 'Confirme sua senha',
+    },
+    '50rar3l6': {
+      'en': 'Recover ',
+      'pt': 'Recuperar',
+    },
+    'vj2850u6': {
+      'en': 'Successfully !!',
+      'pt': 'Sucesso !!',
+    },
+    'o0j2dv3s': {
+      'en': 'Password changed successfully!!!',
+      'pt': 'Senha alterada com sucesso!!!',
+    },
+    '0knewnwq': {
+      'en': 'Field is required',
+      'pt': 'Campo é obrigatório',
+    },
+    'xkog1t8b': {
+      'en': 'Invalid username !',
+      'pt': 'Nome de usuário inválido!',
+    },
+    'do1qy2zf': {
+      'en': 'Please choose an option from the dropdown',
+      'pt': 'Selecione uma opção no menu suspenso',
+    },
+    '8qxegq7w': {
+      'en': 'Field is required!',
+      'pt': 'Campo obrigatório!',
+    },
+    'mwaign3s': {
+      'en': 'Invalid email!',
+      'pt': 'email inválido!',
+    },
+    'e94ufy22': {
+      'en': 'Please choose an option from the dropdown',
+      'pt': 'Selecione uma opção no menu suspenso',
+    },
+    'qe3efxn0': {
+      'en': 'Field is required',
+      'pt': 'Campo é obrigatório',
+    },
+    'vtxx1rtz': {
+      'en': 'Please choose an option from the dropdown',
+      'pt': 'Selecione uma opção no menu suspenso',
+    },
+    'ivz2lz4f': {
+      'en': 'Field is required',
+      'pt': 'Campo é obrigatório!',
+    },
+    'rmo1vknv': {
+      'en': 'Please choose an option from the dropdown',
+      'pt': 'Selecione uma opção no menu suspenso',
+    },
+    'gpdenzgp': {
+      'en': 'Home',
+      'pt': 'Home',
+    },
+  },
   // modal_success
   {
     'kred63vb': {

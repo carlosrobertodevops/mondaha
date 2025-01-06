@@ -197,6 +197,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               path: 'welcomePage',
               requireAuth: true,
               builder: (context, params) => WelcomePageWidget(),
+            ),
+            FFRoute(
+              name: 'auth_recover',
+              path: 'authRecover',
+              requireAuth: true,
+              builder: (context, params) => AuthRecoverWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ),
