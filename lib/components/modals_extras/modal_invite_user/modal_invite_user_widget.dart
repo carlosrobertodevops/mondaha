@@ -422,20 +422,7 @@ class _ModalInviteUserWidgetState extends State<ModalInviteUserWidget>
                           child: FlutterFlowDropDown<String>(
                             controller: _model.dropDownValueController ??=
                                 FormFieldController<String>(null),
-                            options: [
-                              FFLocalizations.of(context).getText(
-                                '7f4dqnt8' /* Admin */,
-                              ),
-                              FFLocalizations.of(context).getText(
-                                'tzetnwcj' /* Manager */,
-                              ),
-                              FFLocalizations.of(context).getText(
-                                'r8pq5puc' /* Editor */,
-                              ),
-                              FFLocalizations.of(context).getText(
-                                'by2vigrp' /* Viewer */,
-                              )
-                            ],
+                            options: <String>[],
                             onChanged: (val) =>
                                 safeSetState(() => _model.dropDownValue = val),
                             width: double.infinity,
