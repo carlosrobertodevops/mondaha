@@ -1224,7 +1224,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'kmbyse66': {
       'en': 'Light',
-      'pt': ' luz',
+      'pt': 'Claro',
     },
     'jcne973r': {
       'en': 'Dark',
@@ -1645,36 +1645,11 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Profile',
       'pt': 'Perfil',
     },
-    'fuw255xv': {
-      'en':
-          'Upload images about the  member and fill out the information below.',
-      'pt': 'Carregue imagens sobre o membro e preencha as informações abaixo.',
-    },
-    'n7bo970y': {
-      'en': 'Add Photos',
-      'pt': 'Adicionar fotos',
-    },
-    '26cfzci7': {
-      'en':
-          'Add one or more images about the Member.\nMaximum of 6 (six) images.',
-      'pt':
-          'Adicione uma ou mais imagens sobre o Membro.\nMáximo de 6 (seis) imagens.',
-    },
-    'szzdveit': {
-      'en': 'Apagar Fotos',
-      'pt': 'Apagar Fotos',
-    },
-    'eivogkvw': {
-      'en':
-          'ATTENTION: (1) Front Photo, (2) Left Side Photo, (3) Right Side Photo and (4) Tattoos. Maximum of 6 images (200px by 200px each).',
-      'pt':
-          'ATENÇÃO : (1) Foto Frente, (2) Foto Lateral Esquerda, (3) Foto Lateral Direira e (4) Tatuagens . No máximo de 6 imagens (200px por 200px cada).',
-    },
-    'npcbcpl9': {
+    'botl60yq': {
       'en': 'Nome completo',
       'pt': 'Nome completo',
     },
-    'eyhgaf81': {
+    'abewpnaq': {
       'en': 'Nome completo',
       'pt': 'Nome completo',
     },
@@ -1796,14 +1771,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Infopen Registration',
       'pt': 'Inscrição Infopen',
     },
-    'cjy846zr': {
-      'en': 'Mother\'s name',
-      'pt': 'Nome da mãe',
-    },
-    '7g88w199': {
-      'en': 'Mother\'s name',
-      'pt': 'Nome da mãe',
-    },
     'gc3vbmj4': {
       'en': 'Mother\'s situation',
       'pt': 'Situação da mãe',
@@ -1827,6 +1794,14 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'aw1z7gel': {
       'en': 'No information',
       'pt': 'Nenhuma informação',
+    },
+    'cjy846zr': {
+      'en': 'Mother\'s name',
+      'pt': 'Nome da mãe',
+    },
+    '7g88w199': {
+      'en': 'Mother\'s name',
+      'pt': 'Nome da mãe',
     },
     'lbcdz337': {
       'en': 'Father\'s name',
@@ -1863,6 +1838,38 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'r9rah6gc': {
       'en': 'No information',
       'pt': 'Nenhuma informação',
+    },
+    'brl9xk7g': {
+      'en': 'Nascido no Brasil',
+      'pt': 'Nascido no Brasil',
+    },
+    'faniwxgb': {
+      'en': 'Nascido no Brasil',
+      'pt': 'Nascido no Brasil',
+    },
+    '34gdwq14': {
+      'en': 'Naturalizado Brasileiro',
+      'pt': 'Naturalizado Brasileiro',
+    },
+    'cm6hoviq': {
+      'en': 'Estrangeiro',
+      'pt': 'Estrangeiro',
+    },
+    'in33eojb': {
+      'en': 'Estado',
+      'pt': 'Estado',
+    },
+    '931cqale': {
+      'en': 'Search...',
+      'pt': 'Procurar...',
+    },
+    '8nru4ncw': {
+      'en': 'Municipio',
+      'pt': 'Município',
+    },
+    'zid95qnq': {
+      'en': 'Search...',
+      'pt': 'Procurar...',
     },
     '0wrilaus': {
       'en': 'Degree or Level of Education',
@@ -1975,38 +1982,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'nvxntirq': {
       'en': 'Localization',
       'pt': 'Localização',
-    },
-    'cwp7l7r2': {
-      'en': 'Nascido no Brasil',
-      'pt': 'Nascido no Brasil',
-    },
-    'tcv32o0m': {
-      'en': 'Nascido no Brasil',
-      'pt': 'Nascido no Brasil',
-    },
-    'p05w4mzf': {
-      'en': 'Naturalizado Brasileiro',
-      'pt': 'Naturalizado Brasileiro',
-    },
-    '78heuj7d': {
-      'en': 'Estrangeiro',
-      'pt': 'Estrangeiro',
-    },
-    'yc6rcmtz': {
-      'en': 'Estado',
-      'pt': 'Estado',
-    },
-    'f7rl31yp': {
-      'en': 'Search...',
-      'pt': 'Procurar...',
-    },
-    'fkmdz2kr': {
-      'en': 'Municipio',
-      'pt': 'Município',
-    },
-    's9xkiwbl': {
-      'en': 'Search...',
-      'pt': 'Procurar...',
     },
     'sc0bhfzq': {
       'en': '',
@@ -2595,6 +2570,26 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'pt': 'Observação(ões)',
     },
     'ld0rt7j2': {
+      'en': 'Photos',
+      'pt': 'Fotos',
+    },
+    '97cao865': {
+      'en': 'Add photo',
+      'pt': 'Adicionar foto',
+    },
+    'jl45ge8k': {
+      'en': 'Add photo',
+      'pt': 'Adicionar foto',
+    },
+    'fy81oycs': {
+      'en': 'Add photo',
+      'pt': 'Adicionar foto',
+    },
+    '6ogiyutt': {
+      'en': 'Add photo',
+      'pt': 'Adicionar foto',
+    },
+    'n5wowq93': {
       'en': 'Relations',
       'pt': 'Relações',
     },
@@ -2791,7 +2786,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'wbiu740t': {
       'en': 'Light Mode',
-      'pt': 'Modo de luz',
+      'pt': 'Modo claro',
     },
     's5971e7s': {
       'en': 'Dark Mode',
@@ -4200,6 +4195,37 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'g7txvjhx': {
       'en': 'Direcciones',
       'pt': 'Endereços',
+    },
+  },
+  // modal_command_paletteCopy
+  {
+    '3c3b7mnj': {
+      'en': 'Search platform...',
+      'pt': 'Plataforma de busca...',
+    },
+    '7iog41rl': {
+      'en': 'Search',
+      'pt': 'Procurar',
+    },
+    'b3l7b11s': {
+      'en': 'Quick Links',
+      'pt': 'Links rápidos',
+    },
+    '7n0im1ku': {
+      'en': 'Find Member',
+      'pt': 'Encontrar Membro',
+    },
+    'v5sc1kxq': {
+      'en': 'Find Faction',
+      'pt': 'Encontrar Facção',
+    },
+    '2g8cex5h': {
+      'en': 'User Habilit',
+      'pt': 'Habilidade do usuário',
+    },
+    'iw2re17z': {
+      'en': 'New member',
+      'pt': 'Novo membro',
     },
   },
   // Miscellaneous
