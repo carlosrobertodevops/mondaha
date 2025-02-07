@@ -39,19 +39,6 @@ import 'package:provider/provider.dart';
 class ModalMembrosEditModel extends FlutterFlowModel<ModalMembrosEditWidget> {
   ///  Local state fields for this component.
 
-  List<FFUploadedFile> membrosFotosFileTemp = [];
-  void addToMembrosFotosFileTemp(FFUploadedFile item) =>
-      membrosFotosFileTemp.add(item);
-  void removeFromMembrosFotosFileTemp(FFUploadedFile item) =>
-      membrosFotosFileTemp.remove(item);
-  void removeAtIndexFromMembrosFotosFileTemp(int index) =>
-      membrosFotosFileTemp.removeAt(index);
-  void insertAtIndexInMembrosFotosFileTemp(int index, FFUploadedFile item) =>
-      membrosFotosFileTemp.insert(index, item);
-  void updateMembrosFotosFileTempAtIndex(
-          int index, Function(FFUploadedFile) updateFn) =>
-      membrosFotosFileTemp[index] = updateFn(membrosFotosFileTemp[index]);
-
   List<String> membrosAlcunhas = [];
   void addToMembrosAlcunhas(String item) => membrosAlcunhas.add(item);
   void removeFromMembrosAlcunhas(String item) => membrosAlcunhas.remove(item);
@@ -168,11 +155,30 @@ class ModalMembrosEditModel extends FlutterFlowModel<ModalMembrosEditWidget> {
   void updateMembrosFotoPathEditAtIndex(int index, Function(String) updateFn) =>
       membrosFotoPathEdit[index] = updateFn(membrosFotoPathEdit[index]);
 
-  bool uploadImageTemp = false;
-
   int? selectedCountValidados;
 
   LatLng? centerMaps;
+
+  List<String> membrosFotosEdit = [];
+  void addToMembrosFotosEdit(String item) => membrosFotosEdit.add(item);
+  void removeFromMembrosFotosEdit(String item) => membrosFotosEdit.remove(item);
+  void removeAtIndexFromMembrosFotosEdit(int index) =>
+      membrosFotosEdit.removeAt(index);
+  void insertAtIndexInMembrosFotosEdit(int index, String item) =>
+      membrosFotosEdit.insert(index, item);
+  void updateMembrosFotosEditAtIndex(int index, Function(String) updateFn) =>
+      membrosFotosEdit[index] = updateFn(membrosFotosEdit[index]);
+
+  List<String> membrosFotosEditSem = [];
+  void addToMembrosFotosEditSem(String item) => membrosFotosEditSem.add(item);
+  void removeFromMembrosFotosEditSem(String item) =>
+      membrosFotosEditSem.remove(item);
+  void removeAtIndexFromMembrosFotosEditSem(int index) =>
+      membrosFotosEditSem.removeAt(index);
+  void insertAtIndexInMembrosFotosEditSem(int index, String item) =>
+      membrosFotosEditSem.insert(index, item);
+  void updateMembrosFotosEditSemAtIndex(int index, Function(String) updateFn) =>
+      membrosFotosEditSem[index] = updateFn(membrosFotosEditSem[index]);
 
   ///  State fields for stateful widgets in this component.
 
@@ -194,7 +200,34 @@ class ModalMembrosEditModel extends FlutterFlowModel<ModalMembrosEditWidget> {
       tabBarController != null ? tabBarController!.index : 0;
 
   bool isDataUploading1 = false;
-  List<FFUploadedFile> uploadedLocalFiles1 = [];
+  FFUploadedFile uploadedLocalFile1 =
+      FFUploadedFile(bytes: Uint8List.fromList([]));
+  String uploadedFileUrl1 = '';
+
+  bool isDataUploading2 = false;
+  FFUploadedFile uploadedLocalFile2 =
+      FFUploadedFile(bytes: Uint8List.fromList([]));
+  String uploadedFileUrl2 = '';
+
+  bool isDataUploading3 = false;
+  FFUploadedFile uploadedLocalFile3 =
+      FFUploadedFile(bytes: Uint8List.fromList([]));
+  String uploadedFileUrl3 = '';
+
+  bool isDataUploading4 = false;
+  FFUploadedFile uploadedLocalFile4 =
+      FFUploadedFile(bytes: Uint8List.fromList([]));
+  String uploadedFileUrl4 = '';
+
+  bool isDataUploading5 = false;
+  FFUploadedFile uploadedLocalFile5 =
+      FFUploadedFile(bytes: Uint8List.fromList([]));
+  String uploadedFileUrl5 = '';
+
+  bool isDataUploading6 = false;
+  FFUploadedFile uploadedLocalFile6 =
+      FFUploadedFile(bytes: Uint8List.fromList([]));
+  String uploadedFileUrl6 = '';
 
   // State field(s) for txt_nome_completo widget.
   FocusNode? txtNomeCompletoFocusNode;
@@ -205,7 +238,7 @@ class ModalMembrosEditModel extends FlutterFlowModel<ModalMembrosEditWidget> {
       BuildContext context, String? val) {
     if (val == null || val.isEmpty) {
       return FFLocalizations.of(context).getText(
-        'etcver8f' /* Field is required */,
+        'i1xddmk1' /* nome_completo is required */,
       );
     }
 
@@ -394,14 +427,8 @@ class ModalMembrosEditModel extends FlutterFlowModel<ModalMembrosEditWidget> {
   TextEditingController? txtValidacoesObservacoesTextController;
   String? Function(BuildContext, String?)?
       txtValidacoesObservacoesTextControllerValidator;
-  bool isDataUploading2 = false;
-  List<FFUploadedFile> uploadedLocalFiles2 = [];
-  List<String> uploadedFileUrls2 = [];
-
   // Stores action output result for [Backend Call - Update Row(s)] action in Button widget.
   List<MembrosRow>? outputMembrosEdit;
-  // Stores action output result for [Backend Call - Update Row(s)] action in Button widget.
-  List<MembrosRow>? outputMembrosEditPath;
   // Stores action output result for [Backend Call - Delete Row(s)] action in Button widget.
   List<ProcedimentosRow>? outputDeleteProcedimentos;
   // Stores action output result for [Backend Call - API (ProcedimentosAdd)] action in Button widget.

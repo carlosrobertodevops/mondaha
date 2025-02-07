@@ -24,6 +24,7 @@ import '/flutter_flow/custom_functions.dart' as functions;
 import 'modal_membros_add_widget.dart' show ModalMembrosAddWidget;
 import 'package:aligned_tooltip/aligned_tooltip.dart';
 import 'package:sticky_headers/sticky_headers.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -165,6 +166,17 @@ class ModalMembrosAddModel extends FlutterFlowModel<ModalMembrosAddWidget> {
   void updateMembrosFotosAtIndex(int index, Function(String) updateFn) =>
       membrosFotos[index] = updateFn(membrosFotos[index]);
 
+  List<String> membrosFotosSemUrl = [];
+  void addToMembrosFotosSemUrl(String item) => membrosFotosSemUrl.add(item);
+  void removeFromMembrosFotosSemUrl(String item) =>
+      membrosFotosSemUrl.remove(item);
+  void removeAtIndexFromMembrosFotosSemUrl(int index) =>
+      membrosFotosSemUrl.removeAt(index);
+  void insertAtIndexInMembrosFotosSemUrl(int index, String item) =>
+      membrosFotosSemUrl.insert(index, item);
+  void updateMembrosFotosSemUrlAtIndex(int index, Function(String) updateFn) =>
+      membrosFotosSemUrl[index] = updateFn(membrosFotosSemUrl[index]);
+
   ///  State fields for stateful widgets in this component.
 
   final formKey2 = GlobalKey<FormState>();
@@ -180,11 +192,52 @@ class ModalMembrosAddModel extends FlutterFlowModel<ModalMembrosAddWidget> {
   int get tabBarCurrentIndex =>
       tabBarController != null ? tabBarController!.index : 0;
 
+  bool isDataUploading1 = false;
+  FFUploadedFile uploadedLocalFile1 =
+      FFUploadedFile(bytes: Uint8List.fromList([]));
+  String uploadedFileUrl1 = '';
+
+  bool isDataUploading2 = false;
+  FFUploadedFile uploadedLocalFile2 =
+      FFUploadedFile(bytes: Uint8List.fromList([]));
+  String uploadedFileUrl2 = '';
+
+  bool isDataUploading3 = false;
+  FFUploadedFile uploadedLocalFile3 =
+      FFUploadedFile(bytes: Uint8List.fromList([]));
+  String uploadedFileUrl3 = '';
+
+  bool isDataUploading4 = false;
+  FFUploadedFile uploadedLocalFile4 =
+      FFUploadedFile(bytes: Uint8List.fromList([]));
+  String uploadedFileUrl4 = '';
+
+  bool isDataUploading5 = false;
+  FFUploadedFile uploadedLocalFile5 =
+      FFUploadedFile(bytes: Uint8List.fromList([]));
+  String uploadedFileUrl5 = '';
+
+  bool isDataUploading6 = false;
+  FFUploadedFile uploadedLocalFile6 =
+      FFUploadedFile(bytes: Uint8List.fromList([]));
+  String uploadedFileUrl6 = '';
+
   // State field(s) for txt_nome_completo widget.
   FocusNode? txtNomeCompletoFocusNode;
   TextEditingController? txtNomeCompletoTextController;
   String? Function(BuildContext, String?)?
       txtNomeCompletoTextControllerValidator;
+  String? _txtNomeCompletoTextControllerValidator(
+      BuildContext context, String? val) {
+    if (val == null || val.isEmpty) {
+      return FFLocalizations.of(context).getText(
+        'araknvd7' /* Nome completo is required */,
+      );
+    }
+
+    return null;
+  }
+
   // Stores action output result for [Backend Call - Query Rows] action in txt_nome_completo widget.
   List<MembrosRow>? existeMmbro;
   // State field(s) for txt_alcunha_add widget.
@@ -216,14 +269,14 @@ class ModalMembrosAddModel extends FlutterFlowModel<ModalMembrosAddWidget> {
   FocusNode? txtNoInfopenFocusNode;
   TextEditingController? txtNoInfopenTextController;
   String? Function(BuildContext, String?)? txtNoInfopenTextControllerValidator;
-  // State field(s) for ddw_situacao_mae widget.
-  String? ddwSituacaoMaeValue;
-  FormFieldController<String>? ddwSituacaoMaeValueController;
   // State field(s) for txt_filiacao_mae widget.
   FocusNode? txtFiliacaoMaeFocusNode;
   TextEditingController? txtFiliacaoMaeTextController;
   String? Function(BuildContext, String?)?
       txtFiliacaoMaeTextControllerValidator;
+  // State field(s) for ddw_situacao_mae widget.
+  String? ddwSituacaoMaeValue;
+  FormFieldController<String>? ddwSituacaoMaeValueController;
   // State field(s) for txt_filiacao_pai widget.
   FocusNode? txtFiliacaoPaiFocusNode;
   TextEditingController? txtFiliacaoPaiTextController;
@@ -232,6 +285,9 @@ class ModalMembrosAddModel extends FlutterFlowModel<ModalMembrosAddWidget> {
   // State field(s) for ddw_situacao_pai widget.
   String? ddwSituacaoPaiValue;
   FormFieldController<String>? ddwSituacaoPaiValueController;
+  // State field(s) for ddw_nivel_instrucao widget.
+  String? ddwNivelInstrucaoValue;
+  FormFieldController<String>? ddwNivelInstrucaoValueController;
   // State field(s) for rbNacionalidade widget.
   FormFieldController<String>? rbNacionalidadeValueController;
   // State field(s) for ddw_estado widget.
@@ -240,9 +296,6 @@ class ModalMembrosAddModel extends FlutterFlowModel<ModalMembrosAddWidget> {
   // State field(s) for ddw_municipio widget.
   int? ddwMunicipioValue;
   FormFieldController<int>? ddwMunicipioValueController;
-  // State field(s) for ddw_nivel_instrucao widget.
-  String? ddwNivelInstrucaoValue;
-  FormFieldController<String>? ddwNivelInstrucaoValueController;
   // State field(s) for PlacePickerEndereco widget.
   FFPlace placePickerEnderecoValue = FFPlace();
   // State field(s) for txt_membros_enderecos_add widget.
@@ -369,35 +422,18 @@ class ModalMembrosAddModel extends FlutterFlowModel<ModalMembrosAddWidget> {
   TextEditingController? txtValidacoesObservacoesTextController;
   String? Function(BuildContext, String?)?
       txtValidacoesObservacoesTextControllerValidator;
-  bool isDataUploading1 = false;
-  FFUploadedFile uploadedLocalFile1 =
-      FFUploadedFile(bytes: Uint8List.fromList([]));
-  String uploadedFileUrl1 = '';
-
-  bool isDataUploading2 = false;
-  FFUploadedFile uploadedLocalFile2 =
-      FFUploadedFile(bytes: Uint8List.fromList([]));
-  String uploadedFileUrl2 = '';
-
-  bool isDataUploading3 = false;
-  FFUploadedFile uploadedLocalFile3 =
-      FFUploadedFile(bytes: Uint8List.fromList([]));
-  String uploadedFileUrl3 = '';
-
-  bool isDataUploading4 = false;
-  FFUploadedFile uploadedLocalFile4 =
-      FFUploadedFile(bytes: Uint8List.fromList([]));
-  String uploadedFileUrl4 = '';
-
   // Stores action output result for [Backend Call - Insert Row] action in Button widget.
-  MembrosRow? retMembrosAdd;
+  MembrosRow? outputMembrosAdd;
   // Stores action output result for [Backend Call - API (ProcedimentosAdd)] action in Button widget.
   ApiCallResponse? apiResultProcedimentos;
   // Stores action output result for [Backend Call - API (ProcessosAdd)] action in Button widget.
   ApiCallResponse? apiResultProcessos;
 
   @override
-  void initState(BuildContext context) {}
+  void initState(BuildContext context) {
+    txtNomeCompletoTextControllerValidator =
+        _txtNomeCompletoTextControllerValidator;
+  }
 
   @override
   void dispose() {

@@ -398,3 +398,37 @@ LatLng extractCoordenadasListToLatLng(List<String> coordinatesList) {
   // Retorne o objeto LatLng
   return LatLng(latitude, longitude);
 }
+
+dynamic searchMembros(String? search) {
+  // final supabase = SupabaseClient('https://buzlazhtcndpegsnijcw.supabase.co',
+  //     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ1emxhemh0Y25kcGVnc25pamN3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQ2OTI2OTksImV4cCI6MjA1MDI2ODY5OX0.myFxYtm5Q3WF1WlV0AJzPoRLKK8W0et8MnKUk4e-nPU');
+
+  // Define the async function to search for members
+  Future<dynamic> searchMembers() async {
+    // await Supabase.initialize(
+    //   url: 'https://buzlazhtcndpegsnijcw.supabase.co',
+    //   anonKey:
+    //       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ1emxhemh0Y25kcGVnc25pamN3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQ2OTI2OTksImV4cCI6MjA1MDI2ODY5OX0.myFxYtm5Q3WF1WlV0AJzPoRLKK8W0et8MnKUk4e-nPU',
+    // );
+
+    final supabase = Supabase.instance.client;
+
+    // Perform the search using Supabase client
+    try {
+      final response = await supabase
+          .from('members')
+          .select("*")
+          .or('name_cliente.ilike.%$search%')
+          .or('nome_faccao.ilike.%$search%');
+
+      final data = response;
+
+      return response;
+    } catch (error) {
+      print("Erro ao buscar usuários: $error");
+      return [];
+    }
+  }
+
+  searchMembers();
+}

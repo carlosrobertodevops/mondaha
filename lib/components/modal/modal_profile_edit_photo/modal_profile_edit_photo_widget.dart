@@ -218,13 +218,10 @@ class _ModalProfileEditPhotoWidgetState
                                                 decoration: BoxDecoration(
                                                   shape: BoxShape.circle,
                                                 ),
-                                                child: CachedNetworkImage(
-                                                  fadeInDuration: Duration(
-                                                      milliseconds: 500),
-                                                  fadeOutDuration: Duration(
-                                                      milliseconds: 500),
-                                                  imageUrl:
-                                                      'https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDJ8fHBlcnNvbnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=900&q=60',
+                                                child: Image.memory(
+                                                  _model.uploadedLocalFile
+                                                          .bytes ??
+                                                      Uint8List.fromList([]),
                                                   fit: BoxFit.cover,
                                                 ),
                                               ),
@@ -363,7 +360,9 @@ class _ModalProfileEditPhotoWidgetState
                                                   'MODAL_PROFILE_EDIT_PHOTO_SAVE_CHANGES_BT');
                                               await UsuariosTable().update(
                                                 data: {
-                                                  'foto_path': '',
+                                                  'foto_path': _model
+                                                      .uploadedLocalFile.height
+                                                      ?.toString(),
                                                 },
                                                 matchingRows: (rows) => rows,
                                               );

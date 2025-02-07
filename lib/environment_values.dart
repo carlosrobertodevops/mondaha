@@ -22,6 +22,7 @@ class FFDevEnvironmentValues {
           await rootBundle.loadString(environmentValuesPath);
       final data = await json.decode(response);
       _AGENCIA = data['AGENCIA'];
+      _supabaseUrl = data['supabaseUrl'];
     } catch (e) {
       print('Error loading environment values: $e');
     }
@@ -29,4 +30,7 @@ class FFDevEnvironmentValues {
 
   String _AGENCIA = '';
   String get AGENCIA => _AGENCIA;
+
+  String _supabaseUrl = '';
+  String get supabaseUrl => _supabaseUrl;
 }

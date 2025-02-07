@@ -114,13 +114,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               requireAuth: true,
               builder: (context, params) => params.isEmpty
                   ? NavBarPage(initialPage: 'main_membros')
-                  : MainMembrosWidget(),
-            ),
-            FFRoute(
-              name: 'main_faccao_old',
-              path: 'mainFaccaoOld',
-              requireAuth: true,
-              builder: (context, params) => MainFaccaoOldWidget(),
+                  : MainMembrosWidget(
+                      membroPesquisa: params.getParam(
+                        'membroPesquisa',
+                        ParamType.String,
+                      ),
+                    ),
             ),
             FFRoute(
               name: 'main_messages',

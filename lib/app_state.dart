@@ -89,14 +89,44 @@ class FFAppState extends ChangeNotifier {
       _CountMaps = await secureStorage.getInt('ff_CountMaps') ?? _CountMaps;
     });
     await _safeInitAsync(() async {
+      _UsuariosImagePathLight =
+          await secureStorage.getString('ff_UsuariosImagePathLight') ??
+              _UsuariosImagePathLight;
+    });
+    await _safeInitAsync(() async {
+      _UsuariosImagePathDark =
+          await secureStorage.getString('ff_UsuariosImagePathDark') ??
+              _UsuariosImagePathDark;
+    });
+    await _safeInitAsync(() async {
+      _MembrosImagePathLight =
+          await secureStorage.getString('ff_MembrosImagePathLight') ??
+              _MembrosImagePathLight;
+    });
+    await _safeInitAsync(() async {
+      _MembrosImagePathDark =
+          await secureStorage.getString('ff_MembrosImagePathDark') ??
+              _MembrosImagePathDark;
+    });
+    await _safeInitAsync(() async {
       _FaccoesImagePathLight =
           await secureStorage.getString('ff_FaccoesImagePathLight') ??
               _FaccoesImagePathLight;
     });
     await _safeInitAsync(() async {
+      _FaccoesImagePathDark =
+          await secureStorage.getString('ff_FaccoesImagePathDark') ??
+              _FaccoesImagePathDark;
+    });
+    await _safeInitAsync(() async {
       _NordesteLngLat = latLngFromString(
               await secureStorage.getString('ff_NordesteLngLat')) ??
           _NordesteLngLat;
+    });
+    await _safeInitAsync(() async {
+      _pesquisarMembrosMain =
+          await secureStorage.getStringList('ff_pesquisarMembrosMain') ??
+              _pesquisarMembrosMain;
     });
   }
 
@@ -295,6 +325,11 @@ class FFAppState extends ChangeNotifier {
   String get UsuariosImagePathLight => _UsuariosImagePathLight;
   set UsuariosImagePathLight(String value) {
     _UsuariosImagePathLight = value;
+    secureStorage.setString('ff_UsuariosImagePathLight', value);
+  }
+
+  void deleteUsuariosImagePathLight() {
+    secureStorage.delete(key: 'ff_UsuariosImagePathLight');
   }
 
   String _UsuariosImagePathDark =
@@ -302,6 +337,11 @@ class FFAppState extends ChangeNotifier {
   String get UsuariosImagePathDark => _UsuariosImagePathDark;
   set UsuariosImagePathDark(String value) {
     _UsuariosImagePathDark = value;
+    secureStorage.setString('ff_UsuariosImagePathDark', value);
+  }
+
+  void deleteUsuariosImagePathDark() {
+    secureStorage.delete(key: 'ff_UsuariosImagePathDark');
   }
 
   String _MembrosImagePathLight =
@@ -309,6 +349,11 @@ class FFAppState extends ChangeNotifier {
   String get MembrosImagePathLight => _MembrosImagePathLight;
   set MembrosImagePathLight(String value) {
     _MembrosImagePathLight = value;
+    secureStorage.setString('ff_MembrosImagePathLight', value);
+  }
+
+  void deleteMembrosImagePathLight() {
+    secureStorage.delete(key: 'ff_MembrosImagePathLight');
   }
 
   String _MembrosImagePathDark =
@@ -316,6 +361,11 @@ class FFAppState extends ChangeNotifier {
   String get MembrosImagePathDark => _MembrosImagePathDark;
   set MembrosImagePathDark(String value) {
     _MembrosImagePathDark = value;
+    secureStorage.setString('ff_MembrosImagePathDark', value);
+  }
+
+  void deleteMembrosImagePathDark() {
+    secureStorage.delete(key: 'ff_MembrosImagePathDark');
   }
 
   String _FaccoesImagePathLight =
@@ -335,6 +385,11 @@ class FFAppState extends ChangeNotifier {
   String get FaccoesImagePathDark => _FaccoesImagePathDark;
   set FaccoesImagePathDark(String value) {
     _FaccoesImagePathDark = value;
+    secureStorage.setString('ff_FaccoesImagePathDark', value);
+  }
+
+  void deleteFaccoesImagePathDark() {
+    secureStorage.delete(key: 'ff_FaccoesImagePathDark');
   }
 
   LatLng? _NordesteLngLat = LatLng(-10.08, -40.577);
@@ -348,6 +403,56 @@ class FFAppState extends ChangeNotifier {
 
   void deleteNordesteLngLat() {
     secureStorage.delete(key: 'ff_NordesteLngLat');
+  }
+
+  List<String> _pesquisarMembrosMain = ['[A-z]'];
+  List<String> get pesquisarMembrosMain => _pesquisarMembrosMain;
+  set pesquisarMembrosMain(List<String> value) {
+    _pesquisarMembrosMain = value;
+    secureStorage.setStringList('ff_pesquisarMembrosMain', value);
+  }
+
+  void deletePesquisarMembrosMain() {
+    secureStorage.delete(key: 'ff_pesquisarMembrosMain');
+  }
+
+  void addToPesquisarMembrosMain(String value) {
+    pesquisarMembrosMain.add(value);
+    secureStorage.setStringList(
+        'ff_pesquisarMembrosMain', _pesquisarMembrosMain);
+  }
+
+  void removeFromPesquisarMembrosMain(String value) {
+    pesquisarMembrosMain.remove(value);
+    secureStorage.setStringList(
+        'ff_pesquisarMembrosMain', _pesquisarMembrosMain);
+  }
+
+  void removeAtIndexFromPesquisarMembrosMain(int index) {
+    pesquisarMembrosMain.removeAt(index);
+    secureStorage.setStringList(
+        'ff_pesquisarMembrosMain', _pesquisarMembrosMain);
+  }
+
+  void updatePesquisarMembrosMainAtIndex(
+    int index,
+    String Function(String) updateFn,
+  ) {
+    pesquisarMembrosMain[index] = updateFn(_pesquisarMembrosMain[index]);
+    secureStorage.setStringList(
+        'ff_pesquisarMembrosMain', _pesquisarMembrosMain);
+  }
+
+  void insertAtIndexInPesquisarMembrosMain(int index, String value) {
+    pesquisarMembrosMain.insert(index, value);
+    secureStorage.setStringList(
+        'ff_pesquisarMembrosMain', _pesquisarMembrosMain);
+  }
+
+  bool _buscarMembros = true;
+  bool get buscarMembros => _buscarMembros;
+  set buscarMembros(bool value) {
+    _buscarMembros = value;
   }
 }
 
