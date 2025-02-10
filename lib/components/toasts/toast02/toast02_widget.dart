@@ -75,7 +75,7 @@ class _Toast02WidgetState extends State<Toast02Widget> {
                 children: [
                   Text(
                     FFLocalizations.of(context).getText(
-                      'ozz9h0eu' /* Notification Title */,
+                      'rve5awza' /* Notification Title */,
                     ),
                     style: FlutterFlowTheme.of(context).bodyLarge.override(
                           fontFamily:

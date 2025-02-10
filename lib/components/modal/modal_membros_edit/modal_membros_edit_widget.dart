@@ -44,7 +44,7 @@ class ModalMembrosEditWidget extends StatefulWidget {
     this.membrosFotos,
   });
 
-  final MembrosViewRow? membrosRow;
+  final MembrosViewConcatSeachRow? membrosRow;
   final List<String>? membrosFotos;
 
   @override

@@ -35,7 +35,7 @@ class AuthLoginModel extends FlutterFlowModel<AuthLoginWidget> {
       BuildContext context, String? val) {
     if (val == null || val.isEmpty) {
       return FFLocalizations.of(context).getText(
-        'jgdeykjo' /* Field is required */,
+        'jc4by7hx' /* Field is required */,
       );
     }
 
@@ -55,7 +55,7 @@ class AuthLoginModel extends FlutterFlowModel<AuthLoginWidget> {
       BuildContext context, String? val) {
     if (val == null || val.isEmpty) {
       return FFLocalizations.of(context).getText(
-        '6ms24pjq' /* Field is required */,
+        'fi11huhh' /* Field is required */,
       );
     }
 
@@ -72,7 +72,7 @@ class AuthLoginModel extends FlutterFlowModel<AuthLoginWidget> {
       BuildContext context, String? val) {
     if (val == null || val.isEmpty) {
       return FFLocalizations.of(context).getText(
-        'u9b5zrd8' /* Field is required */,
+        '7epcfb3x' /* Field is required */,
       );
     }
 

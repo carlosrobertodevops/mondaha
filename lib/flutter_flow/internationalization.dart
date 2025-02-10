@@ -264,11 +264,15 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '27iw7imq': {
       'en': '',
-      'pt': 'Endereço de email',
+      'pt': '',
     },
     'm171alsm': {
-      'en': 'Search by full name ...',
-      'pt': 'Pesquisa por Nome Completo ...',
+      'en': 'Search ...',
+      'pt': 'Pesquisar...',
+    },
+    'a95psnr8': {
+      'en': '',
+      'pt': '',
     },
     'lvnskphp': {
       'en': 'All',
@@ -679,9 +683,17 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Add Profile',
       'pt': 'Adicionar perfil',
     },
+    'qgkhwdhw': {
+      'en': '',
+      'pt': 'Endereço de email',
+    },
+    'ca6nmkst': {
+      'en': 'Search...',
+      'pt': 'Pesquisar....',
+    },
     'i6puusi7': {
       'en': 'All',
-      'pt': 'Todos',
+      'pt': '',
     },
     '5ei4gaxd': {
       'en': 'Full Name',
@@ -700,54 +712,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'pt': 'email',
     },
     '5cijyycp': {
-      'en': 'User Type',
-      'pt': 'Tipo de usuário',
-    },
-    'ppz66xjm': {
-      'en': 'Agency',
-      'pt': 'Agência',
-    },
-    'a2hd8qke': {
-      'en': 'Full Name',
-      'pt': 'Nome completo',
-    },
-    '9gvqhwb3': {
-      'en': 'Agency',
-      'pt': 'Agência',
-    },
-    'xhp03ue9': {
-      'en': 'Description',
-      'pt': 'Descrição',
-    },
-    '3tt06cel': {
-      'en': 'email',
-      'pt': 'e-mail',
-    },
-    'tvxnxzoj': {
-      'en': 'User Type',
-      'pt': 'Tipo de usuário',
-    },
-    'obxycff3': {
-      'en': 'User type',
-      'pt': 'Tipo de Usuário',
-    },
-    'epj34rnd': {
-      'en': 'Full Name',
-      'pt': 'Nome completo',
-    },
-    'v2jg4l8f': {
-      'en': 'Agency',
-      'pt': 'Agência',
-    },
-    'ntr0pfu6': {
-      'en': 'Description',
-      'pt': 'Descrição',
-    },
-    'isqor6dk': {
-      'en': 'email',
-      'pt': 'email',
-    },
-    'sfc75uj7': {
       'en': 'User Type',
       'pt': 'Tipo de usuário',
     },
@@ -770,9 +734,17 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Add Faction',
       'pt': 'Adicionar Facção',
     },
+    '8krcvf4c': {
+      'en': '',
+      'pt': 'Endereço de email',
+    },
+    'xomxkcoy': {
+      'en': 'Search ...',
+      'pt': 'Pesquisa...',
+    },
     'a5ixac3k': {
       'en': 'All',
-      'pt': 'Todos',
+      'pt': '',
     },
     '222dkjfs': {
       'en': 'Name',

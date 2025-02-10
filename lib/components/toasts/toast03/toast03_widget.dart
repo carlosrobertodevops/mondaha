@@ -106,7 +106,7 @@ class _Toast03WidgetState extends State<Toast03Widget> {
                   ),
                   Text(
                     FFLocalizations.of(context).getText(
-                      'u3tbuddm' /* Some body copy that is present... */,
+                      'bxe9e2xt' /* Some body copy that is present... */,
                     ),
                     style: FlutterFlowTheme.of(context).labelMedium.override(
                           fontFamily:

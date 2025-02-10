@@ -16,7 +16,7 @@ class DropdownFaccaoEditWidget extends StatefulWidget {
     required this.faccaoid,
   });
 
-  final FaccoesRow? faccaoid;
+  final FaccoesViewConcatSearchRow? faccaoid;
 
   @override
   State<DropdownFaccaoEditWidget> createState() =>

@@ -432,3 +432,9 @@ dynamic searchMembros(String? search) {
 
   searchMembers();
 }
+
+String pesquisaLike(String pesquisa) {
+  String pesquisar = pesquisa;
+
+  return "%$pesquisar%";
+}

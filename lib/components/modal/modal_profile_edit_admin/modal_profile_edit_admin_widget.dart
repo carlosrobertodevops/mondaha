@@ -25,7 +25,7 @@ class ModalProfileEditAdminWidget extends StatefulWidget {
     this.usuariosRow,
   });
 
-  final UsuariosViewRow? usuariosRow;
+  final UsuariosViewConcatSearchRow? usuariosRow;
 
   @override
   State<ModalProfileEditAdminWidget> createState() =>

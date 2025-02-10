@@ -454,6 +454,18 @@ class FFAppState extends ChangeNotifier {
   set buscarMembros(bool value) {
     _buscarMembros = value;
   }
+
+  bool _buscarFaccao = true;
+  bool get buscarFaccao => _buscarFaccao;
+  set buscarFaccao(bool value) {
+    _buscarFaccao = value;
+  }
+
+  bool _buscarUsuarios = true;
+  bool get buscarUsuarios => _buscarUsuarios;
+  set buscarUsuarios(bool value) {
+    _buscarUsuarios = value;
+  }
 }
 
 void _safeInit(Function() initializeField) {

@@ -232,6 +232,8 @@ dynamic deserializeParam<T>(
             return UsuariosViewRow(data);
           case MembrosViewRow:
             return MembrosViewRow(data);
+          case MembrosViewSeachRow:
+            return MembrosViewSeachRow(data);
           case ProcedimentosRow:
             return ProcedimentosRow(data);
           case ProcessosRow:
@@ -250,8 +252,12 @@ dynamic deserializeParam<T>(
             return RelacionamentosMembrosRow(data);
           case CountMembrosViewRow:
             return CountMembrosViewRow(data);
+          case MembrosViewConcatSeachRow:
+            return MembrosViewConcatSeachRow(data);
           case FuncoesRow:
             return FuncoesRow(data);
+          case FaccoesViewConcatSearchRow:
+            return FaccoesViewConcatSearchRow(data);
           case VaraRow:
             return VaraRow(data);
           case TiposUsuariosRow:
@@ -266,6 +272,8 @@ dynamic deserializeParam<T>(
             return AgenciasRow(data);
           case FaccoesRow:
             return FaccoesRow(data);
+          case UsuariosViewConcatSearchRow:
+            return UsuariosViewConcatSearchRow(data);
           default:
             return null;
         }

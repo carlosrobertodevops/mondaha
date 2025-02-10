@@ -18,10 +18,10 @@ export 'modal_membro_view_model.dart';
 class ModalMembroViewWidget extends StatefulWidget {
   const ModalMembroViewWidget({
     super.key,
-    required this.membroRows,
+    this.membroRows,
   });
 
-  final MembrosViewRow? membroRows;
+  final MembrosViewConcatSeachRow? membroRows;
 
   @override
   State<ModalMembroViewWidget> createState() => _ModalMembroViewWidgetState();

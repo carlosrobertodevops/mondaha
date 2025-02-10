@@ -24,7 +24,7 @@ class ModalFaccaoEditWidget extends StatefulWidget {
     this.faccaoRow,
   });
 
-  final FaccoesRow? faccaoRow;
+  final FaccoesViewConcatSearchRow? faccaoRow;
 
   @override
   State<ModalFaccaoEditWidget> createState() => _ModalFaccaoEditWidgetState();

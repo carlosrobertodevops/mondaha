@@ -13,8 +13,27 @@ const _kPrivateApiFunctionName = 'ffPrivateApiCall';
 
 class DeletarUserAuthNoSUPABASECall {
   static Future<ApiCallResponse> call({
-    String? email = '',
+    String? pNomeCompleto = '',
+    String? pFaccaoNome = '',
+    String? pFuncaoNome = '',
+    String? pEstadoNome = '',
+    String? pMunicipioNome = '',
+    List<String>? pAlcunhaList,
+    List<String>? pTresUltimoLocaisPresoList,
   }) async {
+    final pAlcunha = _serializeList(pAlcunhaList);
+    final pTresUltimoLocaisPreso = _serializeList(pTresUltimoLocaisPresoList);
+
+    final ffApiRequestBody = '''
+{
+  "p_nome_completo": "${pNomeCompleto}",
+  "p_faccao_nome": "${pFaccaoNome}",
+  "p_funcao_nome": "${pFuncaoNome}",
+  "p_estado_nome": "${pEstadoNome}",
+  "p_municipio_nome": "${pMunicipioNome}",
+  "p_alcunha": ${pAlcunha},
+  "p_tres_ultimo_locais_preso": ${pTresUltimoLocaisPreso}
+}''';
     return ApiManager.instance.makeApiCall(
       callName: 'Deletar User Auth no SUPABASE',
       apiUrl: 'https://buzlazhtcndpegsnijcw.supabase.co/auth/v1/user',
@@ -27,6 +46,7 @@ class DeletarUserAuthNoSUPABASECall {
             'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ1emxhemh0Y25kcGVnc25pamN3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQ2OTI2OTksImV4cCI6MjA1MDI2ODY5OX0.myFxYtm5Q3WF1WlV0AJzPoRLKK8W0et8MnKUk4e-nPU',
       },
       params: {},
+      body: ffApiRequestBody,
       bodyType: BodyType.JSON,
       returnBody: true,
       encodeBodyUtf8: false,
@@ -542,6 +562,97 @@ class ApiViaCEPCall {
       ));
 }
 
+class SeachMembrosAvancadoCall {
+  static Future<ApiCallResponse> call({
+    String? pNomeCompleto,
+    String? pFiliacaoMae,
+    String? pFaccaoNome,
+    String? pFuncaoNome,
+    String? pEstadoNome,
+    String? pMunicipioNome,
+    List<String>? pAlcunhaList,
+    List<String>? pTresUltimoLocaisPresoList,
+  }) async {
+    pNomeCompleto ??= null!;
+    pFiliacaoMae ??= null!;
+    pFaccaoNome ??= null!;
+    pFuncaoNome ??= null!;
+    pEstadoNome ??= null!;
+    pMunicipioNome ??= null!;
+
+    final pAlcunha = _serializeList(pAlcunhaList);
+    final pTresUltimoLocaisPreso = _serializeList(pTresUltimoLocaisPresoList);
+
+    final ffApiRequestBody = '''
+{
+  "p_nome_completo": "${escapeStringForJson(pNomeCompleto)}",
+  "p_filiacao_mae": "${escapeStringForJson(pFiliacaoMae)}",
+  "p_funcao_nome": "${escapeStringForJson(pFuncaoNome)}",
+  "p_faccao_nome": "${escapeStringForJson(pFaccaoNome)}",
+  "p_estado_nome": "${escapeStringForJson(pEstadoNome)}",
+  "p_municipio_nome": "${escapeStringForJson(pMunicipioNome)}",
+  "p_alcunha": ${pAlcunha},
+  "p_tres_ultimo_locais_preso": ${pTresUltimoLocaisPreso}
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'seachMembrosAvancado',
+      apiUrl:
+          'https://buzlazhtcndpegsnijcw.supabase.co/rest/v1/rpc/membros_search_avancado',
+      callType: ApiCallType.POST,
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey':
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ1emxhemh0Y25kcGVnc25pamN3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQ2OTI2OTksImV4cCI6MjA1MDI2ODY5OX0.myFxYtm5Q3WF1WlV0AJzPoRLKK8W0et8MnKUk4e-nPU',
+        'Authorization':
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ1emxhemh0Y25kcGVnc25pamN3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQ2OTI2OTksImV4cCI6MjA1MDI2ODY5OX0.myFxYtm5Q3WF1WlV0AJzPoRLKK8W0et8MnKUk4e-nPU',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  static int? id(dynamic response) => castToType<int>(getJsonField(
+        response,
+        r'''$[:].membro_id''',
+      ));
+  static String? nome(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$[:].nome_completo''',
+      ));
+  static String? faccao(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$[:].faccao_nome''',
+      ));
+  static String? estado(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$[:].estado_nome''',
+      ));
+  static String? municipio(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$[:].municipio_nome''',
+      ));
+  static String? funcao(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$[:].funcao_nome''',
+      ));
+  static List<String>? fotos(dynamic response) => (getJsonField(
+        response,
+        r'''$[:].fotos_path''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+}
+
 class SeachMembrosCall {
   static Future<ApiCallResponse> call() async {
     return ApiManager.instance.makeApiCall(
@@ -629,4 +740,15 @@ String _serializeJson(dynamic jsonVar, [bool isList = false]) {
     }
     return isList ? '[]' : '{}';
   }
+}
+
+String? escapeStringForJson(String? input) {
+  if (input == null) {
+    return null;
+  }
+  return input
+      .replaceAll('\\', '\\\\')
+      .replaceAll('"', '\\"')
+      .replaceAll('\n', '\\n')
+      .replaceAll('\t', '\\t');
 }

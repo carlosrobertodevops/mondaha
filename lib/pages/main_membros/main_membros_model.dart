@@ -11,6 +11,7 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/walkthroughs/adicionar_membros.dart';
 import 'dart:math';
 import 'dart:ui';
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'main_membros_widget.dart' show MainMembrosWidget;
 import 'package:sticky_headers/sticky_headers.dart';
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart'
@@ -24,47 +25,18 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:text_search/text_search.dart';
 
 class MainMembrosModel extends FlutterFlowModel<MainMembrosWidget> {
-  ///  Local state fields for this page.
-
-  List<MembrosViewRow> queryMembros = [];
-  void addToQueryMembros(MembrosViewRow item) => queryMembros.add(item);
-  void removeFromQueryMembros(MembrosViewRow item) => queryMembros.remove(item);
-  void removeAtIndexFromQueryMembros(int index) => queryMembros.removeAt(index);
-  void insertAtIndexInQueryMembros(int index, MembrosViewRow item) =>
-      queryMembros.insert(index, item);
-  void updateQueryMembrosAtIndex(
-          int index, Function(MembrosViewRow) updateFn) =>
-      queryMembros[index] = updateFn(queryMembros[index]);
-
-  List<MembrosViewRow> queryMembrosSeach = [];
-  void addToQueryMembrosSeach(MembrosViewRow item) =>
-      queryMembrosSeach.add(item);
-  void removeFromQueryMembrosSeach(MembrosViewRow item) =>
-      queryMembrosSeach.remove(item);
-  void removeAtIndexFromQueryMembrosSeach(int index) =>
-      queryMembrosSeach.removeAt(index);
-  void insertAtIndexInQueryMembrosSeach(int index, MembrosViewRow item) =>
-      queryMembrosSeach.insert(index, item);
-  void updateQueryMembrosSeachAtIndex(
-          int index, Function(MembrosViewRow) updateFn) =>
-      queryMembrosSeach[index] = updateFn(queryMembrosSeach[index]);
-
   ///  State fields for stateful widgets in this page.
 
   TutorialCoachMark? adicionarMembrosController;
-  // Stores action output result for [Backend Call - Query Rows] action in main_membros widget.
-  List<MembrosViewRow>? allMembros;
   // Model for web_nav component.
   late WebNavModel webNavModel;
-  // State field(s) for TextFieldPesquisa widget.
-  FocusNode? textFieldPesquisaFocusNode;
-  TextEditingController? textFieldPesquisaTextController;
+  // State field(s) for TextFieldPesquisarMembros widget.
+  FocusNode? textFieldPesquisarMembrosFocusNode;
+  TextEditingController? textFieldPesquisarMembrosTextController;
   String? Function(BuildContext, String?)?
-      textFieldPesquisaTextControllerValidator;
-  List<String> simpleSearchResults = [];
+      textFieldPesquisarMembrosTextControllerValidator;
   // State field(s) for TabBar widget.
   TabController? tabBarController;
   int get tabBarCurrentIndex =>
@@ -79,8 +51,8 @@ class MainMembrosModel extends FlutterFlowModel<MainMembrosWidget> {
   void dispose() {
     adicionarMembrosController?.finish();
     webNavModel.dispose();
-    textFieldPesquisaFocusNode?.dispose();
-    textFieldPesquisaTextController?.dispose();
+    textFieldPesquisarMembrosFocusNode?.dispose();
+    textFieldPesquisarMembrosTextController?.dispose();
 
     tabBarController?.dispose();
   }

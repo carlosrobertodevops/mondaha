@@ -18,7 +18,7 @@ class DropdownMemberEditWidget extends StatefulWidget {
     this.membrosFotos,
   });
 
-  final MembrosViewRow? membrosRow;
+  final MembrosViewConcatSeachRow? membrosRow;
   final List<String>? membrosFotos;
 
   @override
@@ -216,7 +216,7 @@ class _DropdownMemberEditWidgetState extends State<DropdownMemberEditWidget> {
                                 alignment: AlignmentDirectional(0.0, 0.0)
                                     .resolve(Directionality.of(context)),
                                 child: ModalMembroViewWidget(
-                                  membroRows: widget!.membrosRow!,
+                                  membroRows: widget!.membrosRow,
                                 ),
                               );
                             },

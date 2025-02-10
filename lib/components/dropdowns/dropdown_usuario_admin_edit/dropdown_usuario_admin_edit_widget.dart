@@ -17,7 +17,7 @@ class DropdownUsuarioAdminEditWidget extends StatefulWidget {
     this.usuariosView,
   });
 
-  final UsuariosViewRow? usuariosView;
+  final UsuariosViewConcatSearchRow? usuariosView;
 
   @override
   State<DropdownUsuarioAdminEditWidget> createState() =>
