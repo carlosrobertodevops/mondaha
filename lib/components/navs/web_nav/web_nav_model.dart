@@ -1,7 +1,6 @@
 import '/auth/supabase_auth/auth_util.dart';
 import '/components/logos/main_logo_bar/main_logo_bar_widget.dart';
 import '/components/logos/main_logo_bar_minimal/main_logo_bar_minimal_widget.dart';
-import '/components/modals_extras/modal_command_palette/modal_command_palette_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_language_selector.dart';
 import '/flutter_flow/flutter_flow_theme.dart';

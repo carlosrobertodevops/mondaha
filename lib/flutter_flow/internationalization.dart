@@ -262,6 +262,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Add Member',
       'pt': 'Adicionar membro',
     },
+    'up18v6w5': {
+      'en': 'PDF',
+      'pt': 'PDF',
+    },
     '27iw7imq': {
       'en': '',
       'pt': '',
@@ -1615,6 +1619,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Alcunha',
       'pt': 'Alcunha',
     },
+    '5kbgpt8h': {
+      'en': 'Nickname was not provided !!!',
+      'pt': 'Endereço não foi informado !!!',
+    },
     't455vcot': {
       'en':
           'To add nickname(s) you need to fill in the Nickname Field and click on the (+) Button',
@@ -1664,6 +1672,14 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     '75eegesr': {
       'en': 'Nenhuma das opções',
       'pt': 'Nenhuma das opções',
+    },
+    'zrb8c816': {
+      'en': 'Date of birth',
+      'pt': 'Data de Nascimento',
+    },
+    'ol6syeyq': {
+      'en': 'Procedure Date',
+      'pt': 'Dados do Procedimento',
     },
     '2opj9i3o': {
       'en': 'Identidade',
@@ -1949,6 +1965,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Endereço Completo',
       'pt': 'Endereço Completo',
     },
+    '9jkt3qf8': {
+      'en': 'Address was not provided !!!',
+      'pt': 'Endereço não foi informado !!!',
+    },
     'd56blqb1': {
       'en':
           'To add the address(es) you need to fill in\nthe Address field and click on the (+) button.',
@@ -2068,6 +2088,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'xroteapo': {
       'en': 'Três últimos locais onde esteve preso',
       'pt': 'Três últimos locais onde esteve preso',
+    },
+    'jbuhl8wx': {
+      'en': 'Location was not informed !!!',
+      'pt': 'Endereço não foi informado !!!',
     },
     '6mn9o1ts': {
       'en':
@@ -2242,12 +2266,16 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'pt': 'Dados do Procedimento',
     },
     '5mm0nr5l': {
-      'en': 'Clear procedures below',
-      'pt': 'Limpar procedimentos abaixo',
+      'en': 'Clear',
+      'pt': 'Limpar',
     },
     '8pxnhql5': {
       'en': 'To add',
       'pt': 'Adicionar',
+    },
+    '7iw2izo4': {
+      'en': 'Procedure Number not provided !!!!',
+      'pt': 'Número do Processo não informado !!!!',
     },
     'qjj69k8u': {
       'en': 'Field is required',
@@ -2398,6 +2426,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'vm7t0n6u': {
       'en': 'To add',
       'pt': 'Adicionar',
+    },
+    '1a5jlejb': {
+      'en': 'Process Number not provided !!!!',
+      'pt': 'Número do Processo não informado !!!!',
     },
     'noufgwqe': {
       'en': 'Criminal action number',
@@ -3037,33 +3069,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'pt': 'Salvar alterações',
     },
   },
-  // modal_agencia_pesquisa
-  {
-    'kgdwkq27': {
-      'en': 'Select your agency',
-      'pt': 'Selecione sua agência',
-    },
-    'gcsoddpb': {
-      'en': 'Search for your intelligence agency below',
-      'pt': 'Procure abaixo sua agência de inteligência',
-    },
-    'ibal8767': {
-      'en': 'Search members...',
-      'pt': 'Pesquisar membros...',
-    },
-    'yqk8o466': {
-      'en': '',
-      'pt': '',
-    },
-    '8j1rka5p': {
-      'en': '',
-      'pt': '',
-    },
-    'p38jip18': {
-      'en': 'Save',
-      'pt': 'Salvar',
-    },
-  },
   // modal_message_ok
   {
     'rjc9v8pq': {
@@ -3115,18 +3120,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'pt': 'Título da notificação',
     },
     'u3tbuddm': {
-      'en': 'Some body copy that is present in this small notification.',
-      'pt':
-          'Alguma cópia do corpo que está presente nesta pequena notificação.',
-    },
-  },
-  // Toast03
-  {
-    'm0rvoply': {
-      'en': 'Notification Title',
-      'pt': 'Título da notificação',
-    },
-    'bxe9e2xt': {
       'en': 'Some body copy that is present in this small notification.',
       'pt':
           'Alguma cópia do corpo que está presente nesta pequena notificação.',
@@ -3188,6 +3181,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Alcunha',
       'pt': 'Alcunha',
     },
+    'dzqay8zm': {
+      'en': 'Nickname was not provided !!!',
+      'pt': 'Endereço não foi informado !!!',
+    },
     'm2152j19': {
       'en':
           'To add nickname(s) you need to fill in the Nickname Field and click on the (+) Button',
@@ -3237,6 +3234,14 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'gzwgr7rc': {
       'en': 'Nenhuma das opções',
       'pt': 'Nenhuma das opções',
+    },
+    'ryl4di26': {
+      'en': 'Date of birth',
+      'pt': 'Data de nascimento',
+    },
+    '0avskohf': {
+      'en': 'Date of birth',
+      'pt': 'Data de nascimento',
     },
     '1rnji010': {
       'en': 'Identidade',
@@ -3430,6 +3435,14 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Please choose an option from the dropdown',
       'pt': '',
     },
+    'l2qt3yvc': {
+      'en': 'dt_nascimento is required',
+      'pt': '',
+    },
+    'c0kufw9i': {
+      'en': 'Please choose an option from the dropdown',
+      'pt': 'Selecione uma opção no menu suspenso',
+    },
     'jkgu9aux': {
       'en': 'Field is required',
       'pt': 'Campo é obrigatório',
@@ -3513,6 +3526,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'vz6474h5': {
       'en': 'Endereço Completo',
       'pt': 'Endereço Completo',
+    },
+    '6kl8rill': {
+      'en': 'Address was not provided !!!',
+      'pt': 'Endereço não foi informado !!!',
     },
     'rtp4h0ou': {
       'en':
@@ -3625,6 +3642,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     '79dkmmv3': {
       'en': 'Três últimos locais onde esteve preso',
       'pt': 'Três últimos locais onde esteve preso',
+    },
+    'bae2wl2o': {
+      'en': 'Location was not informed !!!',
+      'pt': 'Endereço não foi informado !!!',
     },
     'ky34u2o1': {
       'en':
@@ -3807,12 +3828,16 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'pt': 'Dados do Procedimento',
     },
     'mpswxw0h': {
-      'en': 'Clear procedures below',
-      'pt': 'Limpar procedimentos abaixo',
+      'en': 'Clear',
+      'pt': 'Limpar',
     },
     '6ffa8gsf': {
       'en': 'To add',
       'pt': 'Adicionar',
+    },
+    '5hm1igqp': {
+      'en': 'Procedure Number not provided !!!!',
+      'pt': 'Endereço não foi informado !!!',
     },
     '74qz68yo': {
       'en': 'Field is required',
@@ -3839,8 +3864,8 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'pt': 'Unidade',
     },
     'aknu3c5t': {
-      'en': 'Type of procedure:',
-      'pt': 'Tipo de procedimento:',
+      'en': 'Type of procedure',
+      'pt': 'Tipo de procedimento',
     },
     'ht23g0id': {
       'en': 'Crime',
@@ -3963,6 +3988,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'miy1u177': {
       'en': 'To add',
       'pt': 'Adicionar',
+    },
+    '7mzxc79j': {
+      'en': 'Procedure Number not provided !!!!',
+      'pt': 'Endereço não foi informado !!!',
     },
     '9vwnb0wp': {
       'en': 'Criminal action number',

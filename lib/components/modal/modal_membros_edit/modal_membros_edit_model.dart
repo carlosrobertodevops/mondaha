@@ -1,6 +1,7 @@
 import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
 import '/backend/supabase/supabase.dart';
+import '/components/toasts/toast03/toast03_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_autocomplete_options_list.dart';
 import '/flutter_flow/flutter_flow_choice_chips.dart';
@@ -180,6 +181,10 @@ class ModalMembrosEditModel extends FlutterFlowModel<ModalMembrosEditWidget> {
   void updateMembrosFotosEditSemAtIndex(int index, Function(String) updateFn) =>
       membrosFotosEditSem[index] = updateFn(membrosFotosEditSem[index]);
 
+  DateTime? dataNascimento;
+
+  int? chieldProcedimentoList;
+
   ///  State fields for stateful widgets in this component.
 
   final formKey2 = GlobalKey<FormState>();
@@ -257,6 +262,13 @@ class ModalMembrosEditModel extends FlutterFlowModel<ModalMembrosEditWidget> {
   // State field(s) for ddw_estado_civil widget.
   String? ddwEstadoCivilValue;
   FormFieldController<String>? ddwEstadoCivilValueController;
+  // State field(s) for txt_data_nascimento widget.
+  FocusNode? txtDataNascimentoFocusNode;
+  TextEditingController? txtDataNascimentoTextController;
+  final txtDataNascimentoMask = MaskTextInputFormatter(mask: '##/##/####');
+  String? Function(BuildContext, String?)?
+      txtDataNascimentoTextControllerValidator;
+  DateTime? datePicked1;
   // State field(s) for txt_no_identidade widget.
   FocusNode? txtNoIdentidadeFocusNode;
   TextEditingController? txtNoIdentidadeTextController;
@@ -382,7 +394,7 @@ class ModalMembrosEditModel extends FlutterFlowModel<ModalMembrosEditWidget> {
   final txtProcedimentoDataMask = MaskTextInputFormatter(mask: '##/##/####');
   String? Function(BuildContext, String?)?
       txtProcedimentoDataTextControllerValidator;
-  DateTime? datePicked;
+  DateTime? datePicked2;
   // State field(s) for txt_processo_no_acao_penal widget.
   FocusNode? txtProcessoNoAcaoPenalFocusNode;
   TextEditingController? txtProcessoNoAcaoPenalTextController;
@@ -434,9 +446,13 @@ class ModalMembrosEditModel extends FlutterFlowModel<ModalMembrosEditWidget> {
   // Stores action output result for [Backend Call - API (ProcedimentosAdd)] action in Button widget.
   ApiCallResponse? apiResultProcedimentosEdit;
   // Stores action output result for [Backend Call - Delete Row(s)] action in Button widget.
+  List<ProcedimentosRow>? outputProcedimentosDeleteNull;
+  // Stores action output result for [Backend Call - Delete Row(s)] action in Button widget.
   List<ProcessosRow>? outputDeleteProcessos;
   // Stores action output result for [Backend Call - API (ProcessosAdd)] action in Button widget.
   ApiCallResponse? apiResultProcessosEdit;
+  // Stores action output result for [Backend Call - Delete Row(s)] action in Button widget.
+  List<ProcessosRow>? outputProcssosDeleteNull;
 
   @override
   void initState(BuildContext context) {
@@ -455,6 +471,9 @@ class ModalMembrosEditModel extends FlutterFlowModel<ModalMembrosEditWidget> {
 
     txtMembroNaturalidadeFocusNode?.dispose();
     txtMembroNaturalidadeTextController?.dispose();
+
+    txtDataNascimentoFocusNode?.dispose();
+    txtDataNascimentoTextController?.dispose();
 
     txtNoIdentidadeFocusNode?.dispose();
     txtNoIdentidadeTextController?.dispose();

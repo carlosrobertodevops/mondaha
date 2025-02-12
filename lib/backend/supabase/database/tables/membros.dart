@@ -159,4 +159,7 @@ class MembrosRow extends SupabaseDataRow {
 
   int? get situacao => getField<int>('situacao');
   set situacao(int? value) => setField<int>('situacao', value);
+
+  String? get dtNascimento => getField<String>('dt_nascimento');
+  set dtNascimento(String? value) => setField<String>('dt_nascimento', value);
 }

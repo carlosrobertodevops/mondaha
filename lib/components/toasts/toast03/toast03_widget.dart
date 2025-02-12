@@ -13,10 +13,12 @@ class Toast03Widget extends StatefulWidget {
   const Toast03Widget({
     super.key,
     String? texto,
+    required this.titulo,
   }) : this.texto = texto ??
             'Alguma cópia do corpo que está presente nesta pequena notificação.';
 
   final String texto;
+  final String? titulo;
 
   @override
   State<Toast03Widget> createState() => _Toast03WidgetState();
@@ -91,8 +93,9 @@ class _Toast03WidgetState extends State<Toast03Widget> {
                         ),
                       ),
                       Text(
-                        FFLocalizations.of(context).getText(
-                          'm0rvoply' /* Notification Title */,
+                        valueOrDefault<String>(
+                          widget!.titulo,
+                          'Titulo da notificação',
                         ),
                         style: FlutterFlowTheme.of(context).bodyLarge.override(
                               fontFamily:
@@ -105,8 +108,9 @@ class _Toast03WidgetState extends State<Toast03Widget> {
                     ].divide(SizedBox(width: 8.0)),
                   ),
                   Text(
-                    FFLocalizations.of(context).getText(
-                      'bxe9e2xt' /* Some body copy that is present... */,
+                    valueOrDefault<String>(
+                      widget!.texto,
+                      'Texto da notificação',
                     ),
                     style: FlutterFlowTheme.of(context).labelMedium.override(
                           fontFamily:

@@ -1,20 +1,19 @@
 import '../database.dart';
 
-class MembrosViewConcatSeachTable
-    extends SupabaseTable<MembrosViewConcatSeachRow> {
+class MembrosViewPdfTable extends SupabaseTable<MembrosViewPdfRow> {
   @override
-  String get tableName => 'membros_view_concat_seach';
+  String get tableName => 'membros_view_pdf';
 
   @override
-  MembrosViewConcatSeachRow createRow(Map<String, dynamic> data) =>
-      MembrosViewConcatSeachRow(data);
+  MembrosViewPdfRow createRow(Map<String, dynamic> data) =>
+      MembrosViewPdfRow(data);
 }
 
-class MembrosViewConcatSeachRow extends SupabaseDataRow {
-  MembrosViewConcatSeachRow(Map<String, dynamic> data) : super(data);
+class MembrosViewPdfRow extends SupabaseDataRow {
+  MembrosViewPdfRow(Map<String, dynamic> data) : super(data);
 
   @override
-  SupabaseTable get table => MembrosViewConcatSeachTable();
+  SupabaseTable get table => MembrosViewPdfTable();
 
   int? get membroId => getField<int>('membro_id');
   set membroId(int? value) => setField<int>('membro_id', value);
@@ -34,6 +33,9 @@ class MembrosViewConcatSeachRow extends SupabaseDataRow {
   String? get faccaoNome => getField<String>('faccao_nome');
   set faccaoNome(String? value) => setField<String>('faccao_nome', value);
 
+  String? get dtNascimento => getField<String>('dt_nascimento');
+  set dtNascimento(String? value) => setField<String>('dt_nascimento', value);
+
   List<String> get fotosPath => getListField<String>('fotos_path');
   set fotosPath(List<String>? value) =>
       setListField<String>('fotos_path', value);
@@ -43,9 +45,6 @@ class MembrosViewConcatSeachRow extends SupabaseDataRow {
 
   String? get funcaoNome => getField<String>('funcao_nome');
   set funcaoNome(String? value) => setField<String>('funcao_nome', value);
-
-  String? get dtNascimento => getField<String>('dt_nascimento');
-  set dtNascimento(String? value) => setField<String>('dt_nascimento', value);
 
   String? get nacionalidade => getField<String>('nacionalidade');
   set nacionalidade(String? value) => setField<String>('nacionalidade', value);

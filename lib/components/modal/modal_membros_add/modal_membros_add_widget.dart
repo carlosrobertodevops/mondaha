@@ -92,6 +92,7 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                     .resolve(Directionality.of(context)),
                 child: Toast03Widget(
                   texto: 'Nome  já existe  !!!',
+                  titulo: 'Atenção',
                 ),
               );
             },
@@ -106,6 +107,9 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
 
     _model.txtMembroNaturalidadeTextController ??= TextEditingController();
     _model.txtMembroNaturalidadeFocusNode ??= FocusNode();
+
+    _model.txtDataNascimentoTextController ??= TextEditingController();
+    _model.txtDataNascimentoFocusNode ??= FocusNode();
 
     _model.txtNoIdentidadeTextController ??= TextEditingController();
     _model.txtNoIdentidadeFocusNode ??= FocusNode();
@@ -177,6 +181,11 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
     });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {
+          _model.txtDataNascimentoTextController?.text = dateTimeFormat(
+            "d/M/y",
+            _model.dataProcedimento,
+            locale: FFLocalizations.of(context).languageCode,
+          );
           _model.txtFiliacaoPaiTextController?.text =
               FFLocalizations.of(context).getText(
             'l5vrftgu' /*  */,
@@ -249,77 +258,69 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          if (responsiveVisibility(
-                            context: context,
-                            tabletLandscape: false,
-                          ))
-                            Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  16.0, 0.0, 0.0, 0.0),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Expanded(
-                                    child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          16.0, 16.0, 0.0, 16.0),
-                                      child: SingleChildScrollView(
-                                        child: Column(
-                                          mainAxisSize: MainAxisSize.max,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              FFLocalizations.of(context)
-                                                  .getText(
-                                                'ioxmm05s' /* Add Member */,
-                                              ),
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .headlineMedium
-                                                      .override(
-                                                        fontFamily:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .headlineMediumFamily,
-                                                        letterSpacing: 0.0,
-                                                        useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                            .containsKey(
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .headlineMediumFamily),
-                                                      ),
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                16.0, 0.0, 0.0, 0.0),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Expanded(
+                                  child: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        16.0, 16.0, 0.0, 16.0),
+                                    child: SingleChildScrollView(
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            FFLocalizations.of(context).getText(
+                                              'ioxmm05s' /* Add Member */,
                                             ),
-                                          ],
-                                        ),
+                                            style: FlutterFlowTheme.of(context)
+                                                .headlineMedium
+                                                .override(
+                                                  fontFamily:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .headlineMediumFamily,
+                                                  letterSpacing: 0.0,
+                                                  useGoogleFonts: GoogleFonts
+                                                          .asMap()
+                                                      .containsKey(FlutterFlowTheme
+                                                              .of(context)
+                                                          .headlineMediumFamily),
+                                                ),
+                                          ),
+                                        ],
                                       ),
                                     ),
                                   ),
-                                  FlutterFlowIconButton(
-                                    borderColor: Colors.transparent,
-                                    borderRadius: 30.0,
-                                    borderWidth: 1.0,
-                                    buttonSize: 60.0,
-                                    icon: Icon(
-                                      Icons.close_rounded,
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryText,
-                                      size: 30.0,
-                                    ),
-                                    onPressed: () async {
-                                      logFirebaseEvent(
-                                          'MODAL_MEMBROS_ADD_close_rounded_ICN_ON_T');
-                                      Navigator.pop(context);
-
-                                      context.pushNamed('main_membros');
-                                    },
+                                ),
+                                FlutterFlowIconButton(
+                                  borderColor: Colors.transparent,
+                                  borderRadius: 30.0,
+                                  borderWidth: 1.0,
+                                  buttonSize: 60.0,
+                                  icon: Icon(
+                                    Icons.close_rounded,
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryText,
+                                    size: 30.0,
                                   ),
-                                ],
-                              ),
+                                  onPressed: () async {
+                                    logFirebaseEvent(
+                                        'MODAL_MEMBROS_ADD_close_rounded_ICN_ON_T');
+                                    Navigator.pop(context);
+
+                                    context.pushNamed('main_membros');
+                                  },
+                                ),
+                              ],
                             ),
+                          ),
                           Expanded(
                             flex: 4,
                             child: Row(
@@ -358,148 +359,146 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                           context)
                                                       .secondaryBackground,
                                                 ),
-                                                child: Visibility(
-                                                  visible: responsiveVisibility(
-                                                    context: context,
-                                                    phone: false,
-                                                    tablet: false,
-                                                    tabletLandscape: false,
-                                                  ),
-                                                  child: Column(
-                                                    children: [
-                                                      Align(
-                                                        alignment:
-                                                            Alignment(0.0, 0),
-                                                        child: TabBar(
-                                                          isScrollable: true,
-                                                          tabAlignment:
-                                                              TabAlignment
-                                                                  .center,
-                                                          labelColor:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .primaryText,
-                                                          unselectedLabelColor:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .secondaryText,
-                                                          labelStyle:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .titleMedium
-                                                                  .override(
-                                                                    fontFamily:
-                                                                        FlutterFlowTheme.of(context)
-                                                                            .titleMediumFamily,
-                                                                    letterSpacing:
-                                                                        0.0,
-                                                                    useGoogleFonts: GoogleFonts
-                                                                            .asMap()
-                                                                        .containsKey(
-                                                                            FlutterFlowTheme.of(context).titleMediumFamily),
-                                                                  ),
-                                                          unselectedLabelStyle:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .titleMedium
-                                                                  .override(
-                                                                    fontFamily:
-                                                                        FlutterFlowTheme.of(context)
-                                                                            .titleMediumFamily,
-                                                                    letterSpacing:
-                                                                        0.0,
-                                                                    useGoogleFonts: GoogleFonts
-                                                                            .asMap()
-                                                                        .containsKey(
-                                                                            FlutterFlowTheme.of(context).titleMediumFamily),
-                                                                  ),
-                                                          indicatorColor:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .primary,
-                                                          padding:
-                                                              EdgeInsets.all(
-                                                                  2.0),
-                                                          tabs: [
-                                                            Tab(
-                                                              text: FFLocalizations
-                                                                      .of(context)
-                                                                  .getText(
-                                                                'ap8ub3ro' /* Profile */,
-                                                              ),
+                                                child: Column(
+                                                  children: [
+                                                    Align(
+                                                      alignment:
+                                                          Alignment(0.0, 0),
+                                                      child: TabBar(
+                                                        isScrollable: true,
+                                                        tabAlignment:
+                                                            TabAlignment.center,
+                                                        labelColor:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryText,
+                                                        unselectedLabelColor:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .secondaryText,
+                                                        labelStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .titleMedium
+                                                                .override(
+                                                                  fontFamily: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .titleMediumFamily,
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                  useGoogleFonts: GoogleFonts
+                                                                          .asMap()
+                                                                      .containsKey(
+                                                                          FlutterFlowTheme.of(context)
+                                                                              .titleMediumFamily),
+                                                                ),
+                                                        unselectedLabelStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .titleMedium
+                                                                .override(
+                                                                  fontFamily: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .titleMediumFamily,
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                  useGoogleFonts: GoogleFonts
+                                                                          .asMap()
+                                                                      .containsKey(
+                                                                          FlutterFlowTheme.of(context)
+                                                                              .titleMediumFamily),
+                                                                ),
+                                                        indicatorColor:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primary,
+                                                        padding:
+                                                            EdgeInsets.all(2.0),
+                                                        tabs: [
+                                                          Tab(
+                                                            text: FFLocalizations
+                                                                    .of(context)
+                                                                .getText(
+                                                              'ap8ub3ro' /* Profile */,
                                                             ),
-                                                            Tab(
-                                                              text: FFLocalizations
-                                                                      .of(context)
-                                                                  .getText(
-                                                                'nvxntirq' /* Localization */,
-                                                              ),
+                                                          ),
+                                                          Tab(
+                                                            text: FFLocalizations
+                                                                    .of(context)
+                                                                .getText(
+                                                              'nvxntirq' /* Localization */,
                                                             ),
-                                                            Tab(
-                                                              text: FFLocalizations
-                                                                      .of(context)
-                                                                  .getText(
-                                                                'zo5mhuuq' /* Facção */,
-                                                              ),
+                                                          ),
+                                                          Tab(
+                                                            text: FFLocalizations
+                                                                    .of(context)
+                                                                .getText(
+                                                              'zo5mhuuq' /* Facção */,
                                                             ),
-                                                            Tab(
-                                                              text: FFLocalizations
-                                                                      .of(context)
-                                                                  .getText(
-                                                                'xeeiaebp' /* Procedimentos */,
-                                                              ),
+                                                          ),
+                                                          Tab(
+                                                            text: FFLocalizations
+                                                                    .of(context)
+                                                                .getText(
+                                                              'xeeiaebp' /* Procedimentos */,
                                                             ),
-                                                            Tab(
-                                                              text: FFLocalizations
-                                                                      .of(context)
-                                                                  .getText(
-                                                                '0v0s6s8e' /* Procedures */,
-                                                              ),
+                                                          ),
+                                                          Tab(
+                                                            text: FFLocalizations
+                                                                    .of(context)
+                                                                .getText(
+                                                              '0v0s6s8e' /* Procedures */,
                                                             ),
-                                                            Tab(
-                                                              text: FFLocalizations
-                                                                      .of(context)
-                                                                  .getText(
-                                                                'xaeljp2r' /* Performance */,
-                                                              ),
+                                                          ),
+                                                          Tab(
+                                                            text: FFLocalizations
+                                                                    .of(context)
+                                                                .getText(
+                                                              'xaeljp2r' /* Performance */,
                                                             ),
-                                                            Tab(
-                                                              text: FFLocalizations
-                                                                      .of(context)
-                                                                  .getText(
-                                                                '8slh1eth' /* Alert */,
-                                                              ),
+                                                          ),
+                                                          Tab(
+                                                            text: FFLocalizations
+                                                                    .of(context)
+                                                                .getText(
+                                                              '8slh1eth' /* Alert */,
                                                             ),
-                                                            Tab(
-                                                              text: FFLocalizations
-                                                                      .of(context)
-                                                                  .getText(
-                                                                '2rc41m6r' /* Validation */,
-                                                              ),
+                                                          ),
+                                                          Tab(
+                                                            text: FFLocalizations
+                                                                    .of(context)
+                                                                .getText(
+                                                              '2rc41m6r' /* Validation */,
                                                             ),
-                                                          ],
-                                                          controller: _model
-                                                              .tabBarController,
-                                                          onTap: (i) async {
-                                                            [
-                                                              () async {},
-                                                              () async {},
-                                                              () async {},
-                                                              () async {},
-                                                              () async {},
-                                                              () async {},
-                                                              () async {},
-                                                              () async {}
-                                                            ][i]();
-                                                          },
-                                                        ),
+                                                          ),
+                                                        ],
+                                                        controller: _model
+                                                            .tabBarController,
+                                                        onTap: (i) async {
+                                                          [
+                                                            () async {},
+                                                            () async {},
+                                                            () async {},
+                                                            () async {},
+                                                            () async {},
+                                                            () async {},
+                                                            () async {},
+                                                            () async {}
+                                                          ][i]();
+                                                        },
                                                       ),
-                                                      Expanded(
-                                                        child: TabBarView(
-                                                          controller: _model
-                                                              .tabBarController,
-                                                          children: [
-                                                            Padding(
+                                                    ),
+                                                    Expanded(
+                                                      child: TabBarView(
+                                                        controller: _model
+                                                            .tabBarController,
+                                                        physics:
+                                                            const NeverScrollableScrollPhysics(),
+                                                        children: [
+                                                          KeepAliveWidgetWrapper(
+                                                            builder:
+                                                                (context) =>
+                                                                    Padding(
                                                               padding:
                                                                   EdgeInsetsDirectional
                                                                       .fromSTEB(
@@ -1954,39 +1953,47 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                                       validator: _model.txtAlcunhaAddTextControllerValidator.asValidator(context),
                                                                                     ),
                                                                                   ),
-                                                                                  FlutterFlowIconButton(
-                                                                                    borderColor: Colors.transparent,
-                                                                                    borderRadius: 30.0,
-                                                                                    buttonSize: 40.0,
-                                                                                    fillColor: FlutterFlowTheme.of(context).primary,
-                                                                                    icon: Icon(
-                                                                                      Icons.add_rounded,
-                                                                                      color: FlutterFlowTheme.of(context).info,
-                                                                                      size: 24.0,
+                                                                                  Builder(
+                                                                                    builder: (context) => FlutterFlowIconButton(
+                                                                                      borderColor: Colors.transparent,
+                                                                                      borderRadius: 30.0,
+                                                                                      buttonSize: 40.0,
+                                                                                      fillColor: FlutterFlowTheme.of(context).primary,
+                                                                                      icon: Icon(
+                                                                                        Icons.add_rounded,
+                                                                                        color: FlutterFlowTheme.of(context).info,
+                                                                                        size: 24.0,
+                                                                                      ),
+                                                                                      onPressed: () async {
+                                                                                        logFirebaseEvent('MODAL_MEMBROS_ADD_add_rounded_ICN_ON_TAP');
+                                                                                        if (_model.txtAlcunhaAddTextController.text != '') {
+                                                                                          _model.addToMembrosAlcunhas(_model.txtAlcunhaAddTextController.text);
+                                                                                          safeSetState(() {});
+                                                                                        } else {
+                                                                                          await showDialog(
+                                                                                            context: context,
+                                                                                            builder: (dialogContext) {
+                                                                                              return Dialog(
+                                                                                                elevation: 0,
+                                                                                                insetPadding: EdgeInsets.zero,
+                                                                                                backgroundColor: Colors.transparent,
+                                                                                                alignment: AlignmentDirectional(0.0, 0.0).resolve(Directionality.of(context)),
+                                                                                                child: Container(
+                                                                                                  height: 100.0,
+                                                                                                  width: 300.0,
+                                                                                                  child: Toast03Widget(
+                                                                                                    texto: FFLocalizations.of(context).getText(
+                                                                                                      '5kbgpt8h' /* Nickname was not provided !!! */,
+                                                                                                    ),
+                                                                                                    titulo: 'Atenção',
+                                                                                                  ),
+                                                                                                ),
+                                                                                              );
+                                                                                            },
+                                                                                          );
+                                                                                        }
+                                                                                      },
                                                                                     ),
-                                                                                    onPressed: () async {
-                                                                                      logFirebaseEvent('MODAL_MEMBROS_ADD_add_rounded_ICN_ON_TAP');
-                                                                                      if (_model.txtAlcunhaAddTextController.text != '') {
-                                                                                        _model.addToMembrosAlcunhas(_model.txtAlcunhaAddTextController.text);
-                                                                                        safeSetState(() {});
-                                                                                        safeSetState(() {
-                                                                                          _model.txtAlcunhaAddTextController?.clear();
-                                                                                        });
-                                                                                      } else {
-                                                                                        ScaffoldMessenger.of(context).showSnackBar(
-                                                                                          SnackBar(
-                                                                                            content: Text(
-                                                                                              'Informação de Alcunha em branco !',
-                                                                                              style: TextStyle(
-                                                                                                color: FlutterFlowTheme.of(context).primaryText,
-                                                                                              ),
-                                                                                            ),
-                                                                                            duration: Duration(milliseconds: 4000),
-                                                                                            backgroundColor: FlutterFlowTheme.of(context).secondary,
-                                                                                          ),
-                                                                                        );
-                                                                                      }
-                                                                                    },
                                                                                   ),
                                                                                   Align(
                                                                                     alignment: AlignmentDirectional(-1.0, -1.0),
@@ -2290,6 +2297,172 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                                         );
                                                                                       },
                                                                                     ),
+                                                                                  ),
+                                                                                  Expanded(
+                                                                                    flex: 3,
+                                                                                    child: TextFormField(
+                                                                                      controller: _model.txtDataNascimentoTextController,
+                                                                                      focusNode: _model.txtDataNascimentoFocusNode,
+                                                                                      onChanged: (_) => EasyDebounce.debounce(
+                                                                                        '_model.txtDataNascimentoTextController',
+                                                                                        Duration(milliseconds: 2000),
+                                                                                        () => safeSetState(() {}),
+                                                                                      ),
+                                                                                      autofocus: false,
+                                                                                      obscureText: false,
+                                                                                      decoration: InputDecoration(
+                                                                                        labelText: FFLocalizations.of(context).getText(
+                                                                                          'zrb8c816' /* Date of birth */,
+                                                                                        ),
+                                                                                        labelStyle: FlutterFlowTheme.of(context).labelMedium.override(
+                                                                                              fontFamily: FlutterFlowTheme.of(context).labelMediumFamily,
+                                                                                              letterSpacing: 0.0,
+                                                                                              useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).labelMediumFamily),
+                                                                                            ),
+                                                                                        alignLabelWithHint: true,
+                                                                                        hintText: FFLocalizations.of(context).getText(
+                                                                                          'ol6syeyq' /* Procedure Date */,
+                                                                                        ),
+                                                                                        hintStyle: FlutterFlowTheme.of(context).labelMedium.override(
+                                                                                              fontFamily: FlutterFlowTheme.of(context).labelMediumFamily,
+                                                                                              letterSpacing: 0.0,
+                                                                                              useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).labelMediumFamily),
+                                                                                            ),
+                                                                                        enabledBorder: OutlineInputBorder(
+                                                                                          borderSide: BorderSide(
+                                                                                            color: FlutterFlowTheme.of(context).alternate,
+                                                                                            width: 2.0,
+                                                                                          ),
+                                                                                          borderRadius: BorderRadius.circular(12.0),
+                                                                                        ),
+                                                                                        focusedBorder: OutlineInputBorder(
+                                                                                          borderSide: BorderSide(
+                                                                                            color: FlutterFlowTheme.of(context).primary,
+                                                                                            width: 2.0,
+                                                                                          ),
+                                                                                          borderRadius: BorderRadius.circular(12.0),
+                                                                                        ),
+                                                                                        errorBorder: OutlineInputBorder(
+                                                                                          borderSide: BorderSide(
+                                                                                            color: FlutterFlowTheme.of(context).error,
+                                                                                            width: 2.0,
+                                                                                          ),
+                                                                                          borderRadius: BorderRadius.circular(12.0),
+                                                                                        ),
+                                                                                        focusedErrorBorder: OutlineInputBorder(
+                                                                                          borderSide: BorderSide(
+                                                                                            color: FlutterFlowTheme.of(context).error,
+                                                                                            width: 2.0,
+                                                                                          ),
+                                                                                          borderRadius: BorderRadius.circular(12.0),
+                                                                                        ),
+                                                                                        filled: true,
+                                                                                        fillColor: FlutterFlowTheme.of(context).secondaryBackground,
+                                                                                        contentPadding: EdgeInsetsDirectional.fromSTEB(20.0, 24.0, 20.0, 24.0),
+                                                                                        suffixIcon: _model.txtDataNascimentoTextController!.text.isNotEmpty
+                                                                                            ? InkWell(
+                                                                                                onTap: () async {
+                                                                                                  _model.txtDataNascimentoTextController?.clear();
+                                                                                                  safeSetState(() {});
+                                                                                                },
+                                                                                                child: Icon(
+                                                                                                  Icons.clear,
+                                                                                                  size: 24.0,
+                                                                                                ),
+                                                                                              )
+                                                                                            : null,
+                                                                                      ),
+                                                                                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                            fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                                            letterSpacing: 0.0,
+                                                                                            useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                                          ),
+                                                                                      keyboardType: TextInputType.datetime,
+                                                                                      cursorColor: FlutterFlowTheme.of(context).primary,
+                                                                                      validator: _model.txtDataNascimentoTextControllerValidator.asValidator(context),
+                                                                                      inputFormatters: [
+                                                                                        _model.txtDataNascimentoMask
+                                                                                      ],
+                                                                                    ),
+                                                                                  ),
+                                                                                  FlutterFlowIconButton(
+                                                                                    borderRadius: 8.0,
+                                                                                    buttonSize: 40.0,
+                                                                                    fillColor: FlutterFlowTheme.of(context).primary,
+                                                                                    icon: Icon(
+                                                                                      Icons.calendar_month_outlined,
+                                                                                      color: FlutterFlowTheme.of(context).info,
+                                                                                      size: 24.0,
+                                                                                    ),
+                                                                                    onPressed: () async {
+                                                                                      logFirebaseEvent('MODAL_MEMBROS_ADD_IconButtonDataNascimen');
+                                                                                      // Data de Nascimento
+                                                                                      final _datePicked1Date = await showDatePicker(
+                                                                                        context: context,
+                                                                                        initialDate: getCurrentTimestamp,
+                                                                                        firstDate: DateTime(1900),
+                                                                                        lastDate: getCurrentTimestamp,
+                                                                                        builder: (context, child) {
+                                                                                          return wrapInMaterialDatePickerTheme(
+                                                                                            context,
+                                                                                            child!,
+                                                                                            headerBackgroundColor: FlutterFlowTheme.of(context).primary,
+                                                                                            headerForegroundColor: FlutterFlowTheme.of(context).info,
+                                                                                            headerTextStyle: FlutterFlowTheme.of(context).headlineLarge.override(
+                                                                                                  fontFamily: FlutterFlowTheme.of(context).headlineLargeFamily,
+                                                                                                  fontSize: 32.0,
+                                                                                                  letterSpacing: 0.0,
+                                                                                                  fontWeight: FontWeight.w600,
+                                                                                                  useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).headlineLargeFamily),
+                                                                                                ),
+                                                                                            pickerBackgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+                                                                                            pickerForegroundColor: FlutterFlowTheme.of(context).primaryText,
+                                                                                            selectedDateTimeBackgroundColor: FlutterFlowTheme.of(context).primary,
+                                                                                            selectedDateTimeForegroundColor: FlutterFlowTheme.of(context).info,
+                                                                                            actionButtonForegroundColor: FlutterFlowTheme.of(context).primaryText,
+                                                                                            iconSize: 24.0,
+                                                                                          );
+                                                                                        },
+                                                                                      );
+
+                                                                                      if (_datePicked1Date != null) {
+                                                                                        safeSetState(() {
+                                                                                          _model.datePicked1 = DateTime(
+                                                                                            _datePicked1Date.year,
+                                                                                            _datePicked1Date.month,
+                                                                                            _datePicked1Date.day,
+                                                                                          );
+                                                                                        });
+                                                                                      } else if (_model.datePicked1 != null) {
+                                                                                        safeSetState(() {
+                                                                                          _model.datePicked1 = getCurrentTimestamp;
+                                                                                        });
+                                                                                      }
+                                                                                      await Future.wait([
+                                                                                        Future(() async {
+                                                                                          safeSetState(() {
+                                                                                            _model.txtDataNascimentoTextController?.text = dateTimeFormat(
+                                                                                              "d/M/y",
+                                                                                              _model.datePicked1,
+                                                                                              locale: FFLocalizations.of(context).languageCode,
+                                                                                            );
+                                                                                            _model.txtDataNascimentoMask.updateMask(
+                                                                                              newValue: TextEditingValue(
+                                                                                                text: _model.txtDataNascimentoTextController!.text,
+                                                                                              ),
+                                                                                            );
+                                                                                          });
+                                                                                        }),
+                                                                                        Future(() async {
+                                                                                          _model.dataNascimento = dateTimeFormat(
+                                                                                            "d/M/y",
+                                                                                            _model.datePicked1,
+                                                                                            locale: FFLocalizations.of(context).languageCode,
+                                                                                          );
+                                                                                          safeSetState(() {});
+                                                                                        }),
+                                                                                      ]);
+                                                                                    },
                                                                                   ),
                                                                                 ].divide(SizedBox(width: 10.0)),
                                                                               ),
@@ -3033,7 +3206,11 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                 ),
                                                               ),
                                                             ),
-                                                            Padding(
+                                                          ),
+                                                          KeepAliveWidgetWrapper(
+                                                            builder:
+                                                                (context) =>
+                                                                    Padding(
                                                               padding:
                                                                   EdgeInsetsDirectional
                                                                       .fromSTEB(
@@ -3431,45 +3608,53 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                                       ),
                                                                                     ),
                                                                                   ),
-                                                                                  FlutterFlowIconButton(
-                                                                                    borderRadius: 30.0,
-                                                                                    buttonSize: 40.0,
-                                                                                    fillColor: FlutterFlowTheme.of(context).primary,
-                                                                                    icon: Icon(
-                                                                                      Icons.add_rounded,
-                                                                                      color: FlutterFlowTheme.of(context).info,
-                                                                                      size: 24.0,
-                                                                                    ),
-                                                                                    onPressed: () async {
-                                                                                      logFirebaseEvent('MODAL_MEMBROS_ADD_add_rounded_ICN_ON_TAP');
-                                                                                      if (_model.txtMembrosEnderecosAddTextController.text != '') {
-                                                                                        _model.addToMembrosEnderecos(_model.txtMembrosEnderecosAddTextController.text);
-                                                                                        _model.updatePage(() {});
-                                                                                        _model.addToMembrosLatLng(_model.placePickerEnderecoValue.latLng);
-                                                                                        _model.updatePage(() {});
-                                                                                        safeSetState(() {
-                                                                                          _model.txtMembrosEnderecosAddTextController?.clear();
-                                                                                        });
-                                                                                        await _model.googleMapMembrosController.future.then(
-                                                                                          (c) => c.animateCamera(
-                                                                                            CameraUpdate.newLatLng(_model.membrosLatLng.lastOrNull!.toGoogleMaps()),
-                                                                                          ),
-                                                                                        );
-                                                                                      } else {
-                                                                                        ScaffoldMessenger.of(context).showSnackBar(
-                                                                                          SnackBar(
-                                                                                            content: Text(
-                                                                                              'Informação de Endereço em branco !',
-                                                                                              style: TextStyle(
-                                                                                                color: FlutterFlowTheme.of(context).primaryText,
-                                                                                              ),
+                                                                                  Builder(
+                                                                                    builder: (context) => FlutterFlowIconButton(
+                                                                                      borderRadius: 30.0,
+                                                                                      buttonSize: 40.0,
+                                                                                      fillColor: FlutterFlowTheme.of(context).primary,
+                                                                                      icon: Icon(
+                                                                                        Icons.add_rounded,
+                                                                                        color: FlutterFlowTheme.of(context).info,
+                                                                                        size: 24.0,
+                                                                                      ),
+                                                                                      onPressed: () async {
+                                                                                        logFirebaseEvent('MODAL_MEMBROS_ADD_add_rounded_ICN_ON_TAP');
+                                                                                        if (_model.txtMembrosEnderecosAddTextController.text != '') {
+                                                                                          _model.addToMembrosEnderecos(_model.txtMembrosEnderecosAddTextController.text);
+                                                                                          _model.updatePage(() {});
+                                                                                          _model.addToMembrosLatLng(_model.placePickerEnderecoValue.latLng);
+                                                                                          _model.updatePage(() {});
+                                                                                          await _model.googleMapMembrosController.future.then(
+                                                                                            (c) => c.animateCamera(
+                                                                                              CameraUpdate.newLatLng(_model.membrosLatLng.lastOrNull!.toGoogleMaps()),
                                                                                             ),
-                                                                                            duration: Duration(milliseconds: 4000),
-                                                                                            backgroundColor: FlutterFlowTheme.of(context).secondary,
-                                                                                          ),
-                                                                                        );
-                                                                                      }
-                                                                                    },
+                                                                                          );
+                                                                                        } else {
+                                                                                          await showDialog(
+                                                                                            context: context,
+                                                                                            builder: (dialogContext) {
+                                                                                              return Dialog(
+                                                                                                elevation: 0,
+                                                                                                insetPadding: EdgeInsets.zero,
+                                                                                                backgroundColor: Colors.transparent,
+                                                                                                alignment: AlignmentDirectional(0.0, 0.0).resolve(Directionality.of(context)),
+                                                                                                child: Container(
+                                                                                                  height: 100.0,
+                                                                                                  width: 300.0,
+                                                                                                  child: Toast03Widget(
+                                                                                                    texto: FFLocalizations.of(context).getText(
+                                                                                                      '9jkt3qf8' /* Address was not provided !!! */,
+                                                                                                    ),
+                                                                                                    titulo: 'Atenção',
+                                                                                                  ),
+                                                                                                ),
+                                                                                              );
+                                                                                            },
+                                                                                          );
+                                                                                        }
+                                                                                      },
+                                                                                    ),
                                                                                   ),
                                                                                   Flex(
                                                                                     direction: Axis.vertical,
@@ -3670,7 +3855,11 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                         16.0)),
                                                               ),
                                                             ),
-                                                            Padding(
+                                                          ),
+                                                          KeepAliveWidgetWrapper(
+                                                            builder:
+                                                                (context) =>
+                                                                    Padding(
                                                               padding:
                                                                   EdgeInsetsDirectional
                                                                       .fromSTEB(
@@ -4590,39 +4779,50 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                                       validator: _model.txtFaccaoTresLocaisAddTextControllerValidator.asValidator(context),
                                                                                     ),
                                                                                   ),
-                                                                                  FlutterFlowIconButton(
-                                                                                    borderColor: Colors.transparent,
-                                                                                    borderRadius: 30.0,
-                                                                                    buttonSize: 40.0,
-                                                                                    fillColor: FlutterFlowTheme.of(context).primary,
-                                                                                    icon: Icon(
-                                                                                      Icons.add_rounded,
-                                                                                      color: FlutterFlowTheme.of(context).info,
-                                                                                      size: 24.0,
+                                                                                  Builder(
+                                                                                    builder: (context) => FlutterFlowIconButton(
+                                                                                      borderColor: Colors.transparent,
+                                                                                      borderRadius: 30.0,
+                                                                                      buttonSize: 40.0,
+                                                                                      fillColor: FlutterFlowTheme.of(context).primary,
+                                                                                      icon: Icon(
+                                                                                        Icons.add_rounded,
+                                                                                        color: FlutterFlowTheme.of(context).info,
+                                                                                        size: 24.0,
+                                                                                      ),
+                                                                                      onPressed: () async {
+                                                                                        logFirebaseEvent('MODAL_MEMBROS_ADD_add_rounded_ICN_ON_TAP');
+                                                                                        if (_model.txtFaccaoTresLocaisAddTextController.text != '') {
+                                                                                          _model.addToMembrosFaccaoTresLocais(_model.txtFaccaoTresLocaisAddTextController.text);
+                                                                                          safeSetState(() {});
+                                                                                          safeSetState(() {
+                                                                                            _model.txtFaccaoTresLocaisAddTextController?.text = '';
+                                                                                          });
+                                                                                        } else {
+                                                                                          await showDialog(
+                                                                                            context: context,
+                                                                                            builder: (dialogContext) {
+                                                                                              return Dialog(
+                                                                                                elevation: 0,
+                                                                                                insetPadding: EdgeInsets.zero,
+                                                                                                backgroundColor: Colors.transparent,
+                                                                                                alignment: AlignmentDirectional(0.0, 0.0).resolve(Directionality.of(context)),
+                                                                                                child: Container(
+                                                                                                  height: 100.0,
+                                                                                                  width: 300.0,
+                                                                                                  child: Toast03Widget(
+                                                                                                    texto: FFLocalizations.of(context).getText(
+                                                                                                      'jbuhl8wx' /* Location was not informed !!! */,
+                                                                                                    ),
+                                                                                                    titulo: 'Atenção',
+                                                                                                  ),
+                                                                                                ),
+                                                                                              );
+                                                                                            },
+                                                                                          );
+                                                                                        }
+                                                                                      },
                                                                                     ),
-                                                                                    onPressed: () async {
-                                                                                      logFirebaseEvent('MODAL_MEMBROS_ADD_add_rounded_ICN_ON_TAP');
-                                                                                      if (_model.txtFaccaoTresLocaisAddTextController.text != '') {
-                                                                                        _model.addToMembrosFaccaoTresLocais(_model.txtFaccaoTresLocaisAddTextController.text);
-                                                                                        safeSetState(() {});
-                                                                                        safeSetState(() {
-                                                                                          _model.txtFaccaoTresLocaisAddTextController?.text = _model.membrosLimpar!;
-                                                                                        });
-                                                                                      } else {
-                                                                                        ScaffoldMessenger.of(context).showSnackBar(
-                                                                                          SnackBar(
-                                                                                            content: Text(
-                                                                                              'Informação de Local em branco !',
-                                                                                              style: TextStyle(
-                                                                                                color: FlutterFlowTheme.of(context).primaryText,
-                                                                                              ),
-                                                                                            ),
-                                                                                            duration: Duration(milliseconds: 4000),
-                                                                                            backgroundColor: FlutterFlowTheme.of(context).secondary,
-                                                                                          ),
-                                                                                        );
-                                                                                      }
-                                                                                    },
                                                                                   ),
                                                                                   Flex(
                                                                                     direction: Axis.vertical,
@@ -4978,7 +5178,11 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                 ),
                                                               ),
                                                             ),
-                                                            Padding(
+                                                          ),
+                                                          KeepAliveWidgetWrapper(
+                                                            builder:
+                                                                (context) =>
+                                                                    Padding(
                                                               padding:
                                                                   EdgeInsetsDirectional
                                                                       .fromSTEB(
@@ -4996,7 +5200,7 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                         .formKey4,
                                                                     autovalidateMode:
                                                                         AutovalidateMode
-                                                                            .disabled,
+                                                                            .always,
                                                                     child:
                                                                         Column(
                                                                       mainAxisSize:
@@ -5311,6 +5515,14 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                                   Duration(milliseconds: 2000),
                                                                                   () => safeSetState(() {}),
                                                                                 ),
+                                                                                onFieldSubmitted: (_) async {
+                                                                                  logFirebaseEvent('MODAL_MEMBROS_ADD_txt_procedimento_data_');
+                                                                                  _model.dataNascimento = valueOrDefault<String>(
+                                                                                    _model.txtDataNascimentoTextController.text,
+                                                                                    '01/01/1900',
+                                                                                  );
+                                                                                  safeSetState(() {});
+                                                                                },
                                                                                 autofocus: false,
                                                                                 obscureText: false,
                                                                                 decoration: InputDecoration(
@@ -5399,7 +5611,7 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                               ),
                                                                               onPressed: () async {
                                                                                 logFirebaseEvent('MODAL_MEMBROS_ADD_calendar_month_outline');
-                                                                                final _datePickedDate = await showDatePicker(
+                                                                                final _datePicked2Date = await showDatePicker(
                                                                                   context: context,
                                                                                   initialDate: getCurrentTimestamp,
                                                                                   firstDate: DateTime(1900),
@@ -5427,13 +5639,17 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                                   },
                                                                                 );
 
-                                                                                if (_datePickedDate != null) {
+                                                                                if (_datePicked2Date != null) {
                                                                                   safeSetState(() {
-                                                                                    _model.datePicked = DateTime(
-                                                                                      _datePickedDate.year,
-                                                                                      _datePickedDate.month,
-                                                                                      _datePickedDate.day,
+                                                                                    _model.datePicked2 = DateTime(
+                                                                                      _datePicked2Date.year,
+                                                                                      _datePicked2Date.month,
+                                                                                      _datePicked2Date.day,
                                                                                     );
+                                                                                  });
+                                                                                } else if (_model.datePicked2 != null) {
+                                                                                  safeSetState(() {
+                                                                                    _model.datePicked2 = getCurrentTimestamp;
                                                                                   });
                                                                                 }
                                                                                 await Future.wait([
@@ -5441,7 +5657,7 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                                     safeSetState(() {
                                                                                       _model.txtProcedimentoDataTextController?.text = dateTimeFormat(
                                                                                         "d/M/y",
-                                                                                        _model.datePicked,
+                                                                                        _model.datePicked2,
                                                                                         locale: FFLocalizations.of(context).languageCode,
                                                                                       );
                                                                                       _model.txtProcedimentoDataMask.updateMask(
@@ -5452,7 +5668,7 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                                     });
                                                                                   }),
                                                                                   Future(() async {
-                                                                                    _model.dataProcedimento = _model.datePicked;
+                                                                                    _model.dataProcedimento = _model.datePicked2;
                                                                                     safeSetState(() {});
                                                                                   }),
                                                                                 ]);
@@ -5469,12 +5685,12 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                               [
                                                                             FFButtonWidget(
                                                                               onPressed: () async {
-                                                                                logFirebaseEvent('MODAL_MEMBROS_ADD_CLEAR_PROCEDURES_BELOW');
+                                                                                logFirebaseEvent('MODAL_MEMBROS_ADD_COMP_CLEAR_BTN_ON_TAP');
                                                                                 _model.membrosProcedimentos = [];
                                                                                 safeSetState(() {});
                                                                               },
                                                                               text: FFLocalizations.of(context).getText(
-                                                                                '5mm0nr5l' /* Clear procedures below */,
+                                                                                '5mm0nr5l' /* Clear */,
                                                                               ),
                                                                               icon: Icon(
                                                                                 Icons.remove_outlined,
@@ -5499,38 +5715,68 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                                 borderRadius: BorderRadius.circular(12.0),
                                                                               ),
                                                                             ),
-                                                                            FFButtonWidget(
-                                                                              onPressed: () async {
-                                                                                logFirebaseEvent('MODAL_MEMBROS_ADD_COMP_TO_ADD_BTN_ON_TAP');
-                                                                                _model.addToMembrosProcedimentos(DataTypesProcedimentosStruct(
-                                                                                  procedimentoNo: _model.txtProcedimentoNoTextController.text,
-                                                                                  procedimentoTipo: _model.ddwProcedimentoTipoValue,
-                                                                                  unidade: _model.ddwProcedimentoUnidadeValue,
-                                                                                  crime: _model.ddwProcedimentoCrimeValue,
-                                                                                  data: _model.dataProcedimento?.toString(),
-                                                                                ));
-                                                                                safeSetState(() {});
-                                                                              },
-                                                                              text: FFLocalizations.of(context).getText(
-                                                                                '8pxnhql5' /* To add */,
-                                                                              ),
-                                                                              icon: Icon(
-                                                                                Icons.add_rounded,
-                                                                                size: 24.0,
-                                                                              ),
-                                                                              options: FFButtonOptions(
-                                                                                height: 40.0,
-                                                                                padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
-                                                                                iconPadding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                                                                                color: FlutterFlowTheme.of(context).primary,
-                                                                                textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-                                                                                      fontFamily: FlutterFlowTheme.of(context).titleSmallFamily,
-                                                                                      color: Colors.white,
-                                                                                      letterSpacing: 0.0,
-                                                                                      useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).titleSmallFamily),
-                                                                                    ),
-                                                                                elevation: 0.0,
-                                                                                borderRadius: BorderRadius.circular(12.0),
+                                                                            Builder(
+                                                                              builder: (context) => FFButtonWidget(
+                                                                                onPressed: () async {
+                                                                                  logFirebaseEvent('MODAL_MEMBROS_ADD_COMP_TO_ADD_BTN_ON_TAP');
+                                                                                  if (_model.txtProcedimentoNoTextController.text != null && _model.txtProcedimentoNoTextController.text != '') {
+                                                                                    _model.addToMembrosProcedimentos(DataTypesProcedimentosStruct(
+                                                                                      procedimentoNo: _model.txtProcedimentoNoTextController.text,
+                                                                                      procedimentoTipo: _model.ddwProcedimentoTipoValue,
+                                                                                      unidade: _model.ddwProcedimentoUnidadeValue,
+                                                                                      crime: _model.ddwProcedimentoCrimeValue,
+                                                                                      data: dateTimeFormat(
+                                                                                        "yMd",
+                                                                                        _model.dataProcedimento,
+                                                                                        locale: FFLocalizations.of(context).languageCode,
+                                                                                      ),
+                                                                                    ));
+                                                                                    safeSetState(() {});
+                                                                                  } else {
+                                                                                    await showDialog(
+                                                                                      context: context,
+                                                                                      builder: (dialogContext) {
+                                                                                        return Dialog(
+                                                                                          elevation: 0,
+                                                                                          insetPadding: EdgeInsets.zero,
+                                                                                          backgroundColor: Colors.transparent,
+                                                                                          alignment: AlignmentDirectional(0.0, 0.0).resolve(Directionality.of(context)),
+                                                                                          child: Container(
+                                                                                            height: 100.0,
+                                                                                            width: 300.0,
+                                                                                            child: Toast03Widget(
+                                                                                              texto: FFLocalizations.of(context).getText(
+                                                                                                '7iw2izo4' /* Procedure Number not provided ... */,
+                                                                                              ),
+                                                                                              titulo: 'Atenção',
+                                                                                            ),
+                                                                                          ),
+                                                                                        );
+                                                                                      },
+                                                                                    );
+                                                                                  }
+                                                                                },
+                                                                                text: FFLocalizations.of(context).getText(
+                                                                                  '8pxnhql5' /* To add */,
+                                                                                ),
+                                                                                icon: Icon(
+                                                                                  Icons.add_rounded,
+                                                                                  size: 24.0,
+                                                                                ),
+                                                                                options: FFButtonOptions(
+                                                                                  height: 40.0,
+                                                                                  padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                                                                                  iconPadding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                                                                                  color: FlutterFlowTheme.of(context).primary,
+                                                                                  textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                                                                                        fontFamily: FlutterFlowTheme.of(context).titleSmallFamily,
+                                                                                        color: Colors.white,
+                                                                                        letterSpacing: 0.0,
+                                                                                        useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).titleSmallFamily),
+                                                                                      ),
+                                                                                  elevation: 0.0,
+                                                                                  borderRadius: BorderRadius.circular(12.0),
+                                                                                ),
                                                                               ),
                                                                             ),
                                                                           ].divide(SizedBox(width: 10.0)),
@@ -5905,7 +6151,11 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                         16.0)),
                                                               ),
                                                             ),
-                                                            Padding(
+                                                          ),
+                                                          KeepAliveWidgetWrapper(
+                                                            builder:
+                                                                (context) =>
+                                                                    Padding(
                                                               padding:
                                                                   EdgeInsetsDirectional
                                                                       .fromSTEB(
@@ -5923,7 +6173,7 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                         .formKey3,
                                                                     autovalidateMode:
                                                                         AutovalidateMode
-                                                                            .disabled,
+                                                                            .always,
                                                                     child:
                                                                         Padding(
                                                                       padding: EdgeInsetsDirectional.fromSTEB(
@@ -6320,38 +6570,64 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                                   borderRadius: BorderRadius.circular(12.0),
                                                                                 ),
                                                                               ),
-                                                                              FFButtonWidget(
-                                                                                onPressed: () async {
-                                                                                  logFirebaseEvent('MODAL_MEMBROS_ADD_COMP_TO_ADD_BTN_ON_TAP');
-                                                                                  _model.addToMembrosProcessos(DataTypesProcessosStruct(
-                                                                                    acaoPenalNo: _model.txtProcessoNoAcaoPenalTextController.text,
-                                                                                    vara: _model.ddwProcessoVaraValue,
-                                                                                    situacaoJuridica: _model.ddwProcessoSituacaoJuridicaValue,
-                                                                                    regime: _model.ddwProcessoRegimeValue,
-                                                                                    situacaoReu: _model.ddwProcessoSituacaoReuValue,
-                                                                                  ));
-                                                                                  safeSetState(() {});
-                                                                                },
-                                                                                text: FFLocalizations.of(context).getText(
-                                                                                  'vm7t0n6u' /* To add */,
-                                                                                ),
-                                                                                icon: Icon(
-                                                                                  Icons.add_rounded,
-                                                                                  size: 24.0,
-                                                                                ),
-                                                                                options: FFButtonOptions(
-                                                                                  height: 40.0,
-                                                                                  padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
-                                                                                  iconPadding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                                                                                  color: FlutterFlowTheme.of(context).primary,
-                                                                                  textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-                                                                                        fontFamily: FlutterFlowTheme.of(context).titleSmallFamily,
-                                                                                        color: Colors.white,
-                                                                                        letterSpacing: 0.0,
-                                                                                        useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).titleSmallFamily),
-                                                                                      ),
-                                                                                  elevation: 0.0,
-                                                                                  borderRadius: BorderRadius.circular(12.0),
+                                                                              Builder(
+                                                                                builder: (context) => FFButtonWidget(
+                                                                                  onPressed: () async {
+                                                                                    logFirebaseEvent('MODAL_MEMBROS_ADD_COMP_TO_ADD_BTN_ON_TAP');
+                                                                                    if (_model.txtProcedimentoNoTextController.text != null && _model.txtProcedimentoNoTextController.text != '') {
+                                                                                      _model.addToMembrosProcessos(DataTypesProcessosStruct(
+                                                                                        acaoPenalNo: _model.txtProcessoNoAcaoPenalTextController.text,
+                                                                                        vara: _model.ddwProcessoVaraValue,
+                                                                                        situacaoJuridica: _model.ddwProcessoSituacaoJuridicaValue,
+                                                                                        regime: _model.ddwProcessoRegimeValue,
+                                                                                        situacaoReu: _model.ddwProcessoSituacaoReuValue,
+                                                                                      ));
+                                                                                      safeSetState(() {});
+                                                                                    } else {
+                                                                                      await showDialog(
+                                                                                        context: context,
+                                                                                        builder: (dialogContext) {
+                                                                                          return Dialog(
+                                                                                            elevation: 0,
+                                                                                            insetPadding: EdgeInsets.zero,
+                                                                                            backgroundColor: Colors.transparent,
+                                                                                            alignment: AlignmentDirectional(0.0, 0.0).resolve(Directionality.of(context)),
+                                                                                            child: Container(
+                                                                                              height: 100.0,
+                                                                                              width: 300.0,
+                                                                                              child: Toast03Widget(
+                                                                                                texto: FFLocalizations.of(context).getText(
+                                                                                                  '1a5jlejb' /* Process Number not provided !!... */,
+                                                                                                ),
+                                                                                                titulo: 'Atenção',
+                                                                                              ),
+                                                                                            ),
+                                                                                          );
+                                                                                        },
+                                                                                      );
+                                                                                    }
+                                                                                  },
+                                                                                  text: FFLocalizations.of(context).getText(
+                                                                                    'vm7t0n6u' /* To add */,
+                                                                                  ),
+                                                                                  icon: Icon(
+                                                                                    Icons.add_rounded,
+                                                                                    size: 24.0,
+                                                                                  ),
+                                                                                  options: FFButtonOptions(
+                                                                                    height: 40.0,
+                                                                                    padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                                                                                    iconPadding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                                                                                    color: FlutterFlowTheme.of(context).primary,
+                                                                                    textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                                                                                          fontFamily: FlutterFlowTheme.of(context).titleSmallFamily,
+                                                                                          color: Colors.white,
+                                                                                          letterSpacing: 0.0,
+                                                                                          useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).titleSmallFamily),
+                                                                                        ),
+                                                                                    elevation: 0.0,
+                                                                                    borderRadius: BorderRadius.circular(12.0),
+                                                                                  ),
                                                                                 ),
                                                                               ),
                                                                             ].divide(SizedBox(width: 10.0)),
@@ -6725,7 +7001,11 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                 ],
                                                               ),
                                                             ),
-                                                            Padding(
+                                                          ),
+                                                          KeepAliveWidgetWrapper(
+                                                            builder:
+                                                                (context) =>
+                                                                    Padding(
                                                               padding:
                                                                   EdgeInsetsDirectional
                                                                       .fromSTEB(
@@ -6771,7 +7051,7 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                         .formKey7,
                                                                     autovalidateMode:
                                                                         AutovalidateMode
-                                                                            .disabled,
+                                                                            .always,
                                                                     child:
                                                                         Column(
                                                                       mainAxisSize:
@@ -6990,7 +7270,11 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                         16.0)),
                                                               ),
                                                             ),
-                                                            Padding(
+                                                          ),
+                                                          KeepAliveWidgetWrapper(
+                                                            builder:
+                                                                (context) =>
+                                                                    Padding(
                                                               padding:
                                                                   EdgeInsetsDirectional
                                                                       .fromSTEB(
@@ -7014,7 +7298,7 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                         .formKey5,
                                                                     autovalidateMode:
                                                                         AutovalidateMode
-                                                                            .disabled,
+                                                                            .always,
                                                                     child: Row(
                                                                       mainAxisSize:
                                                                           MainAxisSize
@@ -7216,12 +7500,16 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                         16.0)),
                                                               ),
                                                             ),
-                                                            Form(
+                                                          ),
+                                                          KeepAliveWidgetWrapper(
+                                                            builder:
+                                                                (context) =>
+                                                                    Form(
                                                               key: _model
                                                                   .formKey6,
                                                               autovalidateMode:
                                                                   AutovalidateMode
-                                                                      .disabled,
+                                                                      .always,
                                                               child: Padding(
                                                                 padding: EdgeInsetsDirectional
                                                                     .fromSTEB(
@@ -7532,11 +7820,11 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                 ),
                                                               ),
                                                             ),
-                                                          ],
-                                                        ),
+                                                          ),
+                                                        ],
                                                       ),
-                                                    ],
-                                                  ),
+                                                    ),
+                                                  ],
                                                 ),
                                               ),
                                             ),
@@ -8132,6 +8420,9 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                           ? _model.membrosFotos
                                                           : _model
                                                               .membrosFotosSemUrl,
+                                                      'dt_nascimento': _model
+                                                          .datePicked2
+                                                          ?.toString(),
                                                     });
                                                     _shouldSetState = true;
                                                     await Future.wait([
@@ -8195,33 +8486,7 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                             if ((_model
                                                                     .apiResultProcedimentos
                                                                     ?.succeeded ??
-                                                                true)) {
-                                                              ScaffoldMessenger
-                                                                      .of(context)
-                                                                  .clearSnackBars();
-                                                              ScaffoldMessenger
-                                                                      .of(context)
-                                                                  .showSnackBar(
-                                                                SnackBar(
-                                                                  content: Text(
-                                                                    'Dados dos procedimentos salvos !',
-                                                                    style:
-                                                                        TextStyle(
-                                                                      color: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .primaryText,
-                                                                    ),
-                                                                  ),
-                                                                  duration: Duration(
-                                                                      milliseconds:
-                                                                          1000),
-                                                                  backgroundColor:
-                                                                      FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .success,
-                                                                ),
-                                                              );
-                                                            }
+                                                                true)) {}
                                                           }
                                                         } else {
                                                           if (_shouldSetState)
@@ -8289,33 +8554,7 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                             if ((_model
                                                                     .apiResultProcessos
                                                                     ?.succeeded ??
-                                                                true)) {
-                                                              ScaffoldMessenger
-                                                                      .of(context)
-                                                                  .clearSnackBars();
-                                                              ScaffoldMessenger
-                                                                      .of(context)
-                                                                  .showSnackBar(
-                                                                SnackBar(
-                                                                  content: Text(
-                                                                    'Dados dos processos salvos !',
-                                                                    style:
-                                                                        TextStyle(
-                                                                      color: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .primaryText,
-                                                                    ),
-                                                                  ),
-                                                                  duration: Duration(
-                                                                      milliseconds:
-                                                                          4000),
-                                                                  backgroundColor:
-                                                                      FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .success,
-                                                                ),
-                                                              );
-                                                            }
+                                                                true)) {}
                                                           }
                                                         } else {
                                                           if (_shouldSetState)

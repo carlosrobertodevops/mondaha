@@ -177,6 +177,8 @@ class ModalMembrosAddModel extends FlutterFlowModel<ModalMembrosAddWidget> {
   void updateMembrosFotosSemUrlAtIndex(int index, Function(String) updateFn) =>
       membrosFotosSemUrl[index] = updateFn(membrosFotosSemUrl[index]);
 
+  String? dataNascimento;
+
   ///  State fields for stateful widgets in this component.
 
   final formKey2 = GlobalKey<FormState>();
@@ -252,6 +254,13 @@ class ModalMembrosAddModel extends FlutterFlowModel<ModalMembrosAddWidget> {
   // State field(s) for ddw_estado_civil widget.
   String? ddwEstadoCivilValue;
   FormFieldController<String>? ddwEstadoCivilValueController;
+  // State field(s) for txt_data_nascimento widget.
+  FocusNode? txtDataNascimentoFocusNode;
+  TextEditingController? txtDataNascimentoTextController;
+  final txtDataNascimentoMask = MaskTextInputFormatter(mask: '##/##/####');
+  String? Function(BuildContext, String?)?
+      txtDataNascimentoTextControllerValidator;
+  DateTime? datePicked1;
   // State field(s) for txt_no_identidade widget.
   FocusNode? txtNoIdentidadeFocusNode;
   TextEditingController? txtNoIdentidadeTextController;
@@ -377,7 +386,7 @@ class ModalMembrosAddModel extends FlutterFlowModel<ModalMembrosAddWidget> {
   final txtProcedimentoDataMask = MaskTextInputFormatter(mask: '##/##/####');
   String? Function(BuildContext, String?)?
       txtProcedimentoDataTextControllerValidator;
-  DateTime? datePicked;
+  DateTime? datePicked2;
   // State field(s) for txt_processo_no_acao_penal widget.
   FocusNode? txtProcessoNoAcaoPenalFocusNode;
   TextEditingController? txtProcessoNoAcaoPenalTextController;
@@ -446,6 +455,9 @@ class ModalMembrosAddModel extends FlutterFlowModel<ModalMembrosAddWidget> {
 
     txtMembroNaturalidadeFocusNode?.dispose();
     txtMembroNaturalidadeTextController?.dispose();
+
+    txtDataNascimentoFocusNode?.dispose();
+    txtDataNascimentoTextController?.dispose();
 
     txtNoIdentidadeFocusNode?.dispose();
     txtNoIdentidadeTextController?.dispose();

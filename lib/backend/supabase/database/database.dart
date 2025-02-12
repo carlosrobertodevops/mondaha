@@ -5,6 +5,7 @@ export '../supabase.dart';
 export 'row.dart';
 export 'table.dart';
 
+export 'tables/membros_view_pdf.dart';
 export 'tables/count_usuarios_view.dart';
 export 'tables/estados.dart';
 export 'tables/grupos_membros.dart';

@@ -232,6 +232,49 @@ class ProcedimentosAddCall {
   }
 }
 
+class ProcedimentosUpdCall {
+  static Future<ApiCallResponse> call({
+    int? membroId,
+    String? procedimentoNo = '',
+    String? unidade = '',
+    String? procedimentoTipo = '',
+    String? crime = '',
+    String? data = '',
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "membro_id": "${membroId}",
+  "procedimento_no": "${procedimentoNo}",
+  "unidade": "${unidade}",
+  "procedimento_tipo": "${procedimentoTipo}",
+  "crime": "${crime}",
+  "data": "${data}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'ProcedimentosUpd',
+      apiUrl:
+          'https://buzlazhtcndpegsnijcw.supabase.co/rest/v1/procedimentos?membro_id=eq.${membroId}',
+      callType: ApiCallType.PUT,
+      headers: {
+        'apikey':
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ1emxhemh0Y25kcGVnc25pamN3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQ2OTI2OTksImV4cCI6MjA1MDI2ODY5OX0.myFxYtm5Q3WF1WlV0AJzPoRLKK8W0et8MnKUk4e-nPU',
+        'Authorization':
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ1emxhemh0Y25kcGVnc25pamN3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQ2OTI2OTksImV4cCI6MjA1MDI2ODY5OX0.myFxYtm5Q3WF1WlV0AJzPoRLKK8W0et8MnKUk4e-nPU',
+        'Content-Type': 'application/json',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
 class ProcedimentosGetCall {
   static Future<ApiCallResponse> call({
     int? membroId,
@@ -256,6 +299,37 @@ class ProcedimentosGetCall {
       alwaysAllowBody: false,
     );
   }
+
+  static int? procedimentoId(dynamic response) => castToType<int>(getJsonField(
+        response,
+        r'''$[:].procedimento_id''',
+      ));
+  static String? procedimentoNo(dynamic response) =>
+      castToType<String>(getJsonField(
+        response,
+        r'''$[:].procedimento_no''',
+      ));
+  static String? unidade(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$[:].unidade''',
+      ));
+  static String? procedimentoTipo(dynamic response) =>
+      castToType<String>(getJsonField(
+        response,
+        r'''$[:].procedimento_tipo''',
+      ));
+  static String? crime(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$[:].crime''',
+      ));
+  static int? membroId(dynamic response) => castToType<int>(getJsonField(
+        response,
+        r'''$[:].membro_id''',
+      ));
+  static String? data(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$[:].data''',
+      ));
 }
 
 class ProcessosAddCall {
@@ -272,7 +346,7 @@ class ProcessosAddCall {
   "membro_id": "${membroId}",
   "acao_penal_no": "${acaoPenalNo}",
   "vara": "${vara}",
-  "situaco_juridica": "${situacaoJuridica}",
+  "situacao_juridica": "${situacaoJuridica}",
   "regime": "${regime}",
   "situacao_reu": "${situacaoReu}"
 }''';
@@ -376,6 +450,38 @@ class ProcessosGetCall {
       alwaysAllowBody: false,
     );
   }
+
+  static int? processoId(dynamic response) => castToType<int>(getJsonField(
+        response,
+        r'''$[:].processo_id''',
+      ));
+  static int? membroId(dynamic response) => castToType<int>(getJsonField(
+        response,
+        r'''$[:].membro_id''',
+      ));
+  static String? acaoPenalNo(dynamic response) =>
+      castToType<String>(getJsonField(
+        response,
+        r'''$[:].acao_penal_no''',
+      ));
+  static String? vara(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$[:].vara''',
+      ));
+  static String? situacaoJuridica(dynamic response) =>
+      castToType<String>(getJsonField(
+        response,
+        r'''$[:].situacao_juridica''',
+      ));
+  static String? regime(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$[:].regime''',
+      ));
+  static String? situacaoReu(dynamic response) =>
+      castToType<String>(getJsonField(
+        response,
+        r'''$[:].situacao_reu''',
+      ));
 }
 
 class CountUsuariosViewCall {
@@ -696,6 +802,24 @@ class SeachMembrosCall {
           .map((x) => castToType<String>(x))
           .withoutNulls
           .toList();
+}
+
+class MembrosGerarPdfCall {
+  static Future<ApiCallResponse> call() async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'membrosGerarPdf',
+      apiUrl: 'https://r0cpc3.buildship.run/membros_gerar_pdf',
+      callType: ApiCallType.GET,
+      headers: {},
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
 }
 
 class ApiPagingParams {
