@@ -3955,20 +3955,20 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                                             ),
                                                                                           );
                                                                                         }
-                                                                                        List<FaccoesRow> ddwMembroFaccaoFaccoesRowList = snapshot.data!;
+                                                                                        List<FaccoesRow> ddwFaccaoFaccoesRowList = snapshot.data!;
 
                                                                                         return FlutterFlowDropDown<int>(
-                                                                                          controller: _model.ddwMembroFaccaoValueController ??= FormFieldController<int>(
-                                                                                            _model.ddwMembroFaccaoValue ??= 0,
+                                                                                          controller: _model.ddwFaccaoValueController ??= FormFieldController<int>(
+                                                                                            _model.ddwFaccaoValue ??= 0,
                                                                                           ),
-                                                                                          options: List<int>.from(ddwMembroFaccaoFaccoesRowList.map((e) => e.faccaoId).toList()),
-                                                                                          optionLabels: ddwMembroFaccaoFaccoesRowList
+                                                                                          options: List<int>.from(ddwFaccaoFaccoesRowList.map((e) => e.faccaoId).toList()),
+                                                                                          optionLabels: ddwFaccaoFaccoesRowList
                                                                                               .map((e) => valueOrDefault<String>(
                                                                                                     e.nome,
                                                                                                     'nome_faccao',
                                                                                                   ))
                                                                                               .toList(),
-                                                                                          onChanged: (val) => safeSetState(() => _model.ddwMembroFaccaoValue = val),
+                                                                                          onChanged: (val) => safeSetState(() => _model.ddwFaccaoValue = val),
                                                                                           height: 60.0,
                                                                                           searchHintTextStyle: FlutterFlowTheme.of(context).labelMedium.override(
                                                                                                 fontFamily: FlutterFlowTheme.of(context).labelMediumFamily,
@@ -4427,15 +4427,15 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                                             ),
                                                                                           );
                                                                                         }
-                                                                                        List<CargosRow> ddwMembroFaccaoCargoAtualCargosRowList = snapshot.data!;
+                                                                                        List<CargosRow> ddwCargoAtualCargosRowList = snapshot.data!;
 
                                                                                         return FlutterFlowDropDown<int>(
-                                                                                          controller: _model.ddwMembroFaccaoCargoAtualValueController ??= FormFieldController<int>(
-                                                                                            _model.ddwMembroFaccaoCargoAtualValue ??= 0,
+                                                                                          controller: _model.ddwCargoAtualValueController ??= FormFieldController<int>(
+                                                                                            _model.ddwCargoAtualValue ??= 0,
                                                                                           ),
-                                                                                          options: List<int>.from(ddwMembroFaccaoCargoAtualCargosRowList.map((e) => e.cargoId).toList()),
-                                                                                          optionLabels: ddwMembroFaccaoCargoAtualCargosRowList.map((e) => e.nome).withoutNulls.toList(),
-                                                                                          onChanged: (val) => safeSetState(() => _model.ddwMembroFaccaoCargoAtualValue = val),
+                                                                                          options: List<int>.from(ddwCargoAtualCargosRowList.map((e) => e.cargoId).toList()),
+                                                                                          optionLabels: ddwCargoAtualCargosRowList.map((e) => e.nome).withoutNulls.toList(),
+                                                                                          onChanged: (val) => safeSetState(() => _model.ddwCargoAtualValue = val),
                                                                                           height: 60.0,
                                                                                           searchHintTextStyle: FlutterFlowTheme.of(context).labelMedium.override(
                                                                                                 fontFamily: FlutterFlowTheme.of(context).labelMediumFamily,
@@ -4497,15 +4497,15 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                                             ),
                                                                                           );
                                                                                         }
-                                                                                        List<CargosRow> ddwMembroFaccaoCargoAnteriorCargosRowList = snapshot.data!;
+                                                                                        List<CargosRow> ddwCargoAnteriorCargosRowList = snapshot.data!;
 
                                                                                         return FlutterFlowDropDown<int>(
-                                                                                          controller: _model.ddwMembroFaccaoCargoAnteriorValueController ??= FormFieldController<int>(
-                                                                                            _model.ddwMembroFaccaoCargoAnteriorValue ??= 0,
+                                                                                          controller: _model.ddwCargoAnteriorValueController ??= FormFieldController<int>(
+                                                                                            _model.ddwCargoAnteriorValue ??= 0,
                                                                                           ),
-                                                                                          options: List<int>.from(ddwMembroFaccaoCargoAnteriorCargosRowList.map((e) => e.cargoId).toList()),
-                                                                                          optionLabels: ddwMembroFaccaoCargoAnteriorCargosRowList.map((e) => e.nome).withoutNulls.toList(),
-                                                                                          onChanged: (val) => safeSetState(() => _model.ddwMembroFaccaoCargoAnteriorValue = val),
+                                                                                          options: List<int>.from(ddwCargoAnteriorCargosRowList.map((e) => e.cargoId).toList()),
+                                                                                          optionLabels: ddwCargoAnteriorCargosRowList.map((e) => e.nome).withoutNulls.toList(),
+                                                                                          onChanged: (val) => safeSetState(() => _model.ddwCargoAnteriorValue = val),
                                                                                           height: 60.0,
                                                                                           searchHintTextStyle: FlutterFlowTheme.of(context).labelMedium.override(
                                                                                                 fontFamily: FlutterFlowTheme.of(context).labelMediumFamily,
@@ -4572,15 +4572,15 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                                             ),
                                                                                           );
                                                                                         }
-                                                                                        List<FuncoesRow> ddwFaccaoFuncaoAtualFuncoesRowList = snapshot.data!;
+                                                                                        List<FuncoesRow> ddwFuncaoAtualFuncoesRowList = snapshot.data!;
 
                                                                                         return FlutterFlowDropDown<int>(
-                                                                                          controller: _model.ddwFaccaoFuncaoAtualValueController ??= FormFieldController<int>(
-                                                                                            _model.ddwFaccaoFuncaoAtualValue ??= 0,
+                                                                                          controller: _model.ddwFuncaoAtualValueController ??= FormFieldController<int>(
+                                                                                            _model.ddwFuncaoAtualValue ??= 0,
                                                                                           ),
-                                                                                          options: List<int>.from(ddwFaccaoFuncaoAtualFuncoesRowList.map((e) => e.funcaoId).toList()),
-                                                                                          optionLabels: ddwFaccaoFuncaoAtualFuncoesRowList.map((e) => e.nome).withoutNulls.toList(),
-                                                                                          onChanged: (val) => safeSetState(() => _model.ddwFaccaoFuncaoAtualValue = val),
+                                                                                          options: List<int>.from(ddwFuncaoAtualFuncoesRowList.map((e) => e.funcaoId).toList()),
+                                                                                          optionLabels: ddwFuncaoAtualFuncoesRowList.map((e) => e.nome).withoutNulls.toList(),
+                                                                                          onChanged: (val) => safeSetState(() => _model.ddwFuncaoAtualValue = val),
                                                                                           height: 60.0,
                                                                                           searchHintTextStyle: FlutterFlowTheme.of(context).labelMedium.override(
                                                                                                 fontFamily: FlutterFlowTheme.of(context).labelMediumFamily,
@@ -4642,15 +4642,15 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                                             ),
                                                                                           );
                                                                                         }
-                                                                                        List<FuncoesRow> ddwFaccaoFuncaoAnteriorFuncoesRowList = snapshot.data!;
+                                                                                        List<FuncoesRow> ddwFuncaoAnteriorFuncoesRowList = snapshot.data!;
 
                                                                                         return FlutterFlowDropDown<int>(
-                                                                                          controller: _model.ddwFaccaoFuncaoAnteriorValueController ??= FormFieldController<int>(
-                                                                                            _model.ddwFaccaoFuncaoAnteriorValue ??= 0,
+                                                                                          controller: _model.ddwFuncaoAnteriorValueController ??= FormFieldController<int>(
+                                                                                            _model.ddwFuncaoAnteriorValue ??= 0,
                                                                                           ),
-                                                                                          options: List<int>.from(ddwFaccaoFuncaoAnteriorFuncoesRowList.map((e) => e.funcaoId).toList()),
-                                                                                          optionLabels: ddwFaccaoFuncaoAnteriorFuncoesRowList.map((e) => e.nome).withoutNulls.toList(),
-                                                                                          onChanged: (val) => safeSetState(() => _model.ddwFaccaoFuncaoAnteriorValue = val),
+                                                                                          options: List<int>.from(ddwFuncaoAnteriorFuncoesRowList.map((e) => e.funcaoId).toList()),
+                                                                                          optionLabels: ddwFuncaoAnteriorFuncoesRowList.map((e) => e.nome).withoutNulls.toList(),
+                                                                                          onChanged: (val) => safeSetState(() => _model.ddwFuncaoAnteriorValue = val),
                                                                                           height: 60.0,
                                                                                           searchHintTextStyle: FlutterFlowTheme.of(context).labelMedium.override(
                                                                                                 fontFamily: FlutterFlowTheme.of(context).labelMediumFamily,
@@ -5761,6 +5761,7 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                                 ),
                                                                                 icon: Icon(
                                                                                   Icons.add_rounded,
+                                                                                  color: FlutterFlowTheme.of(context).info,
                                                                                   size: 24.0,
                                                                                 ),
                                                                                 options: FFButtonOptions(
@@ -8216,6 +8217,9 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                 ),
                                                 icon: Icon(
                                                   Icons.cancel_outlined,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primary,
                                                   size: 24.0,
                                                 ),
                                                 options: FFButtonOptions(
@@ -8347,8 +8351,8 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                       'historico': _model
                                                           .txtHistoricoTextController
                                                           .text,
-                                                      'faccao_id': _model
-                                                          .ddwMembroFaccaoValue,
+                                                      'faccao_id':
+                                                          _model.ddwFaccaoValue,
                                                       'batismo': _model
                                                           .txtFaccaoBastismoTextController
                                                           .text,
@@ -8362,11 +8366,11 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                           .txtMembroFaccaoSenhaTextController
                                                           .text,
                                                       'cargo_id': _model
-                                                          .ddwMembroFaccaoCargoAtualValue,
+                                                          .ddwCargoAtualValue,
                                                       'funcao_id': _model
-                                                          .ddwFaccaoFuncaoAtualValue,
+                                                          .ddwFuncaoAtualValue,
                                                       'cargo_ant_id': _model
-                                                          .ddwMembroFaccaoCargoAnteriorValue,
+                                                          .ddwCargoAnteriorValue,
                                                       'faccao_inimiga': _model
                                                           .ddwFaccaoInimigaValue,
                                                       'faccao_aliada': _model
@@ -8374,7 +8378,7 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                       'nacionalidade': _model
                                                           .rbNacionalidadeValue,
                                                       'funcao_ant_id': _model
-                                                          .ddwFaccaoFuncaoAnteriorValue,
+                                                          .ddwFuncaoAnteriorValue,
                                                       'faccao_integrou': _model
                                                           .ddwFaccaoIntegrouValue,
                                                       'municipio_id': _model
@@ -8433,7 +8437,6 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                             1) {
                                                           _model.membrosProcedimentosCount =
                                                               -1;
-                                                          safeSetState(() {});
                                                           while (_model
                                                                   .membrosProcedimentosCount! <=
                                                               _model
@@ -8442,7 +8445,6 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                             _model.membrosProcedimentosCount =
                                                                 _model.membrosProcedimentosCount! +
                                                                     1;
-                                                            safeSetState(() {});
                                                             _model.apiResultProcedimentos =
                                                                 await ProcedimentosAddCall
                                                                     .call(
@@ -8483,10 +8485,6 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
 
                                                             _shouldSetState =
                                                                 true;
-                                                            if ((_model
-                                                                    .apiResultProcedimentos
-                                                                    ?.succeeded ??
-                                                                true)) {}
                                                           }
                                                         } else {
                                                           if (_shouldSetState)
@@ -8501,7 +8499,6 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                             1) {
                                                           _model.membrosProcessosCount =
                                                               -1;
-                                                          safeSetState(() {});
                                                           while (_model
                                                                   .membrosProcessosCount! <=
                                                               _model
@@ -8510,7 +8507,6 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                             _model.membrosProcessosCount =
                                                                 _model.membrosProcessosCount! +
                                                                     1;
-                                                            safeSetState(() {});
                                                             _model.apiResultProcessos =
                                                                 await ProcessosAddCall
                                                                     .call(
@@ -8551,10 +8547,6 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
 
                                                             _shouldSetState =
                                                                 true;
-                                                            if ((_model
-                                                                    .apiResultProcessos
-                                                                    ?.succeeded ??
-                                                                true)) {}
                                                           }
                                                         } else {
                                                           if (_shouldSetState)
@@ -8603,6 +8595,9 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                 ),
                                                 icon: Icon(
                                                   Icons.check_circle,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .info,
                                                   size: 24.0,
                                                 ),
                                                 options: FFButtonOptions(
@@ -8658,7 +8653,7 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                   hoverTextColor:
                                                       FlutterFlowTheme.of(
                                                               context)
-                                                          .primaryText,
+                                                          .info,
                                                   hoverElevation: 0.0,
                                                 ),
                                               ),

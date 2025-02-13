@@ -1621,7 +1621,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '5kbgpt8h': {
       'en': 'Nickname was not provided !!!',
-      'pt': 'Endereço não foi informado !!!',
+      'pt': 'Algum(ns) dados estão errados !!!',
     },
     't455vcot': {
       'en':
@@ -1967,7 +1967,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '9jkt3qf8': {
       'en': 'Address was not provided !!!',
-      'pt': 'Endereço não foi informado !!!',
+      'pt': 'Algum(ns) dados estão errados !!!',
     },
     'd56blqb1': {
       'en':
@@ -2091,7 +2091,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'jbuhl8wx': {
       'en': 'Location was not informed !!!',
-      'pt': 'Endereço não foi informado !!!',
+      'pt': 'Algum(ns) dados estão errados !!!',
     },
     '6mn9o1ts': {
       'en':
@@ -3183,7 +3183,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'dzqay8zm': {
       'en': 'Nickname was not provided !!!',
-      'pt': 'Endereço não foi informado !!!',
+      'pt': 'Algum(ns) dados estão errados !!!',
     },
     'm2152j19': {
       'en':
@@ -3529,7 +3529,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '6kl8rill': {
       'en': 'Address was not provided !!!',
-      'pt': 'Endereço não foi informado !!!',
+      'pt': 'Algum(ns) dados estão errados !!!',
     },
     'rtp4h0ou': {
       'en':
@@ -3604,16 +3604,16 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'pt': 'Senha',
     },
     'x84yqtw6': {
-      'en': 'Cargo atual',
-      'pt': 'Carga atual',
+      'en': 'Current position',
+      'pt': 'Cargo atual',
     },
     'tk7h51ga': {
       'en': 'Marital status',
       'pt': 'Estado civil',
     },
     'pkvjs31h': {
-      'en': 'Cargo anterior',
-      'pt': 'Carga anterior',
+      'en': 'Previous position',
+      'pt': 'Cargo anterior',
     },
     'niusw42e': {
       'en': 'Marital status',
@@ -3645,7 +3645,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'bae2wl2o': {
       'en': 'Location was not informed !!!',
-      'pt': 'Endereço não foi informado !!!',
+      'pt': 'Algum(ns) dados estão errados !!!',
     },
     'ky34u2o1': {
       'en':
@@ -3837,7 +3837,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '5hm1igqp': {
       'en': 'Procedure Number not provided !!!!',
-      'pt': 'Endereço não foi informado !!!',
+      'pt': 'Algum(ns) dados estão errados !!!',
     },
     '74qz68yo': {
       'en': 'Field is required',
@@ -3991,7 +3991,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '7mzxc79j': {
       'en': 'Procedure Number not provided !!!!',
-      'pt': 'Endereço não foi informado !!!',
+      'pt': 'Algum(ns) dados estão errados !!!',
     },
     '9vwnb0wp': {
       'en': 'Criminal action number',
@@ -4132,6 +4132,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'azk0tcxo': {
       'en': 'Save Member',
       'pt': 'Salvar Membro',
+    },
+    'p4gjje04': {
+      'en': 'Some data is wrong!!!',
+      'pt': 'Algum(ns) dados estão errados !!!',
     },
   },
   // user_details_membro_view

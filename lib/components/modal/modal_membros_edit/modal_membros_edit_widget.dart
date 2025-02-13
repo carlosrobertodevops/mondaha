@@ -104,6 +104,7 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
           );
         }),
         Future(() async {
+          // Procedimentos
           _model.apiOutputProcedimentosGet = await ProcedimentosGetCall.call(
             membroId: widget!.membrosRow?.membroId,
           );
@@ -118,10 +119,11 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                     .withoutNulls
                     .toList()
                     .cast<DataTypesProcedimentosStruct>();
-            _model.updatePage(() {});
+            safeSetState(() {});
           }
         }),
         Future(() async {
+          // Processos
           _model.apiOutputProcessosGet = await ProcessosGetCall.call(
             membroId: widget!.membrosRow?.membroId,
           );
@@ -136,13 +138,69 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                     .withoutNulls
                     .toList()
                     .cast<DataTypesProcessosStruct>();
-            _model.updatePage(() {});
+            safeSetState(() {});
           }
         }),
+        Future(() async {
+          _model.ddwEstado = widget!.membrosRow?.estadoId;
+          _model.ddwMunicipios = widget!.membrosRow?.municipioId;
+          _model.ddwFaccao = widget!.membrosRow?.faccaoId;
+          _model.ddwCargoAtual = widget!.membrosRow?.cargoId;
+          _model.ddwCargoAnterior = widget!.membrosRow?.cargoAntId;
+          _model.ddwFuncaoAtual = widget!.membrosRow?.funcaoId;
+          _model.ddwFuncaoAnterior = widget!.membrosRow?.funcaoAntId;
+          _model.ddwFaccaoIntegrou = widget!.membrosRow?.faccaoIntegrou;
+          _model.ddwFaccaoAliada = widget!.membrosRow?.faccaoAliada;
+          _model.ddwFaccaoInimiga = widget!.membrosRow?.faccaoInimiga;
+          safeSetState(() {});
+          safeSetState(() {
+            _model.ddwEstadoValueController?.value =
+                widget!.membrosRow!.estadoId!;
+          });
+          // ddw_municipio
+          safeSetState(() {
+            _model.ddwMunicipioValueController?.value =
+                widget!.membrosRow!.municipioId!;
+          });
+          // ddw_faccao
+          safeSetState(() {
+            _model.ddwFaccaoValueController?.value =
+                widget!.membrosRow!.faccaoId!;
+          });
+          safeSetState(() {
+            _model.ddwCargoAtualValueController?.value =
+                widget!.membrosRow!.cargoId!;
+          });
+          safeSetState(() {
+            _model.ddwCargoAnteriorValueController?.value =
+                widget!.membrosRow!.cargoAntId!;
+          });
+        }),
+        Future(() async {
+          _model.membroAlerta = widget!.membrosRow!.alerta!;
+          safeSetState(() {});
+          safeSetState(() {
+            _model.ddwFuncaoAtualValueController?.value =
+                widget!.membrosRow!.funcaoId!;
+          });
+          safeSetState(() {
+            _model.ddwFuncaoAnteriorValueController?.value =
+                widget!.membrosRow!.funcaoAntId!;
+          });
+          safeSetState(() {
+            _model.ddwFaccaoIntegrouValueController?.value =
+                widget!.membrosRow!.faccaoIntegrou!;
+          });
+          safeSetState(() {
+            _model.ddwFaccaoAliadaValueController?.value =
+                widget!.membrosRow!.faccaoAliada!;
+          });
+          safeSetState(() {
+            _model.ddwFaccaoInimigaValueController?.value =
+                widget!.membrosRow!.faccaoInimiga!;
+          });
+        }),
       ]);
-      safeSetState(() {
-        _model.switchAlertaValue = widget!.membrosRow!.alerta!;
-      });
     });
 
     _model.tabBarController = TabController(
@@ -4212,20 +4270,24 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                             ),
                                                                                           );
                                                                                         }
-                                                                                        List<FaccoesRow> ddwMembroFaccaoFaccoesRowList = snapshot.data!;
+                                                                                        List<FaccoesRow> ddwFaccaoFaccoesRowList = snapshot.data!;
 
                                                                                         return FlutterFlowDropDown<int>(
-                                                                                          controller: _model.ddwMembroFaccaoValueController ??= FormFieldController<int>(
-                                                                                            _model.ddwMembroFaccaoValue ??= widget!.membrosRow?.faccaoId,
+                                                                                          controller: _model.ddwFaccaoValueController ??= FormFieldController<int>(
+                                                                                            _model.ddwFaccaoValue ??= _model.ddwFaccao,
                                                                                           ),
-                                                                                          options: List<int>.from(ddwMembroFaccaoFaccoesRowList.map((e) => e.faccaoId).toList()),
-                                                                                          optionLabels: ddwMembroFaccaoFaccoesRowList
+                                                                                          options: List<int>.from(ddwFaccaoFaccoesRowList.map((e) => e.faccaoId).toList()),
+                                                                                          optionLabels: ddwFaccaoFaccoesRowList
                                                                                               .map((e) => valueOrDefault<String>(
                                                                                                     e.nome,
                                                                                                     'nome_faccao',
                                                                                                   ))
                                                                                               .toList(),
-                                                                                          onChanged: (val) => safeSetState(() => _model.ddwMembroFaccaoValue = val),
+                                                                                          onChanged: (val) async {
+                                                                                            safeSetState(() => _model.ddwFaccaoValue = val);
+                                                                                            logFirebaseEvent('MODAL_MEMBROS_EDIT_ddw_faccao_ON_FORM_WI');
+                                                                                            _model.ddwFaccao = _model.ddwFaccaoValue;
+                                                                                          },
                                                                                           height: 60.0,
                                                                                           searchHintTextStyle: FlutterFlowTheme.of(context).labelMedium.override(
                                                                                                 fontFamily: FlutterFlowTheme.of(context).labelMediumFamily,
@@ -4688,15 +4750,19 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                             ),
                                                                                           );
                                                                                         }
-                                                                                        List<CargosRow> ddwMembroFaccaoCargoAtualCargosRowList = snapshot.data!;
+                                                                                        List<CargosRow> ddwCargoAtualCargosRowList = snapshot.data!;
 
                                                                                         return FlutterFlowDropDown<int>(
-                                                                                          controller: _model.ddwMembroFaccaoCargoAtualValueController ??= FormFieldController<int>(
-                                                                                            _model.ddwMembroFaccaoCargoAtualValue ??= widget!.membrosRow?.cargoId,
+                                                                                          controller: _model.ddwCargoAtualValueController ??= FormFieldController<int>(
+                                                                                            _model.ddwCargoAtualValue ??= _model.ddwCargoAtual,
                                                                                           ),
-                                                                                          options: List<int>.from(ddwMembroFaccaoCargoAtualCargosRowList.map((e) => e.cargoId).toList()),
-                                                                                          optionLabels: ddwMembroFaccaoCargoAtualCargosRowList.map((e) => e.nome).withoutNulls.toList(),
-                                                                                          onChanged: (val) => safeSetState(() => _model.ddwMembroFaccaoCargoAtualValue = val),
+                                                                                          options: List<int>.from(ddwCargoAtualCargosRowList.map((e) => e.cargoId).toList()),
+                                                                                          optionLabels: ddwCargoAtualCargosRowList.map((e) => e.nome).withoutNulls.toList(),
+                                                                                          onChanged: (val) async {
+                                                                                            safeSetState(() => _model.ddwCargoAtualValue = val);
+                                                                                            logFirebaseEvent('MODAL_MEMBROS_EDIT_ddw_cargo_atual_ON_FO');
+                                                                                            _model.ddwCargoAtual = _model.ddwCargoAtualValue;
+                                                                                          },
                                                                                           height: 60.0,
                                                                                           searchHintTextStyle: FlutterFlowTheme.of(context).labelMedium.override(
                                                                                                 fontFamily: FlutterFlowTheme.of(context).labelMediumFamily,
@@ -4714,7 +4780,7 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                                 useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
                                                                                               ),
                                                                                           hintText: FFLocalizations.of(context).getText(
-                                                                                            'x84yqtw6' /* Cargo atual */,
+                                                                                            'x84yqtw6' /* Current position */,
                                                                                           ),
                                                                                           searchHintText: FFLocalizations.of(context).getText(
                                                                                             'tk7h51ga' /* Marital status */,
@@ -4758,15 +4824,19 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                             ),
                                                                                           );
                                                                                         }
-                                                                                        List<CargosRow> ddwMembroFaccaoCargoAnteriorCargosRowList = snapshot.data!;
+                                                                                        List<CargosRow> ddwCargoAnteriorCargosRowList = snapshot.data!;
 
                                                                                         return FlutterFlowDropDown<int>(
-                                                                                          controller: _model.ddwMembroFaccaoCargoAnteriorValueController ??= FormFieldController<int>(
-                                                                                            _model.ddwMembroFaccaoCargoAnteriorValue ??= widget!.membrosRow?.cargoAntId,
+                                                                                          controller: _model.ddwCargoAnteriorValueController ??= FormFieldController<int>(
+                                                                                            _model.ddwCargoAnteriorValue ??= _model.ddwCargoAnterior,
                                                                                           ),
-                                                                                          options: List<int>.from(ddwMembroFaccaoCargoAnteriorCargosRowList.map((e) => e.cargoId).toList()),
-                                                                                          optionLabels: ddwMembroFaccaoCargoAnteriorCargosRowList.map((e) => e.nome).withoutNulls.toList(),
-                                                                                          onChanged: (val) => safeSetState(() => _model.ddwMembroFaccaoCargoAnteriorValue = val),
+                                                                                          options: List<int>.from(ddwCargoAnteriorCargosRowList.map((e) => e.cargoId).toList()),
+                                                                                          optionLabels: ddwCargoAnteriorCargosRowList.map((e) => e.nome).withoutNulls.toList(),
+                                                                                          onChanged: (val) async {
+                                                                                            safeSetState(() => _model.ddwCargoAnteriorValue = val);
+                                                                                            logFirebaseEvent('MODAL_MEMBROS_EDIT_ddw_cargo_anterior_ON');
+                                                                                            _model.ddwCargoAnterior = _model.ddwFuncaoAnteriorValue;
+                                                                                          },
                                                                                           height: 60.0,
                                                                                           searchHintTextStyle: FlutterFlowTheme.of(context).labelMedium.override(
                                                                                                 fontFamily: FlutterFlowTheme.of(context).labelMediumFamily,
@@ -4784,7 +4854,7 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                                 useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
                                                                                               ),
                                                                                           hintText: FFLocalizations.of(context).getText(
-                                                                                            'pkvjs31h' /* Cargo anterior */,
+                                                                                            'pkvjs31h' /* Previous position */,
                                                                                           ),
                                                                                           searchHintText: FFLocalizations.of(context).getText(
                                                                                             'niusw42e' /* Marital status */,
@@ -4833,15 +4903,19 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                             ),
                                                                                           );
                                                                                         }
-                                                                                        List<FuncoesRow> ddwFaccaoFuncaoAtualFuncoesRowList = snapshot.data!;
+                                                                                        List<FuncoesRow> ddwFuncaoAtualFuncoesRowList = snapshot.data!;
 
                                                                                         return FlutterFlowDropDown<int>(
-                                                                                          controller: _model.ddwFaccaoFuncaoAtualValueController ??= FormFieldController<int>(
-                                                                                            _model.ddwFaccaoFuncaoAtualValue ??= widget!.membrosRow?.funcaoId,
+                                                                                          controller: _model.ddwFuncaoAtualValueController ??= FormFieldController<int>(
+                                                                                            _model.ddwFuncaoAtualValue ??= _model.ddwFuncaoAtual,
                                                                                           ),
-                                                                                          options: List<int>.from(ddwFaccaoFuncaoAtualFuncoesRowList.map((e) => e.funcaoId).toList()),
-                                                                                          optionLabels: ddwFaccaoFuncaoAtualFuncoesRowList.map((e) => e.nome).withoutNulls.toList(),
-                                                                                          onChanged: (val) => safeSetState(() => _model.ddwFaccaoFuncaoAtualValue = val),
+                                                                                          options: List<int>.from(ddwFuncaoAtualFuncoesRowList.map((e) => e.funcaoId).toList()),
+                                                                                          optionLabels: ddwFuncaoAtualFuncoesRowList.map((e) => e.nome).withoutNulls.toList(),
+                                                                                          onChanged: (val) async {
+                                                                                            safeSetState(() => _model.ddwFuncaoAtualValue = val);
+                                                                                            logFirebaseEvent('MODAL_MEMBROS_EDIT_ddw_funcao_atual_ON_F');
+                                                                                            _model.ddwFuncaoAtual = _model.ddwFuncaoAtualValue;
+                                                                                          },
                                                                                           height: 60.0,
                                                                                           searchHintTextStyle: FlutterFlowTheme.of(context).labelMedium.override(
                                                                                                 fontFamily: FlutterFlowTheme.of(context).labelMediumFamily,
@@ -4903,15 +4977,19 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                             ),
                                                                                           );
                                                                                         }
-                                                                                        List<FuncoesRow> ddwFaccaoFuncaoAnteriorFuncoesRowList = snapshot.data!;
+                                                                                        List<FuncoesRow> ddwFuncaoAnteriorFuncoesRowList = snapshot.data!;
 
                                                                                         return FlutterFlowDropDown<int>(
-                                                                                          controller: _model.ddwFaccaoFuncaoAnteriorValueController ??= FormFieldController<int>(
-                                                                                            _model.ddwFaccaoFuncaoAnteriorValue ??= widget!.membrosRow?.funcaoAntId,
+                                                                                          controller: _model.ddwFuncaoAnteriorValueController ??= FormFieldController<int>(
+                                                                                            _model.ddwFuncaoAnteriorValue ??= _model.ddwFuncaoAnterior,
                                                                                           ),
-                                                                                          options: List<int>.from(ddwFaccaoFuncaoAnteriorFuncoesRowList.map((e) => e.funcaoId).toList()),
-                                                                                          optionLabels: ddwFaccaoFuncaoAnteriorFuncoesRowList.map((e) => e.nome).withoutNulls.toList(),
-                                                                                          onChanged: (val) => safeSetState(() => _model.ddwFaccaoFuncaoAnteriorValue = val),
+                                                                                          options: List<int>.from(ddwFuncaoAnteriorFuncoesRowList.map((e) => e.funcaoId).toList()),
+                                                                                          optionLabels: ddwFuncaoAnteriorFuncoesRowList.map((e) => e.nome).withoutNulls.toList(),
+                                                                                          onChanged: (val) async {
+                                                                                            safeSetState(() => _model.ddwFuncaoAnteriorValue = val);
+                                                                                            logFirebaseEvent('MODAL_MEMBROS_EDIT_ddw_funcao_anterior_O');
+                                                                                            _model.ddwFuncaoAnterior = _model.ddwFuncaoAnteriorValue;
+                                                                                          },
                                                                                           height: 60.0,
                                                                                           searchHintTextStyle: FlutterFlowTheme.of(context).labelMedium.override(
                                                                                                 fontFamily: FlutterFlowTheme.of(context).labelMediumFamily,
@@ -5234,11 +5312,15 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
 
                                                                                         return FlutterFlowDropDown<int>(
                                                                                           controller: _model.ddwFaccaoIntegrouValueController ??= FormFieldController<int>(
-                                                                                            _model.ddwFaccaoIntegrouValue ??= widget!.membrosRow?.faccaoIntegrou,
+                                                                                            _model.ddwFaccaoIntegrouValue ??= _model.ddwFaccaoIntegrou,
                                                                                           ),
                                                                                           options: List<int>.from(ddwFaccaoIntegrouFaccoesRowList.map((e) => e.faccaoId).toList()),
                                                                                           optionLabels: ddwFaccaoIntegrouFaccoesRowList.map((e) => e.nome).withoutNulls.toList(),
-                                                                                          onChanged: (val) => safeSetState(() => _model.ddwFaccaoIntegrouValue = val),
+                                                                                          onChanged: (val) async {
+                                                                                            safeSetState(() => _model.ddwFaccaoIntegrouValue = val);
+                                                                                            logFirebaseEvent('MODAL_MEMBROS_EDIT_ddw_faccao_integrou_O');
+                                                                                            _model.ddwFaccaoIntegrou = _model.ddwFaccaoIntegrouValue;
+                                                                                          },
                                                                                           height: 60.0,
                                                                                           searchHintTextStyle: FlutterFlowTheme.of(context).labelMedium.override(
                                                                                                 fontFamily: FlutterFlowTheme.of(context).labelMediumFamily,
@@ -5304,11 +5386,15 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
 
                                                                                         return FlutterFlowDropDown<int>(
                                                                                           controller: _model.ddwFaccaoAliadaValueController ??= FormFieldController<int>(
-                                                                                            _model.ddwFaccaoAliadaValue ??= widget!.membrosRow?.faccaoAliada,
+                                                                                            _model.ddwFaccaoAliadaValue ??= _model.ddwFaccaoAliada,
                                                                                           ),
                                                                                           options: List<int>.from(ddwFaccaoAliadaFaccoesRowList.map((e) => e.faccaoId).toList()),
                                                                                           optionLabels: ddwFaccaoAliadaFaccoesRowList.map((e) => e.nome).withoutNulls.toList(),
-                                                                                          onChanged: (val) => safeSetState(() => _model.ddwFaccaoAliadaValue = val),
+                                                                                          onChanged: (val) async {
+                                                                                            safeSetState(() => _model.ddwFaccaoAliadaValue = val);
+                                                                                            logFirebaseEvent('MODAL_MEMBROS_EDIT_ddw_faccao_aliada_ON_');
+                                                                                            _model.ddwFaccaoAliada = _model.ddwFaccaoAliadaValue;
+                                                                                          },
                                                                                           height: 60.0,
                                                                                           searchHintTextStyle: FlutterFlowTheme.of(context).labelMedium.override(
                                                                                                 fontFamily: FlutterFlowTheme.of(context).labelMediumFamily,
@@ -5379,11 +5465,15 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
 
                                                                                         return FlutterFlowDropDown<int>(
                                                                                           controller: _model.ddwFaccaoInimigaValueController ??= FormFieldController<int>(
-                                                                                            _model.ddwFaccaoInimigaValue ??= widget!.membrosRow?.faccaoInimiga,
+                                                                                            _model.ddwFaccaoInimigaValue ??= _model.ddwFaccaoInimiga,
                                                                                           ),
                                                                                           options: List<int>.from(ddwFaccaoInimigaFaccoesRowList.map((e) => e.faccaoId).toList()),
                                                                                           optionLabels: ddwFaccaoInimigaFaccoesRowList.map((e) => e.nome).withoutNulls.toList(),
-                                                                                          onChanged: (val) => safeSetState(() => _model.ddwFaccaoInimigaValue = val),
+                                                                                          onChanged: (val) async {
+                                                                                            safeSetState(() => _model.ddwFaccaoInimigaValue = val);
+                                                                                            logFirebaseEvent('MODAL_MEMBROS_EDIT_ddw_faccao_inimiga_ON');
+                                                                                            _model.ddwFaccaoInimiga = _model.ddwFaccaoInimigaValue;
+                                                                                          },
                                                                                           height: 60.0,
                                                                                           searchHintTextStyle: FlutterFlowTheme.of(context).labelMedium.override(
                                                                                                 fontFamily: FlutterFlowTheme.of(context).labelMediumFamily,
@@ -5972,14 +6062,11 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                   if (_model.txtProcedimentoNoTextController.text != null && _model.txtProcedimentoNoTextController.text != '') {
                                                                                     _model.addToMembrosProcedimentos(DataTypesProcedimentosStruct(
                                                                                       procedimentoNo: _model.txtProcedimentoNoTextController.text,
+                                                                                      membroId: widget!.membrosRow?.membroId,
+                                                                                      unidade: '',
                                                                                       procedimentoTipo: _model.ddwProcedimentoTipoValue,
-                                                                                      unidade: _model.ddwProcedimentoUnidadeValue,
                                                                                       crime: _model.ddwProcedimentoCrimeValue,
-                                                                                      data: dateTimeFormat(
-                                                                                        "d/M/y",
-                                                                                        _model.dataProcedimento,
-                                                                                        locale: FFLocalizations.of(context).languageCode,
-                                                                                      ),
+                                                                                      data: (_model.txtProcedimentoDataFocusNode?.hasFocus ?? false).toString(),
                                                                                     ));
                                                                                     safeSetState(() {});
                                                                                   } else {
@@ -6011,6 +6098,7 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                 ),
                                                                                 icon: Icon(
                                                                                   Icons.add_rounded,
+                                                                                  color: FlutterFlowTheme.of(context).info,
                                                                                   size: 24.0,
                                                                                 ),
                                                                                 options: FFButtonOptions(
@@ -6815,6 +6903,7 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                         situacaoJuridica: _model.ddwProcessoSituacaoJuridicaValue,
                                                                                         regime: _model.ddwProcessoRegimeValue,
                                                                                         situacaoReu: _model.ddwProcessoSituacaoReuValue,
+                                                                                        membroId: widget!.membrosRow?.membroId,
                                                                                       ));
                                                                                       safeSetState(() {});
                                                                                     } else {
@@ -6846,6 +6935,7 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                   ),
                                                                                   icon: Icon(
                                                                                     Icons.add_rounded,
+                                                                                    color: FlutterFlowTheme.of(context).info,
                                                                                     size: 24.0,
                                                                                   ),
                                                                                   options: FFButtonOptions(
@@ -8404,6 +8494,9 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                 ),
                                                 icon: Icon(
                                                   Icons.cancel_outlined,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primary,
                                                   size: 24.0,
                                                 ),
                                                 options: FFButtonOptions(
@@ -8459,470 +8552,493 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                             Align(
                                               alignment: AlignmentDirectional(
                                                   0.0, 0.05),
-                                              child: FFButtonWidget(
-                                                onPressed: () async {
-                                                  logFirebaseEvent(
-                                                      'MODAL_MEMBROS_EDIT_SAVE_MEMBER_BTN_ON_TA');
-                                                  var _shouldSetState = false;
-                                                  var confirmDialogResponse =
-                                                      await showDialog<bool>(
-                                                            context: context,
-                                                            builder:
-                                                                (alertDialogContext) {
-                                                              return AlertDialog(
-                                                                title: Text(
-                                                                    'Salvar  dados'),
-                                                                content: Text(
-                                                                    'Deseja salvar os  dados editados ?'),
-                                                                actions: [
-                                                                  TextButton(
-                                                                    onPressed: () =>
-                                                                        Navigator.pop(
-                                                                            alertDialogContext,
-                                                                            false),
-                                                                    child: Text(
-                                                                        'Cancelar'),
-                                                                  ),
-                                                                  TextButton(
-                                                                    onPressed: () =>
-                                                                        Navigator.pop(
-                                                                            alertDialogContext,
-                                                                            true),
-                                                                    child: Text(
-                                                                        'Confirmar'),
-                                                                  ),
-                                                                ],
-                                                              );
-                                                            },
-                                                          ) ??
-                                                          false;
-                                                  if (confirmDialogResponse) {
-                                                    await MembrosTable().update(
-                                                      data: {
-                                                        'nome_completo': _model
-                                                            .txtNomeCompletoTextController
-                                                            .text,
-                                                        'fotos_path': _model
-                                                                .membrosFotosEdit
-                                                                .isNotEmpty
-                                                            ? _model
-                                                                .membrosFotosEdit
-                                                            : _model
-                                                                .membrosFotoPathEdit,
-                                                        'alcunha': _model
-                                                            .membrosAlcunhas,
-                                                        'cpf': _model
-                                                            .txtNoCpfTextController
-                                                            .text,
-                                                        'identidade': _model
-                                                            .txtNoIdentidadeTextController
-                                                            .text,
-                                                        'naturalidade': _model
-                                                            .txtMembroNaturalidadeTextController
-                                                            .text,
-                                                        'filiacao_mae': _model
-                                                            .txtFiliacaoMaeTextController
-                                                            .text,
-                                                        'filiacao_pai': _model
-                                                            .txtFiliacaoPaiTextController
-                                                            .text,
-                                                        'situacao_mae': _model
-                                                            .ddwSituacaoMaeValue,
-                                                        'situacao_pai': _model
-                                                            .ddwSituacaoPaiValue,
-                                                        'nivel_instrucao': _model
-                                                            .ddwNivelInstrucaoValue,
-                                                        'estado_civil': _model
-                                                            .ddwEstadoCivilValue,
-                                                        'membro_endereco': _model
-                                                            .membrosEnderecos,
-                                                        'estado_id': _model
-                                                            .ddwEstadoValue,
-                                                        'historico': _model
-                                                            .txtHistoricoTextController
-                                                            .text,
-                                                        'faccao_id': widget!
-                                                                    .membrosRow
-                                                                    ?.faccaoId !=
-                                                                0
-                                                            ? _model
-                                                                .ddwMembroFaccaoValue
-                                                            : widget!.membrosRow
-                                                                ?.faccaoId,
-                                                        'batismo': _model
-                                                            .txtFaccaoBastismoTextController
-                                                            .text,
-                                                        'batismo_local': _model
-                                                            .txtFacaoLocalBastismoTextController
-                                                            .text,
-                                                        'padrinho': _model
-                                                            .txtMembrosFaccaoPadrinhoTextController
-                                                            .text,
-                                                        'faccao_senha': _model
-                                                            .txtMembroFaccaoSenhaTextController
-                                                            .text,
-                                                        'cargo_id': _model
-                                                            .ddwMembroFaccaoCargoAtualValue,
-                                                        'funcao_id': _model
-                                                            .ddwFaccaoFuncaoAtualValue,
-                                                        'cargo_ant_id': _model
-                                                            .ddwMembroFaccaoCargoAnteriorValue,
-                                                        'faccao_inimiga': _model
-                                                            .ddwFaccaoInimigaValue,
-                                                        'faccao_aliada': _model
-                                                            .ddwFaccaoAliadaValue,
-                                                        'nacionalidade': _model
-                                                            .rbNacionalidadeValue,
-                                                        'funcao_ant_id': _model
-                                                            .ddwFaccaoFuncaoAnteriorValue,
-                                                        'faccao_integrou': _model
-                                                            .ddwFaccaoIntegrouValue,
-                                                        'municipio_id': _model
-                                                            .ddwMunicipioValue,
-                                                        'infopen': _model
-                                                            .txtNoInfopenTextController
-                                                            .text,
-                                                        'tres_ultimo_locais_preso':
-                                                            _model
-                                                                .membrosFaccaoTresLocais,
-                                                        'alerta': _model
-                                                            .switchAlertaValue,
-                                                        'atuacao_crime': _model
-                                                            .txtMembroAtuacaoTextController
-                                                            .text,
-                                                        'validacao_precentual':
-                                                            _model
-                                                                .membrosPercetualValidacao,
-                                                        'validacoes': _model
-                                                            .choiceChipsValidacoesValues,
-                                                        'coordenadas': functions
-                                                            .convertLatLngListToStringList(
-                                                                _model
-                                                                    .membrosLatLng
-                                                                    .toList()),
-                                                        'membroLngLat': functions
-                                                            .convertLatLngToDouble(
-                                                                _model
-                                                                    .membrosLatLng
-                                                                    .toList()),
-                                                        'identidade_orgao': _model
-                                                            .ddwOrgaoExpedidorValue,
-                                                        'alerta_observacao': _model
-                                                            .txtMembroAlertaTextController
-                                                            .text,
-                                                        'dt_nascimento': _model
-                                                            .txtDataNascimentoTextController
-                                                            .text,
-                                                      },
-                                                      matchingRows: (rows) =>
-                                                          rows.eqOrNull(
-                                                        'membro_id',
-                                                        widget!.membrosRow
-                                                            ?.membroId,
-                                                      ),
-                                                    );
-                                                    _shouldSetState = true;
-                                                    await Future.wait([
-                                                      Future(() async {
-                                                        if (_model
-                                                                .membrosProcedimentos
-                                                                .length >=
-                                                            1) {
-                                                          await ProcedimentosTable()
-                                                              .delete(
-                                                            matchingRows:
-                                                                (rows) => rows
-                                                                    .eqOrNull(
-                                                              'membro_id',
-                                                              widget!.membrosRow
-                                                                  ?.membroId,
-                                                            ),
-                                                          );
-                                                          _shouldSetState =
-                                                              true;
-                                                          _model.membrosProcedimentosCount =
-                                                              -1;
-                                                          while (_model
-                                                                  .membrosProcedimentosCount! <=
+                                              child: Builder(
+                                                builder: (context) =>
+                                                    FFButtonWidget(
+                                                  onPressed: () async {
+                                                    logFirebaseEvent(
+                                                        'MODAL_MEMBROS_EDIT_SAVE_MEMBER_BTN_ON_TA');
+                                                    var _shouldSetState = false;
+                                                    var confirmDialogResponse =
+                                                        await showDialog<bool>(
+                                                              context: context,
+                                                              builder:
+                                                                  (alertDialogContext) {
+                                                                return AlertDialog(
+                                                                  title: Text(
+                                                                      'Salvar  dados'),
+                                                                  content: Text(
+                                                                      'Deseja salvar os  dados editados ?'),
+                                                                  actions: [
+                                                                    TextButton(
+                                                                      onPressed: () => Navigator.pop(
+                                                                          alertDialogContext,
+                                                                          false),
+                                                                      child: Text(
+                                                                          'Cancelar'),
+                                                                    ),
+                                                                    TextButton(
+                                                                      onPressed: () => Navigator.pop(
+                                                                          alertDialogContext,
+                                                                          true),
+                                                                      child: Text(
+                                                                          'Confirmar'),
+                                                                    ),
+                                                                  ],
+                                                                );
+                                                              },
+                                                            ) ??
+                                                            false;
+                                                    if (confirmDialogResponse) {
+                                                      _model.outputMembrosEdit =
+                                                          await MembrosTable()
+                                                              .update(
+                                                        data: {
+                                                          'nome_completo': _model
+                                                              .txtNomeCompletoTextController
+                                                              .text,
+                                                          'fotos_path': _model
+                                                                  .membrosFotosEdit
+                                                                  .isNotEmpty
+                                                              ? _model
+                                                                  .membrosFotosEdit
+                                                              : _model
+                                                                  .membrosFotoPathEdit,
+                                                          'alcunha': _model
+                                                              .membrosAlcunhas,
+                                                          'cpf': _model
+                                                              .txtNoCpfTextController
+                                                              .text,
+                                                          'identidade': _model
+                                                              .txtNoIdentidadeTextController
+                                                              .text,
+                                                          'naturalidade': _model
+                                                              .txtMembroNaturalidadeTextController
+                                                              .text,
+                                                          'filiacao_mae': _model
+                                                              .txtFiliacaoMaeTextController
+                                                              .text,
+                                                          'filiacao_pai': _model
+                                                              .txtFiliacaoPaiTextController
+                                                              .text,
+                                                          'situacao_mae': _model
+                                                              .ddwSituacaoMaeValue,
+                                                          'situacao_pai': _model
+                                                              .ddwSituacaoPaiValue,
+                                                          'nivel_instrucao': _model
+                                                              .ddwNivelInstrucaoValue,
+                                                          'estado_civil': _model
+                                                              .ddwEstadoCivilValue,
+                                                          'membro_endereco': _model
+                                                              .membrosEnderecos,
+                                                          'estado_id':
+                                                              _model.ddwEstado,
+                                                          'historico': _model
+                                                              .txtHistoricoTextController
+                                                              .text,
+                                                          'faccao_id':
+                                                              _model.ddwFaccao,
+                                                          'batismo': _model
+                                                              .txtFaccaoBastismoTextController
+                                                              .text,
+                                                          'batismo_local': _model
+                                                              .txtFacaoLocalBastismoTextController
+                                                              .text,
+                                                          'padrinho': _model
+                                                              .txtMembrosFaccaoPadrinhoTextController
+                                                              .text,
+                                                          'faccao_senha': _model
+                                                              .txtMembroFaccaoSenhaTextController
+                                                              .text,
+                                                          'cargo_id': _model
+                                                              .ddwCargoAtual,
+                                                          'funcao_id': _model
+                                                              .ddwFuncaoAtual,
+                                                          'cargo_ant_id': _model
+                                                              .ddwCargoAnterior,
+                                                          'faccao_inimiga': _model
+                                                              .ddwFaccaoInimiga,
+                                                          'faccao_aliada': _model
+                                                              .ddwFaccaoAliada,
+                                                          'nacionalidade': _model
+                                                              .rbNacionalidadeValue,
+                                                          'funcao_ant_id': _model
+                                                              .ddwFuncaoAnterior,
+                                                          'faccao_integrou': _model
+                                                              .ddwFaccaoIntegrou,
+                                                          'municipio_id': _model
+                                                              .ddwMunicipios,
+                                                          'infopen': _model
+                                                              .txtNoInfopenTextController
+                                                              .text,
+                                                          'tres_ultimo_locais_preso':
                                                               _model
-                                                                  .membrosProcedimentos
-                                                                  .length) {
-                                                            _model.membrosProcedimentosCount =
-                                                                _model.membrosProcedimentosCount! +
-                                                                    1;
-                                                            safeSetState(() {});
-                                                            if ((_model.membrosProcedimentos
-                                                                        .elementAtOrNull(
-                                                                            _model.membrosProcedimentosCount!)
-                                                                        ?.procedimentoNo !=
-                                                                    '') ||
-                                                                null!) {
-                                                              _model.apiResultProcedimentosEdit =
-                                                                  await ProcedimentosAddCall
-                                                                      .call(
-                                                                membroId: widget!
-                                                                    .membrosRow
-                                                                    ?.membroId,
-                                                                procedimentoNo: _model
+                                                                  .membrosFaccaoTresLocais,
+                                                          'alerta': _model
+                                                              .switchAlertaValue,
+                                                          'atuacao_crime': _model
+                                                              .txtMembroAtuacaoTextController
+                                                              .text,
+                                                          'validacao_precentual':
+                                                              _model
+                                                                  .membrosPercetualValidacao,
+                                                          'validacoes': _model
+                                                              .choiceChipsValidacoesValues,
+                                                          'coordenadas': functions
+                                                              .convertLatLngListToStringList(
+                                                                  _model
+                                                                      .membrosLatLng
+                                                                      .toList()),
+                                                          'membroLngLat': functions
+                                                              .convertLatLngToDouble(
+                                                                  _model
+                                                                      .membrosLatLng
+                                                                      .toList()),
+                                                          'identidade_orgao': _model
+                                                              .ddwOrgaoExpedidorValue,
+                                                          'alerta_observacao':
+                                                              _model
+                                                                  .txtMembroAlertaTextController
+                                                                  .text,
+                                                          'dt_nascimento': _model
+                                                              .txtDataNascimentoTextController
+                                                              .text,
+                                                          'validacao_observacao':
+                                                              _model
+                                                                  .txtValidacoesObservacoesTextController
+                                                                  .text,
+                                                        },
+                                                        matchingRows: (rows) =>
+                                                            rows.eqOrNull(
+                                                          'membro_id',
+                                                          widget!.membrosRow
+                                                              ?.membroId,
+                                                        ),
+                                                        returnRows: true,
+                                                      );
+                                                      _shouldSetState = true;
+                                                      if ((_model.outputMembrosEdit !=
+                                                                  null &&
+                                                              (_model.outputMembrosEdit)!
+                                                                  .isNotEmpty) ==
+                                                          true) {
+                                                        await Future.wait([
+                                                          Future(() async {
+                                                            if (_model
                                                                     .membrosProcedimentos
-                                                                    .elementAtOrNull(
-                                                                        _model
-                                                                            .membrosProcedimentosCount!)
-                                                                    ?.procedimentoNo,
-                                                                unidade: _model
-                                                                    .membrosProcedimentos
-                                                                    .elementAtOrNull(
-                                                                        _model
-                                                                            .membrosProcedimentosCount!)
-                                                                    ?.unidade,
-                                                                procedimentoTipo: _model
-                                                                    .membrosProcedimentos
-                                                                    .elementAtOrNull(
-                                                                        _model
-                                                                            .membrosProcedimentosCount!)
-                                                                    ?.procedimentoTipo,
-                                                                crime: _model
-                                                                    .membrosProcedimentos
-                                                                    .elementAtOrNull(
-                                                                        _model
-                                                                            .membrosProcedimentosCount!)
-                                                                    ?.crime,
-                                                                data: _model
-                                                                    .membrosProcedimentos
-                                                                    .elementAtOrNull(
-                                                                        _model
-                                                                            .membrosProcedimentosCount!)
-                                                                    ?.data,
+                                                                    .length >=
+                                                                1) {
+                                                              await ProcedimentosTable()
+                                                                  .delete(
+                                                                matchingRows:
+                                                                    (rows) => rows
+                                                                        .eqOrNull(
+                                                                  'membro_id',
+                                                                  widget!
+                                                                      .membrosRow
+                                                                      ?.membroId,
+                                                                ),
                                                               );
-
                                                               _shouldSetState =
                                                                   true;
+                                                              _model.membrosProcedimentosCount =
+                                                                  -1;
+                                                              // procedeimentosTotal
+                                                              _model.procedimentosTotal =
+                                                                  _model
+                                                                      .membrosProcedimentos
+                                                                      .length;
+                                                              safeSetState(
+                                                                  () {});
+                                                              // procedeimentosTotal
+                                                              _model.procedimentosTotal =
+                                                                  _model.procedimentosTotal! +
+                                                                      -2;
+                                                              safeSetState(
+                                                                  () {});
+                                                              while (_model
+                                                                      .membrosProcedimentosCount! <=
+                                                                  _model
+                                                                      .procedimentosTotal!) {
+                                                                _model.membrosProcedimentosCount =
+                                                                    _model.membrosProcedimentosCount! +
+                                                                        1;
+                                                                _model.apiResultProcedimentosEdit =
+                                                                    await ProcedimentosAddCall
+                                                                        .call(
+                                                                  membroId: widget!
+                                                                      .membrosRow
+                                                                      ?.membroId,
+                                                                  procedimentoNo: _model
+                                                                      .membrosProcedimentos
+                                                                      .elementAtOrNull(
+                                                                          _model
+                                                                              .membrosProcedimentosCount!)
+                                                                      ?.procedimentoNo,
+                                                                  unidade: _model
+                                                                      .membrosProcedimentos
+                                                                      .elementAtOrNull(
+                                                                          _model
+                                                                              .membrosProcedimentosCount!)
+                                                                      ?.unidade,
+                                                                  procedimentoTipo: _model
+                                                                      .membrosProcedimentos
+                                                                      .elementAtOrNull(
+                                                                          _model
+                                                                              .membrosProcedimentosCount!)
+                                                                      ?.procedimentoTipo,
+                                                                  crime: _model
+                                                                      .membrosProcedimentos
+                                                                      .elementAtOrNull(
+                                                                          _model
+                                                                              .membrosProcedimentosCount!)
+                                                                      ?.crime,
+                                                                  data: _model
+                                                                      .membrosProcedimentos
+                                                                      .elementAtOrNull(
+                                                                          _model
+                                                                              .membrosProcedimentosCount!)
+                                                                      ?.data,
+                                                                );
+
+                                                                _shouldSetState =
+                                                                    true;
+                                                              }
+                                                            } else {
+                                                              if (_shouldSetState)
+                                                                safeSetState(
+                                                                    () {});
+                                                              return;
                                                             }
-                                                          }
-                                                        } else {
-                                                          if (_shouldSetState)
-                                                            safeSetState(() {});
-                                                          return;
-                                                        }
-
-                                                        _model.outputProcedimentosDeleteNull =
-                                                            await ProcedimentosTable()
-                                                                .delete(
-                                                          matchingRows:
-                                                              (rows) => rows
-                                                                  .eqOrNull(
-                                                                    'membro_id',
-                                                                    widget!
-                                                                        .membrosRow
-                                                                        ?.membroId,
-                                                                  )
-                                                                  .eqOrNull(
-                                                                    'procedimento_id',
-                                                                    null,
-                                                                  ),
-                                                          returnRows: true,
-                                                        );
-                                                        _shouldSetState = true;
-                                                      }),
-                                                      Future(() async {
-                                                        if (_model
-                                                                .membrosProcessos
-                                                                .length >=
-                                                            1) {
-                                                          await ProcessosTable()
-                                                              .delete(
-                                                            matchingRows:
-                                                                (rows) => rows
-                                                                    .eqOrNull(
-                                                              'membro_id',
-                                                              widget!.membrosRow
-                                                                  ?.membroId,
-                                                            ),
-                                                          );
-                                                          _shouldSetState =
-                                                              true;
-                                                          _model.membrosProcedimentosCount =
-                                                              -1;
-                                                          while (_model
-                                                                  .membrosProcessosCount! <=
-                                                              _model
-                                                                  .membrosProcessos
-                                                                  .length) {
-                                                            _model.membrosProcessosCount =
-                                                                _model.membrosProcessosCount! +
-                                                                    1;
-                                                            safeSetState(() {});
-                                                            if ((_model.membrosProcessos
-                                                                        .elementAtOrNull(
-                                                                            _model.membrosProcessosCount!)
-                                                                        ?.acaoPenalNo !=
-                                                                    '') ||
-                                                                null!) {
-                                                              _model.apiResultProcessosEdit =
-                                                                  await ProcessosAddCall
-                                                                      .call(
-                                                                membroId: widget!
-                                                                    .membrosRow
-                                                                    ?.membroId,
-                                                                acaoPenalNo: _model
+                                                          }),
+                                                          Future(() async {
+                                                            if (_model
                                                                     .membrosProcessos
-                                                                    .elementAtOrNull(
-                                                                        _model
-                                                                            .membrosProcessosCount!)
-                                                                    ?.acaoPenalNo,
-                                                                vara: _model
-                                                                    .membrosProcessos
-                                                                    .elementAtOrNull(
-                                                                        _model
-                                                                            .membrosProcessosCount!)
-                                                                    ?.vara,
-                                                                situacaoJuridica: _model
-                                                                    .membrosProcessos
-                                                                    .elementAtOrNull(
-                                                                        _model
-                                                                            .membrosProcessosCount!)
-                                                                    ?.situacaoJuridica,
-                                                                regime: _model
-                                                                    .membrosProcessos
-                                                                    .elementAtOrNull(
-                                                                        _model
-                                                                            .membrosProcessosCount!)
-                                                                    ?.regime,
-                                                                situacaoReu: _model
-                                                                    .membrosProcessos
-                                                                    .elementAtOrNull(
-                                                                        _model
-                                                                            .membrosProcessosCount!)
-                                                                    ?.situacaoReu,
+                                                                    .length >=
+                                                                1) {
+                                                              await ProcessosTable()
+                                                                  .delete(
+                                                                matchingRows:
+                                                                    (rows) => rows
+                                                                        .eqOrNull(
+                                                                  'membro_id',
+                                                                  widget!
+                                                                      .membrosRow
+                                                                      ?.membroId,
+                                                                ),
                                                               );
-
                                                               _shouldSetState =
                                                                   true;
+                                                              _model.membrosProcedimentosCount =
+                                                                  -1;
+                                                              // processosTotal
+                                                              _model.processosTotal =
+                                                                  _model
+                                                                      .membrosProcessos
+                                                                      .length;
+                                                              safeSetState(
+                                                                  () {});
+                                                              // processosTotal
+                                                              _model.processosTotal =
+                                                                  _model.processosTotal! +
+                                                                      -2;
+                                                              safeSetState(
+                                                                  () {});
+                                                              while (_model
+                                                                      .membrosProcessosCount! <=
+                                                                  _model
+                                                                      .processosTotal!) {
+                                                                _model.membrosProcessosCount =
+                                                                    _model.membrosProcessosCount! +
+                                                                        1;
+                                                                _model.apiResultProcessosEdit =
+                                                                    await ProcessosAddCall
+                                                                        .call(
+                                                                  membroId: widget!
+                                                                      .membrosRow
+                                                                      ?.membroId,
+                                                                  acaoPenalNo: _model
+                                                                      .membrosProcessos
+                                                                      .elementAtOrNull(
+                                                                          _model
+                                                                              .membrosProcessosCount!)
+                                                                      ?.acaoPenalNo,
+                                                                  vara: _model
+                                                                      .membrosProcessos
+                                                                      .elementAtOrNull(
+                                                                          _model
+                                                                              .membrosProcessosCount!)
+                                                                      ?.vara,
+                                                                  situacaoJuridica: _model
+                                                                      .membrosProcessos
+                                                                      .elementAtOrNull(
+                                                                          _model
+                                                                              .membrosProcessosCount!)
+                                                                      ?.situacaoJuridica,
+                                                                  regime: _model
+                                                                      .membrosProcessos
+                                                                      .elementAtOrNull(
+                                                                          _model
+                                                                              .membrosProcessosCount!)
+                                                                      ?.regime,
+                                                                  situacaoReu: _model
+                                                                      .membrosProcessos
+                                                                      .elementAtOrNull(
+                                                                          _model
+                                                                              .membrosProcessosCount!)
+                                                                      ?.situacaoReu,
+                                                                );
+
+                                                                _shouldSetState =
+                                                                    true;
+                                                              }
+                                                            } else {
+                                                              if (_shouldSetState)
+                                                                safeSetState(
+                                                                    () {});
+                                                              return;
                                                             }
-                                                          }
-                                                        } else {
-                                                          if (_shouldSetState)
-                                                            safeSetState(() {});
-                                                          return;
-                                                        }
+                                                          }),
+                                                        ]);
+                                                        await showDialog(
+                                                          context: context,
+                                                          builder:
+                                                              (alertDialogContext) {
+                                                            return AlertDialog(
+                                                              title: Text(
+                                                                  'Editar membro'),
+                                                              content: Text(
+                                                                  'Dados editados com sucesso !'),
+                                                              actions: [
+                                                                TextButton(
+                                                                  onPressed: () =>
+                                                                      Navigator.pop(
+                                                                          alertDialogContext),
+                                                                  child: Text(
+                                                                      'Ok'),
+                                                                ),
+                                                              ],
+                                                            );
+                                                          },
+                                                        );
+                                                        Navigator.pop(context);
 
-                                                        _model.outputProcssosDeleteNull =
-                                                            await ProcessosTable()
-                                                                .delete(
-                                                          matchingRows:
-                                                              (rows) => rows
-                                                                  .eqOrNull(
-                                                                    'membro_id',
-                                                                    widget!
-                                                                        .membrosRow
-                                                                        ?.membroId,
-                                                                  )
-                                                                  .eqOrNull(
-                                                                    'processo_id',
-                                                                    null,
+                                                        context.pushNamed(
+                                                            'main_membros');
+                                                      } else {
+                                                        await showDialog(
+                                                          context: context,
+                                                          builder:
+                                                              (dialogContext) {
+                                                            return Dialog(
+                                                              elevation: 0,
+                                                              insetPadding:
+                                                                  EdgeInsets
+                                                                      .zero,
+                                                              backgroundColor:
+                                                                  Colors
+                                                                      .transparent,
+                                                              alignment: AlignmentDirectional(
+                                                                      0.0, 0.0)
+                                                                  .resolve(
+                                                                      Directionality.of(
+                                                                          context)),
+                                                              child: Container(
+                                                                height: 100.0,
+                                                                width: 300.0,
+                                                                child:
+                                                                    Toast03Widget(
+                                                                  texto: FFLocalizations.of(
+                                                                          context)
+                                                                      .getText(
+                                                                    'p4gjje04' /* Some data is wrong!!! */,
                                                                   ),
-                                                          returnRows: true,
+                                                                  titulo:
+                                                                      'Atenção',
+                                                                ),
+                                                              ),
+                                                            );
+                                                          },
                                                         );
-                                                        _shouldSetState = true;
-                                                      }),
-                                                    ]);
-                                                    await showDialog(
-                                                      context: context,
-                                                      builder:
-                                                          (alertDialogContext) {
-                                                        return AlertDialog(
-                                                          title: Text(
-                                                              'Editar membro'),
-                                                          content: Text(
-                                                              'Dados editados com sucesso !'),
-                                                          actions: [
-                                                            TextButton(
-                                                              onPressed: () =>
-                                                                  Navigator.pop(
-                                                                      alertDialogContext),
-                                                              child: Text('Ok'),
-                                                            ),
-                                                          ],
-                                                        );
-                                                      },
-                                                    );
-                                                    Navigator.pop(context);
+                                                      }
+                                                    } else {
+                                                      if (_shouldSetState)
+                                                        safeSetState(() {});
+                                                      return;
+                                                    }
 
-                                                    context.pushNamed(
-                                                        'main_membros');
-                                                  } else {
                                                     if (_shouldSetState)
                                                       safeSetState(() {});
-                                                    return;
-                                                  }
-
-                                                  if (_shouldSetState)
-                                                    safeSetState(() {});
-                                                },
-                                                text:
-                                                    FFLocalizations.of(context)
-                                                        .getText(
-                                                  'azk0tcxo' /* Save Member */,
-                                                ),
-                                                icon: Icon(
-                                                  Icons.check_circle,
-                                                  size: 24.0,
-                                                ),
-                                                options: FFButtonOptions(
-                                                  height: 44.0,
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          16.0, 0.0, 16.0, 0.0),
-                                                  iconPadding:
-                                                      EdgeInsetsDirectional
-                                                          .fromSTEB(0.0, 0.0,
-                                                              0.0, 0.0),
-                                                  color: FlutterFlowTheme.of(
+                                                  },
+                                                  text: FFLocalizations.of(
                                                           context)
-                                                      .primary,
-                                                  textStyle: FlutterFlowTheme
-                                                          .of(context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyMediumFamily,
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .info,
-                                                        letterSpacing: 0.0,
-                                                        useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                            .containsKey(
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMediumFamily),
-                                                      ),
-                                                  elevation: 3.0,
-                                                  borderSide: BorderSide(
-                                                    color: Colors.transparent,
-                                                    width: 1.0,
+                                                      .getText(
+                                                    'azk0tcxo' /* Save Member */,
                                                   ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          12.0),
-                                                  hoverColor:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .accent1,
-                                                  hoverBorderSide: BorderSide(
+                                                  icon: Icon(
+                                                    Icons.check_circle,
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .info,
+                                                    size: 24.0,
+                                                  ),
+                                                  options: FFButtonOptions(
+                                                    height: 44.0,
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(16.0, 0.0,
+                                                                16.0, 0.0),
+                                                    iconPadding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(0.0, 0.0,
+                                                                0.0, 0.0),
                                                     color: FlutterFlowTheme.of(
                                                             context)
                                                         .primary,
-                                                    width: 1.0,
+                                                    textStyle: FlutterFlowTheme
+                                                            .of(context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMediumFamily,
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .info,
+                                                          letterSpacing: 0.0,
+                                                          useGoogleFonts: GoogleFonts
+                                                                  .asMap()
+                                                              .containsKey(
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMediumFamily),
+                                                        ),
+                                                    elevation: 3.0,
+                                                    borderSide: BorderSide(
+                                                      color: Colors.transparent,
+                                                      width: 1.0,
+                                                    ),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            12.0),
+                                                    hoverColor:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .accent1,
+                                                    hoverBorderSide: BorderSide(
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primary,
+                                                      width: 1.0,
+                                                    ),
+                                                    hoverTextColor:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .primaryText,
+                                                    hoverElevation: 0.0,
                                                   ),
-                                                  hoverTextColor:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .primaryText,
-                                                  hoverElevation: 0.0,
                                                 ),
                                               ),
                                             ),

@@ -315,9 +315,9 @@ class ModalMembrosAddModel extends FlutterFlowModel<ModalMembrosAddWidget> {
   // State field(s) for GoogleMapMembro widget.
   LatLng? googleMapMembrosCenter;
   final googleMapMembrosController = Completer<GoogleMapController>();
-  // State field(s) for ddw_membro_faccao widget.
-  int? ddwMembroFaccaoValue;
-  FormFieldController<int>? ddwMembroFaccaoValueController;
+  // State field(s) for ddw_faccao widget.
+  int? ddwFaccaoValue;
+  FormFieldController<int>? ddwFaccaoValueController;
   // State field(s) for txt_faccao_bastismo widget.
   final txtFaccaoBastismoKey = GlobalKey();
   FocusNode? txtFaccaoBastismoFocusNode;
@@ -340,18 +340,18 @@ class ModalMembrosAddModel extends FlutterFlowModel<ModalMembrosAddWidget> {
   TextEditingController? txtMembroFaccaoSenhaTextController;
   String? Function(BuildContext, String?)?
       txtMembroFaccaoSenhaTextControllerValidator;
-  // State field(s) for ddw_membro_faccao_cargo_atual widget.
-  int? ddwMembroFaccaoCargoAtualValue;
-  FormFieldController<int>? ddwMembroFaccaoCargoAtualValueController;
-  // State field(s) for ddw_membro_faccao_cargo_anterior widget.
-  int? ddwMembroFaccaoCargoAnteriorValue;
-  FormFieldController<int>? ddwMembroFaccaoCargoAnteriorValueController;
-  // State field(s) for ddw_faccao_funcao_atual widget.
-  int? ddwFaccaoFuncaoAtualValue;
-  FormFieldController<int>? ddwFaccaoFuncaoAtualValueController;
-  // State field(s) for ddw_faccao_funcao_anterior widget.
-  int? ddwFaccaoFuncaoAnteriorValue;
-  FormFieldController<int>? ddwFaccaoFuncaoAnteriorValueController;
+  // State field(s) for ddw_cargo_atual widget.
+  int? ddwCargoAtualValue;
+  FormFieldController<int>? ddwCargoAtualValueController;
+  // State field(s) for ddw_cargo_anterior widget.
+  int? ddwCargoAnteriorValue;
+  FormFieldController<int>? ddwCargoAnteriorValueController;
+  // State field(s) for ddw_funcao_atual widget.
+  int? ddwFuncaoAtualValue;
+  FormFieldController<int>? ddwFuncaoAtualValueController;
+  // State field(s) for ddw_funcao_anterior widget.
+  int? ddwFuncaoAnteriorValue;
+  FormFieldController<int>? ddwFuncaoAnteriorValueController;
   // State field(s) for txt_faccao_tres_locais_add widget.
   FocusNode? txtFaccaoTresLocaisAddFocusNode;
   TextEditingController? txtFaccaoTresLocaisAddTextController;

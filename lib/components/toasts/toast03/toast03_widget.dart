@@ -134,8 +134,9 @@ class _Toast03WidgetState extends State<Toast03Widget> {
                 color: FlutterFlowTheme.of(context).secondaryText,
                 size: 24.0,
               ),
-              onPressed: () {
-                print('IconButton pressed ...');
+              onPressed: () async {
+                logFirebaseEvent('TOAST03_COMP_close_rounded_ICN_ON_TAP');
+                Navigator.pop(context);
               },
             ),
           ].divide(SizedBox(width: 8.0)),
