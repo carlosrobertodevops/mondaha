@@ -1621,7 +1621,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '5kbgpt8h': {
       'en': 'Nickname was not provided !!!',
-      'pt': 'Algum(ns) dados estão errados !!!',
+      'pt': 'Número de Processo já existe !!!',
     },
     't455vcot': {
       'en':
@@ -1967,7 +1967,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '9jkt3qf8': {
       'en': 'Address was not provided !!!',
-      'pt': 'Algum(ns) dados estão errados !!!',
+      'pt': 'Número de Processo já existe !!!',
     },
     'd56blqb1': {
       'en':
@@ -2091,7 +2091,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'jbuhl8wx': {
       'en': 'Location was not informed !!!',
-      'pt': 'Algum(ns) dados estão errados !!!',
+      'pt': 'Número de Processo já existe !!!',
     },
     '6mn9o1ts': {
       'en':
@@ -2277,6 +2277,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Procedure Number not provided !!!!',
       'pt': 'Número do Processo não informado !!!!',
     },
+    'zkz8ptof': {
+      'en': '',
+      'pt': '',
+    },
     'qjj69k8u': {
       'en': 'Field is required',
       'pt': 'Campo é obrigatório',
@@ -2430,6 +2434,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     '1a5jlejb': {
       'en': 'Process Number not provided !!!!',
       'pt': 'Número do Processo não informado !!!!',
+    },
+    'askq4sgj': {
+      'en': 'Criminal Action Number already exists!!!',
+      'pt': 'Número de Processo já existe !!!',
     },
     'noufgwqe': {
       'en': 'Criminal action number',
@@ -3183,7 +3191,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'dzqay8zm': {
       'en': 'Nickname was not provided !!!',
-      'pt': 'Algum(ns) dados estão errados !!!',
+      'pt': 'Número de Processo já existe !!!',
     },
     'm2152j19': {
       'en':
@@ -3527,9 +3535,9 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Endereço Completo',
       'pt': 'Endereço Completo',
     },
-    '6kl8rill': {
+    '0g539rfy': {
       'en': 'Address was not provided !!!',
-      'pt': 'Algum(ns) dados estão errados !!!',
+      'pt': 'Número de Processo já existe !!!',
     },
     'rtp4h0ou': {
       'en':
@@ -3643,9 +3651,9 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Três últimos locais onde esteve preso',
       'pt': 'Três últimos locais onde esteve preso',
     },
-    'bae2wl2o': {
+    'csgib8df': {
       'en': 'Location was not informed !!!',
-      'pt': 'Algum(ns) dados estão errados !!!',
+      'pt': 'Número de Processo já existe !!!',
     },
     'ky34u2o1': {
       'en':
@@ -3835,10 +3843,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'To add',
       'pt': 'Adicionar',
     },
-    '5hm1igqp': {
-      'en': 'Procedure Number not provided !!!!',
-      'pt': 'Algum(ns) dados estão errados !!!',
-    },
     '74qz68yo': {
       'en': 'Field is required',
       'pt': 'Campo é obrigatório!',
@@ -3886,8 +3890,8 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
           'Informe os dados sobre o Processo que foram realizados contra esse membro.',
     },
     'piowig6i': {
-      'en': 'Criminal action number',
-      'pt': 'Nº da ação Penal',
+      'en': 'Criminal Action Number',
+      'pt': 'Nº da Ação Penal',
     },
     'k5t0wx0q': {
       'en': 'Stick',
@@ -3988,10 +3992,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'miy1u177': {
       'en': 'To add',
       'pt': 'Adicionar',
-    },
-    '7mzxc79j': {
-      'en': 'Procedure Number not provided !!!!',
-      'pt': 'Algum(ns) dados estão errados !!!',
     },
     '9vwnb0wp': {
       'en': 'Criminal action number',
@@ -4135,7 +4135,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'p4gjje04': {
       'en': 'Some data is wrong!!!',
-      'pt': 'Algum(ns) dados estão errados !!!',
+      'pt': 'Número de Processo já existe !!!',
     },
   },
   // user_details_membro_view

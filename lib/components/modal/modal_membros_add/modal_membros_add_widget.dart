@@ -11,12 +11,11 @@ import '/flutter_flow/flutter_flow_google_map.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_place_picker.dart';
 import '/flutter_flow/flutter_flow_radio_button.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
-import '/flutter_flow/place.dart';
 import '/flutter_flow/upload_data.dart';
+import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 import 'dart:ui';
@@ -25,6 +24,8 @@ import 'package:aligned_tooltip/aligned_tooltip.dart';
 import 'package:sticky_headers/sticky_headers.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_debounce/easy_debounce.dart';
+import 'package:ff_commons/flutter_flow/place.dart';
+import 'package:ff_theme/flutter_flow/flutter_flow_theme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -5720,18 +5721,47 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                                 onPressed: () async {
                                                                                   logFirebaseEvent('MODAL_MEMBROS_ADD_COMP_TO_ADD_BTN_ON_TAP');
                                                                                   if (_model.txtProcedimentoNoTextController.text != null && _model.txtProcedimentoNoTextController.text != '') {
-                                                                                    _model.addToMembrosProcedimentos(DataTypesProcedimentosStruct(
-                                                                                      procedimentoNo: _model.txtProcedimentoNoTextController.text,
-                                                                                      procedimentoTipo: _model.ddwProcedimentoTipoValue,
-                                                                                      unidade: _model.ddwProcedimentoUnidadeValue,
-                                                                                      crime: _model.ddwProcedimentoCrimeValue,
-                                                                                      data: dateTimeFormat(
-                                                                                        "yMd",
-                                                                                        _model.dataProcedimento,
-                                                                                        locale: FFLocalizations.of(context).languageCode,
-                                                                                      ),
-                                                                                    ));
-                                                                                    safeSetState(() {});
+                                                                                    if (functions.checkProcedimento(_model.txtProcedimentoNoTextController.text)) {
+                                                                                      await showDialog(
+                                                                                        context: context,
+                                                                                        builder: (dialogContext) {
+                                                                                          return Dialog(
+                                                                                            elevation: 0,
+                                                                                            insetPadding: EdgeInsets.zero,
+                                                                                            backgroundColor: Colors.transparent,
+                                                                                            alignment: AlignmentDirectional(0.0, 0.0).resolve(Directionality.of(context)),
+                                                                                            child: Container(
+                                                                                              height: 100.0,
+                                                                                              width: 300.0,
+                                                                                              child: Toast03Widget(
+                                                                                                texto: FFLocalizations.of(context).getText(
+                                                                                                  '27iw7imq' /*  */,
+                                                                                                ),
+                                                                                                titulo: 'Atenção',
+                                                                                              ),
+                                                                                            ),
+                                                                                          );
+                                                                                        },
+                                                                                      );
+                                                                                    } else {
+                                                                                      _model.addToMembrosProcedimentos(DataTypesProcedimentosStruct(
+                                                                                        procedimentoNo: _model.txtProcedimentoNoTextController.text,
+                                                                                        procedimentoTipo: _model.ddwProcedimentoTipoValue,
+                                                                                        unidade: _model.ddwProcedimentoUnidadeValue,
+                                                                                        crime: _model.ddwProcedimentoCrimeValue,
+                                                                                        data: dateTimeFormat(
+                                                                                          "yMd",
+                                                                                          _model.dataProcedimento,
+                                                                                          locale: FFLocalizations.of(context).languageCode,
+                                                                                        ),
+                                                                                      ));
+                                                                                      safeSetState(() {});
+                                                                                    }
+
+                                                                                    safeSetState(() {
+                                                                                      _model.txtProcedimentoNoTextController?.clear();
+                                                                                      _model.txtProcedimentoDataTextController?.clear();
+                                                                                    });
                                                                                   } else {
                                                                                     await showDialog(
                                                                                       context: context,
@@ -6576,14 +6606,46 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                                   onPressed: () async {
                                                                                     logFirebaseEvent('MODAL_MEMBROS_ADD_COMP_TO_ADD_BTN_ON_TAP');
                                                                                     if (_model.txtProcedimentoNoTextController.text != null && _model.txtProcedimentoNoTextController.text != '') {
-                                                                                      _model.addToMembrosProcessos(DataTypesProcessosStruct(
-                                                                                        acaoPenalNo: _model.txtProcessoNoAcaoPenalTextController.text,
-                                                                                        vara: _model.ddwProcessoVaraValue,
-                                                                                        situacaoJuridica: _model.ddwProcessoSituacaoJuridicaValue,
-                                                                                        regime: _model.ddwProcessoRegimeValue,
-                                                                                        situacaoReu: _model.ddwProcessoSituacaoReuValue,
-                                                                                      ));
-                                                                                      safeSetState(() {});
+                                                                                      _model.outputBuscaPorAcaoPenal = await ProcessosBuscaNoCall.call(
+                                                                                        acaoPenalNo: (_model.txtProcessoNoAcaoPenalFocusNode?.hasFocus ?? false).toString(),
+                                                                                      );
+
+                                                                                      if (functions.checkProcesso((_model.txtProcessoNoAcaoPenalFocusNode?.hasFocus ?? false).toString())) {
+                                                                                        await showDialog(
+                                                                                          context: context,
+                                                                                          builder: (dialogContext) {
+                                                                                            return Dialog(
+                                                                                              elevation: 0,
+                                                                                              insetPadding: EdgeInsets.zero,
+                                                                                              backgroundColor: Colors.transparent,
+                                                                                              alignment: AlignmentDirectional(0.0, 0.0).resolve(Directionality.of(context)),
+                                                                                              child: Container(
+                                                                                                height: 100.0,
+                                                                                                width: 300.0,
+                                                                                                child: Toast03Widget(
+                                                                                                  texto: FFLocalizations.of(context).getText(
+                                                                                                    'askq4sgj' /* Criminal Action Number already... */,
+                                                                                                  ),
+                                                                                                  titulo: 'Atenção',
+                                                                                                ),
+                                                                                              ),
+                                                                                            );
+                                                                                          },
+                                                                                        );
+                                                                                      } else {
+                                                                                        _model.addToMembrosProcessos(DataTypesProcessosStruct(
+                                                                                          acaoPenalNo: _model.txtProcessoNoAcaoPenalTextController.text,
+                                                                                          vara: _model.ddwProcessoVaraValue,
+                                                                                          situacaoJuridica: _model.ddwProcessoSituacaoJuridicaValue,
+                                                                                          regime: _model.ddwProcessoRegimeValue,
+                                                                                          situacaoReu: _model.ddwProcessoSituacaoReuValue,
+                                                                                        ));
+                                                                                        safeSetState(() {});
+                                                                                      }
+
+                                                                                      safeSetState(() {
+                                                                                        _model.txtProcessoNoAcaoPenalTextController?.clear();
+                                                                                      });
                                                                                     } else {
                                                                                       await showDialog(
                                                                                         context: context,
@@ -6607,12 +6669,15 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                                         },
                                                                                       );
                                                                                     }
+
+                                                                                    safeSetState(() {});
                                                                                   },
                                                                                   text: FFLocalizations.of(context).getText(
                                                                                     'vm7t0n6u' /* To add */,
                                                                                   ),
                                                                                   icon: Icon(
                                                                                     Icons.add_rounded,
+                                                                                    color: FlutterFlowTheme.of(context).info,
                                                                                     size: 24.0,
                                                                                   ),
                                                                                   options: FFButtonOptions(

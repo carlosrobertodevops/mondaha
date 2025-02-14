@@ -6,8 +6,8 @@ import 'package:google_maps_webservice/places.dart';
 import 'package:collection/collection.dart';
 
 import 'flutter_flow_widgets.dart';
-import 'lat_lng.dart';
-import 'place.dart';
+import 'package:ff_commons/flutter_flow/lat_lng.dart';
+import 'package:ff_commons/flutter_flow/place.dart';
 
 class FlutterFlowPlacePicker extends StatefulWidget {
   const FlutterFlowPlacePicker({

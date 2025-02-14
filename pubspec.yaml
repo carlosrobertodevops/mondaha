@@ -36,12 +36,18 @@ dependencies:
   cached_network_image_platform_interface: 4.1.1
   cached_network_image_web: 1.3.1
   collection: 1.19.0
+  community_testing_ryusdv:
+    path: ./dependencies/community_testing_ryusdv # 0.0.4
   csslib: 0.17.3
   csv: 6.0.0
   dropdown_button2: 2.3.9
   easy_debounce: 2.0.1
   emoji_flag_converter: 1.1.0
   equatable: 2.0.5
+  ff_commons:
+    path: ./dependencies/ff_commons # 1.0.0+1
+  ff_theme:
+    path: ./dependencies/ff_theme # 1.0.0+1
   file_picker: 8.1.2
   firebase_analytics: 11.3.5
   firebase_analytics_platform_interface: 4.2.7
@@ -159,10 +165,10 @@ dependencies:
 
 dependency_overrides:
   http: 1.2.2
+  uuid: ^4.0.0
   package_info_plus: 8.0.2
   package_info_plus_platform_interface: 3.0.1
   rxdart: 0.27.7
-  uuid: ^4.0.0
   win32: 5.5.1
 
 dev_dependencies:
@@ -204,6 +210,13 @@ flutter:
     - assets/rive_animations/
     - assets/pdfs/
     - assets/jsons/
+    - dependencies/community_testing_ryusdv/assets/fonts/
+    - dependencies/community_testing_ryusdv/assets/images/
+    - dependencies/community_testing_ryusdv/assets/videos/
+    - dependencies/community_testing_ryusdv/assets/audios/
+    - dependencies/community_testing_ryusdv/assets/rive_animations/
+    - dependencies/community_testing_ryusdv/assets/pdfs/
+    - dependencies/community_testing_ryusdv/assets/jsons/
 
     - assets/environment_values/
 

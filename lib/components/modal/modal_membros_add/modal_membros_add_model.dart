@@ -11,12 +11,11 @@ import '/flutter_flow/flutter_flow_google_map.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_place_picker.dart';
 import '/flutter_flow/flutter_flow_radio_button.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
-import '/flutter_flow/place.dart';
 import '/flutter_flow/upload_data.dart';
+import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 import 'dart:ui';
@@ -26,6 +25,8 @@ import 'package:aligned_tooltip/aligned_tooltip.dart';
 import 'package:sticky_headers/sticky_headers.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_debounce/easy_debounce.dart';
+import 'package:ff_commons/flutter_flow/place.dart';
+import 'package:ff_theme/flutter_flow/flutter_flow_theme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -178,6 +179,8 @@ class ModalMembrosAddModel extends FlutterFlowModel<ModalMembrosAddWidget> {
       membrosFotosSemUrl[index] = updateFn(membrosFotosSemUrl[index]);
 
   String? dataNascimento;
+
+  int? membroId;
 
   ///  State fields for stateful widgets in this component.
 
@@ -404,6 +407,8 @@ class ModalMembrosAddModel extends FlutterFlowModel<ModalMembrosAddWidget> {
   // State field(s) for ddw_processo_situacao_reu widget.
   String? ddwProcessoSituacaoReuValue;
   FormFieldController<String>? ddwProcessoSituacaoReuValueController;
+  // Stores action output result for [Backend Call - API (ProcessosBuscaNo)] action in Button widget.
+  ApiCallResponse? outputBuscaPorAcaoPenal;
   // State field(s) for txt_historico widget.
   FocusNode? txtHistoricoFocusNode;
   TextEditingController? txtHistoricoTextController;

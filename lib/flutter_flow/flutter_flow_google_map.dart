@@ -6,11 +6,11 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'lat_lng.dart' as latlng;
+import 'package:ff_commons/flutter_flow/lat_lng.dart' as latlng;
 
 export 'dart:async' show Completer;
 export 'package:google_maps_flutter/google_maps_flutter.dart' hide LatLng;
-export 'lat_lng.dart' show LatLng;
+export 'package:ff_commons/flutter_flow/lat_lng.dart' show LatLng;
 
 enum GoogleMapStyle {
   standard,
