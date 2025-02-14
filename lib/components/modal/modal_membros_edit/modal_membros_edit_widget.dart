@@ -6063,10 +6063,10 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                     _model.addToMembrosProcedimentos(DataTypesProcedimentosStruct(
                                                                                       procedimentoNo: _model.txtProcedimentoNoTextController.text,
                                                                                       membroId: widget!.membrosRow?.membroId,
-                                                                                      unidade: '',
+                                                                                      unidade: _model.ddwProcedimentoUnidadeValue,
                                                                                       procedimentoTipo: _model.ddwProcedimentoTipoValue,
                                                                                       crime: _model.ddwProcedimentoCrimeValue,
-                                                                                      data: (_model.txtProcedimentoDataFocusNode?.hasFocus ?? false).toString(),
+                                                                                      data: _model.txtProcedimentoDataTextController.text,
                                                                                     ));
                                                                                     safeSetState(() {});
                                                                                   } else {

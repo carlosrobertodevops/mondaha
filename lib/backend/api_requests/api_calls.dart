@@ -250,8 +250,8 @@ class ProcedimentosGetCall {
       params: {},
       returnBody: true,
       encodeBodyUtf8: false,
-      decodeUtf8: true,
-      cache: true,
+      decodeUtf8: false,
+      cache: false,
       isStreamingApi: false,
       alwaysAllowBody: false,
     );

@@ -224,12 +224,16 @@ dynamic deserializeParam<T>(
             return CountUsuariosViewRow(data);
           case EstadosRow:
             return EstadosRow(data);
+          case CountProcessosViewRow:
+            return CountProcessosViewRow(data);
           case GruposMembrosRow:
             return GruposMembrosRow(data);
           case CountUsuariosAtivosViewRow:
             return CountUsuariosAtivosViewRow(data);
           case WapplerMigrationsRow:
             return WapplerMigrationsRow(data);
+          case CountProcedimentosViewRow:
+            return CountProcedimentosViewRow(data);
           case UsuariosViewRow:
             return UsuariosViewRow(data);
           case MembrosViewRow:
