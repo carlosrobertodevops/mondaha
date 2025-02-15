@@ -381,40 +381,29 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
     context.watch<FFAppState>();
     context.watch<community_testing_ryusdv_app_state.FFAppState>();
 
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(0.0),
-      child: BackdropFilter(
-        filter: ImageFilter.blur(
-          sigmaX: 5.0,
-          sigmaY: 4.0,
-        ),
-        child: Stack(
-          children: [
-            Container(
+    return Stack(
+      children: [
+        Align(
+          alignment: AlignmentDirectional(0.0, -1.0),
+          child: Container(
+            width: 300.0,
+            height: 70.0,
+            child: community_testing_ryusdv_custom_widgets.ToastListener(
               width: 300.0,
-              height: 100.0,
-              child: community_testing_ryusdv_custom_widgets.ToastListener(
-                width: 300.0,
-                height: 100.0,
-                notificationData:
-                    community_testing_ryusdv_data_schema.NotificationStruct(
-                  title: 'Membros',
-                  description: 'Salvado dados ..',
-                  style: community_testing_ryusdv_enums.ToastStyle.flatColored,
-                  position:
-                      community_testing_ryusdv_enums.ToastPosition.topCenter,
-                  type: community_testing_ryusdv_enums.ToastType.info,
-                  progressBar: true,
-                  dragToClose: false,
-                  pauseOnHover: false,
-                  display: valueOrDefault<bool>(
-                    _model.membroSalvo,
-                    true,
-                  ),
-                ),
-              ),
+              height: 70.0,
+              notificationData: community_testing_ryusdv_app_state.FFAppState()
+                  .notificationDT,
             ),
-            Align(
+          ),
+        ),
+        ClipRRect(
+          borderRadius: BorderRadius.circular(0.0),
+          child: BackdropFilter(
+            filter: ImageFilter.blur(
+              sigmaX: 5.0,
+              sigmaY: 4.0,
+            ),
+            child: Align(
               alignment: AlignmentDirectional(0.0, 0.0),
               child: Container(
                 decoration: BoxDecoration(),
@@ -8543,9 +8532,31 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                 ) ??
                                                                 false;
                                                         if (confirmDialogResponse) {
-                                                          _model.membroSalvo =
-                                                              true;
-                                                          safeSetState(() {});
+                                                          community_testing_ryusdv_app_state
+                                                                      .FFAppState()
+                                                                  .notificationDT =
+                                                              community_testing_ryusdv_data_schema
+                                                                  .NotificationStruct(
+                                                            title: 'Atenção',
+                                                            description:
+                                                                'Salvando dados ...',
+                                                            style:
+                                                                community_testing_ryusdv_enums
+                                                                    .ToastStyle
+                                                                    .fillColored,
+                                                            position:
+                                                                community_testing_ryusdv_enums
+                                                                    .ToastPosition
+                                                                    .topCenter,
+                                                            type:
+                                                                community_testing_ryusdv_enums
+                                                                    .ToastType
+                                                                    .info,
+                                                            progressBar: true,
+                                                            dragToClose: false,
+                                                            pauseOnHover: false,
+                                                            display: true,
+                                                          );
                                                           _model.outputMembrosEdit =
                                                               await MembrosTable()
                                                                   .update(
@@ -8858,9 +8869,6 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                 }
                                                               }),
                                                             ]);
-                                                            _model.membroSalvo =
-                                                                false;
-                                                            safeSetState(() {});
                                                             await showDialog(
                                                               context: context,
                                                               builder:
@@ -9035,9 +9043,9 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                 ),
               ),
             ),
-          ],
-        ),
-      ),
-    ).animateOnPageLoad(animationsMap['blurOnPageLoadAnimation']!);
+          ),
+        ).animateOnPageLoad(animationsMap['blurOnPageLoadAnimation']!),
+      ],
+    );
   }
 }
