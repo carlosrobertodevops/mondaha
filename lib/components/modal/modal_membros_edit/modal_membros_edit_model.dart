@@ -29,8 +29,6 @@ import 'modal_membros_edit_widget.dart' show ModalMembrosEditWidget;
 import 'package:aligned_tooltip/aligned_tooltip.dart';
 import 'package:community_testing_ryusdv/app_state.dart'
     as community_testing_ryusdv_app_state;
-import 'package:community_testing_ryusdv/custom_code/widgets/index.dart'
-    as community_testing_ryusdv_custom_widgets;
 import 'package:sticky_headers/sticky_headers.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_debounce/easy_debounce.dart';

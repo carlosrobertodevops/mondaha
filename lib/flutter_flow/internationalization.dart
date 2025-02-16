@@ -2273,14 +2273,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'To add',
       'pt': 'Adicionar',
     },
-    '7iw2izo4': {
-      'en': 'Procedure Number not provided !!!!',
-      'pt': 'Número do Processo não informado !!!!',
-    },
-    'zkz8ptof': {
-      'en': '',
-      'pt': '',
-    },
     'qjj69k8u': {
       'en': 'Field is required',
       'pt': 'Campo é obrigatório',
@@ -2430,14 +2422,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'vm7t0n6u': {
       'en': 'To add',
       'pt': 'Adicionar',
-    },
-    '1a5jlejb': {
-      'en': 'Process Number not provided !!!!',
-      'pt': 'Número do Processo não informado !!!!',
-    },
-    'askq4sgj': {
-      'en': 'Criminal Action Number already exists!!!',
-      'pt': 'Número de Processo já existe !!!',
     },
     'noufgwqe': {
       'en': 'Criminal action number',

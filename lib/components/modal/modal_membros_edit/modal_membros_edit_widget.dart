@@ -28,8 +28,6 @@ import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:aligned_tooltip/aligned_tooltip.dart';
 import 'package:community_testing_ryusdv/app_state.dart'
     as community_testing_ryusdv_app_state;
-import 'package:community_testing_ryusdv/custom_code/widgets/index.dart'
-    as community_testing_ryusdv_custom_widgets;
 import 'package:sticky_headers/sticky_headers.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_debounce/easy_debounce.dart';
@@ -383,19 +381,6 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
 
     return Stack(
       children: [
-        Align(
-          alignment: AlignmentDirectional(0.0, -1.0),
-          child: Container(
-            width: 300.0,
-            height: 70.0,
-            child: community_testing_ryusdv_custom_widgets.ToastListener(
-              width: 300.0,
-              height: 70.0,
-              notificationData: community_testing_ryusdv_app_state.FFAppState()
-                  .notificationDT,
-            ),
-          ),
-        ),
         ClipRRect(
           borderRadius: BorderRadius.circular(0.0),
           child: BackdropFilter(
@@ -6898,7 +6883,7 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                         logFirebaseEvent('MODAL_MEMBROS_EDIT_TO_ADD_BTN_ON_TAP');
                                                                                         if (_model.txtProcessoNoAcaoPenalTextController.text != null && _model.txtProcessoNoAcaoPenalTextController.text != '') {
                                                                                           _model.outputCheckProcessoExists = await actions.checkProcessoExists(
-                                                                                            (_model.txtProcessoNoAcaoPenalFocusNode?.hasFocus ?? false).toString(),
+                                                                                            _model.txtProcessoNoAcaoPenalTextController.text,
                                                                                           );
                                                                                           if (_model.outputCheckProcessoExists!) {
                                                                                             await showDialog(
@@ -8532,6 +8517,10 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                 ) ??
                                                                 false;
                                                         if (confirmDialogResponse) {
+                                                          _model.membroSalvo =
+                                                              true;
+                                                          _model.updatePage(
+                                                              () {});
                                                           community_testing_ryusdv_app_state
                                                                       .FFAppState()
                                                                   .notificationDT =
@@ -8557,6 +8546,7 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                             pauseOnHover: false,
                                                             display: true,
                                                           );
+                                                          safeSetState(() {});
                                                           _model.outputMembrosEdit =
                                                               await MembrosTable()
                                                                   .update(
@@ -8869,6 +8859,36 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                 }
                                                               }),
                                                             ]);
+                                                            _model.membroSalvo =
+                                                                false;
+                                                            safeSetState(() {});
+                                                            community_testing_ryusdv_app_state
+                                                                        .FFAppState()
+                                                                    .notificationDT =
+                                                                community_testing_ryusdv_data_schema
+                                                                    .NotificationStruct(
+                                                              title: 'Atenção',
+                                                              description:
+                                                                  'Salvando dados ...',
+                                                              style: community_testing_ryusdv_enums
+                                                                  .ToastStyle
+                                                                  .fillColored,
+                                                              position:
+                                                                  community_testing_ryusdv_enums
+                                                                      .ToastPosition
+                                                                      .topCenter,
+                                                              type:
+                                                                  community_testing_ryusdv_enums
+                                                                      .ToastType
+                                                                      .info,
+                                                              progressBar: true,
+                                                              dragToClose:
+                                                                  false,
+                                                              pauseOnHover:
+                                                                  false,
+                                                              display: false,
+                                                            );
+                                                            safeSetState(() {});
                                                             await showDialog(
                                                               context: context,
                                                               builder:
@@ -8934,6 +8954,34 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                 );
                                                               },
                                                             );
+
+                                                            community_testing_ryusdv_app_state
+                                                                        .FFAppState()
+                                                                    .notificationDT =
+                                                                community_testing_ryusdv_data_schema
+                                                                    .NotificationStruct(
+                                                              title: 'Atenção',
+                                                              description:
+                                                                  'Salvando dados ...',
+                                                              style: community_testing_ryusdv_enums
+                                                                  .ToastStyle
+                                                                  .fillColored,
+                                                              position:
+                                                                  community_testing_ryusdv_enums
+                                                                      .ToastPosition
+                                                                      .topCenter,
+                                                              type:
+                                                                  community_testing_ryusdv_enums
+                                                                      .ToastType
+                                                                      .info,
+                                                              progressBar: true,
+                                                              dragToClose:
+                                                                  false,
+                                                              pauseOnHover:
+                                                                  false,
+                                                              display: false,
+                                                            );
+                                                            safeSetState(() {});
                                                           }
                                                         } else {
                                                           if (_shouldSetState)

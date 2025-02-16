@@ -23,13 +23,12 @@ import "package:community_testing_ryusdv/backend/schema/enums/enums.dart"
     as community_testing_ryusdv_enums;
 import "package:community_testing_ryusdv/backend/schema/structs/index.dart"
     as community_testing_ryusdv_data_schema;
+import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'modal_membros_add_widget.dart' show ModalMembrosAddWidget;
 import 'package:aligned_tooltip/aligned_tooltip.dart';
 import 'package:community_testing_ryusdv/app_state.dart'
     as community_testing_ryusdv_app_state;
-import 'package:community_testing_ryusdv/custom_code/widgets/index.dart'
-    as community_testing_ryusdv_custom_widgets;
 import 'package:sticky_headers/sticky_headers.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_debounce/easy_debounce.dart';
@@ -398,6 +397,8 @@ class ModalMembrosAddModel extends FlutterFlowModel<ModalMembrosAddWidget> {
   String? Function(BuildContext, String?)?
       txtProcedimentoDataTextControllerValidator;
   DateTime? datePicked2;
+  // Stores action output result for [Custom Action - checkProcedimentoExists] action in Button widget.
+  bool? outputCheckProcedimentoExists;
   // State field(s) for txt_processo_no_acao_penal widget.
   FocusNode? txtProcessoNoAcaoPenalFocusNode;
   TextEditingController? txtProcessoNoAcaoPenalTextController;
@@ -415,8 +416,8 @@ class ModalMembrosAddModel extends FlutterFlowModel<ModalMembrosAddWidget> {
   // State field(s) for ddw_processo_situacao_reu widget.
   String? ddwProcessoSituacaoReuValue;
   FormFieldController<String>? ddwProcessoSituacaoReuValueController;
-  // Stores action output result for [Backend Call - API (ProcessosBuscaNo)] action in Button widget.
-  ApiCallResponse? outputBuscaPorAcaoPenal;
+  // Stores action output result for [Custom Action - checkProcessoExists] action in Button widget.
+  bool? outputCheckProcessoExists;
   // State field(s) for txt_historico widget.
   FocusNode? txtHistoricoFocusNode;
   TextEditingController? txtHistoricoTextController;
