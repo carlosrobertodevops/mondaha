@@ -194,6 +194,45 @@ class UsuarioAddCall {
   }
 }
 
+class LogsAddCall {
+  static Future<ApiCallResponse> call({
+    int? usuarioId,
+    int? agenciaId,
+    int? moduloId,
+    int? acaoId,
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "usuario_id": ${usuarioId},
+  "agencia_id": ${agenciaId},
+  "modulo_id": ${moduloId},
+  "acao_id": ${acaoId}
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'LogsAdd',
+      apiUrl: 'https://buzlazhtcndpegsnijcw.supabase.co/rest/v1/logs',
+      callType: ApiCallType.POST,
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey':
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ1emxhemh0Y25kcGVnc25pamN3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQ2OTI2OTksImV4cCI6MjA1MDI2ODY5OX0.myFxYtm5Q3WF1WlV0AJzPoRLKK8W0et8MnKUk4e-nPU',
+        'Authorization':
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ1emxhemh0Y25kcGVnc25pamN3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQ2OTI2OTksImV4cCI6MjA1MDI2ODY5OX0.myFxYtm5Q3WF1WlV0AJzPoRLKK8W0et8MnKUk4e-nPU',
+        'Prefer': 'return=minimal',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
 class ProcedimentosAddCall {
   static Future<ApiCallResponse> call({
     int? membroId,

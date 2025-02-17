@@ -14,7 +14,6 @@ import 'package:ff_theme/flutter_flow/flutter_flow_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:provider/provider.dart';
@@ -77,6 +76,12 @@ class _MainHomeWidgetState extends State<MainHomeWidget>
           FFAppState().UsuarioAtualTipoUsuarioNome =
               _model.outputQueryTipoUsuarios!.firstOrNull!.descricao!;
           safeSetState(() {});
+          FFAppState().UsuarioAtualAgencia =
+              _model.outputQueryUsuarios!.firstOrNull!.agenciaId!;
+          safeSetState(() {});
+          FFAppState().UsuarioAtualTipoUsuarioId =
+              _model.outputQueryUsuarios!.firstOrNull!.tipoUsuarioId!;
+          safeSetState(() {});
         }),
         Future(() async {
           // Action Usuarios
@@ -88,6 +93,9 @@ class _MainHomeWidgetState extends State<MainHomeWidget>
           );
           FFAppState().UsuarioAtualAgenciaNome =
               _model.outputQueryAgenciaNome!.firstOrNull!.nome!;
+          safeSetState(() {});
+          FFAppState().AgenciaAtualld =
+              _model.outputQueryAgenciaNome!.firstOrNull!.agenciaId;
           safeSetState(() {});
         }),
         Future(() async {
@@ -1103,13 +1111,8 @@ class _MainHomeWidgetState extends State<MainHomeWidget>
                 // Customize what your widget looks like when it's loading.
                 if (!snapshot.hasData) {
                   return Center(
-                    child: SizedBox(
-                      width: 50.0,
-                      height: 50.0,
-                      child: SpinKitFadingCircle(
-                        color: FlutterFlowTheme.of(context).tertiary,
-                        size: 50.0,
-                      ),
+                    child: LinearProgressIndicator(
+                      color: FlutterFlowTheme.of(context).tertiary,
                     ),
                   );
                 }

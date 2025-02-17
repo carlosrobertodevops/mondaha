@@ -7,7 +7,6 @@ import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ff_theme/flutter_flow/flutter_flow_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'modal_profile_edit_photo_model.dart';
@@ -67,13 +66,8 @@ class _ModalProfileEditPhotoWidgetState
                 // Customize what your widget looks like when it's loading.
                 if (!snapshot.hasData) {
                   return Center(
-                    child: SizedBox(
-                      width: 50.0,
-                      height: 50.0,
-                      child: SpinKitFadingCircle(
-                        color: FlutterFlowTheme.of(context).tertiary,
-                        size: 50.0,
-                      ),
+                    child: LinearProgressIndicator(
+                      color: FlutterFlowTheme.of(context).tertiary,
                     ),
                   );
                 }

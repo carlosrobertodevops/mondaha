@@ -248,6 +248,8 @@ dynamic deserializeParam<T>(
             return ProcedimentosRow(data);
           case ProcessosRow:
             return ProcessosRow(data);
+          case SubagenciasRow:
+            return SubagenciasRow(data);
           case FaccoesViewRow:
             return FaccoesViewRow(data);
           case CargosRow:
@@ -270,6 +272,8 @@ dynamic deserializeParam<T>(
             return FaccoesViewConcatSearchRow(data);
           case VaraRow:
             return VaraRow(data);
+          case LogsRow:
+            return LogsRow(data);
           case TiposUsuariosRow:
             return TiposUsuariosRow(data);
           case WapplerMigrationsLockRow:

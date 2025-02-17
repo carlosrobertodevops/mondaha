@@ -7,7 +7,6 @@ import 'dart:ui';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:ff_theme/flutter_flow/flutter_flow_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:text_search/text_search.dart';
@@ -60,13 +59,8 @@ class _SearchPageWidgetState extends State<SearchPageWidget> {
           return Scaffold(
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
             body: Center(
-              child: SizedBox(
-                width: 50.0,
-                height: 50.0,
-                child: SpinKitFadingCircle(
-                  color: FlutterFlowTheme.of(context).tertiary,
-                  size: 50.0,
-                ),
+              child: LinearProgressIndicator(
+                color: FlutterFlowTheme.of(context).tertiary,
               ),
             ),
           );
@@ -458,15 +452,10 @@ class _SearchPageWidgetState extends State<SearchPageWidget> {
                                           // Customize what your widget looks like when it's loading.
                                           if (!snapshot.hasData) {
                                             return Center(
-                                              child: SizedBox(
-                                                width: 50.0,
-                                                height: 50.0,
-                                                child: SpinKitFadingCircle(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .tertiary,
-                                                  size: 50.0,
-                                                ),
+                                              child: LinearProgressIndicator(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .tertiary,
                                               ),
                                             );
                                           }

@@ -608,6 +608,50 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Let\'s get started by filling out the form below.',
       'pt': 'Vamos começar preenchendo o formulário abaixo.',
     },
+    '63cungqg': {
+      'en': 'Agency',
+      'pt': 'Agência',
+    },
+    'rtestkt4': {
+      'en': 'Agency',
+      'pt': 'Agência',
+    },
+    'ucx8bnf4': {
+      'en': 'Alfabetizado',
+      'pt': 'Alfabetizado',
+    },
+    'fwvob1t3': {
+      'en': 'illiterate',
+      'pt': 'Não alfabetizado',
+    },
+    'u2uisnk3': {
+      'en': 'Completed elementary education',
+      'pt': 'Ensino fundamental completo',
+    },
+    'log7lys3': {
+      'en': 'Completed high school',
+      'pt': 'Ensino médio completo',
+    },
+    '1dv3mzq7': {
+      'en': 'Completed higher education',
+      'pt': 'Ensino superior completo',
+    },
+    'dd87yimp': {
+      'en': 'Incomplete elementary education',
+      'pt': 'Ensino fundamental incompleto',
+    },
+    '3t62ulqw': {
+      'en': 'Incomplete high school',
+      'pt': 'Ensino médio incompleto',
+    },
+    '7jlntxnl': {
+      'en': 'Incomplete higher education',
+      'pt': 'Ensino superior incompleto',
+    },
+    'cptxqbop': {
+      'en': 'No information',
+      'pt': 'Sem informação',
+    },
     'rxvn7x0x': {
       'en': 'User name',
       'pt': 'Nome de usuário',

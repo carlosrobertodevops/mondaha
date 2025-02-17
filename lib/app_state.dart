@@ -470,6 +470,12 @@ class FFAppState extends ChangeNotifier {
   set buscarUsuarios(bool value) {
     _buscarUsuarios = value;
   }
+
+  int _AgenciaAtualld = 0;
+  int get AgenciaAtualld => _AgenciaAtualld;
+  set AgenciaAtualld(int value) {
+    _AgenciaAtualld = value;
+  }
 }
 
 void _safeInit(Function() initializeField) {

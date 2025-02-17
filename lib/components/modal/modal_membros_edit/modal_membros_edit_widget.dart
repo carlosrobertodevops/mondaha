@@ -28,6 +28,8 @@ import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:aligned_tooltip/aligned_tooltip.dart';
 import 'package:community_testing_ryusdv/app_state.dart'
     as community_testing_ryusdv_app_state;
+import 'package:community_testing_ryusdv/custom_code/widgets/index.dart'
+    as community_testing_ryusdv_custom_widgets;
 import 'package:sticky_headers/sticky_headers.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_debounce/easy_debounce.dart';
@@ -37,7 +39,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:page_transition/page_transition.dart';
@@ -381,6 +382,19 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
 
     return Stack(
       children: [
+        Align(
+          alignment: AlignmentDirectional(0.0, -1.0),
+          child: Container(
+            width: 300.0,
+            height: 100.0,
+            child: community_testing_ryusdv_custom_widgets.ToastListener(
+              width: 300.0,
+              height: 100.0,
+              notificationData: community_testing_ryusdv_app_state.FFAppState()
+                  .notificationDT,
+            ),
+          ),
+        ),
         ClipRRect(
           borderRadius: BorderRadius.circular(0.0),
           child: BackdropFilter(
@@ -2518,13 +2532,8 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                               // Customize what your widget looks like when it's loading.
                                                                                               if (!snapshot.hasData) {
                                                                                                 return Center(
-                                                                                                  child: SizedBox(
-                                                                                                    width: 50.0,
-                                                                                                    height: 50.0,
-                                                                                                    child: SpinKitFadingCircle(
-                                                                                                      color: FlutterFlowTheme.of(context).tertiary,
-                                                                                                      size: 50.0,
-                                                                                                    ),
+                                                                                                  child: LinearProgressIndicator(
+                                                                                                    color: FlutterFlowTheme.of(context).tertiary,
                                                                                                   ),
                                                                                                 );
                                                                                               }
@@ -2863,13 +2872,8 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                               // Customize what your widget looks like when it's loading.
                                                                                               if (!snapshot.hasData) {
                                                                                                 return Center(
-                                                                                                  child: SizedBox(
-                                                                                                    width: 50.0,
-                                                                                                    height: 50.0,
-                                                                                                    child: SpinKitFadingCircle(
-                                                                                                      color: FlutterFlowTheme.of(context).tertiary,
-                                                                                                      size: 50.0,
-                                                                                                    ),
+                                                                                                  child: LinearProgressIndicator(
+                                                                                                    color: FlutterFlowTheme.of(context).tertiary,
                                                                                                   ),
                                                                                                 );
                                                                                               }
@@ -3610,13 +3614,8 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                             // Customize what your widget looks like when it's loading.
                                                                                             if (!snapshot.hasData) {
                                                                                               return Center(
-                                                                                                child: SizedBox(
-                                                                                                  width: 50.0,
-                                                                                                  height: 50.0,
-                                                                                                  child: SpinKitFadingCircle(
-                                                                                                    color: FlutterFlowTheme.of(context).tertiary,
-                                                                                                    size: 50.0,
-                                                                                                  ),
+                                                                                                child: LinearProgressIndicator(
+                                                                                                  color: FlutterFlowTheme.of(context).tertiary,
                                                                                                 ),
                                                                                               );
                                                                                             }
@@ -3689,13 +3688,8 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                             // Customize what your widget looks like when it's loading.
                                                                                             if (!snapshot.hasData) {
                                                                                               return Center(
-                                                                                                child: SizedBox(
-                                                                                                  width: 50.0,
-                                                                                                  height: 50.0,
-                                                                                                  child: SpinKitFadingCircle(
-                                                                                                    color: FlutterFlowTheme.of(context).tertiary,
-                                                                                                    size: 50.0,
-                                                                                                  ),
+                                                                                                child: LinearProgressIndicator(
+                                                                                                  color: FlutterFlowTheme.of(context).tertiary,
                                                                                                 ),
                                                                                               );
                                                                                             }
@@ -4256,13 +4250,8 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                             // Customize what your widget looks like when it's loading.
                                                                                             if (!snapshot.hasData) {
                                                                                               return Center(
-                                                                                                child: SizedBox(
-                                                                                                  width: 50.0,
-                                                                                                  height: 50.0,
-                                                                                                  child: SpinKitFadingCircle(
-                                                                                                    color: FlutterFlowTheme.of(context).tertiary,
-                                                                                                    size: 50.0,
-                                                                                                  ),
+                                                                                                child: LinearProgressIndicator(
+                                                                                                  color: FlutterFlowTheme.of(context).tertiary,
                                                                                                 ),
                                                                                               );
                                                                                             }
@@ -4736,13 +4725,8 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                             // Customize what your widget looks like when it's loading.
                                                                                             if (!snapshot.hasData) {
                                                                                               return Center(
-                                                                                                child: SizedBox(
-                                                                                                  width: 50.0,
-                                                                                                  height: 50.0,
-                                                                                                  child: SpinKitFadingCircle(
-                                                                                                    color: FlutterFlowTheme.of(context).tertiary,
-                                                                                                    size: 50.0,
-                                                                                                  ),
+                                                                                                child: LinearProgressIndicator(
+                                                                                                  color: FlutterFlowTheme.of(context).tertiary,
                                                                                                 ),
                                                                                               );
                                                                                             }
@@ -4810,13 +4794,8 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                             // Customize what your widget looks like when it's loading.
                                                                                             if (!snapshot.hasData) {
                                                                                               return Center(
-                                                                                                child: SizedBox(
-                                                                                                  width: 50.0,
-                                                                                                  height: 50.0,
-                                                                                                  child: SpinKitFadingCircle(
-                                                                                                    color: FlutterFlowTheme.of(context).tertiary,
-                                                                                                    size: 50.0,
-                                                                                                  ),
+                                                                                                child: LinearProgressIndicator(
+                                                                                                  color: FlutterFlowTheme.of(context).tertiary,
                                                                                                 ),
                                                                                               );
                                                                                             }
@@ -4889,13 +4868,8 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                             // Customize what your widget looks like when it's loading.
                                                                                             if (!snapshot.hasData) {
                                                                                               return Center(
-                                                                                                child: SizedBox(
-                                                                                                  width: 50.0,
-                                                                                                  height: 50.0,
-                                                                                                  child: SpinKitFadingCircle(
-                                                                                                    color: FlutterFlowTheme.of(context).tertiary,
-                                                                                                    size: 50.0,
-                                                                                                  ),
+                                                                                                child: LinearProgressIndicator(
+                                                                                                  color: FlutterFlowTheme.of(context).tertiary,
                                                                                                 ),
                                                                                               );
                                                                                             }
@@ -4963,13 +4937,8 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                             // Customize what your widget looks like when it's loading.
                                                                                             if (!snapshot.hasData) {
                                                                                               return Center(
-                                                                                                child: SizedBox(
-                                                                                                  width: 50.0,
-                                                                                                  height: 50.0,
-                                                                                                  child: SpinKitFadingCircle(
-                                                                                                    color: FlutterFlowTheme.of(context).tertiary,
-                                                                                                    size: 50.0,
-                                                                                                  ),
+                                                                                                child: LinearProgressIndicator(
+                                                                                                  color: FlutterFlowTheme.of(context).tertiary,
                                                                                                 ),
                                                                                               );
                                                                                             }
@@ -5294,13 +5263,8 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                             // Customize what your widget looks like when it's loading.
                                                                                             if (!snapshot.hasData) {
                                                                                               return Center(
-                                                                                                child: SizedBox(
-                                                                                                  width: 50.0,
-                                                                                                  height: 50.0,
-                                                                                                  child: SpinKitFadingCircle(
-                                                                                                    color: FlutterFlowTheme.of(context).tertiary,
-                                                                                                    size: 50.0,
-                                                                                                  ),
+                                                                                                child: LinearProgressIndicator(
+                                                                                                  color: FlutterFlowTheme.of(context).tertiary,
                                                                                                 ),
                                                                                               );
                                                                                             }
@@ -5368,13 +5332,8 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                             // Customize what your widget looks like when it's loading.
                                                                                             if (!snapshot.hasData) {
                                                                                               return Center(
-                                                                                                child: SizedBox(
-                                                                                                  width: 50.0,
-                                                                                                  height: 50.0,
-                                                                                                  child: SpinKitFadingCircle(
-                                                                                                    color: FlutterFlowTheme.of(context).tertiary,
-                                                                                                    size: 50.0,
-                                                                                                  ),
+                                                                                                child: LinearProgressIndicator(
+                                                                                                  color: FlutterFlowTheme.of(context).tertiary,
                                                                                                 ),
                                                                                               );
                                                                                             }
@@ -5447,13 +5406,8 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                             // Customize what your widget looks like when it's loading.
                                                                                             if (!snapshot.hasData) {
                                                                                               return Center(
-                                                                                                child: SizedBox(
-                                                                                                  width: 50.0,
-                                                                                                  height: 50.0,
-                                                                                                  child: SpinKitFadingCircle(
-                                                                                                    color: FlutterFlowTheme.of(context).tertiary,
-                                                                                                    size: 50.0,
-                                                                                                  ),
+                                                                                                child: LinearProgressIndicator(
+                                                                                                  color: FlutterFlowTheme.of(context).tertiary,
                                                                                                 ),
                                                                                               );
                                                                                             }
@@ -8517,10 +8471,6 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                 ) ??
                                                                 false;
                                                         if (confirmDialogResponse) {
-                                                          _model.membroSalvo =
-                                                              true;
-                                                          _model.updatePage(
-                                                              () {});
                                                           community_testing_ryusdv_app_state
                                                                       .FFAppState()
                                                                   .notificationDT =
@@ -8546,7 +8496,6 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                             pauseOnHover: false,
                                                             display: true,
                                                           );
-                                                          safeSetState(() {});
                                                           _model.outputMembrosEdit =
                                                               await MembrosTable()
                                                                   .update(

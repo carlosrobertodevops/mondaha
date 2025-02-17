@@ -5,7 +5,6 @@ import '/flutter_flow/flutter_flow_util.dart';
 import 'dart:ui';
 import 'package:ff_theme/flutter_flow/flutter_flow_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'dropdown_usuario_admin_edit_model.dart';
@@ -62,13 +61,8 @@ class _DropdownUsuarioAdminEditWidgetState
         // Customize what your widget looks like when it's loading.
         if (!snapshot.hasData) {
           return Center(
-            child: SizedBox(
-              width: 50.0,
-              height: 50.0,
-              child: SpinKitFadingCircle(
-                color: FlutterFlowTheme.of(context).tertiary,
-                size: 50.0,
-              ),
+            child: LinearProgressIndicator(
+              color: FlutterFlowTheme.of(context).tertiary,
             ),
           );
         }

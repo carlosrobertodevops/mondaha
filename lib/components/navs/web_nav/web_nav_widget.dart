@@ -13,7 +13,6 @@ import 'package:ff_theme/flutter_flow/flutter_flow_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'web_nav_model.dart';
@@ -502,99 +501,100 @@ class _WebNavWidgetState extends State<WebNavWidget>
                           ),
                         ),
                       ),
-                    Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 12.0),
-                      child: InkWell(
-                        splashColor: Colors.transparent,
-                        focusColor: Colors.transparent,
-                        hoverColor: Colors.transparent,
-                        highlightColor: Colors.transparent,
-                        onTap: () async {
-                          logFirebaseEvent('WEB_NAV_COMP_bg_color_ON_TAP');
-                          if (FFAppState().UsuarioAtualId <= 3) {
-                            context.pushNamed(
-                              'main_admin',
-                              queryParameters: {
-                                'mainAdminTipoUsuario': serializeParam(
-                                  FFAppState().UsuarioAtualTipoUsuarioId,
-                                  ParamType.int,
-                                ),
-                              }.withoutNulls,
-                            );
-                          } else {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text(
-                                  'Acesso não permetido !',
-                                  style: TextStyle(
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryText,
+                    if (FFAppState().UsuarioAtualTipoUsuarioId <= 2)
+                      Padding(
+                        padding:
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 12.0),
+                        child: InkWell(
+                          splashColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          onTap: () async {
+                            logFirebaseEvent('WEB_NAV_COMP_bg_color_ON_TAP');
+                            if (FFAppState().UsuarioAtualId <= 3) {
+                              context.pushNamed(
+                                'main_admin',
+                                queryParameters: {
+                                  'mainAdminTipoUsuario': serializeParam(
+                                    FFAppState().UsuarioAtualTipoUsuarioId,
+                                    ParamType.int,
                                   ),
-                                ),
-                                duration: Duration(milliseconds: 4000),
-                                backgroundColor:
-                                    FlutterFlowTheme.of(context).secondary,
-                              ),
-                            );
-                            context.safePop();
-                          }
-                        },
-                        child: Container(
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            color: widget!.selectedNav == 5
-                                ? FlutterFlowTheme.of(context).alternate
-                                : FlutterFlowTheme.of(context)
-                                    .secondaryBackground,
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                          child: Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  Icons.settings_suggest_outlined,
-                                  color: widget!.selectedNav == 5
-                                      ? FlutterFlowTheme.of(context).primary
-                                      : FlutterFlowTheme.of(context)
-                                          .secondaryText,
-                                  size: 28.0,
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      12.0, 0.0, 0.0, 0.0),
-                                  child: Text(
-                                    FFLocalizations.of(context).getText(
-                                      'kfrv5rp5' /* Administration */,
+                                }.withoutNulls,
+                              );
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    'Acesso não permetido !',
+                                    style: TextStyle(
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryText,
                                     ),
-                                    style: FlutterFlowTheme.of(context)
-                                        .labelLarge
-                                        .override(
-                                          fontFamily:
-                                              FlutterFlowTheme.of(context)
-                                                  .labelLargeFamily,
-                                          color: widget!.selectedNav == 5
-                                              ? FlutterFlowTheme.of(context)
-                                                  .primaryText
-                                              : FlutterFlowTheme.of(context)
-                                                  .secondaryText,
-                                          letterSpacing: 0.0,
-                                          useGoogleFonts: GoogleFonts.asMap()
-                                              .containsKey(
-                                                  FlutterFlowTheme.of(context)
-                                                      .labelLargeFamily),
-                                        ),
                                   ),
+                                  duration: Duration(milliseconds: 4000),
+                                  backgroundColor:
+                                      FlutterFlowTheme.of(context).secondary,
                                 ),
-                              ],
+                              );
+                              context.safePop();
+                            }
+                          },
+                          child: Container(
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              color: widget!.selectedNav == 5
+                                  ? FlutterFlowTheme.of(context).alternate
+                                  : FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            child: Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    Icons.settings_suggest_outlined,
+                                    color: widget!.selectedNav == 5
+                                        ? FlutterFlowTheme.of(context).primary
+                                        : FlutterFlowTheme.of(context)
+                                            .secondaryText,
+                                    size: 28.0,
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        12.0, 0.0, 0.0, 0.0),
+                                    child: Text(
+                                      FFLocalizations.of(context).getText(
+                                        'kfrv5rp5' /* Administration */,
+                                      ),
+                                      style: FlutterFlowTheme.of(context)
+                                          .labelLarge
+                                          .override(
+                                            fontFamily:
+                                                FlutterFlowTheme.of(context)
+                                                    .labelLargeFamily,
+                                            color: widget!.selectedNav == 5
+                                                ? FlutterFlowTheme.of(context)
+                                                    .primaryText
+                                                : FlutterFlowTheme.of(context)
+                                                    .secondaryText,
+                                            letterSpacing: 0.0,
+                                            useGoogleFonts: GoogleFonts.asMap()
+                                                .containsKey(
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelLargeFamily),
+                                          ),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
                       ),
-                    ),
                     Padding(
                       padding:
                           EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 12.0),
@@ -1438,74 +1438,75 @@ class _WebNavWidgetState extends State<WebNavWidget>
                             ),
                           ),
                         ),
-                      Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 12.0),
-                        child: InkWell(
-                          splashColor: Colors.transparent,
-                          focusColor: Colors.transparent,
-                          hoverColor: Colors.transparent,
-                          highlightColor: Colors.transparent,
-                          onTap: () async {
-                            logFirebaseEvent('WEB_NAV_COMP_bg_color_ON_TAP');
-                            if (FFAppState().UsuarioAtualTipoUsuarioId <= 3) {
-                              context.pushNamed(
-                                'main_admin',
-                                queryParameters: {
-                                  'mainAdminTipoUsuario': serializeParam(
-                                    FFAppState().UsuarioAtualTipoUsuarioId,
-                                    ParamType.int,
-                                  ),
-                                }.withoutNulls,
-                              );
-                            } else {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text(
-                                    'Acesso não permetido !',
-                                    style: TextStyle(
-                                      color: FlutterFlowTheme.of(context)
-                                          .primaryText,
+                      if (FFAppState().UsuarioAtualTipoUsuarioId <= 2)
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 0.0, 0.0, 12.0),
+                          child: InkWell(
+                            splashColor: Colors.transparent,
+                            focusColor: Colors.transparent,
+                            hoverColor: Colors.transparent,
+                            highlightColor: Colors.transparent,
+                            onTap: () async {
+                              logFirebaseEvent('WEB_NAV_COMP_bg_color_ON_TAP');
+                              if (FFAppState().UsuarioAtualTipoUsuarioId <= 3) {
+                                context.pushNamed(
+                                  'main_admin',
+                                  queryParameters: {
+                                    'mainAdminTipoUsuario': serializeParam(
+                                      FFAppState().UsuarioAtualTipoUsuarioId,
+                                      ParamType.int,
                                     ),
+                                  }.withoutNulls,
+                                );
+                              } else {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(
+                                      'Acesso não permetido !',
+                                      style: TextStyle(
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryText,
+                                      ),
+                                    ),
+                                    duration: Duration(milliseconds: 4000),
+                                    backgroundColor:
+                                        FlutterFlowTheme.of(context).secondary,
                                   ),
-                                  duration: Duration(milliseconds: 4000),
-                                  backgroundColor:
-                                      FlutterFlowTheme.of(context).secondary,
+                                );
+                                context.safePop();
+                              }
+                            },
+                            child: Container(
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                color: widget!.selectedNav == 5
+                                    ? FlutterFlowTheme.of(context).alternate
+                                    : FlutterFlowTheme.of(context)
+                                        .secondaryBackground,
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              child: Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      Icons.settings_suggest_outlined,
+                                      color: widget!.selectedNav == 5
+                                          ? FlutterFlowTheme.of(context).primary
+                                          : FlutterFlowTheme.of(context)
+                                              .secondaryText,
+                                      size: 28.0,
+                                    ),
+                                  ],
                                 ),
-                              );
-                              context.safePop();
-                            }
-                          },
-                          child: Container(
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                              color: widget!.selectedNav == 5
-                                  ? FlutterFlowTheme.of(context).alternate
-                                  : FlutterFlowTheme.of(context)
-                                      .secondaryBackground,
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                            child: Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Icon(
-                                    Icons.settings_suggest_outlined,
-                                    color: widget!.selectedNav == 5
-                                        ? FlutterFlowTheme.of(context).primary
-                                        : FlutterFlowTheme.of(context)
-                                            .secondaryText,
-                                    size: 28.0,
-                                  ),
-                                ],
                               ),
                             ),
                           ),
                         ),
-                      ),
                       Padding(
                         padding:
                             EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 12.0),
