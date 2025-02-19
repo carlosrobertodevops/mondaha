@@ -102,8 +102,8 @@ class _MainProfileWidgetState extends State<MainProfileWidget>
     context.watch<FFAppState>();
     context.watch<community_testing_ryusdv_app_state.FFAppState>();
 
-    return FutureBuilder<List<UsuariosRow>>(
-      future: UsuariosTable().querySingleRow(
+    return FutureBuilder<List<UsuariosViewRow>>(
+      future: UsuariosViewTable().querySingleRow(
         queryFn: (q) => q.eqOrNull(
           'user_id',
           currentUserUid,
@@ -121,11 +121,12 @@ class _MainProfileWidgetState extends State<MainProfileWidget>
             ),
           );
         }
-        List<UsuariosRow> mainProfileUsuariosRowList = snapshot.data!;
+        List<UsuariosViewRow> mainProfileUsuariosViewRowList = snapshot.data!;
 
-        final mainProfileUsuariosRow = mainProfileUsuariosRowList.isNotEmpty
-            ? mainProfileUsuariosRowList.first
-            : null;
+        final mainProfileUsuariosViewRow =
+            mainProfileUsuariosViewRowList.isNotEmpty
+                ? mainProfileUsuariosViewRowList.first
+                : null;
 
         return Title(
             title: 'main_profile',
@@ -422,7 +423,7 @@ class _MainProfileWidgetState extends State<MainProfileWidget>
                                                       queryFn: (q) =>
                                                           q.eqOrNull(
                                                         'tipo_usuario_id',
-                                                        mainProfileUsuariosRow
+                                                        mainProfileUsuariosViewRow
                                                             ?.tipoUsuarioId,
                                                       ),
                                                     ),

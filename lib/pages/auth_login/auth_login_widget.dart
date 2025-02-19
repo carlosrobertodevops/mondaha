@@ -230,7 +230,7 @@ class _AuthLoginWidgetState extends State<AuthLoginWidget>
                                 alignment: AlignmentDirectional(0.0, 1.0),
                                 child: Container(
                                   width: double.infinity,
-                                  height: 600.0,
+                                  height: 650.0,
                                   constraints: BoxConstraints(
                                     maxWidth: 600.0,
                                   ),

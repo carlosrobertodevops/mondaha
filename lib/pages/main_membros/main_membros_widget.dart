@@ -762,20 +762,13 @@ class _MainMembrosWidgetState extends State<MainMembrosWidget>
                                                                     MainAxisSize
                                                                         .max,
                                                                 children: [
-                                                                  if (responsiveVisibility(
-                                                                    context:
-                                                                        context,
-                                                                    phone:
-                                                                        false,
-                                                                  ))
-                                                                    Container(
-                                                                      width:
-                                                                          90.0,
-                                                                      height:
-                                                                          100.0,
-                                                                      decoration:
-                                                                          BoxDecoration(),
-                                                                    ),
+                                                                  Container(
+                                                                    width: 90.0,
+                                                                    height:
+                                                                        100.0,
+                                                                    decoration:
+                                                                        BoxDecoration(),
+                                                                  ),
                                                                   Expanded(
                                                                     child:
                                                                         Align(
@@ -800,111 +793,99 @@ class _MainMembrosWidgetState extends State<MainMembrosWidget>
                                                                       ),
                                                                     ),
                                                                   ),
-                                                                  if (responsiveVisibility(
-                                                                    context:
-                                                                        context,
-                                                                    phone:
-                                                                        false,
-                                                                    tablet:
-                                                                        false,
-                                                                  ))
-                                                                    Expanded(
+                                                                  Expanded(
+                                                                    child:
+                                                                        Align(
+                                                                      alignment:
+                                                                          AlignmentDirectional(
+                                                                              -1.0,
+                                                                              0.0),
                                                                       child:
-                                                                          Align(
-                                                                        alignment: AlignmentDirectional(
-                                                                            -1.0,
+                                                                          Padding(
+                                                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                                                            16.0,
+                                                                            0.0,
+                                                                            0.0,
                                                                             0.0),
                                                                         child:
-                                                                            Padding(
-                                                                          padding: EdgeInsetsDirectional.fromSTEB(
-                                                                              16.0,
-                                                                              0.0,
-                                                                              0.0,
-                                                                              0.0),
-                                                                          child:
-                                                                              Text(
-                                                                            FFLocalizations.of(context).getText(
-                                                                              '5rmzx51f' /* Funcioton */,
-                                                                            ),
-                                                                            style: FlutterFlowTheme.of(context).labelMedium.override(
-                                                                                  fontFamily: FlutterFlowTheme.of(context).labelMediumFamily,
-                                                                                  letterSpacing: 0.0,
-                                                                                  useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).labelMediumFamily),
-                                                                                ),
+                                                                            Text(
+                                                                          FFLocalizations.of(context)
+                                                                              .getText(
+                                                                            'z0huz1sz' /* Faction */,
                                                                           ),
+                                                                          style: FlutterFlowTheme.of(context)
+                                                                              .labelMedium
+                                                                              .override(
+                                                                                fontFamily: FlutterFlowTheme.of(context).labelMediumFamily,
+                                                                                letterSpacing: 0.0,
+                                                                                useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).labelMediumFamily),
+                                                                              ),
                                                                         ),
                                                                       ),
                                                                     ),
-                                                                  if (responsiveVisibility(
-                                                                    context:
-                                                                        context,
-                                                                    phone:
-                                                                        false,
-                                                                    tablet:
-                                                                        false,
-                                                                  ))
-                                                                    Expanded(
+                                                                  ),
+                                                                  Expanded(
+                                                                    child:
+                                                                        Align(
+                                                                      alignment:
+                                                                          AlignmentDirectional(
+                                                                              -1.0,
+                                                                              0.0),
                                                                       child:
-                                                                          Align(
-                                                                        alignment: AlignmentDirectional(
-                                                                            -1.0,
+                                                                          Padding(
+                                                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                                                            16.0,
+                                                                            0.0,
+                                                                            0.0,
                                                                             0.0),
                                                                         child:
-                                                                            Padding(
-                                                                          padding: EdgeInsetsDirectional.fromSTEB(
-                                                                              16.0,
-                                                                              0.0,
-                                                                              0.0,
-                                                                              0.0),
-                                                                          child:
-                                                                              Text(
-                                                                            FFLocalizations.of(context).getText(
-                                                                              'z0huz1sz' /* Faction */,
-                                                                            ),
-                                                                            style: FlutterFlowTheme.of(context).labelMedium.override(
-                                                                                  fontFamily: FlutterFlowTheme.of(context).labelMediumFamily,
-                                                                                  letterSpacing: 0.0,
-                                                                                  useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).labelMediumFamily),
-                                                                                ),
+                                                                            Text(
+                                                                          FFLocalizations.of(context)
+                                                                              .getText(
+                                                                            '5rmzx51f' /* Function */,
                                                                           ),
+                                                                          style: FlutterFlowTheme.of(context)
+                                                                              .labelMedium
+                                                                              .override(
+                                                                                fontFamily: FlutterFlowTheme.of(context).labelMediumFamily,
+                                                                                letterSpacing: 0.0,
+                                                                                useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).labelMediumFamily),
+                                                                              ),
                                                                         ),
                                                                       ),
                                                                     ),
-                                                                  if (responsiveVisibility(
-                                                                    context:
-                                                                        context,
-                                                                    phone:
-                                                                        false,
-                                                                    tablet:
-                                                                        false,
-                                                                  ))
-                                                                    Expanded(
+                                                                  ),
+                                                                  Expanded(
+                                                                    child:
+                                                                        Align(
+                                                                      alignment:
+                                                                          AlignmentDirectional(
+                                                                              -1.0,
+                                                                              0.0),
                                                                       child:
-                                                                          Align(
-                                                                        alignment: AlignmentDirectional(
-                                                                            -1.0,
+                                                                          Padding(
+                                                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                                                            16.0,
+                                                                            0.0,
+                                                                            0.0,
                                                                             0.0),
                                                                         child:
-                                                                            Padding(
-                                                                          padding: EdgeInsetsDirectional.fromSTEB(
-                                                                              16.0,
-                                                                              0.0,
-                                                                              0.0,
-                                                                              0.0),
-                                                                          child:
-                                                                              Text(
-                                                                            FFLocalizations.of(context).getText(
-                                                                              '04vrv62j' /* Alcunha */,
-                                                                            ),
-                                                                            style: FlutterFlowTheme.of(context).labelMedium.override(
-                                                                                  fontFamily: FlutterFlowTheme.of(context).labelMediumFamily,
-                                                                                  letterSpacing: 0.0,
-                                                                                  useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).labelMediumFamily),
-                                                                                ),
+                                                                            Text(
+                                                                          FFLocalizations.of(context)
+                                                                              .getText(
+                                                                            '04vrv62j' /* Alcunha */,
                                                                           ),
+                                                                          style: FlutterFlowTheme.of(context)
+                                                                              .labelMedium
+                                                                              .override(
+                                                                                fontFamily: FlutterFlowTheme.of(context).labelMediumFamily,
+                                                                                letterSpacing: 0.0,
+                                                                                useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).labelMediumFamily),
+                                                                              ),
                                                                         ),
                                                                       ),
                                                                     ),
+                                                                  ),
                                                                   Expanded(
                                                                     child:
                                                                         Align(
@@ -1052,6 +1033,7 @@ class _MainMembrosWidgetState extends State<MainMembrosWidget>
                                                                                           child: ModalMembrosEditWidget(
                                                                                             membrosRow: listViewMembrosMembrosViewConcatSeachRow,
                                                                                             membrosFotos: listViewMembrosMembrosViewConcatSeachRow.fotosPath,
+                                                                                            membrosId: listViewMembrosMembrosViewConcatSeachRow.membroId,
                                                                                           ),
                                                                                         ),
                                                                                       );
@@ -1122,80 +1104,65 @@ class _MainMembrosWidgetState extends State<MainMembrosWidget>
                                                                                                   ),
                                                                                                 ),
                                                                                               ),
-                                                                                              if (responsiveVisibility(
-                                                                                                context: context,
-                                                                                                phone: false,
-                                                                                                tablet: false,
-                                                                                              ))
-                                                                                                Expanded(
-                                                                                                  child: Padding(
-                                                                                                    padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
-                                                                                                    child: Text(
-                                                                                                      valueOrDefault<String>(
-                                                                                                        listViewMembrosMembrosViewConcatSeachRow.funcaoNome,
-                                                                                                        'sem informação',
-                                                                                                      ),
-                                                                                                      style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                            fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                                            letterSpacing: 0.0,
-                                                                                                            useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                                                          ),
+                                                                                              Expanded(
+                                                                                                child: Padding(
+                                                                                                  padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
+                                                                                                  child: Text(
+                                                                                                    valueOrDefault<String>(
+                                                                                                      listViewMembrosMembrosViewConcatSeachRow.faccaoNome,
+                                                                                                      'sem informação',
                                                                                                     ),
+                                                                                                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                          fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                                                          fontSize: 14.0,
+                                                                                                          letterSpacing: 0.0,
+                                                                                                          useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                                                        ),
                                                                                                   ),
                                                                                                 ),
-                                                                                              if (responsiveVisibility(
-                                                                                                context: context,
-                                                                                                phone: false,
-                                                                                                tablet: false,
-                                                                                              ))
-                                                                                                Expanded(
-                                                                                                  child: Padding(
-                                                                                                    padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
-                                                                                                    child: Text(
-                                                                                                      valueOrDefault<String>(
-                                                                                                        listViewMembrosMembrosViewConcatSeachRow.faccaoNome,
-                                                                                                        'sem informação',
-                                                                                                      ),
-                                                                                                      style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                            fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                                            fontSize: 14.0,
-                                                                                                            letterSpacing: 0.0,
-                                                                                                            useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                                                          ),
+                                                                                              ),
+                                                                                              Expanded(
+                                                                                                child: Padding(
+                                                                                                  padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
+                                                                                                  child: Text(
+                                                                                                    valueOrDefault<String>(
+                                                                                                      listViewMembrosMembrosViewConcatSeachRow.funcaoNome,
+                                                                                                      'sem informação',
                                                                                                     ),
+                                                                                                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                          fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                                                          letterSpacing: 0.0,
+                                                                                                          useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                                                        ),
                                                                                                   ),
                                                                                                 ),
-                                                                                              if (responsiveVisibility(
-                                                                                                context: context,
-                                                                                                phone: false,
-                                                                                                tablet: false,
-                                                                                              ))
-                                                                                                Expanded(
-                                                                                                  child: Padding(
-                                                                                                    padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
-                                                                                                    child: Text(
-                                                                                                      valueOrDefault<String>(
-                                                                                                        listViewMembrosMembrosViewConcatSeachRow.alcunha.firstOrNull ==
-                                                                                                                valueOrDefault<String>(
-                                                                                                                  '',
-                                                                                                                  'sem informação',
-                                                                                                                )
-                                                                                                            ? 'sem informação'
-                                                                                                            : valueOrDefault<String>(
-                                                                                                                listViewMembrosMembrosViewConcatSeachRow.alcunha.firstOrNull,
+                                                                                              ),
+                                                                                              Expanded(
+                                                                                                child: Padding(
+                                                                                                  padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
+                                                                                                  child: Text(
+                                                                                                    valueOrDefault<String>(
+                                                                                                      listViewMembrosMembrosViewConcatSeachRow.alcunha.firstOrNull ==
+                                                                                                              valueOrDefault<String>(
+                                                                                                                '',
                                                                                                                 'sem informação',
-                                                                                                              ),
-                                                                                                        'sem informação',
-                                                                                                      ),
-                                                                                                      style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                            fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                                            fontSize: 14.0,
-                                                                                                            letterSpacing: 0.0,
-                                                                                                            useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                                                          ),
+                                                                                                              )
+                                                                                                          ? 'sem informação'
+                                                                                                          : valueOrDefault<String>(
+                                                                                                              listViewMembrosMembrosViewConcatSeachRow.alcunha.firstOrNull,
+                                                                                                              'sem informação',
+                                                                                                            ),
+                                                                                                      'sem informação',
                                                                                                     ),
+                                                                                                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                          fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                                                          fontSize: 14.0,
+                                                                                                          letterSpacing: 0.0,
+                                                                                                          useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                                                        ),
                                                                                                   ),
                                                                                                 ),
+                                                                                              ),
                                                                                               Expanded(
                                                                                                 child: Row(
                                                                                                   mainAxisSize: MainAxisSize.max,
@@ -1262,6 +1229,7 @@ class _MainMembrosWidgetState extends State<MainMembrosWidget>
                                                                                                         child: DropdownMemberEditWidget(
                                                                                                           membrosRow: listViewMembrosMembrosViewConcatSeachRow,
                                                                                                           membrosFotos: listViewMembrosMembrosViewConcatSeachRow.fotosPath,
+                                                                                                          membroId: listViewMembrosMembrosViewConcatSeachRow.membroId,
                                                                                                         ),
                                                                                                       ),
                                                                                                     );
@@ -1450,80 +1418,65 @@ class _MainMembrosWidgetState extends State<MainMembrosWidget>
                                                                                                   ),
                                                                                                 ),
                                                                                               ),
-                                                                                              if (responsiveVisibility(
-                                                                                                context: context,
-                                                                                                phone: false,
-                                                                                                tablet: false,
-                                                                                              ))
-                                                                                                Expanded(
-                                                                                                  child: Padding(
-                                                                                                    padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
-                                                                                                    child: Text(
-                                                                                                      valueOrDefault<String>(
-                                                                                                        listViewmMembrosSeachMembrosViewConcatSeachRow.funcaoNome,
-                                                                                                        'sem informação',
-                                                                                                      ),
-                                                                                                      style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                            fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                                            letterSpacing: 0.0,
-                                                                                                            useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                                                          ),
+                                                                                              Expanded(
+                                                                                                child: Padding(
+                                                                                                  padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
+                                                                                                  child: Text(
+                                                                                                    valueOrDefault<String>(
+                                                                                                      listViewmMembrosSeachMembrosViewConcatSeachRow.faccaoNome,
+                                                                                                      'sem informação',
                                                                                                     ),
+                                                                                                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                          fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                                                          fontSize: 14.0,
+                                                                                                          letterSpacing: 0.0,
+                                                                                                          useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                                                        ),
                                                                                                   ),
                                                                                                 ),
-                                                                                              if (responsiveVisibility(
-                                                                                                context: context,
-                                                                                                phone: false,
-                                                                                                tablet: false,
-                                                                                              ))
-                                                                                                Expanded(
-                                                                                                  child: Padding(
-                                                                                                    padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
-                                                                                                    child: Text(
-                                                                                                      valueOrDefault<String>(
-                                                                                                        listViewmMembrosSeachMembrosViewConcatSeachRow.faccaoNome,
-                                                                                                        'sem informação',
-                                                                                                      ),
-                                                                                                      style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                            fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                                            fontSize: 14.0,
-                                                                                                            letterSpacing: 0.0,
-                                                                                                            useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                                                          ),
+                                                                                              ),
+                                                                                              Expanded(
+                                                                                                child: Padding(
+                                                                                                  padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
+                                                                                                  child: Text(
+                                                                                                    valueOrDefault<String>(
+                                                                                                      listViewmMembrosSeachMembrosViewConcatSeachRow.funcaoNome,
+                                                                                                      'sem informação',
                                                                                                     ),
+                                                                                                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                          fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                                                          letterSpacing: 0.0,
+                                                                                                          useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                                                        ),
                                                                                                   ),
                                                                                                 ),
-                                                                                              if (responsiveVisibility(
-                                                                                                context: context,
-                                                                                                phone: false,
-                                                                                                tablet: false,
-                                                                                              ))
-                                                                                                Expanded(
-                                                                                                  child: Padding(
-                                                                                                    padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
-                                                                                                    child: Text(
-                                                                                                      valueOrDefault<String>(
-                                                                                                        listViewmMembrosSeachMembrosViewConcatSeachRow.alcunha.firstOrNull ==
-                                                                                                                valueOrDefault<String>(
-                                                                                                                  '',
-                                                                                                                  'sem informação',
-                                                                                                                )
-                                                                                                            ? 'sem informação'
-                                                                                                            : valueOrDefault<String>(
-                                                                                                                listViewmMembrosSeachMembrosViewConcatSeachRow.alcunha.firstOrNull,
+                                                                                              ),
+                                                                                              Expanded(
+                                                                                                child: Padding(
+                                                                                                  padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
+                                                                                                  child: Text(
+                                                                                                    valueOrDefault<String>(
+                                                                                                      listViewmMembrosSeachMembrosViewConcatSeachRow.alcunha.firstOrNull ==
+                                                                                                              valueOrDefault<String>(
+                                                                                                                '',
                                                                                                                 'sem informação',
-                                                                                                              ),
-                                                                                                        'sem informação',
-                                                                                                      ),
-                                                                                                      style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                            fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                                            fontSize: 14.0,
-                                                                                                            letterSpacing: 0.0,
-                                                                                                            useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                                                          ),
+                                                                                                              )
+                                                                                                          ? 'sem informação'
+                                                                                                          : valueOrDefault<String>(
+                                                                                                              listViewmMembrosSeachMembrosViewConcatSeachRow.alcunha.firstOrNull,
+                                                                                                              'sem informação',
+                                                                                                            ),
+                                                                                                      'sem informação',
                                                                                                     ),
+                                                                                                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                          fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                                                          fontSize: 14.0,
+                                                                                                          letterSpacing: 0.0,
+                                                                                                          useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                                                        ),
                                                                                                   ),
                                                                                                 ),
+                                                                                              ),
                                                                                               Expanded(
                                                                                                 child: Row(
                                                                                                   mainAxisSize: MainAxisSize.max,

@@ -19,10 +19,6 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 import 'dart:ui';
-import "package:community_testing_ryusdv/backend/schema/enums/enums.dart"
-    as community_testing_ryusdv_enums;
-import "package:community_testing_ryusdv/backend/schema/structs/index.dart"
-    as community_testing_ryusdv_data_schema;
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'modal_membros_add_widget.dart' show ModalMembrosAddWidget;
@@ -190,6 +186,10 @@ class ModalMembrosAddModel extends FlutterFlowModel<ModalMembrosAddWidget> {
 
   int? membroId;
 
+  int procedimentoTotal = 0;
+
+  int processoTotal = 0;
+
   ///  State fields for stateful widgets in this component.
 
   final formKey2 = GlobalKey<FormState>();
@@ -251,12 +251,12 @@ class ModalMembrosAddModel extends FlutterFlowModel<ModalMembrosAddWidget> {
     return null;
   }
 
-  // Stores action output result for [Backend Call - Query Rows] action in txt_nome_completo widget.
-  List<MembrosRow>? existeMmbro;
   // State field(s) for txt_alcunha_add widget.
   FocusNode? txtAlcunhaAddFocusNode;
   TextEditingController? txtAlcunhaAddTextController;
   String? Function(BuildContext, String?)? txtAlcunhaAddTextControllerValidator;
+  // Stores action output result for [Custom Action - checkValueInList] action in IconButton widget.
+  bool? outputAlcunhaExists;
   // State field(s) for txt_membro_naturalidade widget.
   FocusNode? txtMembroNaturalidadeFocusNode;
   TextEditingController? txtMembroNaturalidadeTextController;
@@ -323,6 +323,8 @@ class ModalMembrosAddModel extends FlutterFlowModel<ModalMembrosAddWidget> {
   TextEditingController? txtMembrosEnderecosAddTextController;
   String? Function(BuildContext, String?)?
       txtMembrosEnderecosAddTextControllerValidator;
+  // Stores action output result for [Custom Action - checkValueInList] action in IconButton widget.
+  bool? outputEnderecoExists;
   // State field(s) for GoogleMapMembro widget.
   LatLng? googleMapMembrosCenter;
   final googleMapMembrosController = Completer<GoogleMapController>();
@@ -398,8 +400,8 @@ class ModalMembrosAddModel extends FlutterFlowModel<ModalMembrosAddWidget> {
   String? Function(BuildContext, String?)?
       txtProcedimentoDataTextControllerValidator;
   DateTime? datePicked2;
-  // Stores action output result for [Custom Action - checkProcedimentoExists] action in Button widget.
-  bool? outputCheckProcedimentoExists;
+  // Stores action output result for [Custom Action - checkProcedimentoNoExists] action in Button widget.
+  bool? outputCheckProcedimentoNoExists;
   // State field(s) for txt_processo_no_acao_penal widget.
   FocusNode? txtProcessoNoAcaoPenalFocusNode;
   TextEditingController? txtProcessoNoAcaoPenalTextController;
@@ -417,7 +419,7 @@ class ModalMembrosAddModel extends FlutterFlowModel<ModalMembrosAddWidget> {
   // State field(s) for ddw_processo_situacao_reu widget.
   String? ddwProcessoSituacaoReuValue;
   FormFieldController<String>? ddwProcessoSituacaoReuValueController;
-  // Stores action output result for [Custom Action - checkProcessoExists] action in Button widget.
+  // Stores action output result for [Custom Action - checkAcaopenalNoExists] action in Button widget.
   bool? outputCheckProcessoExists;
   // State field(s) for txt_historico widget.
   FocusNode? txtHistoricoFocusNode;

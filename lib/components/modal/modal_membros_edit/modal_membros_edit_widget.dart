@@ -19,8 +19,6 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 import 'dart:ui';
-import "package:community_testing_ryusdv/backend/schema/enums/enums.dart"
-    as community_testing_ryusdv_enums;
 import "package:community_testing_ryusdv/backend/schema/structs/index.dart"
     as community_testing_ryusdv_data_schema;
 import '/custom_code/actions/index.dart' as actions;
@@ -52,10 +50,12 @@ class ModalMembrosEditWidget extends StatefulWidget {
     super.key,
     this.membrosRow,
     this.membrosFotos,
+    this.membrosId,
   });
 
   final MembrosViewConcatSeachRow? membrosRow;
   final List<String>? membrosFotos;
+  final int? membrosId;
 
   @override
   State<ModalMembrosEditWidget> createState() => _ModalMembrosEditWidgetState();
@@ -101,6 +101,7 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                   widget!.membrosRow!.coordenadas.toList())
               .toList()
               .cast<LatLng>();
+          _model.membroId = widget!.membrosRow?.membroId;
           _model.updatePage(() {});
           await _model.googleMapMembrosController.future.then(
             (c) => c.animateCamera(
@@ -2276,8 +2277,34 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                             onPressed: () async {
                                                                                               logFirebaseEvent('MODAL_MEMBROS_EDIT_add_rounded_ICN_ON_TA');
                                                                                               if (_model.txtAlcunhaAddTextController.text != '') {
-                                                                                                _model.addToMembrosAlcunhas(_model.txtAlcunhaAddTextController.text);
-                                                                                                safeSetState(() {});
+                                                                                                _model.outputAlcunhaExists = await actions.checkValueInList(
+                                                                                                  _model.membrosAlcunhas.toList(),
+                                                                                                  _model.txtAlcunhaAddTextController.text,
+                                                                                                );
+                                                                                                if (_model.outputAlcunhaExists!) {
+                                                                                                  await showDialog(
+                                                                                                    context: context,
+                                                                                                    builder: (dialogContext) {
+                                                                                                      return Dialog(
+                                                                                                        elevation: 0,
+                                                                                                        insetPadding: EdgeInsets.zero,
+                                                                                                        backgroundColor: Colors.transparent,
+                                                                                                        alignment: AlignmentDirectional(0.0, 0.0).resolve(Directionality.of(context)),
+                                                                                                        child: Container(
+                                                                                                          height: 100.0,
+                                                                                                          width: 300.0,
+                                                                                                          child: Toast03Widget(
+                                                                                                            texto: 'Alcunha já existe !!!',
+                                                                                                            titulo: 'Atenção',
+                                                                                                          ),
+                                                                                                        ),
+                                                                                                      );
+                                                                                                    },
+                                                                                                  );
+                                                                                                } else {
+                                                                                                  _model.addToMembrosAlcunhas(_model.txtAlcunhaAddTextController.text);
+                                                                                                  safeSetState(() {});
+                                                                                                }
                                                                                               } else {
                                                                                                 await showDialog(
                                                                                                   context: context,
@@ -2301,6 +2328,8 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                                   },
                                                                                                 );
                                                                                               }
+
+                                                                                              safeSetState(() {});
                                                                                             },
                                                                                           ),
                                                                                         ),
@@ -3934,15 +3963,41 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                             onPressed: () async {
                                                                                               logFirebaseEvent('MODAL_MEMBROS_EDIT_add_rounded_ICN_ON_TA');
                                                                                               if (_model.txtMembrosEnderecosAddTextController.text != '') {
-                                                                                                _model.addToMembrosEnderecos(_model.txtMembrosEnderecosAddTextController.text);
-                                                                                                _model.updatePage(() {});
-                                                                                                _model.addToMembrosLatLng(_model.placePickerEnderecoValue.latLng);
-                                                                                                _model.updatePage(() {});
-                                                                                                await _model.googleMapMembrosController.future.then(
-                                                                                                  (c) => c.animateCamera(
-                                                                                                    CameraUpdate.newLatLng(_model.membrosLatLng.lastOrNull!.toGoogleMaps()),
-                                                                                                  ),
+                                                                                                _model.outputEnderecoExists = await actions.checkValueInList(
+                                                                                                  _model.membrosEnderecos.toList(),
+                                                                                                  _model.txtMembrosEnderecosAddTextController.text,
                                                                                                 );
+                                                                                                if (_model.outputEnderecoExists!) {
+                                                                                                  await showDialog(
+                                                                                                    context: context,
+                                                                                                    builder: (dialogContext) {
+                                                                                                      return Dialog(
+                                                                                                        elevation: 0,
+                                                                                                        insetPadding: EdgeInsets.zero,
+                                                                                                        backgroundColor: Colors.transparent,
+                                                                                                        alignment: AlignmentDirectional(0.0, 0.0).resolve(Directionality.of(context)),
+                                                                                                        child: Container(
+                                                                                                          height: 100.0,
+                                                                                                          width: 300.0,
+                                                                                                          child: Toast03Widget(
+                                                                                                            texto: 'Endereço já existe !!!',
+                                                                                                            titulo: 'Atenção',
+                                                                                                          ),
+                                                                                                        ),
+                                                                                                      );
+                                                                                                    },
+                                                                                                  );
+                                                                                                } else {
+                                                                                                  _model.addToMembrosEnderecos(_model.txtMembrosEnderecosAddTextController.text);
+                                                                                                  _model.updatePage(() {});
+                                                                                                  _model.addToMembrosLatLng(_model.placePickerEnderecoValue.latLng);
+                                                                                                  _model.updatePage(() {});
+                                                                                                  await _model.googleMapMembrosController.future.then(
+                                                                                                    (c) => c.animateCamera(
+                                                                                                      CameraUpdate.newLatLng(_model.membrosLatLng.lastOrNull!.toGoogleMaps()),
+                                                                                                    ),
+                                                                                                  );
+                                                                                                }
                                                                                               } else {
                                                                                                 await showDialog(
                                                                                                   context: context,
@@ -3966,6 +4021,8 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                                                   },
                                                                                                 );
                                                                                               }
+
+                                                                                              safeSetState(() {});
                                                                                             },
                                                                                           ),
                                                                                         ),
@@ -8471,31 +8528,6 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                 ) ??
                                                                 false;
                                                         if (confirmDialogResponse) {
-                                                          community_testing_ryusdv_app_state
-                                                                      .FFAppState()
-                                                                  .notificationDT =
-                                                              community_testing_ryusdv_data_schema
-                                                                  .NotificationStruct(
-                                                            title: 'Atenção',
-                                                            description:
-                                                                'Salvando dados ...',
-                                                            style:
-                                                                community_testing_ryusdv_enums
-                                                                    .ToastStyle
-                                                                    .fillColored,
-                                                            position:
-                                                                community_testing_ryusdv_enums
-                                                                    .ToastPosition
-                                                                    .topCenter,
-                                                            type:
-                                                                community_testing_ryusdv_enums
-                                                                    .ToastType
-                                                                    .info,
-                                                            progressBar: true,
-                                                            dragToClose: false,
-                                                            pauseOnHover: false,
-                                                            display: true,
-                                                          );
                                                           _model.outputMembrosEdit =
                                                               await MembrosTable()
                                                                   .update(
@@ -8688,30 +8720,19 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                           .membrosRow
                                                                           ?.membroId,
                                                                       procedimentoNo: _model
-                                                                          .membrosProcedimentos
-                                                                          .elementAtOrNull(
-                                                                              _model.membrosProcedimentosCount!)
-                                                                          ?.procedimentoNo,
-                                                                      unidade: _model
-                                                                          .membrosProcedimentos
-                                                                          .elementAtOrNull(
-                                                                              _model.membrosProcedimentosCount!)
-                                                                          ?.unidade,
-                                                                      procedimentoTipo: _model
-                                                                          .membrosProcedimentos
-                                                                          .elementAtOrNull(
-                                                                              _model.membrosProcedimentosCount!)
-                                                                          ?.procedimentoTipo,
+                                                                          .txtProcedimentoNoTextController
+                                                                          .text,
+                                                                      unidade:
+                                                                          _model
+                                                                              .ddwProcedimentoUnidadeValue,
+                                                                      procedimentoTipo:
+                                                                          _model
+                                                                              .ddwProcedimentoTipoValue,
                                                                       crime: _model
-                                                                          .membrosProcedimentos
-                                                                          .elementAtOrNull(
-                                                                              _model.membrosProcedimentosCount!)
-                                                                          ?.crime,
+                                                                          .ddwProcedimentoCrimeValue,
                                                                       data: _model
-                                                                          .membrosProcedimentos
-                                                                          .elementAtOrNull(
-                                                                              _model.membrosProcedimentosCount!)
-                                                                          ?.data,
+                                                                          .txtProcedimentoDataTextController
+                                                                          .text,
                                                                     );
 
                                                                     _shouldSetState =
@@ -8808,36 +8829,6 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                 }
                                                               }),
                                                             ]);
-                                                            _model.membroSalvo =
-                                                                false;
-                                                            safeSetState(() {});
-                                                            community_testing_ryusdv_app_state
-                                                                        .FFAppState()
-                                                                    .notificationDT =
-                                                                community_testing_ryusdv_data_schema
-                                                                    .NotificationStruct(
-                                                              title: 'Atenção',
-                                                              description:
-                                                                  'Salvando dados ...',
-                                                              style: community_testing_ryusdv_enums
-                                                                  .ToastStyle
-                                                                  .fillColored,
-                                                              position:
-                                                                  community_testing_ryusdv_enums
-                                                                      .ToastPosition
-                                                                      .topCenter,
-                                                              type:
-                                                                  community_testing_ryusdv_enums
-                                                                      .ToastType
-                                                                      .info,
-                                                              progressBar: true,
-                                                              dragToClose:
-                                                                  false,
-                                                              pauseOnHover:
-                                                                  false,
-                                                              display: false,
-                                                            );
-                                                            safeSetState(() {});
                                                             await showDialog(
                                                               context: context,
                                                               builder:
@@ -8894,7 +8885,7 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                       texto: FFLocalizations.of(
                                                                               context)
                                                                           .getText(
-                                                                        'p4gjje04' /* Some data is wrong!!! */,
+                                                                        'fwpyqfwo' /* Some data is wrong!!! */,
                                                                       ),
                                                                       titulo:
                                                                           'Atenção',
@@ -8903,34 +8894,6 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                 );
                                                               },
                                                             );
-
-                                                            community_testing_ryusdv_app_state
-                                                                        .FFAppState()
-                                                                    .notificationDT =
-                                                                community_testing_ryusdv_data_schema
-                                                                    .NotificationStruct(
-                                                              title: 'Atenção',
-                                                              description:
-                                                                  'Salvando dados ...',
-                                                              style: community_testing_ryusdv_enums
-                                                                  .ToastStyle
-                                                                  .fillColored,
-                                                              position:
-                                                                  community_testing_ryusdv_enums
-                                                                      .ToastPosition
-                                                                      .topCenter,
-                                                              type:
-                                                                  community_testing_ryusdv_enums
-                                                                      .ToastType
-                                                                      .info,
-                                                              progressBar: true,
-                                                              dragToClose:
-                                                                  false,
-                                                              pauseOnHover:
-                                                                  false,
-                                                              display: false,
-                                                            );
-                                                            safeSetState(() {});
                                                           }
                                                         } else {
                                                           if (_shouldSetState)

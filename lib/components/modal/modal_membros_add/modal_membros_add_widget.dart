@@ -19,10 +19,6 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 import 'dart:ui';
-import "package:community_testing_ryusdv/backend/schema/enums/enums.dart"
-    as community_testing_ryusdv_enums;
-import "package:community_testing_ryusdv/backend/schema/structs/index.dart"
-    as community_testing_ryusdv_data_schema;
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:aligned_tooltip/aligned_tooltip.dart';
@@ -81,34 +77,6 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
     _model.txtNomeCompletoFocusNode!.addListener(
       () async {
         logFirebaseEvent('MODAL_MEMBROS_ADD_txt_nome_completo_ON_F');
-        _model.existeMmbro = await MembrosTable().queryRows(
-          queryFn: (q) => q
-              .eqOrNull(
-                'nome_completo',
-                _model.txtNomeCompletoTextController.text,
-              )
-              .order('nome_completo'),
-        );
-        if (_model.existeMmbro?.contains(null) != false) {
-          await showDialog(
-            context: context,
-            builder: (dialogContext) {
-              return Dialog(
-                elevation: 0,
-                insetPadding: EdgeInsets.zero,
-                backgroundColor: Colors.transparent,
-                alignment: AlignmentDirectional(0.0, 0.0)
-                    .resolve(Directionality.of(context)),
-                child: Toast03Widget(
-                  texto: 'Nome  já existe  !!!',
-                  titulo: 'Atenção',
-                ),
-              );
-            },
-          );
-        }
-
-        safeSetState(() {});
       },
     );
     _model.txtAlcunhaAddTextController ??= TextEditingController();
@@ -125,7 +93,11 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
 
     _model.txtNoCpfTextController ??= TextEditingController();
     _model.txtNoCpfFocusNode ??= FocusNode();
-
+    _model.txtNoCpfFocusNode!.addListener(
+      () async {
+        logFirebaseEvent('MODAL_MEMBROS_ADD_txt_no_cpf_ON_FOCUS_CH');
+      },
+    );
     _model.txtNoInfopenTextController ??= TextEditingController();
     _model.txtNoInfopenFocusNode ??= FocusNode();
 
@@ -1807,89 +1779,87 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                                     children: [
                                                                                       Expanded(
                                                                                         flex: 10,
-                                                                                        child: Builder(
-                                                                                          builder: (context) => TextFormField(
-                                                                                            controller: _model.txtNomeCompletoTextController,
-                                                                                            focusNode: _model.txtNomeCompletoFocusNode,
-                                                                                            onChanged: (_) => EasyDebounce.debounce(
-                                                                                              '_model.txtNomeCompletoTextController',
-                                                                                              Duration(milliseconds: 2000),
-                                                                                              () => safeSetState(() {}),
-                                                                                            ),
-                                                                                            autofocus: false,
-                                                                                            textCapitalization: TextCapitalization.words,
-                                                                                            obscureText: false,
-                                                                                            decoration: InputDecoration(
-                                                                                              labelText: FFLocalizations.of(context).getText(
-                                                                                                'botl60yq' /* Nome completo */,
-                                                                                              ),
-                                                                                              labelStyle: FlutterFlowTheme.of(context).labelMedium.override(
-                                                                                                    fontFamily: FlutterFlowTheme.of(context).labelMediumFamily,
-                                                                                                    letterSpacing: 0.0,
-                                                                                                    useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).labelMediumFamily),
-                                                                                                  ),
-                                                                                              alignLabelWithHint: true,
-                                                                                              hintText: FFLocalizations.of(context).getText(
-                                                                                                'abewpnaq' /* Nome completo */,
-                                                                                              ),
-                                                                                              hintStyle: FlutterFlowTheme.of(context).labelMedium.override(
-                                                                                                    fontFamily: FlutterFlowTheme.of(context).labelMediumFamily,
-                                                                                                    letterSpacing: 0.0,
-                                                                                                    useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).labelMediumFamily),
-                                                                                                  ),
-                                                                                              enabledBorder: OutlineInputBorder(
-                                                                                                borderSide: BorderSide(
-                                                                                                  color: FlutterFlowTheme.of(context).alternate,
-                                                                                                  width: 2.0,
-                                                                                                ),
-                                                                                                borderRadius: BorderRadius.circular(12.0),
-                                                                                              ),
-                                                                                              focusedBorder: OutlineInputBorder(
-                                                                                                borderSide: BorderSide(
-                                                                                                  color: FlutterFlowTheme.of(context).primary,
-                                                                                                  width: 2.0,
-                                                                                                ),
-                                                                                                borderRadius: BorderRadius.circular(12.0),
-                                                                                              ),
-                                                                                              errorBorder: OutlineInputBorder(
-                                                                                                borderSide: BorderSide(
-                                                                                                  color: FlutterFlowTheme.of(context).error,
-                                                                                                  width: 2.0,
-                                                                                                ),
-                                                                                                borderRadius: BorderRadius.circular(12.0),
-                                                                                              ),
-                                                                                              focusedErrorBorder: OutlineInputBorder(
-                                                                                                borderSide: BorderSide(
-                                                                                                  color: FlutterFlowTheme.of(context).error,
-                                                                                                  width: 2.0,
-                                                                                                ),
-                                                                                                borderRadius: BorderRadius.circular(12.0),
-                                                                                              ),
-                                                                                              filled: true,
-                                                                                              fillColor: FlutterFlowTheme.of(context).secondaryBackground,
-                                                                                              contentPadding: EdgeInsetsDirectional.fromSTEB(20.0, 24.0, 20.0, 24.0),
-                                                                                              suffixIcon: _model.txtNomeCompletoTextController!.text.isNotEmpty
-                                                                                                  ? InkWell(
-                                                                                                      onTap: () async {
-                                                                                                        _model.txtNomeCompletoTextController?.clear();
-                                                                                                        safeSetState(() {});
-                                                                                                      },
-                                                                                                      child: Icon(
-                                                                                                        Icons.clear,
-                                                                                                        color: FlutterFlowTheme.of(context).secondaryText,
-                                                                                                        size: 24.0,
-                                                                                                      ),
-                                                                                                    )
-                                                                                                  : null,
-                                                                                            ),
-                                                                                            style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                  fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                                  letterSpacing: 0.0,
-                                                                                                  useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                                                ),
-                                                                                            cursorColor: FlutterFlowTheme.of(context).primary,
-                                                                                            validator: _model.txtNomeCompletoTextControllerValidator.asValidator(context),
+                                                                                        child: TextFormField(
+                                                                                          controller: _model.txtNomeCompletoTextController,
+                                                                                          focusNode: _model.txtNomeCompletoFocusNode,
+                                                                                          onChanged: (_) => EasyDebounce.debounce(
+                                                                                            '_model.txtNomeCompletoTextController',
+                                                                                            Duration(milliseconds: 2000),
+                                                                                            () => safeSetState(() {}),
                                                                                           ),
+                                                                                          autofocus: false,
+                                                                                          textCapitalization: TextCapitalization.words,
+                                                                                          obscureText: false,
+                                                                                          decoration: InputDecoration(
+                                                                                            labelText: FFLocalizations.of(context).getText(
+                                                                                              'botl60yq' /* Nome completo */,
+                                                                                            ),
+                                                                                            labelStyle: FlutterFlowTheme.of(context).labelMedium.override(
+                                                                                                  fontFamily: FlutterFlowTheme.of(context).labelMediumFamily,
+                                                                                                  letterSpacing: 0.0,
+                                                                                                  useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).labelMediumFamily),
+                                                                                                ),
+                                                                                            alignLabelWithHint: true,
+                                                                                            hintText: FFLocalizations.of(context).getText(
+                                                                                              'abewpnaq' /* Nome completo */,
+                                                                                            ),
+                                                                                            hintStyle: FlutterFlowTheme.of(context).labelMedium.override(
+                                                                                                  fontFamily: FlutterFlowTheme.of(context).labelMediumFamily,
+                                                                                                  letterSpacing: 0.0,
+                                                                                                  useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).labelMediumFamily),
+                                                                                                ),
+                                                                                            enabledBorder: OutlineInputBorder(
+                                                                                              borderSide: BorderSide(
+                                                                                                color: FlutterFlowTheme.of(context).alternate,
+                                                                                                width: 2.0,
+                                                                                              ),
+                                                                                              borderRadius: BorderRadius.circular(12.0),
+                                                                                            ),
+                                                                                            focusedBorder: OutlineInputBorder(
+                                                                                              borderSide: BorderSide(
+                                                                                                color: FlutterFlowTheme.of(context).primary,
+                                                                                                width: 2.0,
+                                                                                              ),
+                                                                                              borderRadius: BorderRadius.circular(12.0),
+                                                                                            ),
+                                                                                            errorBorder: OutlineInputBorder(
+                                                                                              borderSide: BorderSide(
+                                                                                                color: FlutterFlowTheme.of(context).error,
+                                                                                                width: 2.0,
+                                                                                              ),
+                                                                                              borderRadius: BorderRadius.circular(12.0),
+                                                                                            ),
+                                                                                            focusedErrorBorder: OutlineInputBorder(
+                                                                                              borderSide: BorderSide(
+                                                                                                color: FlutterFlowTheme.of(context).error,
+                                                                                                width: 2.0,
+                                                                                              ),
+                                                                                              borderRadius: BorderRadius.circular(12.0),
+                                                                                            ),
+                                                                                            filled: true,
+                                                                                            fillColor: FlutterFlowTheme.of(context).secondaryBackground,
+                                                                                            contentPadding: EdgeInsetsDirectional.fromSTEB(20.0, 24.0, 20.0, 24.0),
+                                                                                            suffixIcon: _model.txtNomeCompletoTextController!.text.isNotEmpty
+                                                                                                ? InkWell(
+                                                                                                    onTap: () async {
+                                                                                                      _model.txtNomeCompletoTextController?.clear();
+                                                                                                      safeSetState(() {});
+                                                                                                    },
+                                                                                                    child: Icon(
+                                                                                                      Icons.clear,
+                                                                                                      color: FlutterFlowTheme.of(context).secondaryText,
+                                                                                                      size: 24.0,
+                                                                                                    ),
+                                                                                                  )
+                                                                                                : null,
+                                                                                          ),
+                                                                                          style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                                                letterSpacing: 0.0,
+                                                                                                useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                                              ),
+                                                                                          cursorColor: FlutterFlowTheme.of(context).primary,
+                                                                                          validator: _model.txtNomeCompletoTextControllerValidator.asValidator(context),
                                                                                         ),
                                                                                       ),
                                                                                     ].divide(SizedBox(width: 10.0)),
@@ -1994,8 +1964,34 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                                           onPressed: () async {
                                                                                             logFirebaseEvent('MODAL_MEMBROS_ADD_add_rounded_ICN_ON_TAP');
                                                                                             if (_model.txtAlcunhaAddTextController.text != '') {
-                                                                                              _model.addToMembrosAlcunhas(_model.txtAlcunhaAddTextController.text);
-                                                                                              safeSetState(() {});
+                                                                                              _model.outputAlcunhaExists = await actions.checkValueInList(
+                                                                                                _model.membrosAlcunhas.toList(),
+                                                                                                _model.txtAlcunhaAddTextController.text,
+                                                                                              );
+                                                                                              if (_model.outputAlcunhaExists!) {
+                                                                                                await showDialog(
+                                                                                                  context: context,
+                                                                                                  builder: (dialogContext) {
+                                                                                                    return Dialog(
+                                                                                                      elevation: 0,
+                                                                                                      insetPadding: EdgeInsets.zero,
+                                                                                                      backgroundColor: Colors.transparent,
+                                                                                                      alignment: AlignmentDirectional(0.0, 0.0).resolve(Directionality.of(context)),
+                                                                                                      child: Container(
+                                                                                                        height: 100.0,
+                                                                                                        width: 300.0,
+                                                                                                        child: Toast03Widget(
+                                                                                                          texto: 'Alcunha já existe !!!',
+                                                                                                          titulo: 'Atenção',
+                                                                                                        ),
+                                                                                                      ),
+                                                                                                    );
+                                                                                                  },
+                                                                                                );
+                                                                                              } else {
+                                                                                                _model.addToMembrosAlcunhas(_model.txtAlcunhaAddTextController.text);
+                                                                                                _model.updatePage(() {});
+                                                                                              }
                                                                                             } else {
                                                                                               await showDialog(
                                                                                                 context: context,
@@ -2019,6 +2015,8 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                                                 },
                                                                                               );
                                                                                             }
+
+                                                                                            safeSetState(() {});
                                                                                           },
                                                                                         ),
                                                                                       ),
@@ -3622,15 +3620,41 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                                           onPressed: () async {
                                                                                             logFirebaseEvent('MODAL_MEMBROS_ADD_add_rounded_ICN_ON_TAP');
                                                                                             if (_model.txtMembrosEnderecosAddTextController.text != '') {
-                                                                                              _model.addToMembrosEnderecos(_model.txtMembrosEnderecosAddTextController.text);
-                                                                                              _model.updatePage(() {});
-                                                                                              _model.addToMembrosLatLng(_model.placePickerEnderecoValue.latLng);
-                                                                                              _model.updatePage(() {});
-                                                                                              await _model.googleMapMembrosController.future.then(
-                                                                                                (c) => c.animateCamera(
-                                                                                                  CameraUpdate.newLatLng(_model.membrosLatLng.lastOrNull!.toGoogleMaps()),
-                                                                                                ),
+                                                                                              _model.outputEnderecoExists = await actions.checkValueInList(
+                                                                                                _model.membrosEnderecos.toList(),
+                                                                                                _model.txtMembrosEnderecosAddTextController.text,
                                                                                               );
+                                                                                              if (_model.outputEnderecoExists!) {
+                                                                                                await showDialog(
+                                                                                                  context: context,
+                                                                                                  builder: (dialogContext) {
+                                                                                                    return Dialog(
+                                                                                                      elevation: 0,
+                                                                                                      insetPadding: EdgeInsets.zero,
+                                                                                                      backgroundColor: Colors.transparent,
+                                                                                                      alignment: AlignmentDirectional(0.0, 0.0).resolve(Directionality.of(context)),
+                                                                                                      child: Container(
+                                                                                                        height: 100.0,
+                                                                                                        width: 300.0,
+                                                                                                        child: Toast03Widget(
+                                                                                                          texto: 'Endereço já existe !!!',
+                                                                                                          titulo: 'Atenção',
+                                                                                                        ),
+                                                                                                      ),
+                                                                                                    );
+                                                                                                  },
+                                                                                                );
+                                                                                              } else {
+                                                                                                _model.addToMembrosEnderecos(_model.txtMembrosEnderecosAddTextController.text);
+                                                                                                _model.updatePage(() {});
+                                                                                                _model.addToMembrosLatLng(_model.placePickerEnderecoValue.latLng);
+                                                                                                _model.updatePage(() {});
+                                                                                                await _model.googleMapMembrosController.future.then(
+                                                                                                  (c) => c.animateCamera(
+                                                                                                    CameraUpdate.newLatLng(_model.membrosLatLng.lastOrNull!.toGoogleMaps()),
+                                                                                                  ),
+                                                                                                );
+                                                                                              }
                                                                                             } else {
                                                                                               await showDialog(
                                                                                                 context: context,
@@ -3654,6 +3678,8 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                                                 },
                                                                                               );
                                                                                             }
+
+                                                                                            safeSetState(() {});
                                                                                           },
                                                                                         ),
                                                                                       ),
@@ -5654,10 +5680,11 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                                     onPressed: () async {
                                                                                       logFirebaseEvent('MODAL_MEMBROS_ADD_COMP_TO_ADD_BTN_ON_TAP');
                                                                                       if (_model.txtProcedimentoNoTextController.text != null && _model.txtProcedimentoNoTextController.text != '') {
-                                                                                        _model.outputCheckProcedimentoExists = await actions.checkProcedimentoExists(
-                                                                                          _model.txtNomeCompletoTextController.text,
+                                                                                        _model.outputCheckProcedimentoNoExists = await actions.checkProcedimentoNoExists(
+                                                                                          _model.membrosProcedimentos.toList(),
+                                                                                          _model.txtProcedimentoNoTextController.text,
                                                                                         );
-                                                                                        if (_model.outputCheckProcedimentoExists!) {
+                                                                                        if (_model.outputCheckProcedimentoNoExists!) {
                                                                                           await showDialog(
                                                                                             context: context,
                                                                                             builder: (dialogContext) {
@@ -5679,11 +5706,11 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                                           );
                                                                                         } else {
                                                                                           _model.addToMembrosProcedimentos(DataTypesProcedimentosStruct(
-                                                                                            procedimentoNo: _model.txtNomeCompletoTextController.text,
+                                                                                            procedimentoNo: _model.txtProcedimentoNoTextController.text,
                                                                                             unidade: _model.ddwProcedimentoUnidadeValue,
                                                                                             procedimentoTipo: _model.ddwProcedimentoTipoValue,
                                                                                             crime: _model.ddwProcedimentoCrimeValue,
-                                                                                            data: (_model.txtProcedimentoDataFocusNode?.hasFocus ?? false).toString(),
+                                                                                            data: _model.txtProcedimentoDataTextController.text,
                                                                                           ));
                                                                                           safeSetState(() {});
                                                                                         }
@@ -6513,7 +6540,8 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                                       onPressed: () async {
                                                                                         logFirebaseEvent('MODAL_MEMBROS_ADD_COMP_TO_ADD_BTN_ON_TAP');
                                                                                         if (_model.txtProcessoNoAcaoPenalTextController.text != null && _model.txtProcessoNoAcaoPenalTextController.text != '') {
-                                                                                          _model.outputCheckProcessoExists = await actions.checkProcessoExists(
+                                                                                          _model.outputCheckProcessoExists = await actions.checkAcaopenalNoExists(
+                                                                                            _model.membrosProcessos.toList(),
                                                                                             _model.txtProcessoNoAcaoPenalTextController.text,
                                                                                           );
                                                                                           if (_model.outputCheckProcessoExists!) {
@@ -8165,31 +8193,6 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                               ) ??
                                                               false;
                                                       if (confirmDialogResponse) {
-                                                        community_testing_ryusdv_app_state
-                                                                    .FFAppState()
-                                                                .notificationDT =
-                                                            community_testing_ryusdv_data_schema
-                                                                .NotificationStruct(
-                                                          title: 'Atenção',
-                                                          description:
-                                                              'Salvando dados ...',
-                                                          style:
-                                                              community_testing_ryusdv_enums
-                                                                  .ToastStyle
-                                                                  .fillColored,
-                                                          position:
-                                                              community_testing_ryusdv_enums
-                                                                  .ToastPosition
-                                                                  .topCenter,
-                                                          type:
-                                                              community_testing_ryusdv_enums
-                                                                  .ToastType
-                                                                  .info,
-                                                          progressBar: true,
-                                                          dragToClose: false,
-                                                          pauseOnHover: false,
-                                                          display: true,
-                                                        );
                                                         _model.outputMembrosAdd =
                                                             await MembrosTable()
                                                                 .insert({
@@ -8327,11 +8330,15 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                 1) {
                                                               _model.membrosProcedimentosCount =
                                                                   -1;
+                                                              // procedeimentosTotal
+                                                              _model.procedimentoTotal =
+                                                                  _model
+                                                                      .membrosProcedimentos
+                                                                      .length;
                                                               while (_model
                                                                       .membrosProcedimentosCount! <=
                                                                   _model
-                                                                      .membrosProcedimentos
-                                                                      .length) {
+                                                                      .procedimentoTotal) {
                                                                 _model.membrosProcedimentosCount =
                                                                     _model.membrosProcedimentosCount! +
                                                                         1;
@@ -8341,36 +8348,20 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                   membroId: _model
                                                                       .outputMembrosAdd
                                                                       ?.membroId,
-                                                                  procedimentoNo: _model
-                                                                      .membrosProcedimentos
-                                                                      .elementAtOrNull(
-                                                                          _model
-                                                                              .membrosProcedimentosCount!)
-                                                                      ?.procedimentoNo,
+                                                                  procedimentoNo:
+                                                                      _model
+                                                                          .txtProcedimentoNoTextController
+                                                                          .text,
                                                                   unidade: _model
-                                                                      .membrosProcedimentos
-                                                                      .elementAtOrNull(
-                                                                          _model
-                                                                              .membrosProcedimentosCount!)
-                                                                      ?.unidade,
-                                                                  procedimentoTipo: _model
-                                                                      .membrosProcedimentos
-                                                                      .elementAtOrNull(
-                                                                          _model
-                                                                              .membrosProcedimentosCount!)
-                                                                      ?.procedimentoTipo,
+                                                                      .ddwProcedimentoUnidadeValue,
+                                                                  procedimentoTipo:
+                                                                      _model
+                                                                          .ddwProcedimentoTipoValue,
                                                                   crime: _model
-                                                                      .membrosProcedimentos
-                                                                      .elementAtOrNull(
-                                                                          _model
-                                                                              .membrosProcedimentosCount!)
-                                                                      ?.crime,
+                                                                      .ddwProcedimentoCrimeValue,
                                                                   data: _model
-                                                                      .membrosProcedimentos
-                                                                      .elementAtOrNull(
-                                                                          _model
-                                                                              .membrosProcedimentosCount!)
-                                                                      ?.data,
+                                                                      .txtProcedimentoDataTextController
+                                                                      .text,
                                                                 );
 
                                                                 _shouldSetState =
@@ -8390,11 +8381,15 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                 1) {
                                                               _model.membrosProcessosCount =
                                                                   -1;
+                                                              // procedeimentosTotal
+                                                              _model.procedimentoTotal =
+                                                                  _model
+                                                                      .membrosProcessos
+                                                                      .length;
                                                               while (_model
                                                                       .membrosProcessosCount! <=
                                                                   _model
-                                                                      .membrosProcessos
-                                                                      .length) {
+                                                                      .processoTotal) {
                                                                 _model.membrosProcessosCount =
                                                                     _model.membrosProcessosCount! +
                                                                         1;

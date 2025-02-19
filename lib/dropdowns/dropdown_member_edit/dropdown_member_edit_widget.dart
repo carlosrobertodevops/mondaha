@@ -15,10 +15,12 @@ class DropdownMemberEditWidget extends StatefulWidget {
     super.key,
     this.membrosRow,
     this.membrosFotos,
+    this.membroId,
   });
 
   final MembrosViewConcatSeachRow? membrosRow;
   final List<String>? membrosFotos;
+  final int? membroId;
 
   @override
   State<DropdownMemberEditWidget> createState() =>

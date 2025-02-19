@@ -43,7 +43,9 @@ class AuthLoginModel extends FlutterFlowModel<AuthLoginWidget> {
     }
 
     if (!RegExp(kTextValidatorEmailRegex).hasMatch(val)) {
-      return 'Has to be a valid email address.';
+      return FFLocalizations.of(context).getText(
+        'tfxgr8x2' /* Error typing email! */,
+      );
     }
     return null;
   }

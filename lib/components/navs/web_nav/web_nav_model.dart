@@ -1,4 +1,5 @@
 import '/auth/supabase_auth/auth_util.dart';
+import '/backend/supabase/supabase.dart';
 import '/components/logos/main_logo_bar/main_logo_bar_widget.dart';
 import '/components/logos/main_logo_bar_minimal/main_logo_bar_minimal_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';

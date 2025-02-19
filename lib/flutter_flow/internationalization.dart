@@ -228,16 +228,16 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'pt': 'Abaixo está um resumo da atividade.',
     },
     'uj7jsxmo': {
-      'en': 'Contract Activity',
-      'pt': 'Atividade de contrato',
+      'en': 'Address metrics',
+      'pt': 'Métricas de endereços',
     },
     'hkk2zmjw': {
       'en': 'Below is an a summary of activity.',
       'pt': 'Abaixo está um resumo da atividade.',
     },
     'jkgae0vc': {
-      'en': 'Customer Activity',
-      'pt': 'Atividade do cliente',
+      'en': 'Alert Metrics',
+      'pt': 'Métricas de alertas',
     },
     'g4os7kcp': {
       'en': 'Below is an a summary of activity.',
@@ -286,13 +286,13 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Full Name',
       'pt': 'Nome completo',
     },
-    '5rmzx51f': {
-      'en': 'Funcioton',
-      'pt': 'Função',
-    },
     'z0huz1sz': {
       'en': 'Faction',
       'pt': 'Facção',
+    },
+    '5rmzx51f': {
+      'en': 'Function',
+      'pt': 'Função',
     },
     '04vrv62j': {
       'en': 'Alcunha',
@@ -587,6 +587,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'jc4by7hx': {
       'en': 'Field is required',
       'pt': 'Campo obrigatório!',
+    },
+    'tfxgr8x2': {
+      'en': 'Error typing email!',
+      'pt': 'Erro ao digitar o email !',
     },
     'sa8xye49': {
       'en': 'Please choose an option from the dropdown',
@@ -4162,6 +4166,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'pt': 'Salvar Membro',
     },
     'p4gjje04': {
+      'en': 'Some data is wrong!!!',
+      'pt': 'Número de Processo já existe !!!',
+    },
+    'fwpyqfwo': {
       'en': 'Some data is wrong!!!',
       'pt': 'Número de Processo já existe !!!',
     },

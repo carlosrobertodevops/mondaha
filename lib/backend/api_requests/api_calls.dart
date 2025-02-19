@@ -233,6 +233,72 @@ class LogsAddCall {
   }
 }
 
+class ProcedimentosDeleteNullCall {
+  static Future<ApiCallResponse> call({
+    int? membroId,
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "membro_id": "${membroId}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'ProcedimentosDeleteNull',
+      apiUrl:
+          'https://buzlazhtcndpegsnijcw.supabase.co/rest/v1/rpc/procedimentos_delete_null',
+      callType: ApiCallType.POST,
+      headers: {
+        'apikey':
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ1emxhemh0Y25kcGVnc25pamN3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQ2OTI2OTksImV4cCI6MjA1MDI2ODY5OX0.myFxYtm5Q3WF1WlV0AJzPoRLKK8W0et8MnKUk4e-nPU',
+        'Authorization':
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ1emxhemh0Y25kcGVnc25pamN3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQ2OTI2OTksImV4cCI6MjA1MDI2ODY5OX0.myFxYtm5Q3WF1WlV0AJzPoRLKK8W0et8MnKUk4e-nPU',
+        'Content-Type': 'application/json',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class ProcessosDeleteNullCall {
+  static Future<ApiCallResponse> call({
+    int? membroId,
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "membro_id": "${membroId}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'ProcessosDeleteNull',
+      apiUrl:
+          'https://buzlazhtcndpegsnijcw.supabase.co/rest/v1/rpc/processos_delete_null',
+      callType: ApiCallType.POST,
+      headers: {
+        'apikey':
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ1emxhemh0Y25kcGVnc25pamN3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQ2OTI2OTksImV4cCI6MjA1MDI2ODY5OX0.myFxYtm5Q3WF1WlV0AJzPoRLKK8W0et8MnKUk4e-nPU',
+        'Authorization':
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ1emxhemh0Y25kcGVnc25pamN3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQ2OTI2OTksImV4cCI6MjA1MDI2ODY5OX0.myFxYtm5Q3WF1WlV0AJzPoRLKK8W0et8MnKUk4e-nPU',
+        'Content-Type': 'application/json',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
 class ProcedimentosAddCall {
   static Future<ApiCallResponse> call({
     int? membroId,
@@ -244,16 +310,17 @@ class ProcedimentosAddCall {
   }) async {
     final ffApiRequestBody = '''
 {
-  "membro_id": "${membroId}",
-  "procedimento_no": "${procedimentoNo}",
-  "unidade": "${unidade}",
-  "procedimento_tipo": "${procedimentoTipo}",
-  "crime": "${crime}",
-  "data": "${data}"
+  "p_membro_id": "${membroId}",
+  "p_procedimento_no": "${procedimentoNo}",
+  "p_unidade": "${unidade}",
+  "p_procedimento_tipo": "${procedimentoTipo}",
+  "p_crime": "${crime}",
+  "p_data": "${data}"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'ProcedimentosAdd',
-      apiUrl: 'https://buzlazhtcndpegsnijcw.supabase.co/rest/v1/procedimentos',
+      apiUrl:
+          'https://buzlazhtcndpegsnijcw.supabase.co/rest/v1/rpc/procedimento_add',
       callType: ApiCallType.POST,
       headers: {
         'apikey':
@@ -279,22 +346,29 @@ class ProcedimentosGetCall {
   static Future<ApiCallResponse> call({
     int? membroId,
   }) async {
+    final ffApiRequestBody = '''
+{
+  "p_membro_id": "${membroId}"
+}''';
     return ApiManager.instance.makeApiCall(
       callName: 'ProcedimentosGet',
       apiUrl:
-          'https://buzlazhtcndpegsnijcw.supabase.co/rest/v1/procedimentos?membro_id=eq.${membroId}&select=*',
-      callType: ApiCallType.GET,
+          'https://buzlazhtcndpegsnijcw.supabase.co/rest/v1/rpc/procedimentos_search',
+      callType: ApiCallType.POST,
       headers: {
+        'Content-Type': 'application/json',
         'apikey':
             'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ1emxhemh0Y25kcGVnc25pamN3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQ2OTI2OTksImV4cCI6MjA1MDI2ODY5OX0.myFxYtm5Q3WF1WlV0AJzPoRLKK8W0et8MnKUk4e-nPU',
         'Authorization':
             'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ1emxhemh0Y25kcGVnc25pamN3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQ2OTI2OTksImV4cCI6MjA1MDI2ODY5OX0.myFxYtm5Q3WF1WlV0AJzPoRLKK8W0et8MnKUk4e-nPU',
       },
       params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
       returnBody: true,
       encodeBodyUtf8: false,
       decodeUtf8: false,
-      cache: false,
+      cache: true,
       isStreamingApi: false,
       alwaysAllowBody: false,
     );
@@ -403,16 +477,17 @@ class ProcessosAddCall {
   }) async {
     final ffApiRequestBody = '''
 {
-  "membro_id": "${membroId}",
-  "acao_penal_no": "${acaoPenalNo}",
-  "vara": "${vara}",
-  "situacao_juridica": "${situacaoJuridica}",
-  "regime": "${regime}",
-  "situacao_reu": "${situacaoReu}"
+  "p_membro_id": "${membroId}",
+  "p_acao_penal_no": "${acaoPenalNo}",
+  "p_vara": "${vara}",
+  "p_situacao_juridica": "${situacaoJuridica}",
+  "p_regime": "${regime}",
+  "p_situacao_reu": "${situacaoReu}"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'ProcessosAdd',
-      apiUrl: 'https://buzlazhtcndpegsnijcw.supabase.co/rest/v1/processos',
+      apiUrl:
+          'https://buzlazhtcndpegsnijcw.supabase.co/rest/v1/rpc/processo_add',
       callType: ApiCallType.POST,
       headers: {
         'apikey':
@@ -516,22 +591,29 @@ class ProcessosGetCall {
   static Future<ApiCallResponse> call({
     int? membroId,
   }) async {
+    final ffApiRequestBody = '''
+{
+  "p_membro_id": "${membroId}"
+}''';
     return ApiManager.instance.makeApiCall(
       callName: 'ProcessosGet',
       apiUrl:
-          'https://buzlazhtcndpegsnijcw.supabase.co/rest/v1/processos?membro_id.eq.${membroId}&select=*',
-      callType: ApiCallType.GET,
+          'https://buzlazhtcndpegsnijcw.supabase.co/rest/v1/rpc/processos_search',
+      callType: ApiCallType.POST,
       headers: {
+        'Content-Type': 'application/json',
         'apikey':
             'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ1emxhemh0Y25kcGVnc25pamN3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQ2OTI2OTksImV4cCI6MjA1MDI2ODY5OX0.myFxYtm5Q3WF1WlV0AJzPoRLKK8W0et8MnKUk4e-nPU',
         'Authorization':
             'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ1emxhemh0Y25kcGVnc25pamN3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQ2OTI2OTksImV4cCI6MjA1MDI2ODY5OX0.myFxYtm5Q3WF1WlV0AJzPoRLKK8W0et8MnKUk4e-nPU',
       },
       params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
       returnBody: true,
       encodeBodyUtf8: false,
       decodeUtf8: false,
-      cache: false,
+      cache: true,
       isStreamingApi: false,
       alwaysAllowBody: false,
     );

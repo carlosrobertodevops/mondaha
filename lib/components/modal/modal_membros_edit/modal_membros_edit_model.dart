@@ -19,8 +19,6 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 import 'dart:ui';
-import "package:community_testing_ryusdv/backend/schema/enums/enums.dart"
-    as community_testing_ryusdv_enums;
 import "package:community_testing_ryusdv/backend/schema/structs/index.dart"
     as community_testing_ryusdv_data_schema;
 import '/custom_code/actions/index.dart' as actions;
@@ -220,6 +218,8 @@ class ModalMembrosEditModel extends FlutterFlowModel<ModalMembrosEditWidget> {
 
   bool membroSalvo = false;
 
+  int? membroId = 0;
+
   ///  State fields for stateful widgets in this component.
 
   final formKey2 = GlobalKey<FormState>();
@@ -289,6 +289,8 @@ class ModalMembrosEditModel extends FlutterFlowModel<ModalMembrosEditWidget> {
   FocusNode? txtAlcunhaAddFocusNode;
   TextEditingController? txtAlcunhaAddTextController;
   String? Function(BuildContext, String?)? txtAlcunhaAddTextControllerValidator;
+  // Stores action output result for [Custom Action - checkValueInList] action in IconButton widget.
+  bool? outputAlcunhaExists;
   // State field(s) for txt_membro_naturalidade widget.
   FocusNode? txtMembroNaturalidadeFocusNode;
   TextEditingController? txtMembroNaturalidadeTextController;
@@ -355,6 +357,8 @@ class ModalMembrosEditModel extends FlutterFlowModel<ModalMembrosEditWidget> {
   TextEditingController? txtMembrosEnderecosAddTextController;
   String? Function(BuildContext, String?)?
       txtMembrosEnderecosAddTextControllerValidator;
+  // Stores action output result for [Custom Action - checkValueInList] action in IconButton widget.
+  bool? outputEnderecoExists;
   // State field(s) for GoogleMapMembro widget.
   LatLng? googleMapMembrosCenter;
   final googleMapMembrosController = Completer<GoogleMapController>();

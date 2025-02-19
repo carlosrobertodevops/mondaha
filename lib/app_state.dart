@@ -27,70 +27,8 @@ class FFAppState extends ChangeNotifier {
   Future initializePersistedState() async {
     secureStorage = FlutterSecureStorage();
     await _safeInitAsync(() async {
-      _AGENCIA = await secureStorage.getString('ff_AGENCIA') ?? _AGENCIA;
-    });
-    await _safeInitAsync(() async {
       _webbarminimal =
           await secureStorage.getBool('ff_webbarminimal') ?? _webbarminimal;
-    });
-    await _safeInitAsync(() async {
-      _UsuarioAtualId =
-          await secureStorage.getInt('ff_UsuarioAtualId') ?? _UsuarioAtualId;
-    });
-    await _safeInitAsync(() async {
-      _UsuarioAtualTipoUsuarioId =
-          await secureStorage.getInt('ff_UsuarioAtualTipoUsuarioId') ??
-              _UsuarioAtualTipoUsuarioId;
-    });
-    await _safeInitAsync(() async {
-      _UsuarioAtualNomeCompleto =
-          await secureStorage.getString('ff_UsuarioAtualNomeCompleto') ??
-              _UsuarioAtualNomeCompleto;
-    });
-    await _safeInitAsync(() async {
-      _UsuarioAtualFoto =
-          await secureStorage.getString('ff_UsuarioAtualFoto') ??
-              _UsuarioAtualFoto;
-    });
-    await _safeInitAsync(() async {
-      _UsuarioAtualAgencia =
-          await secureStorage.getInt('ff_UsuarioAtualAgencia') ??
-              _UsuarioAtualAgencia;
-    });
-    await _safeInitAsync(() async {
-      _UsuarioAtualTipoUsuarioNome =
-          await secureStorage.getString('ff_UsuarioAtualTipoUsuarioNome') ??
-              _UsuarioAtualTipoUsuarioNome;
-    });
-    await _safeInitAsync(() async {
-      _UsuarioAtualAgenciaNome =
-          await secureStorage.getString('ff_UsuarioAtualAgenciaNome') ??
-              _UsuarioAtualAgenciaNome;
-    });
-    await _safeInitAsync(() async {
-      _UsuarioAtualEmail =
-          await secureStorage.getString('ff_UsuarioAtualEmail') ??
-              _UsuarioAtualEmail;
-    });
-    await _safeInitAsync(() async {
-      _CountFaccoes =
-          await secureStorage.getInt('ff_CountFaccoes') ?? _CountFaccoes;
-    });
-    await _safeInitAsync(() async {
-      _CountMembros =
-          await secureStorage.getInt('ff_CountMembros') ?? _CountMembros;
-    });
-    await _safeInitAsync(() async {
-      _CountUsuarios =
-          await secureStorage.getInt('ff_CountUsuarios') ?? _CountUsuarios;
-    });
-    await _safeInitAsync(() async {
-      _CountUsuariosAtivos =
-          await secureStorage.getInt('ff_CountUsuariosAtivos') ??
-              _CountUsuariosAtivos;
-    });
-    await _safeInitAsync(() async {
-      _CountMaps = await secureStorage.getInt('ff_CountMaps') ?? _CountMaps;
     });
     await _safeInitAsync(() async {
       _UsuariosImagePathLight =
@@ -145,11 +83,6 @@ class FFAppState extends ChangeNotifier {
   String get AGENCIA => _AGENCIA;
   set AGENCIA(String value) {
     _AGENCIA = value;
-    secureStorage.setString('ff_AGENCIA', value);
-  }
-
-  void deleteAGENCIA() {
-    secureStorage.delete(key: 'ff_AGENCIA');
   }
 
   int _EDITFACCAOID = 0;
@@ -173,143 +106,78 @@ class FFAppState extends ChangeNotifier {
   int get UsuarioAtualId => _UsuarioAtualId;
   set UsuarioAtualId(int value) {
     _UsuarioAtualId = value;
-    secureStorage.setInt('ff_UsuarioAtualId', value);
-  }
-
-  void deleteUsuarioAtualId() {
-    secureStorage.delete(key: 'ff_UsuarioAtualId');
   }
 
   int _UsuarioAtualTipoUsuarioId = 0;
   int get UsuarioAtualTipoUsuarioId => _UsuarioAtualTipoUsuarioId;
   set UsuarioAtualTipoUsuarioId(int value) {
     _UsuarioAtualTipoUsuarioId = value;
-    secureStorage.setInt('ff_UsuarioAtualTipoUsuarioId', value);
-  }
-
-  void deleteUsuarioAtualTipoUsuarioId() {
-    secureStorage.delete(key: 'ff_UsuarioAtualTipoUsuarioId');
   }
 
   String _UsuarioAtualNomeCompleto = '';
   String get UsuarioAtualNomeCompleto => _UsuarioAtualNomeCompleto;
   set UsuarioAtualNomeCompleto(String value) {
     _UsuarioAtualNomeCompleto = value;
-    secureStorage.setString('ff_UsuarioAtualNomeCompleto', value);
-  }
-
-  void deleteUsuarioAtualNomeCompleto() {
-    secureStorage.delete(key: 'ff_UsuarioAtualNomeCompleto');
   }
 
   String _UsuarioAtualFoto = '';
   String get UsuarioAtualFoto => _UsuarioAtualFoto;
   set UsuarioAtualFoto(String value) {
     _UsuarioAtualFoto = value;
-    secureStorage.setString('ff_UsuarioAtualFoto', value);
-  }
-
-  void deleteUsuarioAtualFoto() {
-    secureStorage.delete(key: 'ff_UsuarioAtualFoto');
   }
 
   int _UsuarioAtualAgencia = 0;
   int get UsuarioAtualAgencia => _UsuarioAtualAgencia;
   set UsuarioAtualAgencia(int value) {
     _UsuarioAtualAgencia = value;
-    secureStorage.setInt('ff_UsuarioAtualAgencia', value);
-  }
-
-  void deleteUsuarioAtualAgencia() {
-    secureStorage.delete(key: 'ff_UsuarioAtualAgencia');
   }
 
   String _UsuarioAtualTipoUsuarioNome = '';
   String get UsuarioAtualTipoUsuarioNome => _UsuarioAtualTipoUsuarioNome;
   set UsuarioAtualTipoUsuarioNome(String value) {
     _UsuarioAtualTipoUsuarioNome = value;
-    secureStorage.setString('ff_UsuarioAtualTipoUsuarioNome', value);
-  }
-
-  void deleteUsuarioAtualTipoUsuarioNome() {
-    secureStorage.delete(key: 'ff_UsuarioAtualTipoUsuarioNome');
   }
 
   String _UsuarioAtualAgenciaNome = '';
   String get UsuarioAtualAgenciaNome => _UsuarioAtualAgenciaNome;
   set UsuarioAtualAgenciaNome(String value) {
     _UsuarioAtualAgenciaNome = value;
-    secureStorage.setString('ff_UsuarioAtualAgenciaNome', value);
-  }
-
-  void deleteUsuarioAtualAgenciaNome() {
-    secureStorage.delete(key: 'ff_UsuarioAtualAgenciaNome');
   }
 
   String _UsuarioAtualEmail = '';
   String get UsuarioAtualEmail => _UsuarioAtualEmail;
   set UsuarioAtualEmail(String value) {
     _UsuarioAtualEmail = value;
-    secureStorage.setString('ff_UsuarioAtualEmail', value);
-  }
-
-  void deleteUsuarioAtualEmail() {
-    secureStorage.delete(key: 'ff_UsuarioAtualEmail');
   }
 
   int _CountFaccoes = 0;
   int get CountFaccoes => _CountFaccoes;
   set CountFaccoes(int value) {
     _CountFaccoes = value;
-    secureStorage.setInt('ff_CountFaccoes', value);
-  }
-
-  void deleteCountFaccoes() {
-    secureStorage.delete(key: 'ff_CountFaccoes');
   }
 
   int _CountMembros = 0;
   int get CountMembros => _CountMembros;
   set CountMembros(int value) {
     _CountMembros = value;
-    secureStorage.setInt('ff_CountMembros', value);
-  }
-
-  void deleteCountMembros() {
-    secureStorage.delete(key: 'ff_CountMembros');
   }
 
   int _CountUsuarios = 0;
   int get CountUsuarios => _CountUsuarios;
   set CountUsuarios(int value) {
     _CountUsuarios = value;
-    secureStorage.setInt('ff_CountUsuarios', value);
-  }
-
-  void deleteCountUsuarios() {
-    secureStorage.delete(key: 'ff_CountUsuarios');
   }
 
   int _CountUsuariosAtivos = 0;
   int get CountUsuariosAtivos => _CountUsuariosAtivos;
   set CountUsuariosAtivos(int value) {
     _CountUsuariosAtivos = value;
-    secureStorage.setInt('ff_CountUsuariosAtivos', value);
-  }
-
-  void deleteCountUsuariosAtivos() {
-    secureStorage.delete(key: 'ff_CountUsuariosAtivos');
   }
 
   int _CountMaps = 0;
   int get CountMaps => _CountMaps;
   set CountMaps(int value) {
     _CountMaps = value;
-    secureStorage.setInt('ff_CountMaps', value);
-  }
-
-  void deleteCountMaps() {
-    secureStorage.delete(key: 'ff_CountMaps');
   }
 
   bool _UsuarioLiberado = false;
