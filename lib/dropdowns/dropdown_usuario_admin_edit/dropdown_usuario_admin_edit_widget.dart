@@ -339,7 +339,7 @@ class _DropdownUsuarioAdminEditWidgetState
                                           .primaryText,
                                     ),
                                   ),
-                                  duration: Duration(milliseconds: 3000),
+                                  duration: Duration(milliseconds: 1000),
                                   backgroundColor:
                                       FlutterFlowTheme.of(context).secondary,
                                 ),
@@ -480,7 +480,7 @@ class _DropdownUsuarioAdminEditWidgetState
                                           .primaryText,
                                     ),
                                   ),
-                                  duration: Duration(milliseconds: 4000),
+                                  duration: Duration(milliseconds: 1000),
                                   backgroundColor:
                                       FlutterFlowTheme.of(context).success,
                                 ),
@@ -589,7 +589,7 @@ class _DropdownUsuarioAdminEditWidgetState
                                         .primaryText,
                                   ),
                                 ),
-                                duration: Duration(milliseconds: 4000),
+                                duration: Duration(milliseconds: 1000),
                                 backgroundColor:
                                     FlutterFlowTheme.of(context).success,
                               ),
@@ -697,7 +697,7 @@ class _DropdownUsuarioAdminEditWidgetState
                                         .primaryText,
                                   ),
                                 ),
-                                duration: Duration(milliseconds: 4000),
+                                duration: Duration(milliseconds: 1000),
                                 backgroundColor:
                                     FlutterFlowTheme.of(context).success,
                               ),
@@ -807,7 +807,7 @@ class _DropdownUsuarioAdminEditWidgetState
                                           .primaryText,
                                     ),
                                   ),
-                                  duration: Duration(milliseconds: 4000),
+                                  duration: Duration(milliseconds: 1000),
                                   backgroundColor:
                                       FlutterFlowTheme.of(context).success,
                                 ),
@@ -918,7 +918,7 @@ class _DropdownUsuarioAdminEditWidgetState
                                           .primaryText,
                                     ),
                                   ),
-                                  duration: Duration(milliseconds: 4000),
+                                  duration: Duration(milliseconds: 1000),
                                   backgroundColor:
                                       FlutterFlowTheme.of(context).success,
                                 ),

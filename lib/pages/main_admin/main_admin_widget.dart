@@ -1174,6 +1174,10 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                                         FFAppState()
                                                                             .AgenciaAtualld,
                                                                       )
+                                                                      .gtOrNull(
+                                                                        'tipo_usuario_id',
+                                                                        3,
+                                                                      )
                                                                       .order('nome_completo', ascending: true),
                                                                 ),
                                                                 builder: (context,
@@ -1847,6 +1851,10 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                                         'agencia_id',
                                                                         FFAppState()
                                                                             .AgenciaAtualld,
+                                                                      )
+                                                                      .gtOrNull(
+                                                                        'tipo_usuario_id',
+                                                                        3,
                                                                       )
                                                                       .order('nome_completo', ascending: true),
                                                                 ),

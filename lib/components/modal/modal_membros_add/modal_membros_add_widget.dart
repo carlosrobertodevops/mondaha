@@ -5686,43 +5686,17 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                                     onPressed: () async {
                                                                                       logFirebaseEvent('MODAL_MEMBROS_ADD_COMP_TO_ADD_BTN_ON_TAP');
                                                                                       if (_model.txtProcedimentoNoTextController.text != null && _model.txtProcedimentoNoTextController.text != '') {
-                                                                                        _model.outputCheckProcedimentoNoExists = await actions.checkProcedimentoNoExists(
-                                                                                          _model.membrosProcedimentos.toList(),
-                                                                                          _model.txtProcedimentoNoTextController.text,
-                                                                                        );
-                                                                                        if (_model.outputCheckProcedimentoNoExists!) {
-                                                                                          await showDialog(
-                                                                                            context: context,
-                                                                                            builder: (dialogContext) {
-                                                                                              return Dialog(
-                                                                                                elevation: 0,
-                                                                                                insetPadding: EdgeInsets.zero,
-                                                                                                backgroundColor: Colors.transparent,
-                                                                                                alignment: AlignmentDirectional(0.0, 0.0).resolve(Directionality.of(context)),
-                                                                                                child: Container(
-                                                                                                  height: 100.0,
-                                                                                                  width: 300.0,
-                                                                                                  child: Toast03Widget(
-                                                                                                    texto: 'Número de Procedimento já existe !!!',
-                                                                                                    titulo: 'Atenção',
-                                                                                                  ),
-                                                                                                ),
-                                                                                              );
-                                                                                            },
-                                                                                          );
-                                                                                        } else {
-                                                                                          _model.addToMembrosProcedimentos(DataTypesProcedimentosStruct(
-                                                                                            procedimentoNo: _model.txtProcedimentoNoTextController.text,
-                                                                                            unidade: _model.ddwProcedimentoUnidadeValue,
-                                                                                            procedimentoTipo: _model.ddwProcedimentoTipoValue,
-                                                                                            crime: _model.ddwProcedimentoCrimeValue,
-                                                                                            data: _model.txtProcedimentoDataTextController.text,
-                                                                                          ));
-                                                                                          safeSetState(() {});
-                                                                                        }
-
+                                                                                        _model.addToMembrosProcedimentos(DataTypesProcedimentosStruct(
+                                                                                          procedimentoNo: _model.txtProcedimentoNoTextController.text,
+                                                                                          unidade: _model.ddwProcedimentoUnidadeValue,
+                                                                                          procedimentoTipo: _model.ddwProcedimentoTipoValue,
+                                                                                          crime: _model.ddwProcedimentoCrimeValue,
+                                                                                          data: _model.txtProcedimentoDataTextController.text,
+                                                                                        ));
+                                                                                        safeSetState(() {});
                                                                                         safeSetState(() {
                                                                                           _model.txtProcedimentoNoTextController?.clear();
+                                                                                          _model.txtProcedimentoDataTextController?.clear();
                                                                                         });
                                                                                       } else {
                                                                                         await showDialog(
@@ -5745,8 +5719,6 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                                           },
                                                                                         );
                                                                                       }
-
-                                                                                      safeSetState(() {});
                                                                                     },
                                                                                     text: FFLocalizations.of(context).getText(
                                                                                       '8pxnhql5' /* To add */,
@@ -6546,41 +6518,14 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                                       onPressed: () async {
                                                                                         logFirebaseEvent('MODAL_MEMBROS_ADD_COMP_TO_ADD_BTN_ON_TAP');
                                                                                         if (_model.txtProcessoNoAcaoPenalTextController.text != null && _model.txtProcessoNoAcaoPenalTextController.text != '') {
-                                                                                          _model.outputCheckProcessoExists = await actions.checkAcaopenalNoExists(
-                                                                                            _model.membrosProcessos.toList(),
-                                                                                            _model.txtProcessoNoAcaoPenalTextController.text,
-                                                                                          );
-                                                                                          if (_model.outputCheckProcessoExists!) {
-                                                                                            await showDialog(
-                                                                                              context: context,
-                                                                                              builder: (dialogContext) {
-                                                                                                return Dialog(
-                                                                                                  elevation: 0,
-                                                                                                  insetPadding: EdgeInsets.zero,
-                                                                                                  backgroundColor: Colors.transparent,
-                                                                                                  alignment: AlignmentDirectional(0.0, 0.0).resolve(Directionality.of(context)),
-                                                                                                  child: Container(
-                                                                                                    height: 100.0,
-                                                                                                    width: 300.0,
-                                                                                                    child: Toast03Widget(
-                                                                                                      texto: 'Número da Ação Penal já existe !!!',
-                                                                                                      titulo: 'Atenção',
-                                                                                                    ),
-                                                                                                  ),
-                                                                                                );
-                                                                                              },
-                                                                                            );
-                                                                                          } else {
-                                                                                            _model.addToMembrosProcessos(DataTypesProcessosStruct(
-                                                                                              acaoPenalNo: _model.txtProcessoNoAcaoPenalTextController.text,
-                                                                                              vara: _model.ddwProcessoVaraValue,
-                                                                                              situacaoJuridica: _model.ddwProcessoSituacaoJuridicaValue,
-                                                                                              regime: _model.ddwProcessoRegimeValue,
-                                                                                              situacaoReu: _model.ddwProcessoSituacaoReuValue,
-                                                                                            ));
-                                                                                            safeSetState(() {});
-                                                                                          }
-
+                                                                                          _model.addToMembrosProcessos(DataTypesProcessosStruct(
+                                                                                            acaoPenalNo: _model.txtProcessoNoAcaoPenalTextController.text,
+                                                                                            vara: _model.ddwProcessoVaraValue,
+                                                                                            situacaoJuridica: _model.ddwProcessoSituacaoJuridicaValue,
+                                                                                            regime: _model.ddwProcessoRegimeValue,
+                                                                                            situacaoReu: _model.ddwProcessoSituacaoReuValue,
+                                                                                          ));
+                                                                                          safeSetState(() {});
                                                                                           safeSetState(() {
                                                                                             _model.txtProcessoNoAcaoPenalTextController?.clear();
                                                                                           });
@@ -6605,8 +6550,6 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                                             },
                                                                                           );
                                                                                         }
-
-                                                                                        safeSetState(() {});
                                                                                       },
                                                                                       text: FFLocalizations.of(context).getText(
                                                                                         'vm7t0n6u' /* To add */,
@@ -8504,10 +8447,22 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                           },
                                                         );
                                                         Navigator.pop(context);
-
+                                                        if (Navigator.of(
+                                                                context)
+                                                            .canPop()) {
+                                                          context.pop();
+                                                        }
                                                         context.pushNamed(
-                                                            MainMembrosWidget
-                                                                .routeName);
+                                                          MainMembrosWidget
+                                                              .routeName,
+                                                          queryParameters: {
+                                                            'membroPesquisa':
+                                                                serializeParam(
+                                                              true.toString(),
+                                                              ParamType.String,
+                                                            ),
+                                                          }.withoutNulls,
+                                                        );
 
                                                         FFAppState()
                                                                 .rebuildMembros =

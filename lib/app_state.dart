@@ -359,6 +359,53 @@ class FFAppState extends ChangeNotifier {
   void deleteRebuildMembros() {
     secureStorage.delete(key: 'ff_rebuildMembros');
   }
+
+  community_testing_ryusdv_data_schema.NotificationStruct _mensagemLogin =
+      community_testing_ryusdv_data_schema.NotificationStruct();
+  community_testing_ryusdv_data_schema.NotificationStruct get mensagemLogin =>
+      _mensagemLogin;
+  set mensagemLogin(
+      community_testing_ryusdv_data_schema.NotificationStruct value) {
+    _mensagemLogin = value;
+  }
+
+  void updateMensagemLoginStruct(
+      Function(community_testing_ryusdv_data_schema.NotificationStruct)
+          updateFn) {
+    updateFn(_mensagemLogin);
+  }
+
+  community_testing_ryusdv_data_schema.NotificationStruct
+      _mensagemMembrosSalvar =
+      community_testing_ryusdv_data_schema.NotificationStruct();
+  community_testing_ryusdv_data_schema.NotificationStruct
+      get mensagemMembrosSalvar => _mensagemMembrosSalvar;
+  set mensagemMembrosSalvar(
+      community_testing_ryusdv_data_schema.NotificationStruct value) {
+    _mensagemMembrosSalvar = value;
+  }
+
+  void updateMensagemMembrosSalvarStruct(
+      Function(community_testing_ryusdv_data_schema.NotificationStruct)
+          updateFn) {
+    updateFn(_mensagemMembrosSalvar);
+  }
+
+  community_testing_ryusdv_data_schema.NotificationStruct
+      _mensagemMembroEditar =
+      community_testing_ryusdv_data_schema.NotificationStruct();
+  community_testing_ryusdv_data_schema.NotificationStruct
+      get mensagemMembroEditar => _mensagemMembroEditar;
+  set mensagemMembroEditar(
+      community_testing_ryusdv_data_schema.NotificationStruct value) {
+    _mensagemMembroEditar = value;
+  }
+
+  void updateMensagemMembroEditarStruct(
+      Function(community_testing_ryusdv_data_schema.NotificationStruct)
+          updateFn) {
+    updateFn(_mensagemMembroEditar);
+  }
 }
 
 void _safeInit(Function() initializeField) {

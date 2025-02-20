@@ -405,8 +405,6 @@ class ModalMembrosAddModel extends FlutterFlowModel<ModalMembrosAddWidget> {
   String? Function(BuildContext, String?)?
       txtProcedimentoDataTextControllerValidator;
   DateTime? datePicked2;
-  // Stores action output result for [Custom Action - checkProcedimentoNoExists] action in Button widget.
-  bool? outputCheckProcedimentoNoExists;
   // State field(s) for txt_processo_no_acao_penal widget.
   FocusNode? txtProcessoNoAcaoPenalFocusNode;
   TextEditingController? txtProcessoNoAcaoPenalTextController;
@@ -424,8 +422,6 @@ class ModalMembrosAddModel extends FlutterFlowModel<ModalMembrosAddWidget> {
   // State field(s) for ddw_processo_situacao_reu widget.
   String? ddwProcessoSituacaoReuValue;
   FormFieldController<String>? ddwProcessoSituacaoReuValueController;
-  // Stores action output result for [Custom Action - checkAcaopenalNoExists] action in Button widget.
-  bool? outputCheckProcessoExists;
   // State field(s) for txt_historico widget.
   FocusNode? txtHistoricoFocusNode;
   TextEditingController? txtHistoricoTextController;

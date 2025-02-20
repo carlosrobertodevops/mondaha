@@ -64,10 +64,12 @@ class _MainMembrosWidgetState extends State<MainMembrosWidget>
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       logFirebaseEvent('MAIN_MEMBROS_main_membros_ON_INIT_STATE');
       if (FFAppState().rebuildMembros) {
+        safeSetState(() => _model.requestCompleter1 = null);
+        await _model.waitForRequestCompleted1();
+        safeSetState(() => _model.requestCompleter3 = null);
+        await _model.waitForRequestCompleted3(minWait: 100, maxWait: 1000);
         safeSetState(() => _model.requestCompleter2 = null);
         await _model.waitForRequestCompleted2(minWait: 100, maxWait: 1000);
-        safeSetState(() => _model.requestCompleter1 = null);
-        await _model.waitForRequestCompleted1(minWait: 100, maxWait: 1000);
       } else {
         FFAppState().rebuildMembros = false;
         FFAppState().update(() {});
@@ -181,15 +183,19 @@ class _MainMembrosWidgetState extends State<MainMembrosWidget>
                   )
                 : null,
             body: FutureBuilder<List<MembrosViewPdfRow>>(
-              future: MembrosViewPdfTable().queryRows(
-                queryFn: (q) => q
-                    .ilike(
-                      'pesquisa',
-                      functions.pesquisaLike(
-                          _model.textFieldPesquisarMembrosTextController.text),
-                    )
-                    .order('nome_completo', ascending: true),
-              ),
+              future: (_model.requestCompleter1 ??=
+                      Completer<List<MembrosViewPdfRow>>()
+                        ..complete(MembrosViewPdfTable().queryRows(
+                          queryFn: (q) => q
+                              .ilike(
+                                'pesquisa',
+                                functions.pesquisaLike(_model
+                                    .textFieldPesquisarMembrosTextController
+                                    .text),
+                              )
+                              .order('nome_completo', ascending: true),
+                        )))
+                  .future,
               builder: (context, snapshot) {
                 // Customize what your widget looks like when it's loading.
                 if (!snapshot.hasData) {
@@ -969,7 +975,7 @@ class _MainMembrosWidgetState extends State<MainMembrosWidget>
                                                                   child: FutureBuilder<
                                                                       List<
                                                                           MembrosViewConcatSeachRow>>(
-                                                                    future: (_model.requestCompleter2 ??= Completer<
+                                                                    future: (_model.requestCompleter3 ??= Completer<
                                                                             List<
                                                                                 MembrosViewConcatSeachRow>>()
                                                                           ..complete(
@@ -1284,7 +1290,7 @@ class _MainMembrosWidgetState extends State<MainMembrosWidget>
                                                                   child: FutureBuilder<
                                                                       List<
                                                                           MembrosViewConcatSeachRow>>(
-                                                                    future: (_model.requestCompleter1 ??= Completer<
+                                                                    future: (_model.requestCompleter2 ??= Completer<
                                                                             List<
                                                                                 MembrosViewConcatSeachRow>>()
                                                                           ..complete(
