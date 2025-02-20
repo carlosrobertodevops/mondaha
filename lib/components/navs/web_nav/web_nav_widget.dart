@@ -555,7 +555,7 @@ class _WebNavWidgetState extends State<WebNavWidget>
                               onTap: () async {
                                 logFirebaseEvent(
                                     'WEB_NAV_COMP_bg_color_ON_TAP');
-                                if (FFAppState().UsuarioAtualTipoUsuarioId >=
+                                if (FFAppState().UsuarioAtualTipoUsuarioId >
                                     3) {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
@@ -1578,7 +1578,7 @@ class _WebNavWidgetState extends State<WebNavWidget>
                                 onTap: () async {
                                   logFirebaseEvent(
                                       'WEB_NAV_COMP_bg_color_ON_TAP');
-                                  if (FFAppState().UsuarioAtualTipoUsuarioId >=
+                                  if (FFAppState().UsuarioAtualTipoUsuarioId >
                                       3) {
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
