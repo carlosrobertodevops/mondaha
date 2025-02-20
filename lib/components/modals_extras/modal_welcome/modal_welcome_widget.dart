@@ -4,6 +4,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:math';
 import 'dart:ui';
+import '/index.dart';
 import 'package:ff_theme/flutter_flow/flutter_flow_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -301,7 +302,7 @@ class _ModalWelcomeWidgetState extends State<ModalWelcomeWidget>
                                         'MODAL_WELCOME_COMP_CONTINUE_BTN_ON_TAP');
 
                                     context.pushNamed(
-                                      'main_home',
+                                      MainHomeWidget.routeName,
                                       extra: <String, dynamic>{
                                         kTransitionInfoKey: TransitionInfo(
                                           hasTransition: true,

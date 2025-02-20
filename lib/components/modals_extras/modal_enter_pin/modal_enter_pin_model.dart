@@ -17,6 +17,7 @@ class ModalEnterPinModel extends FlutterFlowModel<ModalEnterPinWidget> {
 
   // State field(s) for PinCode widget.
   TextEditingController? pinCodeController;
+  FocusNode? pinCodeFocusNode;
   String? Function(BuildContext, String?)? pinCodeControllerValidator;
 
   @override
@@ -26,6 +27,7 @@ class ModalEnterPinModel extends FlutterFlowModel<ModalEnterPinWidget> {
 
   @override
   void dispose() {
+    pinCodeFocusNode?.dispose();
     pinCodeController?.dispose();
   }
 }

@@ -3,6 +3,7 @@ import '/components/modal/modal_membro_view/modal_membro_view_widget.dart';
 import '/components/modal/modal_membros_edit/modal_membros_edit_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'dart:ui';
+import '/index.dart';
 import 'dropdown_member_edit_widget.dart' show DropdownMemberEditWidget;
 import 'package:ff_theme/flutter_flow/flutter_flow_theme.dart';
 import 'package:flutter/material.dart';

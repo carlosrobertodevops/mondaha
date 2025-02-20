@@ -18,6 +18,9 @@ export 'main_messages_model.dart';
 class MainMessagesWidget extends StatefulWidget {
   const MainMessagesWidget({super.key});
 
+  static String routeName = 'main_messages';
+  static String routePath = 'mainMessages';
+
   @override
   State<MainMessagesWidget> createState() => _MainMessagesWidgetState();
 }

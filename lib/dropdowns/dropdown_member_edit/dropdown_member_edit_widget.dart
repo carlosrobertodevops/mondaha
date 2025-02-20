@@ -3,6 +3,7 @@ import '/components/modal/modal_membro_view/modal_membro_view_widget.dart';
 import '/components/modal/modal_membros_edit/modal_membros_edit_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'dart:ui';
+import '/index.dart';
 import 'package:ff_theme/flutter_flow/flutter_flow_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -401,14 +402,15 @@ class _DropdownMemberEditWidgetState extends State<DropdownMemberEditWidget> {
                                   color:
                                       FlutterFlowTheme.of(context).primaryText,
                                 ),
+                                textAlign: TextAlign.justify,
                               ),
-                              duration: Duration(milliseconds: 3000),
+                              duration: Duration(milliseconds: 1000),
                               backgroundColor:
                                   FlutterFlowTheme.of(context).secondary,
                             ),
                           );
 
-                          context.pushNamed('main_membros');
+                          context.pushNamed(MainMembrosWidget.routeName);
                         }
                       },
                       child: AnimatedContainer(

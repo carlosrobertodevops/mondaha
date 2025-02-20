@@ -342,6 +342,49 @@ class ProcedimentosAddCall {
   }
 }
 
+class ProcedimentoAddCall {
+  static Future<ApiCallResponse> call({
+    int? membroId,
+    String? procedimentoNo = '',
+    String? unidade = '',
+    String? procedimentoTipo = '',
+    String? crime = '',
+    String? data = '',
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "p_membro_id": "${membroId}",
+  "p_procedimento_no": "${procedimentoNo}",
+  "p_unidade": "${unidade}",
+  "p_procedimento_tipo": "${procedimentoTipo}",
+  "p_crime": "${crime}",
+  "p_data": "${data}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'ProcedimentoAdd ',
+      apiUrl:
+          'https://buzlazhtcndpegsnijcw.supabase.co/rest/v1/rpc/procedimento_add',
+      callType: ApiCallType.POST,
+      headers: {
+        'apikey':
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ1emxhemh0Y25kcGVnc25pamN3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQ2OTI2OTksImV4cCI6MjA1MDI2ODY5OX0.myFxYtm5Q3WF1WlV0AJzPoRLKK8W0et8MnKUk4e-nPU',
+        'Authorization':
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ1emxhemh0Y25kcGVnc25pamN3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQ2OTI2OTksImV4cCI6MjA1MDI2ODY5OX0.myFxYtm5Q3WF1WlV0AJzPoRLKK8W0et8MnKUk4e-nPU',
+        'Content-Type': 'application/json',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
 class ProcedimentosGetCall {
   static Future<ApiCallResponse> call({
     int? membroId,

@@ -70,6 +70,10 @@ class FFAppState extends ChangeNotifier {
           await secureStorage.getStringList('ff_pesquisarMembrosMain') ??
               _pesquisarMembrosMain;
     });
+    await _safeInitAsync(() async {
+      _rebuildMembros =
+          await secureStorage.getBool('ff_rebuildMembros') ?? _rebuildMembros;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -343,6 +347,17 @@ class FFAppState extends ChangeNotifier {
   int get AgenciaAtualld => _AgenciaAtualld;
   set AgenciaAtualld(int value) {
     _AgenciaAtualld = value;
+  }
+
+  bool _rebuildMembros = true;
+  bool get rebuildMembros => _rebuildMembros;
+  set rebuildMembros(bool value) {
+    _rebuildMembros = value;
+    secureStorage.setBool('ff_rebuildMembros', value);
+  }
+
+  void deleteRebuildMembros() {
+    secureStorage.delete(key: 'ff_rebuildMembros');
   }
 }
 

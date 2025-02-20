@@ -3,6 +3,7 @@ import '/backend/supabase/supabase.dart';
 import '/components/modal/modal_profile_edit_admin/modal_profile_edit_admin_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'dart:ui';
+import '/index.dart';
 import 'package:ff_theme/flutter_flow/flutter_flow_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -344,7 +345,7 @@ class _DropdownUsuarioAdminEditWidgetState
                                 ),
                               );
 
-                              context.pushNamed('main_admin');
+                              context.pushNamed(MainAdminWidget.routeName);
                             }
                           },
                           child: AnimatedContainer(
@@ -468,7 +469,7 @@ class _DropdownUsuarioAdminEditWidgetState
                                 ),
                               );
 
-                              context.pushNamed('main_admin');
+                              context.pushNamed(MainAdminWidget.routeName);
 
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
@@ -577,7 +578,7 @@ class _DropdownUsuarioAdminEditWidgetState
                               ),
                             );
 
-                            context.pushNamed('main_admin');
+                            context.pushNamed(MainAdminWidget.routeName);
 
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
@@ -685,7 +686,7 @@ class _DropdownUsuarioAdminEditWidgetState
                               ),
                             );
 
-                            context.pushNamed('main_admin');
+                            context.pushNamed(MainAdminWidget.routeName);
 
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
@@ -795,7 +796,7 @@ class _DropdownUsuarioAdminEditWidgetState
                                 ),
                               );
 
-                              context.pushNamed('main_admin');
+                              context.pushNamed(MainAdminWidget.routeName);
 
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
@@ -906,7 +907,7 @@ class _DropdownUsuarioAdminEditWidgetState
                                 ),
                               );
 
-                              context.pushNamed('main_admin');
+                              context.pushNamed(MainAdminWidget.routeName);
 
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(

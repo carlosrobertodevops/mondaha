@@ -23,6 +23,9 @@ export 'main_home_model.dart';
 class MainHomeWidget extends StatefulWidget {
   const MainHomeWidget({super.key});
 
+  static String routeName = 'main_home';
+  static String routePath = 'mainHome';
+
   @override
   State<MainHomeWidget> createState() => _MainHomeWidgetState();
 }

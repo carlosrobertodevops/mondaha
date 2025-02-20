@@ -37,6 +37,8 @@ class _ModalEnterPinWidgetState extends State<ModalEnterPinWidget>
     super.initState();
     _model = createModel(context, () => ModalEnterPinModel());
 
+    _model.pinCodeFocusNode ??= FocusNode();
+
     animationsMap.addAll({
       'containerOnPageLoadAnimation': AnimationInfo(
         trigger: AnimationTrigger.onPageLoad,
@@ -179,6 +181,7 @@ class _ModalEnterPinWidgetState extends State<ModalEnterPinWidget>
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               enableActiveFill: false,
                               autoFocus: true,
+                              focusNode: _model.pinCodeFocusNode,
                               enablePinAutofill: true,
                               errorTextSpace: 16.0,
                               showCursor: true,

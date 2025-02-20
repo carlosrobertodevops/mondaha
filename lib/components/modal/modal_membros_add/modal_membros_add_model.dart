@@ -19,8 +19,13 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 import 'dart:ui';
+import "package:community_testing_ryusdv/backend/schema/enums/enums.dart"
+    as community_testing_ryusdv_enums;
+import "package:community_testing_ryusdv/backend/schema/structs/index.dart"
+    as community_testing_ryusdv_data_schema;
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
+import '/index.dart';
 import 'modal_membros_add_widget.dart' show ModalMembrosAddWidget;
 import 'package:aligned_tooltip/aligned_tooltip.dart';
 import 'package:community_testing_ryusdv/app_state.dart'
@@ -450,10 +455,10 @@ class ModalMembrosAddModel extends FlutterFlowModel<ModalMembrosAddWidget> {
       txtValidacoesObservacoesTextControllerValidator;
   // Stores action output result for [Backend Call - Insert Row] action in Button widget.
   MembrosRow? outputMembrosAdd;
-  // Stores action output result for [Backend Call - API (ProcedimentosAdd)] action in Button widget.
-  ApiCallResponse? apiResultProcedimentos;
+  // Stores action output result for [Backend Call - API (ProcedimentoAdd )] action in Button widget.
+  ApiCallResponse? apiResultProcedimentosAdd;
   // Stores action output result for [Backend Call - API (ProcessosAdd)] action in Button widget.
-  ApiCallResponse? apiResultProcessos;
+  ApiCallResponse? apiResultProcessosAdd;
 
   @override
   void initState(BuildContext context) {

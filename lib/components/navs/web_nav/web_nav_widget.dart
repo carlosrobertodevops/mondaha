@@ -7,6 +7,7 @@ import '/flutter_flow/flutter_flow_language_selector.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'dart:math';
 import 'dart:ui';
+import '/index.dart';
 import 'package:community_testing_ryusdv/app_state.dart'
     as community_testing_ryusdv_app_state;
 import 'package:cached_network_image/cached_network_image.dart';
@@ -267,7 +268,7 @@ class _WebNavWidgetState extends State<WebNavWidget>
                             onTap: () async {
                               logFirebaseEvent('WEB_NAV_COMP_bg_color_ON_TAP');
 
-                              context.pushNamed('main_home');
+                              context.pushNamed(MainHomeWidget.routeName);
                             },
                             child: Container(
                               width: double.infinity,
@@ -337,7 +338,7 @@ class _WebNavWidgetState extends State<WebNavWidget>
                             onTap: () async {
                               logFirebaseEvent('WEB_NAV_COMP_bg_color_ON_TAP');
 
-                              context.pushNamed('main_faccoes');
+                              context.pushNamed(MainFaccoesWidget.routeName);
                             },
                             child: Container(
                               width: double.infinity,
@@ -407,7 +408,7 @@ class _WebNavWidgetState extends State<WebNavWidget>
                             onTap: () async {
                               logFirebaseEvent('WEB_NAV_COMP_bg_color_ON_TAP');
 
-                              context.pushNamed('main_membros');
+                              context.pushNamed(MainMembrosWidget.routeName);
                             },
                             child: Container(
                               width: double.infinity,
@@ -479,7 +480,7 @@ class _WebNavWidgetState extends State<WebNavWidget>
                                 logFirebaseEvent(
                                     'WEB_NAV_COMP_bg_color_ON_TAP');
 
-                                context.pushNamed('main_messages');
+                                context.pushNamed(MainMessagesWidget.routeName);
                               },
                               child: Container(
                                 width: double.infinity,
@@ -542,7 +543,7 @@ class _WebNavWidgetState extends State<WebNavWidget>
                               ),
                             ),
                           ),
-                        if (FFAppState().UsuarioAtualTipoUsuarioId <= 2)
+                        if (FFAppState().UsuarioAtualTipoUsuarioId <= 3)
                           Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 12.0),
@@ -572,10 +573,10 @@ class _WebNavWidgetState extends State<WebNavWidget>
                                     ),
                                   );
 
-                                  context.pushNamed('main_home');
+                                  context.pushNamed(MainHomeWidget.routeName);
                                 } else {
                                   context.pushNamed(
-                                    'main_admin',
+                                    MainAdminWidget.routeName,
                                     queryParameters: {
                                       'mainAdminTipoUsuario': serializeParam(
                                         FFAppState().UsuarioAtualTipoUsuarioId,
@@ -657,7 +658,7 @@ class _WebNavWidgetState extends State<WebNavWidget>
                             onTap: () async {
                               logFirebaseEvent('WEB_NAV_COMP_bg_color_ON_TAP');
 
-                              context.pushNamed('main_profile');
+                              context.pushNamed(MainProfileWidget.routeName);
                             },
                             child: Container(
                               width: double.infinity,
@@ -719,6 +720,28 @@ class _WebNavWidgetState extends State<WebNavWidget>
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 12.0),
+                          child: Container(
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              color: widget!.selectedNav == 6
+                                  ? FlutterFlowTheme.of(context).alternate
+                                  : FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            child: Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [],
+                              ),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 0.0, 0.0, 12.0),
                           child: InkWell(
                             splashColor: Colors.transparent,
                             focusColor: Colors.transparent,
@@ -731,7 +754,7 @@ class _WebNavWidgetState extends State<WebNavWidget>
                               GoRouter.of(context).clearRedirectLocation();
 
                               context.goNamedAuth(
-                                  'auth_login', context.mounted);
+                                  AuthLoginWidget.routeName, context.mounted);
                             },
                             child: Container(
                               width: double.infinity,
@@ -1368,7 +1391,7 @@ class _WebNavWidgetState extends State<WebNavWidget>
                                 logFirebaseEvent(
                                     'WEB_NAV_COMP_bg_color_ON_TAP');
 
-                                context.pushNamed('main_home');
+                                context.pushNamed(MainHomeWidget.routeName);
                               },
                               child: Container(
                                 width: double.infinity,
@@ -1414,7 +1437,7 @@ class _WebNavWidgetState extends State<WebNavWidget>
                                 logFirebaseEvent(
                                     'WEB_NAV_COMP_bg_color_ON_TAP');
 
-                                context.pushNamed('main_faccoes');
+                                context.pushNamed(MainFaccoesWidget.routeName);
                               },
                               child: Container(
                                 width: double.infinity,
@@ -1460,7 +1483,7 @@ class _WebNavWidgetState extends State<WebNavWidget>
                                 logFirebaseEvent(
                                     'WEB_NAV_COMP_bg_color_ON_TAP');
 
-                                context.pushNamed('main_membros');
+                                context.pushNamed(MainMembrosWidget.routeName);
                               },
                               child: Container(
                                 width: double.infinity,
@@ -1507,7 +1530,8 @@ class _WebNavWidgetState extends State<WebNavWidget>
                                   logFirebaseEvent(
                                       'WEB_NAV_COMP_bg_color_ON_TAP');
 
-                                  context.pushNamed('main_messages');
+                                  context
+                                      .pushNamed(MainMessagesWidget.routeName);
                                 },
                                 child: Container(
                                   width: double.infinity,
@@ -1542,7 +1566,7 @@ class _WebNavWidgetState extends State<WebNavWidget>
                                 ),
                               ),
                             ),
-                          if (FFAppState().UsuarioAtualTipoUsuarioId <= 2)
+                          if (FFAppState().UsuarioAtualTipoUsuarioId <= 3)
                             Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 0.0, 12.0),
@@ -1572,10 +1596,10 @@ class _WebNavWidgetState extends State<WebNavWidget>
                                       ),
                                     );
 
-                                    context.pushNamed('main_home');
+                                    context.pushNamed(MainHomeWidget.routeName);
                                   } else {
                                     context.pushNamed(
-                                      'main_admin',
+                                      MainAdminWidget.routeName,
                                       queryParameters: {
                                         'mainAdminTipoUsuario': serializeParam(
                                           FFAppState()
@@ -1631,7 +1655,7 @@ class _WebNavWidgetState extends State<WebNavWidget>
                                 logFirebaseEvent(
                                     'WEB_NAV_COMP_bg_color_ON_TAP');
 
-                                context.pushNamed('main_profile');
+                                context.pushNamed(MainProfileWidget.routeName);
                               },
                               child: Container(
                                 width: double.infinity,
@@ -1668,6 +1692,29 @@ class _WebNavWidgetState extends State<WebNavWidget>
                           Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 12.0),
+                            child: Container(
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                color: widget!.selectedNav == 6
+                                    ? FlutterFlowTheme.of(context).alternate
+                                    : FlutterFlowTheme.of(context)
+                                        .secondaryBackground,
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              child: Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [],
+                                ),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 0.0, 0.0, 12.0),
                             child: InkWell(
                               splashColor: Colors.transparent,
                               focusColor: Colors.transparent,
@@ -1681,7 +1728,7 @@ class _WebNavWidgetState extends State<WebNavWidget>
                                 GoRouter.of(context).clearRedirectLocation();
 
                                 context.goNamedAuth(
-                                    'auth_login', context.mounted);
+                                    AuthLoginWidget.routeName, context.mounted);
                               },
                               child: Container(
                                 width: double.infinity,

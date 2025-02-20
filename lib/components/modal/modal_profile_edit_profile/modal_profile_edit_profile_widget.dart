@@ -9,6 +9,7 @@ import '/flutter_flow/form_field_controller.dart';
 import '/flutter_flow/upload_data.dart';
 import 'dart:math';
 import 'dart:ui';
+import '/index.dart';
 import 'package:community_testing_ryusdv/app_state.dart'
     as community_testing_ryusdv_app_state;
 import 'package:cached_network_image/cached_network_image.dart';
@@ -1268,7 +1269,8 @@ class _ModalProfileEditProfileWidgetState
                                               FFAppState().update(() {});
                                             }
 
-                                            context.pushNamed('main_profile');
+                                            context.pushNamed(
+                                                MainProfileWidget.routeName);
 
                                             Navigator.pop(context);
                                             ScaffoldMessenger.of(context)
@@ -1290,7 +1292,8 @@ class _ModalProfileEditProfileWidgetState
                                               ),
                                             );
                                           } else {
-                                            context.pushNamed('main_profile');
+                                            context.pushNamed(
+                                                MainProfileWidget.routeName);
 
                                             Navigator.pop(context);
                                           }

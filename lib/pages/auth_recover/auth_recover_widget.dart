@@ -5,6 +5,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:math';
 import 'dart:ui';
+import '/index.dart';
 import 'package:community_testing_ryusdv/app_state.dart'
     as community_testing_ryusdv_app_state;
 import 'package:cached_network_image/cached_network_image.dart';
@@ -19,6 +20,9 @@ export 'auth_recover_model.dart';
 
 class AuthRecoverWidget extends StatefulWidget {
   const AuthRecoverWidget({super.key});
+
+  static String routeName = 'auth_recover';
+  static String routePath = 'authRecover';
 
   @override
   State<AuthRecoverWidget> createState() => _AuthRecoverWidgetState();
@@ -722,7 +726,8 @@ class _AuthRecoverWidgetState extends State<AuthRecoverWidget>
                                                                   });
 
                                                                   context.pushNamedAuth(
-                                                                      'auth_login',
+                                                                      AuthLoginWidget
+                                                                          .routeName,
                                                                       context
                                                                           .mounted);
                                                                 },

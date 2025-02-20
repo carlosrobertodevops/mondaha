@@ -1,5 +1,6 @@
 import '/flutter_flow/flutter_flow_util.dart';
 import 'dart:ui';
+import '/index.dart';
 import 'package:ff_theme/flutter_flow/flutter_flow_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -85,7 +86,7 @@ class _MobileNavWidgetState extends State<MobileNavWidget> {
                   logFirebaseEvent('MOBILE_NAV_COMP_Column_5op2fdni_ON_TAP');
 
                   context.pushNamed(
-                    'main_home',
+                    MainHomeWidget.routeName,
                     extra: <String, dynamic>{
                       kTransitionInfoKey: TransitionInfo(
                         hasTransition: true,
@@ -132,7 +133,7 @@ class _MobileNavWidgetState extends State<MobileNavWidget> {
                   logFirebaseEvent('MOBILE_NAV_COMP_Column_t87ij4ed_ON_TAP');
 
                   context.pushNamed(
-                    'main_messages',
+                    MainMessagesWidget.routeName,
                     extra: <String, dynamic>{
                       kTransitionInfoKey: TransitionInfo(
                         hasTransition: true,
@@ -179,7 +180,7 @@ class _MobileNavWidgetState extends State<MobileNavWidget> {
                   logFirebaseEvent('MOBILE_NAV_COMP_Column_5root8xc_ON_TAP');
 
                   context.pushNamed(
-                    'main_membros',
+                    MainMembrosWidget.routeName,
                     extra: <String, dynamic>{
                       kTransitionInfoKey: TransitionInfo(
                         hasTransition: true,
@@ -226,7 +227,7 @@ class _MobileNavWidgetState extends State<MobileNavWidget> {
                   logFirebaseEvent('MOBILE_NAV_COMP_Column_yvpwce9x_ON_TAP');
 
                   context.pushNamed(
-                    'main_faccoes',
+                    MainFaccoesWidget.routeName,
                     extra: <String, dynamic>{
                       kTransitionInfoKey: TransitionInfo(
                         hasTransition: true,
@@ -273,7 +274,7 @@ class _MobileNavWidgetState extends State<MobileNavWidget> {
                   logFirebaseEvent('MOBILE_NAV_COMP_Column_rda41op2_ON_TAP');
 
                   context.pushNamed(
-                    'main_profile',
+                    MainProfileWidget.routeName,
                     extra: <String, dynamic>{
                       kTransitionInfoKey: TransitionInfo(
                         hasTransition: true,

@@ -10,6 +10,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:math';
 import 'dart:ui';
+import '/index.dart';
 import 'package:community_testing_ryusdv/app_state.dart'
     as community_testing_ryusdv_app_state;
 import 'package:cached_network_image/cached_network_image.dart';
@@ -24,6 +25,9 @@ export 'main_profile_model.dart';
 
 class MainProfileWidget extends StatefulWidget {
   const MainProfileWidget({super.key});
+
+  static String routeName = 'main_profile';
+  static String routePath = 'mainProfile';
 
   @override
   State<MainProfileWidget> createState() => _MainProfileWidgetState();
@@ -530,7 +534,8 @@ class _MainProfileWidgetState extends State<MainProfileWidget>
                                                   'MAIN_PROFILE_Container_geiuas93_ON_TAP');
 
                                               context.pushNamed(
-                                                'auth_forgot_password',
+                                                AuthForgotPasswordWidget
+                                                    .routeName,
                                                 extra: <String, dynamic>{
                                                   kTransitionInfoKey:
                                                       TransitionInfo(

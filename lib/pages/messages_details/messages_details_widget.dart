@@ -13,6 +13,9 @@ export 'messages_details_model.dart';
 class MessagesDetailsWidget extends StatefulWidget {
   const MessagesDetailsWidget({super.key});
 
+  static String routeName = 'messages_details';
+  static String routePath = 'messagesDetails';
+
   @override
   State<MessagesDetailsWidget> createState() => _MessagesDetailsWidgetState();
 }

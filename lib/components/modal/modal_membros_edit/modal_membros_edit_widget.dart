@@ -23,6 +23,7 @@ import "package:community_testing_ryusdv/backend/schema/structs/index.dart"
     as community_testing_ryusdv_data_schema;
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
+import '/index.dart';
 import 'package:aligned_tooltip/aligned_tooltip.dart';
 import 'package:community_testing_ryusdv/app_state.dart'
     as community_testing_ryusdv_app_state;
@@ -129,7 +130,7 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                     .withoutNulls
                     .toList()
                     .cast<DataTypesProcedimentosStruct>();
-            safeSetState(() {});
+            _model.updatePage(() {});
           }
         }),
         Future(() async {
@@ -148,7 +149,7 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                     .withoutNulls
                     .toList()
                     .cast<DataTypesProcessosStruct>();
-            safeSetState(() {});
+            _model.updatePage(() {});
           }
         }),
         Future(() async {
@@ -509,7 +510,8 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                             'MODAL_MEMBROS_EDIT_close_rounded_ICN_ON_');
                                         Navigator.pop(context);
 
-                                        context.pushNamed('main_membros');
+                                        context.pushNamed(
+                                            MainMembrosWidget.routeName);
                                       },
                                     ),
                                   ],
@@ -8411,7 +8413,8 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                       Navigator.pop(context);
 
                                                       context.pushNamed(
-                                                          'main_membros');
+                                                          MainMembrosWidget
+                                                              .routeName);
                                                     },
                                                     text: FFLocalizations.of(
                                                             context)
@@ -8693,46 +8696,45 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                       true;
                                                                   _model.membrosProcedimentosCount =
                                                                       -1;
-                                                                  // procedeimentosTotal
-                                                                  _model.procedimentosTotal =
-                                                                      _model
-                                                                          .membrosProcedimentos
-                                                                          .length;
-                                                                  safeSetState(
-                                                                      () {});
-                                                                  // procedeimentosTotal
-                                                                  _model.procedimentosTotal =
-                                                                      _model.procedimentosTotal! +
-                                                                          -2;
-                                                                  safeSetState(
-                                                                      () {});
                                                                   while (_model
                                                                           .membrosProcedimentosCount! <=
                                                                       _model
-                                                                          .procedimentosTotal!) {
+                                                                          .membrosProcedimentos
+                                                                          .length) {
                                                                     _model.membrosProcedimentosCount =
                                                                         _model.membrosProcedimentosCount! +
                                                                             1;
-                                                                    _model.apiResultProcedimentosEdit =
-                                                                        await ProcedimentosAddCall
+                                                                    _model.apiResultProcedimentosAdd =
+                                                                        await ProcedimentoAddCall
                                                                             .call(
                                                                       membroId: widget!
                                                                           .membrosRow
                                                                           ?.membroId,
                                                                       procedimentoNo: _model
-                                                                          .txtProcedimentoNoTextController
-                                                                          .text,
-                                                                      unidade:
-                                                                          _model
-                                                                              .ddwProcedimentoUnidadeValue,
-                                                                      procedimentoTipo:
-                                                                          _model
-                                                                              .ddwProcedimentoTipoValue,
+                                                                          .membrosProcedimentos
+                                                                          .elementAtOrNull(
+                                                                              _model.membrosProcedimentosCount!)
+                                                                          ?.procedimentoNo,
+                                                                      unidade: _model
+                                                                          .membrosProcedimentos
+                                                                          .elementAtOrNull(
+                                                                              _model.membrosProcedimentosCount!)
+                                                                          ?.unidade,
+                                                                      procedimentoTipo: _model
+                                                                          .membrosProcedimentos
+                                                                          .elementAtOrNull(
+                                                                              _model.membrosProcedimentosCount!)
+                                                                          ?.procedimentoTipo,
                                                                       crime: _model
-                                                                          .ddwProcedimentoCrimeValue,
+                                                                          .membrosProcedimentos
+                                                                          .elementAtOrNull(
+                                                                              _model.membrosProcedimentosCount!)
+                                                                          ?.crime,
                                                                       data: _model
-                                                                          .txtProcedimentoDataTextController
-                                                                          .text,
+                                                                          .membrosProcedimentos
+                                                                          .elementAtOrNull(
+                                                                              _model.membrosProcedimentosCount!)
+                                                                          ?.data,
                                                                     );
 
                                                                     _shouldSetState =
@@ -8765,23 +8767,11 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                       true;
                                                                   _model.membrosProcessosCount =
                                                                       -1;
-                                                                  // processosTotal
-                                                                  _model.processosTotal =
-                                                                      _model
-                                                                          .membrosProcessos
-                                                                          .length;
-                                                                  safeSetState(
-                                                                      () {});
-                                                                  // processosTotal
-                                                                  _model.processosTotal =
-                                                                      _model.processosTotal! +
-                                                                          -2;
-                                                                  safeSetState(
-                                                                      () {});
                                                                   while (_model
                                                                           .membrosProcessosCount! <=
                                                                       _model
-                                                                          .processosTotal!) {
+                                                                          .membrosProcessos
+                                                                          .length) {
                                                                     _model.membrosProcessosCount =
                                                                         _model.membrosProcessosCount! +
                                                                             1;
@@ -8854,7 +8844,8 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                 context);
 
                                                             context.pushNamed(
-                                                                'main_membros');
+                                                                MainMembrosWidget
+                                                                    .routeName);
                                                           } else {
                                                             await showDialog(
                                                               context: context,
@@ -8885,7 +8876,7 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                       texto: FFLocalizations.of(
                                                                               context)
                                                                           .getText(
-                                                                        'fwpyqfwo' /* Some data is wrong!!! */,
+                                                                        'p4gjje04' /* Some data is wrong!!! */,
                                                                       ),
                                                                       titulo:
                                                                           'Atenção',
@@ -8895,6 +8886,12 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                               },
                                                             );
                                                           }
+
+                                                          FFAppState()
+                                                                  .rebuildMembros =
+                                                              true;
+                                                          FFAppState()
+                                                              .update(() {});
                                                         } else {
                                                           if (_shouldSetState)
                                                             safeSetState(() {});

@@ -12,6 +12,7 @@ import 'dart:math';
 import 'dart:ui';
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
+import 'dart:async';
 import 'package:community_testing_ryusdv/app_state.dart'
     as community_testing_ryusdv_app_state;
 import 'package:sticky_headers/sticky_headers.dart';
@@ -37,6 +38,9 @@ class MainMembrosWidget extends StatefulWidget {
 
   final String? membroPesquisa;
 
+  static String routeName = 'main_membros';
+  static String routePath = 'mainMembros';
+
   @override
   State<MainMembrosWidget> createState() => _MainMembrosWidgetState();
 }
@@ -56,6 +60,20 @@ class _MainMembrosWidgetState extends State<MainMembrosWidget>
 
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'main_membros'});
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('MAIN_MEMBROS_main_membros_ON_INIT_STATE');
+      if (FFAppState().rebuildMembros) {
+        safeSetState(() => _model.requestCompleter2 = null);
+        await _model.waitForRequestCompleted2(minWait: 100, maxWait: 1000);
+        safeSetState(() => _model.requestCompleter1 = null);
+        await _model.waitForRequestCompleted1(minWait: 100, maxWait: 1000);
+      } else {
+        FFAppState().rebuildMembros = false;
+        FFAppState().update(() {});
+      }
+    });
+
     _model.textFieldPesquisarMembrosTextController ??= TextEditingController();
     _model.textFieldPesquisarMembrosFocusNode ??= FocusNode();
 
@@ -951,13 +969,15 @@ class _MainMembrosWidgetState extends State<MainMembrosWidget>
                                                                   child: FutureBuilder<
                                                                       List<
                                                                           MembrosViewConcatSeachRow>>(
-                                                                    future: MembrosViewConcatSeachTable()
-                                                                        .queryRows(
-                                                                      queryFn: (q) => q.order(
-                                                                          'nome_completo',
-                                                                          ascending:
-                                                                              true),
-                                                                    ),
+                                                                    future: (_model.requestCompleter2 ??= Completer<
+                                                                            List<
+                                                                                MembrosViewConcatSeachRow>>()
+                                                                          ..complete(
+                                                                              MembrosViewConcatSeachTable().queryRows(
+                                                                            queryFn: (q) =>
+                                                                                q.order('nome_completo', ascending: true),
+                                                                          )))
+                                                                        .future,
                                                                     builder:
                                                                         (context,
                                                                             snapshot) {
@@ -1264,15 +1284,19 @@ class _MainMembrosWidgetState extends State<MainMembrosWidget>
                                                                   child: FutureBuilder<
                                                                       List<
                                                                           MembrosViewConcatSeachRow>>(
-                                                                    future: MembrosViewConcatSeachTable()
-                                                                        .queryRows(
-                                                                      queryFn: (q) => q
-                                                                          .ilike(
-                                                                            'pesquisa',
-                                                                            functions.pesquisaLike(_model.textFieldPesquisarMembrosTextController.text),
-                                                                          )
-                                                                          .order('nome_completo', ascending: true),
-                                                                    ),
+                                                                    future: (_model.requestCompleter1 ??= Completer<
+                                                                            List<
+                                                                                MembrosViewConcatSeachRow>>()
+                                                                          ..complete(
+                                                                              MembrosViewConcatSeachTable().queryRows(
+                                                                            queryFn: (q) => q
+                                                                                .ilike(
+                                                                                  'pesquisa',
+                                                                                  functions.pesquisaLike(_model.textFieldPesquisarMembrosTextController.text),
+                                                                                )
+                                                                                .order('nome_completo', ascending: true),
+                                                                          )))
+                                                                        .future,
                                                                     builder:
                                                                         (context,
                                                                             snapshot) {

@@ -8,13 +8,14 @@ import 'package:provider/provider.dart';
 import '/backend/schema/structs/index.dart';
 import '/backend/schema/enums/enums.dart';
 
-import '/index.dart';
 import '/main.dart';
 import 'package:ff_theme/flutter_flow/flutter_flow_theme.dart';
 import 'package:ff_commons/flutter_flow/lat_lng.dart';
 import 'package:ff_commons/flutter_flow/place.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'serialization_util.dart';
+
+import '/index.dart';
 
 export 'package:go_router/go_router.dart';
 export 'serialization_util.dart';
@@ -50,12 +51,20 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, _) => NotificationsWidget(),
         ),
         FFRoute(
-          name: 'notifications',
-          path: '/notifications',
+          name: NotificationsWidget.routeName,
+          path: NotificationsWidget.routePath,
           builder: (context, params) => NotificationsWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
+
+void initializeRoutes({
+  String? notificationsWidgetName,
+  String? notificationsWidgetPath,
+}) {
+  NotificationsWidget.maybeSetRouteName(notificationsWidgetName);
+  NotificationsWidget.maybeSetRoutePath(notificationsWidgetPath);
+}
 
 extension NavParamExtensions on Map<String, String?> {
   Map<String, String> get withoutNulls => Map.fromEntries(

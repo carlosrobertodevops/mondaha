@@ -560,6 +560,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // auth_login
   {
+    'bqen2vi4': {
+      'en': 'Beta Version 1.0.1. 2025',
+      'pt': 'Versão Beta 1.0.1.2025',
+    },
     'tzm2gn5e': {
       'en': 'Sign In',
       'pt': 'Entrar',
@@ -573,8 +577,8 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'pt': 'email',
     },
     'sltzyh98': {
-      'en': 'Password',
-      'pt': 'Senha',
+      'en': 'Password (minimum 6 digits)',
+      'pt': 'Senha (mínimo 6 dígitos)',
     },
     'ufqw0h0a': {
       'en': 'Sign In',
@@ -665,12 +669,12 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'pt': 'email',
     },
     'xi8bszk0': {
-      'en': 'Password',
-      'pt': 'Senha',
+      'en': 'Password (minimum 6 digits)',
+      'pt': 'Senha (mínimo 6 dígitos)',
     },
     'ffom99vq': {
-      'en': 'Confirm Password',
-      'pt': 'Confirme sua senha',
+      'en': 'Confirm Password (minimum 6 digits)',
+      'pt': 'Confirme sua senha (mínimo 6 dígitos)',
     },
     '22cyhqvr': {
       'en': 'Create Account',
@@ -4165,11 +4169,11 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Save Member',
       'pt': 'Salvar Membro',
     },
-    'p4gjje04': {
+    'fwpyqfwo': {
       'en': 'Some data is wrong!!!',
       'pt': 'Número de Processo já existe !!!',
     },
-    'fwpyqfwo': {
+    'p4gjje04': {
       'en': 'Some data is wrong!!!',
       'pt': 'Número de Processo já existe !!!',
     },

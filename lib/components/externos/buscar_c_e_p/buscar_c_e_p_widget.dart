@@ -17,6 +17,9 @@ export 'buscar_c_e_p_model.dart';
 class BuscarCEPWidget extends StatefulWidget {
   const BuscarCEPWidget({super.key});
 
+  static String routeName = 'BuscarCEP';
+  static String routePath = 'buscarCEP';
+
   @override
   State<BuscarCEPWidget> createState() => _BuscarCEPWidgetState();
 }

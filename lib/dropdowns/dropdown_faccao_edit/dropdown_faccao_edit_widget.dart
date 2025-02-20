@@ -2,6 +2,7 @@ import '/backend/supabase/supabase.dart';
 import '/components/modal/modal_faccao_edit/modal_faccao_edit_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'dart:ui';
+import '/index.dart';
 import 'package:ff_theme/flutter_flow/flutter_flow_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -370,9 +371,9 @@ class _DropdownFaccaoEditWidgetState extends State<DropdownFaccaoEditWidget> {
                             ),
                           );
 
-                          context.pushNamed('main_faccoes');
+                          context.pushNamed(MainFaccoesWidget.routeName);
                         } else {
-                          context.pushNamed('main_faccoes');
+                          context.pushNamed(MainFaccoesWidget.routeName);
                         }
                       },
                       child: AnimatedContainer(

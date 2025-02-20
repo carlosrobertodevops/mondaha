@@ -12,6 +12,9 @@ export 'project_details_model.dart';
 class ProjectDetailsWidget extends StatefulWidget {
   const ProjectDetailsWidget({super.key});
 
+  static String routeName = 'project_details';
+  static String routePath = 'projectDetails';
+
   @override
   State<ProjectDetailsWidget> createState() => _ProjectDetailsWidgetState();
 }

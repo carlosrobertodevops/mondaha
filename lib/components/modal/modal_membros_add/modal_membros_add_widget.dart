@@ -19,8 +19,13 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 import 'dart:ui';
+import "package:community_testing_ryusdv/backend/schema/enums/enums.dart"
+    as community_testing_ryusdv_enums;
+import "package:community_testing_ryusdv/backend/schema/structs/index.dart"
+    as community_testing_ryusdv_data_schema;
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
+import '/index.dart';
 import 'package:aligned_tooltip/aligned_tooltip.dart';
 import 'package:community_testing_ryusdv/app_state.dart'
     as community_testing_ryusdv_app_state;
@@ -319,7 +324,8 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                             'MODAL_MEMBROS_ADD_close_rounded_ICN_ON_T');
                                         Navigator.pop(context);
 
-                                        context.pushNamed('main_membros');
+                                        context.pushNamed(
+                                            MainMembrosWidget.routeName);
                                       },
                                     ),
                                   ],
@@ -8193,6 +8199,32 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                               ) ??
                                                               false;
                                                       if (confirmDialogResponse) {
+                                                        community_testing_ryusdv_app_state
+                                                                    .FFAppState()
+                                                                .notificationDT =
+                                                            community_testing_ryusdv_data_schema
+                                                                .NotificationStruct(
+                                                          title: 'Atenção',
+                                                          description:
+                                                              'Salvando dados ...',
+                                                          style:
+                                                              community_testing_ryusdv_enums
+                                                                  .ToastStyle
+                                                                  .fillColored,
+                                                          position:
+                                                              community_testing_ryusdv_enums
+                                                                  .ToastPosition
+                                                                  .topCenter,
+                                                          type:
+                                                              community_testing_ryusdv_enums
+                                                                  .ToastType
+                                                                  .info,
+                                                          progressBar: true,
+                                                          dragToClose: false,
+                                                          pauseOnHover: false,
+                                                          display: true,
+                                                        );
+                                                        safeSetState(() {});
                                                         _model.outputMembrosAdd =
                                                             await MembrosTable()
                                                                 .insert({
@@ -8330,38 +8362,50 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                 1) {
                                                               _model.membrosProcedimentosCount =
                                                                   -1;
-                                                              // procedeimentosTotal
-                                                              _model.procedimentoTotal =
-                                                                  _model
-                                                                      .membrosProcedimentos
-                                                                      .length;
                                                               while (_model
                                                                       .membrosProcedimentosCount! <=
                                                                   _model
-                                                                      .procedimentoTotal) {
+                                                                      .membrosProcedimentos
+                                                                      .length) {
                                                                 _model.membrosProcedimentosCount =
                                                                     _model.membrosProcedimentosCount! +
                                                                         1;
-                                                                _model.apiResultProcedimentos =
-                                                                    await ProcedimentosAddCall
+                                                                _model.apiResultProcedimentosAdd =
+                                                                    await ProcedimentoAddCall
                                                                         .call(
                                                                   membroId: _model
                                                                       .outputMembrosAdd
                                                                       ?.membroId,
-                                                                  procedimentoNo:
-                                                                      _model
-                                                                          .txtProcedimentoNoTextController
-                                                                          .text,
+                                                                  procedimentoNo: _model
+                                                                      .membrosProcedimentos
+                                                                      .elementAtOrNull(
+                                                                          _model
+                                                                              .membrosProcedimentosCount!)
+                                                                      ?.procedimentoNo,
                                                                   unidade: _model
-                                                                      .ddwProcedimentoUnidadeValue,
-                                                                  procedimentoTipo:
-                                                                      _model
-                                                                          .ddwProcedimentoTipoValue,
+                                                                      .membrosProcedimentos
+                                                                      .elementAtOrNull(
+                                                                          _model
+                                                                              .membrosProcedimentosCount!)
+                                                                      ?.unidade,
+                                                                  procedimentoTipo: _model
+                                                                      .membrosProcedimentos
+                                                                      .elementAtOrNull(
+                                                                          _model
+                                                                              .membrosProcedimentosCount!)
+                                                                      ?.procedimentoTipo,
                                                                   crime: _model
-                                                                      .ddwProcedimentoCrimeValue,
+                                                                      .membrosProcedimentos
+                                                                      .elementAtOrNull(
+                                                                          _model
+                                                                              .membrosProcedimentosCount!)
+                                                                      ?.crime,
                                                                   data: _model
-                                                                      .txtProcedimentoDataTextController
-                                                                      .text,
+                                                                      .membrosProcedimentos
+                                                                      .elementAtOrNull(
+                                                                          _model
+                                                                              .membrosProcedimentosCount!)
+                                                                      ?.data,
                                                                 );
 
                                                                 _shouldSetState =
@@ -8381,19 +8425,15 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                 1) {
                                                               _model.membrosProcessosCount =
                                                                   -1;
-                                                              // procedeimentosTotal
-                                                              _model.procedimentoTotal =
-                                                                  _model
-                                                                      .membrosProcessos
-                                                                      .length;
                                                               while (_model
                                                                       .membrosProcessosCount! <=
                                                                   _model
-                                                                      .processoTotal) {
+                                                                      .membrosProcessos
+                                                                      .length) {
                                                                 _model.membrosProcessosCount =
                                                                     _model.membrosProcessosCount! +
                                                                         1;
-                                                                _model.apiResultProcessos =
+                                                                _model.apiResultProcessosAdd =
                                                                     await ProcessosAddCall
                                                                         .call(
                                                                   membroId: _model
@@ -8466,7 +8506,14 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                         Navigator.pop(context);
 
                                                         context.pushNamed(
-                                                            'main_membros');
+                                                            MainMembrosWidget
+                                                                .routeName);
+
+                                                        FFAppState()
+                                                                .rebuildMembros =
+                                                            true;
+                                                        FFAppState()
+                                                            .update(() {});
                                                       } else {
                                                         if (_shouldSetState)
                                                           safeSetState(() {});

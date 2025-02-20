@@ -6,6 +6,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:math';
 import 'dart:ui';
+import '/index.dart';
 import 'package:ff_theme/flutter_flow/flutter_flow_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -17,6 +18,9 @@ export 'auth_forgot_password_model.dart';
 
 class AuthForgotPasswordWidget extends StatefulWidget {
   const AuthForgotPasswordWidget({super.key});
+
+  static String routeName = 'auth_forgot_password';
+  static String routePath = 'authForgotPassword';
 
   @override
   State<AuthForgotPasswordWidget> createState() =>

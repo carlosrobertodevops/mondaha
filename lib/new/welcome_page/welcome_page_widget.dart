@@ -15,6 +15,9 @@ export 'welcome_page_model.dart';
 class WelcomePageWidget extends StatefulWidget {
   const WelcomePageWidget({super.key});
 
+  static String routeName = 'WelcomePage';
+  static String routePath = 'welcomePage';
+
   @override
   State<WelcomePageWidget> createState() => _WelcomePageWidgetState();
 }

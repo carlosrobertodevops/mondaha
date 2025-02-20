@@ -24,6 +24,9 @@ export 'main_faccoes_model.dart';
 class MainFaccoesWidget extends StatefulWidget {
   const MainFaccoesWidget({super.key});
 
+  static String routeName = 'main_faccoes';
+  static String routePath = 'mainFaccoes';
+
   @override
   State<MainFaccoesWidget> createState() => _MainFaccoesWidgetState();
 }
