@@ -19,10 +19,6 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 import 'dart:ui';
-import "package:community_testing_ryusdv/backend/schema/enums/enums.dart"
-    as community_testing_ryusdv_enums;
-import "package:community_testing_ryusdv/backend/schema/structs/index.dart"
-    as community_testing_ryusdv_data_schema;
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import '/index.dart';
@@ -8142,32 +8138,6 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                               ) ??
                                                               false;
                                                       if (confirmDialogResponse) {
-                                                        community_testing_ryusdv_app_state
-                                                                    .FFAppState()
-                                                                .notificationDT =
-                                                            community_testing_ryusdv_data_schema
-                                                                .NotificationStruct(
-                                                          title: 'Atenção',
-                                                          description:
-                                                              'Salvando dados ...',
-                                                          style:
-                                                              community_testing_ryusdv_enums
-                                                                  .ToastStyle
-                                                                  .fillColored,
-                                                          position:
-                                                              community_testing_ryusdv_enums
-                                                                  .ToastPosition
-                                                                  .topCenter,
-                                                          type:
-                                                              community_testing_ryusdv_enums
-                                                                  .ToastType
-                                                                  .info,
-                                                          progressBar: true,
-                                                          dragToClose: false,
-                                                          pauseOnHover: false,
-                                                          display: true,
-                                                        );
-                                                        safeSetState(() {});
                                                         _model.outputMembrosAdd =
                                                             await MembrosTable()
                                                                 .insert({
@@ -8281,9 +8251,9 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                   .membrosFotos
                                                               : _model
                                                                   .membrosFotosSemUrl,
-                                                          'dt_nascimento':
-                                                              _model.datePicked2
-                                                                  ?.toString(),
+                                                          'dt_nascimento': _model
+                                                              .txtDataNascimentoTextController
+                                                              .text,
                                                           'validacao_observacao':
                                                               (_model.txtValidacoesObservacoesFocusNode
                                                                           ?.hasFocus ??

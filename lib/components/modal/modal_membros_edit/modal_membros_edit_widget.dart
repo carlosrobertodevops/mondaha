@@ -15,6 +15,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/flutter_flow/upload_data.dart';
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
@@ -54,7 +55,7 @@ class ModalMembrosEditWidget extends StatefulWidget {
     this.membrosId,
   });
 
-  final MembrosViewConcatSeachRow? membrosRow;
+  final MembrosViewConcatSeachMaterializadaRow? membrosRow;
   final List<String>? membrosFotos;
   final int? membrosId;
 
@@ -8476,142 +8477,166 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                 ) ??
                                                                 false;
                                                         if (confirmDialogResponse) {
-                                                          _model.outputMembrosEdit =
+                                                          unawaited(
+                                                            () async {
                                                               await MembrosTable()
                                                                   .update(
-                                                            data: {
-                                                              'nome_completo':
-                                                                  _model
-                                                                      .txtNomeCompletoTextController
+                                                                data: {
+                                                                  'nome_completo':
+                                                                      _model
+                                                                          .txtNomeCompletoTextController
+                                                                          .text,
+                                                                  'fotos_path': _model
+                                                                          .membrosFotosEdit
+                                                                          .isNotEmpty
+                                                                      ? _model
+                                                                          .membrosFotosEdit
+                                                                      : _model
+                                                                          .membrosFotoPathEdit,
+                                                                  'alcunha': _model
+                                                                      .membrosAlcunhas,
+                                                                  'cpf': _model
+                                                                      .txtNoCpfTextController
                                                                       .text,
-                                                              'fotos_path': _model
-                                                                      .membrosFotosEdit
-                                                                      .isNotEmpty
-                                                                  ? _model
-                                                                      .membrosFotosEdit
-                                                                  : _model
-                                                                      .membrosFotoPathEdit,
-                                                              'alcunha': _model
-                                                                  .membrosAlcunhas,
-                                                              'cpf': _model
-                                                                  .txtNoCpfTextController
-                                                                  .text,
-                                                              'identidade': _model
-                                                                  .txtNoIdentidadeTextController
-                                                                  .text,
-                                                              'naturalidade': _model
-                                                                  .txtMembroNaturalidadeTextController
-                                                                  .text,
-                                                              'filiacao_mae': _model
-                                                                  .txtFiliacaoMaeTextController
-                                                                  .text,
-                                                              'filiacao_pai': _model
-                                                                  .txtFiliacaoPaiTextController
-                                                                  .text,
-                                                              'situacao_mae': _model
-                                                                  .ddwSituacaoMaeValue,
-                                                              'situacao_pai': _model
-                                                                  .ddwSituacaoPaiValue,
-                                                              'nivel_instrucao':
-                                                                  _model
-                                                                      .ddwNivelInstrucaoValue,
-                                                              'estado_civil': _model
-                                                                  .ddwEstadoCivilValue,
-                                                              'membro_endereco':
-                                                                  _model
-                                                                      .membrosEnderecos,
-                                                              'estado_id': _model
-                                                                  .ddwEstado,
-                                                              'historico': _model
-                                                                  .txtHistoricoTextController
-                                                                  .text,
-                                                              'faccao_id': _model
-                                                                  .ddwFaccao,
-                                                              'batismo': _model
-                                                                  .txtFaccaoBastismoTextController
-                                                                  .text,
-                                                              'batismo_local':
-                                                                  _model
-                                                                      .txtFacaoLocalBastismoTextController
+                                                                  'identidade':
+                                                                      _model
+                                                                          .txtNoIdentidadeTextController
+                                                                          .text,
+                                                                  'naturalidade':
+                                                                      _model
+                                                                          .txtMembroNaturalidadeTextController
+                                                                          .text,
+                                                                  'filiacao_mae':
+                                                                      _model
+                                                                          .txtFiliacaoMaeTextController
+                                                                          .text,
+                                                                  'filiacao_pai':
+                                                                      _model
+                                                                          .txtFiliacaoPaiTextController
+                                                                          .text,
+                                                                  'situacao_mae':
+                                                                      _model
+                                                                          .ddwSituacaoMaeValue,
+                                                                  'situacao_pai':
+                                                                      _model
+                                                                          .ddwSituacaoPaiValue,
+                                                                  'nivel_instrucao':
+                                                                      _model
+                                                                          .ddwNivelInstrucaoValue,
+                                                                  'estado_civil':
+                                                                      _model
+                                                                          .ddwEstadoCivilValue,
+                                                                  'membro_endereco':
+                                                                      _model
+                                                                          .membrosEnderecos,
+                                                                  'estado_id':
+                                                                      _model
+                                                                          .ddwEstado,
+                                                                  'historico':
+                                                                      _model
+                                                                          .txtHistoricoTextController
+                                                                          .text,
+                                                                  'faccao_id':
+                                                                      _model
+                                                                          .ddwFaccao,
+                                                                  'batismo': _model
+                                                                      .txtFaccaoBastismoTextController
                                                                       .text,
-                                                              'padrinho': _model
-                                                                  .txtMembrosFaccaoPadrinhoTextController
-                                                                  .text,
-                                                              'faccao_senha': _model
-                                                                  .txtMembroFaccaoSenhaTextController
-                                                                  .text,
-                                                              'cargo_id': _model
-                                                                  .ddwCargoAtual,
-                                                              'funcao_id': _model
-                                                                  .ddwFuncaoAtual,
-                                                              'cargo_ant_id': _model
-                                                                  .ddwCargoAnterior,
-                                                              'faccao_inimiga':
-                                                                  _model
-                                                                      .ddwFaccaoInimiga,
-                                                              'faccao_aliada':
-                                                                  _model
-                                                                      .ddwFaccaoAliada,
-                                                              'nacionalidade':
-                                                                  _model
-                                                                      .rbNacionalidadeValue,
-                                                              'funcao_ant_id':
-                                                                  _model
-                                                                      .ddwFuncaoAnterior,
-                                                              'faccao_integrou':
-                                                                  _model
-                                                                      .ddwFaccaoIntegrou,
-                                                              'municipio_id': _model
-                                                                  .ddwMunicipios,
-                                                              'infopen': _model
-                                                                  .txtNoInfopenTextController
-                                                                  .text,
-                                                              'tres_ultimo_locais_preso':
-                                                                  _model
-                                                                      .membrosFaccaoTresLocais,
-                                                              'alerta': _model
-                                                                  .switchAlertaValue,
-                                                              'atuacao_crime':
-                                                                  _model
-                                                                      .txtMembroAtuacaoTextController
+                                                                  'batismo_local':
+                                                                      _model
+                                                                          .txtFacaoLocalBastismoTextController
+                                                                          .text,
+                                                                  'padrinho': _model
+                                                                      .txtMembrosFaccaoPadrinhoTextController
                                                                       .text,
-                                                              'validacao_precentual':
-                                                                  _model
-                                                                      .membrosPercetualValidacao,
-                                                              'validacoes': _model
-                                                                  .choiceChipsValidacoesValues,
-                                                              'coordenadas': functions
-                                                                  .convertLatLngListToStringList(_model
-                                                                      .membrosLatLng
-                                                                      .toList()),
-                                                              'membroLngLat': functions
-                                                                  .convertLatLngToDouble(_model
-                                                                      .membrosLatLng
-                                                                      .toList()),
-                                                              'identidade_orgao':
-                                                                  _model
-                                                                      .ddwOrgaoExpedidorValue,
-                                                              'alerta_observacao':
-                                                                  _model
-                                                                      .txtMembroAlertaTextController
+                                                                  'faccao_senha':
+                                                                      _model
+                                                                          .txtMembroFaccaoSenhaTextController
+                                                                          .text,
+                                                                  'cargo_id': _model
+                                                                      .ddwCargoAtual,
+                                                                  'funcao_id':
+                                                                      _model
+                                                                          .ddwFuncaoAtual,
+                                                                  'cargo_ant_id':
+                                                                      _model
+                                                                          .ddwCargoAnterior,
+                                                                  'faccao_inimiga':
+                                                                      _model
+                                                                          .ddwFaccaoInimiga,
+                                                                  'faccao_aliada':
+                                                                      _model
+                                                                          .ddwFaccaoAliada,
+                                                                  'nacionalidade':
+                                                                      _model
+                                                                          .rbNacionalidadeValue,
+                                                                  'funcao_ant_id':
+                                                                      _model
+                                                                          .ddwFuncaoAnterior,
+                                                                  'faccao_integrou':
+                                                                      _model
+                                                                          .ddwFaccaoIntegrou,
+                                                                  'municipio_id':
+                                                                      _model
+                                                                          .ddwMunicipios,
+                                                                  'infopen': _model
+                                                                      .txtNoInfopenTextController
                                                                       .text,
-                                                              'dt_nascimento':
-                                                                  _model
-                                                                      .txtDataNascimentoTextController
-                                                                      .text,
-                                                              'validacao_observacao':
-                                                                  _model
-                                                                      .txtValidacoesObservacoesTextController
-                                                                      .text,
-                                                            },
-                                                            matchingRows:
-                                                                (rows) => rows
-                                                                    .eqOrNull(
-                                                              'membro_id',
-                                                              widget!.membrosRow
-                                                                  ?.membroId,
-                                                            ),
-                                                            returnRows: true,
+                                                                  'tres_ultimo_locais_preso':
+                                                                      _model
+                                                                          .membrosFaccaoTresLocais,
+                                                                  'alerta': _model
+                                                                      .switchAlertaValue,
+                                                                  'atuacao_crime':
+                                                                      _model
+                                                                          .txtMembroAtuacaoTextController
+                                                                          .text,
+                                                                  'validacao_precentual':
+                                                                      _model
+                                                                          .membrosPercetualValidacao,
+                                                                  'validacoes':
+                                                                      _model
+                                                                          .choiceChipsValidacoesValues,
+                                                                  'coordenadas':
+                                                                      functions.convertLatLngListToStringList(_model
+                                                                          .membrosLatLng
+                                                                          .toList()),
+                                                                  'membroLngLat':
+                                                                      functions.convertLatLngToDouble(_model
+                                                                          .membrosLatLng
+                                                                          .toList()),
+                                                                  'identidade_orgao':
+                                                                      _model
+                                                                          .ddwOrgaoExpedidorValue,
+                                                                  'alerta_observacao':
+                                                                      _model
+                                                                          .txtMembroAlertaTextController
+                                                                          .text,
+                                                                  'dt_nascimento':
+                                                                      _model
+                                                                          .txtDataNascimentoTextController
+                                                                          .text,
+                                                                  'validacao_observacao':
+                                                                      _model
+                                                                          .txtValidacoesObservacoesTextController
+                                                                          .text,
+                                                                  'id_usuario':
+                                                                      FFAppState()
+                                                                          .UsuarioAtualId,
+                                                                  'id_agencia':
+                                                                      FFAppState()
+                                                                          .AgenciaAtualld,
+                                                                },
+                                                                matchingRows:
+                                                                    (rows) => rows
+                                                                        .eqOrNull(
+                                                                  'membro_id',
+                                                                  widget!
+                                                                      .membrosRow
+                                                                      ?.membroId,
+                                                                ),
+                                                              );
+                                                            }(),
                                                           );
                                                           _shouldSetState =
                                                               true;
@@ -8649,7 +8674,7 @@ class _ModalMembrosEditWidgetState extends State<ModalMembrosEditWidget>
                                                                     _model.membrosProcedimentosCount =
                                                                         _model.membrosProcedimentosCount! +
                                                                             1;
-                                                                    _model.apiResultProcedimentosAdd =
+                                                                    _model.apiResultProcedimentosEdit =
                                                                         await ProcedimentoAddCall
                                                                             .call(
                                                                       membroId: widget!

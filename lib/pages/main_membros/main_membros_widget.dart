@@ -182,10 +182,10 @@ class _MainMembrosWidgetState extends State<MainMembrosWidget>
                     elevation: 0.0,
                   )
                 : null,
-            body: FutureBuilder<List<MembrosViewPdfRow>>(
+            body: FutureBuilder<List<MembrosViewPdfMaterializadaRow>>(
               future: (_model.requestCompleter1 ??=
-                      Completer<List<MembrosViewPdfRow>>()
-                        ..complete(MembrosViewPdfTable().queryRows(
+                      Completer<List<MembrosViewPdfMaterializadaRow>>()
+                        ..complete(MembrosViewPdfMaterializadaTable().queryRows(
                           queryFn: (q) => q
                               .ilike(
                                 'pesquisa',
@@ -205,7 +205,8 @@ class _MainMembrosWidgetState extends State<MainMembrosWidget>
                     ),
                   );
                 }
-                List<MembrosViewPdfRow> containerMembrosViewPdfRowList =
+                List<MembrosViewPdfMaterializadaRow>
+                    containerMembrosViewPdfMaterializadaRowList =
                     snapshot.data!;
 
                 return Container(
@@ -372,12 +373,12 @@ class _MainMembrosWidgetState extends State<MainMembrosWidget>
                                                   .text ==
                                               '') {
                                             await actions.docGerarPDF(
-                                              containerMembrosViewPdfRowList
+                                              containerMembrosViewPdfMaterializadaRowList
                                                   .toList(),
                                             );
                                           } else {
                                             await actions.docGerarPDF(
-                                              containerMembrosViewPdfRowList
+                                              containerMembrosViewPdfMaterializadaRowList
                                                   .toList(),
                                             );
                                           }
@@ -485,7 +486,8 @@ class _MainMembrosWidgetState extends State<MainMembrosWidget>
                                                         FFAppState()
                                                                 .buscarMembros =
                                                             true;
-                                                        safeSetState(() {});
+                                                        FFAppState()
+                                                            .update(() {});
                                                       }
                                                     },
                                                   ),
@@ -608,8 +610,9 @@ class _MainMembrosWidgetState extends State<MainMembrosWidget>
                                                                 FFAppState()
                                                                         .buscarMembros =
                                                                     true;
-                                                                safeSetState(
-                                                                    () {});
+                                                                FFAppState()
+                                                                    .update(
+                                                                        () {});
                                                               }
                                                               safeSetState(
                                                                   () {});
@@ -666,7 +669,7 @@ class _MainMembrosWidgetState extends State<MainMembrosWidget>
                                                       'MAIN_MEMBROS_search_rounded_ICN_ON_TAP');
                                                   FFAppState().buscarMembros =
                                                       false;
-                                                  safeSetState(() {});
+                                                  FFAppState().update(() {});
                                                 },
                                               ),
                                             ].divide(SizedBox(width: 16.0)),
@@ -974,12 +977,12 @@ class _MainMembrosWidgetState extends State<MainMembrosWidget>
                                                                       BoxDecoration(),
                                                                   child: FutureBuilder<
                                                                       List<
-                                                                          MembrosViewConcatSeachRow>>(
+                                                                          MembrosViewConcatSeachMaterializadaRow>>(
                                                                     future: (_model.requestCompleter3 ??= Completer<
                                                                             List<
-                                                                                MembrosViewConcatSeachRow>>()
+                                                                                MembrosViewConcatSeachMaterializadaRow>>()
                                                                           ..complete(
-                                                                              MembrosViewConcatSeachTable().queryRows(
+                                                                              MembrosViewConcatSeachMaterializadaTable().queryRows(
                                                                             queryFn: (q) =>
                                                                                 q.order('nome_completo', ascending: true),
                                                                           )))
@@ -998,12 +1001,12 @@ class _MainMembrosWidgetState extends State<MainMembrosWidget>
                                                                           ),
                                                                         );
                                                                       }
-                                                                      List<MembrosViewConcatSeachRow>
-                                                                          listViewMembrosMembrosViewConcatSeachRowList =
+                                                                      List<MembrosViewConcatSeachMaterializadaRow>
+                                                                          listViewMembrosMembrosViewConcatSeachMaterializadaRowList =
                                                                           snapshot
                                                                               .data!;
 
-                                                                      if (listViewMembrosMembrosViewConcatSeachRowList
+                                                                      if (listViewMembrosMembrosViewConcatSeachMaterializadaRowList
                                                                           .isEmpty) {
                                                                         return Center(
                                                                           child:
@@ -1026,12 +1029,12 @@ class _MainMembrosWidgetState extends State<MainMembrosWidget>
                                                                         scrollDirection:
                                                                             Axis.vertical,
                                                                         itemCount:
-                                                                            listViewMembrosMembrosViewConcatSeachRowList.length,
+                                                                            listViewMembrosMembrosViewConcatSeachMaterializadaRowList.length,
                                                                         itemBuilder:
                                                                             (context,
                                                                                 listViewMembrosIndex) {
-                                                                          final listViewMembrosMembrosViewConcatSeachRow =
-                                                                              listViewMembrosMembrosViewConcatSeachRowList[listViewMembrosIndex];
+                                                                          final listViewMembrosMembrosViewConcatSeachMaterializadaRow =
+                                                                              listViewMembrosMembrosViewConcatSeachMaterializadaRowList[listViewMembrosIndex];
                                                                           return Builder(
                                                                             builder: (context) =>
                                                                                 Padding(
@@ -1057,9 +1060,9 @@ class _MainMembrosWidgetState extends State<MainMembrosWidget>
                                                                                             FocusManager.instance.primaryFocus?.unfocus();
                                                                                           },
                                                                                           child: ModalMembrosEditWidget(
-                                                                                            membrosRow: listViewMembrosMembrosViewConcatSeachRow,
-                                                                                            membrosFotos: listViewMembrosMembrosViewConcatSeachRow.fotosPath,
-                                                                                            membrosId: listViewMembrosMembrosViewConcatSeachRow.membroId,
+                                                                                            membrosRow: listViewMembrosMembrosViewConcatSeachMaterializadaRow,
+                                                                                            membrosFotos: listViewMembrosMembrosViewConcatSeachMaterializadaRow.fotosPath,
+                                                                                            membrosId: listViewMembrosMembrosViewConcatSeachMaterializadaRow.membroId,
                                                                                           ),
                                                                                         ),
                                                                                       );
@@ -1094,9 +1097,9 @@ class _MainMembrosWidgetState extends State<MainMembrosWidget>
                                                                                             fadeInDuration: Duration(milliseconds: 100),
                                                                                             fadeOutDuration: Duration(milliseconds: 100),
                                                                                             imageUrl: valueOrDefault<String>(
-                                                                                              listViewMembrosMembrosViewConcatSeachRow.fotosPath.firstOrNull != ''
+                                                                                              listViewMembrosMembrosViewConcatSeachMaterializadaRow.fotosPath.firstOrNull != ''
                                                                                                   ? valueOrDefault<String>(
-                                                                                                      listViewMembrosMembrosViewConcatSeachRow.fotosPath.firstOrNull,
+                                                                                                      listViewMembrosMembrosViewConcatSeachMaterializadaRow.fotosPath.firstOrNull,
                                                                                                       'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/h99rv77ta7i5/groups_24dp_00000_FILL0_wght400_GRAD0_opsz24.png',
                                                                                                     )
                                                                                                   : valueOrDefault<String>(
@@ -1119,7 +1122,7 @@ class _MainMembrosWidgetState extends State<MainMembrosWidget>
                                                                                                   padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
                                                                                                   child: Text(
                                                                                                     valueOrDefault<String>(
-                                                                                                      listViewMembrosMembrosViewConcatSeachRow.nomeCompleto == '' ? 'sem informação' : listViewMembrosMembrosViewConcatSeachRow.nomeCompleto,
+                                                                                                      listViewMembrosMembrosViewConcatSeachMaterializadaRow.nomeCompleto == '' ? 'sem informação' : listViewMembrosMembrosViewConcatSeachMaterializadaRow.nomeCompleto,
                                                                                                       'sem informação',
                                                                                                     ),
                                                                                                     style: FlutterFlowTheme.of(context).bodyLarge.override(
@@ -1135,7 +1138,7 @@ class _MainMembrosWidgetState extends State<MainMembrosWidget>
                                                                                                   padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
                                                                                                   child: Text(
                                                                                                     valueOrDefault<String>(
-                                                                                                      listViewMembrosMembrosViewConcatSeachRow.faccaoNome,
+                                                                                                      listViewMembrosMembrosViewConcatSeachMaterializadaRow.faccaoNome,
                                                                                                       'sem informação',
                                                                                                     ),
                                                                                                     style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -1152,7 +1155,7 @@ class _MainMembrosWidgetState extends State<MainMembrosWidget>
                                                                                                   padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
                                                                                                   child: Text(
                                                                                                     valueOrDefault<String>(
-                                                                                                      listViewMembrosMembrosViewConcatSeachRow.funcaoNome,
+                                                                                                      listViewMembrosMembrosViewConcatSeachMaterializadaRow.funcaoNome,
                                                                                                       'sem informação',
                                                                                                     ),
                                                                                                     style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -1168,14 +1171,14 @@ class _MainMembrosWidgetState extends State<MainMembrosWidget>
                                                                                                   padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
                                                                                                   child: Text(
                                                                                                     valueOrDefault<String>(
-                                                                                                      listViewMembrosMembrosViewConcatSeachRow.alcunha.firstOrNull ==
+                                                                                                      listViewMembrosMembrosViewConcatSeachMaterializadaRow.alcunha.firstOrNull ==
                                                                                                               valueOrDefault<String>(
                                                                                                                 '',
                                                                                                                 'sem informação',
                                                                                                               )
                                                                                                           ? 'sem informação'
                                                                                                           : valueOrDefault<String>(
-                                                                                                              listViewMembrosMembrosViewConcatSeachRow.alcunha.firstOrNull,
+                                                                                                              listViewMembrosMembrosViewConcatSeachMaterializadaRow.alcunha.firstOrNull,
                                                                                                               'sem informação',
                                                                                                             ),
                                                                                                       'sem informação',
@@ -1209,7 +1212,7 @@ class _MainMembrosWidgetState extends State<MainMembrosWidget>
                                                                                                           padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
                                                                                                           child: Text(
                                                                                                             valueOrDefault<String>(
-                                                                                                              listViewMembrosMembrosViewConcatSeachRow.cpf,
+                                                                                                              listViewMembrosMembrosViewConcatSeachMaterializadaRow.cpf,
                                                                                                               'sem informação',
                                                                                                             ),
                                                                                                             style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -1253,9 +1256,9 @@ class _MainMembrosWidgetState extends State<MainMembrosWidget>
                                                                                                           FocusManager.instance.primaryFocus?.unfocus();
                                                                                                         },
                                                                                                         child: DropdownMemberEditWidget(
-                                                                                                          membrosRow: listViewMembrosMembrosViewConcatSeachRow,
-                                                                                                          membrosFotos: listViewMembrosMembrosViewConcatSeachRow.fotosPath,
-                                                                                                          membroId: listViewMembrosMembrosViewConcatSeachRow.membroId,
+                                                                                                          membrosRow: listViewMembrosMembrosViewConcatSeachMaterializadaRow,
+                                                                                                          membrosFotos: listViewMembrosMembrosViewConcatSeachMaterializadaRow.fotosPath,
+                                                                                                          membroId: listViewMembrosMembrosViewConcatSeachMaterializadaRow.membroId,
                                                                                                         ),
                                                                                                       ),
                                                                                                     );
@@ -1289,16 +1292,19 @@ class _MainMembrosWidgetState extends State<MainMembrosWidget>
                                                                       BoxDecoration(),
                                                                   child: FutureBuilder<
                                                                       List<
-                                                                          MembrosViewConcatSeachRow>>(
+                                                                          MembrosViewConcatSeachMaterializadaRow>>(
                                                                     future: (_model.requestCompleter2 ??= Completer<
                                                                             List<
-                                                                                MembrosViewConcatSeachRow>>()
+                                                                                MembrosViewConcatSeachMaterializadaRow>>()
                                                                           ..complete(
-                                                                              MembrosViewConcatSeachTable().queryRows(
+                                                                              MembrosViewConcatSeachMaterializadaTable().queryRows(
                                                                             queryFn: (q) => q
                                                                                 .ilike(
                                                                                   'pesquisa',
-                                                                                  functions.pesquisaLike(_model.textFieldPesquisarMembrosTextController.text),
+                                                                                  valueOrDefault<String>(
+                                                                                    functions.pesquisaLike(_model.textFieldPesquisarMembrosTextController.text),
+                                                                                    '%%',
+                                                                                  ),
                                                                                 )
                                                                                 .order('nome_completo', ascending: true),
                                                                           )))
@@ -1317,12 +1323,12 @@ class _MainMembrosWidgetState extends State<MainMembrosWidget>
                                                                           ),
                                                                         );
                                                                       }
-                                                                      List<MembrosViewConcatSeachRow>
-                                                                          listViewmMembrosSeachMembrosViewConcatSeachRowList =
+                                                                      List<MembrosViewConcatSeachMaterializadaRow>
+                                                                          listViewMembrosSeachMembrosViewConcatSeachMaterializadaRowList =
                                                                           snapshot
                                                                               .data!;
 
-                                                                      if (listViewmMembrosSeachMembrosViewConcatSeachRowList
+                                                                      if (listViewMembrosSeachMembrosViewConcatSeachMaterializadaRowList
                                                                           .isEmpty) {
                                                                         return Center(
                                                                           child:
@@ -1345,12 +1351,12 @@ class _MainMembrosWidgetState extends State<MainMembrosWidget>
                                                                         scrollDirection:
                                                                             Axis.vertical,
                                                                         itemCount:
-                                                                            listViewmMembrosSeachMembrosViewConcatSeachRowList.length,
+                                                                            listViewMembrosSeachMembrosViewConcatSeachMaterializadaRowList.length,
                                                                         itemBuilder:
                                                                             (context,
-                                                                                listViewmMembrosSeachIndex) {
-                                                                          final listViewmMembrosSeachMembrosViewConcatSeachRow =
-                                                                              listViewmMembrosSeachMembrosViewConcatSeachRowList[listViewmMembrosSeachIndex];
+                                                                                listViewMembrosSeachIndex) {
+                                                                          final listViewMembrosSeachMembrosViewConcatSeachMaterializadaRow =
+                                                                              listViewMembrosSeachMembrosViewConcatSeachMaterializadaRowList[listViewMembrosSeachIndex];
                                                                           return Builder(
                                                                             builder: (context) =>
                                                                                 Padding(
@@ -1376,8 +1382,9 @@ class _MainMembrosWidgetState extends State<MainMembrosWidget>
                                                                                             FocusManager.instance.primaryFocus?.unfocus();
                                                                                           },
                                                                                           child: ModalMembrosEditWidget(
-                                                                                            membrosRow: listViewmMembrosSeachMembrosViewConcatSeachRow,
-                                                                                            membrosFotos: listViewmMembrosSeachMembrosViewConcatSeachRow.fotosPath,
+                                                                                            membrosRow: listViewMembrosSeachMembrosViewConcatSeachMaterializadaRow,
+                                                                                            membrosFotos: listViewMembrosSeachMembrosViewConcatSeachMaterializadaRow.fotosPath,
+                                                                                            membrosId: listViewMembrosSeachMembrosViewConcatSeachMaterializadaRow.membroId,
                                                                                           ),
                                                                                         ),
                                                                                       );
@@ -1412,9 +1419,9 @@ class _MainMembrosWidgetState extends State<MainMembrosWidget>
                                                                                             fadeInDuration: Duration(milliseconds: 100),
                                                                                             fadeOutDuration: Duration(milliseconds: 100),
                                                                                             imageUrl: valueOrDefault<String>(
-                                                                                              listViewmMembrosSeachMembrosViewConcatSeachRow.fotosPath.firstOrNull != ''
+                                                                                              listViewMembrosSeachMembrosViewConcatSeachMaterializadaRow.fotosPath.firstOrNull != ''
                                                                                                   ? valueOrDefault<String>(
-                                                                                                      listViewmMembrosSeachMembrosViewConcatSeachRow.fotosPath.firstOrNull,
+                                                                                                      listViewMembrosSeachMembrosViewConcatSeachMaterializadaRow.fotosPath.firstOrNull,
                                                                                                       'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/h99rv77ta7i5/groups_24dp_00000_FILL0_wght400_GRAD0_opsz24.png',
                                                                                                     )
                                                                                                   : valueOrDefault<String>(
@@ -1437,7 +1444,7 @@ class _MainMembrosWidgetState extends State<MainMembrosWidget>
                                                                                                   padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
                                                                                                   child: Text(
                                                                                                     valueOrDefault<String>(
-                                                                                                      listViewmMembrosSeachMembrosViewConcatSeachRow.nomeCompleto == '' ? 'sem informação' : listViewmMembrosSeachMembrosViewConcatSeachRow.nomeCompleto,
+                                                                                                      listViewMembrosSeachMembrosViewConcatSeachMaterializadaRow.nomeCompleto == '' ? 'sem informação' : listViewMembrosSeachMembrosViewConcatSeachMaterializadaRow.nomeCompleto,
                                                                                                       'sem informação',
                                                                                                     ),
                                                                                                     style: FlutterFlowTheme.of(context).bodyLarge.override(
@@ -1453,7 +1460,7 @@ class _MainMembrosWidgetState extends State<MainMembrosWidget>
                                                                                                   padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
                                                                                                   child: Text(
                                                                                                     valueOrDefault<String>(
-                                                                                                      listViewmMembrosSeachMembrosViewConcatSeachRow.faccaoNome,
+                                                                                                      listViewMembrosSeachMembrosViewConcatSeachMaterializadaRow.faccaoNome,
                                                                                                       'sem informação',
                                                                                                     ),
                                                                                                     style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -1470,7 +1477,7 @@ class _MainMembrosWidgetState extends State<MainMembrosWidget>
                                                                                                   padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
                                                                                                   child: Text(
                                                                                                     valueOrDefault<String>(
-                                                                                                      listViewmMembrosSeachMembrosViewConcatSeachRow.funcaoNome,
+                                                                                                      listViewMembrosSeachMembrosViewConcatSeachMaterializadaRow.funcaoNome,
                                                                                                       'sem informação',
                                                                                                     ),
                                                                                                     style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -1486,14 +1493,14 @@ class _MainMembrosWidgetState extends State<MainMembrosWidget>
                                                                                                   padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
                                                                                                   child: Text(
                                                                                                     valueOrDefault<String>(
-                                                                                                      listViewmMembrosSeachMembrosViewConcatSeachRow.alcunha.firstOrNull ==
+                                                                                                      listViewMembrosSeachMembrosViewConcatSeachMaterializadaRow.alcunha.firstOrNull ==
                                                                                                               valueOrDefault<String>(
                                                                                                                 '',
                                                                                                                 'sem informação',
                                                                                                               )
                                                                                                           ? 'sem informação'
                                                                                                           : valueOrDefault<String>(
-                                                                                                              listViewmMembrosSeachMembrosViewConcatSeachRow.alcunha.firstOrNull,
+                                                                                                              listViewMembrosSeachMembrosViewConcatSeachMaterializadaRow.alcunha.firstOrNull,
                                                                                                               'sem informação',
                                                                                                             ),
                                                                                                       'sem informação',
@@ -1527,7 +1534,7 @@ class _MainMembrosWidgetState extends State<MainMembrosWidget>
                                                                                                           padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
                                                                                                           child: Text(
                                                                                                             valueOrDefault<String>(
-                                                                                                              listViewmMembrosSeachMembrosViewConcatSeachRow.cpf,
+                                                                                                              listViewMembrosSeachMembrosViewConcatSeachMaterializadaRow.cpf,
                                                                                                               'sem informação',
                                                                                                             ),
                                                                                                             style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -1571,8 +1578,8 @@ class _MainMembrosWidgetState extends State<MainMembrosWidget>
                                                                                                           FocusManager.instance.primaryFocus?.unfocus();
                                                                                                         },
                                                                                                         child: DropdownMemberEditWidget(
-                                                                                                          membrosRow: listViewmMembrosSeachMembrosViewConcatSeachRow,
-                                                                                                          membrosFotos: listViewmMembrosSeachMembrosViewConcatSeachRow.fotosPath,
+                                                                                                          membrosRow: listViewMembrosSeachMembrosViewConcatSeachMaterializadaRow,
+                                                                                                          membrosFotos: listViewMembrosSeachMembrosViewConcatSeachMaterializadaRow.fotosPath,
                                                                                                         ),
                                                                                                       ),
                                                                                                     );

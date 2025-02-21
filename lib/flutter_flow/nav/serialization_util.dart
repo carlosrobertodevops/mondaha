@@ -266,6 +266,10 @@ dynamic deserializeParam<T>(
             return CountMembrosViewRow(data);
           case MembrosViewConcatSeachRow:
             return MembrosViewConcatSeachRow(data);
+          case MembrosViewPdfMaterializadaRow:
+            return MembrosViewPdfMaterializadaRow(data);
+          case MembrosViewConcatSeachMaterializadaRow:
+            return MembrosViewConcatSeachMaterializadaRow(data);
           case FuncoesRow:
             return FuncoesRow(data);
           case FaccoesViewConcatSearchRow:

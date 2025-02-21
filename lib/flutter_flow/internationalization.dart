@@ -4169,10 +4169,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Save Member',
       'pt': 'Salvar Membro',
     },
-    'fwpyqfwo': {
-      'en': 'Some data is wrong!!!',
-      'pt': 'Número de Processo já existe !!!',
-    },
     'uqhnzed2': {
       'en': 'Some data is wrong!!!',
       'pt': 'Número de Processo já existe !!!',

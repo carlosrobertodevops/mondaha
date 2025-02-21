@@ -27,6 +27,8 @@ export 'tables/grupos.dart';
 export 'tables/relacionamentos_membros.dart';
 export 'tables/count_membros_view.dart';
 export 'tables/membros_view_concat_seach.dart';
+export 'tables/membros_view_pdf_materializada.dart';
+export 'tables/membros_view_concat_seach_materializada.dart';
 export 'tables/funcoes.dart';
 export 'tables/faccoes_view_concat_search.dart';
 export 'tables/vara.dart';
