@@ -23,7 +23,7 @@ class UserDetailsMembroViewWidget extends StatefulWidget {
   });
 
   final bool? showBack;
-  final MembrosViewConcatSeachMaterializadaRow? membroRow;
+  final MembrosViewConcatSeachRow? membroRow;
 
   @override
   State<UserDetailsMembroViewWidget> createState() =>

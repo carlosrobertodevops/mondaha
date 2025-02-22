@@ -10,6 +10,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:math';
 import 'dart:ui';
+import '/custom_code/actions/index.dart' as actions;
 import '/index.dart';
 import 'package:community_testing_ryusdv/app_state.dart'
     as community_testing_ryusdv_app_state;
@@ -48,6 +49,14 @@ class _MainProfileWidgetState extends State<MainProfileWidget>
 
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'main_profile'});
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('MAIN_PROFILE_main_profile_ON_INIT_STATE');
+      await actions.resetTimerAction(
+        context,
+      );
+    });
+
     animationsMap.addAll({
       'iconOnPageLoadAnimation1': AnimationInfo(
         trigger: AnimationTrigger.onPageLoad,

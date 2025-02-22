@@ -2102,16 +2102,16 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'pt': 'Senha',
     },
     '5xrtyank': {
-      'en': 'Cargo atual',
-      'pt': 'Carga atual',
+      'en': 'Current position',
+      'pt': 'Cargo atual',
     },
     'u231jvsq': {
       'en': 'Marital status',
       'pt': 'Estado civil',
     },
     'uhi29t9v': {
-      'en': 'Cargo anterior',
-      'pt': 'Carga anterior',
+      'en': 'Previous position',
+      'pt': 'Cargo anterior',
     },
     'bfv93uyj': {
       'en': 'Marital status',

@@ -234,8 +234,6 @@ dynamic deserializeParam<T>(
             return GruposMembrosRow(data);
           case CountUsuariosAtivosViewRow:
             return CountUsuariosAtivosViewRow(data);
-          case WapplerMigrationsRow:
-            return WapplerMigrationsRow(data);
           case CountProcedimentosViewRow:
             return CountProcedimentosViewRow(data);
           case UsuariosViewRow:
@@ -266,10 +264,6 @@ dynamic deserializeParam<T>(
             return CountMembrosViewRow(data);
           case MembrosViewConcatSeachRow:
             return MembrosViewConcatSeachRow(data);
-          case MembrosViewPdfMaterializadaRow:
-            return MembrosViewPdfMaterializadaRow(data);
-          case MembrosViewConcatSeachMaterializadaRow:
-            return MembrosViewConcatSeachMaterializadaRow(data);
           case FuncoesRow:
             return FuncoesRow(data);
           case FaccoesViewConcatSearchRow:
@@ -280,8 +274,6 @@ dynamic deserializeParam<T>(
             return LogsRow(data);
           case TiposUsuariosRow:
             return TiposUsuariosRow(data);
-          case WapplerMigrationsLockRow:
-            return WapplerMigrationsLockRow(data);
           case CountFaccoesViewRow:
             return CountFaccoesViewRow(data);
           case MunicipiosRow:

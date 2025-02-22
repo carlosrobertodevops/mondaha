@@ -7,3 +7,4 @@ export 'check_acaopenal_no_exists.dart' show checkAcaopenalNoExists;
 export 'check_value_in_list.dart' show checkValueInList;
 export 'validate_c_p_f.dart' show validateCPF;
 export 'check_membro_exists.dart' show checkMembroExists;
+export 'reset_timer_action.dart' show resetTimerAction;

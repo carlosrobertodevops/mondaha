@@ -15,7 +15,6 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/flutter_flow/upload_data.dart';
-import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
@@ -233,9 +232,9 @@ class ModalMembrosEditModel extends FlutterFlowModel<ModalMembrosEditWidget> {
   final formKey1 = GlobalKey<FormState>();
   final formKey3 = GlobalKey<FormState>();
   // Stores action output result for [Backend Call - API (ProcedimentosGet)] action in modal_membros_edit widget.
-  ApiCallResponse? apiOutputProcedimentosGet;
+  ApiCallResponse? apioutputProcedimentosGet;
   // Stores action output result for [Backend Call - API (ProcessosGet)] action in modal_membros_edit widget.
-  ApiCallResponse? apiOutputProcessosGet;
+  ApiCallResponse? apioutputProcessosGet;
   // State field(s) for TabBar widget.
   TabController? tabBarController;
   int get tabBarCurrentIndex =>
@@ -485,7 +484,7 @@ class ModalMembrosEditModel extends FlutterFlowModel<ModalMembrosEditWidget> {
   // Stores action output result for [Backend Call - Delete Row(s)] action in Button widget.
   List<ProcedimentosRow>? outputDeleteProcedimentos;
   // Stores action output result for [Backend Call - API (ProcedimentoAdd )] action in Button widget.
-  ApiCallResponse? apiResultProcedimentosEdit;
+  ApiCallResponse? apiResultProcedimentosAdd;
   // Stores action output result for [Backend Call - Delete Row(s)] action in Button widget.
   List<ProcessosRow>? outputDeleteProcessos;
   // Stores action output result for [Backend Call - API (ProcessosAdd)] action in Button widget.

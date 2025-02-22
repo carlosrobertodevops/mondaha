@@ -20,7 +20,7 @@ class ModalMembroViewWidget extends StatefulWidget {
     this.membroRows,
   });
 
-  final MembrosViewConcatSeachMaterializadaRow? membroRows;
+  final MembrosViewConcatSeachRow? membroRows;
 
   @override
   State<ModalMembroViewWidget> createState() => _ModalMembroViewWidgetState();

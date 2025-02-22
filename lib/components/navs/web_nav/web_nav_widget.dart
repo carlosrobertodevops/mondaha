@@ -7,6 +7,7 @@ import '/flutter_flow/flutter_flow_language_selector.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'dart:math';
 import 'dart:ui';
+import '/custom_code/actions/index.dart' as actions;
 import '/index.dart';
 import 'package:community_testing_ryusdv/app_state.dart'
     as community_testing_ryusdv_app_state;
@@ -48,6 +49,14 @@ class _WebNavWidgetState extends State<WebNavWidget>
   void initState() {
     super.initState();
     _model = createModel(context, () => WebNavModel());
+
+    // On component load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('WEB_NAV_COMP_web_nav_ON_INIT_STATE');
+      await actions.resetTimerAction(
+        context,
+      );
+    });
 
     animationsMap.addAll({
       'containerOnActionTriggerAnimation1': AnimationInfo(

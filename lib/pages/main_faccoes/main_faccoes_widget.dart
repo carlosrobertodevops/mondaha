@@ -7,6 +7,7 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:ui';
+import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:community_testing_ryusdv/app_state.dart'
     as community_testing_ryusdv_app_state;
@@ -16,6 +17,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:ff_theme/flutter_flow/flutter_flow_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'main_faccoes_model.dart';
@@ -44,6 +46,14 @@ class _MainFaccoesWidgetState extends State<MainFaccoesWidget>
 
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'main_faccoes'});
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('MAIN_FACCOES_main_faccoes_ON_INIT_STATE');
+      await actions.resetTimerAction(
+        context,
+      );
+    });
+
     _model.textFieldPesquisarFaccoesTextController ??= TextEditingController();
     _model.textFieldPesquisarFaccoesFocusNode ??= FocusNode();
 

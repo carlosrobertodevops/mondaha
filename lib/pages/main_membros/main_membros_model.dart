@@ -55,12 +55,14 @@ class MainMembrosModel extends FlutterFlowModel<MainMembrosWidget> {
           int index, Function(MembrosViewPdfRow) updateFn) =>
       pdfMembrosSearch[index] = updateFn(pdfMembrosSearch[index]);
 
+  String? pesquisaMembroTexto;
+
   ///  State fields for stateful widgets in this page.
 
   TutorialCoachMark? adicionarMembrosController;
-  Completer<List<MembrosViewPdfMaterializadaRow>>? requestCompleter1;
-  Completer<List<MembrosViewConcatSeachMaterializadaRow>>? requestCompleter3;
-  Completer<List<MembrosViewConcatSeachMaterializadaRow>>? requestCompleter2;
+  Completer<List<MembrosViewPdfRow>>? requestCompleter1;
+  Completer<List<MembrosViewConcatSeachRow>>? requestCompleter3;
+  Completer<List<MembrosViewConcatSeachRow>>? requestCompleter2;
   // Model for web_nav component.
   late WebNavModel webNavModel;
   // State field(s) for TextFieldPesquisarMembros widget.

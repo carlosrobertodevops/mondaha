@@ -4463,7 +4463,7 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                                                     useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
                                                                                                   ),
                                                                                               hintText: FFLocalizations.of(context).getText(
-                                                                                                '5xrtyank' /* Cargo atual */,
+                                                                                                '5xrtyank' /* Current position */,
                                                                                               ),
                                                                                               searchHintText: FFLocalizations.of(context).getText(
                                                                                                 'u231jvsq' /* Marital status */,
@@ -4528,7 +4528,7 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                                                     useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
                                                                                                   ),
                                                                                               hintText: FFLocalizations.of(context).getText(
-                                                                                                'uhi29t9v' /* Cargo anterior */,
+                                                                                                'uhi29t9v' /* Previous position */,
                                                                                               ),
                                                                                               searchHintText: FFLocalizations.of(context).getText(
                                                                                                 'bfv93uyj' /* Marital status */,
@@ -8252,13 +8252,18 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                               : _model
                                                                   .membrosFotosSemUrl,
                                                           'dt_nascimento': _model
-                                                              .txtDataNascimentoTextController
-                                                              .text,
+                                                                      .txtDataNascimentoTextController
+                                                                      .text ==
+                                                                  ''
+                                                              ? _model
+                                                                  .dataNascimento
+                                                              : _model
+                                                                  .txtDataNascimentoTextController
+                                                                  .text,
                                                           'validacao_observacao':
-                                                              (_model.txtValidacoesObservacoesFocusNode
-                                                                          ?.hasFocus ??
-                                                                      false)
-                                                                  .toString(),
+                                                              _model
+                                                                  .txtValidacoesObservacoesTextController
+                                                                  .text,
                                                           'id_usuario':
                                                               FFAppState()
                                                                   .UsuarioAtualId,

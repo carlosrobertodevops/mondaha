@@ -8,6 +8,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:math';
 import 'dart:ui';
+import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:community_testing_ryusdv/app_state.dart'
     as community_testing_ryusdv_app_state;
@@ -55,6 +56,14 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
     _model = createModel(context, () => MainAdminModel());
 
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'main_admin'});
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('MAIN_ADMIN_PAGE_main_admin_ON_INIT_STATE');
+      await actions.resetTimerAction(
+        context,
+      );
+    });
+
     _model.textFieldPesquisaAdminTextController ??= TextEditingController();
     _model.textFieldPesquisaAdminFocusNode ??= FocusNode();
 
@@ -339,6 +348,10 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                   FFAppState().buscarUsuarios =
                                                       true;
                                                   safeSetState(() {});
+                                                } else {
+                                                  FFAppState().buscarUsuarios =
+                                                      false;
+                                                  safeSetState(() {});
                                                 }
                                               },
                                             ),
@@ -450,7 +463,13 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                                   .buscarUsuarios =
                                                               true;
                                                           safeSetState(() {});
+                                                        } else {
+                                                          FFAppState()
+                                                                  .buscarUsuarios =
+                                                              false;
+                                                          safeSetState(() {});
                                                         }
+
                                                         safeSetState(() {});
                                                       },
                                                       child: Icon(
@@ -500,8 +519,18 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                           onPressed: () async {
                                             logFirebaseEvent(
                                                 'MAIN_ADMIN_search_rounded_ICN_ON_TAP');
-                                            FFAppState().buscarUsuarios = false;
-                                            safeSetState(() {});
+                                            if (_model
+                                                    .textFieldPesquisaAdminTextController
+                                                    .text ==
+                                                '') {
+                                              FFAppState().buscarUsuarios =
+                                                  true;
+                                              safeSetState(() {});
+                                            } else {
+                                              FFAppState().buscarUsuarios =
+                                                  false;
+                                              safeSetState(() {});
+                                            }
                                           },
                                         ),
                                       ].divide(SizedBox(width: 16.0)),
@@ -861,295 +890,320 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                                       snapshot
                                                                           .data!;
 
-                                                                  return ListView
-                                                                      .builder(
-                                                                    padding:
-                                                                        EdgeInsets
-                                                                            .zero,
-                                                                    shrinkWrap:
-                                                                        true,
-                                                                    scrollDirection:
-                                                                        Axis.vertical,
-                                                                    itemCount:
-                                                                        listViewUsuariosViewConcatSearchRowList
-                                                                            .length,
-                                                                    itemBuilder:
-                                                                        (context,
-                                                                            listViewIndex) {
-                                                                      final listViewUsuariosViewConcatSearchRow =
-                                                                          listViewUsuariosViewConcatSearchRowList[
-                                                                              listViewIndex];
-                                                                      return Builder(
-                                                                        builder:
-                                                                            (context) =>
-                                                                                Padding(
-                                                                          padding: EdgeInsetsDirectional.fromSTEB(
-                                                                              16.0,
-                                                                              8.0,
-                                                                              16.0,
-                                                                              0.0),
-                                                                          child:
-                                                                              InkWell(
-                                                                            splashColor:
-                                                                                Colors.transparent,
-                                                                            focusColor:
-                                                                                Colors.transparent,
-                                                                            hoverColor:
-                                                                                Colors.transparent,
-                                                                            highlightColor:
-                                                                                Colors.transparent,
-                                                                            onTap:
-                                                                                () async {
-                                                                              logFirebaseEvent('MAIN_ADMIN_Container_ijixveoe_ON_TAP');
-                                                                              await showDialog(
-                                                                                context: context,
-                                                                                builder: (dialogContext) {
-                                                                                  return Dialog(
-                                                                                    elevation: 0,
-                                                                                    insetPadding: EdgeInsets.zero,
-                                                                                    backgroundColor: Colors.transparent,
-                                                                                    alignment: AlignmentDirectional(0.0, 0.0).resolve(Directionality.of(context)),
-                                                                                    child: GestureDetector(
-                                                                                      onTap: () {
-                                                                                        FocusScope.of(dialogContext).unfocus();
-                                                                                        FocusManager.instance.primaryFocus?.unfocus();
-                                                                                      },
-                                                                                      child: ModalProfileEditAdminWidget(
-                                                                                        usuariosRow: listViewUsuariosViewConcatSearchRow,
-                                                                                      ),
-                                                                                    ),
-                                                                                  );
-                                                                                },
-                                                                              );
-                                                                            },
+                                                                  if (listViewUsuariosViewConcatSearchRowList
+                                                                      .isEmpty) {
+                                                                    return Center(
+                                                                      child: Image
+                                                                          .asset(
+                                                                        'assets/images/2vqf7_',
+                                                                      ),
+                                                                    );
+                                                                  }
+
+                                                                  return InkWell(
+                                                                    splashColor:
+                                                                        Colors
+                                                                            .transparent,
+                                                                    focusColor:
+                                                                        Colors
+                                                                            .transparent,
+                                                                    hoverColor:
+                                                                        Colors
+                                                                            .transparent,
+                                                                    highlightColor:
+                                                                        Colors
+                                                                            .transparent,
+                                                                    onTap:
+                                                                        () async {
+                                                                      logFirebaseEvent(
+                                                                          'MAIN_ADMIN_PAGE_ListView_n9z1h1x7_ON_TAP');
+                                                                      await actions
+                                                                          .resetTimerAction(
+                                                                        context,
+                                                                      );
+                                                                    },
+                                                                    child: ListView
+                                                                        .builder(
+                                                                      padding:
+                                                                          EdgeInsets
+                                                                              .zero,
+                                                                      shrinkWrap:
+                                                                          true,
+                                                                      scrollDirection:
+                                                                          Axis.vertical,
+                                                                      itemCount:
+                                                                          listViewUsuariosViewConcatSearchRowList
+                                                                              .length,
+                                                                      itemBuilder:
+                                                                          (context,
+                                                                              listViewIndex) {
+                                                                        final listViewUsuariosViewConcatSearchRow =
+                                                                            listViewUsuariosViewConcatSearchRowList[listViewIndex];
+                                                                        return Builder(
+                                                                          builder: (context) =>
+                                                                              Padding(
+                                                                            padding: EdgeInsetsDirectional.fromSTEB(
+                                                                                16.0,
+                                                                                8.0,
+                                                                                16.0,
+                                                                                0.0),
                                                                             child:
-                                                                                Container(
-                                                                              width: double.infinity,
-                                                                              decoration: BoxDecoration(
-                                                                                color: FlutterFlowTheme.of(context).secondaryBackground,
-                                                                                boxShadow: [
-                                                                                  BoxShadow(
-                                                                                    blurRadius: 3.0,
-                                                                                    color: Color(0x20000000),
-                                                                                    offset: Offset(
-                                                                                      0.0,
-                                                                                      1.0,
-                                                                                    ),
-                                                                                  )
-                                                                                ],
-                                                                                borderRadius: BorderRadius.circular(12.0),
-                                                                              ),
-                                                                              child: Padding(
-                                                                                padding: EdgeInsetsDirectional.fromSTEB(8.0, 8.0, 12.0, 8.0),
-                                                                                child: Row(
-                                                                                  mainAxisSize: MainAxisSize.max,
-                                                                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                                                                  children: [
-                                                                                    Align(
-                                                                                      alignment: AlignmentDirectional(0.0, 0.0),
-                                                                                      child: Container(
-                                                                                        width: 50.0,
-                                                                                        height: 50.0,
-                                                                                        clipBehavior: Clip.antiAlias,
-                                                                                        decoration: BoxDecoration(
-                                                                                          shape: BoxShape.circle,
-                                                                                        ),
-                                                                                        child: CachedNetworkImage(
-                                                                                          fadeInDuration: Duration(milliseconds: 10),
-                                                                                          fadeOutDuration: Duration(milliseconds: 10),
-                                                                                          imageUrl: valueOrDefault<String>(
-                                                                                            listViewUsuariosViewConcatSearchRow.fotoPath != ''
-                                                                                                ? listViewUsuariosViewConcatSearchRow.fotoPath
-                                                                                                : valueOrDefault<String>(
-                                                                                                    (Theme.of(context).brightness == Brightness.light) == true
-                                                                                                        ? valueOrDefault<String>(
-                                                                                                            FFAppState().UsuariosImagePathLight,
-                                                                                                            'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/knv28f1mlohg/account_circle_24dp_99999_FILL0_wght400_GRAD0_opsz24.png',
-                                                                                                          )
-                                                                                                        : valueOrDefault<String>(
-                                                                                                            FFAppState().UsuariosImagePathDark,
-                                                                                                            'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/0p4owp0uortf/account_circle_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.png',
-                                                                                                          ),
-                                                                                                    'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/79wfovohiaq7/account_circle_96dp_99999_FILL0_wght400_GRAD0_opsz48.png',
-                                                                                                  ),
-                                                                                            'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/knv28f1mlohg/account_circle_24dp_99999_FILL0_wght400_GRAD0_opsz24.png',
-                                                                                          ),
-                                                                                          fit: BoxFit.cover,
-                                                                                          errorWidget: (context, error, stackTrace) => Image.asset(
-                                                                                            'assets/images/error_image.png',
-                                                                                            fit: BoxFit.cover,
-                                                                                          ),
+                                                                                InkWell(
+                                                                              splashColor: Colors.transparent,
+                                                                              focusColor: Colors.transparent,
+                                                                              hoverColor: Colors.transparent,
+                                                                              highlightColor: Colors.transparent,
+                                                                              onTap: () async {
+                                                                                logFirebaseEvent('MAIN_ADMIN_Container_ijixveoe_ON_TAP');
+                                                                                await showDialog(
+                                                                                  context: context,
+                                                                                  builder: (dialogContext) {
+                                                                                    return Dialog(
+                                                                                      elevation: 0,
+                                                                                      insetPadding: EdgeInsets.zero,
+                                                                                      backgroundColor: Colors.transparent,
+                                                                                      alignment: AlignmentDirectional(0.0, 0.0).resolve(Directionality.of(context)),
+                                                                                      child: GestureDetector(
+                                                                                        onTap: () {
+                                                                                          FocusScope.of(dialogContext).unfocus();
+                                                                                          FocusManager.instance.primaryFocus?.unfocus();
+                                                                                        },
+                                                                                        child: ModalProfileEditAdminWidget(
+                                                                                          usuariosRow: listViewUsuariosViewConcatSearchRow,
                                                                                         ),
                                                                                       ),
-                                                                                    ),
-                                                                                    Expanded(
-                                                                                      child: Row(
-                                                                                        mainAxisSize: MainAxisSize.max,
-                                                                                        children: [
-                                                                                          Expanded(
-                                                                                            child: Padding(
-                                                                                              padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
-                                                                                              child: Text(
-                                                                                                valueOrDefault<String>(
-                                                                                                  listViewUsuariosViewConcatSearchRow.nomeCompleto,
-                                                                                                  'sem informação',
-                                                                                                ),
-                                                                                                style: FlutterFlowTheme.of(context).bodyLarge.override(
-                                                                                                      fontFamily: FlutterFlowTheme.of(context).bodyLargeFamily,
-                                                                                                      letterSpacing: 0.0,
-                                                                                                      useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyLargeFamily),
+                                                                                    );
+                                                                                  },
+                                                                                );
+                                                                              },
+                                                                              child: Container(
+                                                                                width: double.infinity,
+                                                                                decoration: BoxDecoration(
+                                                                                  color: FlutterFlowTheme.of(context).secondaryBackground,
+                                                                                  boxShadow: [
+                                                                                    BoxShadow(
+                                                                                      blurRadius: 3.0,
+                                                                                      color: Color(0x20000000),
+                                                                                      offset: Offset(
+                                                                                        0.0,
+                                                                                        1.0,
+                                                                                      ),
+                                                                                    )
+                                                                                  ],
+                                                                                  borderRadius: BorderRadius.circular(12.0),
+                                                                                ),
+                                                                                child: Padding(
+                                                                                  padding: EdgeInsetsDirectional.fromSTEB(8.0, 8.0, 12.0, 8.0),
+                                                                                  child: Row(
+                                                                                    mainAxisSize: MainAxisSize.max,
+                                                                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                                                                    children: [
+                                                                                      Align(
+                                                                                        alignment: AlignmentDirectional(0.0, 0.0),
+                                                                                        child: Container(
+                                                                                          width: 50.0,
+                                                                                          height: 50.0,
+                                                                                          clipBehavior: Clip.antiAlias,
+                                                                                          decoration: BoxDecoration(
+                                                                                            shape: BoxShape.circle,
+                                                                                          ),
+                                                                                          child: CachedNetworkImage(
+                                                                                            fadeInDuration: Duration(milliseconds: 10),
+                                                                                            fadeOutDuration: Duration(milliseconds: 10),
+                                                                                            imageUrl: valueOrDefault<String>(
+                                                                                              listViewUsuariosViewConcatSearchRow.fotoPath != ''
+                                                                                                  ? listViewUsuariosViewConcatSearchRow.fotoPath
+                                                                                                  : valueOrDefault<String>(
+                                                                                                      (Theme.of(context).brightness == Brightness.light) == true
+                                                                                                          ? valueOrDefault<String>(
+                                                                                                              FFAppState().UsuariosImagePathLight,
+                                                                                                              'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/knv28f1mlohg/account_circle_24dp_99999_FILL0_wght400_GRAD0_opsz24.png',
+                                                                                                            )
+                                                                                                          : valueOrDefault<String>(
+                                                                                                              FFAppState().UsuariosImagePathDark,
+                                                                                                              'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/0p4owp0uortf/account_circle_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.png',
+                                                                                                            ),
+                                                                                                      'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/79wfovohiaq7/account_circle_96dp_99999_FILL0_wght400_GRAD0_opsz48.png',
                                                                                                     ),
-                                                                                              ),
+                                                                                              'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/knv28f1mlohg/account_circle_24dp_99999_FILL0_wght400_GRAD0_opsz24.png',
+                                                                                            ),
+                                                                                            fit: BoxFit.cover,
+                                                                                            errorWidget: (context, error, stackTrace) => Image.asset(
+                                                                                              'assets/images/error_image.png',
+                                                                                              fit: BoxFit.cover,
                                                                                             ),
                                                                                           ),
-                                                                                          Expanded(
-                                                                                            child: Container(
-                                                                                              width: 100.0,
-                                                                                              height: 26.0,
-                                                                                              decoration: BoxDecoration(
-                                                                                                color: FlutterFlowTheme.of(context).secondaryBackground,
-                                                                                              ),
-                                                                                              alignment: AlignmentDirectional(-1.0, 0.0),
+                                                                                        ),
+                                                                                      ),
+                                                                                      Expanded(
+                                                                                        child: Row(
+                                                                                          mainAxisSize: MainAxisSize.max,
+                                                                                          children: [
+                                                                                            Expanded(
                                                                                               child: Padding(
                                                                                                 padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
                                                                                                 child: Text(
                                                                                                   valueOrDefault<String>(
-                                                                                                    listViewUsuariosViewConcatSearchRow.agenciaNome,
+                                                                                                    listViewUsuariosViewConcatSearchRow.nomeCompleto,
+                                                                                                    'sem informação',
+                                                                                                  ),
+                                                                                                  style: FlutterFlowTheme.of(context).bodyLarge.override(
+                                                                                                        fontFamily: FlutterFlowTheme.of(context).bodyLargeFamily,
+                                                                                                        letterSpacing: 0.0,
+                                                                                                        useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyLargeFamily),
+                                                                                                      ),
+                                                                                                ),
+                                                                                              ),
+                                                                                            ),
+                                                                                            Expanded(
+                                                                                              child: Container(
+                                                                                                width: 100.0,
+                                                                                                height: 26.0,
+                                                                                                decoration: BoxDecoration(
+                                                                                                  color: FlutterFlowTheme.of(context).secondaryBackground,
+                                                                                                ),
+                                                                                                alignment: AlignmentDirectional(-1.0, 0.0),
+                                                                                                child: Padding(
+                                                                                                  padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
+                                                                                                  child: Text(
+                                                                                                    valueOrDefault<String>(
+                                                                                                      listViewUsuariosViewConcatSearchRow.agenciaNome,
+                                                                                                      'sem informação',
+                                                                                                    ),
+                                                                                                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                          fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                                                          letterSpacing: 0.0,
+                                                                                                          useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                                                        ),
+                                                                                                  ),
+                                                                                                ),
+                                                                                              ),
+                                                                                            ),
+                                                                                            Expanded(
+                                                                                              child: Padding(
+                                                                                                padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
+                                                                                                child: Text(
+                                                                                                  valueOrDefault<String>(
+                                                                                                    listViewUsuariosViewConcatSearchRow.descricao,
                                                                                                     'sem informação',
                                                                                                   ),
                                                                                                   style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                                         fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                                                        fontSize: 14.0,
                                                                                                         letterSpacing: 0.0,
                                                                                                         useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
                                                                                                       ),
                                                                                                 ),
                                                                                               ),
                                                                                             ),
-                                                                                          ),
-                                                                                          Expanded(
-                                                                                            child: Padding(
-                                                                                              padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
-                                                                                              child: Text(
-                                                                                                valueOrDefault<String>(
-                                                                                                  listViewUsuariosViewConcatSearchRow.descricao,
-                                                                                                  'sem informação',
-                                                                                                ),
-                                                                                                style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                      fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                                      fontSize: 14.0,
-                                                                                                      letterSpacing: 0.0,
-                                                                                                      useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                                                    ),
-                                                                                              ),
-                                                                                            ),
-                                                                                          ),
-                                                                                          Expanded(
-                                                                                            child: Padding(
-                                                                                              padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
-                                                                                              child: Text(
-                                                                                                valueOrDefault<String>(
-                                                                                                  listViewUsuariosViewConcatSearchRow.email,
-                                                                                                  'sem informacao',
-                                                                                                ),
-                                                                                                style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                      fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                                      fontSize: 14.0,
-                                                                                                      letterSpacing: 0.0,
-                                                                                                      useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                                                    ),
-                                                                                              ),
-                                                                                            ),
-                                                                                          ),
-                                                                                          Expanded(
-                                                                                            child: Row(
-                                                                                              mainAxisSize: MainAxisSize.max,
-                                                                                              mainAxisAlignment: MainAxisAlignment.end,
-                                                                                              children: [
-                                                                                                Container(
-                                                                                                  height: 32.0,
-                                                                                                  decoration: BoxDecoration(
-                                                                                                    color: valueOrDefault<Color>(
-                                                                                                      listViewUsuariosViewConcatSearchRow.tipoUsuarioId == 9 ? FlutterFlowTheme.of(context).accent3 : FlutterFlowTheme.of(context).accent2,
-                                                                                                      FlutterFlowTheme.of(context).accent2,
-                                                                                                    ),
-                                                                                                    borderRadius: BorderRadius.circular(8.0),
-                                                                                                    border: Border.all(
-                                                                                                      color: FlutterFlowTheme.of(context).secondary,
-                                                                                                    ),
+                                                                                            Expanded(
+                                                                                              child: Padding(
+                                                                                                padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
+                                                                                                child: Text(
+                                                                                                  valueOrDefault<String>(
+                                                                                                    listViewUsuariosViewConcatSearchRow.email,
+                                                                                                    'sem informacao',
                                                                                                   ),
-                                                                                                  child: Align(
-                                                                                                    alignment: AlignmentDirectional(0.0, 0.0),
-                                                                                                    child: Padding(
-                                                                                                      padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
-                                                                                                      child: Text(
-                                                                                                        valueOrDefault<String>(
-                                                                                                          listViewUsuariosViewConcatSearchRow.tipoUsuarioDescricao,
-                                                                                                          'sem informação',
+                                                                                                  style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                        fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                                                        fontSize: 14.0,
+                                                                                                        letterSpacing: 0.0,
+                                                                                                        useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                                                      ),
+                                                                                                ),
+                                                                                              ),
+                                                                                            ),
+                                                                                            Expanded(
+                                                                                              child: Row(
+                                                                                                mainAxisSize: MainAxisSize.max,
+                                                                                                mainAxisAlignment: MainAxisAlignment.end,
+                                                                                                children: [
+                                                                                                  Container(
+                                                                                                    height: 32.0,
+                                                                                                    decoration: BoxDecoration(
+                                                                                                      color: valueOrDefault<Color>(
+                                                                                                        listViewUsuariosViewConcatSearchRow.tipoUsuarioId == 9 ? FlutterFlowTheme.of(context).accent3 : FlutterFlowTheme.of(context).accent2,
+                                                                                                        FlutterFlowTheme.of(context).accent2,
+                                                                                                      ),
+                                                                                                      borderRadius: BorderRadius.circular(8.0),
+                                                                                                      border: Border.all(
+                                                                                                        color: FlutterFlowTheme.of(context).secondary,
+                                                                                                      ),
+                                                                                                    ),
+                                                                                                    child: Align(
+                                                                                                      alignment: AlignmentDirectional(0.0, 0.0),
+                                                                                                      child: Padding(
+                                                                                                        padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
+                                                                                                        child: Text(
+                                                                                                          valueOrDefault<String>(
+                                                                                                            listViewUsuariosViewConcatSearchRow.tipoUsuarioDescricao,
+                                                                                                            'sem informação',
+                                                                                                          ),
+                                                                                                          style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                                fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                                                                letterSpacing: 0.0,
+                                                                                                                useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                                                              ),
                                                                                                         ),
-                                                                                                        style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                              fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                                              letterSpacing: 0.0,
-                                                                                                              useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                                                            ),
                                                                                                       ),
                                                                                                     ),
                                                                                                   ),
-                                                                                                ),
-                                                                                              ],
+                                                                                                ],
+                                                                                              ),
                                                                                             ),
-                                                                                          ),
-                                                                                        ],
+                                                                                          ],
+                                                                                        ),
                                                                                       ),
-                                                                                    ),
-                                                                                    Builder(
-                                                                                      builder: (context) => Padding(
-                                                                                        padding: EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 0.0, 0.0),
-                                                                                        child: InkWell(
-                                                                                          splashColor: Colors.transparent,
-                                                                                          focusColor: Colors.transparent,
-                                                                                          hoverColor: Colors.transparent,
-                                                                                          highlightColor: Colors.transparent,
-                                                                                          onTap: () async {
-                                                                                            logFirebaseEvent('MAIN_ADMIN_PAGE_Icon_mgpftkgm_ON_TAP');
-                                                                                            await showAlignedDialog(
-                                                                                              barrierColor: Colors.transparent,
-                                                                                              context: context,
-                                                                                              isGlobal: false,
-                                                                                              avoidOverflow: true,
-                                                                                              targetAnchor: AlignmentDirectional(-1.0, 1.0).resolve(Directionality.of(context)),
-                                                                                              followerAnchor: AlignmentDirectional(1.0, -1.0).resolve(Directionality.of(context)),
-                                                                                              builder: (dialogContext) {
-                                                                                                return Material(
-                                                                                                  color: Colors.transparent,
-                                                                                                  child: GestureDetector(
-                                                                                                    onTap: () {
-                                                                                                      FocusScope.of(dialogContext).unfocus();
-                                                                                                      FocusManager.instance.primaryFocus?.unfocus();
-                                                                                                    },
-                                                                                                    child: DropdownUsuarioAdminEditWidget(
-                                                                                                      usuariosView: listViewUsuariosViewConcatSearchRow,
+                                                                                      Builder(
+                                                                                        builder: (context) => Padding(
+                                                                                          padding: EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 0.0, 0.0),
+                                                                                          child: InkWell(
+                                                                                            splashColor: Colors.transparent,
+                                                                                            focusColor: Colors.transparent,
+                                                                                            hoverColor: Colors.transparent,
+                                                                                            highlightColor: Colors.transparent,
+                                                                                            onTap: () async {
+                                                                                              logFirebaseEvent('MAIN_ADMIN_PAGE_Icon_mgpftkgm_ON_TAP');
+                                                                                              await showAlignedDialog(
+                                                                                                barrierColor: Colors.transparent,
+                                                                                                context: context,
+                                                                                                isGlobal: false,
+                                                                                                avoidOverflow: true,
+                                                                                                targetAnchor: AlignmentDirectional(-1.0, 1.0).resolve(Directionality.of(context)),
+                                                                                                followerAnchor: AlignmentDirectional(1.0, -1.0).resolve(Directionality.of(context)),
+                                                                                                builder: (dialogContext) {
+                                                                                                  return Material(
+                                                                                                    color: Colors.transparent,
+                                                                                                    child: GestureDetector(
+                                                                                                      onTap: () {
+                                                                                                        FocusScope.of(dialogContext).unfocus();
+                                                                                                        FocusManager.instance.primaryFocus?.unfocus();
+                                                                                                      },
+                                                                                                      child: DropdownUsuarioAdminEditWidget(
+                                                                                                        usuariosView: listViewUsuariosViewConcatSearchRow,
+                                                                                                      ),
                                                                                                     ),
-                                                                                                  ),
-                                                                                                );
-                                                                                              },
-                                                                                            );
-                                                                                          },
-                                                                                          child: Icon(
-                                                                                            Icons.more_vert,
-                                                                                            color: FlutterFlowTheme.of(context).secondaryText,
-                                                                                            size: 24.0,
+                                                                                                  );
+                                                                                                },
+                                                                                              );
+                                                                                            },
+                                                                                            child: Icon(
+                                                                                              Icons.more_vert,
+                                                                                              color: FlutterFlowTheme.of(context).secondaryText,
+                                                                                              size: 24.0,
+                                                                                            ),
                                                                                           ),
                                                                                         ),
                                                                                       ),
-                                                                                    ),
-                                                                                  ],
+                                                                                    ],
+                                                                                  ),
                                                                                 ),
                                                                               ),
-                                                                            ),
-                                                                          ).animateOnPageLoad(animationsMap['containerOnPageLoadAnimation1']!),
-                                                                        ),
-                                                                      );
-                                                                    },
+                                                                            ).animateOnPageLoad(animationsMap['containerOnPageLoadAnimation1']!),
+                                                                          ),
+                                                                        );
+                                                                      },
+                                                                    ),
                                                                   );
                                                                 },
                                                               ),
@@ -1198,295 +1252,320 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                                       snapshot
                                                                           .data!;
 
-                                                                  return ListView
-                                                                      .builder(
-                                                                    padding:
-                                                                        EdgeInsets
-                                                                            .zero,
-                                                                    shrinkWrap:
-                                                                        true,
-                                                                    scrollDirection:
-                                                                        Axis.vertical,
-                                                                    itemCount:
-                                                                        listViewUsuariosViewConcatSearchRowList
-                                                                            .length,
-                                                                    itemBuilder:
-                                                                        (context,
-                                                                            listViewIndex) {
-                                                                      final listViewUsuariosViewConcatSearchRow =
-                                                                          listViewUsuariosViewConcatSearchRowList[
-                                                                              listViewIndex];
-                                                                      return Builder(
-                                                                        builder:
-                                                                            (context) =>
-                                                                                Padding(
-                                                                          padding: EdgeInsetsDirectional.fromSTEB(
-                                                                              16.0,
-                                                                              8.0,
-                                                                              16.0,
-                                                                              0.0),
-                                                                          child:
-                                                                              InkWell(
-                                                                            splashColor:
-                                                                                Colors.transparent,
-                                                                            focusColor:
-                                                                                Colors.transparent,
-                                                                            hoverColor:
-                                                                                Colors.transparent,
-                                                                            highlightColor:
-                                                                                Colors.transparent,
-                                                                            onTap:
-                                                                                () async {
-                                                                              logFirebaseEvent('MAIN_ADMIN_Container_6683v07v_ON_TAP');
-                                                                              await showDialog(
-                                                                                context: context,
-                                                                                builder: (dialogContext) {
-                                                                                  return Dialog(
-                                                                                    elevation: 0,
-                                                                                    insetPadding: EdgeInsets.zero,
-                                                                                    backgroundColor: Colors.transparent,
-                                                                                    alignment: AlignmentDirectional(0.0, 0.0).resolve(Directionality.of(context)),
-                                                                                    child: GestureDetector(
-                                                                                      onTap: () {
-                                                                                        FocusScope.of(dialogContext).unfocus();
-                                                                                        FocusManager.instance.primaryFocus?.unfocus();
-                                                                                      },
-                                                                                      child: ModalProfileEditAdminWidget(
-                                                                                        usuariosRow: listViewUsuariosViewConcatSearchRow,
-                                                                                      ),
-                                                                                    ),
-                                                                                  );
-                                                                                },
-                                                                              );
-                                                                            },
+                                                                  if (listViewUsuariosViewConcatSearchRowList
+                                                                      .isEmpty) {
+                                                                    return Center(
+                                                                      child: Image
+                                                                          .asset(
+                                                                        'assets/images/2vqf7_',
+                                                                      ),
+                                                                    );
+                                                                  }
+
+                                                                  return InkWell(
+                                                                    splashColor:
+                                                                        Colors
+                                                                            .transparent,
+                                                                    focusColor:
+                                                                        Colors
+                                                                            .transparent,
+                                                                    hoverColor:
+                                                                        Colors
+                                                                            .transparent,
+                                                                    highlightColor:
+                                                                        Colors
+                                                                            .transparent,
+                                                                    onTap:
+                                                                        () async {
+                                                                      logFirebaseEvent(
+                                                                          'MAIN_ADMIN_PAGE_ListView_2qvx3xds_ON_TAP');
+                                                                      await actions
+                                                                          .resetTimerAction(
+                                                                        context,
+                                                                      );
+                                                                    },
+                                                                    child: ListView
+                                                                        .builder(
+                                                                      padding:
+                                                                          EdgeInsets
+                                                                              .zero,
+                                                                      shrinkWrap:
+                                                                          true,
+                                                                      scrollDirection:
+                                                                          Axis.vertical,
+                                                                      itemCount:
+                                                                          listViewUsuariosViewConcatSearchRowList
+                                                                              .length,
+                                                                      itemBuilder:
+                                                                          (context,
+                                                                              listViewIndex) {
+                                                                        final listViewUsuariosViewConcatSearchRow =
+                                                                            listViewUsuariosViewConcatSearchRowList[listViewIndex];
+                                                                        return Builder(
+                                                                          builder: (context) =>
+                                                                              Padding(
+                                                                            padding: EdgeInsetsDirectional.fromSTEB(
+                                                                                16.0,
+                                                                                8.0,
+                                                                                16.0,
+                                                                                0.0),
                                                                             child:
-                                                                                Container(
-                                                                              width: double.infinity,
-                                                                              decoration: BoxDecoration(
-                                                                                color: FlutterFlowTheme.of(context).secondaryBackground,
-                                                                                boxShadow: [
-                                                                                  BoxShadow(
-                                                                                    blurRadius: 3.0,
-                                                                                    color: Color(0x20000000),
-                                                                                    offset: Offset(
-                                                                                      0.0,
-                                                                                      1.0,
-                                                                                    ),
-                                                                                  )
-                                                                                ],
-                                                                                borderRadius: BorderRadius.circular(12.0),
-                                                                              ),
-                                                                              child: Padding(
-                                                                                padding: EdgeInsetsDirectional.fromSTEB(8.0, 8.0, 12.0, 8.0),
-                                                                                child: Row(
-                                                                                  mainAxisSize: MainAxisSize.max,
-                                                                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                                                                  children: [
-                                                                                    Align(
-                                                                                      alignment: AlignmentDirectional(0.0, 0.0),
-                                                                                      child: Container(
-                                                                                        width: 50.0,
-                                                                                        height: 50.0,
-                                                                                        clipBehavior: Clip.antiAlias,
-                                                                                        decoration: BoxDecoration(
-                                                                                          shape: BoxShape.circle,
-                                                                                        ),
-                                                                                        child: CachedNetworkImage(
-                                                                                          fadeInDuration: Duration(milliseconds: 10),
-                                                                                          fadeOutDuration: Duration(milliseconds: 10),
-                                                                                          imageUrl: valueOrDefault<String>(
-                                                                                            listViewUsuariosViewConcatSearchRow.fotoPath != ''
-                                                                                                ? listViewUsuariosViewConcatSearchRow.fotoPath
-                                                                                                : valueOrDefault<String>(
-                                                                                                    (Theme.of(context).brightness == Brightness.light) == true
-                                                                                                        ? valueOrDefault<String>(
-                                                                                                            FFAppState().UsuariosImagePathLight,
-                                                                                                            'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/knv28f1mlohg/account_circle_24dp_99999_FILL0_wght400_GRAD0_opsz24.png',
-                                                                                                          )
-                                                                                                        : valueOrDefault<String>(
-                                                                                                            FFAppState().UsuariosImagePathDark,
-                                                                                                            'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/0p4owp0uortf/account_circle_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.png',
-                                                                                                          ),
-                                                                                                    'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/79wfovohiaq7/account_circle_96dp_99999_FILL0_wght400_GRAD0_opsz48.png',
-                                                                                                  ),
-                                                                                            'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/knv28f1mlohg/account_circle_24dp_99999_FILL0_wght400_GRAD0_opsz24.png',
-                                                                                          ),
-                                                                                          fit: BoxFit.cover,
-                                                                                          errorWidget: (context, error, stackTrace) => Image.asset(
-                                                                                            'assets/images/error_image.png',
-                                                                                            fit: BoxFit.cover,
-                                                                                          ),
+                                                                                InkWell(
+                                                                              splashColor: Colors.transparent,
+                                                                              focusColor: Colors.transparent,
+                                                                              hoverColor: Colors.transparent,
+                                                                              highlightColor: Colors.transparent,
+                                                                              onTap: () async {
+                                                                                logFirebaseEvent('MAIN_ADMIN_Container_6683v07v_ON_TAP');
+                                                                                await showDialog(
+                                                                                  context: context,
+                                                                                  builder: (dialogContext) {
+                                                                                    return Dialog(
+                                                                                      elevation: 0,
+                                                                                      insetPadding: EdgeInsets.zero,
+                                                                                      backgroundColor: Colors.transparent,
+                                                                                      alignment: AlignmentDirectional(0.0, 0.0).resolve(Directionality.of(context)),
+                                                                                      child: GestureDetector(
+                                                                                        onTap: () {
+                                                                                          FocusScope.of(dialogContext).unfocus();
+                                                                                          FocusManager.instance.primaryFocus?.unfocus();
+                                                                                        },
+                                                                                        child: ModalProfileEditAdminWidget(
+                                                                                          usuariosRow: listViewUsuariosViewConcatSearchRow,
                                                                                         ),
                                                                                       ),
-                                                                                    ),
-                                                                                    Expanded(
-                                                                                      child: Row(
-                                                                                        mainAxisSize: MainAxisSize.max,
-                                                                                        children: [
-                                                                                          Expanded(
-                                                                                            child: Padding(
-                                                                                              padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
-                                                                                              child: Text(
-                                                                                                valueOrDefault<String>(
-                                                                                                  listViewUsuariosViewConcatSearchRow.nomeCompleto,
-                                                                                                  'sem informação',
-                                                                                                ),
-                                                                                                style: FlutterFlowTheme.of(context).bodyLarge.override(
-                                                                                                      fontFamily: FlutterFlowTheme.of(context).bodyLargeFamily,
-                                                                                                      letterSpacing: 0.0,
-                                                                                                      useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyLargeFamily),
+                                                                                    );
+                                                                                  },
+                                                                                );
+                                                                              },
+                                                                              child: Container(
+                                                                                width: double.infinity,
+                                                                                decoration: BoxDecoration(
+                                                                                  color: FlutterFlowTheme.of(context).secondaryBackground,
+                                                                                  boxShadow: [
+                                                                                    BoxShadow(
+                                                                                      blurRadius: 3.0,
+                                                                                      color: Color(0x20000000),
+                                                                                      offset: Offset(
+                                                                                        0.0,
+                                                                                        1.0,
+                                                                                      ),
+                                                                                    )
+                                                                                  ],
+                                                                                  borderRadius: BorderRadius.circular(12.0),
+                                                                                ),
+                                                                                child: Padding(
+                                                                                  padding: EdgeInsetsDirectional.fromSTEB(8.0, 8.0, 12.0, 8.0),
+                                                                                  child: Row(
+                                                                                    mainAxisSize: MainAxisSize.max,
+                                                                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                                                                    children: [
+                                                                                      Align(
+                                                                                        alignment: AlignmentDirectional(0.0, 0.0),
+                                                                                        child: Container(
+                                                                                          width: 50.0,
+                                                                                          height: 50.0,
+                                                                                          clipBehavior: Clip.antiAlias,
+                                                                                          decoration: BoxDecoration(
+                                                                                            shape: BoxShape.circle,
+                                                                                          ),
+                                                                                          child: CachedNetworkImage(
+                                                                                            fadeInDuration: Duration(milliseconds: 10),
+                                                                                            fadeOutDuration: Duration(milliseconds: 10),
+                                                                                            imageUrl: valueOrDefault<String>(
+                                                                                              listViewUsuariosViewConcatSearchRow.fotoPath != ''
+                                                                                                  ? listViewUsuariosViewConcatSearchRow.fotoPath
+                                                                                                  : valueOrDefault<String>(
+                                                                                                      (Theme.of(context).brightness == Brightness.light) == true
+                                                                                                          ? valueOrDefault<String>(
+                                                                                                              FFAppState().UsuariosImagePathLight,
+                                                                                                              'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/knv28f1mlohg/account_circle_24dp_99999_FILL0_wght400_GRAD0_opsz24.png',
+                                                                                                            )
+                                                                                                          : valueOrDefault<String>(
+                                                                                                              FFAppState().UsuariosImagePathDark,
+                                                                                                              'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/0p4owp0uortf/account_circle_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.png',
+                                                                                                            ),
+                                                                                                      'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/79wfovohiaq7/account_circle_96dp_99999_FILL0_wght400_GRAD0_opsz48.png',
                                                                                                     ),
-                                                                                              ),
+                                                                                              'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/knv28f1mlohg/account_circle_24dp_99999_FILL0_wght400_GRAD0_opsz24.png',
+                                                                                            ),
+                                                                                            fit: BoxFit.cover,
+                                                                                            errorWidget: (context, error, stackTrace) => Image.asset(
+                                                                                              'assets/images/error_image.png',
+                                                                                              fit: BoxFit.cover,
                                                                                             ),
                                                                                           ),
-                                                                                          Expanded(
-                                                                                            child: Container(
-                                                                                              width: 100.0,
-                                                                                              height: 26.0,
-                                                                                              decoration: BoxDecoration(
-                                                                                                color: FlutterFlowTheme.of(context).secondaryBackground,
-                                                                                              ),
-                                                                                              alignment: AlignmentDirectional(-1.0, 0.0),
+                                                                                        ),
+                                                                                      ),
+                                                                                      Expanded(
+                                                                                        child: Row(
+                                                                                          mainAxisSize: MainAxisSize.max,
+                                                                                          children: [
+                                                                                            Expanded(
                                                                                               child: Padding(
                                                                                                 padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
                                                                                                 child: Text(
                                                                                                   valueOrDefault<String>(
-                                                                                                    listViewUsuariosViewConcatSearchRow.agenciaNome,
+                                                                                                    listViewUsuariosViewConcatSearchRow.nomeCompleto,
+                                                                                                    'sem informação',
+                                                                                                  ),
+                                                                                                  style: FlutterFlowTheme.of(context).bodyLarge.override(
+                                                                                                        fontFamily: FlutterFlowTheme.of(context).bodyLargeFamily,
+                                                                                                        letterSpacing: 0.0,
+                                                                                                        useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyLargeFamily),
+                                                                                                      ),
+                                                                                                ),
+                                                                                              ),
+                                                                                            ),
+                                                                                            Expanded(
+                                                                                              child: Container(
+                                                                                                width: 100.0,
+                                                                                                height: 26.0,
+                                                                                                decoration: BoxDecoration(
+                                                                                                  color: FlutterFlowTheme.of(context).secondaryBackground,
+                                                                                                ),
+                                                                                                alignment: AlignmentDirectional(-1.0, 0.0),
+                                                                                                child: Padding(
+                                                                                                  padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
+                                                                                                  child: Text(
+                                                                                                    valueOrDefault<String>(
+                                                                                                      listViewUsuariosViewConcatSearchRow.agenciaNome,
+                                                                                                      'sem informação',
+                                                                                                    ),
+                                                                                                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                          fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                                                          letterSpacing: 0.0,
+                                                                                                          useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                                                        ),
+                                                                                                  ),
+                                                                                                ),
+                                                                                              ),
+                                                                                            ),
+                                                                                            Expanded(
+                                                                                              child: Padding(
+                                                                                                padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
+                                                                                                child: Text(
+                                                                                                  valueOrDefault<String>(
+                                                                                                    listViewUsuariosViewConcatSearchRow.descricao,
                                                                                                     'sem informação',
                                                                                                   ),
                                                                                                   style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                                         fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                                                        fontSize: 14.0,
                                                                                                         letterSpacing: 0.0,
                                                                                                         useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
                                                                                                       ),
                                                                                                 ),
                                                                                               ),
                                                                                             ),
-                                                                                          ),
-                                                                                          Expanded(
-                                                                                            child: Padding(
-                                                                                              padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
-                                                                                              child: Text(
-                                                                                                valueOrDefault<String>(
-                                                                                                  listViewUsuariosViewConcatSearchRow.descricao,
-                                                                                                  'sem informação',
-                                                                                                ),
-                                                                                                style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                      fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                                      fontSize: 14.0,
-                                                                                                      letterSpacing: 0.0,
-                                                                                                      useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                                                    ),
-                                                                                              ),
-                                                                                            ),
-                                                                                          ),
-                                                                                          Expanded(
-                                                                                            child: Padding(
-                                                                                              padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
-                                                                                              child: Text(
-                                                                                                valueOrDefault<String>(
-                                                                                                  listViewUsuariosViewConcatSearchRow.email,
-                                                                                                  'sem informacao',
-                                                                                                ),
-                                                                                                style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                      fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                                      fontSize: 14.0,
-                                                                                                      letterSpacing: 0.0,
-                                                                                                      useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                                                    ),
-                                                                                              ),
-                                                                                            ),
-                                                                                          ),
-                                                                                          Expanded(
-                                                                                            child: Row(
-                                                                                              mainAxisSize: MainAxisSize.max,
-                                                                                              mainAxisAlignment: MainAxisAlignment.end,
-                                                                                              children: [
-                                                                                                Container(
-                                                                                                  height: 32.0,
-                                                                                                  decoration: BoxDecoration(
-                                                                                                    color: valueOrDefault<Color>(
-                                                                                                      listViewUsuariosViewConcatSearchRow.tipoUsuarioId == 9 ? FlutterFlowTheme.of(context).accent3 : FlutterFlowTheme.of(context).accent2,
-                                                                                                      FlutterFlowTheme.of(context).accent2,
-                                                                                                    ),
-                                                                                                    borderRadius: BorderRadius.circular(8.0),
-                                                                                                    border: Border.all(
-                                                                                                      color: FlutterFlowTheme.of(context).secondary,
-                                                                                                    ),
+                                                                                            Expanded(
+                                                                                              child: Padding(
+                                                                                                padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
+                                                                                                child: Text(
+                                                                                                  valueOrDefault<String>(
+                                                                                                    listViewUsuariosViewConcatSearchRow.email,
+                                                                                                    'sem informacao',
                                                                                                   ),
-                                                                                                  child: Align(
-                                                                                                    alignment: AlignmentDirectional(0.0, 0.0),
-                                                                                                    child: Padding(
-                                                                                                      padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
-                                                                                                      child: Text(
-                                                                                                        valueOrDefault<String>(
-                                                                                                          listViewUsuariosViewConcatSearchRow.tipoUsuarioDescricao,
-                                                                                                          'sem informação',
+                                                                                                  style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                        fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                                                        fontSize: 14.0,
+                                                                                                        letterSpacing: 0.0,
+                                                                                                        useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                                                      ),
+                                                                                                ),
+                                                                                              ),
+                                                                                            ),
+                                                                                            Expanded(
+                                                                                              child: Row(
+                                                                                                mainAxisSize: MainAxisSize.max,
+                                                                                                mainAxisAlignment: MainAxisAlignment.end,
+                                                                                                children: [
+                                                                                                  Container(
+                                                                                                    height: 32.0,
+                                                                                                    decoration: BoxDecoration(
+                                                                                                      color: valueOrDefault<Color>(
+                                                                                                        listViewUsuariosViewConcatSearchRow.tipoUsuarioId == 9 ? FlutterFlowTheme.of(context).accent3 : FlutterFlowTheme.of(context).accent2,
+                                                                                                        FlutterFlowTheme.of(context).accent2,
+                                                                                                      ),
+                                                                                                      borderRadius: BorderRadius.circular(8.0),
+                                                                                                      border: Border.all(
+                                                                                                        color: FlutterFlowTheme.of(context).secondary,
+                                                                                                      ),
+                                                                                                    ),
+                                                                                                    child: Align(
+                                                                                                      alignment: AlignmentDirectional(0.0, 0.0),
+                                                                                                      child: Padding(
+                                                                                                        padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
+                                                                                                        child: Text(
+                                                                                                          valueOrDefault<String>(
+                                                                                                            listViewUsuariosViewConcatSearchRow.tipoUsuarioDescricao,
+                                                                                                            'sem informação',
+                                                                                                          ),
+                                                                                                          style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                                fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                                                                letterSpacing: 0.0,
+                                                                                                                useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                                                              ),
                                                                                                         ),
-                                                                                                        style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                              fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                                              letterSpacing: 0.0,
-                                                                                                              useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                                                            ),
                                                                                                       ),
                                                                                                     ),
                                                                                                   ),
-                                                                                                ),
-                                                                                              ],
+                                                                                                ],
+                                                                                              ),
                                                                                             ),
-                                                                                          ),
-                                                                                        ],
+                                                                                          ],
+                                                                                        ),
                                                                                       ),
-                                                                                    ),
-                                                                                    Builder(
-                                                                                      builder: (context) => Padding(
-                                                                                        padding: EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 0.0, 0.0),
-                                                                                        child: InkWell(
-                                                                                          splashColor: Colors.transparent,
-                                                                                          focusColor: Colors.transparent,
-                                                                                          hoverColor: Colors.transparent,
-                                                                                          highlightColor: Colors.transparent,
-                                                                                          onTap: () async {
-                                                                                            logFirebaseEvent('MAIN_ADMIN_PAGE_Icon_n78n75bx_ON_TAP');
-                                                                                            await showAlignedDialog(
-                                                                                              barrierColor: Colors.transparent,
-                                                                                              context: context,
-                                                                                              isGlobal: false,
-                                                                                              avoidOverflow: true,
-                                                                                              targetAnchor: AlignmentDirectional(-1.0, 1.0).resolve(Directionality.of(context)),
-                                                                                              followerAnchor: AlignmentDirectional(1.0, -1.0).resolve(Directionality.of(context)),
-                                                                                              builder: (dialogContext) {
-                                                                                                return Material(
-                                                                                                  color: Colors.transparent,
-                                                                                                  child: GestureDetector(
-                                                                                                    onTap: () {
-                                                                                                      FocusScope.of(dialogContext).unfocus();
-                                                                                                      FocusManager.instance.primaryFocus?.unfocus();
-                                                                                                    },
-                                                                                                    child: DropdownUsuarioAdminEditWidget(
-                                                                                                      usuariosView: listViewUsuariosViewConcatSearchRow,
+                                                                                      Builder(
+                                                                                        builder: (context) => Padding(
+                                                                                          padding: EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 0.0, 0.0),
+                                                                                          child: InkWell(
+                                                                                            splashColor: Colors.transparent,
+                                                                                            focusColor: Colors.transparent,
+                                                                                            hoverColor: Colors.transparent,
+                                                                                            highlightColor: Colors.transparent,
+                                                                                            onTap: () async {
+                                                                                              logFirebaseEvent('MAIN_ADMIN_PAGE_Icon_n78n75bx_ON_TAP');
+                                                                                              await showAlignedDialog(
+                                                                                                barrierColor: Colors.transparent,
+                                                                                                context: context,
+                                                                                                isGlobal: false,
+                                                                                                avoidOverflow: true,
+                                                                                                targetAnchor: AlignmentDirectional(-1.0, 1.0).resolve(Directionality.of(context)),
+                                                                                                followerAnchor: AlignmentDirectional(1.0, -1.0).resolve(Directionality.of(context)),
+                                                                                                builder: (dialogContext) {
+                                                                                                  return Material(
+                                                                                                    color: Colors.transparent,
+                                                                                                    child: GestureDetector(
+                                                                                                      onTap: () {
+                                                                                                        FocusScope.of(dialogContext).unfocus();
+                                                                                                        FocusManager.instance.primaryFocus?.unfocus();
+                                                                                                      },
+                                                                                                      child: DropdownUsuarioAdminEditWidget(
+                                                                                                        usuariosView: listViewUsuariosViewConcatSearchRow,
+                                                                                                      ),
                                                                                                     ),
-                                                                                                  ),
-                                                                                                );
-                                                                                              },
-                                                                                            );
-                                                                                          },
-                                                                                          child: Icon(
-                                                                                            Icons.more_vert,
-                                                                                            color: FlutterFlowTheme.of(context).secondaryText,
-                                                                                            size: 24.0,
+                                                                                                  );
+                                                                                                },
+                                                                                              );
+                                                                                            },
+                                                                                            child: Icon(
+                                                                                              Icons.more_vert,
+                                                                                              color: FlutterFlowTheme.of(context).secondaryText,
+                                                                                              size: 24.0,
+                                                                                            ),
                                                                                           ),
                                                                                         ),
                                                                                       ),
-                                                                                    ),
-                                                                                  ],
+                                                                                    ],
+                                                                                  ),
                                                                                 ),
                                                                               ),
-                                                                            ),
-                                                                          ).animateOnPageLoad(animationsMap['containerOnPageLoadAnimation2']!),
-                                                                        ),
-                                                                      );
-                                                                    },
+                                                                            ).animateOnPageLoad(animationsMap['containerOnPageLoadAnimation2']!),
+                                                                          ),
+                                                                        );
+                                                                      },
+                                                                    ),
                                                                   );
                                                                 },
                                                               ),
@@ -1533,295 +1612,320 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                                       snapshot
                                                                           .data!;
 
-                                                                  return ListView
-                                                                      .builder(
-                                                                    padding:
-                                                                        EdgeInsets
-                                                                            .zero,
-                                                                    shrinkWrap:
-                                                                        true,
-                                                                    scrollDirection:
-                                                                        Axis.vertical,
-                                                                    itemCount:
-                                                                        listViewUsuariosViewConcatSearchRowList
-                                                                            .length,
-                                                                    itemBuilder:
-                                                                        (context,
-                                                                            listViewIndex) {
-                                                                      final listViewUsuariosViewConcatSearchRow =
-                                                                          listViewUsuariosViewConcatSearchRowList[
-                                                                              listViewIndex];
-                                                                      return Builder(
-                                                                        builder:
-                                                                            (context) =>
-                                                                                Padding(
-                                                                          padding: EdgeInsetsDirectional.fromSTEB(
-                                                                              16.0,
-                                                                              8.0,
-                                                                              16.0,
-                                                                              0.0),
-                                                                          child:
-                                                                              InkWell(
-                                                                            splashColor:
-                                                                                Colors.transparent,
-                                                                            focusColor:
-                                                                                Colors.transparent,
-                                                                            hoverColor:
-                                                                                Colors.transparent,
-                                                                            highlightColor:
-                                                                                Colors.transparent,
-                                                                            onTap:
-                                                                                () async {
-                                                                              logFirebaseEvent('MAIN_ADMIN_Container_ydt7jv5g_ON_TAP');
-                                                                              await showDialog(
-                                                                                context: context,
-                                                                                builder: (dialogContext) {
-                                                                                  return Dialog(
-                                                                                    elevation: 0,
-                                                                                    insetPadding: EdgeInsets.zero,
-                                                                                    backgroundColor: Colors.transparent,
-                                                                                    alignment: AlignmentDirectional(0.0, 0.0).resolve(Directionality.of(context)),
-                                                                                    child: GestureDetector(
-                                                                                      onTap: () {
-                                                                                        FocusScope.of(dialogContext).unfocus();
-                                                                                        FocusManager.instance.primaryFocus?.unfocus();
-                                                                                      },
-                                                                                      child: ModalProfileEditAdminWidget(
-                                                                                        usuariosRow: listViewUsuariosViewConcatSearchRow,
-                                                                                      ),
-                                                                                    ),
-                                                                                  );
-                                                                                },
-                                                                              );
-                                                                            },
+                                                                  if (listViewUsuariosViewConcatSearchRowList
+                                                                      .isEmpty) {
+                                                                    return Center(
+                                                                      child: Image
+                                                                          .asset(
+                                                                        'assets/images/2vqf7_',
+                                                                      ),
+                                                                    );
+                                                                  }
+
+                                                                  return InkWell(
+                                                                    splashColor:
+                                                                        Colors
+                                                                            .transparent,
+                                                                    focusColor:
+                                                                        Colors
+                                                                            .transparent,
+                                                                    hoverColor:
+                                                                        Colors
+                                                                            .transparent,
+                                                                    highlightColor:
+                                                                        Colors
+                                                                            .transparent,
+                                                                    onTap:
+                                                                        () async {
+                                                                      logFirebaseEvent(
+                                                                          'MAIN_ADMIN_PAGE_ListView_lyupsolp_ON_TAP');
+                                                                      await actions
+                                                                          .resetTimerAction(
+                                                                        context,
+                                                                      );
+                                                                    },
+                                                                    child: ListView
+                                                                        .builder(
+                                                                      padding:
+                                                                          EdgeInsets
+                                                                              .zero,
+                                                                      shrinkWrap:
+                                                                          true,
+                                                                      scrollDirection:
+                                                                          Axis.vertical,
+                                                                      itemCount:
+                                                                          listViewUsuariosViewConcatSearchRowList
+                                                                              .length,
+                                                                      itemBuilder:
+                                                                          (context,
+                                                                              listViewIndex) {
+                                                                        final listViewUsuariosViewConcatSearchRow =
+                                                                            listViewUsuariosViewConcatSearchRowList[listViewIndex];
+                                                                        return Builder(
+                                                                          builder: (context) =>
+                                                                              Padding(
+                                                                            padding: EdgeInsetsDirectional.fromSTEB(
+                                                                                16.0,
+                                                                                8.0,
+                                                                                16.0,
+                                                                                0.0),
                                                                             child:
-                                                                                Container(
-                                                                              width: double.infinity,
-                                                                              decoration: BoxDecoration(
-                                                                                color: FlutterFlowTheme.of(context).secondaryBackground,
-                                                                                boxShadow: [
-                                                                                  BoxShadow(
-                                                                                    blurRadius: 3.0,
-                                                                                    color: Color(0x20000000),
-                                                                                    offset: Offset(
-                                                                                      0.0,
-                                                                                      1.0,
-                                                                                    ),
-                                                                                  )
-                                                                                ],
-                                                                                borderRadius: BorderRadius.circular(12.0),
-                                                                              ),
-                                                                              child: Padding(
-                                                                                padding: EdgeInsetsDirectional.fromSTEB(8.0, 8.0, 12.0, 8.0),
-                                                                                child: Row(
-                                                                                  mainAxisSize: MainAxisSize.max,
-                                                                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                                                                  children: [
-                                                                                    Align(
-                                                                                      alignment: AlignmentDirectional(0.0, 0.0),
-                                                                                      child: Container(
-                                                                                        width: 50.0,
-                                                                                        height: 50.0,
-                                                                                        clipBehavior: Clip.antiAlias,
-                                                                                        decoration: BoxDecoration(
-                                                                                          shape: BoxShape.circle,
-                                                                                        ),
-                                                                                        child: CachedNetworkImage(
-                                                                                          fadeInDuration: Duration(milliseconds: 10),
-                                                                                          fadeOutDuration: Duration(milliseconds: 10),
-                                                                                          imageUrl: valueOrDefault<String>(
-                                                                                            listViewUsuariosViewConcatSearchRow.fotoPath != ''
-                                                                                                ? listViewUsuariosViewConcatSearchRow.fotoPath
-                                                                                                : valueOrDefault<String>(
-                                                                                                    (Theme.of(context).brightness == Brightness.light) == true
-                                                                                                        ? valueOrDefault<String>(
-                                                                                                            FFAppState().UsuariosImagePathLight,
-                                                                                                            'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/knv28f1mlohg/account_circle_24dp_99999_FILL0_wght400_GRAD0_opsz24.png',
-                                                                                                          )
-                                                                                                        : valueOrDefault<String>(
-                                                                                                            FFAppState().UsuariosImagePathDark,
-                                                                                                            'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/0p4owp0uortf/account_circle_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.png',
-                                                                                                          ),
-                                                                                                    'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/79wfovohiaq7/account_circle_96dp_99999_FILL0_wght400_GRAD0_opsz48.png',
-                                                                                                  ),
-                                                                                            'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/knv28f1mlohg/account_circle_24dp_99999_FILL0_wght400_GRAD0_opsz24.png',
-                                                                                          ),
-                                                                                          fit: BoxFit.cover,
-                                                                                          errorWidget: (context, error, stackTrace) => Image.asset(
-                                                                                            'assets/images/error_image.png',
-                                                                                            fit: BoxFit.cover,
-                                                                                          ),
+                                                                                InkWell(
+                                                                              splashColor: Colors.transparent,
+                                                                              focusColor: Colors.transparent,
+                                                                              hoverColor: Colors.transparent,
+                                                                              highlightColor: Colors.transparent,
+                                                                              onTap: () async {
+                                                                                logFirebaseEvent('MAIN_ADMIN_Container_ydt7jv5g_ON_TAP');
+                                                                                await showDialog(
+                                                                                  context: context,
+                                                                                  builder: (dialogContext) {
+                                                                                    return Dialog(
+                                                                                      elevation: 0,
+                                                                                      insetPadding: EdgeInsets.zero,
+                                                                                      backgroundColor: Colors.transparent,
+                                                                                      alignment: AlignmentDirectional(0.0, 0.0).resolve(Directionality.of(context)),
+                                                                                      child: GestureDetector(
+                                                                                        onTap: () {
+                                                                                          FocusScope.of(dialogContext).unfocus();
+                                                                                          FocusManager.instance.primaryFocus?.unfocus();
+                                                                                        },
+                                                                                        child: ModalProfileEditAdminWidget(
+                                                                                          usuariosRow: listViewUsuariosViewConcatSearchRow,
                                                                                         ),
                                                                                       ),
-                                                                                    ),
-                                                                                    Expanded(
-                                                                                      child: Row(
-                                                                                        mainAxisSize: MainAxisSize.max,
-                                                                                        children: [
-                                                                                          Expanded(
-                                                                                            child: Padding(
-                                                                                              padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
-                                                                                              child: Text(
-                                                                                                valueOrDefault<String>(
-                                                                                                  listViewUsuariosViewConcatSearchRow.nomeCompleto,
-                                                                                                  'sem informação',
-                                                                                                ),
-                                                                                                style: FlutterFlowTheme.of(context).bodyLarge.override(
-                                                                                                      fontFamily: FlutterFlowTheme.of(context).bodyLargeFamily,
-                                                                                                      letterSpacing: 0.0,
-                                                                                                      useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyLargeFamily),
+                                                                                    );
+                                                                                  },
+                                                                                );
+                                                                              },
+                                                                              child: Container(
+                                                                                width: double.infinity,
+                                                                                decoration: BoxDecoration(
+                                                                                  color: FlutterFlowTheme.of(context).secondaryBackground,
+                                                                                  boxShadow: [
+                                                                                    BoxShadow(
+                                                                                      blurRadius: 3.0,
+                                                                                      color: Color(0x20000000),
+                                                                                      offset: Offset(
+                                                                                        0.0,
+                                                                                        1.0,
+                                                                                      ),
+                                                                                    )
+                                                                                  ],
+                                                                                  borderRadius: BorderRadius.circular(12.0),
+                                                                                ),
+                                                                                child: Padding(
+                                                                                  padding: EdgeInsetsDirectional.fromSTEB(8.0, 8.0, 12.0, 8.0),
+                                                                                  child: Row(
+                                                                                    mainAxisSize: MainAxisSize.max,
+                                                                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                                                                    children: [
+                                                                                      Align(
+                                                                                        alignment: AlignmentDirectional(0.0, 0.0),
+                                                                                        child: Container(
+                                                                                          width: 50.0,
+                                                                                          height: 50.0,
+                                                                                          clipBehavior: Clip.antiAlias,
+                                                                                          decoration: BoxDecoration(
+                                                                                            shape: BoxShape.circle,
+                                                                                          ),
+                                                                                          child: CachedNetworkImage(
+                                                                                            fadeInDuration: Duration(milliseconds: 10),
+                                                                                            fadeOutDuration: Duration(milliseconds: 10),
+                                                                                            imageUrl: valueOrDefault<String>(
+                                                                                              listViewUsuariosViewConcatSearchRow.fotoPath != ''
+                                                                                                  ? listViewUsuariosViewConcatSearchRow.fotoPath
+                                                                                                  : valueOrDefault<String>(
+                                                                                                      (Theme.of(context).brightness == Brightness.light) == true
+                                                                                                          ? valueOrDefault<String>(
+                                                                                                              FFAppState().UsuariosImagePathLight,
+                                                                                                              'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/knv28f1mlohg/account_circle_24dp_99999_FILL0_wght400_GRAD0_opsz24.png',
+                                                                                                            )
+                                                                                                          : valueOrDefault<String>(
+                                                                                                              FFAppState().UsuariosImagePathDark,
+                                                                                                              'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/0p4owp0uortf/account_circle_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.png',
+                                                                                                            ),
+                                                                                                      'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/79wfovohiaq7/account_circle_96dp_99999_FILL0_wght400_GRAD0_opsz48.png',
                                                                                                     ),
-                                                                                              ),
+                                                                                              'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/knv28f1mlohg/account_circle_24dp_99999_FILL0_wght400_GRAD0_opsz24.png',
+                                                                                            ),
+                                                                                            fit: BoxFit.cover,
+                                                                                            errorWidget: (context, error, stackTrace) => Image.asset(
+                                                                                              'assets/images/error_image.png',
+                                                                                              fit: BoxFit.cover,
                                                                                             ),
                                                                                           ),
-                                                                                          Expanded(
-                                                                                            child: Container(
-                                                                                              width: 100.0,
-                                                                                              height: 26.0,
-                                                                                              decoration: BoxDecoration(
-                                                                                                color: FlutterFlowTheme.of(context).secondaryBackground,
-                                                                                              ),
-                                                                                              alignment: AlignmentDirectional(-1.0, 0.0),
+                                                                                        ),
+                                                                                      ),
+                                                                                      Expanded(
+                                                                                        child: Row(
+                                                                                          mainAxisSize: MainAxisSize.max,
+                                                                                          children: [
+                                                                                            Expanded(
                                                                                               child: Padding(
                                                                                                 padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
                                                                                                 child: Text(
                                                                                                   valueOrDefault<String>(
-                                                                                                    listViewUsuariosViewConcatSearchRow.agenciaNome,
+                                                                                                    listViewUsuariosViewConcatSearchRow.nomeCompleto,
+                                                                                                    'sem informação',
+                                                                                                  ),
+                                                                                                  style: FlutterFlowTheme.of(context).bodyLarge.override(
+                                                                                                        fontFamily: FlutterFlowTheme.of(context).bodyLargeFamily,
+                                                                                                        letterSpacing: 0.0,
+                                                                                                        useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyLargeFamily),
+                                                                                                      ),
+                                                                                                ),
+                                                                                              ),
+                                                                                            ),
+                                                                                            Expanded(
+                                                                                              child: Container(
+                                                                                                width: 100.0,
+                                                                                                height: 26.0,
+                                                                                                decoration: BoxDecoration(
+                                                                                                  color: FlutterFlowTheme.of(context).secondaryBackground,
+                                                                                                ),
+                                                                                                alignment: AlignmentDirectional(-1.0, 0.0),
+                                                                                                child: Padding(
+                                                                                                  padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
+                                                                                                  child: Text(
+                                                                                                    valueOrDefault<String>(
+                                                                                                      listViewUsuariosViewConcatSearchRow.agenciaNome,
+                                                                                                      'sem informação',
+                                                                                                    ),
+                                                                                                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                          fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                                                          letterSpacing: 0.0,
+                                                                                                          useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                                                        ),
+                                                                                                  ),
+                                                                                                ),
+                                                                                              ),
+                                                                                            ),
+                                                                                            Expanded(
+                                                                                              child: Padding(
+                                                                                                padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
+                                                                                                child: Text(
+                                                                                                  valueOrDefault<String>(
+                                                                                                    listViewUsuariosViewConcatSearchRow.descricao,
                                                                                                     'sem informação',
                                                                                                   ),
                                                                                                   style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                                         fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                                                        fontSize: 14.0,
                                                                                                         letterSpacing: 0.0,
                                                                                                         useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
                                                                                                       ),
                                                                                                 ),
                                                                                               ),
                                                                                             ),
-                                                                                          ),
-                                                                                          Expanded(
-                                                                                            child: Padding(
-                                                                                              padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
-                                                                                              child: Text(
-                                                                                                valueOrDefault<String>(
-                                                                                                  listViewUsuariosViewConcatSearchRow.descricao,
-                                                                                                  'sem informação',
-                                                                                                ),
-                                                                                                style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                      fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                                      fontSize: 14.0,
-                                                                                                      letterSpacing: 0.0,
-                                                                                                      useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                                                    ),
-                                                                                              ),
-                                                                                            ),
-                                                                                          ),
-                                                                                          Expanded(
-                                                                                            child: Padding(
-                                                                                              padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
-                                                                                              child: Text(
-                                                                                                valueOrDefault<String>(
-                                                                                                  listViewUsuariosViewConcatSearchRow.email,
-                                                                                                  'sem informacao',
-                                                                                                ),
-                                                                                                style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                      fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                                      fontSize: 14.0,
-                                                                                                      letterSpacing: 0.0,
-                                                                                                      useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                                                    ),
-                                                                                              ),
-                                                                                            ),
-                                                                                          ),
-                                                                                          Expanded(
-                                                                                            child: Row(
-                                                                                              mainAxisSize: MainAxisSize.max,
-                                                                                              mainAxisAlignment: MainAxisAlignment.end,
-                                                                                              children: [
-                                                                                                Container(
-                                                                                                  height: 32.0,
-                                                                                                  decoration: BoxDecoration(
-                                                                                                    color: valueOrDefault<Color>(
-                                                                                                      listViewUsuariosViewConcatSearchRow.tipoUsuarioId == 9 ? FlutterFlowTheme.of(context).accent3 : FlutterFlowTheme.of(context).accent2,
-                                                                                                      FlutterFlowTheme.of(context).accent2,
-                                                                                                    ),
-                                                                                                    borderRadius: BorderRadius.circular(8.0),
-                                                                                                    border: Border.all(
-                                                                                                      color: FlutterFlowTheme.of(context).secondary,
-                                                                                                    ),
+                                                                                            Expanded(
+                                                                                              child: Padding(
+                                                                                                padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
+                                                                                                child: Text(
+                                                                                                  valueOrDefault<String>(
+                                                                                                    listViewUsuariosViewConcatSearchRow.email,
+                                                                                                    'sem informacao',
                                                                                                   ),
-                                                                                                  child: Align(
-                                                                                                    alignment: AlignmentDirectional(0.0, 0.0),
-                                                                                                    child: Padding(
-                                                                                                      padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
-                                                                                                      child: Text(
-                                                                                                        valueOrDefault<String>(
-                                                                                                          listViewUsuariosViewConcatSearchRow.tipoUsuarioDescricao,
-                                                                                                          'sem informação',
+                                                                                                  style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                        fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                                                        fontSize: 14.0,
+                                                                                                        letterSpacing: 0.0,
+                                                                                                        useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                                                      ),
+                                                                                                ),
+                                                                                              ),
+                                                                                            ),
+                                                                                            Expanded(
+                                                                                              child: Row(
+                                                                                                mainAxisSize: MainAxisSize.max,
+                                                                                                mainAxisAlignment: MainAxisAlignment.end,
+                                                                                                children: [
+                                                                                                  Container(
+                                                                                                    height: 32.0,
+                                                                                                    decoration: BoxDecoration(
+                                                                                                      color: valueOrDefault<Color>(
+                                                                                                        listViewUsuariosViewConcatSearchRow.tipoUsuarioId == 9 ? FlutterFlowTheme.of(context).accent3 : FlutterFlowTheme.of(context).accent2,
+                                                                                                        FlutterFlowTheme.of(context).accent2,
+                                                                                                      ),
+                                                                                                      borderRadius: BorderRadius.circular(8.0),
+                                                                                                      border: Border.all(
+                                                                                                        color: FlutterFlowTheme.of(context).secondary,
+                                                                                                      ),
+                                                                                                    ),
+                                                                                                    child: Align(
+                                                                                                      alignment: AlignmentDirectional(0.0, 0.0),
+                                                                                                      child: Padding(
+                                                                                                        padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
+                                                                                                        child: Text(
+                                                                                                          valueOrDefault<String>(
+                                                                                                            listViewUsuariosViewConcatSearchRow.tipoUsuarioDescricao,
+                                                                                                            'sem informação',
+                                                                                                          ),
+                                                                                                          style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                                fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                                                                letterSpacing: 0.0,
+                                                                                                                useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                                                              ),
                                                                                                         ),
-                                                                                                        style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                              fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                                              letterSpacing: 0.0,
-                                                                                                              useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                                                            ),
                                                                                                       ),
                                                                                                     ),
                                                                                                   ),
-                                                                                                ),
-                                                                                              ],
+                                                                                                ],
+                                                                                              ),
                                                                                             ),
-                                                                                          ),
-                                                                                        ],
+                                                                                          ],
+                                                                                        ),
                                                                                       ),
-                                                                                    ),
-                                                                                    Builder(
-                                                                                      builder: (context) => Padding(
-                                                                                        padding: EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 0.0, 0.0),
-                                                                                        child: InkWell(
-                                                                                          splashColor: Colors.transparent,
-                                                                                          focusColor: Colors.transparent,
-                                                                                          hoverColor: Colors.transparent,
-                                                                                          highlightColor: Colors.transparent,
-                                                                                          onTap: () async {
-                                                                                            logFirebaseEvent('MAIN_ADMIN_PAGE_Icon_wy59uazw_ON_TAP');
-                                                                                            await showAlignedDialog(
-                                                                                              barrierColor: Colors.transparent,
-                                                                                              context: context,
-                                                                                              isGlobal: false,
-                                                                                              avoidOverflow: true,
-                                                                                              targetAnchor: AlignmentDirectional(-1.0, 1.0).resolve(Directionality.of(context)),
-                                                                                              followerAnchor: AlignmentDirectional(1.0, -1.0).resolve(Directionality.of(context)),
-                                                                                              builder: (dialogContext) {
-                                                                                                return Material(
-                                                                                                  color: Colors.transparent,
-                                                                                                  child: GestureDetector(
-                                                                                                    onTap: () {
-                                                                                                      FocusScope.of(dialogContext).unfocus();
-                                                                                                      FocusManager.instance.primaryFocus?.unfocus();
-                                                                                                    },
-                                                                                                    child: DropdownUsuarioAdminEditWidget(
-                                                                                                      usuariosView: listViewUsuariosViewConcatSearchRow,
+                                                                                      Builder(
+                                                                                        builder: (context) => Padding(
+                                                                                          padding: EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 0.0, 0.0),
+                                                                                          child: InkWell(
+                                                                                            splashColor: Colors.transparent,
+                                                                                            focusColor: Colors.transparent,
+                                                                                            hoverColor: Colors.transparent,
+                                                                                            highlightColor: Colors.transparent,
+                                                                                            onTap: () async {
+                                                                                              logFirebaseEvent('MAIN_ADMIN_PAGE_Icon_wy59uazw_ON_TAP');
+                                                                                              await showAlignedDialog(
+                                                                                                barrierColor: Colors.transparent,
+                                                                                                context: context,
+                                                                                                isGlobal: false,
+                                                                                                avoidOverflow: true,
+                                                                                                targetAnchor: AlignmentDirectional(-1.0, 1.0).resolve(Directionality.of(context)),
+                                                                                                followerAnchor: AlignmentDirectional(1.0, -1.0).resolve(Directionality.of(context)),
+                                                                                                builder: (dialogContext) {
+                                                                                                  return Material(
+                                                                                                    color: Colors.transparent,
+                                                                                                    child: GestureDetector(
+                                                                                                      onTap: () {
+                                                                                                        FocusScope.of(dialogContext).unfocus();
+                                                                                                        FocusManager.instance.primaryFocus?.unfocus();
+                                                                                                      },
+                                                                                                      child: DropdownUsuarioAdminEditWidget(
+                                                                                                        usuariosView: listViewUsuariosViewConcatSearchRow,
+                                                                                                      ),
                                                                                                     ),
-                                                                                                  ),
-                                                                                                );
-                                                                                              },
-                                                                                            );
-                                                                                          },
-                                                                                          child: Icon(
-                                                                                            Icons.more_vert,
-                                                                                            color: FlutterFlowTheme.of(context).secondaryText,
-                                                                                            size: 24.0,
+                                                                                                  );
+                                                                                                },
+                                                                                              );
+                                                                                            },
+                                                                                            child: Icon(
+                                                                                              Icons.more_vert,
+                                                                                              color: FlutterFlowTheme.of(context).secondaryText,
+                                                                                              size: 24.0,
+                                                                                            ),
                                                                                           ),
                                                                                         ),
                                                                                       ),
-                                                                                    ),
-                                                                                  ],
+                                                                                    ],
+                                                                                  ),
                                                                                 ),
                                                                               ),
-                                                                            ),
-                                                                          ).animateOnPageLoad(animationsMap['containerOnPageLoadAnimation3']!),
-                                                                        ),
-                                                                      );
-                                                                    },
+                                                                            ).animateOnPageLoad(animationsMap['containerOnPageLoadAnimation3']!),
+                                                                          ),
+                                                                        );
+                                                                      },
+                                                                    ),
                                                                   );
                                                                 },
                                                               ),
@@ -1876,295 +1980,320 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                                       snapshot
                                                                           .data!;
 
-                                                                  return ListView
-                                                                      .builder(
-                                                                    padding:
-                                                                        EdgeInsets
-                                                                            .zero,
-                                                                    shrinkWrap:
-                                                                        true,
-                                                                    scrollDirection:
-                                                                        Axis.vertical,
-                                                                    itemCount:
-                                                                        listViewUsuariosViewConcatSearchRowList
-                                                                            .length,
-                                                                    itemBuilder:
-                                                                        (context,
-                                                                            listViewIndex) {
-                                                                      final listViewUsuariosViewConcatSearchRow =
-                                                                          listViewUsuariosViewConcatSearchRowList[
-                                                                              listViewIndex];
-                                                                      return Builder(
-                                                                        builder:
-                                                                            (context) =>
-                                                                                Padding(
-                                                                          padding: EdgeInsetsDirectional.fromSTEB(
-                                                                              16.0,
-                                                                              8.0,
-                                                                              16.0,
-                                                                              0.0),
-                                                                          child:
-                                                                              InkWell(
-                                                                            splashColor:
-                                                                                Colors.transparent,
-                                                                            focusColor:
-                                                                                Colors.transparent,
-                                                                            hoverColor:
-                                                                                Colors.transparent,
-                                                                            highlightColor:
-                                                                                Colors.transparent,
-                                                                            onTap:
-                                                                                () async {
-                                                                              logFirebaseEvent('MAIN_ADMIN_Container_7xvycb3g_ON_TAP');
-                                                                              await showDialog(
-                                                                                context: context,
-                                                                                builder: (dialogContext) {
-                                                                                  return Dialog(
-                                                                                    elevation: 0,
-                                                                                    insetPadding: EdgeInsets.zero,
-                                                                                    backgroundColor: Colors.transparent,
-                                                                                    alignment: AlignmentDirectional(0.0, 0.0).resolve(Directionality.of(context)),
-                                                                                    child: GestureDetector(
-                                                                                      onTap: () {
-                                                                                        FocusScope.of(dialogContext).unfocus();
-                                                                                        FocusManager.instance.primaryFocus?.unfocus();
-                                                                                      },
-                                                                                      child: ModalProfileEditAdminWidget(
-                                                                                        usuariosRow: listViewUsuariosViewConcatSearchRow,
-                                                                                      ),
-                                                                                    ),
-                                                                                  );
-                                                                                },
-                                                                              );
-                                                                            },
+                                                                  if (listViewUsuariosViewConcatSearchRowList
+                                                                      .isEmpty) {
+                                                                    return Center(
+                                                                      child: Image
+                                                                          .asset(
+                                                                        'assets/images/2vqf7_',
+                                                                      ),
+                                                                    );
+                                                                  }
+
+                                                                  return InkWell(
+                                                                    splashColor:
+                                                                        Colors
+                                                                            .transparent,
+                                                                    focusColor:
+                                                                        Colors
+                                                                            .transparent,
+                                                                    hoverColor:
+                                                                        Colors
+                                                                            .transparent,
+                                                                    highlightColor:
+                                                                        Colors
+                                                                            .transparent,
+                                                                    onTap:
+                                                                        () async {
+                                                                      logFirebaseEvent(
+                                                                          'MAIN_ADMIN_PAGE_ListView_pmzfd1gd_ON_TAP');
+                                                                      await actions
+                                                                          .resetTimerAction(
+                                                                        context,
+                                                                      );
+                                                                    },
+                                                                    child: ListView
+                                                                        .builder(
+                                                                      padding:
+                                                                          EdgeInsets
+                                                                              .zero,
+                                                                      shrinkWrap:
+                                                                          true,
+                                                                      scrollDirection:
+                                                                          Axis.vertical,
+                                                                      itemCount:
+                                                                          listViewUsuariosViewConcatSearchRowList
+                                                                              .length,
+                                                                      itemBuilder:
+                                                                          (context,
+                                                                              listViewIndex) {
+                                                                        final listViewUsuariosViewConcatSearchRow =
+                                                                            listViewUsuariosViewConcatSearchRowList[listViewIndex];
+                                                                        return Builder(
+                                                                          builder: (context) =>
+                                                                              Padding(
+                                                                            padding: EdgeInsetsDirectional.fromSTEB(
+                                                                                16.0,
+                                                                                8.0,
+                                                                                16.0,
+                                                                                0.0),
                                                                             child:
-                                                                                Container(
-                                                                              width: double.infinity,
-                                                                              decoration: BoxDecoration(
-                                                                                color: FlutterFlowTheme.of(context).secondaryBackground,
-                                                                                boxShadow: [
-                                                                                  BoxShadow(
-                                                                                    blurRadius: 3.0,
-                                                                                    color: Color(0x20000000),
-                                                                                    offset: Offset(
-                                                                                      0.0,
-                                                                                      1.0,
-                                                                                    ),
-                                                                                  )
-                                                                                ],
-                                                                                borderRadius: BorderRadius.circular(12.0),
-                                                                              ),
-                                                                              child: Padding(
-                                                                                padding: EdgeInsetsDirectional.fromSTEB(8.0, 8.0, 12.0, 8.0),
-                                                                                child: Row(
-                                                                                  mainAxisSize: MainAxisSize.max,
-                                                                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                                                                  children: [
-                                                                                    Align(
-                                                                                      alignment: AlignmentDirectional(0.0, 0.0),
-                                                                                      child: Container(
-                                                                                        width: 50.0,
-                                                                                        height: 50.0,
-                                                                                        clipBehavior: Clip.antiAlias,
-                                                                                        decoration: BoxDecoration(
-                                                                                          shape: BoxShape.circle,
-                                                                                        ),
-                                                                                        child: CachedNetworkImage(
-                                                                                          fadeInDuration: Duration(milliseconds: 10),
-                                                                                          fadeOutDuration: Duration(milliseconds: 10),
-                                                                                          imageUrl: valueOrDefault<String>(
-                                                                                            listViewUsuariosViewConcatSearchRow.fotoPath != ''
-                                                                                                ? listViewUsuariosViewConcatSearchRow.fotoPath
-                                                                                                : valueOrDefault<String>(
-                                                                                                    (Theme.of(context).brightness == Brightness.light) == true
-                                                                                                        ? valueOrDefault<String>(
-                                                                                                            FFAppState().UsuariosImagePathLight,
-                                                                                                            'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/knv28f1mlohg/account_circle_24dp_99999_FILL0_wght400_GRAD0_opsz24.png',
-                                                                                                          )
-                                                                                                        : valueOrDefault<String>(
-                                                                                                            FFAppState().UsuariosImagePathDark,
-                                                                                                            'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/0p4owp0uortf/account_circle_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.png',
-                                                                                                          ),
-                                                                                                    'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/79wfovohiaq7/account_circle_96dp_99999_FILL0_wght400_GRAD0_opsz48.png',
-                                                                                                  ),
-                                                                                            'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/knv28f1mlohg/account_circle_24dp_99999_FILL0_wght400_GRAD0_opsz24.png',
-                                                                                          ),
-                                                                                          fit: BoxFit.cover,
-                                                                                          errorWidget: (context, error, stackTrace) => Image.asset(
-                                                                                            'assets/images/error_image.png',
-                                                                                            fit: BoxFit.cover,
-                                                                                          ),
+                                                                                InkWell(
+                                                                              splashColor: Colors.transparent,
+                                                                              focusColor: Colors.transparent,
+                                                                              hoverColor: Colors.transparent,
+                                                                              highlightColor: Colors.transparent,
+                                                                              onTap: () async {
+                                                                                logFirebaseEvent('MAIN_ADMIN_Container_7xvycb3g_ON_TAP');
+                                                                                await showDialog(
+                                                                                  context: context,
+                                                                                  builder: (dialogContext) {
+                                                                                    return Dialog(
+                                                                                      elevation: 0,
+                                                                                      insetPadding: EdgeInsets.zero,
+                                                                                      backgroundColor: Colors.transparent,
+                                                                                      alignment: AlignmentDirectional(0.0, 0.0).resolve(Directionality.of(context)),
+                                                                                      child: GestureDetector(
+                                                                                        onTap: () {
+                                                                                          FocusScope.of(dialogContext).unfocus();
+                                                                                          FocusManager.instance.primaryFocus?.unfocus();
+                                                                                        },
+                                                                                        child: ModalProfileEditAdminWidget(
+                                                                                          usuariosRow: listViewUsuariosViewConcatSearchRow,
                                                                                         ),
                                                                                       ),
-                                                                                    ),
-                                                                                    Expanded(
-                                                                                      child: Row(
-                                                                                        mainAxisSize: MainAxisSize.max,
-                                                                                        children: [
-                                                                                          Expanded(
-                                                                                            child: Padding(
-                                                                                              padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
-                                                                                              child: Text(
-                                                                                                valueOrDefault<String>(
-                                                                                                  listViewUsuariosViewConcatSearchRow.nomeCompleto,
-                                                                                                  'sem informação',
-                                                                                                ),
-                                                                                                style: FlutterFlowTheme.of(context).bodyLarge.override(
-                                                                                                      fontFamily: FlutterFlowTheme.of(context).bodyLargeFamily,
-                                                                                                      letterSpacing: 0.0,
-                                                                                                      useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyLargeFamily),
+                                                                                    );
+                                                                                  },
+                                                                                );
+                                                                              },
+                                                                              child: Container(
+                                                                                width: double.infinity,
+                                                                                decoration: BoxDecoration(
+                                                                                  color: FlutterFlowTheme.of(context).secondaryBackground,
+                                                                                  boxShadow: [
+                                                                                    BoxShadow(
+                                                                                      blurRadius: 3.0,
+                                                                                      color: Color(0x20000000),
+                                                                                      offset: Offset(
+                                                                                        0.0,
+                                                                                        1.0,
+                                                                                      ),
+                                                                                    )
+                                                                                  ],
+                                                                                  borderRadius: BorderRadius.circular(12.0),
+                                                                                ),
+                                                                                child: Padding(
+                                                                                  padding: EdgeInsetsDirectional.fromSTEB(8.0, 8.0, 12.0, 8.0),
+                                                                                  child: Row(
+                                                                                    mainAxisSize: MainAxisSize.max,
+                                                                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                                                                    children: [
+                                                                                      Align(
+                                                                                        alignment: AlignmentDirectional(0.0, 0.0),
+                                                                                        child: Container(
+                                                                                          width: 50.0,
+                                                                                          height: 50.0,
+                                                                                          clipBehavior: Clip.antiAlias,
+                                                                                          decoration: BoxDecoration(
+                                                                                            shape: BoxShape.circle,
+                                                                                          ),
+                                                                                          child: CachedNetworkImage(
+                                                                                            fadeInDuration: Duration(milliseconds: 10),
+                                                                                            fadeOutDuration: Duration(milliseconds: 10),
+                                                                                            imageUrl: valueOrDefault<String>(
+                                                                                              listViewUsuariosViewConcatSearchRow.fotoPath != ''
+                                                                                                  ? listViewUsuariosViewConcatSearchRow.fotoPath
+                                                                                                  : valueOrDefault<String>(
+                                                                                                      (Theme.of(context).brightness == Brightness.light) == true
+                                                                                                          ? valueOrDefault<String>(
+                                                                                                              FFAppState().UsuariosImagePathLight,
+                                                                                                              'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/knv28f1mlohg/account_circle_24dp_99999_FILL0_wght400_GRAD0_opsz24.png',
+                                                                                                            )
+                                                                                                          : valueOrDefault<String>(
+                                                                                                              FFAppState().UsuariosImagePathDark,
+                                                                                                              'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/0p4owp0uortf/account_circle_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.png',
+                                                                                                            ),
+                                                                                                      'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/79wfovohiaq7/account_circle_96dp_99999_FILL0_wght400_GRAD0_opsz48.png',
                                                                                                     ),
-                                                                                              ),
+                                                                                              'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/knv28f1mlohg/account_circle_24dp_99999_FILL0_wght400_GRAD0_opsz24.png',
+                                                                                            ),
+                                                                                            fit: BoxFit.cover,
+                                                                                            errorWidget: (context, error, stackTrace) => Image.asset(
+                                                                                              'assets/images/error_image.png',
+                                                                                              fit: BoxFit.cover,
                                                                                             ),
                                                                                           ),
-                                                                                          Expanded(
-                                                                                            child: Container(
-                                                                                              width: 100.0,
-                                                                                              height: 26.0,
-                                                                                              decoration: BoxDecoration(
-                                                                                                color: FlutterFlowTheme.of(context).secondaryBackground,
-                                                                                              ),
-                                                                                              alignment: AlignmentDirectional(-1.0, 0.0),
+                                                                                        ),
+                                                                                      ),
+                                                                                      Expanded(
+                                                                                        child: Row(
+                                                                                          mainAxisSize: MainAxisSize.max,
+                                                                                          children: [
+                                                                                            Expanded(
                                                                                               child: Padding(
                                                                                                 padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
                                                                                                 child: Text(
                                                                                                   valueOrDefault<String>(
-                                                                                                    listViewUsuariosViewConcatSearchRow.agenciaNome,
+                                                                                                    listViewUsuariosViewConcatSearchRow.nomeCompleto,
+                                                                                                    'sem informação',
+                                                                                                  ),
+                                                                                                  style: FlutterFlowTheme.of(context).bodyLarge.override(
+                                                                                                        fontFamily: FlutterFlowTheme.of(context).bodyLargeFamily,
+                                                                                                        letterSpacing: 0.0,
+                                                                                                        useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyLargeFamily),
+                                                                                                      ),
+                                                                                                ),
+                                                                                              ),
+                                                                                            ),
+                                                                                            Expanded(
+                                                                                              child: Container(
+                                                                                                width: 100.0,
+                                                                                                height: 26.0,
+                                                                                                decoration: BoxDecoration(
+                                                                                                  color: FlutterFlowTheme.of(context).secondaryBackground,
+                                                                                                ),
+                                                                                                alignment: AlignmentDirectional(-1.0, 0.0),
+                                                                                                child: Padding(
+                                                                                                  padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
+                                                                                                  child: Text(
+                                                                                                    valueOrDefault<String>(
+                                                                                                      listViewUsuariosViewConcatSearchRow.agenciaNome,
+                                                                                                      'sem informação',
+                                                                                                    ),
+                                                                                                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                          fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                                                          letterSpacing: 0.0,
+                                                                                                          useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                                                        ),
+                                                                                                  ),
+                                                                                                ),
+                                                                                              ),
+                                                                                            ),
+                                                                                            Expanded(
+                                                                                              child: Padding(
+                                                                                                padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
+                                                                                                child: Text(
+                                                                                                  valueOrDefault<String>(
+                                                                                                    listViewUsuariosViewConcatSearchRow.descricao,
                                                                                                     'sem informação',
                                                                                                   ),
                                                                                                   style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                                         fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                                                        fontSize: 14.0,
                                                                                                         letterSpacing: 0.0,
                                                                                                         useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
                                                                                                       ),
                                                                                                 ),
                                                                                               ),
                                                                                             ),
-                                                                                          ),
-                                                                                          Expanded(
-                                                                                            child: Padding(
-                                                                                              padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
-                                                                                              child: Text(
-                                                                                                valueOrDefault<String>(
-                                                                                                  listViewUsuariosViewConcatSearchRow.descricao,
-                                                                                                  'sem informação',
-                                                                                                ),
-                                                                                                style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                      fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                                      fontSize: 14.0,
-                                                                                                      letterSpacing: 0.0,
-                                                                                                      useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                                                    ),
-                                                                                              ),
-                                                                                            ),
-                                                                                          ),
-                                                                                          Expanded(
-                                                                                            child: Padding(
-                                                                                              padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
-                                                                                              child: Text(
-                                                                                                valueOrDefault<String>(
-                                                                                                  listViewUsuariosViewConcatSearchRow.email,
-                                                                                                  'sem informacao',
-                                                                                                ),
-                                                                                                style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                      fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                                      fontSize: 14.0,
-                                                                                                      letterSpacing: 0.0,
-                                                                                                      useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                                                    ),
-                                                                                              ),
-                                                                                            ),
-                                                                                          ),
-                                                                                          Expanded(
-                                                                                            child: Row(
-                                                                                              mainAxisSize: MainAxisSize.max,
-                                                                                              mainAxisAlignment: MainAxisAlignment.end,
-                                                                                              children: [
-                                                                                                Container(
-                                                                                                  height: 32.0,
-                                                                                                  decoration: BoxDecoration(
-                                                                                                    color: valueOrDefault<Color>(
-                                                                                                      listViewUsuariosViewConcatSearchRow.tipoUsuarioId == 9 ? FlutterFlowTheme.of(context).accent3 : FlutterFlowTheme.of(context).accent2,
-                                                                                                      FlutterFlowTheme.of(context).accent2,
-                                                                                                    ),
-                                                                                                    borderRadius: BorderRadius.circular(8.0),
-                                                                                                    border: Border.all(
-                                                                                                      color: FlutterFlowTheme.of(context).secondary,
-                                                                                                    ),
+                                                                                            Expanded(
+                                                                                              child: Padding(
+                                                                                                padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
+                                                                                                child: Text(
+                                                                                                  valueOrDefault<String>(
+                                                                                                    listViewUsuariosViewConcatSearchRow.email,
+                                                                                                    'sem informacao',
                                                                                                   ),
-                                                                                                  child: Align(
-                                                                                                    alignment: AlignmentDirectional(0.0, 0.0),
-                                                                                                    child: Padding(
-                                                                                                      padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
-                                                                                                      child: Text(
-                                                                                                        valueOrDefault<String>(
-                                                                                                          listViewUsuariosViewConcatSearchRow.tipoUsuarioDescricao,
-                                                                                                          'sem informação',
+                                                                                                  style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                        fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                                                        fontSize: 14.0,
+                                                                                                        letterSpacing: 0.0,
+                                                                                                        useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                                                      ),
+                                                                                                ),
+                                                                                              ),
+                                                                                            ),
+                                                                                            Expanded(
+                                                                                              child: Row(
+                                                                                                mainAxisSize: MainAxisSize.max,
+                                                                                                mainAxisAlignment: MainAxisAlignment.end,
+                                                                                                children: [
+                                                                                                  Container(
+                                                                                                    height: 32.0,
+                                                                                                    decoration: BoxDecoration(
+                                                                                                      color: valueOrDefault<Color>(
+                                                                                                        listViewUsuariosViewConcatSearchRow.tipoUsuarioId == 9 ? FlutterFlowTheme.of(context).accent3 : FlutterFlowTheme.of(context).accent2,
+                                                                                                        FlutterFlowTheme.of(context).accent2,
+                                                                                                      ),
+                                                                                                      borderRadius: BorderRadius.circular(8.0),
+                                                                                                      border: Border.all(
+                                                                                                        color: FlutterFlowTheme.of(context).secondary,
+                                                                                                      ),
+                                                                                                    ),
+                                                                                                    child: Align(
+                                                                                                      alignment: AlignmentDirectional(0.0, 0.0),
+                                                                                                      child: Padding(
+                                                                                                        padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
+                                                                                                        child: Text(
+                                                                                                          valueOrDefault<String>(
+                                                                                                            listViewUsuariosViewConcatSearchRow.tipoUsuarioDescricao,
+                                                                                                            'sem informação',
+                                                                                                          ),
+                                                                                                          style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                                fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                                                                letterSpacing: 0.0,
+                                                                                                                useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                                                              ),
                                                                                                         ),
-                                                                                                        style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                              fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                                              letterSpacing: 0.0,
-                                                                                                              useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                                                            ),
                                                                                                       ),
                                                                                                     ),
                                                                                                   ),
-                                                                                                ),
-                                                                                              ],
+                                                                                                ],
+                                                                                              ),
                                                                                             ),
-                                                                                          ),
-                                                                                        ],
+                                                                                          ],
+                                                                                        ),
                                                                                       ),
-                                                                                    ),
-                                                                                    Builder(
-                                                                                      builder: (context) => Padding(
-                                                                                        padding: EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 0.0, 0.0),
-                                                                                        child: InkWell(
-                                                                                          splashColor: Colors.transparent,
-                                                                                          focusColor: Colors.transparent,
-                                                                                          hoverColor: Colors.transparent,
-                                                                                          highlightColor: Colors.transparent,
-                                                                                          onTap: () async {
-                                                                                            logFirebaseEvent('MAIN_ADMIN_PAGE_Icon_s5zys07m_ON_TAP');
-                                                                                            await showAlignedDialog(
-                                                                                              barrierColor: Colors.transparent,
-                                                                                              context: context,
-                                                                                              isGlobal: false,
-                                                                                              avoidOverflow: true,
-                                                                                              targetAnchor: AlignmentDirectional(-1.0, 1.0).resolve(Directionality.of(context)),
-                                                                                              followerAnchor: AlignmentDirectional(1.0, -1.0).resolve(Directionality.of(context)),
-                                                                                              builder: (dialogContext) {
-                                                                                                return Material(
-                                                                                                  color: Colors.transparent,
-                                                                                                  child: GestureDetector(
-                                                                                                    onTap: () {
-                                                                                                      FocusScope.of(dialogContext).unfocus();
-                                                                                                      FocusManager.instance.primaryFocus?.unfocus();
-                                                                                                    },
-                                                                                                    child: DropdownUsuarioAdminEditWidget(
-                                                                                                      usuariosView: listViewUsuariosViewConcatSearchRow,
+                                                                                      Builder(
+                                                                                        builder: (context) => Padding(
+                                                                                          padding: EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 0.0, 0.0),
+                                                                                          child: InkWell(
+                                                                                            splashColor: Colors.transparent,
+                                                                                            focusColor: Colors.transparent,
+                                                                                            hoverColor: Colors.transparent,
+                                                                                            highlightColor: Colors.transparent,
+                                                                                            onTap: () async {
+                                                                                              logFirebaseEvent('MAIN_ADMIN_PAGE_Icon_s5zys07m_ON_TAP');
+                                                                                              await showAlignedDialog(
+                                                                                                barrierColor: Colors.transparent,
+                                                                                                context: context,
+                                                                                                isGlobal: false,
+                                                                                                avoidOverflow: true,
+                                                                                                targetAnchor: AlignmentDirectional(-1.0, 1.0).resolve(Directionality.of(context)),
+                                                                                                followerAnchor: AlignmentDirectional(1.0, -1.0).resolve(Directionality.of(context)),
+                                                                                                builder: (dialogContext) {
+                                                                                                  return Material(
+                                                                                                    color: Colors.transparent,
+                                                                                                    child: GestureDetector(
+                                                                                                      onTap: () {
+                                                                                                        FocusScope.of(dialogContext).unfocus();
+                                                                                                        FocusManager.instance.primaryFocus?.unfocus();
+                                                                                                      },
+                                                                                                      child: DropdownUsuarioAdminEditWidget(
+                                                                                                        usuariosView: listViewUsuariosViewConcatSearchRow,
+                                                                                                      ),
                                                                                                     ),
-                                                                                                  ),
-                                                                                                );
-                                                                                              },
-                                                                                            );
-                                                                                          },
-                                                                                          child: Icon(
-                                                                                            Icons.more_vert,
-                                                                                            color: FlutterFlowTheme.of(context).secondaryText,
-                                                                                            size: 24.0,
+                                                                                                  );
+                                                                                                },
+                                                                                              );
+                                                                                            },
+                                                                                            child: Icon(
+                                                                                              Icons.more_vert,
+                                                                                              color: FlutterFlowTheme.of(context).secondaryText,
+                                                                                              size: 24.0,
+                                                                                            ),
                                                                                           ),
                                                                                         ),
                                                                                       ),
-                                                                                    ),
-                                                                                  ],
+                                                                                    ],
+                                                                                  ),
                                                                                 ),
                                                                               ),
-                                                                            ),
-                                                                          ).animateOnPageLoad(animationsMap['containerOnPageLoadAnimation4']!),
-                                                                        ),
-                                                                      );
-                                                                    },
+                                                                            ).animateOnPageLoad(animationsMap['containerOnPageLoadAnimation4']!),
+                                                                          ),
+                                                                        );
+                                                                      },
+                                                                    ),
                                                                   );
                                                                 },
                                                               ),

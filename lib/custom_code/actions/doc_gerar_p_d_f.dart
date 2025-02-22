@@ -19,7 +19,7 @@ import 'package:printing/printing.dart';
 import 'dart:typed_data';
 import 'package:http/http.dart' as http;
 
-Future docGerarPDF(List<MembrosViewPdfMaterializadaRow> membrosDoc) async {
+Future docGerarPDF(List<MembrosViewPdfRow> membrosDoc) async {
 // Add your function code here!
   final pdf = pw.Document();
 

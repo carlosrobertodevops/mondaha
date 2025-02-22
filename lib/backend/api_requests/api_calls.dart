@@ -411,7 +411,7 @@ class ProcedimentosGetCall {
       returnBody: true,
       encodeBodyUtf8: false,
       decodeUtf8: false,
-      cache: true,
+      cache: false,
       isStreamingApi: false,
       alwaysAllowBody: false,
     );
@@ -656,7 +656,7 @@ class ProcessosGetCall {
       returnBody: true,
       encodeBodyUtf8: false,
       decodeUtf8: false,
-      cache: true,
+      cache: false,
       isStreamingApi: false,
       alwaysAllowBody: false,
     );

@@ -19,7 +19,7 @@ class DropdownMemberEditWidget extends StatefulWidget {
     this.membroId,
   });
 
-  final MembrosViewConcatSeachMaterializadaRow? membrosRow;
+  final MembrosViewConcatSeachRow? membrosRow;
   final List<String>? membrosFotos;
   final int? membroId;
 

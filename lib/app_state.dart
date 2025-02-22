@@ -74,6 +74,10 @@ class FFAppState extends ChangeNotifier {
       _rebuildMembros =
           await secureStorage.getBool('ff_rebuildMembros') ?? _rebuildMembros;
     });
+    await _safeInitAsync(() async {
+      _inactivityTimeout = await secureStorage.getInt('ff_inactivityTimeout') ??
+          _inactivityTimeout;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -405,6 +409,17 @@ class FFAppState extends ChangeNotifier {
       Function(community_testing_ryusdv_data_schema.NotificationStruct)
           updateFn) {
     updateFn(_mensagemMembroEditar);
+  }
+
+  int _inactivityTimeout = 5;
+  int get inactivityTimeout => _inactivityTimeout;
+  set inactivityTimeout(int value) {
+    _inactivityTimeout = value;
+    secureStorage.setInt('ff_inactivityTimeout', value);
+  }
+
+  void deleteInactivityTimeout() {
+    secureStorage.delete(key: 'ff_inactivityTimeout');
   }
 }
 

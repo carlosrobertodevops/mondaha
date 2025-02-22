@@ -8,6 +8,7 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:convert';
 import 'dart:math';
 import 'dart:ui';
+import '/custom_code/actions/index.dart' as actions;
 import 'package:community_testing_ryusdv/app_state.dart'
     as community_testing_ryusdv_app_state;
 import 'package:ff_theme/flutter_flow/flutter_flow_theme.dart';
@@ -47,6 +48,9 @@ class _MainHomeWidgetState extends State<MainHomeWidget>
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       logFirebaseEvent('MAIN_HOME_PAGE_main_home_ON_INIT_STATE');
+      await actions.resetTimerAction(
+        context,
+      );
       // Action Usuarios
       _model.outputQueryUsuarios = await UsuariosTable().queryRows(
         queryFn: (q) => q
