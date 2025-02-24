@@ -12,7 +12,6 @@ import 'dart:math';
 import 'dart:ui';
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
-import 'dart:async';
 import 'package:community_testing_ryusdv/app_state.dart'
     as community_testing_ryusdv_app_state;
 import 'package:sticky_headers/sticky_headers.dart';
@@ -63,18 +62,6 @@ class _MainMembrosWidgetState extends State<MainMembrosWidget>
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       logFirebaseEvent('MAIN_MEMBROS_main_membros_ON_INIT_STATE');
-      if (FFAppState().rebuildMembros) {
-        safeSetState(() => _model.requestCompleter1 = null);
-        await _model.waitForRequestCompleted1();
-        safeSetState(() => _model.requestCompleter3 = null);
-        await _model.waitForRequestCompleted3(minWait: 100, maxWait: 1000);
-        safeSetState(() => _model.requestCompleter2 = null);
-        await _model.waitForRequestCompleted2(minWait: 100, maxWait: 1000);
-      } else {
-        FFAppState().rebuildMembros = false;
-        FFAppState().update(() {});
-      }
-
       await actions.resetTimerAction(
         context,
       );
@@ -187,19 +174,15 @@ class _MainMembrosWidgetState extends State<MainMembrosWidget>
                   )
                 : null,
             body: FutureBuilder<List<MembrosViewPdfRow>>(
-              future: (_model.requestCompleter1 ??=
-                      Completer<List<MembrosViewPdfRow>>()
-                        ..complete(MembrosViewPdfTable().queryRows(
-                          queryFn: (q) => q
-                              .ilike(
-                                'pesquisa',
-                                functions.pesquisaLikeCS(_model
-                                    .textFieldPesquisarMembrosTextController
-                                    .text),
-                              )
-                              .order('nome_completo', ascending: true),
-                        )))
-                  .future,
+              future: MembrosViewPdfTable().queryRows(
+                queryFn: (q) => q
+                    .ilike(
+                      'pesquisa',
+                      functions.pesquisaLikeCS(
+                          _model.textFieldPesquisarMembrosTextController.text),
+                    )
+                    .order('nome_completo', ascending: true),
+              ),
               builder: (context, snapshot) {
                 // Customize what your widget looks like when it's loading.
                 if (!snapshot.hasData) {
@@ -457,6 +440,29 @@ class _MainMembrosWidgetState extends State<MainMembrosWidget>
                                                           .buscarMembros = true;
                                                       safeSetState(() {});
                                                     }
+                                                    _model.outputQueryMembrosCount =
+                                                        await MembrosViewConcatSeachTable()
+                                                            .queryRows(
+                                                      queryFn: (q) => q
+                                                          .ilike(
+                                                            'pesquisa',
+                                                            functions
+                                                                .pesquisaLikeCS(
+                                                                    _model
+                                                                        .textFieldPesquisarMembrosTextController
+                                                                        .text),
+                                                          )
+                                                          .order(
+                                                              'nome_completo',
+                                                              ascending: true),
+                                                    );
+                                                    _model.countMembrosSearch =
+                                                        _model
+                                                            .outputQueryMembrosCount!
+                                                            .length;
+                                                    safeSetState(() {});
+
+                                                    safeSetState(() {});
                                                   },
                                                 ),
                                                 onFieldSubmitted: (_) async {
@@ -595,6 +601,28 @@ class _MainMembrosWidgetState extends State<MainMembrosWidget>
                                                               safeSetState(
                                                                   () {});
                                                             }
+                                                            _model.outputQueryMembrosCount =
+                                                                await MembrosViewConcatSeachTable()
+                                                                    .queryRows(
+                                                              queryFn: (q) => q
+                                                                  .ilike(
+                                                                    'pesquisa',
+                                                                    functions.pesquisaLikeCS(_model
+                                                                        .textFieldPesquisarMembrosTextController
+                                                                        .text),
+                                                                  )
+                                                                  .order(
+                                                                      'nome_completo',
+                                                                      ascending:
+                                                                          true),
+                                                            );
+                                                            _model.countMembrosSearch =
+                                                                _model
+                                                                    .outputQueryMembrosCount!
+                                                                    .length;
+                                                            safeSetState(() {});
+
+                                                            safeSetState(() {});
                                                             safeSetState(() {});
                                                           },
                                                           child: Icon(
@@ -648,6 +676,26 @@ class _MainMembrosWidgetState extends State<MainMembrosWidget>
                                                     'MAIN_MEMBROS_search_rounded_ICN_ON_TAP');
                                                 FFAppState().buscarMembros =
                                                     false;
+                                                safeSetState(() {});
+                                                _model.outputQueryMembrosCount2 =
+                                                    await MembrosViewConcatSeachTable()
+                                                        .queryRows(
+                                                  queryFn: (q) => q
+                                                      .ilike(
+                                                        'pesquisa',
+                                                        functions.pesquisaLikeCS(
+                                                            _model
+                                                                .textFieldPesquisarMembrosTextController
+                                                                .text),
+                                                      )
+                                                      .order('nome_completo',
+                                                          ascending: true),
+                                                );
+                                                _model.countMembrosSearch = _model
+                                                    .outputQueryMembrosCount2!
+                                                    .length;
+                                                safeSetState(() {});
+
                                                 safeSetState(() {});
                                               },
                                             ),
@@ -1021,15 +1069,13 @@ class _MainMembrosWidgetState extends State<MainMembrosWidget>
                                                                   child: FutureBuilder<
                                                                       List<
                                                                           MembrosViewConcatSeachRow>>(
-                                                                    future: (_model.requestCompleter3 ??= Completer<
-                                                                            List<
-                                                                                MembrosViewConcatSeachRow>>()
-                                                                          ..complete(
-                                                                              MembrosViewConcatSeachTable().queryRows(
-                                                                            queryFn: (q) =>
-                                                                                q.order('nome_completo', ascending: true),
-                                                                          )))
-                                                                        .future,
+                                                                    future: MembrosViewConcatSeachTable()
+                                                                        .queryRows(
+                                                                      queryFn: (q) => q.order(
+                                                                          'nome_completo',
+                                                                          ascending:
+                                                                              true),
+                                                                    ),
                                                                     builder:
                                                                         (context,
                                                                             snapshot) {
@@ -1068,11 +1114,12 @@ class _MainMembrosWidgetState extends State<MainMembrosWidget>
                                                                               'MAIN_MEMBROS_ListViewMembros_ON_PULL_TO_');
                                                                           _model.outputCountMembrosSearch =
                                                                               await MembrosViewConcatSeachTable().queryRows(
-                                                                            queryFn: (q) =>
-                                                                                q.ilike(
-                                                                              'pesquisa',
-                                                                              functions.pesquisaLikeCS(_model.textFieldPesquisarMembrosTextController.text),
-                                                                            ),
+                                                                            queryFn: (q) => q
+                                                                                .ilike(
+                                                                                  'pesquisa',
+                                                                                  functions.pesquisaLikeCS(_model.textFieldPesquisarMembrosTextController.text),
+                                                                                )
+                                                                                .order('nome_completo', ascending: true),
                                                                           );
                                                                           _model.countMembrosSearch = _model
                                                                               .outputCountMembrosSearch!
@@ -1352,19 +1399,15 @@ class _MainMembrosWidgetState extends State<MainMembrosWidget>
                                                                   child: FutureBuilder<
                                                                       List<
                                                                           MembrosViewConcatSeachRow>>(
-                                                                    future: (_model.requestCompleter2 ??= Completer<
-                                                                            List<
-                                                                                MembrosViewConcatSeachRow>>()
-                                                                          ..complete(
-                                                                              MembrosViewConcatSeachTable().queryRows(
-                                                                            queryFn: (q) => q
-                                                                                .ilike(
-                                                                                  'pesquisa',
-                                                                                  functions.pesquisaLikeCS(_model.textFieldPesquisarMembrosTextController.text),
-                                                                                )
-                                                                                .order('nome_completo', ascending: true),
-                                                                          )))
-                                                                        .future,
+                                                                    future: MembrosViewConcatSeachTable()
+                                                                        .queryRows(
+                                                                      queryFn: (q) => q
+                                                                          .ilike(
+                                                                            'pesquisa',
+                                                                            functions.pesquisaLikeCS(_model.textFieldPesquisarMembrosTextController.text),
+                                                                          )
+                                                                          .order('nome_completo', ascending: true),
+                                                                    ),
                                                                     builder:
                                                                         (context,
                                                                             snapshot) {

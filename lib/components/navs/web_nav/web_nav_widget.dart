@@ -743,7 +743,26 @@ class _WebNavWidgetState extends State<WebNavWidget>
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
                                 crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [],
+                                children: [
+                                  Container(
+                                    width: 200.0,
+                                    height: 1.0,
+                                    decoration: BoxDecoration(
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondaryBackground,
+                                      borderRadius: BorderRadius.only(
+                                        bottomLeft: Radius.circular(0.0),
+                                        bottomRight: Radius.circular(0.0),
+                                        topLeft: Radius.circular(0.0),
+                                        topRight: Radius.circular(0.0),
+                                      ),
+                                      border: Border.all(
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryText,
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                           ),
@@ -1716,7 +1735,62 @@ class _WebNavWidgetState extends State<WebNavWidget>
                                   mainAxisSize: MainAxisSize.max,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [],
+                                  children: [
+                                    Expanded(
+                                      child: Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 0.0, 0.0, 12.0),
+                                        child: Container(
+                                          width: double.infinity,
+                                          decoration: BoxDecoration(
+                                            color: widget!.selectedNav == 6
+                                                ? FlutterFlowTheme.of(context)
+                                                    .alternate
+                                                : FlutterFlowTheme.of(context)
+                                                    .secondaryBackground,
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                          ),
+                                          child: Padding(
+                                            padding: EdgeInsets.all(8.0),
+                                            child: Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: [
+                                                Container(
+                                                  width: 200.0,
+                                                  height: 1.0,
+                                                  decoration: BoxDecoration(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .secondaryBackground,
+                                                    borderRadius:
+                                                        BorderRadius.only(
+                                                      bottomLeft:
+                                                          Radius.circular(0.0),
+                                                      bottomRight:
+                                                          Radius.circular(0.0),
+                                                      topLeft:
+                                                          Radius.circular(0.0),
+                                                      topRight:
+                                                          Radius.circular(0.0),
+                                                    ),
+                                                    border: Border.all(
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .secondaryText,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ),

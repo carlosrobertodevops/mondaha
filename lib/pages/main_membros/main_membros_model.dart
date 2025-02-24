@@ -12,7 +12,6 @@ import 'dart:math';
 import 'dart:ui';
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
-import 'dart:async';
 import 'main_membros_widget.dart' show MainMembrosWidget;
 import 'package:community_testing_ryusdv/app_state.dart'
     as community_testing_ryusdv_app_state;
@@ -60,9 +59,6 @@ class MainMembrosModel extends FlutterFlowModel<MainMembrosWidget> {
   ///  State fields for stateful widgets in this page.
 
   TutorialCoachMark? adicionarMembrosController;
-  Completer<List<MembrosViewPdfRow>>? requestCompleter1;
-  Completer<List<MembrosViewConcatSeachRow>>? requestCompleter3;
-  Completer<List<MembrosViewConcatSeachRow>>? requestCompleter2;
   // Model for web_nav component.
   late WebNavModel webNavModel;
   // State field(s) for TextFieldPesquisarMembros widget.
@@ -70,6 +66,10 @@ class MainMembrosModel extends FlutterFlowModel<MainMembrosWidget> {
   TextEditingController? textFieldPesquisarMembrosTextController;
   String? Function(BuildContext, String?)?
       textFieldPesquisarMembrosTextControllerValidator;
+  // Stores action output result for [Backend Call - Query Rows] action in TextFieldPesquisarMembros widget.
+  List<MembrosViewConcatSeachRow>? outputQueryMembrosCount;
+  // Stores action output result for [Backend Call - Query Rows] action in IconButton widget.
+  List<MembrosViewConcatSeachRow>? outputQueryMembrosCount2;
   // State field(s) for TabBar widget.
   TabController? tabBarController;
   int get tabBarCurrentIndex =>
@@ -91,51 +91,5 @@ class MainMembrosModel extends FlutterFlowModel<MainMembrosWidget> {
     textFieldPesquisarMembrosTextController?.dispose();
 
     tabBarController?.dispose();
-  }
-
-  /// Additional helper methods.
-  Future waitForRequestCompleted1({
-    double minWait = 0,
-    double maxWait = double.infinity,
-  }) async {
-    final stopwatch = Stopwatch()..start();
-    while (true) {
-      await Future.delayed(Duration(milliseconds: 50));
-      final timeElapsed = stopwatch.elapsedMilliseconds;
-      final requestComplete = requestCompleter1?.isCompleted ?? false;
-      if (timeElapsed > maxWait || (requestComplete && timeElapsed > minWait)) {
-        break;
-      }
-    }
-  }
-
-  Future waitForRequestCompleted3({
-    double minWait = 0,
-    double maxWait = double.infinity,
-  }) async {
-    final stopwatch = Stopwatch()..start();
-    while (true) {
-      await Future.delayed(Duration(milliseconds: 50));
-      final timeElapsed = stopwatch.elapsedMilliseconds;
-      final requestComplete = requestCompleter3?.isCompleted ?? false;
-      if (timeElapsed > maxWait || (requestComplete && timeElapsed > minWait)) {
-        break;
-      }
-    }
-  }
-
-  Future waitForRequestCompleted2({
-    double minWait = 0,
-    double maxWait = double.infinity,
-  }) async {
-    final stopwatch = Stopwatch()..start();
-    while (true) {
-      await Future.delayed(Duration(milliseconds: 50));
-      final timeElapsed = stopwatch.elapsedMilliseconds;
-      final requestComplete = requestCompleter2?.isCompleted ?? false;
-      if (timeElapsed > maxWait || (requestComplete && timeElapsed > minWait)) {
-        break;
-      }
-    }
   }
 }
