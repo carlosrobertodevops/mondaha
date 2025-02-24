@@ -114,18 +114,13 @@ class _MainFaccoesWidgetState extends State<MainFaccoesWidget>
             body: Row(
               mainAxisSize: MainAxisSize.max,
               children: [
-                if (responsiveVisibility(
-                  context: context,
-                  phone: false,
-                  tablet: false,
-                ))
-                  wrapWithModel(
-                    model: _model.webNavModel,
-                    updateCallback: () => safeSetState(() {}),
-                    child: WebNavWidget(
-                      selectedNav: 2,
-                    ),
+                wrapWithModel(
+                  model: _model.webNavModel,
+                  updateCallback: () => safeSetState(() {}),
+                  child: WebNavWidget(
+                    selectedNav: 2,
                   ),
+                ),
                 Expanded(
                   child: Align(
                     alignment: AlignmentDirectional(-1.0, -1.0),
@@ -133,17 +128,9 @@ class _MainFaccoesWidgetState extends State<MainFaccoesWidget>
                       mainAxisSize: MainAxisSize.max,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Container(
-                          width: double.infinity,
-                          height: 40.0,
-                          decoration: BoxDecoration(
-                            color:
-                                FlutterFlowTheme.of(context).primaryBackground,
-                          ),
-                        ),
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
-                              16.0, 0.0, 16.0, 0.0),
+                              16.0, 30.0, 16.0, 0.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -166,85 +153,76 @@ class _MainFaccoesWidgetState extends State<MainFaccoesWidget>
                                       ),
                                 ),
                               ),
-                              if (responsiveVisibility(
-                                context: context,
-                                phone: false,
-                                tablet: false,
-                              ))
-                                Builder(
-                                  builder: (context) => FFButtonWidget(
-                                    onPressed: () async {
-                                      logFirebaseEvent(
-                                          'MAIN_FACCOES_PAGE_ADD_FACTION_BTN_ON_TAP');
-                                      await showDialog(
-                                        context: context,
-                                        builder: (dialogContext) {
-                                          return Dialog(
-                                            elevation: 0,
-                                            insetPadding: EdgeInsets.zero,
-                                            backgroundColor: Colors.transparent,
-                                            alignment: AlignmentDirectional(
-                                                    0.0, 0.0)
-                                                .resolve(
-                                                    Directionality.of(context)),
-                                            child: GestureDetector(
-                                              onTap: () {
-                                                FocusScope.of(dialogContext)
-                                                    .unfocus();
-                                                FocusManager
-                                                    .instance.primaryFocus
-                                                    ?.unfocus();
-                                              },
-                                              child: ModalFaccaoAddWidget(),
-                                            ),
-                                          );
-                                        },
-                                      );
-                                    },
-                                    text: FFLocalizations.of(context).getText(
-                                      'zt1zsn3q' /* Add Faction */,
+                              Builder(
+                                builder: (context) => FFButtonWidget(
+                                  onPressed: () async {
+                                    logFirebaseEvent(
+                                        'MAIN_FACCOES_PAGE_ADD_FACTION_BTN_ON_TAP');
+                                    await showDialog(
+                                      context: context,
+                                      builder: (dialogContext) {
+                                        return Dialog(
+                                          elevation: 0,
+                                          insetPadding: EdgeInsets.zero,
+                                          backgroundColor: Colors.transparent,
+                                          alignment: AlignmentDirectional(
+                                                  0.0, 0.0)
+                                              .resolve(
+                                                  Directionality.of(context)),
+                                          child: GestureDetector(
+                                            onTap: () {
+                                              FocusScope.of(dialogContext)
+                                                  .unfocus();
+                                              FocusManager.instance.primaryFocus
+                                                  ?.unfocus();
+                                            },
+                                            child: ModalFaccaoAddWidget(),
+                                          ),
+                                        );
+                                      },
+                                    );
+                                  },
+                                  text: FFLocalizations.of(context).getText(
+                                    'zt1zsn3q' /* Add Faction */,
+                                  ),
+                                  options: FFButtonOptions(
+                                    height: 40.0,
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        24.0, 0.0, 24.0, 0.0),
+                                    iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 0.0, 0.0, 0.0),
+                                    color: FlutterFlowTheme.of(context).primary,
+                                    textStyle: FlutterFlowTheme.of(context)
+                                        .titleSmall
+                                        .override(
+                                          fontFamily:
+                                              FlutterFlowTheme.of(context)
+                                                  .titleSmallFamily,
+                                          letterSpacing: 0.0,
+                                          useGoogleFonts: GoogleFonts.asMap()
+                                              .containsKey(
+                                                  FlutterFlowTheme.of(context)
+                                                      .titleSmallFamily),
+                                        ),
+                                    elevation: 3.0,
+                                    borderSide: BorderSide(
+                                      color: Colors.transparent,
+                                      width: 1.0,
                                     ),
-                                    options: FFButtonOptions(
-                                      height: 40.0,
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          24.0, 0.0, 24.0, 0.0),
-                                      iconPadding:
-                                          EdgeInsetsDirectional.fromSTEB(
-                                              0.0, 0.0, 0.0, 0.0),
+                                    borderRadius: BorderRadius.circular(8.0),
+                                    hoverColor:
+                                        FlutterFlowTheme.of(context).accent1,
+                                    hoverBorderSide: BorderSide(
                                       color:
                                           FlutterFlowTheme.of(context).primary,
-                                      textStyle: FlutterFlowTheme.of(context)
-                                          .titleSmall
-                                          .override(
-                                            fontFamily:
-                                                FlutterFlowTheme.of(context)
-                                                    .titleSmallFamily,
-                                            letterSpacing: 0.0,
-                                            useGoogleFonts: GoogleFonts.asMap()
-                                                .containsKey(
-                                                    FlutterFlowTheme.of(context)
-                                                        .titleSmallFamily),
-                                          ),
-                                      elevation: 3.0,
-                                      borderSide: BorderSide(
-                                        color: Colors.transparent,
-                                        width: 1.0,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8.0),
-                                      hoverColor:
-                                          FlutterFlowTheme.of(context).accent1,
-                                      hoverBorderSide: BorderSide(
-                                        color: FlutterFlowTheme.of(context)
-                                            .primary,
-                                        width: 1.0,
-                                      ),
-                                      hoverTextColor:
-                                          FlutterFlowTheme.of(context)
-                                              .primaryText,
-                                      hoverElevation: 0.0,
+                                      width: 1.0,
                                     ),
+                                    hoverTextColor: FlutterFlowTheme.of(context)
+                                        .primaryText,
+                                    hoverElevation: 0.0,
                                   ),
                                 ),
+                              ),
                             ].divide(SizedBox(width: 16.0)),
                           ),
                         ),
@@ -292,6 +270,17 @@ class _MainFaccoesWidgetState extends State<MainFaccoesWidget>
                                               }
                                             },
                                           ),
+                                          onFieldSubmitted: (_) async {
+                                            logFirebaseEvent(
+                                                'MAIN_FACCOES_TextFieldPesquisarFaccoes_O');
+                                            if (_model
+                                                    .textFieldPesquisarFaccoesTextController
+                                                    .text ==
+                                                '') {
+                                              FFAppState().buscarFaccao = true;
+                                              safeSetState(() {});
+                                            }
+                                          },
                                           autofocus: true,
                                           obscureText: false,
                                           decoration: InputDecoration(
@@ -541,9 +530,6 @@ class _MainFaccoesWidgetState extends State<MainFaccoesWidget>
                                                                   .of(context)
                                                               .primaryBackground,
                                                         ),
-                                                        alignment:
-                                                            AlignmentDirectional(
-                                                                -1.0, 0.0),
                                                         child: Padding(
                                                           padding:
                                                               EdgeInsetsDirectional
@@ -556,157 +542,117 @@ class _MainFaccoesWidgetState extends State<MainFaccoesWidget>
                                                             mainAxisSize:
                                                                 MainAxisSize
                                                                     .max,
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
                                                             children: [
-                                                              if (responsiveVisibility(
-                                                                context:
-                                                                    context,
-                                                                phone: false,
-                                                              ))
-                                                                Container(
-                                                                  width: 90.0,
-                                                                  height: 100.0,
-                                                                  decoration:
-                                                                      BoxDecoration(),
-                                                                ),
+                                                              Container(
+                                                                width: 90.0,
+                                                                height: 100.0,
+                                                                decoration:
+                                                                    BoxDecoration(),
+                                                              ),
                                                               Expanded(
                                                                 child: Align(
                                                                   alignment:
                                                                       AlignmentDirectional(
                                                                           -1.0,
                                                                           0.0),
-                                                                  child:
-                                                                      Padding(
-                                                                    padding: EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            16.0,
-                                                                            0.0,
-                                                                            0.0,
-                                                                            0.0),
-                                                                    child: Text(
-                                                                      FFLocalizations.of(
-                                                                              context)
-                                                                          .getText(
-                                                                        '222dkjfs' /* Name */,
-                                                                      ),
-                                                                      style: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .labelMedium
-                                                                          .override(
-                                                                            fontFamily:
-                                                                                FlutterFlowTheme.of(context).labelMediumFamily,
-                                                                            letterSpacing:
-                                                                                0.0,
-                                                                            useGoogleFonts:
-                                                                                GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).labelMediumFamily),
-                                                                          ),
+                                                                  child: Text(
+                                                                    FFLocalizations.of(
+                                                                            context)
+                                                                        .getText(
+                                                                      '222dkjfs' /* Name */,
                                                                     ),
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .labelMedium
+                                                                        .override(
+                                                                          fontFamily:
+                                                                              FlutterFlowTheme.of(context).labelMediumFamily,
+                                                                          letterSpacing:
+                                                                              0.0,
+                                                                          useGoogleFonts:
+                                                                              GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).labelMediumFamily),
+                                                                        ),
                                                                   ),
                                                                 ),
                                                               ),
-                                                              if (responsiveVisibility(
-                                                                context:
-                                                                    context,
-                                                                phone: false,
-                                                                tablet: false,
-                                                              ))
-                                                                Expanded(
-                                                                  child: Align(
-                                                                    alignment:
-                                                                        AlignmentDirectional(
-                                                                            -1.0,
-                                                                            0.0),
-                                                                    child:
-                                                                        Padding(
-                                                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                                                          16.0,
-                                                                          0.0,
-                                                                          0.0,
+                                                              Expanded(
+                                                                child: Align(
+                                                                  alignment:
+                                                                      AlignmentDirectional(
+                                                                          -1.0,
                                                                           0.0),
-                                                                      child:
-                                                                          Text(
-                                                                        FFLocalizations.of(context)
-                                                                            .getText(
-                                                                          'qyq0ek8t' /* Description */,
-                                                                        ),
-                                                                        style: FlutterFlowTheme.of(context)
-                                                                            .labelMedium
-                                                                            .override(
-                                                                              fontFamily: FlutterFlowTheme.of(context).labelMediumFamily,
-                                                                              letterSpacing: 0.0,
-                                                                              useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).labelMediumFamily),
-                                                                            ),
-                                                                      ),
+                                                                  child: Text(
+                                                                    FFLocalizations.of(
+                                                                            context)
+                                                                        .getText(
+                                                                      'qyq0ek8t' /* Description */,
                                                                     ),
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .labelMedium
+                                                                        .override(
+                                                                          fontFamily:
+                                                                              FlutterFlowTheme.of(context).labelMediumFamily,
+                                                                          letterSpacing:
+                                                                              0.0,
+                                                                          useGoogleFonts:
+                                                                              GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).labelMediumFamily),
+                                                                        ),
                                                                   ),
                                                                 ),
-                                                              if (responsiveVisibility(
-                                                                context:
-                                                                    context,
-                                                                phone: false,
-                                                                tablet: false,
-                                                              ))
-                                                                Expanded(
-                                                                  child: Align(
-                                                                    alignment:
-                                                                        AlignmentDirectional(
-                                                                            -1.0,
-                                                                            0.0),
-                                                                    child:
-                                                                        Padding(
-                                                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                                                          16.0,
-                                                                          0.0,
-                                                                          0.0,
+                                                              ),
+                                                              Expanded(
+                                                                child: Align(
+                                                                  alignment:
+                                                                      AlignmentDirectional(
+                                                                          -1.0,
                                                                           0.0),
-                                                                      child:
-                                                                          Text(
-                                                                        FFLocalizations.of(context)
-                                                                            .getText(
-                                                                          'mtyn0hp2' /* Faction Creation Date */,
-                                                                        ),
-                                                                        style: FlutterFlowTheme.of(context)
-                                                                            .labelMedium
-                                                                            .override(
-                                                                              fontFamily: FlutterFlowTheme.of(context).labelMediumFamily,
-                                                                              letterSpacing: 0.0,
-                                                                              useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).labelMediumFamily),
-                                                                            ),
-                                                                      ),
+                                                                  child: Text(
+                                                                    FFLocalizations.of(
+                                                                            context)
+                                                                        .getText(
+                                                                      'mtyn0hp2' /* Faction Creation Date */,
                                                                     ),
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .labelMedium
+                                                                        .override(
+                                                                          fontFamily:
+                                                                              FlutterFlowTheme.of(context).labelMediumFamily,
+                                                                          letterSpacing:
+                                                                              0.0,
+                                                                          useGoogleFonts:
+                                                                              GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).labelMediumFamily),
+                                                                        ),
                                                                   ),
                                                                 ),
+                                                              ),
                                                               Expanded(
                                                                 child: Align(
                                                                   alignment:
                                                                       AlignmentDirectional(
                                                                           1.0,
                                                                           0.0),
-                                                                  child:
-                                                                      Padding(
-                                                                    padding: EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            8.0,
-                                                                            0.0,
-                                                                            0.0,
-                                                                            0.0),
-                                                                    child: Text(
-                                                                      FFLocalizations.of(
-                                                                              context)
-                                                                          .getText(
-                                                                        'h9ronhq6' /* Last modified */,
-                                                                      ),
-                                                                      style: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .labelMedium
-                                                                          .override(
-                                                                            fontFamily:
-                                                                                FlutterFlowTheme.of(context).labelMediumFamily,
-                                                                            letterSpacing:
-                                                                                0.0,
-                                                                            useGoogleFonts:
-                                                                                GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).labelMediumFamily),
-                                                                          ),
+                                                                  child: Text(
+                                                                    FFLocalizations.of(
+                                                                            context)
+                                                                        .getText(
+                                                                      'h9ronhq6' /* Last modified */,
                                                                     ),
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .labelMedium
+                                                                        .override(
+                                                                          fontFamily:
+                                                                              FlutterFlowTheme.of(context).labelMediumFamily,
+                                                                          letterSpacing:
+                                                                              0.0,
+                                                                          useGoogleFonts:
+                                                                              GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).labelMediumFamily),
+                                                                        ),
                                                                   ),
                                                                 ),
                                                               ),
@@ -768,11 +714,11 @@ class _MainFaccoesWidgetState extends State<MainFaccoesWidget>
                                                                       );
                                                                     }
                                                                     List<FaccoesViewConcatSearchRow>
-                                                                        listViewFaccoesViewConcatSearchRowList =
+                                                                        listViewFaccaoFaccoesViewConcatSearchRowList =
                                                                         snapshot
                                                                             .data!;
 
-                                                                    if (listViewFaccoesViewConcatSearchRowList
+                                                                    if (listViewFaccaoFaccoesViewConcatSearchRowList
                                                                         .isEmpty) {
                                                                       return Center(
                                                                         child: Image
@@ -789,20 +735,18 @@ class _MainFaccoesWidgetState extends State<MainFaccoesWidget>
                                                                       padding:
                                                                           EdgeInsets
                                                                               .zero,
-                                                                      primary:
-                                                                          false,
                                                                       shrinkWrap:
                                                                           true,
                                                                       scrollDirection:
                                                                           Axis.vertical,
                                                                       itemCount:
-                                                                          listViewFaccoesViewConcatSearchRowList
+                                                                          listViewFaccaoFaccoesViewConcatSearchRowList
                                                                               .length,
                                                                       itemBuilder:
                                                                           (context,
-                                                                              listViewIndex) {
-                                                                        final listViewFaccoesViewConcatSearchRow =
-                                                                            listViewFaccoesViewConcatSearchRowList[listViewIndex];
+                                                                              listViewFaccaoIndex) {
+                                                                        final listViewFaccaoFaccoesViewConcatSearchRow =
+                                                                            listViewFaccaoFaccoesViewConcatSearchRowList[listViewFaccaoIndex];
                                                                         return Builder(
                                                                           builder: (context) =>
                                                                               Padding(
@@ -833,7 +777,7 @@ class _MainFaccoesWidgetState extends State<MainFaccoesWidget>
                                                                                           FocusManager.instance.primaryFocus?.unfocus();
                                                                                         },
                                                                                         child: ModalFaccaoEditWidget(
-                                                                                          faccaoRow: listViewFaccoesViewConcatSearchRow,
+                                                                                          faccaoRow: listViewFaccaoFaccoesViewConcatSearchRow,
                                                                                         ),
                                                                                       ),
                                                                                     );
@@ -868,9 +812,9 @@ class _MainFaccoesWidgetState extends State<MainFaccoesWidget>
                                                                                           fadeInDuration: Duration(milliseconds: 100),
                                                                                           fadeOutDuration: Duration(milliseconds: 100),
                                                                                           imageUrl: valueOrDefault<String>(
-                                                                                            listViewFaccoesViewConcatSearchRow.imagemPath != ''
+                                                                                            listViewFaccaoFaccoesViewConcatSearchRow.imagemPath != ''
                                                                                                 ? valueOrDefault<String>(
-                                                                                                    listViewFaccoesViewConcatSearchRow.imagemPath,
+                                                                                                    listViewFaccaoFaccoesViewConcatSearchRow.imagemPath,
                                                                                                     'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/8dptd6ulegwr/account_tree_24dp_00000_FILL0_wght400_GRAD0_opsz24.png',
                                                                                                   )
                                                                                                 : valueOrDefault<String>(
@@ -893,7 +837,7 @@ class _MainFaccoesWidgetState extends State<MainFaccoesWidget>
                                                                                                 padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
                                                                                                 child: Text(
                                                                                                   valueOrDefault<String>(
-                                                                                                    listViewFaccoesViewConcatSearchRow.nome,
+                                                                                                    listViewFaccaoFaccoesViewConcatSearchRow.nome,
                                                                                                     'sem informacao',
                                                                                                   ),
                                                                                                   style: FlutterFlowTheme.of(context).bodyLarge.override(
@@ -912,55 +856,43 @@ class _MainFaccoesWidgetState extends State<MainFaccoesWidget>
                                                                                                   color: FlutterFlowTheme.of(context).secondaryBackground,
                                                                                                 ),
                                                                                                 alignment: AlignmentDirectional(-1.0, 0.0),
-                                                                                                child: Visibility(
-                                                                                                  visible: responsiveVisibility(
-                                                                                                    context: context,
-                                                                                                    phone: false,
-                                                                                                    tablet: false,
-                                                                                                  ),
-                                                                                                  child: Padding(
-                                                                                                    padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
-                                                                                                    child: Text(
-                                                                                                      valueOrDefault<String>(
-                                                                                                        listViewFaccoesViewConcatSearchRow.descricao,
-                                                                                                        'sem informação',
-                                                                                                      ),
-                                                                                                      style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                            fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                                            letterSpacing: 0.0,
-                                                                                                            useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                                                          ),
-                                                                                                    ),
-                                                                                                  ),
-                                                                                                ),
-                                                                                              ),
-                                                                                            ),
-                                                                                            if (responsiveVisibility(
-                                                                                              context: context,
-                                                                                              phone: false,
-                                                                                              tablet: false,
-                                                                                            ))
-                                                                                              Expanded(
                                                                                                 child: Padding(
                                                                                                   padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
                                                                                                   child: Text(
                                                                                                     valueOrDefault<String>(
-                                                                                                      dateTimeFormat(
-                                                                                                        "d/M/y",
-                                                                                                        listViewFaccoesViewConcatSearchRow.dataCriacao,
-                                                                                                        locale: FFLocalizations.of(context).languageCode,
-                                                                                                      ),
+                                                                                                      listViewFaccaoFaccoesViewConcatSearchRow.descricao,
                                                                                                       'sem informação',
                                                                                                     ),
                                                                                                     style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                                           fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                                          fontSize: 14.0,
                                                                                                           letterSpacing: 0.0,
                                                                                                           useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
                                                                                                         ),
                                                                                                   ),
                                                                                                 ),
                                                                                               ),
+                                                                                            ),
+                                                                                            Expanded(
+                                                                                              child: Padding(
+                                                                                                padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
+                                                                                                child: Text(
+                                                                                                  valueOrDefault<String>(
+                                                                                                    dateTimeFormat(
+                                                                                                      "d/M/y",
+                                                                                                      listViewFaccaoFaccoesViewConcatSearchRow.dataCriacao,
+                                                                                                      locale: FFLocalizations.of(context).languageCode,
+                                                                                                    ),
+                                                                                                    'sem informação',
+                                                                                                  ),
+                                                                                                  style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                        fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                                                        fontSize: 14.0,
+                                                                                                        letterSpacing: 0.0,
+                                                                                                        useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                                                      ),
+                                                                                                ),
+                                                                                              ),
+                                                                                            ),
                                                                                             Expanded(
                                                                                               child: Row(
                                                                                                 mainAxisSize: MainAxisSize.max,
@@ -983,7 +915,7 @@ class _MainFaccoesWidgetState extends State<MainFaccoesWidget>
                                                                                                           valueOrDefault<String>(
                                                                                                             dateTimeFormat(
                                                                                                               "relative",
-                                                                                                              listViewFaccoesViewConcatSearchRow.createdAt,
+                                                                                                              listViewFaccaoFaccoesViewConcatSearchRow.createdAt,
                                                                                                               locale: FFLocalizations.of(context).languageCode,
                                                                                                             ),
                                                                                                             'sem informação',
@@ -1029,7 +961,7 @@ class _MainFaccoesWidgetState extends State<MainFaccoesWidget>
                                                                                                         FocusManager.instance.primaryFocus?.unfocus();
                                                                                                       },
                                                                                                       child: DropdownFaccaoEditWidget(
-                                                                                                        faccaoid: listViewFaccoesViewConcatSearchRow,
+                                                                                                        faccaoid: listViewFaccaoFaccoesViewConcatSearchRow,
                                                                                                       ),
                                                                                                     ),
                                                                                                   );
@@ -1075,7 +1007,7 @@ class _MainFaccoesWidgetState extends State<MainFaccoesWidget>
                                                                     queryFn: (q) => q
                                                                         .ilike(
                                                                           'pesquisa',
-                                                                          functions.pesquisaLike(_model
+                                                                          functions.pesquisaLikeCS(_model
                                                                               .textFieldPesquisarFaccoesTextController
                                                                               .text),
                                                                         )
@@ -1095,11 +1027,11 @@ class _MainFaccoesWidgetState extends State<MainFaccoesWidget>
                                                                       );
                                                                     }
                                                                     List<FaccoesViewConcatSearchRow>
-                                                                        listViewFaccoesViewConcatSearchRowList =
+                                                                        listViewFaccaoBuscarFaccoesViewConcatSearchRowList =
                                                                         snapshot
                                                                             .data!;
 
-                                                                    if (listViewFaccoesViewConcatSearchRowList
+                                                                    if (listViewFaccaoBuscarFaccoesViewConcatSearchRowList
                                                                         .isEmpty) {
                                                                       return Center(
                                                                         child: Image
@@ -1116,20 +1048,18 @@ class _MainFaccoesWidgetState extends State<MainFaccoesWidget>
                                                                       padding:
                                                                           EdgeInsets
                                                                               .zero,
-                                                                      primary:
-                                                                          false,
                                                                       shrinkWrap:
                                                                           true,
                                                                       scrollDirection:
                                                                           Axis.vertical,
                                                                       itemCount:
-                                                                          listViewFaccoesViewConcatSearchRowList
+                                                                          listViewFaccaoBuscarFaccoesViewConcatSearchRowList
                                                                               .length,
                                                                       itemBuilder:
                                                                           (context,
-                                                                              listViewIndex) {
-                                                                        final listViewFaccoesViewConcatSearchRow =
-                                                                            listViewFaccoesViewConcatSearchRowList[listViewIndex];
+                                                                              listViewFaccaoBuscarIndex) {
+                                                                        final listViewFaccaoBuscarFaccoesViewConcatSearchRow =
+                                                                            listViewFaccaoBuscarFaccoesViewConcatSearchRowList[listViewFaccaoBuscarIndex];
                                                                         return Builder(
                                                                           builder: (context) =>
                                                                               Padding(
@@ -1160,7 +1090,7 @@ class _MainFaccoesWidgetState extends State<MainFaccoesWidget>
                                                                                           FocusManager.instance.primaryFocus?.unfocus();
                                                                                         },
                                                                                         child: ModalFaccaoEditWidget(
-                                                                                          faccaoRow: listViewFaccoesViewConcatSearchRow,
+                                                                                          faccaoRow: listViewFaccaoBuscarFaccoesViewConcatSearchRow,
                                                                                         ),
                                                                                       ),
                                                                                     );
@@ -1195,9 +1125,9 @@ class _MainFaccoesWidgetState extends State<MainFaccoesWidget>
                                                                                           fadeInDuration: Duration(milliseconds: 100),
                                                                                           fadeOutDuration: Duration(milliseconds: 100),
                                                                                           imageUrl: valueOrDefault<String>(
-                                                                                            listViewFaccoesViewConcatSearchRow.imagemPath != ''
+                                                                                            listViewFaccaoBuscarFaccoesViewConcatSearchRow.imagemPath != ''
                                                                                                 ? valueOrDefault<String>(
-                                                                                                    listViewFaccoesViewConcatSearchRow.imagemPath,
+                                                                                                    listViewFaccaoBuscarFaccoesViewConcatSearchRow.imagemPath,
                                                                                                     'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/8dptd6ulegwr/account_tree_24dp_00000_FILL0_wght400_GRAD0_opsz24.png',
                                                                                                   )
                                                                                                 : valueOrDefault<String>(
@@ -1220,7 +1150,7 @@ class _MainFaccoesWidgetState extends State<MainFaccoesWidget>
                                                                                                 padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
                                                                                                 child: Text(
                                                                                                   valueOrDefault<String>(
-                                                                                                    listViewFaccoesViewConcatSearchRow.nome,
+                                                                                                    listViewFaccaoBuscarFaccoesViewConcatSearchRow.nome,
                                                                                                     'sem informacao',
                                                                                                   ),
                                                                                                   style: FlutterFlowTheme.of(context).bodyLarge.override(
@@ -1239,55 +1169,43 @@ class _MainFaccoesWidgetState extends State<MainFaccoesWidget>
                                                                                                   color: FlutterFlowTheme.of(context).secondaryBackground,
                                                                                                 ),
                                                                                                 alignment: AlignmentDirectional(-1.0, 0.0),
-                                                                                                child: Visibility(
-                                                                                                  visible: responsiveVisibility(
-                                                                                                    context: context,
-                                                                                                    phone: false,
-                                                                                                    tablet: false,
-                                                                                                  ),
-                                                                                                  child: Padding(
-                                                                                                    padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
-                                                                                                    child: Text(
-                                                                                                      valueOrDefault<String>(
-                                                                                                        listViewFaccoesViewConcatSearchRow.descricao,
-                                                                                                        'sem informação',
-                                                                                                      ),
-                                                                                                      style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                            fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                                            letterSpacing: 0.0,
-                                                                                                            useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                                                          ),
-                                                                                                    ),
-                                                                                                  ),
-                                                                                                ),
-                                                                                              ),
-                                                                                            ),
-                                                                                            if (responsiveVisibility(
-                                                                                              context: context,
-                                                                                              phone: false,
-                                                                                              tablet: false,
-                                                                                            ))
-                                                                                              Expanded(
                                                                                                 child: Padding(
                                                                                                   padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
                                                                                                   child: Text(
                                                                                                     valueOrDefault<String>(
-                                                                                                      dateTimeFormat(
-                                                                                                        "d/M/y",
-                                                                                                        listViewFaccoesViewConcatSearchRow.dataCriacao,
-                                                                                                        locale: FFLocalizations.of(context).languageCode,
-                                                                                                      ),
+                                                                                                      listViewFaccaoBuscarFaccoesViewConcatSearchRow.descricao,
                                                                                                       'sem informação',
                                                                                                     ),
                                                                                                     style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                                           fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                                          fontSize: 14.0,
                                                                                                           letterSpacing: 0.0,
                                                                                                           useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
                                                                                                         ),
                                                                                                   ),
                                                                                                 ),
                                                                                               ),
+                                                                                            ),
+                                                                                            Expanded(
+                                                                                              child: Padding(
+                                                                                                padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
+                                                                                                child: Text(
+                                                                                                  valueOrDefault<String>(
+                                                                                                    dateTimeFormat(
+                                                                                                      "d/M/y",
+                                                                                                      listViewFaccaoBuscarFaccoesViewConcatSearchRow.dataCriacao,
+                                                                                                      locale: FFLocalizations.of(context).languageCode,
+                                                                                                    ),
+                                                                                                    'sem informação',
+                                                                                                  ),
+                                                                                                  style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                        fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                                                        fontSize: 14.0,
+                                                                                                        letterSpacing: 0.0,
+                                                                                                        useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                                                      ),
+                                                                                                ),
+                                                                                              ),
+                                                                                            ),
                                                                                             Expanded(
                                                                                               child: Row(
                                                                                                 mainAxisSize: MainAxisSize.max,
@@ -1310,7 +1228,7 @@ class _MainFaccoesWidgetState extends State<MainFaccoesWidget>
                                                                                                           valueOrDefault<String>(
                                                                                                             dateTimeFormat(
                                                                                                               "relative",
-                                                                                                              listViewFaccoesViewConcatSearchRow.createdAt,
+                                                                                                              listViewFaccaoBuscarFaccoesViewConcatSearchRow.createdAt,
                                                                                                               locale: FFLocalizations.of(context).languageCode,
                                                                                                             ),
                                                                                                             'sem informação',
@@ -1356,7 +1274,7 @@ class _MainFaccoesWidgetState extends State<MainFaccoesWidget>
                                                                                                         FocusManager.instance.primaryFocus?.unfocus();
                                                                                                       },
                                                                                                       child: DropdownFaccaoEditWidget(
-                                                                                                        faccaoid: listViewFaccoesViewConcatSearchRow,
+                                                                                                        faccaoid: listViewFaccaoBuscarFaccoesViewConcatSearchRow,
                                                                                                       ),
                                                                                                     ),
                                                                                                   );

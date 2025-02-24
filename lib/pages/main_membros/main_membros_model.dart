@@ -55,7 +55,7 @@ class MainMembrosModel extends FlutterFlowModel<MainMembrosWidget> {
           int index, Function(MembrosViewPdfRow) updateFn) =>
       pdfMembrosSearch[index] = updateFn(pdfMembrosSearch[index]);
 
-  String? pesquisaMembroTexto;
+  int countMembrosSearch = 0;
 
   ///  State fields for stateful widgets in this page.
 
@@ -74,6 +74,9 @@ class MainMembrosModel extends FlutterFlowModel<MainMembrosWidget> {
   TabController? tabBarController;
   int get tabBarCurrentIndex =>
       tabBarController != null ? tabBarController!.index : 0;
+
+  // Stores action output result for [Backend Call - Query Rows] action in ListViewMembros widget.
+  List<MembrosViewConcatSeachRow>? outputCountMembrosSearch;
 
   @override
   void initState(BuildContext context) {

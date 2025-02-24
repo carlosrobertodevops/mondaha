@@ -278,6 +278,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': '',
       'pt': '',
     },
+    '1jhwh93g': {
+      'en': 'Count of Members: ',
+      'pt': 'Total de Membros: ',
+    },
     'lvnskphp': {
       'en': 'All',
       'pt': '',

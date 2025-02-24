@@ -15,5 +15,5 @@ export '/pages/main_admin/main_admin_widget.dart' show MainAdminWidget;
 export '/pages/main_faccoes/main_faccoes_widget.dart' show MainFaccoesWidget;
 export '/components/externos/buscar_c_e_p/buscar_c_e_p_widget.dart'
     show BuscarCEPWidget;
-export '/new/welcome_page/welcome_page_widget.dart' show WelcomePageWidget;
+export '/pages/welcome_page/welcome_page_widget.dart' show WelcomePageWidget;
 export '/pages/auth_recover/auth_recover_widget.dart' show AuthRecoverWidget;

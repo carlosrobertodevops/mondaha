@@ -213,22 +213,17 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
             body: Row(
               mainAxisSize: MainAxisSize.max,
               children: [
-                if (responsiveVisibility(
-                  context: context,
-                  phone: false,
-                  tablet: false,
-                ))
-                  wrapWithModel(
-                    model: _model.webNavModel,
-                    updateCallback: () => safeSetState(() {}),
-                    child: WebNavWidget(
-                      selectedNav: 5,
-                    ),
+                wrapWithModel(
+                  model: _model.webNavModel,
+                  updateCallback: () => safeSetState(() {}),
+                  child: WebNavWidget(
+                    selectedNav: 5,
                   ),
+                ),
                 Expanded(
                   child: Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 40.0, 0.0, 0.0),
+                        EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -258,55 +253,48 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                       ),
                                 ),
                               ),
-                              if (responsiveVisibility(
-                                context: context,
-                                phone: false,
-                                tablet: false,
-                              ))
-                                FFButtonWidget(
-                                  onPressed: () {
-                                    print('Button pressed ...');
-                                  },
-                                  text: FFLocalizations.of(context).getText(
-                                    'r8vl0ce9' /* Add Profile */,
-                                  ),
-                                  options: FFButtonOptions(
-                                    height: 40.0,
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        24.0, 0.0, 24.0, 0.0),
-                                    iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 0.0),
-                                    color: FlutterFlowTheme.of(context).primary,
-                                    textStyle: FlutterFlowTheme.of(context)
-                                        .titleSmall
-                                        .override(
-                                          fontFamily:
-                                              FlutterFlowTheme.of(context)
-                                                  .titleSmallFamily,
-                                          letterSpacing: 0.0,
-                                          useGoogleFonts: GoogleFonts.asMap()
-                                              .containsKey(
-                                                  FlutterFlowTheme.of(context)
-                                                      .titleSmallFamily),
-                                        ),
-                                    elevation: 3.0,
-                                    borderSide: BorderSide(
-                                      color: Colors.transparent,
-                                      width: 1.0,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8.0),
-                                    hoverColor:
-                                        FlutterFlowTheme.of(context).accent1,
-                                    hoverBorderSide: BorderSide(
-                                      color:
-                                          FlutterFlowTheme.of(context).primary,
-                                      width: 1.0,
-                                    ),
-                                    hoverTextColor: FlutterFlowTheme.of(context)
-                                        .primaryText,
-                                    hoverElevation: 0.0,
-                                  ),
+                              FFButtonWidget(
+                                onPressed: () {
+                                  print('Button pressed ...');
+                                },
+                                text: FFLocalizations.of(context).getText(
+                                  'r8vl0ce9' /* Add Profile */,
                                 ),
+                                options: FFButtonOptions(
+                                  height: 40.0,
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      24.0, 0.0, 24.0, 0.0),
+                                  iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 0.0, 0.0, 0.0),
+                                  color: FlutterFlowTheme.of(context).primary,
+                                  textStyle: FlutterFlowTheme.of(context)
+                                      .titleSmall
+                                      .override(
+                                        fontFamily: FlutterFlowTheme.of(context)
+                                            .titleSmallFamily,
+                                        letterSpacing: 0.0,
+                                        useGoogleFonts: GoogleFonts.asMap()
+                                            .containsKey(
+                                                FlutterFlowTheme.of(context)
+                                                    .titleSmallFamily),
+                                      ),
+                                  elevation: 3.0,
+                                  borderSide: BorderSide(
+                                    color: Colors.transparent,
+                                    width: 1.0,
+                                  ),
+                                  borderRadius: BorderRadius.circular(8.0),
+                                  hoverColor:
+                                      FlutterFlowTheme.of(context).accent1,
+                                  hoverBorderSide: BorderSide(
+                                    color: FlutterFlowTheme.of(context).primary,
+                                    width: 1.0,
+                                  ),
+                                  hoverTextColor:
+                                      FlutterFlowTheme.of(context).primaryText,
+                                  hoverElevation: 0.0,
+                                ),
+                              ),
                             ].divide(SizedBox(width: 16.0)),
                           ),
                         ),
@@ -348,13 +336,21 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                   FFAppState().buscarUsuarios =
                                                       true;
                                                   safeSetState(() {});
-                                                } else {
-                                                  FFAppState().buscarUsuarios =
-                                                      false;
-                                                  safeSetState(() {});
                                                 }
                                               },
                                             ),
+                                            onFieldSubmitted: (_) async {
+                                              logFirebaseEvent(
+                                                  'MAIN_ADMIN_TextFieldPesquisaAdmin_ON_TEX');
+                                              if (_model
+                                                      .textFieldPesquisaAdminTextController
+                                                      .text ==
+                                                  '') {
+                                                FFAppState().buscarUsuarios =
+                                                    true;
+                                                safeSetState(() {});
+                                              }
+                                            },
                                             autofocus: true,
                                             obscureText: false,
                                             decoration: InputDecoration(
@@ -463,13 +459,7 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                                   .buscarUsuarios =
                                                               true;
                                                           safeSetState(() {});
-                                                        } else {
-                                                          FFAppState()
-                                                                  .buscarUsuarios =
-                                                              false;
-                                                          safeSetState(() {});
                                                         }
-
                                                         safeSetState(() {});
                                                       },
                                                       child: Icon(
@@ -519,18 +509,8 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                           onPressed: () async {
                                             logFirebaseEvent(
                                                 'MAIN_ADMIN_search_rounded_ICN_ON_TAP');
-                                            if (_model
-                                                    .textFieldPesquisaAdminTextController
-                                                    .text ==
-                                                '') {
-                                              FFAppState().buscarUsuarios =
-                                                  true;
-                                              safeSetState(() {});
-                                            } else {
-                                              FFAppState().buscarUsuarios =
-                                                  false;
-                                              safeSetState(() {});
-                                            }
+                                            FFAppState().buscarUsuarios = false;
+                                            safeSetState(() {});
                                           },
                                         ),
                                       ].divide(SizedBox(width: 16.0)),
@@ -624,9 +604,6 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                                   .of(context)
                                                               .primaryBackground,
                                                         ),
-                                                        alignment:
-                                                            AlignmentDirectional(
-                                                                -1.0, 0.0),
                                                         child: Padding(
                                                           padding:
                                                               EdgeInsetsDirectional
@@ -639,193 +616,143 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                             mainAxisSize:
                                                                 MainAxisSize
                                                                     .max,
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
                                                             children: [
-                                                              if (responsiveVisibility(
-                                                                context:
-                                                                    context,
-                                                                phone: false,
-                                                              ))
-                                                                Container(
-                                                                  width: 90.0,
-                                                                  height: 100.0,
-                                                                  decoration:
-                                                                      BoxDecoration(),
-                                                                ),
+                                                              Container(
+                                                                width: 90.0,
+                                                                height: 100.0,
+                                                                decoration:
+                                                                    BoxDecoration(),
+                                                              ),
                                                               Expanded(
                                                                 child: Align(
                                                                   alignment:
                                                                       AlignmentDirectional(
                                                                           -1.0,
                                                                           0.0),
-                                                                  child:
-                                                                      Padding(
-                                                                    padding: EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            16.0,
-                                                                            0.0,
-                                                                            0.0,
-                                                                            0.0),
-                                                                    child: Text(
-                                                                      FFLocalizations.of(
-                                                                              context)
-                                                                          .getText(
-                                                                        '5ei4gaxd' /* Full Name */,
-                                                                      ),
-                                                                      style: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .labelMedium
-                                                                          .override(
-                                                                            fontFamily:
-                                                                                FlutterFlowTheme.of(context).labelMediumFamily,
-                                                                            letterSpacing:
-                                                                                0.0,
-                                                                            useGoogleFonts:
-                                                                                GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).labelMediumFamily),
-                                                                          ),
+                                                                  child: Text(
+                                                                    FFLocalizations.of(
+                                                                            context)
+                                                                        .getText(
+                                                                      '5ei4gaxd' /* Full Name */,
                                                                     ),
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .labelMedium
+                                                                        .override(
+                                                                          fontFamily:
+                                                                              FlutterFlowTheme.of(context).labelMediumFamily,
+                                                                          letterSpacing:
+                                                                              0.0,
+                                                                          useGoogleFonts:
+                                                                              GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).labelMediumFamily),
+                                                                        ),
                                                                   ),
                                                                 ),
                                                               ),
-                                                              if (responsiveVisibility(
-                                                                context:
-                                                                    context,
-                                                                phone: false,
-                                                                tablet: false,
-                                                              ))
-                                                                Expanded(
-                                                                  child: Align(
-                                                                    alignment:
-                                                                        AlignmentDirectional(
-                                                                            -1.0,
-                                                                            0.0),
-                                                                    child:
-                                                                        Padding(
-                                                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                                                          16.0,
-                                                                          0.0,
-                                                                          0.0,
+                                                              Expanded(
+                                                                child: Align(
+                                                                  alignment:
+                                                                      AlignmentDirectional(
+                                                                          -1.0,
                                                                           0.0),
-                                                                      child:
-                                                                          Text(
-                                                                        FFLocalizations.of(context)
-                                                                            .getText(
-                                                                          'knvrskhd' /* Agency */,
-                                                                        ),
-                                                                        style: FlutterFlowTheme.of(context)
-                                                                            .labelMedium
-                                                                            .override(
-                                                                              fontFamily: FlutterFlowTheme.of(context).labelMediumFamily,
-                                                                              letterSpacing: 0.0,
-                                                                              useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).labelMediumFamily),
-                                                                            ),
-                                                                      ),
+                                                                  child: Text(
+                                                                    FFLocalizations.of(
+                                                                            context)
+                                                                        .getText(
+                                                                      'knvrskhd' /* Agency */,
                                                                     ),
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .labelMedium
+                                                                        .override(
+                                                                          fontFamily:
+                                                                              FlutterFlowTheme.of(context).labelMediumFamily,
+                                                                          letterSpacing:
+                                                                              0.0,
+                                                                          useGoogleFonts:
+                                                                              GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).labelMediumFamily),
+                                                                        ),
                                                                   ),
                                                                 ),
-                                                              if (responsiveVisibility(
-                                                                context:
-                                                                    context,
-                                                                phone: false,
-                                                                tablet: false,
-                                                              ))
-                                                                Expanded(
-                                                                  child: Align(
-                                                                    alignment:
-                                                                        AlignmentDirectional(
-                                                                            -1.0,
-                                                                            0.0),
-                                                                    child:
-                                                                        Padding(
-                                                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                                                          16.0,
-                                                                          0.0,
-                                                                          0.0,
+                                                              ),
+                                                              Expanded(
+                                                                child: Align(
+                                                                  alignment:
+                                                                      AlignmentDirectional(
+                                                                          -1.0,
                                                                           0.0),
-                                                                      child:
-                                                                          Text(
-                                                                        FFLocalizations.of(context)
-                                                                            .getText(
-                                                                          'q5s6eda3' /* Description */,
-                                                                        ),
-                                                                        style: FlutterFlowTheme.of(context)
-                                                                            .labelMedium
-                                                                            .override(
-                                                                              fontFamily: FlutterFlowTheme.of(context).labelMediumFamily,
-                                                                              letterSpacing: 0.0,
-                                                                              useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).labelMediumFamily),
-                                                                            ),
-                                                                      ),
+                                                                  child: Text(
+                                                                    FFLocalizations.of(
+                                                                            context)
+                                                                        .getText(
+                                                                      'q5s6eda3' /* Description */,
                                                                     ),
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .labelMedium
+                                                                        .override(
+                                                                          fontFamily:
+                                                                              FlutterFlowTheme.of(context).labelMediumFamily,
+                                                                          letterSpacing:
+                                                                              0.0,
+                                                                          useGoogleFonts:
+                                                                              GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).labelMediumFamily),
+                                                                        ),
                                                                   ),
                                                                 ),
-                                                              if (responsiveVisibility(
-                                                                context:
-                                                                    context,
-                                                                phone: false,
-                                                                tablet: false,
-                                                              ))
-                                                                Expanded(
-                                                                  child: Align(
-                                                                    alignment:
-                                                                        AlignmentDirectional(
-                                                                            -1.0,
-                                                                            0.0),
-                                                                    child:
-                                                                        Padding(
-                                                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                                                          16.0,
-                                                                          0.0,
-                                                                          0.0,
+                                                              ),
+                                                              Expanded(
+                                                                child: Align(
+                                                                  alignment:
+                                                                      AlignmentDirectional(
+                                                                          -1.0,
                                                                           0.0),
-                                                                      child:
-                                                                          Text(
-                                                                        FFLocalizations.of(context)
-                                                                            .getText(
-                                                                          'rd2ba3as' /* email */,
-                                                                        ),
-                                                                        style: FlutterFlowTheme.of(context)
-                                                                            .labelMedium
-                                                                            .override(
-                                                                              fontFamily: FlutterFlowTheme.of(context).labelMediumFamily,
-                                                                              letterSpacing: 0.0,
-                                                                              useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).labelMediumFamily),
-                                                                            ),
-                                                                      ),
+                                                                  child: Text(
+                                                                    FFLocalizations.of(
+                                                                            context)
+                                                                        .getText(
+                                                                      'rd2ba3as' /* email */,
                                                                     ),
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .labelMedium
+                                                                        .override(
+                                                                          fontFamily:
+                                                                              FlutterFlowTheme.of(context).labelMediumFamily,
+                                                                          letterSpacing:
+                                                                              0.0,
+                                                                          useGoogleFonts:
+                                                                              GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).labelMediumFamily),
+                                                                        ),
                                                                   ),
                                                                 ),
+                                                              ),
                                                               Expanded(
                                                                 child: Align(
                                                                   alignment:
                                                                       AlignmentDirectional(
                                                                           1.0,
                                                                           0.0),
-                                                                  child:
-                                                                      Padding(
-                                                                    padding: EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            8.0,
-                                                                            0.0,
-                                                                            0.0,
-                                                                            0.0),
-                                                                    child: Text(
-                                                                      FFLocalizations.of(
-                                                                              context)
-                                                                          .getText(
-                                                                        '5cijyycp' /* User Type */,
-                                                                      ),
-                                                                      style: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .labelMedium
-                                                                          .override(
-                                                                            fontFamily:
-                                                                                FlutterFlowTheme.of(context).labelMediumFamily,
-                                                                            letterSpacing:
-                                                                                0.0,
-                                                                            useGoogleFonts:
-                                                                                GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).labelMediumFamily),
-                                                                          ),
+                                                                  child: Text(
+                                                                    FFLocalizations.of(
+                                                                            context)
+                                                                        .getText(
+                                                                      '5cijyycp' /* User Type */,
                                                                     ),
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .labelMedium
+                                                                        .override(
+                                                                          fontFamily:
+                                                                              FlutterFlowTheme.of(context).labelMediumFamily,
+                                                                          letterSpacing:
+                                                                              0.0,
+                                                                          useGoogleFonts:
+                                                                              GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).labelMediumFamily),
+                                                                        ),
                                                                   ),
                                                                 ),
                                                               ),
@@ -886,11 +813,11 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                                     );
                                                                   }
                                                                   List<UsuariosViewConcatSearchRow>
-                                                                      listViewUsuariosViewConcatSearchRowList =
+                                                                      listViewUsuariosUsuariosViewConcatSearchRowList =
                                                                       snapshot
                                                                           .data!;
 
-                                                                  if (listViewUsuariosViewConcatSearchRowList
+                                                                  if (listViewUsuariosUsuariosViewConcatSearchRowList
                                                                       .isEmpty) {
                                                                     return Center(
                                                                       child: Image
@@ -916,7 +843,7 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                                     onTap:
                                                                         () async {
                                                                       logFirebaseEvent(
-                                                                          'MAIN_ADMIN_PAGE_ListView_n9z1h1x7_ON_TAP');
+                                                                          'MAIN_ADMIN_PAGE_ListViewUsuarios_ON_TAP');
                                                                       await actions
                                                                           .resetTimerAction(
                                                                         context,
@@ -932,13 +859,13 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                                       scrollDirection:
                                                                           Axis.vertical,
                                                                       itemCount:
-                                                                          listViewUsuariosViewConcatSearchRowList
+                                                                          listViewUsuariosUsuariosViewConcatSearchRowList
                                                                               .length,
                                                                       itemBuilder:
                                                                           (context,
-                                                                              listViewIndex) {
-                                                                        final listViewUsuariosViewConcatSearchRow =
-                                                                            listViewUsuariosViewConcatSearchRowList[listViewIndex];
+                                                                              listViewUsuariosIndex) {
+                                                                        final listViewUsuariosUsuariosViewConcatSearchRow =
+                                                                            listViewUsuariosUsuariosViewConcatSearchRowList[listViewUsuariosIndex];
                                                                         return Builder(
                                                                           builder: (context) =>
                                                                               Padding(
@@ -969,7 +896,7 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                                                           FocusManager.instance.primaryFocus?.unfocus();
                                                                                         },
                                                                                         child: ModalProfileEditAdminWidget(
-                                                                                          usuariosRow: listViewUsuariosViewConcatSearchRow,
+                                                                                          usuariosRow: listViewUsuariosUsuariosViewConcatSearchRow,
                                                                                         ),
                                                                                       ),
                                                                                     );
@@ -1011,8 +938,8 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                                                             fadeInDuration: Duration(milliseconds: 10),
                                                                                             fadeOutDuration: Duration(milliseconds: 10),
                                                                                             imageUrl: valueOrDefault<String>(
-                                                                                              listViewUsuariosViewConcatSearchRow.fotoPath != ''
-                                                                                                  ? listViewUsuariosViewConcatSearchRow.fotoPath
+                                                                                              listViewUsuariosUsuariosViewConcatSearchRow.fotoPath != ''
+                                                                                                  ? listViewUsuariosUsuariosViewConcatSearchRow.fotoPath
                                                                                                   : valueOrDefault<String>(
                                                                                                       (Theme.of(context).brightness == Brightness.light) == true
                                                                                                           ? valueOrDefault<String>(
@@ -1044,7 +971,7 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                                                                 padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
                                                                                                 child: Text(
                                                                                                   valueOrDefault<String>(
-                                                                                                    listViewUsuariosViewConcatSearchRow.nomeCompleto,
+                                                                                                    listViewUsuariosUsuariosViewConcatSearchRow.nomeCompleto,
                                                                                                     'sem informação',
                                                                                                   ),
                                                                                                   style: FlutterFlowTheme.of(context).bodyLarge.override(
@@ -1067,7 +994,7 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                                                                   padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
                                                                                                   child: Text(
                                                                                                     valueOrDefault<String>(
-                                                                                                      listViewUsuariosViewConcatSearchRow.agenciaNome,
+                                                                                                      listViewUsuariosUsuariosViewConcatSearchRow.agenciaNome,
                                                                                                       'sem informação',
                                                                                                     ),
                                                                                                     style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -1084,7 +1011,7 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                                                                 padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
                                                                                                 child: Text(
                                                                                                   valueOrDefault<String>(
-                                                                                                    listViewUsuariosViewConcatSearchRow.descricao,
+                                                                                                    listViewUsuariosUsuariosViewConcatSearchRow.descricao,
                                                                                                     'sem informação',
                                                                                                   ),
                                                                                                   style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -1101,7 +1028,7 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                                                                 padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
                                                                                                 child: Text(
                                                                                                   valueOrDefault<String>(
-                                                                                                    listViewUsuariosViewConcatSearchRow.email,
+                                                                                                    listViewUsuariosUsuariosViewConcatSearchRow.email,
                                                                                                     'sem informacao',
                                                                                                   ),
                                                                                                   style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -1122,7 +1049,7 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                                                                     height: 32.0,
                                                                                                     decoration: BoxDecoration(
                                                                                                       color: valueOrDefault<Color>(
-                                                                                                        listViewUsuariosViewConcatSearchRow.tipoUsuarioId == 9 ? FlutterFlowTheme.of(context).accent3 : FlutterFlowTheme.of(context).accent2,
+                                                                                                        listViewUsuariosUsuariosViewConcatSearchRow.tipoUsuarioId == 9 ? FlutterFlowTheme.of(context).accent3 : FlutterFlowTheme.of(context).accent2,
                                                                                                         FlutterFlowTheme.of(context).accent2,
                                                                                                       ),
                                                                                                       borderRadius: BorderRadius.circular(8.0),
@@ -1136,7 +1063,7 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                                                                         padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
                                                                                                         child: Text(
                                                                                                           valueOrDefault<String>(
-                                                                                                            listViewUsuariosViewConcatSearchRow.tipoUsuarioDescricao,
+                                                                                                            listViewUsuariosUsuariosViewConcatSearchRow.tipoUsuarioDescricao,
                                                                                                             'sem informação',
                                                                                                           ),
                                                                                                           style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -1180,7 +1107,7 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                                                                         FocusManager.instance.primaryFocus?.unfocus();
                                                                                                       },
                                                                                                       child: DropdownUsuarioAdminEditWidget(
-                                                                                                        usuariosView: listViewUsuariosViewConcatSearchRow,
+                                                                                                        usuariosView: listViewUsuariosUsuariosViewConcatSearchRow,
                                                                                                       ),
                                                                                                     ),
                                                                                                   );
@@ -1248,11 +1175,11 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                                     );
                                                                   }
                                                                   List<UsuariosViewConcatSearchRow>
-                                                                      listViewUsuariosViewConcatSearchRowList =
+                                                                      listViewUsuariosGestorUsuariosViewConcatSearchRowList =
                                                                       snapshot
                                                                           .data!;
 
-                                                                  if (listViewUsuariosViewConcatSearchRowList
+                                                                  if (listViewUsuariosGestorUsuariosViewConcatSearchRowList
                                                                       .isEmpty) {
                                                                     return Center(
                                                                       child: Image
@@ -1278,7 +1205,7 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                                     onTap:
                                                                         () async {
                                                                       logFirebaseEvent(
-                                                                          'MAIN_ADMIN_PAGE_ListView_2qvx3xds_ON_TAP');
+                                                                          'MAIN_ADMIN_ListViewUsuariosGestor_ON_TAP');
                                                                       await actions
                                                                           .resetTimerAction(
                                                                         context,
@@ -1294,13 +1221,13 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                                       scrollDirection:
                                                                           Axis.vertical,
                                                                       itemCount:
-                                                                          listViewUsuariosViewConcatSearchRowList
+                                                                          listViewUsuariosGestorUsuariosViewConcatSearchRowList
                                                                               .length,
                                                                       itemBuilder:
                                                                           (context,
-                                                                              listViewIndex) {
-                                                                        final listViewUsuariosViewConcatSearchRow =
-                                                                            listViewUsuariosViewConcatSearchRowList[listViewIndex];
+                                                                              listViewUsuariosGestorIndex) {
+                                                                        final listViewUsuariosGestorUsuariosViewConcatSearchRow =
+                                                                            listViewUsuariosGestorUsuariosViewConcatSearchRowList[listViewUsuariosGestorIndex];
                                                                         return Builder(
                                                                           builder: (context) =>
                                                                               Padding(
@@ -1331,7 +1258,7 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                                                           FocusManager.instance.primaryFocus?.unfocus();
                                                                                         },
                                                                                         child: ModalProfileEditAdminWidget(
-                                                                                          usuariosRow: listViewUsuariosViewConcatSearchRow,
+                                                                                          usuariosRow: listViewUsuariosGestorUsuariosViewConcatSearchRow,
                                                                                         ),
                                                                                       ),
                                                                                     );
@@ -1373,8 +1300,8 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                                                             fadeInDuration: Duration(milliseconds: 10),
                                                                                             fadeOutDuration: Duration(milliseconds: 10),
                                                                                             imageUrl: valueOrDefault<String>(
-                                                                                              listViewUsuariosViewConcatSearchRow.fotoPath != ''
-                                                                                                  ? listViewUsuariosViewConcatSearchRow.fotoPath
+                                                                                              listViewUsuariosGestorUsuariosViewConcatSearchRow.fotoPath != ''
+                                                                                                  ? listViewUsuariosGestorUsuariosViewConcatSearchRow.fotoPath
                                                                                                   : valueOrDefault<String>(
                                                                                                       (Theme.of(context).brightness == Brightness.light) == true
                                                                                                           ? valueOrDefault<String>(
@@ -1406,7 +1333,7 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                                                                 padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
                                                                                                 child: Text(
                                                                                                   valueOrDefault<String>(
-                                                                                                    listViewUsuariosViewConcatSearchRow.nomeCompleto,
+                                                                                                    listViewUsuariosGestorUsuariosViewConcatSearchRow.nomeCompleto,
                                                                                                     'sem informação',
                                                                                                   ),
                                                                                                   style: FlutterFlowTheme.of(context).bodyLarge.override(
@@ -1429,7 +1356,7 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                                                                   padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
                                                                                                   child: Text(
                                                                                                     valueOrDefault<String>(
-                                                                                                      listViewUsuariosViewConcatSearchRow.agenciaNome,
+                                                                                                      listViewUsuariosGestorUsuariosViewConcatSearchRow.agenciaNome,
                                                                                                       'sem informação',
                                                                                                     ),
                                                                                                     style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -1446,7 +1373,7 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                                                                 padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
                                                                                                 child: Text(
                                                                                                   valueOrDefault<String>(
-                                                                                                    listViewUsuariosViewConcatSearchRow.descricao,
+                                                                                                    listViewUsuariosGestorUsuariosViewConcatSearchRow.descricao,
                                                                                                     'sem informação',
                                                                                                   ),
                                                                                                   style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -1463,7 +1390,7 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                                                                 padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
                                                                                                 child: Text(
                                                                                                   valueOrDefault<String>(
-                                                                                                    listViewUsuariosViewConcatSearchRow.email,
+                                                                                                    listViewUsuariosGestorUsuariosViewConcatSearchRow.email,
                                                                                                     'sem informacao',
                                                                                                   ),
                                                                                                   style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -1484,7 +1411,7 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                                                                     height: 32.0,
                                                                                                     decoration: BoxDecoration(
                                                                                                       color: valueOrDefault<Color>(
-                                                                                                        listViewUsuariosViewConcatSearchRow.tipoUsuarioId == 9 ? FlutterFlowTheme.of(context).accent3 : FlutterFlowTheme.of(context).accent2,
+                                                                                                        listViewUsuariosGestorUsuariosViewConcatSearchRow.tipoUsuarioId == 9 ? FlutterFlowTheme.of(context).accent3 : FlutterFlowTheme.of(context).accent2,
                                                                                                         FlutterFlowTheme.of(context).accent2,
                                                                                                       ),
                                                                                                       borderRadius: BorderRadius.circular(8.0),
@@ -1498,7 +1425,7 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                                                                         padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
                                                                                                         child: Text(
                                                                                                           valueOrDefault<String>(
-                                                                                                            listViewUsuariosViewConcatSearchRow.tipoUsuarioDescricao,
+                                                                                                            listViewUsuariosGestorUsuariosViewConcatSearchRow.tipoUsuarioDescricao,
                                                                                                             'sem informação',
                                                                                                           ),
                                                                                                           style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -1542,7 +1469,7 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                                                                         FocusManager.instance.primaryFocus?.unfocus();
                                                                                                       },
                                                                                                       child: DropdownUsuarioAdminEditWidget(
-                                                                                                        usuariosView: listViewUsuariosViewConcatSearchRow,
+                                                                                                        usuariosView: listViewUsuariosGestorUsuariosViewConcatSearchRow,
                                                                                                       ),
                                                                                                     ),
                                                                                                   );
@@ -1588,7 +1515,7 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                                       (q) => q
                                                                           .ilike(
                                                                             'pesquisa',
-                                                                            functions.pesquisaLike(_model.textFieldPesquisaAdminTextController.text),
+                                                                            functions.pesquisaLikeCS(_model.textFieldPesquisaAdminTextController.text),
                                                                           )
                                                                           .order(
                                                                               'nome_completo',
@@ -1608,11 +1535,11 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                                     );
                                                                   }
                                                                   List<UsuariosViewConcatSearchRow>
-                                                                      listViewUsuariosViewConcatSearchRowList =
+                                                                      listViewUsuariosSearchUsuariosViewConcatSearchRowList =
                                                                       snapshot
                                                                           .data!;
 
-                                                                  if (listViewUsuariosViewConcatSearchRowList
+                                                                  if (listViewUsuariosSearchUsuariosViewConcatSearchRowList
                                                                       .isEmpty) {
                                                                     return Center(
                                                                       child: Image
@@ -1638,7 +1565,7 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                                     onTap:
                                                                         () async {
                                                                       logFirebaseEvent(
-                                                                          'MAIN_ADMIN_PAGE_ListView_lyupsolp_ON_TAP');
+                                                                          'MAIN_ADMIN_ListViewUsuariosSearch_ON_TAP');
                                                                       await actions
                                                                           .resetTimerAction(
                                                                         context,
@@ -1654,13 +1581,13 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                                       scrollDirection:
                                                                           Axis.vertical,
                                                                       itemCount:
-                                                                          listViewUsuariosViewConcatSearchRowList
+                                                                          listViewUsuariosSearchUsuariosViewConcatSearchRowList
                                                                               .length,
                                                                       itemBuilder:
                                                                           (context,
-                                                                              listViewIndex) {
-                                                                        final listViewUsuariosViewConcatSearchRow =
-                                                                            listViewUsuariosViewConcatSearchRowList[listViewIndex];
+                                                                              listViewUsuariosSearchIndex) {
+                                                                        final listViewUsuariosSearchUsuariosViewConcatSearchRow =
+                                                                            listViewUsuariosSearchUsuariosViewConcatSearchRowList[listViewUsuariosSearchIndex];
                                                                         return Builder(
                                                                           builder: (context) =>
                                                                               Padding(
@@ -1691,7 +1618,7 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                                                           FocusManager.instance.primaryFocus?.unfocus();
                                                                                         },
                                                                                         child: ModalProfileEditAdminWidget(
-                                                                                          usuariosRow: listViewUsuariosViewConcatSearchRow,
+                                                                                          usuariosRow: listViewUsuariosSearchUsuariosViewConcatSearchRow,
                                                                                         ),
                                                                                       ),
                                                                                     );
@@ -1733,8 +1660,8 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                                                             fadeInDuration: Duration(milliseconds: 10),
                                                                                             fadeOutDuration: Duration(milliseconds: 10),
                                                                                             imageUrl: valueOrDefault<String>(
-                                                                                              listViewUsuariosViewConcatSearchRow.fotoPath != ''
-                                                                                                  ? listViewUsuariosViewConcatSearchRow.fotoPath
+                                                                                              listViewUsuariosSearchUsuariosViewConcatSearchRow.fotoPath != ''
+                                                                                                  ? listViewUsuariosSearchUsuariosViewConcatSearchRow.fotoPath
                                                                                                   : valueOrDefault<String>(
                                                                                                       (Theme.of(context).brightness == Brightness.light) == true
                                                                                                           ? valueOrDefault<String>(
@@ -1766,7 +1693,7 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                                                                 padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
                                                                                                 child: Text(
                                                                                                   valueOrDefault<String>(
-                                                                                                    listViewUsuariosViewConcatSearchRow.nomeCompleto,
+                                                                                                    listViewUsuariosSearchUsuariosViewConcatSearchRow.nomeCompleto,
                                                                                                     'sem informação',
                                                                                                   ),
                                                                                                   style: FlutterFlowTheme.of(context).bodyLarge.override(
@@ -1789,7 +1716,7 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                                                                   padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
                                                                                                   child: Text(
                                                                                                     valueOrDefault<String>(
-                                                                                                      listViewUsuariosViewConcatSearchRow.agenciaNome,
+                                                                                                      listViewUsuariosSearchUsuariosViewConcatSearchRow.agenciaNome,
                                                                                                       'sem informação',
                                                                                                     ),
                                                                                                     style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -1806,7 +1733,7 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                                                                 padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
                                                                                                 child: Text(
                                                                                                   valueOrDefault<String>(
-                                                                                                    listViewUsuariosViewConcatSearchRow.descricao,
+                                                                                                    listViewUsuariosSearchUsuariosViewConcatSearchRow.descricao,
                                                                                                     'sem informação',
                                                                                                   ),
                                                                                                   style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -1823,7 +1750,7 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                                                                 padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
                                                                                                 child: Text(
                                                                                                   valueOrDefault<String>(
-                                                                                                    listViewUsuariosViewConcatSearchRow.email,
+                                                                                                    listViewUsuariosSearchUsuariosViewConcatSearchRow.email,
                                                                                                     'sem informacao',
                                                                                                   ),
                                                                                                   style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -1844,7 +1771,7 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                                                                     height: 32.0,
                                                                                                     decoration: BoxDecoration(
                                                                                                       color: valueOrDefault<Color>(
-                                                                                                        listViewUsuariosViewConcatSearchRow.tipoUsuarioId == 9 ? FlutterFlowTheme.of(context).accent3 : FlutterFlowTheme.of(context).accent2,
+                                                                                                        listViewUsuariosSearchUsuariosViewConcatSearchRow.tipoUsuarioId == 9 ? FlutterFlowTheme.of(context).accent3 : FlutterFlowTheme.of(context).accent2,
                                                                                                         FlutterFlowTheme.of(context).accent2,
                                                                                                       ),
                                                                                                       borderRadius: BorderRadius.circular(8.0),
@@ -1858,7 +1785,7 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                                                                         padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
                                                                                                         child: Text(
                                                                                                           valueOrDefault<String>(
-                                                                                                            listViewUsuariosViewConcatSearchRow.tipoUsuarioDescricao,
+                                                                                                            listViewUsuariosSearchUsuariosViewConcatSearchRow.tipoUsuarioDescricao,
                                                                                                             'sem informação',
                                                                                                           ),
                                                                                                           style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -1902,7 +1829,7 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                                                                         FocusManager.instance.primaryFocus?.unfocus();
                                                                                                       },
                                                                                                       child: DropdownUsuarioAdminEditWidget(
-                                                                                                        usuariosView: listViewUsuariosViewConcatSearchRow,
+                                                                                                        usuariosView: listViewUsuariosSearchUsuariosViewConcatSearchRow,
                                                                                                       ),
                                                                                                     ),
                                                                                                   );
@@ -1947,7 +1874,7 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                                   queryFn: (q) => q
                                                                       .ilike(
                                                                         'pesquisa',
-                                                                        functions.pesquisaLike(_model
+                                                                        functions.pesquisaLikeCS(_model
                                                                             .textFieldPesquisaAdminTextController
                                                                             .text),
                                                                       )
@@ -1976,11 +1903,11 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                                     );
                                                                   }
                                                                   List<UsuariosViewConcatSearchRow>
-                                                                      listViewUsuariosViewConcatSearchRowList =
+                                                                      listViewUsuariosGestorSearchUsuariosViewConcatSearchRowList =
                                                                       snapshot
                                                                           .data!;
 
-                                                                  if (listViewUsuariosViewConcatSearchRowList
+                                                                  if (listViewUsuariosGestorSearchUsuariosViewConcatSearchRowList
                                                                       .isEmpty) {
                                                                     return Center(
                                                                       child: Image
@@ -2006,7 +1933,7 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                                     onTap:
                                                                         () async {
                                                                       logFirebaseEvent(
-                                                                          'MAIN_ADMIN_PAGE_ListView_pmzfd1gd_ON_TAP');
+                                                                          'MAIN_ADMIN_ListViewUsuariosGestorSearch_');
                                                                       await actions
                                                                           .resetTimerAction(
                                                                         context,
@@ -2022,13 +1949,13 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                                       scrollDirection:
                                                                           Axis.vertical,
                                                                       itemCount:
-                                                                          listViewUsuariosViewConcatSearchRowList
+                                                                          listViewUsuariosGestorSearchUsuariosViewConcatSearchRowList
                                                                               .length,
                                                                       itemBuilder:
                                                                           (context,
-                                                                              listViewIndex) {
-                                                                        final listViewUsuariosViewConcatSearchRow =
-                                                                            listViewUsuariosViewConcatSearchRowList[listViewIndex];
+                                                                              listViewUsuariosGestorSearchIndex) {
+                                                                        final listViewUsuariosGestorSearchUsuariosViewConcatSearchRow =
+                                                                            listViewUsuariosGestorSearchUsuariosViewConcatSearchRowList[listViewUsuariosGestorSearchIndex];
                                                                         return Builder(
                                                                           builder: (context) =>
                                                                               Padding(
@@ -2059,7 +1986,7 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                                                           FocusManager.instance.primaryFocus?.unfocus();
                                                                                         },
                                                                                         child: ModalProfileEditAdminWidget(
-                                                                                          usuariosRow: listViewUsuariosViewConcatSearchRow,
+                                                                                          usuariosRow: listViewUsuariosGestorSearchUsuariosViewConcatSearchRow,
                                                                                         ),
                                                                                       ),
                                                                                     );
@@ -2101,8 +2028,8 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                                                             fadeInDuration: Duration(milliseconds: 10),
                                                                                             fadeOutDuration: Duration(milliseconds: 10),
                                                                                             imageUrl: valueOrDefault<String>(
-                                                                                              listViewUsuariosViewConcatSearchRow.fotoPath != ''
-                                                                                                  ? listViewUsuariosViewConcatSearchRow.fotoPath
+                                                                                              listViewUsuariosGestorSearchUsuariosViewConcatSearchRow.fotoPath != ''
+                                                                                                  ? listViewUsuariosGestorSearchUsuariosViewConcatSearchRow.fotoPath
                                                                                                   : valueOrDefault<String>(
                                                                                                       (Theme.of(context).brightness == Brightness.light) == true
                                                                                                           ? valueOrDefault<String>(
@@ -2134,7 +2061,7 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                                                                 padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
                                                                                                 child: Text(
                                                                                                   valueOrDefault<String>(
-                                                                                                    listViewUsuariosViewConcatSearchRow.nomeCompleto,
+                                                                                                    listViewUsuariosGestorSearchUsuariosViewConcatSearchRow.nomeCompleto,
                                                                                                     'sem informação',
                                                                                                   ),
                                                                                                   style: FlutterFlowTheme.of(context).bodyLarge.override(
@@ -2157,7 +2084,7 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                                                                   padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
                                                                                                   child: Text(
                                                                                                     valueOrDefault<String>(
-                                                                                                      listViewUsuariosViewConcatSearchRow.agenciaNome,
+                                                                                                      listViewUsuariosGestorSearchUsuariosViewConcatSearchRow.agenciaNome,
                                                                                                       'sem informação',
                                                                                                     ),
                                                                                                     style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -2174,7 +2101,7 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                                                                 padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
                                                                                                 child: Text(
                                                                                                   valueOrDefault<String>(
-                                                                                                    listViewUsuariosViewConcatSearchRow.descricao,
+                                                                                                    listViewUsuariosGestorSearchUsuariosViewConcatSearchRow.descricao,
                                                                                                     'sem informação',
                                                                                                   ),
                                                                                                   style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -2191,7 +2118,7 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                                                                 padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
                                                                                                 child: Text(
                                                                                                   valueOrDefault<String>(
-                                                                                                    listViewUsuariosViewConcatSearchRow.email,
+                                                                                                    listViewUsuariosGestorSearchUsuariosViewConcatSearchRow.email,
                                                                                                     'sem informacao',
                                                                                                   ),
                                                                                                   style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -2212,7 +2139,7 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                                                                     height: 32.0,
                                                                                                     decoration: BoxDecoration(
                                                                                                       color: valueOrDefault<Color>(
-                                                                                                        listViewUsuariosViewConcatSearchRow.tipoUsuarioId == 9 ? FlutterFlowTheme.of(context).accent3 : FlutterFlowTheme.of(context).accent2,
+                                                                                                        listViewUsuariosGestorSearchUsuariosViewConcatSearchRow.tipoUsuarioId == 9 ? FlutterFlowTheme.of(context).accent3 : FlutterFlowTheme.of(context).accent2,
                                                                                                         FlutterFlowTheme.of(context).accent2,
                                                                                                       ),
                                                                                                       borderRadius: BorderRadius.circular(8.0),
@@ -2226,7 +2153,7 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                                                                         padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
                                                                                                         child: Text(
                                                                                                           valueOrDefault<String>(
-                                                                                                            listViewUsuariosViewConcatSearchRow.tipoUsuarioDescricao,
+                                                                                                            listViewUsuariosGestorSearchUsuariosViewConcatSearchRow.tipoUsuarioDescricao,
                                                                                                             'sem informação',
                                                                                                           ),
                                                                                                           style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -2270,7 +2197,7 @@ class _MainAdminWidgetState extends State<MainAdminWidget>
                                                                                                         FocusManager.instance.primaryFocus?.unfocus();
                                                                                                       },
                                                                                                       child: DropdownUsuarioAdminEditWidget(
-                                                                                                        usuariosView: listViewUsuariosViewConcatSearchRow,
+                                                                                                        usuariosView: listViewUsuariosGestorSearchUsuariosViewConcatSearchRow,
                                                                                                       ),
                                                                                                     ),
                                                                                                   );
