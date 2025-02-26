@@ -78,6 +78,10 @@ class FFAppState extends ChangeNotifier {
       _inactivityTimeout = await secureStorage.getInt('ff_inactivityTimeout') ??
           _inactivityTimeout;
     });
+    await _safeInitAsync(() async {
+      _versaoAtual =
+          await secureStorage.getString('ff_versaoAtual') ?? _versaoAtual;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -420,6 +424,18 @@ class FFAppState extends ChangeNotifier {
 
   void deleteInactivityTimeout() {
     secureStorage.delete(key: 'ff_inactivityTimeout');
+  }
+
+  /// Versão Beta 1.0.2.2025
+  String _versaoAtual = 'Versão Beta 1.0.2.2025';
+  String get versaoAtual => _versaoAtual;
+  set versaoAtual(String value) {
+    _versaoAtual = value;
+    secureStorage.setString('ff_versaoAtual', value);
+  }
+
+  void deleteVersaoAtual() {
+    secureStorage.delete(key: 'ff_versaoAtual');
   }
 }
 

@@ -11,13 +11,13 @@ export 'toast03_model.dart';
 class Toast03Widget extends StatefulWidget {
   const Toast03Widget({
     super.key,
+    this.titulo,
     String? texto,
-    required this.titulo,
   }) : this.texto = texto ??
             'Alguma cópia do corpo que está presente nesta pequena notificação.';
 
-  final String texto;
   final String? titulo;
+  final String texto;
 
   @override
   State<Toast03Widget> createState() => _Toast03WidgetState();
@@ -50,7 +50,6 @@ class _Toast03WidgetState extends State<Toast03Widget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 400.0,
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).secondaryBackground,
         boxShadow: [

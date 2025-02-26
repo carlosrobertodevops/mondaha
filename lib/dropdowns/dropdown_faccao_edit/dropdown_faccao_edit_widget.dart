@@ -336,12 +336,12 @@ class _DropdownFaccaoEditWidgetState extends State<DropdownFaccaoEditWidget> {
                                     TextButton(
                                       onPressed: () => Navigator.pop(
                                           alertDialogContext, false),
-                                      child: Text('Cancel'),
+                                      child: Text('Cancelar'),
                                     ),
                                     TextButton(
                                       onPressed: () => Navigator.pop(
                                           alertDialogContext, true),
-                                      child: Text('Confirm'),
+                                      child: Text('Confirmar'),
                                     ),
                                   ],
                                 );
@@ -353,21 +353,6 @@ class _DropdownFaccaoEditWidgetState extends State<DropdownFaccaoEditWidget> {
                             matchingRows: (rows) => rows.eqOrNull(
                               'faccao_id',
                               widget!.faccaoid?.faccaoId,
-                            ),
-                          );
-                          ScaffoldMessenger.of(context).clearSnackBars();
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(
-                                'Registro APAGADO com sucesso !',
-                                style: TextStyle(
-                                  color:
-                                      FlutterFlowTheme.of(context).primaryText,
-                                ),
-                              ),
-                              duration: Duration(milliseconds: 2000),
-                              backgroundColor:
-                                  FlutterFlowTheme.of(context).secondary,
                             ),
                           );
 

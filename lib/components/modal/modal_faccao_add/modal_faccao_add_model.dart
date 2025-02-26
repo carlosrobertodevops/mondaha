@@ -1,4 +1,5 @@
 import '/backend/supabase/supabase.dart';
+import '/components/toasts/toast04/toast04_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -9,17 +10,22 @@ import 'dart:ui';
 import '/index.dart';
 import 'modal_faccao_add_widget.dart' show ModalFaccaoAddWidget;
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:ff_theme/flutter_flow/flutter_flow_theme.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:provider/provider.dart';
 
 class ModalFaccaoAddModel extends FlutterFlowModel<ModalFaccaoAddWidget> {
   ///  Local state fields for this component.
 
   bool uploadImagem = false;
+
+  String? dataCriacao;
 
   ///  State fields for stateful widgets in this component.
 
@@ -69,13 +75,22 @@ class ModalFaccaoAddModel extends FlutterFlowModel<ModalFaccaoAddWidget> {
     return null;
   }
 
+  // State field(s) for txt_data_criacao widget.
+  FocusNode? txtDataCriacaoFocusNode;
+  TextEditingController? txtDataCriacaoTextController;
+  final txtDataCriacaoMask = MaskTextInputFormatter(mask: '##/##/####');
+  String? Function(BuildContext, String?)?
+      txtDataCriacaoTextControllerValidator;
+  DateTime? datePicked;
   bool isDataUploading2 = false;
   FFUploadedFile uploadedLocalFile2 =
       FFUploadedFile(bytes: Uint8List.fromList([]));
   String uploadedFileUrl2 = '';
 
   // Stores action output result for [Backend Call - Insert Row] action in Button widget.
-  FaccoesRow? outputFaccaoUpdate;
+  FaccoesRow? outputFaccaoAddyesPhoto;
+  // Stores action output result for [Backend Call - Insert Row] action in Button widget.
+  FaccoesRow? outputFaccaoAddnoPhoto;
 
   @override
   void initState(BuildContext context) {
@@ -91,5 +106,8 @@ class ModalFaccaoAddModel extends FlutterFlowModel<ModalFaccaoAddWidget> {
 
     descriptionFocusNode?.dispose();
     descriptionTextController?.dispose();
+
+    txtDataCriacaoFocusNode?.dispose();
+    txtDataCriacaoTextController?.dispose();
   }
 }

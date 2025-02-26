@@ -26,13 +26,13 @@ class FaccoesRow extends SupabaseDataRow {
   String? get descricao => getField<String>('descricao');
   set descricao(String? value) => setField<String>('descricao', value);
 
-  DateTime? get dataCriacao => getField<DateTime>('data_criacao');
-  set dataCriacao(DateTime? value) => setField<DateTime>('data_criacao', value);
-
   List<String> get fundadores => getListField<String>('fundadores');
   set fundadores(List<String>? value) =>
       setListField<String>('fundadores', value);
 
   String? get imagemPath => getField<String>('imagem_path');
   set imagemPath(String? value) => setField<String>('imagem_path', value);
+
+  String? get dataCriacao => getField<String>('data_criacao');
+  set dataCriacao(String? value) => setField<String>('data_criacao', value);
 }

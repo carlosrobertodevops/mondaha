@@ -28,8 +28,8 @@ class FaccoesViewConcatSearchRow extends SupabaseDataRow {
   String? get descricao => getField<String>('descricao');
   set descricao(String? value) => setField<String>('descricao', value);
 
-  DateTime? get dataCriacao => getField<DateTime>('data_criacao');
-  set dataCriacao(DateTime? value) => setField<DateTime>('data_criacao', value);
+  String? get dataCriacao => getField<String>('data_criacao');
+  set dataCriacao(String? value) => setField<String>('data_criacao', value);
 
   DateTime? get createdAt => getField<DateTime>('created_at');
   set createdAt(DateTime? value) => setField<DateTime>('created_at', value);

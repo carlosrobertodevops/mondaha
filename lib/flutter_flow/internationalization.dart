@@ -144,35 +144,6 @@ bool _isSupportedLocale(Locale locale) {
 }
 
 final kTranslationsMap = <Map<String, Map<String, String>>>[
-  // auth_forgot_password
-  {
-    '3hcuc8v6': {
-      'en': 'Forgot Password',
-      'pt': 'Esqueceu sua senha',
-    },
-    'sjjd1jb9': {
-      'en':
-          'Don\'t remember your password? Enter the email associated with your account below and we will send you a new link.',
-      'pt':
-          'Não lembra da sua senha? Insira o e-mail associado à sua conta abaixo e nós lhe enviaremos um novo link.',
-    },
-    'tzm5opaa': {
-      'en': 'Email Address',
-      'pt': 'Endereço de email',
-    },
-    'uvsotzng': {
-      'en': 'Please enter a valid email...',
-      'pt': 'Insira um e-mail válido...',
-    },
-    '3sdzjivm': {
-      'en': 'Send Reset Link',
-      'pt': 'Enviar link de redefinição',
-    },
-    '8p6xd6cl': {
-      'en': 'Home',
-      'pt': 'Lar',
-    },
-  },
   // main_home
   {
     '3bi54x5g': {
@@ -564,10 +535,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // auth_login
   {
-    'bqen2vi4': {
-      'en': 'Beta Version 1.0.1. 2025',
-      'pt': 'Versão Beta 1.0.1.2025',
-    },
     'tzm2gn5e': {
       'en': 'Sign In',
       'pt': 'Entrar',
@@ -588,9 +555,9 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Sign In',
       'pt': 'Entrar',
     },
-    '8l7e2xqq': {
-      'en': 'Forgot Password',
-      'pt': 'Esqueceu sua senha',
+    '9b0pjc1h': {
+      'en': 'Forgot your password ?',
+      'pt': 'Esqueceu sua senha?',
     },
     'jc4by7hx': {
       'en': 'Field is required',
@@ -977,6 +944,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // auth_recover
   {
+    '4dd14s4x': {
+      'en': 'Beta Version 1.0.1. 2025',
+      'pt': 'Versão Beta 1.0.1.2025',
+    },
     '1wq5pp7h': {
       'en': 'Recover password',
       'pt': 'Recuperar senha',
@@ -997,11 +968,11 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Recover ',
       'pt': 'Recuperar',
     },
-    'vj2850u6': {
+    'rsong6b5': {
       'en': 'Successfully !!',
-      'pt': 'Sucesso !!',
+      'pt': 'Com sucesso!!',
     },
-    'o0j2dv3s': {
+    'rawi67ub': {
       'en': 'Password changed successfully!!!',
       'pt': 'Senha alterada com sucesso!!!',
     },
@@ -1414,7 +1385,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'cxlzs5tl': {
       'en': 'Nome da facção',
-      'pt': 'Nome da facção',
+      'pt': '',
     },
     'gvgwcy4p': {
       'en': 'Descrição ou Biografia',
@@ -1423,6 +1394,14 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'uqziqhmg': {
       'en': 'Description ',
       'pt': 'Descrição',
+    },
+    '28f75u87': {
+      'en': 'Creation Date',
+      'pt': 'Data de Criação',
+    },
+    'ad4mdnu3': {
+      'en': 'Procedure Date',
+      'pt': 'Dados do Procedimento',
     },
     '2g54ptaj': {
       'en': 'Save',
@@ -2110,31 +2089,31 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'pt': 'Cargo atual',
     },
     'u231jvsq': {
-      'en': 'Marital status',
-      'pt': 'Estado civil',
+      'en': 'Current position',
+      'pt': 'Cargo atual',
     },
     'uhi29t9v': {
       'en': 'Previous position',
       'pt': 'Cargo anterior',
     },
     'bfv93uyj': {
-      'en': 'Marital status',
-      'pt': 'Estado civil',
+      'en': 'Previous position',
+      'pt': 'Cargo anterior',
     },
     '0c8h6wz9': {
-      'en': 'Função atual',
+      'en': 'Current function',
       'pt': 'Função atual',
     },
     'qc1gohjk': {
-      'en': 'Mother\'s Situation',
-      'pt': 'Situação da Mãe',
+      'en': 'Current function',
+      'pt': 'Função atual',
     },
     '8c2yoabs': {
-      'en': 'Função anterior',
+      'en': 'Previous function',
       'pt': 'Função anterior',
     },
     'xtghmnhj': {
-      'en': 'Função anterior',
+      'en': 'Previous function',
       'pt': 'Função anterior',
     },
     'm25toomj': {
@@ -2156,15 +2135,15 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
           'Para adicionar o nome da(s) Prisão(ões), você precisa preencher os últimos três locais e clicar no botão (+).',
     },
     '8uf1jitv': {
-      'en': 'Facção que integrou',
+      'en': 'Faction that he joined',
       'pt': 'Facção que integrou',
     },
     'fzkhhi3x': {
-      'en': 'Facção que integrou',
+      'en': 'Faction that he joined',
       'pt': 'Facção que integrou',
     },
     '4i6g2oa6': {
-      'en': 'Facção aliada',
+      'en': 'Allied faction',
       'pt': 'Facção aliada',
     },
     'rnawpmov': {
@@ -2172,11 +2151,11 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'pt': 'Situação do Pai',
     },
     '2rfuge4k': {
-      'en': 'Facção Inimiga',
+      'en': 'Enemy Faction',
       'pt': 'Facção Inimiga',
     },
     '03pc9yaz': {
-      'en': 'Facção Inimiga',
+      'en': 'Enemy Faction',
       'pt': 'Facção Inimiga',
     },
     'i2sj5hwa': {
@@ -2313,6 +2292,105 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Murder',
       'pt': 'Homicídio',
     },
+    'evlv2sw3': {
+      'en': 'Criminal Organization (Law 12,850/2013)(art. 2)',
+      'pt': 'Organização Criminosa (Lei 12.850/2013)(art. 2º)',
+    },
+    'uhbankg4': {
+      'en': 'Simple Homicide (PC) (art. 121)',
+      'pt': 'Homicídio Simples (CP)(art. 121)',
+    },
+    'f5r0sru9': {
+      'en': 'Qualified Homicide (PC) (art. 121, §2º)',
+      'pt': 'Homicídio Qualificado (CP)(art. 121, §2º)',
+    },
+    'gbef5bre': {
+      'en': 'Femicide (PC) (art. 121, §2, VI)',
+      'pt': 'Feminicídio (CP) (art. 121, §2º, VI)',
+    },
+    'qfjlgk3q': {
+      'en': 'Serious or Very Serious Bodily Injury (PC) (art. 129)',
+      'pt': 'Lesão Corporal Grave ou Gravíssima (CP)(art. 129)',
+    },
+    '6j5253hn': {
+      'en': 'Kidnapping and False Imprisonment (PC) (art. 148)',
+      'pt': 'Sequestro e Cárcere Privado (CP)(art. 148)',
+    },
+    'bsrpwul7': {
+      'en': 'Extortion by kidnapping (PC) (art. 159)',
+      'pt': 'Extorsão mediante sequestro (CP) (art. 159)',
+    },
+    'ao93x875': {
+      'en': 'Theft (PC) (art. 157)',
+      'pt': 'Roubo (CP) (art. 157)',
+    },
+    '5va2fod4': {
+      'en': 'Qualified Robbery (PC)  (art. 157, §2)',
+      'pt': 'Roubo Qualificado (CP) (art. 157, §2º)',
+    },
+    'cwv9010x': {
+      'en': 'Extortion (PC) (art. 158)',
+      'pt': 'Extorsão (CP) (art. 158)',
+    },
+    'v15itzvj': {
+      'en': 'Extortion through kidnapping (PC) (art. 159)',
+      'pt': 'Extorsão mediante sequestro (CP) (art. 159)',
+    },
+    '5u02yc4b': {
+      'en': 'Receiving stolen goods (PC) (art. 180)',
+      'pt': 'Receptação (CP) (art. 180)',
+    },
+    '4pglu5om': {
+      'en': 'Money laundering (Law 9.613/1998)',
+      'pt': 'Lavagem de dinheiro (Lei 9.613/1998)',
+    },
+    'ei9kdecf': {
+      'en': 'Drug Trafficking (Law 11.343/2006) art. 33)',
+      'pt': 'Tráfico de Drogas  (Lei 11.343/2006) (art. 33)',
+    },
+    'jyu8xsfs': {
+      'en': 'Association for Trafficking (Law 11.343/2006) (art. 35)',
+      'pt': 'Associação para o Tráfico (Lei 11.343/2006) (art. 35) ',
+    },
+    '785yu3x1': {
+      'en': 'Financing of Trafficking (Law 11.343/2006) (art. 36)',
+      'pt': 'Financiamento do Tráfico (Lei 11.343/2006) (art. 36)',
+    },
+    'jco8oq2n': {
+      'en': 'Illegal possession of firearms (Law 10.826/2003) (art. 14)',
+      'pt': 'Porte ilegal de arma de fogo (Lei 10.826/2003) (art. 14)',
+    },
+    '09b2gdsy': {
+      'en':
+          'Illegal possession of restricted firearms  (Law 10.826/2003) (art. 16)',
+      'pt':
+          'Posse ilegal de arma de fogo de uso restrito (Lei 10.826/2003) (art. 16)',
+    },
+    'fqswzn3u': {
+      'en':
+          'Illegal trade in firearms  (Lei 10.826/2003)(Law 10.826/2003) (art. 17)',
+      'pt': 'Comércio ilegal de arma de fogo  (Lei 10.826/2003) (art. 17)',
+    },
+    'm2qrkswj': {
+      'en': 'International arms trafficking (Law 10.826/2003) (art. 18)',
+      'pt': 'Tráfico internacional de armas (Lei 10.826/2003) (art. 18)',
+    },
+    '2abid325': {
+      'en': 'Explosion (CP) (art. 251)',
+      'pt': 'Explosão (CP) (art. 251)',
+    },
+    'i1rswn5h': {
+      'en': 'Attack on a public utility service (CP) (art. 265)',
+      'pt': 'Atentado contra serviço de utilidade pública (CP) (art. 265)',
+    },
+    '7rooscp1': {
+      'en': 'Terrorism (Law 13,260/2016)',
+      'pt': 'Terrorismo (Lei 13.260/2016)',
+    },
+    'ah4vr309': {
+      'en': 'Armed criminal association (CP) (art. 288)',
+      'pt': 'Associação criminosa armada (CP) (art. 288)',
+    },
     'kkjjfns6': {
       'en': 'Procedure Date',
       'pt': 'Dados do Procedimento',
@@ -2403,6 +2481,22 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': '3rd CRIMINAL COURT',
       'pt': '3ª VARA PENAL',
     },
+    '9ssog1pb': {
+      'en': '4rd CRIMINAL COURT',
+      'pt': '4ª TRIBUNAL CRIMINAL',
+    },
+    'prsgpqpv': {
+      'en': '5st CRIMINAL COURT',
+      'pt': '5ª TRIBUNAL CRIMINAL',
+    },
+    'dzj474gi': {
+      'en': '6st CRIMINAL COURT',
+      'pt': '6ª TRIBUNAL CRIMINAL',
+    },
+    'r2ussqri': {
+      'en': '7st CRIMINAL COURT',
+      'pt': '7ª TRIBUNAL CRIMINAL',
+    },
     'njzw806d': {
       'en': 'Legal status',
       'pt': 'Situação jurídica',
@@ -2447,13 +2541,21 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Semi-open',
       'pt': 'Semi-aberto',
     },
+    '2lr5eep8': {
+      'en': 'Open',
+      'pt': 'Aberto',
+    },
+    '3j1588lk': {
+      'en': 'Regime progression',
+      'pt': 'Progressão de regime',
+    },
     'qoe55ylu': {
       'en': '',
       'pt': '',
     },
     'whrvcs43': {
       'en': 'Defendant situation',
-      'pt': 'Situação real',
+      'pt': 'Situação real ou atual',
     },
     'dquf2f18': {
       'en': 'Search...',
@@ -2646,11 +2748,11 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Bio',
       'pt': 'Biografia',
     },
-    '7g5fvtiv': {
+    'p59zbdpq': {
       'en': 'Please select...',
       'pt': 'Por favor selecione...',
     },
-    'yszzomxi': {
+    'y24rs6yz': {
       'en': 'Search for an item...',
       'pt': 'Pesquisar um item...',
     },
@@ -2936,25 +3038,17 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Description here...',
       'pt': 'Descrição aqui...',
     },
+    '35gs515g': {
+      'en': 'Creation Date',
+      'pt': 'Data de Criação',
+    },
+    'm6g42tso': {
+      'en': 'Procedure Date',
+      'pt': 'Dados do Procedimento',
+    },
     'ntyay3mi': {
       'en': 'Save',
       'pt': 'Salvar',
-    },
-    '6q6ela0n': {
-      'en': 'Factons',
-      'pt': 'Facções',
-    },
-    '8cm49dh7': {
-      'en': 'Information saved successfully!',
-      'pt': 'Informações salvas com sucesso!',
-    },
-    'e3wa81po': {
-      'en': 'Factons',
-      'pt': 'Facções',
-    },
-    'dd30lzu8': {
-      'en': 'Information saved successfully!',
-      'pt': 'Informações salvas com sucesso!',
     },
     'yg28k56i': {
       'en': 'Please enter a faction name...',

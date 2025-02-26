@@ -578,180 +578,177 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                                               width: 2.0,
                                                                                             ),
                                                                                           ),
-                                                                                          child: SingleChildScrollView(
-                                                                                            primary: false,
-                                                                                            child: Column(
-                                                                                              mainAxisSize: MainAxisSize.max,
-                                                                                              mainAxisAlignment: MainAxisAlignment.center,
-                                                                                              children: [
-                                                                                                InkWell(
+                                                                                          child: Column(
+                                                                                            mainAxisSize: MainAxisSize.max,
+                                                                                            mainAxisAlignment: MainAxisAlignment.center,
+                                                                                            children: [
+                                                                                              InkWell(
+                                                                                                splashColor: Colors.transparent,
+                                                                                                focusColor: Colors.transparent,
+                                                                                                hoverColor: Colors.transparent,
+                                                                                                highlightColor: Colors.transparent,
+                                                                                                onTap: () async {
+                                                                                                  logFirebaseEvent('MODAL_MEMBROS_ADD_Text_qlctojzn_ON_TAP');
+                                                                                                  final selectedMedia = await selectMedia(
+                                                                                                    storageFolderPath: 'membros',
+                                                                                                    maxWidth: 300.00,
+                                                                                                    maxHeight: 300.00,
+                                                                                                    imageQuality: 100,
+                                                                                                    mediaSource: MediaSource.photoGallery,
+                                                                                                    multiImage: false,
+                                                                                                  );
+                                                                                                  if (selectedMedia != null && selectedMedia.every((m) => validateFileFormat(m.storagePath, context))) {
+                                                                                                    safeSetState(() => _model.isDataUploading1 = true);
+                                                                                                    var selectedUploadedFiles = <FFUploadedFile>[];
+
+                                                                                                    var downloadUrls = <String>[];
+                                                                                                    try {
+                                                                                                      selectedUploadedFiles = selectedMedia
+                                                                                                          .map((m) => FFUploadedFile(
+                                                                                                                name: m.storagePath.split('/').last,
+                                                                                                                bytes: m.bytes,
+                                                                                                                height: m.dimensions?.height,
+                                                                                                                width: m.dimensions?.width,
+                                                                                                                blurHash: m.blurHash,
+                                                                                                              ))
+                                                                                                          .toList();
+
+                                                                                                      downloadUrls = await uploadSupabaseStorageFiles(
+                                                                                                        bucketName: 'uploads',
+                                                                                                        selectedFiles: selectedMedia,
+                                                                                                      );
+                                                                                                    } finally {
+                                                                                                      _model.isDataUploading1 = false;
+                                                                                                    }
+                                                                                                    if (selectedUploadedFiles.length == selectedMedia.length && downloadUrls.length == selectedMedia.length) {
+                                                                                                      safeSetState(() {
+                                                                                                        _model.uploadedLocalFile1 = selectedUploadedFiles.first;
+                                                                                                        _model.uploadedFileUrl1 = downloadUrls.first;
+                                                                                                      });
+                                                                                                    } else {
+                                                                                                      safeSetState(() {});
+                                                                                                      return;
+                                                                                                    }
+                                                                                                  }
+
+                                                                                                  _model.insertAtIndexInMembrosFotos(0, _model.uploadedFileUrl1);
+                                                                                                  _model.updatePage(() {});
+                                                                                                },
+                                                                                                child: Text(
+                                                                                                  FFLocalizations.of(context).getText(
+                                                                                                    '1er6ik3u' /* Add photo #1 */,
+                                                                                                  ),
+                                                                                                  style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                        fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                                                        color: FlutterFlowTheme.of(context).primaryText,
+                                                                                                        letterSpacing: 0.0,
+                                                                                                        fontWeight: FontWeight.bold,
+                                                                                                        useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                                                      ),
+                                                                                                ),
+                                                                                              ),
+                                                                                              Padding(
+                                                                                                padding: EdgeInsets.all(1.0),
+                                                                                                child: InkWell(
                                                                                                   splashColor: Colors.transparent,
                                                                                                   focusColor: Colors.transparent,
                                                                                                   hoverColor: Colors.transparent,
                                                                                                   highlightColor: Colors.transparent,
                                                                                                   onTap: () async {
-                                                                                                    logFirebaseEvent('MODAL_MEMBROS_ADD_Text_qlctojzn_ON_TAP');
-                                                                                                    final selectedMedia = await selectMedia(
-                                                                                                      storageFolderPath: 'membros',
-                                                                                                      maxWidth: 300.00,
-                                                                                                      maxHeight: 300.00,
-                                                                                                      imageQuality: 100,
-                                                                                                      mediaSource: MediaSource.photoGallery,
-                                                                                                      multiImage: false,
-                                                                                                    );
-                                                                                                    if (selectedMedia != null && selectedMedia.every((m) => validateFileFormat(m.storagePath, context))) {
-                                                                                                      safeSetState(() => _model.isDataUploading1 = true);
-                                                                                                      var selectedUploadedFiles = <FFUploadedFile>[];
-
-                                                                                                      var downloadUrls = <String>[];
-                                                                                                      try {
-                                                                                                        selectedUploadedFiles = selectedMedia
-                                                                                                            .map((m) => FFUploadedFile(
-                                                                                                                  name: m.storagePath.split('/').last,
-                                                                                                                  bytes: m.bytes,
-                                                                                                                  height: m.dimensions?.height,
-                                                                                                                  width: m.dimensions?.width,
-                                                                                                                  blurHash: m.blurHash,
-                                                                                                                ))
-                                                                                                            .toList();
-
-                                                                                                        downloadUrls = await uploadSupabaseStorageFiles(
-                                                                                                          bucketName: 'uploads',
-                                                                                                          selectedFiles: selectedMedia,
-                                                                                                        );
-                                                                                                      } finally {
-                                                                                                        _model.isDataUploading1 = false;
-                                                                                                      }
-                                                                                                      if (selectedUploadedFiles.length == selectedMedia.length && downloadUrls.length == selectedMedia.length) {
-                                                                                                        safeSetState(() {
-                                                                                                          _model.uploadedLocalFile1 = selectedUploadedFiles.first;
-                                                                                                          _model.uploadedFileUrl1 = downloadUrls.first;
-                                                                                                        });
-                                                                                                      } else {
-                                                                                                        safeSetState(() {});
-                                                                                                        return;
-                                                                                                      }
-                                                                                                    }
-
-                                                                                                    _model.insertAtIndexInMembrosFotos(0, _model.uploadedFileUrl1);
-                                                                                                    _model.updatePage(() {});
-                                                                                                  },
-                                                                                                  child: Text(
-                                                                                                    FFLocalizations.of(context).getText(
-                                                                                                      '1er6ik3u' /* Add photo #1 */,
-                                                                                                    ),
-                                                                                                    style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                          fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                                          color: FlutterFlowTheme.of(context).primaryText,
-                                                                                                          letterSpacing: 0.0,
-                                                                                                          fontWeight: FontWeight.bold,
-                                                                                                          useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                                                        ),
-                                                                                                  ),
-                                                                                                ),
-                                                                                                Padding(
-                                                                                                  padding: EdgeInsets.all(1.0),
-                                                                                                  child: InkWell(
-                                                                                                    splashColor: Colors.transparent,
-                                                                                                    focusColor: Colors.transparent,
-                                                                                                    hoverColor: Colors.transparent,
-                                                                                                    highlightColor: Colors.transparent,
-                                                                                                    onTap: () async {
-                                                                                                      logFirebaseEvent('MODAL_MEMBROS_ADD_membro_foto_1_ON_TAP');
-                                                                                                      await Navigator.push(
-                                                                                                        context,
-                                                                                                        PageTransition(
-                                                                                                          type: PageTransitionType.fade,
-                                                                                                          child: FlutterFlowExpandedImageView(
-                                                                                                            image: Image.network(
-                                                                                                              valueOrDefault<String>(
-                                                                                                                _model.membrosFotos.elementAtOrNull(0),
-                                                                                                                'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/rgxzhoyu6nbx/groups_96dp_99999_FILL0_wght400_GRAD0_opsz48.png',
-                                                                                                              ),
-                                                                                                              fit: BoxFit.contain,
-                                                                                                              alignment: Alignment(0.0, 0.0),
-                                                                                                            ),
-                                                                                                            allowRotation: false,
-                                                                                                            tag: valueOrDefault<String>(
+                                                                                                    logFirebaseEvent('MODAL_MEMBROS_ADD_membro_foto_1_ON_TAP');
+                                                                                                    await Navigator.push(
+                                                                                                      context,
+                                                                                                      PageTransition(
+                                                                                                        type: PageTransitionType.fade,
+                                                                                                        child: FlutterFlowExpandedImageView(
+                                                                                                          image: Image.network(
+                                                                                                            valueOrDefault<String>(
                                                                                                               _model.membrosFotos.elementAtOrNull(0),
                                                                                                               'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/rgxzhoyu6nbx/groups_96dp_99999_FILL0_wght400_GRAD0_opsz48.png',
                                                                                                             ),
-                                                                                                            useHeroAnimation: true,
+                                                                                                            fit: BoxFit.contain,
+                                                                                                            alignment: Alignment(0.0, 0.0),
                                                                                                           ),
-                                                                                                        ),
-                                                                                                      );
-                                                                                                    },
-                                                                                                    child: Hero(
-                                                                                                      tag: valueOrDefault<String>(
-                                                                                                        _model.membrosFotos.elementAtOrNull(0),
-                                                                                                        'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/rgxzhoyu6nbx/groups_96dp_99999_FILL0_wght400_GRAD0_opsz48.png',
-                                                                                                      ),
-                                                                                                      transitionOnUserGestures: true,
-                                                                                                      child: ClipRRect(
-                                                                                                        borderRadius: BorderRadius.circular(10.0),
-                                                                                                        child: Image.network(
-                                                                                                          valueOrDefault<String>(
+                                                                                                          allowRotation: false,
+                                                                                                          tag: valueOrDefault<String>(
                                                                                                             _model.membrosFotos.elementAtOrNull(0),
                                                                                                             'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/rgxzhoyu6nbx/groups_96dp_99999_FILL0_wght400_GRAD0_opsz48.png',
                                                                                                           ),
-                                                                                                          width: 114.0,
-                                                                                                          height: 100.0,
-                                                                                                          fit: BoxFit.contain,
-                                                                                                          alignment: Alignment(0.0, 0.0),
+                                                                                                          useHeroAnimation: true,
                                                                                                         ),
+                                                                                                      ),
+                                                                                                    );
+                                                                                                  },
+                                                                                                  child: Hero(
+                                                                                                    tag: valueOrDefault<String>(
+                                                                                                      _model.membrosFotos.elementAtOrNull(0),
+                                                                                                      'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/rgxzhoyu6nbx/groups_96dp_99999_FILL0_wght400_GRAD0_opsz48.png',
+                                                                                                    ),
+                                                                                                    transitionOnUserGestures: true,
+                                                                                                    child: ClipRRect(
+                                                                                                      borderRadius: BorderRadius.circular(10.0),
+                                                                                                      child: Image.network(
+                                                                                                        valueOrDefault<String>(
+                                                                                                          _model.membrosFotos.elementAtOrNull(0),
+                                                                                                          'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/rgxzhoyu6nbx/groups_96dp_99999_FILL0_wght400_GRAD0_opsz48.png',
+                                                                                                        ),
+                                                                                                        width: 114.0,
+                                                                                                        height: 100.0,
+                                                                                                        fit: BoxFit.contain,
+                                                                                                        alignment: Alignment(0.0, 0.0),
                                                                                                       ),
                                                                                                     ),
                                                                                                   ),
                                                                                                 ),
-                                                                                                Align(
-                                                                                                  alignment: AlignmentDirectional(0.0, 0.0),
-                                                                                                  child: InkWell(
-                                                                                                    splashColor: Colors.transparent,
-                                                                                                    focusColor: Colors.transparent,
-                                                                                                    hoverColor: Colors.transparent,
-                                                                                                    highlightColor: Colors.transparent,
-                                                                                                    onTap: () async {
-                                                                                                      logFirebaseEvent('MODAL_MEMBROS_ADD_Icon_5tvdl3w6_ON_TAP');
-                                                                                                      var confirmDialogResponse = await showDialog<bool>(
-                                                                                                            context: context,
-                                                                                                            builder: (alertDialogContext) {
-                                                                                                              return AlertDialog(
-                                                                                                                title: Text('Apagar Foto'),
-                                                                                                                content: Text('Deseja APAGAR esta foto ?'),
-                                                                                                                actions: [
-                                                                                                                  TextButton(
-                                                                                                                    onPressed: () => Navigator.pop(alertDialogContext, false),
-                                                                                                                    child: Text('Cancelar'),
-                                                                                                                  ),
-                                                                                                                  TextButton(
-                                                                                                                    onPressed: () => Navigator.pop(alertDialogContext, true),
-                                                                                                                    child: Text('Confirmar'),
-                                                                                                                  ),
-                                                                                                                ],
-                                                                                                              );
-                                                                                                            },
-                                                                                                          ) ??
-                                                                                                          false;
-                                                                                                      if (confirmDialogResponse) {
-                                                                                                        safeSetState(() {
-                                                                                                          _model.isDataUploading1 = false;
-                                                                                                          _model.uploadedLocalFile1 = FFUploadedFile(bytes: Uint8List.fromList([]));
-                                                                                                          _model.uploadedFileUrl1 = '';
-                                                                                                        });
+                                                                                              ),
+                                                                                              Align(
+                                                                                                alignment: AlignmentDirectional(0.0, 0.0),
+                                                                                                child: InkWell(
+                                                                                                  splashColor: Colors.transparent,
+                                                                                                  focusColor: Colors.transparent,
+                                                                                                  hoverColor: Colors.transparent,
+                                                                                                  highlightColor: Colors.transparent,
+                                                                                                  onTap: () async {
+                                                                                                    logFirebaseEvent('MODAL_MEMBROS_ADD_Icon_5tvdl3w6_ON_TAP');
+                                                                                                    var confirmDialogResponse = await showDialog<bool>(
+                                                                                                          context: context,
+                                                                                                          builder: (alertDialogContext) {
+                                                                                                            return AlertDialog(
+                                                                                                              title: Text('Apagar Foto'),
+                                                                                                              content: Text('Deseja APAGAR esta foto ?'),
+                                                                                                              actions: [
+                                                                                                                TextButton(
+                                                                                                                  onPressed: () => Navigator.pop(alertDialogContext, false),
+                                                                                                                  child: Text('Cancelar'),
+                                                                                                                ),
+                                                                                                                TextButton(
+                                                                                                                  onPressed: () => Navigator.pop(alertDialogContext, true),
+                                                                                                                  child: Text('Confirmar'),
+                                                                                                                ),
+                                                                                                              ],
+                                                                                                            );
+                                                                                                          },
+                                                                                                        ) ??
+                                                                                                        false;
+                                                                                                    if (confirmDialogResponse) {
+                                                                                                      safeSetState(() {
+                                                                                                        _model.isDataUploading1 = false;
+                                                                                                        _model.uploadedLocalFile1 = FFUploadedFile(bytes: Uint8List.fromList([]));
+                                                                                                        _model.uploadedFileUrl1 = '';
+                                                                                                      });
 
-                                                                                                        _model.removeAtIndexFromMembrosFotos(0);
-                                                                                                        _model.updatePage(() {});
-                                                                                                      }
-                                                                                                    },
-                                                                                                    child: Icon(
-                                                                                                      Icons.do_not_disturb_on_rounded,
-                                                                                                      color: FlutterFlowTheme.of(context).error,
-                                                                                                      size: 24.0,
-                                                                                                    ),
+                                                                                                      _model.removeAtIndexFromMembrosFotos(0);
+                                                                                                      _model.updatePage(() {});
+                                                                                                    }
+                                                                                                  },
+                                                                                                  child: Icon(
+                                                                                                    Icons.do_not_disturb_on_rounded,
+                                                                                                    color: FlutterFlowTheme.of(context).error,
+                                                                                                    size: 24.0,
                                                                                                   ),
                                                                                                 ),
-                                                                                              ].divide(SizedBox(height: 1.0)),
-                                                                                            ),
+                                                                                              ),
+                                                                                            ].divide(SizedBox(height: 1.0)),
                                                                                           ),
                                                                                         ),
                                                                                       ),
@@ -769,192 +766,189 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                                               width: 2.0,
                                                                                             ),
                                                                                           ),
-                                                                                          child: SingleChildScrollView(
-                                                                                            primary: false,
-                                                                                            child: Column(
-                                                                                              mainAxisSize: MainAxisSize.max,
-                                                                                              mainAxisAlignment: MainAxisAlignment.center,
-                                                                                              children: [
-                                                                                                InkWell(
+                                                                                          child: Column(
+                                                                                            mainAxisSize: MainAxisSize.max,
+                                                                                            mainAxisAlignment: MainAxisAlignment.center,
+                                                                                            children: [
+                                                                                              InkWell(
+                                                                                                splashColor: Colors.transparent,
+                                                                                                focusColor: Colors.transparent,
+                                                                                                hoverColor: Colors.transparent,
+                                                                                                highlightColor: Colors.transparent,
+                                                                                                onTap: () async {
+                                                                                                  logFirebaseEvent('MODAL_MEMBROS_ADD_Text_fyohj85x_ON_TAP');
+                                                                                                  final selectedMedia = await selectMedia(
+                                                                                                    storageFolderPath: 'membros',
+                                                                                                    maxWidth: 300.00,
+                                                                                                    maxHeight: 300.00,
+                                                                                                    imageQuality: 100,
+                                                                                                    mediaSource: MediaSource.photoGallery,
+                                                                                                    multiImage: false,
+                                                                                                  );
+                                                                                                  if (selectedMedia != null && selectedMedia.every((m) => validateFileFormat(m.storagePath, context))) {
+                                                                                                    safeSetState(() => _model.isDataUploading2 = true);
+                                                                                                    var selectedUploadedFiles = <FFUploadedFile>[];
+
+                                                                                                    var downloadUrls = <String>[];
+                                                                                                    try {
+                                                                                                      selectedUploadedFiles = selectedMedia
+                                                                                                          .map((m) => FFUploadedFile(
+                                                                                                                name: m.storagePath.split('/').last,
+                                                                                                                bytes: m.bytes,
+                                                                                                                height: m.dimensions?.height,
+                                                                                                                width: m.dimensions?.width,
+                                                                                                                blurHash: m.blurHash,
+                                                                                                              ))
+                                                                                                          .toList();
+
+                                                                                                      downloadUrls = await uploadSupabaseStorageFiles(
+                                                                                                        bucketName: 'uploads',
+                                                                                                        selectedFiles: selectedMedia,
+                                                                                                      );
+                                                                                                    } finally {
+                                                                                                      _model.isDataUploading2 = false;
+                                                                                                    }
+                                                                                                    if (selectedUploadedFiles.length == selectedMedia.length && downloadUrls.length == selectedMedia.length) {
+                                                                                                      safeSetState(() {
+                                                                                                        _model.uploadedLocalFile2 = selectedUploadedFiles.first;
+                                                                                                        _model.uploadedFileUrl2 = downloadUrls.first;
+                                                                                                      });
+                                                                                                    } else {
+                                                                                                      safeSetState(() {});
+                                                                                                      return;
+                                                                                                    }
+                                                                                                  }
+
+                                                                                                  _model.insertAtIndexInMembrosFotos(1, _model.uploadedFileUrl2);
+                                                                                                  safeSetState(() {});
+                                                                                                },
+                                                                                                child: Text(
+                                                                                                  FFLocalizations.of(context).getText(
+                                                                                                    'jl45ge8k' /* Add photo #2 */,
+                                                                                                  ),
+                                                                                                  style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                        fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                                                        color: FlutterFlowTheme.of(context).primaryText,
+                                                                                                        letterSpacing: 0.0,
+                                                                                                        fontWeight: FontWeight.bold,
+                                                                                                        useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                                                      ),
+                                                                                                ),
+                                                                                              ),
+                                                                                              Padding(
+                                                                                                padding: EdgeInsets.all(1.0),
+                                                                                                child: InkWell(
                                                                                                   splashColor: Colors.transparent,
                                                                                                   focusColor: Colors.transparent,
                                                                                                   hoverColor: Colors.transparent,
                                                                                                   highlightColor: Colors.transparent,
                                                                                                   onTap: () async {
-                                                                                                    logFirebaseEvent('MODAL_MEMBROS_ADD_Text_fyohj85x_ON_TAP');
-                                                                                                    final selectedMedia = await selectMedia(
-                                                                                                      storageFolderPath: 'membros',
-                                                                                                      maxWidth: 300.00,
-                                                                                                      maxHeight: 300.00,
-                                                                                                      imageQuality: 100,
-                                                                                                      mediaSource: MediaSource.photoGallery,
-                                                                                                      multiImage: false,
-                                                                                                    );
-                                                                                                    if (selectedMedia != null && selectedMedia.every((m) => validateFileFormat(m.storagePath, context))) {
-                                                                                                      safeSetState(() => _model.isDataUploading2 = true);
-                                                                                                      var selectedUploadedFiles = <FFUploadedFile>[];
-
-                                                                                                      var downloadUrls = <String>[];
-                                                                                                      try {
-                                                                                                        selectedUploadedFiles = selectedMedia
-                                                                                                            .map((m) => FFUploadedFile(
-                                                                                                                  name: m.storagePath.split('/').last,
-                                                                                                                  bytes: m.bytes,
-                                                                                                                  height: m.dimensions?.height,
-                                                                                                                  width: m.dimensions?.width,
-                                                                                                                  blurHash: m.blurHash,
-                                                                                                                ))
-                                                                                                            .toList();
-
-                                                                                                        downloadUrls = await uploadSupabaseStorageFiles(
-                                                                                                          bucketName: 'uploads',
-                                                                                                          selectedFiles: selectedMedia,
-                                                                                                        );
-                                                                                                      } finally {
-                                                                                                        _model.isDataUploading2 = false;
-                                                                                                      }
-                                                                                                      if (selectedUploadedFiles.length == selectedMedia.length && downloadUrls.length == selectedMedia.length) {
-                                                                                                        safeSetState(() {
-                                                                                                          _model.uploadedLocalFile2 = selectedUploadedFiles.first;
-                                                                                                          _model.uploadedFileUrl2 = downloadUrls.first;
-                                                                                                        });
-                                                                                                      } else {
-                                                                                                        safeSetState(() {});
-                                                                                                        return;
-                                                                                                      }
-                                                                                                    }
-
-                                                                                                    _model.insertAtIndexInMembrosFotos(1, _model.uploadedFileUrl2);
-                                                                                                    safeSetState(() {});
-                                                                                                  },
-                                                                                                  child: Text(
-                                                                                                    FFLocalizations.of(context).getText(
-                                                                                                      'jl45ge8k' /* Add photo #2 */,
-                                                                                                    ),
-                                                                                                    style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                          fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                                          color: FlutterFlowTheme.of(context).primaryText,
-                                                                                                          letterSpacing: 0.0,
-                                                                                                          fontWeight: FontWeight.bold,
-                                                                                                          useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                                                        ),
-                                                                                                  ),
-                                                                                                ),
-                                                                                                Padding(
-                                                                                                  padding: EdgeInsets.all(1.0),
-                                                                                                  child: InkWell(
-                                                                                                    splashColor: Colors.transparent,
-                                                                                                    focusColor: Colors.transparent,
-                                                                                                    hoverColor: Colors.transparent,
-                                                                                                    highlightColor: Colors.transparent,
-                                                                                                    onTap: () async {
-                                                                                                      logFirebaseEvent('MODAL_MEMBROS_ADD_membro_foto_2_ON_TAP');
-                                                                                                      await Navigator.push(
-                                                                                                        context,
-                                                                                                        PageTransition(
-                                                                                                          type: PageTransitionType.fade,
-                                                                                                          child: FlutterFlowExpandedImageView(
-                                                                                                            image: Image.network(
-                                                                                                              valueOrDefault<String>(
-                                                                                                                _model.membrosFotos.elementAtOrNull(1),
-                                                                                                                'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/rgxzhoyu6nbx/groups_96dp_99999_FILL0_wght400_GRAD0_opsz48.png',
-                                                                                                              ),
-                                                                                                              fit: BoxFit.contain,
-                                                                                                              alignment: Alignment(0.0, 0.0),
-                                                                                                              errorBuilder: (context, error, stackTrace) => Image.asset(
-                                                                                                                'assets/images/error_image.png',
-                                                                                                                fit: BoxFit.contain,
-                                                                                                                alignment: Alignment(0.0, 0.0),
-                                                                                                              ),
-                                                                                                            ),
-                                                                                                            allowRotation: false,
-                                                                                                            tag: valueOrDefault<String>(
+                                                                                                    logFirebaseEvent('MODAL_MEMBROS_ADD_membro_foto_2_ON_TAP');
+                                                                                                    await Navigator.push(
+                                                                                                      context,
+                                                                                                      PageTransition(
+                                                                                                        type: PageTransitionType.fade,
+                                                                                                        child: FlutterFlowExpandedImageView(
+                                                                                                          image: Image.network(
+                                                                                                            valueOrDefault<String>(
                                                                                                               _model.membrosFotos.elementAtOrNull(1),
                                                                                                               'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/rgxzhoyu6nbx/groups_96dp_99999_FILL0_wght400_GRAD0_opsz48.png',
                                                                                                             ),
-                                                                                                            useHeroAnimation: true,
+                                                                                                            fit: BoxFit.contain,
+                                                                                                            alignment: Alignment(0.0, 0.0),
+                                                                                                            errorBuilder: (context, error, stackTrace) => Image.asset(
+                                                                                                              'assets/images/error_image.png',
+                                                                                                              fit: BoxFit.contain,
+                                                                                                              alignment: Alignment(0.0, 0.0),
+                                                                                                            ),
                                                                                                           ),
-                                                                                                        ),
-                                                                                                      );
-                                                                                                    },
-                                                                                                    child: Hero(
-                                                                                                      tag: valueOrDefault<String>(
-                                                                                                        _model.membrosFotos.elementAtOrNull(1),
-                                                                                                        'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/rgxzhoyu6nbx/groups_96dp_99999_FILL0_wght400_GRAD0_opsz48.png',
-                                                                                                      ),
-                                                                                                      transitionOnUserGestures: true,
-                                                                                                      child: ClipRRect(
-                                                                                                        borderRadius: BorderRadius.circular(10.0),
-                                                                                                        child: Image.network(
-                                                                                                          valueOrDefault<String>(
+                                                                                                          allowRotation: false,
+                                                                                                          tag: valueOrDefault<String>(
                                                                                                             _model.membrosFotos.elementAtOrNull(1),
                                                                                                             'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/rgxzhoyu6nbx/groups_96dp_99999_FILL0_wght400_GRAD0_opsz48.png',
                                                                                                           ),
+                                                                                                          useHeroAnimation: true,
+                                                                                                        ),
+                                                                                                      ),
+                                                                                                    );
+                                                                                                  },
+                                                                                                  child: Hero(
+                                                                                                    tag: valueOrDefault<String>(
+                                                                                                      _model.membrosFotos.elementAtOrNull(1),
+                                                                                                      'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/rgxzhoyu6nbx/groups_96dp_99999_FILL0_wght400_GRAD0_opsz48.png',
+                                                                                                    ),
+                                                                                                    transitionOnUserGestures: true,
+                                                                                                    child: ClipRRect(
+                                                                                                      borderRadius: BorderRadius.circular(10.0),
+                                                                                                      child: Image.network(
+                                                                                                        valueOrDefault<String>(
+                                                                                                          _model.membrosFotos.elementAtOrNull(1),
+                                                                                                          'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/rgxzhoyu6nbx/groups_96dp_99999_FILL0_wght400_GRAD0_opsz48.png',
+                                                                                                        ),
+                                                                                                        width: 114.0,
+                                                                                                        height: 100.0,
+                                                                                                        fit: BoxFit.contain,
+                                                                                                        alignment: Alignment(0.0, 0.0),
+                                                                                                        errorBuilder: (context, error, stackTrace) => Image.asset(
+                                                                                                          'assets/images/error_image.png',
                                                                                                           width: 114.0,
                                                                                                           height: 100.0,
                                                                                                           fit: BoxFit.contain,
                                                                                                           alignment: Alignment(0.0, 0.0),
-                                                                                                          errorBuilder: (context, error, stackTrace) => Image.asset(
-                                                                                                            'assets/images/error_image.png',
-                                                                                                            width: 114.0,
-                                                                                                            height: 100.0,
-                                                                                                            fit: BoxFit.contain,
-                                                                                                            alignment: Alignment(0.0, 0.0),
-                                                                                                          ),
                                                                                                         ),
                                                                                                       ),
                                                                                                     ),
                                                                                                   ),
                                                                                                 ),
-                                                                                                Align(
-                                                                                                  alignment: AlignmentDirectional(0.0, 0.0),
-                                                                                                  child: InkWell(
-                                                                                                    splashColor: Colors.transparent,
-                                                                                                    focusColor: Colors.transparent,
-                                                                                                    hoverColor: Colors.transparent,
-                                                                                                    highlightColor: Colors.transparent,
-                                                                                                    onTap: () async {
-                                                                                                      logFirebaseEvent('MODAL_MEMBROS_ADD_Icon_i6o325ej_ON_TAP');
-                                                                                                      var confirmDialogResponse = await showDialog<bool>(
-                                                                                                            context: context,
-                                                                                                            builder: (alertDialogContext) {
-                                                                                                              return AlertDialog(
-                                                                                                                title: Text('Apagar Foto'),
-                                                                                                                content: Text('Deseja APAGAR esta foto ?'),
-                                                                                                                actions: [
-                                                                                                                  TextButton(
-                                                                                                                    onPressed: () => Navigator.pop(alertDialogContext, false),
-                                                                                                                    child: Text('Cancelar'),
-                                                                                                                  ),
-                                                                                                                  TextButton(
-                                                                                                                    onPressed: () => Navigator.pop(alertDialogContext, true),
-                                                                                                                    child: Text('Confirmar'),
-                                                                                                                  ),
-                                                                                                                ],
-                                                                                                              );
-                                                                                                            },
-                                                                                                          ) ??
-                                                                                                          false;
-                                                                                                      if (confirmDialogResponse) {
-                                                                                                        safeSetState(() {
-                                                                                                          _model.isDataUploading2 = false;
-                                                                                                          _model.uploadedLocalFile2 = FFUploadedFile(bytes: Uint8List.fromList([]));
-                                                                                                          _model.uploadedFileUrl2 = '';
-                                                                                                        });
+                                                                                              ),
+                                                                                              Align(
+                                                                                                alignment: AlignmentDirectional(0.0, 0.0),
+                                                                                                child: InkWell(
+                                                                                                  splashColor: Colors.transparent,
+                                                                                                  focusColor: Colors.transparent,
+                                                                                                  hoverColor: Colors.transparent,
+                                                                                                  highlightColor: Colors.transparent,
+                                                                                                  onTap: () async {
+                                                                                                    logFirebaseEvent('MODAL_MEMBROS_ADD_Icon_i6o325ej_ON_TAP');
+                                                                                                    var confirmDialogResponse = await showDialog<bool>(
+                                                                                                          context: context,
+                                                                                                          builder: (alertDialogContext) {
+                                                                                                            return AlertDialog(
+                                                                                                              title: Text('Apagar Foto'),
+                                                                                                              content: Text('Deseja APAGAR esta foto ?'),
+                                                                                                              actions: [
+                                                                                                                TextButton(
+                                                                                                                  onPressed: () => Navigator.pop(alertDialogContext, false),
+                                                                                                                  child: Text('Cancelar'),
+                                                                                                                ),
+                                                                                                                TextButton(
+                                                                                                                  onPressed: () => Navigator.pop(alertDialogContext, true),
+                                                                                                                  child: Text('Confirmar'),
+                                                                                                                ),
+                                                                                                              ],
+                                                                                                            );
+                                                                                                          },
+                                                                                                        ) ??
+                                                                                                        false;
+                                                                                                    if (confirmDialogResponse) {
+                                                                                                      safeSetState(() {
+                                                                                                        _model.isDataUploading2 = false;
+                                                                                                        _model.uploadedLocalFile2 = FFUploadedFile(bytes: Uint8List.fromList([]));
+                                                                                                        _model.uploadedFileUrl2 = '';
+                                                                                                      });
 
-                                                                                                        _model.removeAtIndexFromMembrosFotos(1);
-                                                                                                        _model.updatePage(() {});
-                                                                                                      }
-                                                                                                    },
-                                                                                                    child: Icon(
-                                                                                                      Icons.do_not_disturb_on_rounded,
-                                                                                                      color: FlutterFlowTheme.of(context).error,
-                                                                                                      size: 24.0,
-                                                                                                    ),
+                                                                                                      _model.removeAtIndexFromMembrosFotos(1);
+                                                                                                      _model.updatePage(() {});
+                                                                                                    }
+                                                                                                  },
+                                                                                                  child: Icon(
+                                                                                                    Icons.do_not_disturb_on_rounded,
+                                                                                                    color: FlutterFlowTheme.of(context).error,
+                                                                                                    size: 24.0,
                                                                                                   ),
                                                                                                 ),
-                                                                                              ].divide(SizedBox(height: 1.0)),
-                                                                                            ),
+                                                                                              ),
+                                                                                            ].divide(SizedBox(height: 1.0)),
                                                                                           ),
                                                                                         ),
                                                                                       ),
@@ -972,196 +966,193 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                                               width: 2.0,
                                                                                             ),
                                                                                           ),
-                                                                                          child: SingleChildScrollView(
-                                                                                            primary: false,
-                                                                                            child: Column(
-                                                                                              mainAxisSize: MainAxisSize.max,
-                                                                                              mainAxisAlignment: MainAxisAlignment.center,
-                                                                                              children: [
-                                                                                                InkWell(
+                                                                                          child: Column(
+                                                                                            mainAxisSize: MainAxisSize.max,
+                                                                                            mainAxisAlignment: MainAxisAlignment.center,
+                                                                                            children: [
+                                                                                              InkWell(
+                                                                                                splashColor: Colors.transparent,
+                                                                                                focusColor: Colors.transparent,
+                                                                                                hoverColor: Colors.transparent,
+                                                                                                highlightColor: Colors.transparent,
+                                                                                                onTap: () async {
+                                                                                                  logFirebaseEvent('MODAL_MEMBROS_ADD_Text_7njjxrl7_ON_TAP');
+                                                                                                  final selectedMedia = await selectMedia(
+                                                                                                    storageFolderPath: 'membros',
+                                                                                                    maxWidth: 300.00,
+                                                                                                    maxHeight: 300.00,
+                                                                                                    imageQuality: 100,
+                                                                                                    mediaSource: MediaSource.photoGallery,
+                                                                                                    multiImage: false,
+                                                                                                  );
+                                                                                                  if (selectedMedia != null && selectedMedia.every((m) => validateFileFormat(m.storagePath, context))) {
+                                                                                                    safeSetState(() => _model.isDataUploading3 = true);
+                                                                                                    var selectedUploadedFiles = <FFUploadedFile>[];
+
+                                                                                                    var downloadUrls = <String>[];
+                                                                                                    try {
+                                                                                                      selectedUploadedFiles = selectedMedia
+                                                                                                          .map((m) => FFUploadedFile(
+                                                                                                                name: m.storagePath.split('/').last,
+                                                                                                                bytes: m.bytes,
+                                                                                                                height: m.dimensions?.height,
+                                                                                                                width: m.dimensions?.width,
+                                                                                                                blurHash: m.blurHash,
+                                                                                                              ))
+                                                                                                          .toList();
+
+                                                                                                      downloadUrls = await uploadSupabaseStorageFiles(
+                                                                                                        bucketName: 'uploads',
+                                                                                                        selectedFiles: selectedMedia,
+                                                                                                      );
+                                                                                                    } finally {
+                                                                                                      _model.isDataUploading3 = false;
+                                                                                                    }
+                                                                                                    if (selectedUploadedFiles.length == selectedMedia.length && downloadUrls.length == selectedMedia.length) {
+                                                                                                      safeSetState(() {
+                                                                                                        _model.uploadedLocalFile3 = selectedUploadedFiles.first;
+                                                                                                        _model.uploadedFileUrl3 = downloadUrls.first;
+                                                                                                      });
+                                                                                                    } else {
+                                                                                                      safeSetState(() {});
+                                                                                                      return;
+                                                                                                    }
+                                                                                                  }
+
+                                                                                                  _model.insertAtIndexInMembrosFotos(2, _model.uploadedFileUrl3);
+                                                                                                  _model.updatePage(() {});
+                                                                                                },
+                                                                                                child: Text(
+                                                                                                  FFLocalizations.of(context).getText(
+                                                                                                    'fy81oycs' /* Add photo #3 */,
+                                                                                                  ),
+                                                                                                  style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                        fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                                                        color: FlutterFlowTheme.of(context).primaryText,
+                                                                                                        letterSpacing: 0.0,
+                                                                                                        fontWeight: FontWeight.bold,
+                                                                                                        useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                                                      ),
+                                                                                                ),
+                                                                                              ),
+                                                                                              Padding(
+                                                                                                padding: EdgeInsets.all(1.0),
+                                                                                                child: InkWell(
                                                                                                   splashColor: Colors.transparent,
                                                                                                   focusColor: Colors.transparent,
                                                                                                   hoverColor: Colors.transparent,
                                                                                                   highlightColor: Colors.transparent,
                                                                                                   onTap: () async {
-                                                                                                    logFirebaseEvent('MODAL_MEMBROS_ADD_Text_7njjxrl7_ON_TAP');
-                                                                                                    final selectedMedia = await selectMedia(
-                                                                                                      storageFolderPath: 'membros',
-                                                                                                      maxWidth: 300.00,
-                                                                                                      maxHeight: 300.00,
-                                                                                                      imageQuality: 100,
-                                                                                                      mediaSource: MediaSource.photoGallery,
-                                                                                                      multiImage: false,
-                                                                                                    );
-                                                                                                    if (selectedMedia != null && selectedMedia.every((m) => validateFileFormat(m.storagePath, context))) {
-                                                                                                      safeSetState(() => _model.isDataUploading3 = true);
-                                                                                                      var selectedUploadedFiles = <FFUploadedFile>[];
-
-                                                                                                      var downloadUrls = <String>[];
-                                                                                                      try {
-                                                                                                        selectedUploadedFiles = selectedMedia
-                                                                                                            .map((m) => FFUploadedFile(
-                                                                                                                  name: m.storagePath.split('/').last,
-                                                                                                                  bytes: m.bytes,
-                                                                                                                  height: m.dimensions?.height,
-                                                                                                                  width: m.dimensions?.width,
-                                                                                                                  blurHash: m.blurHash,
-                                                                                                                ))
-                                                                                                            .toList();
-
-                                                                                                        downloadUrls = await uploadSupabaseStorageFiles(
-                                                                                                          bucketName: 'uploads',
-                                                                                                          selectedFiles: selectedMedia,
-                                                                                                        );
-                                                                                                      } finally {
-                                                                                                        _model.isDataUploading3 = false;
-                                                                                                      }
-                                                                                                      if (selectedUploadedFiles.length == selectedMedia.length && downloadUrls.length == selectedMedia.length) {
-                                                                                                        safeSetState(() {
-                                                                                                          _model.uploadedLocalFile3 = selectedUploadedFiles.first;
-                                                                                                          _model.uploadedFileUrl3 = downloadUrls.first;
-                                                                                                        });
-                                                                                                      } else {
-                                                                                                        safeSetState(() {});
-                                                                                                        return;
-                                                                                                      }
-                                                                                                    }
-
-                                                                                                    _model.insertAtIndexInMembrosFotos(2, _model.uploadedFileUrl3);
-                                                                                                    _model.updatePage(() {});
-                                                                                                  },
-                                                                                                  child: Text(
-                                                                                                    FFLocalizations.of(context).getText(
-                                                                                                      'fy81oycs' /* Add photo #3 */,
-                                                                                                    ),
-                                                                                                    style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                          fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                                          color: FlutterFlowTheme.of(context).primaryText,
-                                                                                                          letterSpacing: 0.0,
-                                                                                                          fontWeight: FontWeight.bold,
-                                                                                                          useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                                                        ),
-                                                                                                  ),
-                                                                                                ),
-                                                                                                Padding(
-                                                                                                  padding: EdgeInsets.all(1.0),
-                                                                                                  child: InkWell(
-                                                                                                    splashColor: Colors.transparent,
-                                                                                                    focusColor: Colors.transparent,
-                                                                                                    hoverColor: Colors.transparent,
-                                                                                                    highlightColor: Colors.transparent,
-                                                                                                    onTap: () async {
-                                                                                                      logFirebaseEvent('MODAL_MEMBROS_ADD_membro_foto_3_ON_TAP');
-                                                                                                      await Navigator.push(
-                                                                                                        context,
-                                                                                                        PageTransition(
-                                                                                                          type: PageTransitionType.fade,
-                                                                                                          child: FlutterFlowExpandedImageView(
-                                                                                                            image: CachedNetworkImage(
-                                                                                                              fadeInDuration: Duration(milliseconds: 100),
-                                                                                                              fadeOutDuration: Duration(milliseconds: 100),
-                                                                                                              imageUrl: valueOrDefault<String>(
-                                                                                                                _model.membrosFotos.elementAtOrNull(2),
-                                                                                                                'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/rgxzhoyu6nbx/groups_96dp_99999_FILL0_wght400_GRAD0_opsz48.png',
-                                                                                                              ),
-                                                                                                              fit: BoxFit.contain,
-                                                                                                              alignment: Alignment(0.0, 0.0),
-                                                                                                              errorWidget: (context, error, stackTrace) => Image.asset(
-                                                                                                                'assets/images/error_image.png',
-                                                                                                                fit: BoxFit.contain,
-                                                                                                                alignment: Alignment(0.0, 0.0),
-                                                                                                              ),
-                                                                                                            ),
-                                                                                                            allowRotation: false,
-                                                                                                            tag: valueOrDefault<String>(
+                                                                                                    logFirebaseEvent('MODAL_MEMBROS_ADD_membro_foto_3_ON_TAP');
+                                                                                                    await Navigator.push(
+                                                                                                      context,
+                                                                                                      PageTransition(
+                                                                                                        type: PageTransitionType.fade,
+                                                                                                        child: FlutterFlowExpandedImageView(
+                                                                                                          image: CachedNetworkImage(
+                                                                                                            fadeInDuration: Duration(milliseconds: 100),
+                                                                                                            fadeOutDuration: Duration(milliseconds: 100),
+                                                                                                            imageUrl: valueOrDefault<String>(
                                                                                                               _model.membrosFotos.elementAtOrNull(2),
                                                                                                               'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/rgxzhoyu6nbx/groups_96dp_99999_FILL0_wght400_GRAD0_opsz48.png',
                                                                                                             ),
-                                                                                                            useHeroAnimation: true,
+                                                                                                            fit: BoxFit.contain,
+                                                                                                            alignment: Alignment(0.0, 0.0),
+                                                                                                            errorWidget: (context, error, stackTrace) => Image.asset(
+                                                                                                              'assets/images/error_image.png',
+                                                                                                              fit: BoxFit.contain,
+                                                                                                              alignment: Alignment(0.0, 0.0),
+                                                                                                            ),
                                                                                                           ),
-                                                                                                        ),
-                                                                                                      );
-                                                                                                    },
-                                                                                                    child: Hero(
-                                                                                                      tag: valueOrDefault<String>(
-                                                                                                        _model.membrosFotos.elementAtOrNull(2),
-                                                                                                        'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/rgxzhoyu6nbx/groups_96dp_99999_FILL0_wght400_GRAD0_opsz48.png',
-                                                                                                      ),
-                                                                                                      transitionOnUserGestures: true,
-                                                                                                      child: ClipRRect(
-                                                                                                        borderRadius: BorderRadius.circular(10.0),
-                                                                                                        child: CachedNetworkImage(
-                                                                                                          fadeInDuration: Duration(milliseconds: 100),
-                                                                                                          fadeOutDuration: Duration(milliseconds: 100),
-                                                                                                          imageUrl: valueOrDefault<String>(
+                                                                                                          allowRotation: false,
+                                                                                                          tag: valueOrDefault<String>(
                                                                                                             _model.membrosFotos.elementAtOrNull(2),
                                                                                                             'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/rgxzhoyu6nbx/groups_96dp_99999_FILL0_wght400_GRAD0_opsz48.png',
                                                                                                           ),
+                                                                                                          useHeroAnimation: true,
+                                                                                                        ),
+                                                                                                      ),
+                                                                                                    );
+                                                                                                  },
+                                                                                                  child: Hero(
+                                                                                                    tag: valueOrDefault<String>(
+                                                                                                      _model.membrosFotos.elementAtOrNull(2),
+                                                                                                      'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/rgxzhoyu6nbx/groups_96dp_99999_FILL0_wght400_GRAD0_opsz48.png',
+                                                                                                    ),
+                                                                                                    transitionOnUserGestures: true,
+                                                                                                    child: ClipRRect(
+                                                                                                      borderRadius: BorderRadius.circular(10.0),
+                                                                                                      child: CachedNetworkImage(
+                                                                                                        fadeInDuration: Duration(milliseconds: 100),
+                                                                                                        fadeOutDuration: Duration(milliseconds: 100),
+                                                                                                        imageUrl: valueOrDefault<String>(
+                                                                                                          _model.membrosFotos.elementAtOrNull(2),
+                                                                                                          'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/rgxzhoyu6nbx/groups_96dp_99999_FILL0_wght400_GRAD0_opsz48.png',
+                                                                                                        ),
+                                                                                                        width: 114.0,
+                                                                                                        height: 100.0,
+                                                                                                        fit: BoxFit.contain,
+                                                                                                        alignment: Alignment(0.0, 0.0),
+                                                                                                        errorWidget: (context, error, stackTrace) => Image.asset(
+                                                                                                          'assets/images/error_image.png',
                                                                                                           width: 114.0,
                                                                                                           height: 100.0,
                                                                                                           fit: BoxFit.contain,
                                                                                                           alignment: Alignment(0.0, 0.0),
-                                                                                                          errorWidget: (context, error, stackTrace) => Image.asset(
-                                                                                                            'assets/images/error_image.png',
-                                                                                                            width: 114.0,
-                                                                                                            height: 100.0,
-                                                                                                            fit: BoxFit.contain,
-                                                                                                            alignment: Alignment(0.0, 0.0),
-                                                                                                          ),
                                                                                                         ),
                                                                                                       ),
                                                                                                     ),
                                                                                                   ),
                                                                                                 ),
-                                                                                                Align(
-                                                                                                  alignment: AlignmentDirectional(0.0, 0.0),
-                                                                                                  child: InkWell(
-                                                                                                    splashColor: Colors.transparent,
-                                                                                                    focusColor: Colors.transparent,
-                                                                                                    hoverColor: Colors.transparent,
-                                                                                                    highlightColor: Colors.transparent,
-                                                                                                    onTap: () async {
-                                                                                                      logFirebaseEvent('MODAL_MEMBROS_ADD_Icon_fmv3o1xc_ON_TAP');
-                                                                                                      var confirmDialogResponse = await showDialog<bool>(
-                                                                                                            context: context,
-                                                                                                            builder: (alertDialogContext) {
-                                                                                                              return AlertDialog(
-                                                                                                                title: Text('Apagar Foto'),
-                                                                                                                content: Text('Deseja APAGAR esta foto ?'),
-                                                                                                                actions: [
-                                                                                                                  TextButton(
-                                                                                                                    onPressed: () => Navigator.pop(alertDialogContext, false),
-                                                                                                                    child: Text('Cancelar'),
-                                                                                                                  ),
-                                                                                                                  TextButton(
-                                                                                                                    onPressed: () => Navigator.pop(alertDialogContext, true),
-                                                                                                                    child: Text('Confirmar'),
-                                                                                                                  ),
-                                                                                                                ],
-                                                                                                              );
-                                                                                                            },
-                                                                                                          ) ??
-                                                                                                          false;
-                                                                                                      if (confirmDialogResponse) {
-                                                                                                        safeSetState(() {
-                                                                                                          _model.isDataUploading3 = false;
-                                                                                                          _model.uploadedLocalFile3 = FFUploadedFile(bytes: Uint8List.fromList([]));
-                                                                                                          _model.uploadedFileUrl3 = '';
-                                                                                                        });
+                                                                                              ),
+                                                                                              Align(
+                                                                                                alignment: AlignmentDirectional(0.0, 0.0),
+                                                                                                child: InkWell(
+                                                                                                  splashColor: Colors.transparent,
+                                                                                                  focusColor: Colors.transparent,
+                                                                                                  hoverColor: Colors.transparent,
+                                                                                                  highlightColor: Colors.transparent,
+                                                                                                  onTap: () async {
+                                                                                                    logFirebaseEvent('MODAL_MEMBROS_ADD_Icon_fmv3o1xc_ON_TAP');
+                                                                                                    var confirmDialogResponse = await showDialog<bool>(
+                                                                                                          context: context,
+                                                                                                          builder: (alertDialogContext) {
+                                                                                                            return AlertDialog(
+                                                                                                              title: Text('Apagar Foto'),
+                                                                                                              content: Text('Deseja APAGAR esta foto ?'),
+                                                                                                              actions: [
+                                                                                                                TextButton(
+                                                                                                                  onPressed: () => Navigator.pop(alertDialogContext, false),
+                                                                                                                  child: Text('Cancelar'),
+                                                                                                                ),
+                                                                                                                TextButton(
+                                                                                                                  onPressed: () => Navigator.pop(alertDialogContext, true),
+                                                                                                                  child: Text('Confirmar'),
+                                                                                                                ),
+                                                                                                              ],
+                                                                                                            );
+                                                                                                          },
+                                                                                                        ) ??
+                                                                                                        false;
+                                                                                                    if (confirmDialogResponse) {
+                                                                                                      safeSetState(() {
+                                                                                                        _model.isDataUploading3 = false;
+                                                                                                        _model.uploadedLocalFile3 = FFUploadedFile(bytes: Uint8List.fromList([]));
+                                                                                                        _model.uploadedFileUrl3 = '';
+                                                                                                      });
 
-                                                                                                        _model.removeAtIndexFromMembrosFotos(2);
-                                                                                                        _model.updatePage(() {});
-                                                                                                      }
-                                                                                                    },
-                                                                                                    child: Icon(
-                                                                                                      Icons.do_not_disturb_on_rounded,
-                                                                                                      color: FlutterFlowTheme.of(context).error,
-                                                                                                      size: 24.0,
-                                                                                                    ),
+                                                                                                      _model.removeAtIndexFromMembrosFotos(2);
+                                                                                                      _model.updatePage(() {});
+                                                                                                    }
+                                                                                                  },
+                                                                                                  child: Icon(
+                                                                                                    Icons.do_not_disturb_on_rounded,
+                                                                                                    color: FlutterFlowTheme.of(context).error,
+                                                                                                    size: 24.0,
                                                                                                   ),
                                                                                                 ),
-                                                                                              ].divide(SizedBox(height: 1.0)),
-                                                                                            ),
+                                                                                              ),
+                                                                                            ].divide(SizedBox(height: 1.0)),
                                                                                           ),
                                                                                         ),
                                                                                       ),
@@ -1179,192 +1170,189 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                                               width: 2.0,
                                                                                             ),
                                                                                           ),
-                                                                                          child: SingleChildScrollView(
-                                                                                            primary: false,
-                                                                                            child: Column(
-                                                                                              mainAxisSize: MainAxisSize.max,
-                                                                                              mainAxisAlignment: MainAxisAlignment.center,
-                                                                                              children: [
-                                                                                                InkWell(
+                                                                                          child: Column(
+                                                                                            mainAxisSize: MainAxisSize.max,
+                                                                                            mainAxisAlignment: MainAxisAlignment.center,
+                                                                                            children: [
+                                                                                              InkWell(
+                                                                                                splashColor: Colors.transparent,
+                                                                                                focusColor: Colors.transparent,
+                                                                                                hoverColor: Colors.transparent,
+                                                                                                highlightColor: Colors.transparent,
+                                                                                                onTap: () async {
+                                                                                                  logFirebaseEvent('MODAL_MEMBROS_ADD_Text_aj9r90o4_ON_TAP');
+                                                                                                  final selectedMedia = await selectMedia(
+                                                                                                    storageFolderPath: 'membros',
+                                                                                                    maxWidth: 300.00,
+                                                                                                    maxHeight: 300.00,
+                                                                                                    imageQuality: 100,
+                                                                                                    mediaSource: MediaSource.photoGallery,
+                                                                                                    multiImage: false,
+                                                                                                  );
+                                                                                                  if (selectedMedia != null && selectedMedia.every((m) => validateFileFormat(m.storagePath, context))) {
+                                                                                                    safeSetState(() => _model.isDataUploading4 = true);
+                                                                                                    var selectedUploadedFiles = <FFUploadedFile>[];
+
+                                                                                                    var downloadUrls = <String>[];
+                                                                                                    try {
+                                                                                                      selectedUploadedFiles = selectedMedia
+                                                                                                          .map((m) => FFUploadedFile(
+                                                                                                                name: m.storagePath.split('/').last,
+                                                                                                                bytes: m.bytes,
+                                                                                                                height: m.dimensions?.height,
+                                                                                                                width: m.dimensions?.width,
+                                                                                                                blurHash: m.blurHash,
+                                                                                                              ))
+                                                                                                          .toList();
+
+                                                                                                      downloadUrls = await uploadSupabaseStorageFiles(
+                                                                                                        bucketName: 'uploads',
+                                                                                                        selectedFiles: selectedMedia,
+                                                                                                      );
+                                                                                                    } finally {
+                                                                                                      _model.isDataUploading4 = false;
+                                                                                                    }
+                                                                                                    if (selectedUploadedFiles.length == selectedMedia.length && downloadUrls.length == selectedMedia.length) {
+                                                                                                      safeSetState(() {
+                                                                                                        _model.uploadedLocalFile4 = selectedUploadedFiles.first;
+                                                                                                        _model.uploadedFileUrl4 = downloadUrls.first;
+                                                                                                      });
+                                                                                                    } else {
+                                                                                                      safeSetState(() {});
+                                                                                                      return;
+                                                                                                    }
+                                                                                                  }
+
+                                                                                                  _model.insertAtIndexInMembrosFotos(3, _model.uploadedFileUrl4);
+                                                                                                  _model.updatePage(() {});
+                                                                                                },
+                                                                                                child: Text(
+                                                                                                  FFLocalizations.of(context).getText(
+                                                                                                    '6ogiyutt' /* Add photo #4 */,
+                                                                                                  ),
+                                                                                                  style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                        fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                                                        color: FlutterFlowTheme.of(context).primaryText,
+                                                                                                        letterSpacing: 0.0,
+                                                                                                        fontWeight: FontWeight.bold,
+                                                                                                        useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                                                      ),
+                                                                                                ),
+                                                                                              ),
+                                                                                              Padding(
+                                                                                                padding: EdgeInsets.all(1.0),
+                                                                                                child: InkWell(
                                                                                                   splashColor: Colors.transparent,
                                                                                                   focusColor: Colors.transparent,
                                                                                                   hoverColor: Colors.transparent,
                                                                                                   highlightColor: Colors.transparent,
                                                                                                   onTap: () async {
-                                                                                                    logFirebaseEvent('MODAL_MEMBROS_ADD_Text_aj9r90o4_ON_TAP');
-                                                                                                    final selectedMedia = await selectMedia(
-                                                                                                      storageFolderPath: 'membros',
-                                                                                                      maxWidth: 300.00,
-                                                                                                      maxHeight: 300.00,
-                                                                                                      imageQuality: 100,
-                                                                                                      mediaSource: MediaSource.photoGallery,
-                                                                                                      multiImage: false,
+                                                                                                    logFirebaseEvent('MODAL_MEMBROS_ADD_membro_foto_4_ON_TAP');
+                                                                                                    await Navigator.push(
+                                                                                                      context,
+                                                                                                      PageTransition(
+                                                                                                        type: PageTransitionType.fade,
+                                                                                                        child: FlutterFlowExpandedImageView(
+                                                                                                          image: Image.network(
+                                                                                                            valueOrDefault<String>(
+                                                                                                              _model.membrosFotos.elementAtOrNull(3),
+                                                                                                              'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/rgxzhoyu6nbx/groups_96dp_99999_FILL0_wght400_GRAD0_opsz48.png',
+                                                                                                            ),
+                                                                                                            fit: BoxFit.contain,
+                                                                                                            alignment: Alignment(0.0, 0.0),
+                                                                                                            errorBuilder: (context, error, stackTrace) => Image.asset(
+                                                                                                              'assets/images/error_image.png',
+                                                                                                              fit: BoxFit.contain,
+                                                                                                              alignment: Alignment(0.0, 0.0),
+                                                                                                            ),
+                                                                                                          ),
+                                                                                                          allowRotation: false,
+                                                                                                          tag: valueOrDefault<String>(
+                                                                                                            _model.membrosFotos.elementAtOrNull(3),
+                                                                                                            'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/rgxzhoyu6nbx/groups_96dp_99999_FILL0_wght400_GRAD0_opsz48.png',
+                                                                                                          ),
+                                                                                                          useHeroAnimation: true,
+                                                                                                        ),
+                                                                                                      ),
                                                                                                     );
-                                                                                                    if (selectedMedia != null && selectedMedia.every((m) => validateFileFormat(m.storagePath, context))) {
-                                                                                                      safeSetState(() => _model.isDataUploading4 = true);
-                                                                                                      var selectedUploadedFiles = <FFUploadedFile>[];
-
-                                                                                                      var downloadUrls = <String>[];
-                                                                                                      try {
-                                                                                                        selectedUploadedFiles = selectedMedia
-                                                                                                            .map((m) => FFUploadedFile(
-                                                                                                                  name: m.storagePath.split('/').last,
-                                                                                                                  bytes: m.bytes,
-                                                                                                                  height: m.dimensions?.height,
-                                                                                                                  width: m.dimensions?.width,
-                                                                                                                  blurHash: m.blurHash,
-                                                                                                                ))
-                                                                                                            .toList();
-
-                                                                                                        downloadUrls = await uploadSupabaseStorageFiles(
-                                                                                                          bucketName: 'uploads',
-                                                                                                          selectedFiles: selectedMedia,
-                                                                                                        );
-                                                                                                      } finally {
+                                                                                                  },
+                                                                                                  child: Hero(
+                                                                                                    tag: valueOrDefault<String>(
+                                                                                                      _model.membrosFotos.elementAtOrNull(3),
+                                                                                                      'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/rgxzhoyu6nbx/groups_96dp_99999_FILL0_wght400_GRAD0_opsz48.png',
+                                                                                                    ),
+                                                                                                    transitionOnUserGestures: true,
+                                                                                                    child: ClipRRect(
+                                                                                                      borderRadius: BorderRadius.circular(10.0),
+                                                                                                      child: Image.network(
+                                                                                                        valueOrDefault<String>(
+                                                                                                          _model.membrosFotos.elementAtOrNull(3),
+                                                                                                          'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/rgxzhoyu6nbx/groups_96dp_99999_FILL0_wght400_GRAD0_opsz48.png',
+                                                                                                        ),
+                                                                                                        width: 114.0,
+                                                                                                        height: 100.0,
+                                                                                                        fit: BoxFit.contain,
+                                                                                                        alignment: Alignment(0.0, 0.0),
+                                                                                                        errorBuilder: (context, error, stackTrace) => Image.asset(
+                                                                                                          'assets/images/error_image.png',
+                                                                                                          width: 114.0,
+                                                                                                          height: 100.0,
+                                                                                                          fit: BoxFit.contain,
+                                                                                                          alignment: Alignment(0.0, 0.0),
+                                                                                                        ),
+                                                                                                      ),
+                                                                                                    ),
+                                                                                                  ),
+                                                                                                ),
+                                                                                              ),
+                                                                                              Align(
+                                                                                                alignment: AlignmentDirectional(0.0, 0.0),
+                                                                                                child: InkWell(
+                                                                                                  splashColor: Colors.transparent,
+                                                                                                  focusColor: Colors.transparent,
+                                                                                                  hoverColor: Colors.transparent,
+                                                                                                  highlightColor: Colors.transparent,
+                                                                                                  onTap: () async {
+                                                                                                    logFirebaseEvent('MODAL_MEMBROS_ADD_Icon_ewdonxc2_ON_TAP');
+                                                                                                    var confirmDialogResponse = await showDialog<bool>(
+                                                                                                          context: context,
+                                                                                                          builder: (alertDialogContext) {
+                                                                                                            return AlertDialog(
+                                                                                                              title: Text('Apagar Foto'),
+                                                                                                              content: Text('Deseja APAGAR esta foto ?'),
+                                                                                                              actions: [
+                                                                                                                TextButton(
+                                                                                                                  onPressed: () => Navigator.pop(alertDialogContext, false),
+                                                                                                                  child: Text('Cancelar'),
+                                                                                                                ),
+                                                                                                                TextButton(
+                                                                                                                  onPressed: () => Navigator.pop(alertDialogContext, true),
+                                                                                                                  child: Text('Confirmar'),
+                                                                                                                ),
+                                                                                                              ],
+                                                                                                            );
+                                                                                                          },
+                                                                                                        ) ??
+                                                                                                        false;
+                                                                                                    if (confirmDialogResponse) {
+                                                                                                      safeSetState(() {
                                                                                                         _model.isDataUploading4 = false;
-                                                                                                      }
-                                                                                                      if (selectedUploadedFiles.length == selectedMedia.length && downloadUrls.length == selectedMedia.length) {
-                                                                                                        safeSetState(() {
-                                                                                                          _model.uploadedLocalFile4 = selectedUploadedFiles.first;
-                                                                                                          _model.uploadedFileUrl4 = downloadUrls.first;
-                                                                                                        });
-                                                                                                      } else {
-                                                                                                        safeSetState(() {});
-                                                                                                        return;
-                                                                                                      }
+                                                                                                        _model.uploadedLocalFile4 = FFUploadedFile(bytes: Uint8List.fromList([]));
+                                                                                                        _model.uploadedFileUrl4 = '';
+                                                                                                      });
+
+                                                                                                      _model.removeAtIndexFromMembrosFotos(3);
+                                                                                                      _model.updatePage(() {});
                                                                                                     }
-
-                                                                                                    _model.insertAtIndexInMembrosFotos(3, _model.uploadedFileUrl4);
-                                                                                                    _model.updatePage(() {});
                                                                                                   },
-                                                                                                  child: Text(
-                                                                                                    FFLocalizations.of(context).getText(
-                                                                                                      '6ogiyutt' /* Add photo #4 */,
-                                                                                                    ),
-                                                                                                    style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                          fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                                          color: FlutterFlowTheme.of(context).primaryText,
-                                                                                                          letterSpacing: 0.0,
-                                                                                                          fontWeight: FontWeight.bold,
-                                                                                                          useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                                                        ),
+                                                                                                  child: Icon(
+                                                                                                    Icons.do_not_disturb_on_rounded,
+                                                                                                    color: FlutterFlowTheme.of(context).error,
+                                                                                                    size: 24.0,
                                                                                                   ),
                                                                                                 ),
-                                                                                                Padding(
-                                                                                                  padding: EdgeInsets.all(1.0),
-                                                                                                  child: InkWell(
-                                                                                                    splashColor: Colors.transparent,
-                                                                                                    focusColor: Colors.transparent,
-                                                                                                    hoverColor: Colors.transparent,
-                                                                                                    highlightColor: Colors.transparent,
-                                                                                                    onTap: () async {
-                                                                                                      logFirebaseEvent('MODAL_MEMBROS_ADD_membro_foto_4_ON_TAP');
-                                                                                                      await Navigator.push(
-                                                                                                        context,
-                                                                                                        PageTransition(
-                                                                                                          type: PageTransitionType.fade,
-                                                                                                          child: FlutterFlowExpandedImageView(
-                                                                                                            image: Image.network(
-                                                                                                              valueOrDefault<String>(
-                                                                                                                _model.membrosFotos.elementAtOrNull(3),
-                                                                                                                'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/rgxzhoyu6nbx/groups_96dp_99999_FILL0_wght400_GRAD0_opsz48.png',
-                                                                                                              ),
-                                                                                                              fit: BoxFit.contain,
-                                                                                                              alignment: Alignment(0.0, 0.0),
-                                                                                                              errorBuilder: (context, error, stackTrace) => Image.asset(
-                                                                                                                'assets/images/error_image.png',
-                                                                                                                fit: BoxFit.contain,
-                                                                                                                alignment: Alignment(0.0, 0.0),
-                                                                                                              ),
-                                                                                                            ),
-                                                                                                            allowRotation: false,
-                                                                                                            tag: valueOrDefault<String>(
-                                                                                                              _model.membrosFotos.elementAtOrNull(3),
-                                                                                                              'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/rgxzhoyu6nbx/groups_96dp_99999_FILL0_wght400_GRAD0_opsz48.png',
-                                                                                                            ),
-                                                                                                            useHeroAnimation: true,
-                                                                                                          ),
-                                                                                                        ),
-                                                                                                      );
-                                                                                                    },
-                                                                                                    child: Hero(
-                                                                                                      tag: valueOrDefault<String>(
-                                                                                                        _model.membrosFotos.elementAtOrNull(3),
-                                                                                                        'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/rgxzhoyu6nbx/groups_96dp_99999_FILL0_wght400_GRAD0_opsz48.png',
-                                                                                                      ),
-                                                                                                      transitionOnUserGestures: true,
-                                                                                                      child: ClipRRect(
-                                                                                                        borderRadius: BorderRadius.circular(10.0),
-                                                                                                        child: Image.network(
-                                                                                                          valueOrDefault<String>(
-                                                                                                            _model.membrosFotos.elementAtOrNull(3),
-                                                                                                            'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/rgxzhoyu6nbx/groups_96dp_99999_FILL0_wght400_GRAD0_opsz48.png',
-                                                                                                          ),
-                                                                                                          width: 114.0,
-                                                                                                          height: 100.0,
-                                                                                                          fit: BoxFit.contain,
-                                                                                                          alignment: Alignment(0.0, 0.0),
-                                                                                                          errorBuilder: (context, error, stackTrace) => Image.asset(
-                                                                                                            'assets/images/error_image.png',
-                                                                                                            width: 114.0,
-                                                                                                            height: 100.0,
-                                                                                                            fit: BoxFit.contain,
-                                                                                                            alignment: Alignment(0.0, 0.0),
-                                                                                                          ),
-                                                                                                        ),
-                                                                                                      ),
-                                                                                                    ),
-                                                                                                  ),
-                                                                                                ),
-                                                                                                Align(
-                                                                                                  alignment: AlignmentDirectional(0.0, 0.0),
-                                                                                                  child: InkWell(
-                                                                                                    splashColor: Colors.transparent,
-                                                                                                    focusColor: Colors.transparent,
-                                                                                                    hoverColor: Colors.transparent,
-                                                                                                    highlightColor: Colors.transparent,
-                                                                                                    onTap: () async {
-                                                                                                      logFirebaseEvent('MODAL_MEMBROS_ADD_Icon_ewdonxc2_ON_TAP');
-                                                                                                      var confirmDialogResponse = await showDialog<bool>(
-                                                                                                            context: context,
-                                                                                                            builder: (alertDialogContext) {
-                                                                                                              return AlertDialog(
-                                                                                                                title: Text('Apagar Foto'),
-                                                                                                                content: Text('Deseja APAGAR esta foto ?'),
-                                                                                                                actions: [
-                                                                                                                  TextButton(
-                                                                                                                    onPressed: () => Navigator.pop(alertDialogContext, false),
-                                                                                                                    child: Text('Cancelar'),
-                                                                                                                  ),
-                                                                                                                  TextButton(
-                                                                                                                    onPressed: () => Navigator.pop(alertDialogContext, true),
-                                                                                                                    child: Text('Confirmar'),
-                                                                                                                  ),
-                                                                                                                ],
-                                                                                                              );
-                                                                                                            },
-                                                                                                          ) ??
-                                                                                                          false;
-                                                                                                      if (confirmDialogResponse) {
-                                                                                                        safeSetState(() {
-                                                                                                          _model.isDataUploading4 = false;
-                                                                                                          _model.uploadedLocalFile4 = FFUploadedFile(bytes: Uint8List.fromList([]));
-                                                                                                          _model.uploadedFileUrl4 = '';
-                                                                                                        });
-
-                                                                                                        _model.removeAtIndexFromMembrosFotos(3);
-                                                                                                        _model.updatePage(() {});
-                                                                                                      }
-                                                                                                    },
-                                                                                                    child: Icon(
-                                                                                                      Icons.do_not_disturb_on_rounded,
-                                                                                                      color: FlutterFlowTheme.of(context).error,
-                                                                                                      size: 24.0,
-                                                                                                    ),
-                                                                                                  ),
-                                                                                                ),
-                                                                                              ].divide(SizedBox(height: 1.0)),
-                                                                                            ),
+                                                                                              ),
+                                                                                            ].divide(SizedBox(height: 1.0)),
                                                                                           ),
                                                                                         ),
                                                                                       ),
@@ -1382,192 +1370,189 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                                               width: 2.0,
                                                                                             ),
                                                                                           ),
-                                                                                          child: SingleChildScrollView(
-                                                                                            primary: false,
-                                                                                            child: Column(
-                                                                                              mainAxisSize: MainAxisSize.max,
-                                                                                              mainAxisAlignment: MainAxisAlignment.center,
-                                                                                              children: [
-                                                                                                InkWell(
+                                                                                          child: Column(
+                                                                                            mainAxisSize: MainAxisSize.max,
+                                                                                            mainAxisAlignment: MainAxisAlignment.center,
+                                                                                            children: [
+                                                                                              InkWell(
+                                                                                                splashColor: Colors.transparent,
+                                                                                                focusColor: Colors.transparent,
+                                                                                                hoverColor: Colors.transparent,
+                                                                                                highlightColor: Colors.transparent,
+                                                                                                onTap: () async {
+                                                                                                  logFirebaseEvent('MODAL_MEMBROS_ADD_Text_lbbagoze_ON_TAP');
+                                                                                                  final selectedMedia = await selectMedia(
+                                                                                                    storageFolderPath: 'membros',
+                                                                                                    maxWidth: 300.00,
+                                                                                                    maxHeight: 300.00,
+                                                                                                    imageQuality: 100,
+                                                                                                    mediaSource: MediaSource.photoGallery,
+                                                                                                    multiImage: false,
+                                                                                                  );
+                                                                                                  if (selectedMedia != null && selectedMedia.every((m) => validateFileFormat(m.storagePath, context))) {
+                                                                                                    safeSetState(() => _model.isDataUploading5 = true);
+                                                                                                    var selectedUploadedFiles = <FFUploadedFile>[];
+
+                                                                                                    var downloadUrls = <String>[];
+                                                                                                    try {
+                                                                                                      selectedUploadedFiles = selectedMedia
+                                                                                                          .map((m) => FFUploadedFile(
+                                                                                                                name: m.storagePath.split('/').last,
+                                                                                                                bytes: m.bytes,
+                                                                                                                height: m.dimensions?.height,
+                                                                                                                width: m.dimensions?.width,
+                                                                                                                blurHash: m.blurHash,
+                                                                                                              ))
+                                                                                                          .toList();
+
+                                                                                                      downloadUrls = await uploadSupabaseStorageFiles(
+                                                                                                        bucketName: 'uploads',
+                                                                                                        selectedFiles: selectedMedia,
+                                                                                                      );
+                                                                                                    } finally {
+                                                                                                      _model.isDataUploading5 = false;
+                                                                                                    }
+                                                                                                    if (selectedUploadedFiles.length == selectedMedia.length && downloadUrls.length == selectedMedia.length) {
+                                                                                                      safeSetState(() {
+                                                                                                        _model.uploadedLocalFile5 = selectedUploadedFiles.first;
+                                                                                                        _model.uploadedFileUrl5 = downloadUrls.first;
+                                                                                                      });
+                                                                                                    } else {
+                                                                                                      safeSetState(() {});
+                                                                                                      return;
+                                                                                                    }
+                                                                                                  }
+
+                                                                                                  _model.insertAtIndexInMembrosFotos(4, _model.uploadedFileUrl5);
+                                                                                                  _model.updatePage(() {});
+                                                                                                },
+                                                                                                child: Text(
+                                                                                                  FFLocalizations.of(context).getText(
+                                                                                                    'vzoqd487' /* Add photo #5 */,
+                                                                                                  ),
+                                                                                                  style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                        fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                                                        color: FlutterFlowTheme.of(context).primaryText,
+                                                                                                        letterSpacing: 0.0,
+                                                                                                        fontWeight: FontWeight.bold,
+                                                                                                        useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                                                      ),
+                                                                                                ),
+                                                                                              ),
+                                                                                              Padding(
+                                                                                                padding: EdgeInsets.all(1.0),
+                                                                                                child: InkWell(
                                                                                                   splashColor: Colors.transparent,
                                                                                                   focusColor: Colors.transparent,
                                                                                                   hoverColor: Colors.transparent,
                                                                                                   highlightColor: Colors.transparent,
                                                                                                   onTap: () async {
-                                                                                                    logFirebaseEvent('MODAL_MEMBROS_ADD_Text_lbbagoze_ON_TAP');
-                                                                                                    final selectedMedia = await selectMedia(
-                                                                                                      storageFolderPath: 'membros',
-                                                                                                      maxWidth: 300.00,
-                                                                                                      maxHeight: 300.00,
-                                                                                                      imageQuality: 100,
-                                                                                                      mediaSource: MediaSource.photoGallery,
-                                                                                                      multiImage: false,
-                                                                                                    );
-                                                                                                    if (selectedMedia != null && selectedMedia.every((m) => validateFileFormat(m.storagePath, context))) {
-                                                                                                      safeSetState(() => _model.isDataUploading5 = true);
-                                                                                                      var selectedUploadedFiles = <FFUploadedFile>[];
-
-                                                                                                      var downloadUrls = <String>[];
-                                                                                                      try {
-                                                                                                        selectedUploadedFiles = selectedMedia
-                                                                                                            .map((m) => FFUploadedFile(
-                                                                                                                  name: m.storagePath.split('/').last,
-                                                                                                                  bytes: m.bytes,
-                                                                                                                  height: m.dimensions?.height,
-                                                                                                                  width: m.dimensions?.width,
-                                                                                                                  blurHash: m.blurHash,
-                                                                                                                ))
-                                                                                                            .toList();
-
-                                                                                                        downloadUrls = await uploadSupabaseStorageFiles(
-                                                                                                          bucketName: 'uploads',
-                                                                                                          selectedFiles: selectedMedia,
-                                                                                                        );
-                                                                                                      } finally {
-                                                                                                        _model.isDataUploading5 = false;
-                                                                                                      }
-                                                                                                      if (selectedUploadedFiles.length == selectedMedia.length && downloadUrls.length == selectedMedia.length) {
-                                                                                                        safeSetState(() {
-                                                                                                          _model.uploadedLocalFile5 = selectedUploadedFiles.first;
-                                                                                                          _model.uploadedFileUrl5 = downloadUrls.first;
-                                                                                                        });
-                                                                                                      } else {
-                                                                                                        safeSetState(() {});
-                                                                                                        return;
-                                                                                                      }
-                                                                                                    }
-
-                                                                                                    _model.insertAtIndexInMembrosFotos(4, _model.uploadedFileUrl5);
-                                                                                                    _model.updatePage(() {});
-                                                                                                  },
-                                                                                                  child: Text(
-                                                                                                    FFLocalizations.of(context).getText(
-                                                                                                      'vzoqd487' /* Add photo #5 */,
-                                                                                                    ),
-                                                                                                    style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                          fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                                          color: FlutterFlowTheme.of(context).primaryText,
-                                                                                                          letterSpacing: 0.0,
-                                                                                                          fontWeight: FontWeight.bold,
-                                                                                                          useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                                                        ),
-                                                                                                  ),
-                                                                                                ),
-                                                                                                Padding(
-                                                                                                  padding: EdgeInsets.all(1.0),
-                                                                                                  child: InkWell(
-                                                                                                    splashColor: Colors.transparent,
-                                                                                                    focusColor: Colors.transparent,
-                                                                                                    hoverColor: Colors.transparent,
-                                                                                                    highlightColor: Colors.transparent,
-                                                                                                    onTap: () async {
-                                                                                                      logFirebaseEvent('MODAL_MEMBROS_ADD_membro_foto_5_ON_TAP');
-                                                                                                      await Navigator.push(
-                                                                                                        context,
-                                                                                                        PageTransition(
-                                                                                                          type: PageTransitionType.fade,
-                                                                                                          child: FlutterFlowExpandedImageView(
-                                                                                                            image: Image.network(
-                                                                                                              valueOrDefault<String>(
-                                                                                                                _model.membrosFotos.elementAtOrNull(3),
-                                                                                                                'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/rgxzhoyu6nbx/groups_96dp_99999_FILL0_wght400_GRAD0_opsz48.png',
-                                                                                                              ),
-                                                                                                              fit: BoxFit.contain,
-                                                                                                              alignment: Alignment(0.0, 0.0),
-                                                                                                              errorBuilder: (context, error, stackTrace) => Image.asset(
-                                                                                                                'assets/images/error_image.png',
-                                                                                                                fit: BoxFit.contain,
-                                                                                                                alignment: Alignment(0.0, 0.0),
-                                                                                                              ),
-                                                                                                            ),
-                                                                                                            allowRotation: false,
-                                                                                                            tag: valueOrDefault<String>(
+                                                                                                    logFirebaseEvent('MODAL_MEMBROS_ADD_membro_foto_5_ON_TAP');
+                                                                                                    await Navigator.push(
+                                                                                                      context,
+                                                                                                      PageTransition(
+                                                                                                        type: PageTransitionType.fade,
+                                                                                                        child: FlutterFlowExpandedImageView(
+                                                                                                          image: Image.network(
+                                                                                                            valueOrDefault<String>(
                                                                                                               _model.membrosFotos.elementAtOrNull(3),
                                                                                                               'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/rgxzhoyu6nbx/groups_96dp_99999_FILL0_wght400_GRAD0_opsz48.png',
                                                                                                             ),
-                                                                                                            useHeroAnimation: true,
+                                                                                                            fit: BoxFit.contain,
+                                                                                                            alignment: Alignment(0.0, 0.0),
+                                                                                                            errorBuilder: (context, error, stackTrace) => Image.asset(
+                                                                                                              'assets/images/error_image.png',
+                                                                                                              fit: BoxFit.contain,
+                                                                                                              alignment: Alignment(0.0, 0.0),
+                                                                                                            ),
                                                                                                           ),
-                                                                                                        ),
-                                                                                                      );
-                                                                                                    },
-                                                                                                    child: Hero(
-                                                                                                      tag: valueOrDefault<String>(
-                                                                                                        _model.membrosFotos.elementAtOrNull(3),
-                                                                                                        'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/rgxzhoyu6nbx/groups_96dp_99999_FILL0_wght400_GRAD0_opsz48.png',
-                                                                                                      ),
-                                                                                                      transitionOnUserGestures: true,
-                                                                                                      child: ClipRRect(
-                                                                                                        borderRadius: BorderRadius.circular(10.0),
-                                                                                                        child: Image.network(
-                                                                                                          valueOrDefault<String>(
+                                                                                                          allowRotation: false,
+                                                                                                          tag: valueOrDefault<String>(
                                                                                                             _model.membrosFotos.elementAtOrNull(3),
                                                                                                             'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/rgxzhoyu6nbx/groups_96dp_99999_FILL0_wght400_GRAD0_opsz48.png',
                                                                                                           ),
+                                                                                                          useHeroAnimation: true,
+                                                                                                        ),
+                                                                                                      ),
+                                                                                                    );
+                                                                                                  },
+                                                                                                  child: Hero(
+                                                                                                    tag: valueOrDefault<String>(
+                                                                                                      _model.membrosFotos.elementAtOrNull(3),
+                                                                                                      'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/rgxzhoyu6nbx/groups_96dp_99999_FILL0_wght400_GRAD0_opsz48.png',
+                                                                                                    ),
+                                                                                                    transitionOnUserGestures: true,
+                                                                                                    child: ClipRRect(
+                                                                                                      borderRadius: BorderRadius.circular(10.0),
+                                                                                                      child: Image.network(
+                                                                                                        valueOrDefault<String>(
+                                                                                                          _model.membrosFotos.elementAtOrNull(3),
+                                                                                                          'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/rgxzhoyu6nbx/groups_96dp_99999_FILL0_wght400_GRAD0_opsz48.png',
+                                                                                                        ),
+                                                                                                        width: 114.0,
+                                                                                                        height: 100.0,
+                                                                                                        fit: BoxFit.contain,
+                                                                                                        alignment: Alignment(0.0, 0.0),
+                                                                                                        errorBuilder: (context, error, stackTrace) => Image.asset(
+                                                                                                          'assets/images/error_image.png',
                                                                                                           width: 114.0,
                                                                                                           height: 100.0,
                                                                                                           fit: BoxFit.contain,
                                                                                                           alignment: Alignment(0.0, 0.0),
-                                                                                                          errorBuilder: (context, error, stackTrace) => Image.asset(
-                                                                                                            'assets/images/error_image.png',
-                                                                                                            width: 114.0,
-                                                                                                            height: 100.0,
-                                                                                                            fit: BoxFit.contain,
-                                                                                                            alignment: Alignment(0.0, 0.0),
-                                                                                                          ),
                                                                                                         ),
                                                                                                       ),
                                                                                                     ),
                                                                                                   ),
                                                                                                 ),
-                                                                                                Align(
-                                                                                                  alignment: AlignmentDirectional(0.0, 0.0),
-                                                                                                  child: InkWell(
-                                                                                                    splashColor: Colors.transparent,
-                                                                                                    focusColor: Colors.transparent,
-                                                                                                    hoverColor: Colors.transparent,
-                                                                                                    highlightColor: Colors.transparent,
-                                                                                                    onTap: () async {
-                                                                                                      logFirebaseEvent('MODAL_MEMBROS_ADD_Icon_sbtz32y9_ON_TAP');
-                                                                                                      var confirmDialogResponse = await showDialog<bool>(
-                                                                                                            context: context,
-                                                                                                            builder: (alertDialogContext) {
-                                                                                                              return AlertDialog(
-                                                                                                                title: Text('Apagar Foto'),
-                                                                                                                content: Text('Deseja APAGAR esta foto ?'),
-                                                                                                                actions: [
-                                                                                                                  TextButton(
-                                                                                                                    onPressed: () => Navigator.pop(alertDialogContext, false),
-                                                                                                                    child: Text('Cancelar'),
-                                                                                                                  ),
-                                                                                                                  TextButton(
-                                                                                                                    onPressed: () => Navigator.pop(alertDialogContext, true),
-                                                                                                                    child: Text('Confirmar'),
-                                                                                                                  ),
-                                                                                                                ],
-                                                                                                              );
-                                                                                                            },
-                                                                                                          ) ??
-                                                                                                          false;
-                                                                                                      if (confirmDialogResponse) {
-                                                                                                        safeSetState(() {
-                                                                                                          _model.isDataUploading4 = false;
-                                                                                                          _model.uploadedLocalFile4 = FFUploadedFile(bytes: Uint8List.fromList([]));
-                                                                                                          _model.uploadedFileUrl4 = '';
-                                                                                                        });
+                                                                                              ),
+                                                                                              Align(
+                                                                                                alignment: AlignmentDirectional(0.0, 0.0),
+                                                                                                child: InkWell(
+                                                                                                  splashColor: Colors.transparent,
+                                                                                                  focusColor: Colors.transparent,
+                                                                                                  hoverColor: Colors.transparent,
+                                                                                                  highlightColor: Colors.transparent,
+                                                                                                  onTap: () async {
+                                                                                                    logFirebaseEvent('MODAL_MEMBROS_ADD_Icon_sbtz32y9_ON_TAP');
+                                                                                                    var confirmDialogResponse = await showDialog<bool>(
+                                                                                                          context: context,
+                                                                                                          builder: (alertDialogContext) {
+                                                                                                            return AlertDialog(
+                                                                                                              title: Text('Apagar Foto'),
+                                                                                                              content: Text('Deseja APAGAR esta foto ?'),
+                                                                                                              actions: [
+                                                                                                                TextButton(
+                                                                                                                  onPressed: () => Navigator.pop(alertDialogContext, false),
+                                                                                                                  child: Text('Cancelar'),
+                                                                                                                ),
+                                                                                                                TextButton(
+                                                                                                                  onPressed: () => Navigator.pop(alertDialogContext, true),
+                                                                                                                  child: Text('Confirmar'),
+                                                                                                                ),
+                                                                                                              ],
+                                                                                                            );
+                                                                                                          },
+                                                                                                        ) ??
+                                                                                                        false;
+                                                                                                    if (confirmDialogResponse) {
+                                                                                                      safeSetState(() {
+                                                                                                        _model.isDataUploading4 = false;
+                                                                                                        _model.uploadedLocalFile4 = FFUploadedFile(bytes: Uint8List.fromList([]));
+                                                                                                        _model.uploadedFileUrl4 = '';
+                                                                                                      });
 
-                                                                                                        _model.removeAtIndexFromMembrosFotos(3);
-                                                                                                        _model.updatePage(() {});
-                                                                                                      }
-                                                                                                    },
-                                                                                                    child: Icon(
-                                                                                                      Icons.do_not_disturb_on_rounded,
-                                                                                                      color: FlutterFlowTheme.of(context).error,
-                                                                                                      size: 24.0,
-                                                                                                    ),
+                                                                                                      _model.removeAtIndexFromMembrosFotos(3);
+                                                                                                      _model.updatePage(() {});
+                                                                                                    }
+                                                                                                  },
+                                                                                                  child: Icon(
+                                                                                                    Icons.do_not_disturb_on_rounded,
+                                                                                                    color: FlutterFlowTheme.of(context).error,
+                                                                                                    size: 24.0,
                                                                                                   ),
                                                                                                 ),
-                                                                                              ].divide(SizedBox(height: 1.0)),
-                                                                                            ),
+                                                                                              ),
+                                                                                            ].divide(SizedBox(height: 1.0)),
                                                                                           ),
                                                                                         ),
                                                                                       ),
@@ -1585,192 +1570,189 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                                               width: 2.0,
                                                                                             ),
                                                                                           ),
-                                                                                          child: SingleChildScrollView(
-                                                                                            primary: false,
-                                                                                            child: Column(
-                                                                                              mainAxisSize: MainAxisSize.max,
-                                                                                              mainAxisAlignment: MainAxisAlignment.center,
-                                                                                              children: [
-                                                                                                InkWell(
+                                                                                          child: Column(
+                                                                                            mainAxisSize: MainAxisSize.max,
+                                                                                            mainAxisAlignment: MainAxisAlignment.center,
+                                                                                            children: [
+                                                                                              InkWell(
+                                                                                                splashColor: Colors.transparent,
+                                                                                                focusColor: Colors.transparent,
+                                                                                                hoverColor: Colors.transparent,
+                                                                                                highlightColor: Colors.transparent,
+                                                                                                onTap: () async {
+                                                                                                  logFirebaseEvent('MODAL_MEMBROS_ADD_Text_kp6tqo99_ON_TAP');
+                                                                                                  final selectedMedia = await selectMedia(
+                                                                                                    storageFolderPath: 'membros',
+                                                                                                    maxWidth: 300.00,
+                                                                                                    maxHeight: 300.00,
+                                                                                                    imageQuality: 100,
+                                                                                                    mediaSource: MediaSource.photoGallery,
+                                                                                                    multiImage: false,
+                                                                                                  );
+                                                                                                  if (selectedMedia != null && selectedMedia.every((m) => validateFileFormat(m.storagePath, context))) {
+                                                                                                    safeSetState(() => _model.isDataUploading6 = true);
+                                                                                                    var selectedUploadedFiles = <FFUploadedFile>[];
+
+                                                                                                    var downloadUrls = <String>[];
+                                                                                                    try {
+                                                                                                      selectedUploadedFiles = selectedMedia
+                                                                                                          .map((m) => FFUploadedFile(
+                                                                                                                name: m.storagePath.split('/').last,
+                                                                                                                bytes: m.bytes,
+                                                                                                                height: m.dimensions?.height,
+                                                                                                                width: m.dimensions?.width,
+                                                                                                                blurHash: m.blurHash,
+                                                                                                              ))
+                                                                                                          .toList();
+
+                                                                                                      downloadUrls = await uploadSupabaseStorageFiles(
+                                                                                                        bucketName: 'uploads',
+                                                                                                        selectedFiles: selectedMedia,
+                                                                                                      );
+                                                                                                    } finally {
+                                                                                                      _model.isDataUploading6 = false;
+                                                                                                    }
+                                                                                                    if (selectedUploadedFiles.length == selectedMedia.length && downloadUrls.length == selectedMedia.length) {
+                                                                                                      safeSetState(() {
+                                                                                                        _model.uploadedLocalFile6 = selectedUploadedFiles.first;
+                                                                                                        _model.uploadedFileUrl6 = downloadUrls.first;
+                                                                                                      });
+                                                                                                    } else {
+                                                                                                      safeSetState(() {});
+                                                                                                      return;
+                                                                                                    }
+                                                                                                  }
+
+                                                                                                  _model.insertAtIndexInMembrosFotos(5, _model.uploadedFileUrl6);
+                                                                                                  _model.updatePage(() {});
+                                                                                                },
+                                                                                                child: Text(
+                                                                                                  FFLocalizations.of(context).getText(
+                                                                                                    'orgu7b19' /* Add photo #6 */,
+                                                                                                  ),
+                                                                                                  style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                        fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                                                        color: FlutterFlowTheme.of(context).primaryText,
+                                                                                                        letterSpacing: 0.0,
+                                                                                                        fontWeight: FontWeight.bold,
+                                                                                                        useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                                                      ),
+                                                                                                ),
+                                                                                              ),
+                                                                                              Padding(
+                                                                                                padding: EdgeInsets.all(1.0),
+                                                                                                child: InkWell(
                                                                                                   splashColor: Colors.transparent,
                                                                                                   focusColor: Colors.transparent,
                                                                                                   hoverColor: Colors.transparent,
                                                                                                   highlightColor: Colors.transparent,
                                                                                                   onTap: () async {
-                                                                                                    logFirebaseEvent('MODAL_MEMBROS_ADD_Text_kp6tqo99_ON_TAP');
-                                                                                                    final selectedMedia = await selectMedia(
-                                                                                                      storageFolderPath: 'membros',
-                                                                                                      maxWidth: 300.00,
-                                                                                                      maxHeight: 300.00,
-                                                                                                      imageQuality: 100,
-                                                                                                      mediaSource: MediaSource.photoGallery,
-                                                                                                      multiImage: false,
-                                                                                                    );
-                                                                                                    if (selectedMedia != null && selectedMedia.every((m) => validateFileFormat(m.storagePath, context))) {
-                                                                                                      safeSetState(() => _model.isDataUploading6 = true);
-                                                                                                      var selectedUploadedFiles = <FFUploadedFile>[];
-
-                                                                                                      var downloadUrls = <String>[];
-                                                                                                      try {
-                                                                                                        selectedUploadedFiles = selectedMedia
-                                                                                                            .map((m) => FFUploadedFile(
-                                                                                                                  name: m.storagePath.split('/').last,
-                                                                                                                  bytes: m.bytes,
-                                                                                                                  height: m.dimensions?.height,
-                                                                                                                  width: m.dimensions?.width,
-                                                                                                                  blurHash: m.blurHash,
-                                                                                                                ))
-                                                                                                            .toList();
-
-                                                                                                        downloadUrls = await uploadSupabaseStorageFiles(
-                                                                                                          bucketName: 'uploads',
-                                                                                                          selectedFiles: selectedMedia,
-                                                                                                        );
-                                                                                                      } finally {
-                                                                                                        _model.isDataUploading6 = false;
-                                                                                                      }
-                                                                                                      if (selectedUploadedFiles.length == selectedMedia.length && downloadUrls.length == selectedMedia.length) {
-                                                                                                        safeSetState(() {
-                                                                                                          _model.uploadedLocalFile6 = selectedUploadedFiles.first;
-                                                                                                          _model.uploadedFileUrl6 = downloadUrls.first;
-                                                                                                        });
-                                                                                                      } else {
-                                                                                                        safeSetState(() {});
-                                                                                                        return;
-                                                                                                      }
-                                                                                                    }
-
-                                                                                                    _model.insertAtIndexInMembrosFotos(5, _model.uploadedFileUrl6);
-                                                                                                    _model.updatePage(() {});
-                                                                                                  },
-                                                                                                  child: Text(
-                                                                                                    FFLocalizations.of(context).getText(
-                                                                                                      'orgu7b19' /* Add photo #6 */,
-                                                                                                    ),
-                                                                                                    style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                          fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                                          color: FlutterFlowTheme.of(context).primaryText,
-                                                                                                          letterSpacing: 0.0,
-                                                                                                          fontWeight: FontWeight.bold,
-                                                                                                          useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                                                        ),
-                                                                                                  ),
-                                                                                                ),
-                                                                                                Padding(
-                                                                                                  padding: EdgeInsets.all(1.0),
-                                                                                                  child: InkWell(
-                                                                                                    splashColor: Colors.transparent,
-                                                                                                    focusColor: Colors.transparent,
-                                                                                                    hoverColor: Colors.transparent,
-                                                                                                    highlightColor: Colors.transparent,
-                                                                                                    onTap: () async {
-                                                                                                      logFirebaseEvent('MODAL_MEMBROS_ADD_membro_foto_6_ON_TAP');
-                                                                                                      await Navigator.push(
-                                                                                                        context,
-                                                                                                        PageTransition(
-                                                                                                          type: PageTransitionType.fade,
-                                                                                                          child: FlutterFlowExpandedImageView(
-                                                                                                            image: Image.network(
-                                                                                                              valueOrDefault<String>(
-                                                                                                                _model.membrosFotos.elementAtOrNull(3),
-                                                                                                                'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/rgxzhoyu6nbx/groups_96dp_99999_FILL0_wght400_GRAD0_opsz48.png',
-                                                                                                              ),
-                                                                                                              fit: BoxFit.contain,
-                                                                                                              alignment: Alignment(0.0, 0.0),
-                                                                                                              errorBuilder: (context, error, stackTrace) => Image.asset(
-                                                                                                                'assets/images/error_image.png',
-                                                                                                                fit: BoxFit.contain,
-                                                                                                                alignment: Alignment(0.0, 0.0),
-                                                                                                              ),
-                                                                                                            ),
-                                                                                                            allowRotation: false,
-                                                                                                            tag: valueOrDefault<String>(
+                                                                                                    logFirebaseEvent('MODAL_MEMBROS_ADD_membro_foto_6_ON_TAP');
+                                                                                                    await Navigator.push(
+                                                                                                      context,
+                                                                                                      PageTransition(
+                                                                                                        type: PageTransitionType.fade,
+                                                                                                        child: FlutterFlowExpandedImageView(
+                                                                                                          image: Image.network(
+                                                                                                            valueOrDefault<String>(
                                                                                                               _model.membrosFotos.elementAtOrNull(3),
                                                                                                               'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/rgxzhoyu6nbx/groups_96dp_99999_FILL0_wght400_GRAD0_opsz48.png',
                                                                                                             ),
-                                                                                                            useHeroAnimation: true,
+                                                                                                            fit: BoxFit.contain,
+                                                                                                            alignment: Alignment(0.0, 0.0),
+                                                                                                            errorBuilder: (context, error, stackTrace) => Image.asset(
+                                                                                                              'assets/images/error_image.png',
+                                                                                                              fit: BoxFit.contain,
+                                                                                                              alignment: Alignment(0.0, 0.0),
+                                                                                                            ),
                                                                                                           ),
-                                                                                                        ),
-                                                                                                      );
-                                                                                                    },
-                                                                                                    child: Hero(
-                                                                                                      tag: valueOrDefault<String>(
-                                                                                                        _model.membrosFotos.elementAtOrNull(3),
-                                                                                                        'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/rgxzhoyu6nbx/groups_96dp_99999_FILL0_wght400_GRAD0_opsz48.png',
-                                                                                                      ),
-                                                                                                      transitionOnUserGestures: true,
-                                                                                                      child: ClipRRect(
-                                                                                                        borderRadius: BorderRadius.circular(10.0),
-                                                                                                        child: Image.network(
-                                                                                                          valueOrDefault<String>(
+                                                                                                          allowRotation: false,
+                                                                                                          tag: valueOrDefault<String>(
                                                                                                             _model.membrosFotos.elementAtOrNull(3),
                                                                                                             'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/rgxzhoyu6nbx/groups_96dp_99999_FILL0_wght400_GRAD0_opsz48.png',
                                                                                                           ),
+                                                                                                          useHeroAnimation: true,
+                                                                                                        ),
+                                                                                                      ),
+                                                                                                    );
+                                                                                                  },
+                                                                                                  child: Hero(
+                                                                                                    tag: valueOrDefault<String>(
+                                                                                                      _model.membrosFotos.elementAtOrNull(3),
+                                                                                                      'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/rgxzhoyu6nbx/groups_96dp_99999_FILL0_wght400_GRAD0_opsz48.png',
+                                                                                                    ),
+                                                                                                    transitionOnUserGestures: true,
+                                                                                                    child: ClipRRect(
+                                                                                                      borderRadius: BorderRadius.circular(10.0),
+                                                                                                      child: Image.network(
+                                                                                                        valueOrDefault<String>(
+                                                                                                          _model.membrosFotos.elementAtOrNull(3),
+                                                                                                          'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/rgxzhoyu6nbx/groups_96dp_99999_FILL0_wght400_GRAD0_opsz48.png',
+                                                                                                        ),
+                                                                                                        width: 114.0,
+                                                                                                        height: 100.0,
+                                                                                                        fit: BoxFit.contain,
+                                                                                                        alignment: Alignment(0.0, 0.0),
+                                                                                                        errorBuilder: (context, error, stackTrace) => Image.asset(
+                                                                                                          'assets/images/error_image.png',
                                                                                                           width: 114.0,
                                                                                                           height: 100.0,
                                                                                                           fit: BoxFit.contain,
                                                                                                           alignment: Alignment(0.0, 0.0),
-                                                                                                          errorBuilder: (context, error, stackTrace) => Image.asset(
-                                                                                                            'assets/images/error_image.png',
-                                                                                                            width: 114.0,
-                                                                                                            height: 100.0,
-                                                                                                            fit: BoxFit.contain,
-                                                                                                            alignment: Alignment(0.0, 0.0),
-                                                                                                          ),
                                                                                                         ),
                                                                                                       ),
                                                                                                     ),
                                                                                                   ),
                                                                                                 ),
-                                                                                                Align(
-                                                                                                  alignment: AlignmentDirectional(0.0, 0.0),
-                                                                                                  child: InkWell(
-                                                                                                    splashColor: Colors.transparent,
-                                                                                                    focusColor: Colors.transparent,
-                                                                                                    hoverColor: Colors.transparent,
-                                                                                                    highlightColor: Colors.transparent,
-                                                                                                    onTap: () async {
-                                                                                                      logFirebaseEvent('MODAL_MEMBROS_ADD_Icon_yf5kptt7_ON_TAP');
-                                                                                                      var confirmDialogResponse = await showDialog<bool>(
-                                                                                                            context: context,
-                                                                                                            builder: (alertDialogContext) {
-                                                                                                              return AlertDialog(
-                                                                                                                title: Text('Apagar Foto'),
-                                                                                                                content: Text('Deseja APAGAR esta foto ?'),
-                                                                                                                actions: [
-                                                                                                                  TextButton(
-                                                                                                                    onPressed: () => Navigator.pop(alertDialogContext, false),
-                                                                                                                    child: Text('Cancelar'),
-                                                                                                                  ),
-                                                                                                                  TextButton(
-                                                                                                                    onPressed: () => Navigator.pop(alertDialogContext, true),
-                                                                                                                    child: Text('Confirmar'),
-                                                                                                                  ),
-                                                                                                                ],
-                                                                                                              );
-                                                                                                            },
-                                                                                                          ) ??
-                                                                                                          false;
-                                                                                                      if (confirmDialogResponse) {
-                                                                                                        safeSetState(() {
-                                                                                                          _model.isDataUploading4 = false;
-                                                                                                          _model.uploadedLocalFile4 = FFUploadedFile(bytes: Uint8List.fromList([]));
-                                                                                                          _model.uploadedFileUrl4 = '';
-                                                                                                        });
+                                                                                              ),
+                                                                                              Align(
+                                                                                                alignment: AlignmentDirectional(0.0, 0.0),
+                                                                                                child: InkWell(
+                                                                                                  splashColor: Colors.transparent,
+                                                                                                  focusColor: Colors.transparent,
+                                                                                                  hoverColor: Colors.transparent,
+                                                                                                  highlightColor: Colors.transparent,
+                                                                                                  onTap: () async {
+                                                                                                    logFirebaseEvent('MODAL_MEMBROS_ADD_Icon_yf5kptt7_ON_TAP');
+                                                                                                    var confirmDialogResponse = await showDialog<bool>(
+                                                                                                          context: context,
+                                                                                                          builder: (alertDialogContext) {
+                                                                                                            return AlertDialog(
+                                                                                                              title: Text('Apagar Foto'),
+                                                                                                              content: Text('Deseja APAGAR esta foto ?'),
+                                                                                                              actions: [
+                                                                                                                TextButton(
+                                                                                                                  onPressed: () => Navigator.pop(alertDialogContext, false),
+                                                                                                                  child: Text('Cancelar'),
+                                                                                                                ),
+                                                                                                                TextButton(
+                                                                                                                  onPressed: () => Navigator.pop(alertDialogContext, true),
+                                                                                                                  child: Text('Confirmar'),
+                                                                                                                ),
+                                                                                                              ],
+                                                                                                            );
+                                                                                                          },
+                                                                                                        ) ??
+                                                                                                        false;
+                                                                                                    if (confirmDialogResponse) {
+                                                                                                      safeSetState(() {
+                                                                                                        _model.isDataUploading4 = false;
+                                                                                                        _model.uploadedLocalFile4 = FFUploadedFile(bytes: Uint8List.fromList([]));
+                                                                                                        _model.uploadedFileUrl4 = '';
+                                                                                                      });
 
-                                                                                                        _model.removeAtIndexFromMembrosFotos(3);
-                                                                                                        _model.updatePage(() {});
-                                                                                                      }
-                                                                                                    },
-                                                                                                    child: Icon(
-                                                                                                      Icons.do_not_disturb_on_rounded,
-                                                                                                      color: FlutterFlowTheme.of(context).error,
-                                                                                                      size: 24.0,
-                                                                                                    ),
+                                                                                                      _model.removeAtIndexFromMembrosFotos(3);
+                                                                                                      _model.updatePage(() {});
+                                                                                                    }
+                                                                                                  },
+                                                                                                  child: Icon(
+                                                                                                    Icons.do_not_disturb_on_rounded,
+                                                                                                    color: FlutterFlowTheme.of(context).error,
+                                                                                                    size: 24.0,
                                                                                                   ),
                                                                                                 ),
-                                                                                              ].divide(SizedBox(height: 1.0)),
-                                                                                            ),
+                                                                                              ),
+                                                                                            ].divide(SizedBox(height: 1.0)),
                                                                                           ),
                                                                                         ),
                                                                                       ),
@@ -3826,7 +3808,7 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                                           borderRadius: BorderRadius.circular(12.0),
                                                                                           child: Container(
                                                                                             width: 1084.0,
-                                                                                            height: 490.0,
+                                                                                            height: 480.0,
                                                                                             decoration: BoxDecoration(
                                                                                               color: FlutterFlowTheme.of(context).secondaryBackground,
                                                                                               borderRadius: BorderRadius.circular(12.0),
@@ -3842,30 +3824,33 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                                                 tablet: false,
                                                                                                 tabletLandscape: false,
                                                                                               ),
-                                                                                              child: FlutterFlowGoogleMap(
-                                                                                                controller: _model.googleMapMembrosController,
-                                                                                                onCameraIdle: (latLng) => _model.googleMapMembrosCenter = latLng,
-                                                                                                initialLocation: _model.googleMapMembrosCenter ??= LatLng(-8.77, -70.55),
-                                                                                                markers: _model.membrosLatLng
-                                                                                                    .map(
-                                                                                                      (marker) => FlutterFlowMarker(
-                                                                                                        marker.serialize(),
-                                                                                                        marker,
-                                                                                                      ),
-                                                                                                    )
-                                                                                                    .toList(),
-                                                                                                markerColor: GoogleMarkerColor.violet,
-                                                                                                mapType: MapType.normal,
-                                                                                                style: GoogleMapStyle.standard,
-                                                                                                initialZoom: 9.0,
-                                                                                                allowInteraction: true,
-                                                                                                allowZoom: true,
-                                                                                                showZoomControls: true,
-                                                                                                showLocation: true,
-                                                                                                showCompass: false,
-                                                                                                showMapToolbar: false,
-                                                                                                showTraffic: false,
-                                                                                                centerMapOnMarkerTap: true,
+                                                                                              child: Align(
+                                                                                                alignment: AlignmentDirectional(0.0, 0.0),
+                                                                                                child: FlutterFlowGoogleMap(
+                                                                                                  controller: _model.googleMapMembrosController,
+                                                                                                  onCameraIdle: (latLng) => _model.googleMapMembrosCenter = latLng,
+                                                                                                  initialLocation: _model.googleMapMembrosCenter ??= LatLng(-8.77, -70.55),
+                                                                                                  markers: _model.membrosLatLng
+                                                                                                      .map(
+                                                                                                        (marker) => FlutterFlowMarker(
+                                                                                                          marker.serialize(),
+                                                                                                          marker,
+                                                                                                        ),
+                                                                                                      )
+                                                                                                      .toList(),
+                                                                                                  markerColor: GoogleMarkerColor.violet,
+                                                                                                  mapType: MapType.normal,
+                                                                                                  style: GoogleMapStyle.standard,
+                                                                                                  initialZoom: 9.0,
+                                                                                                  allowInteraction: true,
+                                                                                                  allowZoom: true,
+                                                                                                  showZoomControls: true,
+                                                                                                  showLocation: true,
+                                                                                                  showCompass: false,
+                                                                                                  showMapToolbar: false,
+                                                                                                  showTraffic: false,
+                                                                                                  centerMapOnMarkerTap: true,
+                                                                                                ),
                                                                                               ),
                                                                                             ),
                                                                                           ),
@@ -4466,7 +4451,7 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                                                 '5xrtyank' /* Current position */,
                                                                                               ),
                                                                                               searchHintText: FFLocalizations.of(context).getText(
-                                                                                                'u231jvsq' /* Marital status */,
+                                                                                                'u231jvsq' /* Current position */,
                                                                                               ),
                                                                                               icon: Icon(
                                                                                                 Icons.keyboard_arrow_down_rounded,
@@ -4531,7 +4516,7 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                                                 'uhi29t9v' /* Previous position */,
                                                                                               ),
                                                                                               searchHintText: FFLocalizations.of(context).getText(
-                                                                                                'bfv93uyj' /* Marital status */,
+                                                                                                'bfv93uyj' /* Previous position */,
                                                                                               ),
                                                                                               icon: Icon(
                                                                                                 Icons.keyboard_arrow_down_rounded,
@@ -4598,10 +4583,10 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                                                     useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
                                                                                                   ),
                                                                                               hintText: FFLocalizations.of(context).getText(
-                                                                                                '0c8h6wz9' /* Função atual */,
+                                                                                                '0c8h6wz9' /* Current function */,
                                                                                               ),
                                                                                               searchHintText: FFLocalizations.of(context).getText(
-                                                                                                'qc1gohjk' /* Mother's Situation */,
+                                                                                                'qc1gohjk' /* Current function */,
                                                                                               ),
                                                                                               icon: Icon(
                                                                                                 Icons.keyboard_arrow_down_rounded,
@@ -4663,10 +4648,10 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                                                     useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
                                                                                                   ),
                                                                                               hintText: FFLocalizations.of(context).getText(
-                                                                                                '8c2yoabs' /* Função anterior */,
+                                                                                                '8c2yoabs' /* Previous function */,
                                                                                               ),
                                                                                               searchHintText: FFLocalizations.of(context).getText(
-                                                                                                'xtghmnhj' /* Função anterior */,
+                                                                                                'xtghmnhj' /* Previous function */,
                                                                                               ),
                                                                                               icon: Icon(
                                                                                                 Icons.keyboard_arrow_down_rounded,
@@ -4988,10 +4973,10 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                                                     useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
                                                                                                   ),
                                                                                               hintText: FFLocalizations.of(context).getText(
-                                                                                                '8uf1jitv' /* Facção que integrou */,
+                                                                                                '8uf1jitv' /* Faction that he joined */,
                                                                                               ),
                                                                                               searchHintText: FFLocalizations.of(context).getText(
-                                                                                                'fzkhhi3x' /* Facção que integrou */,
+                                                                                                'fzkhhi3x' /* Faction that he joined */,
                                                                                               ),
                                                                                               icon: Icon(
                                                                                                 Icons.keyboard_arrow_down_rounded,
@@ -5053,7 +5038,7 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                                                     useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
                                                                                                   ),
                                                                                               hintText: FFLocalizations.of(context).getText(
-                                                                                                '4i6g2oa6' /* Facção aliada */,
+                                                                                                '4i6g2oa6' /* Allied faction */,
                                                                                               ),
                                                                                               searchHintText: FFLocalizations.of(context).getText(
                                                                                                 'rnawpmov' /* Father's Situation */,
@@ -5123,10 +5108,10 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                                                     useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
                                                                                                   ),
                                                                                               hintText: FFLocalizations.of(context).getText(
-                                                                                                '2rfuge4k' /* Facção Inimiga */,
+                                                                                                '2rfuge4k' /* Enemy Faction */,
                                                                                               ),
                                                                                               searchHintText: FFLocalizations.of(context).getText(
-                                                                                                '03pc9yaz' /* Facção Inimiga */,
+                                                                                                '03pc9yaz' /* Enemy Faction */,
                                                                                               ),
                                                                                               icon: Icon(
                                                                                                 Icons.keyboard_arrow_down_rounded,
@@ -5428,6 +5413,78 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                                       ),
                                                                                       FFLocalizations.of(context).getText(
                                                                                         '1zj80s5y' /* Murder */,
+                                                                                      ),
+                                                                                      FFLocalizations.of(context).getText(
+                                                                                        'evlv2sw3' /* Criminal Organization (Law 12,... */,
+                                                                                      ),
+                                                                                      FFLocalizations.of(context).getText(
+                                                                                        'uhbankg4' /* Simple Homicide (PC) (art. 121... */,
+                                                                                      ),
+                                                                                      FFLocalizations.of(context).getText(
+                                                                                        'f5r0sru9' /* Qualified Homicide (PC) (art. ... */,
+                                                                                      ),
+                                                                                      FFLocalizations.of(context).getText(
+                                                                                        'gbef5bre' /* Femicide (PC) (art. 121, §2, V... */,
+                                                                                      ),
+                                                                                      FFLocalizations.of(context).getText(
+                                                                                        'qfjlgk3q' /* Serious or Very Serious Bodily... */,
+                                                                                      ),
+                                                                                      FFLocalizations.of(context).getText(
+                                                                                        '6j5253hn' /* Kidnapping and False Imprisonm... */,
+                                                                                      ),
+                                                                                      FFLocalizations.of(context).getText(
+                                                                                        'bsrpwul7' /* Extortion by kidnapping (PC) (... */,
+                                                                                      ),
+                                                                                      FFLocalizations.of(context).getText(
+                                                                                        'ao93x875' /* Theft (PC) (art. 157) */,
+                                                                                      ),
+                                                                                      FFLocalizations.of(context).getText(
+                                                                                        '5va2fod4' /* Qualified Robbery (PC)  (art. ... */,
+                                                                                      ),
+                                                                                      FFLocalizations.of(context).getText(
+                                                                                        'cwv9010x' /* Extortion (PC) (art. 158) */,
+                                                                                      ),
+                                                                                      FFLocalizations.of(context).getText(
+                                                                                        'v15itzvj' /* Extortion through kidnapping (... */,
+                                                                                      ),
+                                                                                      FFLocalizations.of(context).getText(
+                                                                                        '5u02yc4b' /* Receiving stolen goods (PC) (a... */,
+                                                                                      ),
+                                                                                      FFLocalizations.of(context).getText(
+                                                                                        '4pglu5om' /* Money laundering (Law 9.613/19... */,
+                                                                                      ),
+                                                                                      FFLocalizations.of(context).getText(
+                                                                                        'ei9kdecf' /* Drug Trafficking (Law 11.343/2... */,
+                                                                                      ),
+                                                                                      FFLocalizations.of(context).getText(
+                                                                                        'jyu8xsfs' /* Association for Trafficking (L... */,
+                                                                                      ),
+                                                                                      FFLocalizations.of(context).getText(
+                                                                                        '785yu3x1' /* Financing of Trafficking (Law ... */,
+                                                                                      ),
+                                                                                      FFLocalizations.of(context).getText(
+                                                                                        'jco8oq2n' /* Illegal possession of firearms... */,
+                                                                                      ),
+                                                                                      FFLocalizations.of(context).getText(
+                                                                                        '09b2gdsy' /* Illegal possession of restrict... */,
+                                                                                      ),
+                                                                                      FFLocalizations.of(context).getText(
+                                                                                        'fqswzn3u' /* Illegal trade in firearms  (Le... */,
+                                                                                      ),
+                                                                                      FFLocalizations.of(context).getText(
+                                                                                        'm2qrkswj' /* International arms trafficking... */,
+                                                                                      ),
+                                                                                      FFLocalizations.of(context).getText(
+                                                                                        '2abid325' /* Explosion (CP) (art. 251) */,
+                                                                                      ),
+                                                                                      FFLocalizations.of(context).getText(
+                                                                                        'i1rswn5h' /* Attack on a public utility ser... */,
+                                                                                      ),
+                                                                                      FFLocalizations.of(context).getText(
+                                                                                        '7rooscp1' /* Terrorism (Law 13,260/2016) */,
+                                                                                      ),
+                                                                                      FFLocalizations.of(context).getText(
+                                                                                        'ah4vr309' /* Armed criminal association (CP... */,
                                                                                       )
                                                                                     ],
                                                                                     onChanged: (val) => safeSetState(() => _model.ddwProcedimentoCrimeValue = val),
@@ -6252,6 +6309,18 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                                         ),
                                                                                         FFLocalizations.of(context).getText(
                                                                                           '62uy1ula' /* 3rd CRIMINAL COURT */,
+                                                                                        ),
+                                                                                        FFLocalizations.of(context).getText(
+                                                                                          '9ssog1pb' /* 4rd CRIMINAL COURT */,
+                                                                                        ),
+                                                                                        FFLocalizations.of(context).getText(
+                                                                                          'prsgpqpv' /* 5st CRIMINAL COURT */,
+                                                                                        ),
+                                                                                        FFLocalizations.of(context).getText(
+                                                                                          'dzj474gi' /* 6st CRIMINAL COURT */,
+                                                                                        ),
+                                                                                        FFLocalizations.of(context).getText(
+                                                                                          'r2ussqri' /* 7st CRIMINAL COURT */,
                                                                                         )
                                                                                       ],
                                                                                       onChanged: (val) => safeSetState(() => _model.ddwProcessoVaraValue = val),
@@ -6370,6 +6439,12 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                                         ),
                                                                                         FFLocalizations.of(context).getText(
                                                                                           '9ogzdq4x' /* Semi-open */,
+                                                                                        ),
+                                                                                        FFLocalizations.of(context).getText(
+                                                                                          '2lr5eep8' /* Open */,
+                                                                                        ),
+                                                                                        FFLocalizations.of(context).getText(
+                                                                                          '3j1588lk' /* Regime progression */,
                                                                                         )
                                                                                       ],
                                                                                       onChanged: (val) => safeSetState(() => _model.ddwProcessoRegimeValue = val),

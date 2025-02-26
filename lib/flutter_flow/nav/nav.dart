@@ -97,12 +97,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               appStateNotifier.loggedIn ? NavBarPage() : AuthLoginWidget(),
           routes: [
             FFRoute(
-              name: AuthForgotPasswordWidget.routeName,
-              path: AuthForgotPasswordWidget.routePath,
-              requireAuth: true,
-              builder: (context, params) => AuthForgotPasswordWidget(),
-            ),
-            FFRoute(
               name: MainHomeWidget.routeName,
               path: MainHomeWidget.routePath,
               requireAuth: true,
@@ -203,7 +197,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: AuthRecoverWidget.routeName,
               path: AuthRecoverWidget.routePath,
               requireAuth: true,
-              builder: (context, params) => AuthRecoverWidget(),
+              builder: (context, params) => AuthRecoverWidget(
+                emailUsuario: params.getParam(
+                  'emailUsuario',
+                  ParamType.String,
+                ),
+              ),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ),

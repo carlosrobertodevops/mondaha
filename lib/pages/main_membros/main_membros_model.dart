@@ -67,9 +67,11 @@ class MainMembrosModel extends FlutterFlowModel<MainMembrosWidget> {
   String? Function(BuildContext, String?)?
       textFieldPesquisarMembrosTextControllerValidator;
   // Stores action output result for [Backend Call - Query Rows] action in TextFieldPesquisarMembros widget.
+  List<MembrosViewConcatSeachRow>? outputQueryMembrosCount1;
+  // Stores action output result for [Backend Call - Query Rows] action in TextFieldPesquisarMembros widget.
   List<MembrosViewConcatSeachRow>? outputQueryMembrosCount;
   // Stores action output result for [Backend Call - Query Rows] action in IconButton widget.
-  List<MembrosViewConcatSeachRow>? outputQueryMembrosCount2;
+  List<MembrosViewConcatSeachRow>? outputQueryMembrosCount3;
   // State field(s) for TabBar widget.
   TabController? tabBarController;
   int get tabBarCurrentIndex =>

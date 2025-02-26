@@ -65,6 +65,8 @@ class _MainMembrosWidgetState extends State<MainMembrosWidget>
       await actions.resetTimerAction(
         context,
       );
+      _model.countMembrosSearch = FFAppState().CountMembros;
+      safeSetState(() {});
     });
 
     _model.textFieldPesquisarMembrosTextController ??= TextEditingController();
@@ -338,7 +340,7 @@ class _MainMembrosWidgetState extends State<MainMembrosWidget>
                                       onPressed: () async {
                                         logFirebaseEvent(
                                             'MAIN_MEMBROS_PAGE_PDF_BTN_ON_TAP');
-                                        await actions.docGerarPDF(
+                                        await actions.docMembrosGerarPDF(
                                           containerMembrosViewPdfRowList
                                               .toList(),
                                         );
@@ -476,6 +478,27 @@ class _MainMembrosWidgetState extends State<MainMembrosWidget>
                                                         true;
                                                     safeSetState(() {});
                                                   }
+                                                  _model.outputQueryMembrosCount1 =
+                                                      await MembrosViewConcatSeachTable()
+                                                          .queryRows(
+                                                    queryFn: (q) => q
+                                                        .ilike(
+                                                          'pesquisa',
+                                                          functions.pesquisaLikeCS(
+                                                              _model
+                                                                  .textFieldPesquisarMembrosTextController
+                                                                  .text),
+                                                        )
+                                                        .order('nome_completo',
+                                                            ascending: true),
+                                                  );
+                                                  _model.countMembrosSearch =
+                                                      _model
+                                                          .outputQueryMembrosCount!
+                                                          .length;
+                                                  safeSetState(() {});
+
+                                                  safeSetState(() {});
                                                 },
                                                 autofocus: true,
                                                 obscureText: false,
@@ -677,7 +700,7 @@ class _MainMembrosWidgetState extends State<MainMembrosWidget>
                                                 FFAppState().buscarMembros =
                                                     false;
                                                 safeSetState(() {});
-                                                _model.outputQueryMembrosCount2 =
+                                                _model.outputQueryMembrosCount3 =
                                                     await MembrosViewConcatSeachTable()
                                                         .queryRows(
                                                   queryFn: (q) => q
@@ -692,7 +715,7 @@ class _MainMembrosWidgetState extends State<MainMembrosWidget>
                                                           ascending: true),
                                                 );
                                                 _model.countMembrosSearch = _model
-                                                    .outputQueryMembrosCount2!
+                                                    .outputQueryMembrosCount3!
                                                     .length;
                                                 safeSetState(() {});
 
@@ -719,8 +742,8 @@ class _MainMembrosWidgetState extends State<MainMembrosWidget>
                                                     1.0, 0.0),
                                                 child: Padding(
                                                   padding: EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          16.0, 16.0, 0.0, 0.0),
+                                                      .fromSTEB(16.0, 16.0,
+                                                          10.0, 0.0),
                                                   child: Text(
                                                     FFLocalizations.of(context)
                                                         .getText(
@@ -752,7 +775,7 @@ class _MainMembrosWidgetState extends State<MainMembrosWidget>
                                                 child: Padding(
                                                   padding: EdgeInsetsDirectional
                                                       .fromSTEB(
-                                                          0.0, 16.0, 0.0, 0.0),
+                                                          0.0, 16.0, 16.0, 0.0),
                                                   child: Text(
                                                     _model.countMembrosSearch
                                                         .toString()
@@ -1201,18 +1224,15 @@ class _MainMembrosWidgetState extends State<MainMembrosWidget>
                                                                                             child: CachedNetworkImage(
                                                                                               fadeInDuration: Duration(milliseconds: 100),
                                                                                               fadeOutDuration: Duration(milliseconds: 100),
-                                                                                              imageUrl: valueOrDefault<String>(
-                                                                                                listViewMembrosMembrosViewConcatSeachRow.fotosPath.firstOrNull != ''
-                                                                                                    ? valueOrDefault<String>(
-                                                                                                        listViewMembrosMembrosViewConcatSeachRow.fotosPath.firstOrNull,
-                                                                                                        'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/h99rv77ta7i5/groups_24dp_00000_FILL0_wght400_GRAD0_opsz24.png',
-                                                                                                      )
-                                                                                                    : valueOrDefault<String>(
-                                                                                                        Theme.of(context).brightness == Brightness.light ? 'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/h99rv77ta7i5/groups_24dp_00000_FILL0_wght400_GRAD0_opsz24.png' : 'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/cjwx21vtk3oj/groups_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.png',
-                                                                                                        'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/h99rv77ta7i5/groups_24dp_00000_FILL0_wght400_GRAD0_opsz24.png',
-                                                                                                      ),
-                                                                                                'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/rgxzhoyu6nbx/groups_96dp_99999_FILL0_wght400_GRAD0_opsz48.png',
-                                                                                              ),
+                                                                                              imageUrl: listViewMembrosMembrosViewConcatSeachRow.fotosPath.firstOrNull != null && listViewMembrosMembrosViewConcatSeachRow.fotosPath.firstOrNull != ''
+                                                                                                  ? valueOrDefault<String>(
+                                                                                                      listViewMembrosMembrosViewConcatSeachRow.fotosPath.firstOrNull,
+                                                                                                      'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/h99rv77ta7i5/groups_24dp_00000_FILL0_wght400_GRAD0_opsz24.png',
+                                                                                                    )
+                                                                                                  : valueOrDefault<String>(
+                                                                                                      Theme.of(context).brightness == Brightness.light ? 'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/h99rv77ta7i5/groups_24dp_00000_FILL0_wght400_GRAD0_opsz24.png' : 'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/cjwx21vtk3oj/groups_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.png',
+                                                                                                      'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/h99rv77ta7i5/groups_24dp_00000_FILL0_wght400_GRAD0_opsz24.png',
+                                                                                                    ),
                                                                                               width: 50.0,
                                                                                               height: 50.0,
                                                                                               fit: BoxFit.contain,
@@ -1514,18 +1534,15 @@ class _MainMembrosWidgetState extends State<MainMembrosWidget>
                                                                                           child: CachedNetworkImage(
                                                                                             fadeInDuration: Duration(milliseconds: 100),
                                                                                             fadeOutDuration: Duration(milliseconds: 100),
-                                                                                            imageUrl: valueOrDefault<String>(
-                                                                                              listViewmMembrosSeachMembrosViewConcatSeachRow.fotosPath.firstOrNull != ''
-                                                                                                  ? valueOrDefault<String>(
-                                                                                                      listViewmMembrosSeachMembrosViewConcatSeachRow.fotosPath.firstOrNull,
-                                                                                                      'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/h99rv77ta7i5/groups_24dp_00000_FILL0_wght400_GRAD0_opsz24.png',
-                                                                                                    )
-                                                                                                  : valueOrDefault<String>(
-                                                                                                      Theme.of(context).brightness == Brightness.light ? 'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/h99rv77ta7i5/groups_24dp_00000_FILL0_wght400_GRAD0_opsz24.png' : 'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/cjwx21vtk3oj/groups_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.png',
-                                                                                                      'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/h99rv77ta7i5/groups_24dp_00000_FILL0_wght400_GRAD0_opsz24.png',
-                                                                                                    ),
-                                                                                              'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/rgxzhoyu6nbx/groups_96dp_99999_FILL0_wght400_GRAD0_opsz48.png',
-                                                                                            ),
+                                                                                            imageUrl: listViewmMembrosSeachMembrosViewConcatSeachRow.fotosPath.firstOrNull != null && listViewmMembrosSeachMembrosViewConcatSeachRow.fotosPath.firstOrNull != ''
+                                                                                                ? valueOrDefault<String>(
+                                                                                                    listViewmMembrosSeachMembrosViewConcatSeachRow.fotosPath.firstOrNull,
+                                                                                                    'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/h99rv77ta7i5/groups_24dp_00000_FILL0_wght400_GRAD0_opsz24.png',
+                                                                                                  )
+                                                                                                : valueOrDefault<String>(
+                                                                                                    Theme.of(context).brightness == Brightness.light ? 'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/h99rv77ta7i5/groups_24dp_00000_FILL0_wght400_GRAD0_opsz24.png' : 'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/cjwx21vtk3oj/groups_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.png',
+                                                                                                    'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/h99rv77ta7i5/groups_24dp_00000_FILL0_wght400_GRAD0_opsz24.png',
+                                                                                                  ),
                                                                                             width: 50.0,
                                                                                             height: 50.0,
                                                                                             fit: BoxFit.contain,

@@ -19,7 +19,12 @@ import 'auth_recover_model.dart';
 export 'auth_recover_model.dart';
 
 class AuthRecoverWidget extends StatefulWidget {
-  const AuthRecoverWidget({super.key});
+  const AuthRecoverWidget({
+    super.key,
+    this.emailUsuario,
+  });
+
+  final String? emailUsuario;
 
   static String routeName = 'auth_recover';
   static String routePath = 'authRecover';
@@ -146,45 +151,82 @@ class _AuthRecoverWidgetState extends State<AuthRecoverWidget>
                                   ),
                                 ),
                                 alignment: AlignmentDirectional(-1.0, 0.0),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Align(
-                                      alignment:
-                                          AlignmentDirectional(0.0, -1.0),
-                                      child: Text(
-                                        FFAppState().AGENCIA,
-                                        style: FlutterFlowTheme.of(context)
-                                            .headlineMedium
-                                            .override(
-                                              fontFamily:
-                                                  FlutterFlowTheme.of(context)
-                                                      .headlineMediumFamily,
-                                              letterSpacing: 0.0,
-                                              useGoogleFonts: GoogleFonts
-                                                      .asMap()
-                                                  .containsKey(FlutterFlowTheme
-                                                          .of(context)
-                                                      .headlineMediumFamily),
-                                            ),
-                                      ),
-                                    ),
-                                    Align(
-                                      alignment:
-                                          AlignmentDirectional(0.0, -1.0),
-                                      child: ClipRRect(
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
-                                        child: Image.asset(
-                                          'assets/images/app_launcher_icon.png',
-                                          width: 300.0,
-                                          height: 250.0,
-                                          fit: BoxFit.cover,
+                                child: Align(
+                                  alignment: AlignmentDirectional(0.0, 0.0),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Align(
+                                        alignment:
+                                            AlignmentDirectional(0.0, -1.0),
+                                        child: Text(
+                                          FFAppState().AGENCIA,
+                                          style: FlutterFlowTheme.of(context)
+                                              .headlineMedium
+                                              .override(
+                                                fontFamily:
+                                                    FlutterFlowTheme.of(context)
+                                                        .headlineMediumFamily,
+                                                letterSpacing: 0.0,
+                                                fontWeight: FontWeight.w600,
+                                                useGoogleFonts: GoogleFonts
+                                                        .asMap()
+                                                    .containsKey(FlutterFlowTheme
+                                                            .of(context)
+                                                        .headlineMediumFamily),
+                                              ),
                                         ),
                                       ),
-                                    ),
-                                  ],
+                                      Align(
+                                        alignment:
+                                            AlignmentDirectional(0.0, 0.0),
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
+                                          child: Image.asset(
+                                            'assets/images/app_launcher_icon.png',
+                                            fit: BoxFit.none,
+                                            alignment: Alignment(0.0, 0.0),
+                                          ),
+                                        ),
+                                      ),
+                                      Align(
+                                        alignment:
+                                            AlignmentDirectional(0.0, -1.0),
+                                        child: Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 0.0, 0.0, 16.0),
+                                          child: Text(
+                                            FFLocalizations.of(context).getText(
+                                              '4dd14s4x' /* Beta Version 1.0.1. 2025 */,
+                                            ),
+                                            textAlign: TextAlign.start,
+                                            style: FlutterFlowTheme.of(context)
+                                                .labelMedium
+                                                .override(
+                                                  fontFamily:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelMediumFamily,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryText,
+                                                  letterSpacing: 0.0,
+                                                  fontWeight: FontWeight.bold,
+                                                  useGoogleFonts: GoogleFonts
+                                                          .asMap()
+                                                      .containsKey(
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .labelMediumFamily),
+                                                ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                               Align(
@@ -701,13 +743,13 @@ class _AuthRecoverWidgetState extends State<AuthRecoverWidget>
                                                                           },
                                                                           child:
                                                                               Toast04Widget(
-                                                                            toast04Titulo:
+                                                                            titulo:
                                                                                 FFLocalizations.of(context).getText(
-                                                                              'vj2850u6' /* Successfully !! */,
+                                                                              'rsong6b5' /* Successfully !! */,
                                                                             ),
-                                                                            toast04Notificacao:
+                                                                            texto:
                                                                                 FFLocalizations.of(context).getText(
-                                                                              'o0j2dv3s' /* Password changed successfully!... */,
+                                                                              'rawi67ub' /* Password changed successfully!... */,
                                                                             ),
                                                                           ),
                                                                         ),

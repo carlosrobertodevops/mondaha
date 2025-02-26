@@ -11,14 +11,12 @@ export 'toast04_model.dart';
 class Toast04Widget extends StatefulWidget {
   const Toast04Widget({
     super.key,
-    String? toast04Titulo,
-    String? toast04Notificacao,
-  })  : this.toast04Titulo = toast04Titulo ?? 'Título da notificação',
-        this.toast04Notificacao = toast04Notificacao ??
-            'Alguma cópia do corpo que está presente nesta pequena notificação.';
+    this.titulo,
+    this.texto,
+  });
 
-  final String toast04Titulo;
-  final String toast04Notificacao;
+  final String? titulo;
+  final String? texto;
 
   @override
   State<Toast04Widget> createState() => _Toast04WidgetState();
@@ -51,7 +49,6 @@ class _Toast04WidgetState extends State<Toast04Widget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 400.0,
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).success,
         boxShadow: [
@@ -93,7 +90,7 @@ class _Toast04WidgetState extends State<Toast04Widget> {
                         ),
                       ),
                       Text(
-                        widget!.toast04Titulo,
+                        widget!.titulo!,
                         style: FlutterFlowTheme.of(context).titleSmall.override(
                               fontFamily:
                                   FlutterFlowTheme.of(context).titleSmallFamily,
@@ -106,7 +103,7 @@ class _Toast04WidgetState extends State<Toast04Widget> {
                     ].divide(SizedBox(width: 8.0)),
                   ),
                   Text(
-                    widget!.toast04Notificacao,
+                    widget!.texto!,
                     style: FlutterFlowTheme.of(context).labelMedium.override(
                           fontFamily:
                               FlutterFlowTheme.of(context).labelMediumFamily,
