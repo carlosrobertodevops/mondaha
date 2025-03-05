@@ -492,6 +492,82 @@ class _WebNavWidgetState extends State<WebNavWidget>
                             ),
                           ),
                         ),
+                        if (FFAppState().UsuarioAtualTipoUsuarioId == 2)
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 0.0, 0.0, 12.0),
+                            child: InkWell(
+                              splashColor: Colors.transparent,
+                              focusColor: Colors.transparent,
+                              hoverColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                              onTap: () async {
+                                logFirebaseEvent(
+                                    'WEB_NAV_COMP_bg_color_ON_TAP');
+
+                                context.pushNamed(MainMapaWidget.routeName);
+                              },
+                              child: Container(
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                  color: widget!.selectedNav == 4
+                                      ? FlutterFlowTheme.of(context).alternate
+                                      : FlutterFlowTheme.of(context)
+                                          .secondaryBackground,
+                                  borderRadius: BorderRadius.circular(8.0),
+                                ),
+                                child: Padding(
+                                  padding: EdgeInsets.all(8.0),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Icon(
+                                        Icons.location_history_outlined,
+                                        color: widget!.selectedNav == 4
+                                            ? FlutterFlowTheme.of(context)
+                                                .primary
+                                            : FlutterFlowTheme.of(context)
+                                                .secondaryText,
+                                        size: 28.0,
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            12.0, 0.0, 0.0, 0.0),
+                                        child: Text(
+                                          FFLocalizations.of(context).getText(
+                                            'a4bp4t99' /* Map */,
+                                          ),
+                                          style: FlutterFlowTheme.of(context)
+                                              .labelLarge
+                                              .override(
+                                                fontFamily:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelLargeFamily,
+                                                color: widget!.selectedNav == 4
+                                                    ? FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryText
+                                                    : FlutterFlowTheme.of(
+                                                            context)
+                                                        .secondaryText,
+                                                letterSpacing: 0.0,
+                                                useGoogleFonts: GoogleFonts
+                                                        .asMap()
+                                                    .containsKey(
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .labelLargeFamily),
+                                              ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
                         if (false)
                           Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
@@ -510,7 +586,7 @@ class _WebNavWidgetState extends State<WebNavWidget>
                               child: Container(
                                 width: double.infinity,
                                 decoration: BoxDecoration(
-                                  color: widget!.selectedNav == 4
+                                  color: widget!.selectedNav == 5
                                       ? FlutterFlowTheme.of(context).alternate
                                       : FlutterFlowTheme.of(context)
                                           .secondaryBackground,
@@ -614,7 +690,7 @@ class _WebNavWidgetState extends State<WebNavWidget>
                               child: Container(
                                 width: double.infinity,
                                 decoration: BoxDecoration(
-                                  color: widget!.selectedNav == 5
+                                  color: widget!.selectedNav == 6
                                       ? FlutterFlowTheme.of(context).alternate
                                       : FlutterFlowTheme.of(context)
                                           .secondaryBackground,
@@ -688,7 +764,7 @@ class _WebNavWidgetState extends State<WebNavWidget>
                             child: Container(
                               width: double.infinity,
                               decoration: BoxDecoration(
-                                color: widget!.selectedNav == 6
+                                color: widget!.selectedNav == 7
                                     ? FlutterFlowTheme.of(context).alternate
                                     : FlutterFlowTheme.of(context)
                                         .secondaryBackground,
@@ -762,10 +838,10 @@ class _WebNavWidgetState extends State<WebNavWidget>
                                 children: [
                                   Container(
                                     width: 200.0,
-                                    height: 1.0,
+                                    height: 2.0,
                                     decoration: BoxDecoration(
                                       color: FlutterFlowTheme.of(context)
-                                          .secondaryBackground,
+                                          .alternate,
                                       borderRadius: BorderRadius.only(
                                         bottomLeft: Radius.circular(0.0),
                                         bottomRight: Radius.circular(0.0),
@@ -774,7 +850,7 @@ class _WebNavWidgetState extends State<WebNavWidget>
                                       ),
                                       border: Border.all(
                                         color: FlutterFlowTheme.of(context)
-                                            .secondaryText,
+                                            .alternate,
                                       ),
                                     ),
                                   ),
@@ -803,7 +879,7 @@ class _WebNavWidgetState extends State<WebNavWidget>
                             child: Container(
                               width: double.infinity,
                               decoration: BoxDecoration(
-                                color: widget!.selectedNav == 7
+                                color: widget!.selectedNav == 8
                                     ? FlutterFlowTheme.of(context).alternate
                                     : FlutterFlowTheme.of(context)
                                         .secondaryBackground,
@@ -1578,6 +1654,54 @@ class _WebNavWidgetState extends State<WebNavWidget>
                               ),
                             ),
                           ),
+                          if (FFAppState().UsuarioAtualTipoUsuarioId == 2)
+                            Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 0.0, 0.0, 12.0),
+                              child: InkWell(
+                                splashColor: Colors.transparent,
+                                focusColor: Colors.transparent,
+                                hoverColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
+                                onTap: () async {
+                                  logFirebaseEvent(
+                                      'WEB_NAV_COMP_bg_color_ON_TAP');
+
+                                  context.pushNamed(MainMapaWidget.routeName);
+                                },
+                                child: Container(
+                                  width: double.infinity,
+                                  decoration: BoxDecoration(
+                                    color: widget!.selectedNav == 4
+                                        ? FlutterFlowTheme.of(context).alternate
+                                        : FlutterFlowTheme.of(context)
+                                            .secondaryBackground,
+                                    borderRadius: BorderRadius.circular(8.0),
+                                  ),
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Icon(
+                                          Icons.location_history_outlined,
+                                          color: widget!.selectedNav == 4
+                                              ? FlutterFlowTheme.of(context)
+                                                  .primary
+                                              : FlutterFlowTheme.of(context)
+                                                  .secondaryText,
+                                          size: 28.0,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
                           if (false)
                             Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
@@ -1597,7 +1721,7 @@ class _WebNavWidgetState extends State<WebNavWidget>
                                 child: Container(
                                   width: double.infinity,
                                   decoration: BoxDecoration(
-                                    color: widget!.selectedNav == 4
+                                    color: widget!.selectedNav == 5
                                         ? FlutterFlowTheme.of(context).alternate
                                         : FlutterFlowTheme.of(context)
                                             .secondaryBackground,
@@ -1674,7 +1798,7 @@ class _WebNavWidgetState extends State<WebNavWidget>
                                 child: Container(
                                   width: double.infinity,
                                   decoration: BoxDecoration(
-                                    color: widget!.selectedNav == 5
+                                    color: widget!.selectedNav == 6
                                         ? FlutterFlowTheme.of(context).alternate
                                         : FlutterFlowTheme.of(context)
                                             .secondaryBackground,
@@ -1721,7 +1845,7 @@ class _WebNavWidgetState extends State<WebNavWidget>
                               child: Container(
                                 width: double.infinity,
                                 decoration: BoxDecoration(
-                                  color: widget!.selectedNav == 6
+                                  color: widget!.selectedNav == 7
                                       ? FlutterFlowTheme.of(context).alternate
                                       : FlutterFlowTheme.of(context)
                                           .secondaryBackground,
@@ -1755,6 +1879,9 @@ class _WebNavWidgetState extends State<WebNavWidget>
                                 0.0, 0.0, 0.0, 12.0),
                             child: Container(
                               width: double.infinity,
+                              constraints: BoxConstraints(
+                                minHeight: 3.0,
+                              ),
                               decoration: BoxDecoration(
                                 color: widget!.selectedNav == 6
                                     ? FlutterFlowTheme.of(context).alternate
@@ -1770,11 +1897,11 @@ class _WebNavWidgetState extends State<WebNavWidget>
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     Container(
-                                      width: 200.0,
-                                      height: 1.0,
+                                      width: 70.0,
+                                      height: 3.0,
                                       decoration: BoxDecoration(
                                         color: FlutterFlowTheme.of(context)
-                                            .secondaryBackground,
+                                            .alternate,
                                         borderRadius: BorderRadius.only(
                                           bottomLeft: Radius.circular(0.0),
                                           bottomRight: Radius.circular(0.0),
@@ -1783,9 +1910,10 @@ class _WebNavWidgetState extends State<WebNavWidget>
                                         ),
                                         border: Border.all(
                                           color: FlutterFlowTheme.of(context)
-                                              .secondaryText,
+                                              .alternate,
                                         ),
                                       ),
+                                      alignment: AlignmentDirectional(0.0, 0.0),
                                     ),
                                   ],
                                 ),
@@ -1813,7 +1941,7 @@ class _WebNavWidgetState extends State<WebNavWidget>
                               child: Container(
                                 width: double.infinity,
                                 decoration: BoxDecoration(
-                                  color: widget!.selectedNav == 7
+                                  color: widget!.selectedNav == 8
                                       ? FlutterFlowTheme.of(context).alternate
                                       : FlutterFlowTheme.of(context)
                                           .secondaryBackground,

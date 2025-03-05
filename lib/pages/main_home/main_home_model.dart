@@ -37,6 +37,8 @@ class MainHomeModel extends FlutterFlowModel<MainHomeWidget> {
   ApiCallResponse? apiResultFaccoes;
   // Stores action output result for [Backend Call - API (CountUsuariosAtivosView )] action in main_home widget.
   ApiCallResponse? apiResultUsuariosAtivos;
+  // Stores action output result for [Backend Call - Query Rows] action in main_home widget.
+  List<CountFaccoesViewRow>? outputCountMembros;
   // Model for web_nav component.
   late WebNavModel webNavModel;
 

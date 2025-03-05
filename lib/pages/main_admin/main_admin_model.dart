@@ -1,3 +1,4 @@
+import '';
 import '/backend/supabase/supabase.dart';
 import '/components/modal/modal_profile_edit_admin/modal_profile_edit_admin_widget.dart';
 import '/components/navs/web_nav/web_nav_widget.dart';
@@ -25,6 +26,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class MainAdminModel extends FlutterFlowModel<MainAdminWidget> {
+  ///  Local state fields for this page.
+
+  int? countUsuarios = 0;
+
   ///  State fields for stateful widgets in this page.
 
   // Model for web_nav component.
@@ -34,10 +39,25 @@ class MainAdminModel extends FlutterFlowModel<MainAdminWidget> {
   TextEditingController? textFieldPesquisaAdminTextController;
   String? Function(BuildContext, String?)?
       textFieldPesquisaAdminTextControllerValidator;
+  // Stores action output result for [Backend Call - Query Rows] action in TextFieldPesquisaAdmin widget.
+  List<UsuariosViewConcatSearchRow>? outputQueryUsuariosCount2;
+  // Stores action output result for [Backend Call - Query Rows] action in TextFieldPesquisaAdmin widget.
+  List<UsuariosViewConcatSearchRow>? outputQueryUsuariosCount1;
+  // Stores action output result for [Backend Call - Query Rows] action in IconButton widget.
+  List<UsuariosViewConcatSearchRow>? outputQueryUsuariosCount3;
   // State field(s) for TabBar widget.
   TabController? tabBarController;
   int get tabBarCurrentIndex =>
       tabBarController != null ? tabBarController!.index : 0;
+
+  // Stores action output result for [Backend Call - Query Rows] action in ListViewUsuarios widget.
+  List<UsuariosViewConcatSearchRow>? outputCountUsuariosSearch1;
+  // Stores action output result for [Backend Call - Query Rows] action in ListViewUsuariosGestor widget.
+  List<UsuariosViewConcatSearchRow>? outputCountUsuariosSearch2;
+  // Stores action output result for [Backend Call - Query Rows] action in ListViewUsuariosSearch widget.
+  List<UsuariosViewConcatSearchRow>? outputCountUsuariosSearch2Copy;
+  // Stores action output result for [Backend Call - Query Rows] action in ListViewUsuariosGestorSearch widget.
+  List<UsuariosViewConcatSearchRow>? outputCountUsuariosSearch4;
 
   @override
   void initState(BuildContext context) {

@@ -1,24 +1,26 @@
 import '../database.dart';
 
-class MembrosTable extends SupabaseTable<MembrosRow> {
+class MembrosViewConcatMapsSeachTable
+    extends SupabaseTable<MembrosViewConcatMapsSeachRow> {
   @override
-  String get tableName => 'membros';
+  String get tableName => 'membros_view_concat_maps_seach';
 
   @override
-  MembrosRow createRow(Map<String, dynamic> data) => MembrosRow(data);
+  MembrosViewConcatMapsSeachRow createRow(Map<String, dynamic> data) =>
+      MembrosViewConcatMapsSeachRow(data);
 }
 
-class MembrosRow extends SupabaseDataRow {
-  MembrosRow(Map<String, dynamic> data) : super(data);
+class MembrosViewConcatMapsSeachRow extends SupabaseDataRow {
+  MembrosViewConcatMapsSeachRow(Map<String, dynamic> data) : super(data);
 
   @override
-  SupabaseTable get table => MembrosTable();
+  SupabaseTable get table => MembrosViewConcatMapsSeachTable();
 
-  int get membroId => getField<int>('membro_id')!;
-  set membroId(int value) => setField<int>('membro_id', value);
+  int? get membroId => getField<int>('membro_id');
+  set membroId(int? value) => setField<int>('membro_id', value);
 
-  DateTime get createdAt => getField<DateTime>('created_at')!;
-  set createdAt(DateTime value) => setField<DateTime>('created_at', value);
+  DateTime? get createdAt => getField<DateTime>('created_at');
+  set createdAt(DateTime? value) => setField<DateTime>('created_at', value);
 
   String? get nomeCompleto => getField<String>('nome_completo');
   set nomeCompleto(String? value) => setField<String>('nome_completo', value);
@@ -29,12 +31,18 @@ class MembrosRow extends SupabaseDataRow {
   int? get faccaoId => getField<int>('faccao_id');
   set faccaoId(int? value) => setField<int>('faccao_id', value);
 
+  String? get faccaoNome => getField<String>('faccao_nome');
+  set faccaoNome(String? value) => setField<String>('faccao_nome', value);
+
   List<String> get fotosPath => getListField<String>('fotos_path');
   set fotosPath(List<String>? value) =>
       setListField<String>('fotos_path', value);
 
   int? get funcaoId => getField<int>('funcao_id');
   set funcaoId(int? value) => setField<int>('funcao_id', value);
+
+  String? get funcaoNome => getField<String>('funcao_nome');
+  set funcaoNome(String? value) => setField<String>('funcao_nome', value);
 
   String? get nacionalidade => getField<String>('nacionalidade');
   set nacionalidade(String? value) => setField<String>('nacionalidade', value);
@@ -70,6 +78,9 @@ class MembrosRow extends SupabaseDataRow {
   int? get cargoId => getField<int>('cargo_id');
   set cargoId(int? value) => setField<int>('cargo_id', value);
 
+  String? get cargoNome => getField<String>('cargo_nome');
+  set cargoNome(String? value) => setField<String>('cargo_nome', value);
+
   int? get cargoAntId => getField<int>('cargo_ant_id');
   set cargoAntId(int? value) => setField<int>('cargo_ant_id', value);
 
@@ -101,8 +112,14 @@ class MembrosRow extends SupabaseDataRow {
   int? get estadoId => getField<int>('estado_id');
   set estadoId(int? value) => setField<int>('estado_id', value);
 
+  String? get estadoNome => getField<String>('estado_nome');
+  set estadoNome(String? value) => setField<String>('estado_nome', value);
+
   int? get municipioId => getField<int>('municipio_id');
   set municipioId(int? value) => setField<int>('municipio_id', value);
+
+  String? get municipioNome => getField<String>('municipio_nome');
+  set municipioNome(String? value) => setField<String>('municipio_nome', value);
 
   String? get infopen => getField<String>('infopen');
   set infopen(String? value) => setField<String>('infopen', value);
@@ -120,6 +137,10 @@ class MembrosRow extends SupabaseDataRow {
 
   bool? get alerta => getField<bool>('alerta');
   set alerta(bool? value) => setField<bool>('alerta', value);
+
+  String? get alertaObservacao => getField<String>('alerta_observacao');
+  set alertaObservacao(String? value) =>
+      setField<String>('alerta_observacao', value);
 
   String? get atuacaoCrime => getField<String>('atuacao_crime');
   set atuacaoCrime(String? value) => setField<String>('atuacao_crime', value);
@@ -147,10 +168,6 @@ class MembrosRow extends SupabaseDataRow {
   set membroLngLat(List<double>? value) =>
       setListField<double>('membroLngLat', value);
 
-  String? get alertaObservacao => getField<String>('alerta_observacao');
-  set alertaObservacao(String? value) =>
-      setField<String>('alerta_observacao', value);
-
   bool? get excluido => getField<bool>('excluido');
   set excluido(bool? value) => setField<bool>('excluido', value);
 
@@ -160,18 +177,9 @@ class MembrosRow extends SupabaseDataRow {
   int? get situacao => getField<int>('situacao');
   set situacao(int? value) => setField<int>('situacao', value);
 
-  String? get dtNascimento => getField<String>('dt_nascimento');
-  set dtNascimento(String? value) => setField<String>('dt_nascimento', value);
+  String? get coordenada => getField<String>('coordenada');
+  set coordenada(String? value) => setField<String>('coordenada', value);
 
-  int? get idUsuario => getField<int>('id_usuario');
-  set idUsuario(int? value) => setField<int>('id_usuario', value);
-
-  int? get idAgencia => getField<int>('id_agencia');
-  set idAgencia(int? value) => setField<int>('id_agencia', value);
-
-  int? get idSubagencia => getField<int>('id_subagencia');
-  set idSubagencia(int? value) => setField<int>('id_subagencia', value);
-
-  String? get coordenadasff => getField<String>('coordenadasff');
-  set coordenadasff(String? value) => setField<String>('coordenadasff', value);
+  String? get pesquisa => getField<String>('pesquisa');
+  set pesquisa(String? value) => setField<String>('pesquisa', value);
 }

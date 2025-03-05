@@ -1,6 +1,6 @@
 import '';
 import '/backend/supabase/supabase.dart';
-import '/components/modal/user_details_membro_view/user_details_membro_view_widget.dart';
+import '/components/modal/user_details_membro_maps_view/user_details_membro_maps_view_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -12,24 +12,25 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'modal_membro_view_model.dart';
-export 'modal_membro_view_model.dart';
+import 'modal_membro_maps_view_model.dart';
+export 'modal_membro_maps_view_model.dart';
 
-class ModalMembroViewWidget extends StatefulWidget {
-  const ModalMembroViewWidget({
+class ModalMembroMapsViewWidget extends StatefulWidget {
+  const ModalMembroMapsViewWidget({
     super.key,
-    this.membroRows,
+    this.membroMapsRows,
   });
 
-  final MembrosViewConcatSeachRow? membroRows;
+  final MembrosViewConcatMapsSeachRow? membroMapsRows;
 
   @override
-  State<ModalMembroViewWidget> createState() => _ModalMembroViewWidgetState();
+  State<ModalMembroMapsViewWidget> createState() =>
+      _ModalMembroMapsViewWidgetState();
 }
 
-class _ModalMembroViewWidgetState extends State<ModalMembroViewWidget>
+class _ModalMembroMapsViewWidgetState extends State<ModalMembroMapsViewWidget>
     with TickerProviderStateMixin {
-  late ModalMembroViewModel _model;
+  late ModalMembroMapsViewModel _model;
 
   final animationsMap = <String, AnimationInfo>{};
 
@@ -42,7 +43,7 @@ class _ModalMembroViewWidgetState extends State<ModalMembroViewWidget>
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => ModalMembroViewModel());
+    _model = createModel(context, () => ModalMembroMapsViewModel());
 
     animationsMap.addAll({
       'iconButtonOnPageLoadAnimation': AnimationInfo(
@@ -117,7 +118,7 @@ class _ModalMembroViewWidgetState extends State<ModalMembroViewWidget>
             hoverColor: Colors.transparent,
             highlightColor: Colors.transparent,
             onTap: () async {
-              logFirebaseEvent('MODAL_MEMBRO_VIEW_Column_v9vciv7e_ON_TAP');
+              logFirebaseEvent('MODAL_MEMBRO_MAPS_VIEW_Column_30csmvem_O');
               Navigator.pop(context);
             },
             child: Column(
@@ -141,7 +142,7 @@ class _ModalMembroViewWidgetState extends State<ModalMembroViewWidget>
                       ),
                       onPressed: () async {
                         logFirebaseEvent(
-                            'MODAL_MEMBRO_VIEW_close_outlined_ICN_ON_');
+                            'MODAL_MEMBRO_MAPS_VIEW_close_outlined_IC');
                         Navigator.pop(context);
                       },
                     ).animateOnPageLoad(
@@ -193,11 +194,11 @@ class _ModalMembroViewWidgetState extends State<ModalMembroViewWidget>
                     borderRadius: BorderRadius.circular(12.0),
                   ),
                   child: wrapWithModel(
-                    model: _model.userDetailsMembroViewModel,
+                    model: _model.userDetailsMembroMapsViewModel,
                     updateCallback: () => safeSetState(() {}),
-                    child: UserDetailsMembroViewWidget(
+                    child: UserDetailsMembroMapsViewWidget(
                       showBack: false,
-                      membroRow: widget!.membroRows!,
+                      membroMapsRow: widget!.membroMapsRows!,
                     ),
                   ),
                 ),

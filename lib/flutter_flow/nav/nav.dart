@@ -136,19 +136,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             FFRoute(
               name: ProjectDetailsWidget.routeName,
               path: ProjectDetailsWidget.routePath,
-              requireAuth: true,
               builder: (context, params) => ProjectDetailsWidget(),
             ),
             FFRoute(
               name: SearchPageWidget.routeName,
               path: SearchPageWidget.routePath,
-              requireAuth: true,
               builder: (context, params) => SearchPageWidget(),
             ),
             FFRoute(
               name: MessagesDetailsWidget.routeName,
               path: MessagesDetailsWidget.routePath,
-              requireAuth: true,
               builder: (context, params) => MessagesDetailsWidget(),
             ),
             FFRoute(
@@ -184,25 +181,40 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             FFRoute(
               name: BuscarCEPWidget.routeName,
               path: BuscarCEPWidget.routePath,
-              requireAuth: true,
               builder: (context, params) => BuscarCEPWidget(),
             ),
             FFRoute(
               name: WelcomePageWidget.routeName,
               path: WelcomePageWidget.routePath,
-              requireAuth: true,
               builder: (context, params) => WelcomePageWidget(),
             ),
             FFRoute(
-              name: AuthRecoverWidget.routeName,
-              path: AuthRecoverWidget.routePath,
-              requireAuth: true,
-              builder: (context, params) => AuthRecoverWidget(
+              name: AuthRecoverSenhaWidget.routeName,
+              path: AuthRecoverSenhaWidget.routePath,
+              builder: (context, params) => AuthRecoverSenhaWidget(
                 emailUsuario: params.getParam(
                   'emailUsuario',
                   ParamType.String,
                 ),
               ),
+            ),
+            FFRoute(
+              name: AuthRecoverEmailWidget.routeName,
+              path: AuthRecoverEmailWidget.routePath,
+              builder: (context, params) => AuthRecoverEmailWidget(
+                emailUsuario: params.getParam(
+                  'emailUsuario',
+                  ParamType.String,
+                ),
+              ),
+            ),
+            FFRoute(
+              name: MainMapaWidget.routeName,
+              path: MainMapaWidget.routePath,
+              requireAuth: true,
+              builder: (context, params) => params.isEmpty
+                  ? NavBarPage(initialPage: 'main_mapa')
+                  : MainMapaWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ),

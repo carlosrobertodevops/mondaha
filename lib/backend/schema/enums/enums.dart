@@ -1,16 +1,8 @@
 import 'package:collection/collection.dart';
 import "package:community_testing_ryusdv/backend/schema/enums/enums.dart"
-    as community_testing_ryusdv_enums
-    hide FFEnumExtensions, FFEnumListExtensions;
-
-extension FFEnumExtensions<T extends Enum> on T {
-  String serialize() => name;
-}
-
-extension FFEnumListExtensions<T extends Enum> on Iterable<T> {
-  T? deserialize(String? value) =>
-      firstWhereOrNull((e) => e.serialize() == value);
-}
+    as community_testing_ryusdv_enums;
+import 'package:ff_commons/flutter_flow/enums.dart';
+export 'package:ff_commons/flutter_flow/enums.dart';
 
 T? deserializeEnum<T>(String? value) {
   switch (T) {

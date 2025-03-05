@@ -1,3 +1,4 @@
+import '';
 import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
 import '/backend/supabase/supabase.dart';
@@ -3817,40 +3818,32 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                                                 width: 2.0,
                                                                                               ),
                                                                                             ),
-                                                                                            child: Visibility(
-                                                                                              visible: responsiveVisibility(
-                                                                                                context: context,
-                                                                                                phone: false,
-                                                                                                tablet: false,
-                                                                                                tabletLandscape: false,
-                                                                                              ),
-                                                                                              child: Align(
-                                                                                                alignment: AlignmentDirectional(0.0, 0.0),
-                                                                                                child: FlutterFlowGoogleMap(
-                                                                                                  controller: _model.googleMapMembrosController,
-                                                                                                  onCameraIdle: (latLng) => _model.googleMapMembrosCenter = latLng,
-                                                                                                  initialLocation: _model.googleMapMembrosCenter ??= LatLng(-8.77, -70.55),
-                                                                                                  markers: _model.membrosLatLng
-                                                                                                      .map(
-                                                                                                        (marker) => FlutterFlowMarker(
-                                                                                                          marker.serialize(),
-                                                                                                          marker,
-                                                                                                        ),
-                                                                                                      )
-                                                                                                      .toList(),
-                                                                                                  markerColor: GoogleMarkerColor.violet,
-                                                                                                  mapType: MapType.normal,
-                                                                                                  style: GoogleMapStyle.standard,
-                                                                                                  initialZoom: 9.0,
-                                                                                                  allowInteraction: true,
-                                                                                                  allowZoom: true,
-                                                                                                  showZoomControls: true,
-                                                                                                  showLocation: true,
-                                                                                                  showCompass: false,
-                                                                                                  showMapToolbar: false,
-                                                                                                  showTraffic: false,
-                                                                                                  centerMapOnMarkerTap: true,
-                                                                                                ),
+                                                                                            child: Align(
+                                                                                              alignment: AlignmentDirectional(0.0, 0.0),
+                                                                                              child: FlutterFlowGoogleMap(
+                                                                                                controller: _model.googleMapMembrosController,
+                                                                                                onCameraIdle: (latLng) => _model.googleMapMembrosCenter = latLng,
+                                                                                                initialLocation: _model.googleMapMembrosCenter ??= LatLng(-8.77, -70.55),
+                                                                                                markers: _model.membrosLatLng
+                                                                                                    .map(
+                                                                                                      (marker) => FlutterFlowMarker(
+                                                                                                        marker.serialize(),
+                                                                                                        marker,
+                                                                                                      ),
+                                                                                                    )
+                                                                                                    .toList(),
+                                                                                                markerColor: GoogleMarkerColor.violet,
+                                                                                                mapType: MapType.normal,
+                                                                                                style: GoogleMapStyle.standard,
+                                                                                                initialZoom: 9.0,
+                                                                                                allowInteraction: true,
+                                                                                                allowZoom: true,
+                                                                                                showZoomControls: true,
+                                                                                                showLocation: true,
+                                                                                                showCompass: false,
+                                                                                                showMapToolbar: false,
+                                                                                                showTraffic: false,
+                                                                                                centerMapOnMarkerTap: true,
                                                                                               ),
                                                                                             ),
                                                                                           ),
@@ -8347,6 +8340,13 @@ class _ModalMembrosAddWidgetState extends State<ModalMembrosAddWidget>
                                                                   .AgenciaAtualld,
                                                         });
                                                         _shouldSetState = true;
+                                                        await MembrosCoordenadasAddCall
+                                                            .call(
+                                                          membroId: _model
+                                                              .outputMembrosAdd
+                                                              ?.membroId,
+                                                        );
+
                                                         await Future.wait([
                                                           Future(() async {
                                                             if (_model

@@ -8,10 +8,14 @@ export '/pages/project_details/project_details_widget.dart'
 export '/pages/search_page/search_page_widget.dart' show SearchPageWidget;
 export '/pages/messages_details/messages_details_widget.dart'
     show MessagesDetailsWidget;
-export '/pages/auth_login/auth_login_widget.dart' show AuthLoginWidget;
+export '/auth/auth_login/auth_login_widget.dart' show AuthLoginWidget;
 export '/pages/main_admin/main_admin_widget.dart' show MainAdminWidget;
 export '/pages/main_faccoes/main_faccoes_widget.dart' show MainFaccoesWidget;
 export '/components/externos/buscar_c_e_p/buscar_c_e_p_widget.dart'
     show BuscarCEPWidget;
 export '/pages/welcome_page/welcome_page_widget.dart' show WelcomePageWidget;
-export '/pages/auth_recover/auth_recover_widget.dart' show AuthRecoverWidget;
+export '/auth/auth_recover_senha/auth_recover_senha_widget.dart'
+    show AuthRecoverSenhaWidget;
+export '/auth/auth_recover_email/auth_recover_email_widget.dart'
+    show AuthRecoverEmailWidget;
+export '/pages/main_mapa/main_mapa_widget.dart' show MainMapaWidget;

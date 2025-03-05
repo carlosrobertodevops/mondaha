@@ -18,25 +18,39 @@ import 'package:pdf/pdf.dart';
 import 'package:printing/printing.dart';
 import 'dart:typed_data';
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 
 Future docMembrosGerarPDF(List<MembrosViewPdfRow> membrosDoc) async {
-// Add your function code here!
   final pdf = pw.Document();
+  final now = DateTime.now();
+  final dateFormat = DateFormat('dd/MM/yyyy HH:mm');
+  final generatedDate = dateFormat.format(now);
 
-  // Definindo estilos personalizados
-  final pw.TextStyle headerStyle =
-      pw.TextStyle(fontWeight: pw.FontWeight.bold, fontSize: 12);
-  final pw.TextStyle cellStyle = pw.TextStyle(fontSize: 10);
+  // Imagem de fundo com uma marca d'água ou logo da organização
+  // Obtendo a URL da variável de app do FlutterFlow
+  final String? backgroundImageUrl = FFAppState().backgroundImageUrl;
+  final String? usuarioAtual = FFAppState().UsuarioAtualNomeCompleto;
+  final String? agenciaAtual = FFAppState().UsuarioAtualAgenciaNome;
+
+  // Imagem de fundo (marca d'água ou logo da organização)
+  Uint8List? backgroundImage;
+  if (backgroundImageUrl != null && backgroundImageUrl.isNotEmpty) {
+    try {
+      final response = await http.get(Uri.parse(backgroundImageUrl));
+      if (response.statusCode == 200) {
+        backgroundImage = response.bodyBytes;
+      }
+    } catch (e) {
+      print("Erro ao carregar imagem de fundo: $e");
+    }
+  }
 
   for (var i = 0; i < membrosDoc.length; i++) {
     final membro = membrosDoc[i];
-
-    // Obtém a URL da primeira foto, se existir
-    final String imageUrl = membro.fotosPath.isNotEmpty == true
-        ? membro.fotosPath.first
-        : 'SEM FOTO';
-
+    final String imageUrl =
+        membro.fotosPath.isNotEmpty ? membro.fotosPath.first : '';
     Uint8List? imageBytes;
+
     if (imageUrl.isNotEmpty) {
       try {
         final response = await http.get(Uri.parse(imageUrl));
@@ -44,81 +58,103 @@ Future docMembrosGerarPDF(List<MembrosViewPdfRow> membrosDoc) async {
           imageBytes = response.bodyBytes;
         }
       } catch (e) {
-        print("Erro ao carregar imagem: $e");
+        print("Erro ao carregar imagem do membro: $e");
       }
     }
 
     pdf.addPage(
       pw.Page(
-        build: (context) => pw.Column(
-          crossAxisAlignment: pw.CrossAxisAlignment.start,
+        pageFormat: PdfPageFormat.a4.landscape,
+        build: (context) => pw.Stack(
           children: [
-            pw.Header(
-              level: 0,
-              child: pw.Text(
-                'FICHA CADASTRAL DE UM POSSÍVEL MEMBRO DE FACÇÃO CRIMINOSA',
-                style: pw.TextStyle(
-                  fontWeight: pw.FontWeight.bold,
-                  fontSize: 14,
-                  color: PdfColors.blue,
-                ),
-              ),
-            ),
-            pw.SizedBox(height: 20),
-
-            // Exibe a foto se existir
-            if (imageBytes != null)
-              pw.Center(
-                child: pw.Image(
-                  pw.MemoryImage(imageBytes),
-                  width: 150,
-                  height: 150,
-                  fit: pw.BoxFit.cover,
+            // Imagem de fundo
+            if (backgroundImage != null)
+              pw.Positioned.fill(
+                child: pw.Opacity(
+                  opacity: 0.2,
+                  child: pw.Image(pw.MemoryImage(backgroundImage),
+                      fit: pw.BoxFit.cover),
                 ),
               ),
 
-            pw.SizedBox(height: 20),
-            pw.Text(
-              'ID: ${i + 1}',
-              style: pw.TextStyle(fontWeight: pw.FontWeight.bold, fontSize: 12),
-            ),
+            pw.Column(
+              crossAxisAlignment: pw.CrossAxisAlignment.start,
+              children: [
+                pw.Header(
+                  level: 0,
+                  child: pw.Text(
+                    'POSSÍVEL MEMBRO DE FACÇÃO CRIMINOSA',
+                    style: pw.TextStyle(
+                      fontWeight: pw.FontWeight.bold,
+                      fontSize: 14,
+                      color: PdfColors.blue,
+                    ),
+                  ),
+                ),
+                pw.SizedBox(height: 20),
 
-            pw.SizedBox(height: 10),
-            pw.Text(
-              'Facção: ${membro.faccaoNome ?? 'N/A'}',
-              style: pw.TextStyle(fontSize: 12),
-            ),
+                if (imageBytes != null)
+                  pw.Center(
+                    child: pw.Image(
+                      pw.MemoryImage(imageBytes),
+                      width: 150,
+                      height: 150,
+                      fit: pw.BoxFit.cover,
+                    ),
+                  ),
 
-            pw.SizedBox(height: 10),
-            pw.Text(
-              'Nome: ${membro.nomeCompleto ?? 'N/A'}',
-              style: pw.TextStyle(fontSize: 12),
-            ),
+                pw.SizedBox(height: 10),
+                pw.Text('Facção: ${membro.faccaoNome ?? 'N/A'}',
+                    style: pw.TextStyle(fontSize: 14)),
 
-            pw.SizedBox(height: 10),
-            pw.Text(
-              'Alcunha(s): ${membro.alcunha ?? 'N/A'}',
-              style: pw.TextStyle(fontSize: 12),
-            ),
+                pw.SizedBox(height: 10),
+                pw.Text('Nome: ${membro.nomeCompleto ?? 'N/A'}',
+                    style: pw.TextStyle(fontSize: 12)),
 
-            pw.SizedBox(height: 10),
-            pw.Text(
-              'Função: ${membro.funcaoNome ?? 'N/A'}',
-              style: pw.TextStyle(fontSize: 12),
-            ),
+                pw.SizedBox(height: 10),
+                pw.Text('Alcunha(s): ${membro.alcunha ?? 'N/A'}',
+                    style: pw.TextStyle(fontSize: 12)),
 
-            pw.SizedBox(height: 10),
-            pw.Text(
-              'Endereço(s): ${membro.membroEndereco ?? 'N/A'}',
-              style: pw.TextStyle(fontSize: 12),
+                pw.SizedBox(height: 10),
+                pw.Text('Função: ${membro.funcaoNome ?? 'N/A'}',
+                    style: pw.TextStyle(fontSize: 12)),
+
+                pw.SizedBox(height: 10),
+                pw.Text('Endereço(s): ${membro.membroEndereco ?? 'N/A'}',
+                    style: pw.TextStyle(fontSize: 12)),
+
+                pw.SizedBox(height: 10),
+
+                // Dados vinculados (exemplo: outros registros relacionados ao membro)
+                // if (membro.dadosExtras != null)
+                //   pw.Text('Outras Informações: ${membro.dadosExtras}',
+                //       style: pw.TextStyle(fontSize: 12)),
+                pw.Footer(
+                  leading: null,
+                  title: pw.Text(
+                    '(DOCUMENTO RESERVADO - CHEGII) - ($agenciaAtual) - ($usuarioAtual) - Relatório gerado em: $generatedDate',
+                    style: pw.TextStyle(
+                      fontWeight: pw.FontWeight.bold,
+                      fontSize: 10,
+                      color: PdfColors.blue,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ],
         ),
+        // footer: (context) => pw.Text(
+        //   '(DOCUMENTO RESERVADO - CHEGII) - Relatório gerado em: $generatedDate',
+        //   style: pw.TextStyle(fontSize: 10, color: PdfColors.grey),
+        //   textAlign: pw.TextAlign.center,
+        // ),
       ),
     );
   }
 
-  // Print the pdf file
+  // Imprime o PDF
   await Printing.layoutPdf(
-      onLayout: (PdfPageFormat format) async => pdf.save());
+    onLayout: (PdfPageFormat format) async => pdf.save(),
+  );
 }

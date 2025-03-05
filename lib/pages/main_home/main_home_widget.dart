@@ -165,6 +165,13 @@ class _MainHomeWidgetState extends State<MainHomeWidget>
             safeSetState(() {});
           }
         }),
+        Future(() async {
+          _model.outputCountMembros = await CountFaccoesViewTable().queryRows(
+            queryFn: (q) => q,
+          );
+          FFAppState().CountFaccoes = _model.outputCountMembros!.length;
+          safeSetState(() {});
+        }),
       ]);
     });
 

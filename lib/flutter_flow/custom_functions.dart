@@ -470,3 +470,18 @@ bool checkProcesso(String acaoPenalNo) {
 
   return response != Null;
 }
+
+List<LatLng> converteStringLatLng(List<String> strings) {
+  List<LatLng> latLngList = [];
+
+  for (String s in strings) {
+    final match = RegExp(r'LatLng\(lat: (.*), lng: (.*)\)').firstMatch(s);
+    if (match != null) {
+      double lat = double.parse(match.group(1)!);
+      double lng = double.parse(match.group(2)!);
+      latLngList.add(LatLng(lat, lng));
+    }
+  }
+
+  return latLngList;
+}

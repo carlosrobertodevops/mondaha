@@ -1,3 +1,4 @@
+import '';
 import '/backend/supabase/supabase.dart';
 import '/components/modal/user_details_membro_view/user_details_membro_view_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';

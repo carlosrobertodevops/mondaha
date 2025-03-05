@@ -1,3 +1,4 @@
+import '';
 import '/backend/supabase/supabase.dart';
 import '/components/modal/modal_faccao_add/modal_faccao_add_widget.dart';
 import '/components/modal/modal_faccao_edit/modal_faccao_edit_widget.dart';
@@ -23,6 +24,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class MainFaccoesModel extends FlutterFlowModel<MainFaccoesWidget> {
+  ///  Local state fields for this page.
+
+  int? countFaccoes = 0;
+
   ///  State fields for stateful widgets in this page.
 
   // Model for web_nav component.
@@ -32,10 +37,21 @@ class MainFaccoesModel extends FlutterFlowModel<MainFaccoesWidget> {
   TextEditingController? textFieldPesquisarFaccoesTextController;
   String? Function(BuildContext, String?)?
       textFieldPesquisarFaccoesTextControllerValidator;
+  // Stores action output result for [Backend Call - Query Rows] action in TextFieldPesquisarFaccoes widget.
+  List<FaccoesViewConcatSearchRow>? outputQueryFaccaoCount2;
+  // Stores action output result for [Backend Call - Query Rows] action in TextFieldPesquisarFaccoes widget.
+  List<FaccoesViewConcatSearchRow>? outputQueryFaccaoCount1;
+  // Stores action output result for [Backend Call - Query Rows] action in IconButton widget.
+  List<FaccoesViewConcatSearchRow>? outputQueryFaccaoCount3;
   // State field(s) for TabBar widget.
   TabController? tabBarController;
   int get tabBarCurrentIndex =>
       tabBarController != null ? tabBarController!.index : 0;
+
+  // Stores action output result for [Backend Call - Query Rows] action in ListViewFaccao widget.
+  List<FaccoesViewConcatSearchRow>? outputCountFaccoesSearch1;
+  // Stores action output result for [Backend Call - Query Rows] action in ListViewFaccaoBuscar widget.
+  List<FaccoesViewConcatSearchRow>? outputCountFaccoesSearch2;
 
   @override
   void initState(BuildContext context) {

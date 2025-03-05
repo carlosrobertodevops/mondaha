@@ -248,6 +248,8 @@ dynamic deserializeParam<T>(
             return ProcessosRow(data);
           case SubagenciasRow:
             return SubagenciasRow(data);
+          case MembrosCoordenadasRow:
+            return MembrosCoordenadasRow(data);
           case FaccoesViewRow:
             return FaccoesViewRow(data);
           case CargosRow:
@@ -276,6 +278,8 @@ dynamic deserializeParam<T>(
             return TiposUsuariosRow(data);
           case CountFaccoesViewRow:
             return CountFaccoesViewRow(data);
+          case MembrosViewConcatMapsSeachRow:
+            return MembrosViewConcatMapsSeachRow(data);
           case MunicipiosRow:
             return MunicipiosRow(data);
           case AgenciasRow:

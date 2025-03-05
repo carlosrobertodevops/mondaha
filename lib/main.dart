@@ -176,6 +176,7 @@ class _NavBarPageState extends State<NavBarPage> {
       'main_profile': MainProfileWidget(),
       'main_admin': MainAdminWidget(),
       'main_faccoes': MainFaccoesWidget(),
+      'main_mapa': MainMapaWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
 
@@ -281,6 +282,20 @@ class _NavBarPageState extends State<NavBarPage> {
               ),
               label: FFLocalizations.of(context).getText(
                 '8xlnl6av' /* __ */,
+              ),
+              tooltip: '',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.dashboard_outlined,
+                size: 24.0,
+              ),
+              activeIcon: Icon(
+                Icons.account_tree_outlined,
+                size: 32.0,
+              ),
+              label: FFLocalizations.of(context).getText(
+                'bys57gqn' /* __ */,
               ),
               tooltip: '',
             )

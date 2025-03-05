@@ -545,11 +545,23 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'bqvjzpge': {
       'en': 'email',
-      'pt': 'email',
+      'pt': 'emai',
+    },
+    'grdu9kqq': {
+      'en': 'email@dominio.com',
+      'pt': 'email@dominio.com',
     },
     'sltzyh98': {
+      'en': 'Password',
+      'pt': 'Senha',
+    },
+    'oz5bpv98': {
       'en': 'Password (minimum 6 digits)',
       'pt': 'Senha (mínimo 6 dígitos)',
+    },
+    '59mgk747': {
+      'en': '',
+      'pt': '',
     },
     'ufqw0h0a': {
       'en': 'Sign In',
@@ -558,6 +570,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     '9b0pjc1h': {
       'en': 'Forgot your password ?',
       'pt': 'Esqueceu sua senha?',
+    },
+    'hkm23ak8': {
+      'en': 'Click here',
+      'pt': 'Clique aqui.',
     },
     'jc4by7hx': {
       'en': 'Field is required',
@@ -635,17 +651,33 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'User name',
       'pt': 'Nome de usuário',
     },
+    'dkcowi48': {
+      'en': 'User name',
+      'pt': 'Nome de usuário',
+    },
     'nyrv8tm0': {
-      'en': 'Email',
+      'en': 'email',
       'pt': 'email',
     },
+    'ct123orb': {
+      'en': 'email@dominio.com',
+      'pt': 'email@dominio.com',
+    },
     'xi8bszk0': {
+      'en': 'Password',
+      'pt': 'Senha',
+    },
+    'uvdxhj8n': {
       'en': 'Password (minimum 6 digits)',
       'pt': 'Senha (mínimo 6 dígitos)',
     },
     'ffom99vq': {
+      'en': 'Confirm Password',
+      'pt': 'Confirme sua senha',
+    },
+    '6090c1l0': {
       'en': 'Confirm Password (minimum 6 digits)',
-      'pt': 'Confirme sua senha (mínimo 6 dígitos)',
+      'pt': 'Confirmar senha (mínimo 6 dígitos)',
     },
     '22cyhqvr': {
       'en': 'Create Account',
@@ -718,6 +750,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Search...',
       'pt': 'Pesquisar....',
     },
+    '7duuqj5g': {
+      'en': 'Count of Users: ',
+      'pt': 'Total de Usuários: ',
+    },
     'i6puusi7': {
       'en': 'All',
       'pt': '',
@@ -768,6 +804,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'xomxkcoy': {
       'en': 'Search ...',
       'pt': 'Pesquisa...',
+    },
+    '9cechlhi': {
+      'en': 'Count of Factions: ',
+      'pt': 'Total de Facções: ',
     },
     'a5ixac3k': {
       'en': 'All',
@@ -942,19 +982,15 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'pt': '',
     },
   },
-  // auth_recover
+  // auth_recover_senha
   {
-    '4dd14s4x': {
-      'en': 'Beta Version 1.0.1. 2025',
-      'pt': 'Versão Beta 1.0.1.2025',
-    },
     '1wq5pp7h': {
-      'en': 'Recover password',
-      'pt': 'Recuperar senha',
+      'en': 'New Password',
+      'pt': 'Nova Senha',
     },
     'jh9qy90n': {
-      'en': 'Enter your new password to regain access.',
-      'pt': 'Digite sua nova senha para recuperar o acesso.',
+      'en': 'Enter your new password to access Mondaha.com.',
+      'pt': 'Digite sua nova senha para ter acesso ao Mondaha.com.',
     },
     '9zj7eekt': {
       'en': 'Password',
@@ -967,14 +1003,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     '50rar3l6': {
       'en': 'Recover ',
       'pt': 'Recuperar',
-    },
-    'rsong6b5': {
-      'en': 'Successfully !!',
-      'pt': 'Com sucesso!!',
-    },
-    'rawi67ub': {
-      'en': 'Password changed successfully!!!',
-      'pt': 'Senha alterada com sucesso!!!',
     },
     '0knewnwq': {
       'en': 'Field is required',
@@ -1019,6 +1047,94 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'gpdenzgp': {
       'en': 'Home',
       'pt': 'Home',
+    },
+  },
+  // auth_recover_email
+  {
+    'ygm07a49': {
+      'en': 'Recover password',
+      'pt': 'Recuperar senha',
+    },
+    'xmbhh4ei': {
+      'en':
+          'Enter your email to recover your password. After clicking the button we will send you a recovery link.',
+      'pt':
+          'Digite seu e-mail para recuperar sua senha. \nApós clicar no botão enviaremos um link de recuperação.',
+    },
+    'mng7jncf': {
+      'en': 'Recover email',
+      'pt': ' email de recuperação',
+    },
+    'fx6r9hhf': {
+      'en': 'email@dominio.com',
+      'pt': 'email@dominio.com',
+    },
+    'yjsfytps': {
+      'en': 'Send reset link',
+      'pt': 'Enviar link de redifinição...',
+    },
+    'mqrul54e': {
+      'en': 'Field is required',
+      'pt': 'Campo é obrigatório',
+    },
+    'jk8r2sq9': {
+      'en': 'Please choose an option from the dropdown',
+      'pt': 'Selecione uma opção no menu suspenso',
+    },
+    'husqbqvt': {
+      'en': 'Home',
+      'pt': 'Home',
+    },
+  },
+  // main_mapa
+  {
+    'wa6uy33a': {
+      'en': 'Location Map',
+      'pt': 'Mapa de Localização',
+    },
+    'eawkmt64': {
+      'en': 'Below is a summary of your Maps activity.',
+      'pt': 'Abaixo está um resumo das atividades no Mapas.',
+    },
+    'oq9nbr6l': {
+      'en': 'New Members',
+      'pt': 'Novos Membros',
+    },
+    'ox20jt0z': {
+      'en': 'New Factions',
+      'pt': 'Novas Facções',
+    },
+    'd8uzr996': {
+      'en': 'Add in the Map',
+      'pt': 'Adicionados no mapa',
+    },
+    '40ocudfw': {
+      'en': 'Active users',
+      'pt': 'Usuários ativos',
+    },
+    '2n5sg4v8': {
+      'en': '',
+      'pt': '',
+    },
+    '1s3qmbne': {
+      'en': 'Search ...',
+      'pt': 'Pesquisar...',
+    },
+    'f5tljsyg': {
+      'en': '',
+      'pt': '',
+    },
+    'a2gdp2rj': {
+      'en': 'Users in  adding registers',
+      'pt': 'Atualizações de registros por usuários',
+    },
+    'ywmyqjyf': {
+      'en': 'Dashboard',
+      'pt': 'Painel',
+    },
+    'bys57gqn': {
+      'en': '__',
+      'pt': '__',
     },
   },
   // modal_success
@@ -1161,6 +1277,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     '9pjba90p': {
       'en': 'Members',
       'pt': 'Membros',
+    },
+    'a4bp4t99': {
+      'en': 'Map',
+      'pt': 'Mapa',
     },
     '5s0d776i': {
       'en': 'Messages',
@@ -3207,8 +3327,8 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'pt': 'Cancelar',
     },
     'djvkekt3': {
-      'en': 'Save Changes',
-      'pt': 'Salvar alterações',
+      'en': 'Save ',
+      'pt': 'Salvar ',
     },
   },
   // modal_message_ok
@@ -4267,10 +4387,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Save Member',
       'pt': 'Salvar Membro',
     },
-    'uqhnzed2': {
-      'en': 'Some data is wrong!!!',
-      'pt': 'Número de Processo já existe !!!',
-    },
   },
   // user_details_membro_view
   {
@@ -4312,6 +4428,37 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     '7iog41rl': {
       'en': 'Search',
       'pt': 'Procurar',
+    },
+  },
+  // user_details_membro_maps_view
+  {
+    '442i4u9a': {
+      'en': 'Full Name',
+      'pt': 'Nome completo',
+    },
+    'qd9jf619': {
+      'en': 'Alert',
+      'pt': 'Alerta',
+    },
+    '8jfjci6q': {
+      'en': 'Nike name',
+      'pt': 'Alcunha',
+    },
+    '2fnyyp33': {
+      'en': 'Faction',
+      'pt': 'Facção',
+    },
+    '91nd9jtu': {
+      'en': 'Dates',
+      'pt': 'Dados',
+    },
+    'ba2q9kqo': {
+      'en': 'Historic',
+      'pt': 'Histórico',
+    },
+    'dsa97wej': {
+      'en': 'Direcciones',
+      'pt': 'Endereços',
     },
   },
   // Miscellaneous

@@ -31,6 +31,26 @@ class FFAppState extends ChangeNotifier {
           await secureStorage.getBool('ff_webbarminimal') ?? _webbarminimal;
     });
     await _safeInitAsync(() async {
+      _CountFaccoes =
+          await secureStorage.getInt('ff_CountFaccoes') ?? _CountFaccoes;
+    });
+    await _safeInitAsync(() async {
+      _CountMembros =
+          await secureStorage.getInt('ff_CountMembros') ?? _CountMembros;
+    });
+    await _safeInitAsync(() async {
+      _CountUsuarios =
+          await secureStorage.getInt('ff_CountUsuarios') ?? _CountUsuarios;
+    });
+    await _safeInitAsync(() async {
+      _CountUsuariosAtivos =
+          await secureStorage.getInt('ff_CountUsuariosAtivos') ??
+              _CountUsuariosAtivos;
+    });
+    await _safeInitAsync(() async {
+      _CountMaps = await secureStorage.getInt('ff_CountMaps') ?? _CountMaps;
+    });
+    await _safeInitAsync(() async {
       _UsuariosImagePathLight =
           await secureStorage.getString('ff_UsuariosImagePathLight') ??
               _UsuariosImagePathLight;
@@ -81,6 +101,15 @@ class FFAppState extends ChangeNotifier {
     await _safeInitAsync(() async {
       _versaoAtual =
           await secureStorage.getString('ff_versaoAtual') ?? _versaoAtual;
+    });
+    await _safeInitAsync(() async {
+      _agenciaPrincipal = await secureStorage.getInt('ff_agenciaPrincipal') ??
+          _agenciaPrincipal;
+    });
+    await _safeInitAsync(() async {
+      _backgroundImageUrl =
+          await secureStorage.getString('ff_backgroundImageUrl') ??
+              _backgroundImageUrl;
     });
   }
 
@@ -166,30 +195,55 @@ class FFAppState extends ChangeNotifier {
   int get CountFaccoes => _CountFaccoes;
   set CountFaccoes(int value) {
     _CountFaccoes = value;
+    secureStorage.setInt('ff_CountFaccoes', value);
+  }
+
+  void deleteCountFaccoes() {
+    secureStorage.delete(key: 'ff_CountFaccoes');
   }
 
   int _CountMembros = 0;
   int get CountMembros => _CountMembros;
   set CountMembros(int value) {
     _CountMembros = value;
+    secureStorage.setInt('ff_CountMembros', value);
+  }
+
+  void deleteCountMembros() {
+    secureStorage.delete(key: 'ff_CountMembros');
   }
 
   int _CountUsuarios = 0;
   int get CountUsuarios => _CountUsuarios;
   set CountUsuarios(int value) {
     _CountUsuarios = value;
+    secureStorage.setInt('ff_CountUsuarios', value);
+  }
+
+  void deleteCountUsuarios() {
+    secureStorage.delete(key: 'ff_CountUsuarios');
   }
 
   int _CountUsuariosAtivos = 0;
   int get CountUsuariosAtivos => _CountUsuariosAtivos;
   set CountUsuariosAtivos(int value) {
     _CountUsuariosAtivos = value;
+    secureStorage.setInt('ff_CountUsuariosAtivos', value);
+  }
+
+  void deleteCountUsuariosAtivos() {
+    secureStorage.delete(key: 'ff_CountUsuariosAtivos');
   }
 
   int _CountMaps = 0;
   int get CountMaps => _CountMaps;
   set CountMaps(int value) {
     _CountMaps = value;
+    secureStorage.setInt('ff_CountMaps', value);
+  }
+
+  void deleteCountMaps() {
+    secureStorage.delete(key: 'ff_CountMaps');
   }
 
   bool _UsuarioLiberado = false;
@@ -436,6 +490,41 @@ class FFAppState extends ChangeNotifier {
 
   void deleteVersaoAtual() {
     secureStorage.delete(key: 'ff_versaoAtual');
+  }
+
+  int _agenciaPrincipal = 4;
+  int get agenciaPrincipal => _agenciaPrincipal;
+  set agenciaPrincipal(int value) {
+    _agenciaPrincipal = value;
+    secureStorage.setInt('ff_agenciaPrincipal', value);
+  }
+
+  void deleteAgenciaPrincipal() {
+    secureStorage.delete(key: 'ff_agenciaPrincipal');
+  }
+
+  String _backgroundImageUrl =
+      'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/51ztd47merzk/mondaha-chegii-fundo.png';
+  String get backgroundImageUrl => _backgroundImageUrl;
+  set backgroundImageUrl(String value) {
+    _backgroundImageUrl = value;
+    secureStorage.setString('ff_backgroundImageUrl', value);
+  }
+
+  void deleteBackgroundImageUrl() {
+    secureStorage.delete(key: 'ff_backgroundImageUrl');
+  }
+
+  bool _buscarMapa = true;
+  bool get buscarMapa => _buscarMapa;
+  set buscarMapa(bool value) {
+    _buscarMapa = value;
+  }
+
+  LatLng? _coordAlagoas = LatLng(-9.5713058, -36.7819505);
+  LatLng? get coordAlagoas => _coordAlagoas;
+  set coordAlagoas(LatLng? value) {
+    _coordAlagoas = value;
   }
 }
 

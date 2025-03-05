@@ -1,3 +1,4 @@
+import '';
 import '/backend/supabase/supabase.dart';
 import '/components/modal/modal_membros_add/modal_membros_add_widget.dart';
 import '/components/modal/modal_membros_edit/modal_membros_edit_widget.dart';
@@ -54,7 +55,7 @@ class MainMembrosModel extends FlutterFlowModel<MainMembrosWidget> {
           int index, Function(MembrosViewPdfRow) updateFn) =>
       pdfMembrosSearch[index] = updateFn(pdfMembrosSearch[index]);
 
-  int countMembrosSearch = 0;
+  int countMembros = 0;
 
   ///  State fields for stateful widgets in this page.
 
@@ -79,6 +80,8 @@ class MainMembrosModel extends FlutterFlowModel<MainMembrosWidget> {
 
   // Stores action output result for [Backend Call - Query Rows] action in ListViewMembros widget.
   List<MembrosViewConcatSeachRow>? outputCountMembrosSearch;
+  // Stores action output result for [Backend Call - Query Rows] action in ListViewmMembrosSeach widget.
+  List<MembrosViewConcatSeachRow>? outputCountMembrosSearch2;
 
   @override
   void initState(BuildContext context) {

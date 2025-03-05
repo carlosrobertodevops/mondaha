@@ -3,6 +3,8 @@ import '/components/modal/modal_faccao_edit/modal_faccao_edit_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'dart:ui';
 import '/index.dart';
+import 'package:community_testing_ryusdv/app_state.dart'
+    as community_testing_ryusdv_app_state;
 import 'package:ff_theme/flutter_flow/flutter_flow_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -49,6 +51,9 @@ class _DropdownFaccaoEditWidgetState extends State<DropdownFaccaoEditWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+    context.watch<community_testing_ryusdv_app_state.FFAppState>();
+
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -317,107 +322,111 @@ class _DropdownFaccaoEditWidgetState extends State<DropdownFaccaoEditWidget> {
                   MouseRegion(
                     opaque: false,
                     cursor: MouseCursor.defer ?? MouseCursor.defer,
-                    child: InkWell(
-                      splashColor: Colors.transparent,
-                      focusColor: Colors.transparent,
-                      hoverColor: Colors.transparent,
-                      highlightColor: Colors.transparent,
-                      onTap: () async {
-                        logFirebaseEvent(
-                            'DROPDOWN_FACCAO_EDIT_component_ON_TAP');
-                        var confirmDialogResponse = await showDialog<bool>(
-                              context: context,
-                              builder: (alertDialogContext) {
-                                return AlertDialog(
-                                  title: Text('APAGAR'),
-                                  content: Text(
-                                      'Deseja APAGAR o registro selecionado ?'),
-                                  actions: [
-                                    TextButton(
-                                      onPressed: () => Navigator.pop(
-                                          alertDialogContext, false),
-                                      child: Text('Cancelar'),
-                                    ),
-                                    TextButton(
-                                      onPressed: () => Navigator.pop(
-                                          alertDialogContext, true),
-                                      child: Text('Confirmar'),
-                                    ),
-                                  ],
-                                );
-                              },
-                            ) ??
-                            false;
-                        if (confirmDialogResponse) {
-                          await FaccoesTable().delete(
-                            matchingRows: (rows) => rows.eqOrNull(
-                              'faccao_id',
-                              widget!.faccaoid?.faccaoId,
-                            ),
-                          );
-
-                          context.pushNamed(MainFaccoesWidget.routeName);
-                        } else {
-                          context.pushNamed(MainFaccoesWidget.routeName);
-                        }
-                      },
-                      child: AnimatedContainer(
-                        duration: Duration(milliseconds: 150),
-                        curve: Curves.easeInOut,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: _model.mouseRegionHovered4!
-                              ? FlutterFlowTheme.of(context).primaryBackground
-                              : FlutterFlowTheme.of(context)
-                                  .secondaryBackground,
-                          borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(4.0),
-                            bottomRight: Radius.circular(4.0),
-                            topLeft: Radius.circular(0.0),
-                            topRight: Radius.circular(0.0),
-                          ),
-                        ),
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              0.0, 8.0, 0.0, 8.0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    12.0, 0.0, 0.0, 0.0),
-                                child: Icon(
-                                  Icons.delete_outline_rounded,
-                                  color: FlutterFlowTheme.of(context).error,
-                                  size: 20.0,
-                                ),
+                    child: Visibility(
+                      visible: FFAppState().AgenciaAtualld ==
+                          FFAppState().agenciaPrincipal,
+                      child: InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        onTap: () async {
+                          logFirebaseEvent(
+                              'DROPDOWN_FACCAO_EDIT_component_ON_TAP');
+                          var confirmDialogResponse = await showDialog<bool>(
+                                context: context,
+                                builder: (alertDialogContext) {
+                                  return AlertDialog(
+                                    title: Text('APAGAR'),
+                                    content: Text(
+                                        'Deseja APAGAR o registro selecionado ?'),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () => Navigator.pop(
+                                            alertDialogContext, false),
+                                        child: Text('Cancelar'),
+                                      ),
+                                      TextButton(
+                                        onPressed: () => Navigator.pop(
+                                            alertDialogContext, true),
+                                        child: Text('Confirmar'),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              ) ??
+                              false;
+                          if (confirmDialogResponse) {
+                            await FaccoesTable().delete(
+                              matchingRows: (rows) => rows.eqOrNull(
+                                'faccao_id',
+                                widget!.faccaoid?.faccaoId,
                               ),
-                              Expanded(
-                                child: Padding(
+                            );
+
+                            context.pushNamed(MainFaccoesWidget.routeName);
+                          } else {
+                            context.pushNamed(MainFaccoesWidget.routeName);
+                          }
+                        },
+                        child: AnimatedContainer(
+                          duration: Duration(milliseconds: 150),
+                          curve: Curves.easeInOut,
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            color: _model.mouseRegionHovered4!
+                                ? FlutterFlowTheme.of(context).primaryBackground
+                                : FlutterFlowTheme.of(context)
+                                    .secondaryBackground,
+                            borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(4.0),
+                              bottomRight: Radius.circular(4.0),
+                              topLeft: Radius.circular(0.0),
+                              topRight: Radius.circular(0.0),
+                            ),
+                          ),
+                          child: Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 8.0, 0.0, 8.0),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       12.0, 0.0, 0.0, 0.0),
-                                  child: Text(
-                                    FFLocalizations.of(context).getText(
-                                      'vu30hinr' /* Delete */,
-                                    ),
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          fontFamily:
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyMediumFamily,
-                                          color: FlutterFlowTheme.of(context)
-                                              .error,
-                                          letterSpacing: 0.0,
-                                          useGoogleFonts: GoogleFonts.asMap()
-                                              .containsKey(
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMediumFamily),
-                                        ),
+                                  child: Icon(
+                                    Icons.delete_outline_rounded,
+                                    color: FlutterFlowTheme.of(context).error,
+                                    size: 20.0,
                                   ),
                                 ),
-                              ),
-                            ],
+                                Expanded(
+                                  child: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        12.0, 0.0, 0.0, 0.0),
+                                    child: Text(
+                                      FFLocalizations.of(context).getText(
+                                        'vu30hinr' /* Delete */,
+                                      ),
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMediumFamily,
+                                            color: FlutterFlowTheme.of(context)
+                                                .error,
+                                            letterSpacing: 0.0,
+                                            useGoogleFonts: GoogleFonts.asMap()
+                                                .containsKey(
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMediumFamily),
+                                          ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),

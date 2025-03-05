@@ -1,4 +1,6 @@
+import '';
 import '/backend/supabase/supabase.dart';
+import '/components/toasts/toast04/toast04_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -277,11 +279,6 @@ class _ModalProfileEditAdminWidgetState
                                               <FFUploadedFile>[];
 
                                           try {
-                                            showUploadMessage(
-                                              context,
-                                              'Uploading file...',
-                                              showLoading: true,
-                                            );
                                             selectedUploadedFiles =
                                                 selectedMedia
                                                     .map((m) => FFUploadedFile(
@@ -297,8 +294,6 @@ class _ModalProfileEditAdminWidgetState
                                                         ))
                                                     .toList();
                                           } finally {
-                                            ScaffoldMessenger.of(context)
-                                                .hideCurrentSnackBar();
                                             _model.isDataUploading1 = false;
                                           }
                                           if (selectedUploadedFiles.length ==
@@ -307,12 +302,8 @@ class _ModalProfileEditAdminWidgetState
                                               _model.uploadedLocalFile1 =
                                                   selectedUploadedFiles.first;
                                             });
-                                            showUploadMessage(
-                                                context, 'Success!');
                                           } else {
                                             safeSetState(() {});
-                                            showUploadMessage(context,
-                                                'Failed to upload data');
                                             return;
                                           }
                                         }
@@ -335,7 +326,7 @@ class _ModalProfileEditAdminWidgetState
                                         ),
                                         child: Stack(
                                           children: [
-                                            if (_model.uploadAdminImagemTemp ==
+                                            if (_model.isDataUploading1 ==
                                                 false)
                                               Padding(
                                                 padding: EdgeInsets.all(2.0),
@@ -351,12 +342,36 @@ class _ModalProfileEditAdminWidgetState
                                                         milliseconds: 10),
                                                     fadeOutDuration: Duration(
                                                         milliseconds: 10),
-                                                    imageUrl:
-                                                        valueOrDefault<String>(
-                                                      widget!.usuariosRow
-                                                          ?.fotoPath,
-                                                      'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/fg8v0c6ta78d/account_circle_outline_icon_140062.png',
-                                                    ),
+                                                    imageUrl: widget!
+                                                                    .usuariosRow
+                                                                    ?.fotoPath !=
+                                                                null &&
+                                                            widget!.usuariosRow
+                                                                    ?.fotoPath !=
+                                                                ''
+                                                        ? widget!.usuariosRow!
+                                                            .fotoPath!
+                                                        : valueOrDefault<
+                                                            String>(
+                                                            (Theme.of(context)
+                                                                            .brightness ==
+                                                                        Brightness
+                                                                            .light) ==
+                                                                    true
+                                                                ? valueOrDefault<
+                                                                    String>(
+                                                                    FFAppState()
+                                                                        .UsuariosImagePathLight,
+                                                                    'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/knv28f1mlohg/account_circle_24dp_99999_FILL0_wght400_GRAD0_opsz24.png',
+                                                                  )
+                                                                : valueOrDefault<
+                                                                    String>(
+                                                                    FFAppState()
+                                                                        .UsuariosImagePathDark,
+                                                                    'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/0p4owp0uortf/account_circle_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.png',
+                                                                  ),
+                                                            'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/mondaha-be2293/assets/79wfovohiaq7/account_circle_96dp_99999_FILL0_wght400_GRAD0_opsz48.png',
+                                                          ),
                                                     fit: BoxFit.fitWidth,
                                                     errorWidget: (context,
                                                             error,
@@ -368,8 +383,7 @@ class _ModalProfileEditAdminWidgetState
                                                   ),
                                                 ),
                                               ),
-                                            if (_model.uploadAdminImagemTemp ==
-                                                true)
+                                            if (_model.isDataUploading1 == true)
                                               Padding(
                                                 padding: EdgeInsets.all(2.0),
                                                 child: Container(
@@ -1009,208 +1023,228 @@ class _ModalProfileEditAdminWidgetState
                                 ),
                                 Align(
                                   alignment: AlignmentDirectional(0.0, 0.05),
-                                  child: FFButtonWidget(
-                                    onPressed: () async {
-                                      logFirebaseEvent(
-                                          'MODAL_PROFILE_EDIT_ADMIN_SAVE_CHANGES_BT');
-                                      var confirmDialogResponse =
-                                          await showDialog<bool>(
-                                                context: context,
-                                                builder: (alertDialogContext) {
-                                                  return AlertDialog(
-                                                    title: Text('SALVAR'),
-                                                    content: Text(
-                                                        'Deseja SALVAR os dados ?'),
-                                                    actions: [
-                                                      TextButton(
-                                                        onPressed: () =>
-                                                            Navigator.pop(
-                                                                alertDialogContext,
-                                                                false),
-                                                        child: Text('Cancelar'),
-                                                      ),
-                                                      TextButton(
-                                                        onPressed: () =>
-                                                            Navigator.pop(
-                                                                alertDialogContext,
-                                                                true),
-                                                        child:
-                                                            Text('Confirmar'),
-                                                      ),
-                                                    ],
-                                                  );
-                                                },
-                                              ) ??
-                                              false;
-                                      if (confirmDialogResponse) {
-                                        if (_model.uploadAdminImagemTemp) {
-                                          await deleteSupabaseFileFromPublicUrl(
-                                              widget!.usuariosRow?.fotoPath !=
-                                                      ''
-                                                  ? widget!
-                                                      .usuariosRow!.fotoPath!
-                                                  : '');
-                                          {
-                                            safeSetState(() =>
-                                                _model.isDataUploading2 = true);
-                                            var selectedUploadedFiles =
-                                                <FFUploadedFile>[];
-                                            var selectedMedia =
-                                                <SelectedFile>[];
-                                            var downloadUrls = <String>[];
-                                            try {
-                                              selectedUploadedFiles = _model
-                                                      .uploadedLocalFile1
-                                                      .bytes!
-                                                      .isNotEmpty
-                                                  ? [_model.uploadedLocalFile1]
-                                                  : <FFUploadedFile>[];
-                                              selectedMedia =
-                                                  selectedFilesFromUploadedFiles(
-                                                selectedUploadedFiles,
-                                                storageFolderPath: 'usuarios',
-                                              );
-                                              downloadUrls =
-                                                  await uploadSupabaseStorageFiles(
-                                                bucketName: 'uploads',
-                                                selectedFiles: selectedMedia,
-                                              );
-                                            } finally {
-                                              _model.isDataUploading2 = false;
+                                  child: Builder(
+                                    builder: (context) => FFButtonWidget(
+                                      onPressed: () async {
+                                        logFirebaseEvent(
+                                            'MODAL_PROFILE_EDIT_ADMIN_SAVE_BTN_ON_TAP');
+                                        var _shouldSetState = false;
+                                        var confirmDialogResponse =
+                                            await showDialog<bool>(
+                                                  context: context,
+                                                  builder:
+                                                      (alertDialogContext) {
+                                                    return AlertDialog(
+                                                      title: Text('SALVAR'),
+                                                      content: Text(
+                                                          'Deseja SALVAR os dados ?'),
+                                                      actions: [
+                                                        TextButton(
+                                                          onPressed: () =>
+                                                              Navigator.pop(
+                                                                  alertDialogContext,
+                                                                  false),
+                                                          child:
+                                                              Text('Cancelar'),
+                                                        ),
+                                                        TextButton(
+                                                          onPressed: () =>
+                                                              Navigator.pop(
+                                                                  alertDialogContext,
+                                                                  true),
+                                                          child:
+                                                              Text('Confirmar'),
+                                                        ),
+                                                      ],
+                                                    );
+                                                  },
+                                                ) ??
+                                                false;
+                                        if (confirmDialogResponse) {
+                                          if (_model.isDataUploading1) {
+                                            await deleteSupabaseFileFromPublicUrl(
+                                                widget!.usuariosRow?.fotoPath !=
+                                                        ''
+                                                    ? widget!
+                                                        .usuariosRow!.fotoPath!
+                                                    : '');
+                                            {
+                                              safeSetState(() => _model
+                                                  .isDataUploading2 = true);
+                                              var selectedUploadedFiles =
+                                                  <FFUploadedFile>[];
+                                              var selectedMedia =
+                                                  <SelectedFile>[];
+                                              var downloadUrls = <String>[];
+                                              try {
+                                                selectedUploadedFiles = _model
+                                                        .uploadedLocalFile1
+                                                        .bytes!
+                                                        .isNotEmpty
+                                                    ? [
+                                                        _model
+                                                            .uploadedLocalFile1
+                                                      ]
+                                                    : <FFUploadedFile>[];
+                                                selectedMedia =
+                                                    selectedFilesFromUploadedFiles(
+                                                  selectedUploadedFiles,
+                                                  storageFolderPath: 'usuarios',
+                                                );
+                                                downloadUrls =
+                                                    await uploadSupabaseStorageFiles(
+                                                  bucketName: 'uploads',
+                                                  selectedFiles: selectedMedia,
+                                                );
+                                              } finally {
+                                                _model.isDataUploading2 = false;
+                                              }
+                                              if (selectedUploadedFiles
+                                                          .length ==
+                                                      selectedMedia.length &&
+                                                  downloadUrls.length ==
+                                                      selectedMedia.length) {
+                                                safeSetState(() {
+                                                  _model.uploadedLocalFile2 =
+                                                      selectedUploadedFiles
+                                                          .first;
+                                                  _model.uploadedFileUrl2 =
+                                                      downloadUrls.first;
+                                                });
+                                              } else {
+                                                safeSetState(() {});
+                                                return;
+                                              }
                                             }
-                                            if (selectedUploadedFiles.length ==
-                                                    selectedMedia.length &&
-                                                downloadUrls.length ==
-                                                    selectedMedia.length) {
-                                              safeSetState(() {
-                                                _model.uploadedLocalFile2 =
-                                                    selectedUploadedFiles.first;
-                                                _model.uploadedFileUrl2 =
-                                                    downloadUrls.first;
-                                              });
-                                            } else {
-                                              safeSetState(() {});
-                                              return;
-                                            }
+
+                                            await UsuariosTable().update(
+                                              data: {
+                                                'nome_completo': _model
+                                                    .txtNomeCompletoTextController
+                                                    .text,
+                                                'foto_path':
+                                                    _model.uploadedFileUrl2,
+                                                'descricao': _model
+                                                    .txtDescricaoTextController
+                                                    .text,
+                                                'agencia_id':
+                                                    _model.ddwAgenciaValue,
+                                                'acesso_at':
+                                                    supaSerialize<DateTime>(
+                                                        getCurrentTimestamp),
+                                              },
+                                              matchingRows: (rows) =>
+                                                  rows.eqOrNull(
+                                                'usuario_id',
+                                                widget!.usuariosRow?.usuarioId,
+                                              ),
+                                            );
+                                            _shouldSetState = true;
+                                          } else {
+                                            await UsuariosTable().update(
+                                              data: {
+                                                'nome_completo': _model
+                                                    .txtNomeCompletoTextController
+                                                    .text,
+                                                'descricao': _model
+                                                    .txtDescricaoTextController
+                                                    .text,
+                                                'agencia_id':
+                                                    _model.ddwAgenciaValue,
+                                                'acesso_at':
+                                                    supaSerialize<DateTime>(
+                                                        getCurrentTimestamp),
+                                              },
+                                              matchingRows: (rows) =>
+                                                  rows.eqOrNull(
+                                                'usuario_id',
+                                                widget!.usuariosRow?.usuarioId,
+                                              ),
+                                            );
+                                            _shouldSetState = true;
                                           }
 
-                                          await UsuariosTable().update(
-                                            data: {
-                                              'nome_completo': _model
-                                                  .txtNomeCompletoTextController
-                                                  .text,
-                                              'foto_path':
-                                                  _model.uploadedFileUrl2,
-                                              'descricao': _model
-                                                  .txtDescricaoTextController
-                                                  .text,
-                                              'agencia_id':
-                                                  _model.ddwAgenciaValue,
-                                              'acesso_at':
-                                                  supaSerialize<DateTime>(
-                                                      getCurrentTimestamp),
+                                          context.pushNamed(
+                                              MainAdminWidget.routeName);
+
+                                          await showDialog(
+                                            context: context,
+                                            builder: (dialogContext) {
+                                              return Dialog(
+                                                elevation: 0,
+                                                insetPadding: EdgeInsets.zero,
+                                                backgroundColor:
+                                                    Colors.transparent,
+                                                alignment: AlignmentDirectional(
+                                                        0.0, 0.0)
+                                                    .resolve(Directionality.of(
+                                                        context)),
+                                                child: Toast04Widget(
+                                                  titulo: 'Facções',
+                                                  texto:
+                                                      'Informações Salvas com Sucesso !!!',
+                                                ),
+                                              );
                                             },
-                                            matchingRows: (rows) =>
-                                                rows.eqOrNull(
-                                              'usuario_id',
-                                              widget!.usuariosRow?.usuarioId,
-                                            ),
                                           );
+
+                                          if (_shouldSetState)
+                                            safeSetState(() {});
+                                          return;
                                         } else {
-                                          await UsuariosTable().update(
-                                            data: {
-                                              'nome_completo': _model
-                                                  .txtNomeCompletoTextController
-                                                  .text,
-                                              'descricao': _model
-                                                  .txtDescricaoTextController
-                                                  .text,
-                                              'agencia_id':
-                                                  _model.ddwAgenciaValue,
-                                              'acesso_at':
-                                                  supaSerialize<DateTime>(
-                                                      getCurrentTimestamp),
-                                            },
-                                            matchingRows: (rows) =>
-                                                rows.eqOrNull(
-                                              'usuario_id',
-                                              widget!.usuariosRow?.usuarioId,
-                                            ),
-                                          );
+                                          if (_shouldSetState)
+                                            safeSetState(() {});
+                                          return;
                                         }
 
-                                        context.pushNamed(
-                                            MainAdminWidget.routeName);
-
-                                        Navigator.pop(context);
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(
-                                          SnackBar(
-                                            content: Text(
-                                              'Dados ATUALIZADOS com sucesso !',
-                                              style: TextStyle(
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryText,
-                                              ),
-                                            ),
-                                            duration:
-                                                Duration(milliseconds: 4000),
-                                            backgroundColor:
-                                                FlutterFlowTheme.of(context)
-                                                    .success,
-                                          ),
-                                        );
-                                      } else {
-                                        context.pushNamed(
-                                            MainAdminWidget.routeName);
-
-                                        Navigator.pop(context);
-                                      }
-
-                                      safeSetState(() {});
-                                    },
-                                    text: FFLocalizations.of(context).getText(
-                                      'djvkekt3' /* Save Changes */,
-                                    ),
-                                    options: FFButtonOptions(
-                                      height: 40.0,
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          24.0, 0.0, 24.0, 0.0),
-                                      iconPadding:
-                                          EdgeInsetsDirectional.fromSTEB(
-                                              0.0, 0.0, 0.0, 0.0),
-                                      color:
-                                          FlutterFlowTheme.of(context).primary,
-                                      textStyle: FlutterFlowTheme.of(context)
-                                          .titleSmall
-                                          .override(
-                                            fontFamily:
-                                                FlutterFlowTheme.of(context)
-                                                    .titleSmallFamily,
-                                            letterSpacing: 0.0,
-                                            useGoogleFonts: GoogleFonts.asMap()
-                                                .containsKey(
-                                                    FlutterFlowTheme.of(context)
-                                                        .titleSmallFamily),
-                                          ),
-                                      elevation: 3.0,
-                                      borderSide: BorderSide(
-                                        color: Colors.transparent,
-                                        width: 1.0,
+                                        if (_shouldSetState)
+                                          safeSetState(() {});
+                                      },
+                                      text: FFLocalizations.of(context).getText(
+                                        'djvkekt3' /* Save  */,
                                       ),
-                                      borderRadius: BorderRadius.circular(12.0),
-                                      hoverColor:
-                                          FlutterFlowTheme.of(context).accent1,
-                                      hoverBorderSide: BorderSide(
+                                      options: FFButtonOptions(
+                                        height: 40.0,
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            24.0, 0.0, 24.0, 0.0),
+                                        iconPadding:
+                                            EdgeInsetsDirectional.fromSTEB(
+                                                0.0, 0.0, 0.0, 0.0),
                                         color: FlutterFlowTheme.of(context)
                                             .primary,
-                                        width: 1.0,
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .titleSmall
+                                            .override(
+                                              fontFamily:
+                                                  FlutterFlowTheme.of(context)
+                                                      .titleSmallFamily,
+                                              letterSpacing: 0.0,
+                                              useGoogleFonts: GoogleFonts
+                                                      .asMap()
+                                                  .containsKey(
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .titleSmallFamily),
+                                            ),
+                                        elevation: 3.0,
+                                        borderSide: BorderSide(
+                                          color: Colors.transparent,
+                                          width: 1.0,
+                                        ),
+                                        borderRadius:
+                                            BorderRadius.circular(12.0),
+                                        hoverColor: FlutterFlowTheme.of(context)
+                                            .accent1,
+                                        hoverBorderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context)
+                                              .primary,
+                                          width: 1.0,
+                                        ),
+                                        hoverTextColor:
+                                            FlutterFlowTheme.of(context)
+                                                .primaryText,
+                                        hoverElevation: 0.0,
                                       ),
-                                      hoverTextColor:
-                                          FlutterFlowTheme.of(context)
-                                              .primaryText,
-                                      hoverElevation: 0.0,
                                     ),
                                   ),
                                 ),

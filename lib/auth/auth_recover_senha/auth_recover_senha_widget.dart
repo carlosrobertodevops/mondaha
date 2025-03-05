@@ -1,6 +1,7 @@
 import '/auth/supabase_auth/auth_util.dart';
 import '/components/toasts/toast04/toast04_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
+import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:math';
@@ -15,27 +16,27 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'auth_recover_model.dart';
-export 'auth_recover_model.dart';
+import 'auth_recover_senha_model.dart';
+export 'auth_recover_senha_model.dart';
 
-class AuthRecoverWidget extends StatefulWidget {
-  const AuthRecoverWidget({
+class AuthRecoverSenhaWidget extends StatefulWidget {
+  const AuthRecoverSenhaWidget({
     super.key,
     this.emailUsuario,
   });
 
   final String? emailUsuario;
 
-  static String routeName = 'auth_recover';
-  static String routePath = 'authRecover';
+  static String routeName = 'auth_recover_senha';
+  static String routePath = 'authRecoverSenha';
 
   @override
-  State<AuthRecoverWidget> createState() => _AuthRecoverWidgetState();
+  State<AuthRecoverSenhaWidget> createState() => _AuthRecoverSenhaWidgetState();
 }
 
-class _AuthRecoverWidgetState extends State<AuthRecoverWidget>
+class _AuthRecoverSenhaWidgetState extends State<AuthRecoverSenhaWidget>
     with TickerProviderStateMixin {
-  late AuthRecoverModel _model;
+  late AuthRecoverSenhaModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -44,10 +45,10 @@ class _AuthRecoverWidgetState extends State<AuthRecoverWidget>
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => AuthRecoverModel());
+    _model = createModel(context, () => AuthRecoverSenhaModel());
 
     logFirebaseEvent('screen_view',
-        parameters: {'screen_name': 'auth_recover'});
+        parameters: {'screen_name': 'auth_recover_senha'});
     _model.tabBarController = TabController(
       vsync: this,
       length: 1,
@@ -104,7 +105,7 @@ class _AuthRecoverWidgetState extends State<AuthRecoverWidget>
     context.watch<community_testing_ryusdv_app_state.FFAppState>();
 
     return Title(
-        title: 'auth_recover',
+        title: 'auth_recover_senha',
         color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
         child: GestureDetector(
           onTap: () {
@@ -129,13 +130,33 @@ class _AuthRecoverWidgetState extends State<AuthRecoverWidget>
                       ),
                       alignment: AlignmentDirectional(0.0, -1.0),
                       child: Align(
-                        alignment: AlignmentDirectional(-1.0, 1.0),
+                        alignment: AlignmentDirectional(-1.0, -1.0),
                         child: SingleChildScrollView(
                           primary: false,
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
+                              Align(
+                                alignment: AlignmentDirectional(-1.0, -1.0),
+                                child: FlutterFlowIconButton(
+                                  borderRadius: 8.0,
+                                  buttonSize: 40.0,
+                                  fillColor:
+                                      FlutterFlowTheme.of(context).primary,
+                                  icon: Icon(
+                                    Icons.arrow_back,
+                                    color: FlutterFlowTheme.of(context).info,
+                                    size: 24.0,
+                                  ),
+                                  onPressed: () async {
+                                    logFirebaseEvent(
+                                        'AUTH_RECOVER_SENHA_arrow_back_ICN_ON_TAP');
+
+                                    context.goNamed(AuthLoginWidget.routeName);
+                                  },
+                                ),
+                              ),
                               Container(
                                 width: double.infinity,
                                 constraints: BoxConstraints(
@@ -199,9 +220,7 @@ class _AuthRecoverWidgetState extends State<AuthRecoverWidget>
                                               EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 0.0, 0.0, 16.0),
                                           child: Text(
-                                            FFLocalizations.of(context).getText(
-                                              '4dd14s4x' /* Beta Version 1.0.1. 2025 */,
-                                            ),
+                                            FFAppState().versaoAtual,
                                             textAlign: TextAlign.start,
                                             style: FlutterFlowTheme.of(context)
                                                 .labelMedium
@@ -233,7 +252,7 @@ class _AuthRecoverWidgetState extends State<AuthRecoverWidget>
                                 alignment: AlignmentDirectional(0.0, 1.0),
                                 child: Container(
                                   width: double.infinity,
-                                  height: 600.0,
+                                  height: 450.0,
                                   constraints: BoxConstraints(
                                     maxWidth: 600.0,
                                   ),
@@ -324,7 +343,7 @@ class _AuthRecoverWidgetState extends State<AuthRecoverWidget>
                                                       text: FFLocalizations.of(
                                                               context)
                                                           .getText(
-                                                        '1wq5pp7h' /* Recover password */,
+                                                        '1wq5pp7h' /* New Password */,
                                                       ),
                                                     ),
                                                   ],
@@ -374,7 +393,7 @@ class _AuthRecoverWidgetState extends State<AuthRecoverWidget>
                                                             FFLocalizations.of(
                                                                     context)
                                                                 .getText(
-                                                              'jh9qy90n' /* Enter your new password to reg... */,
+                                                              'jh9qy90n' /* Enter your new password to acc... */,
                                                             ),
                                                             textAlign:
                                                                 TextAlign.start,
@@ -707,7 +726,7 @@ class _AuthRecoverWidgetState extends State<AuthRecoverWidget>
                                                                 onPressed:
                                                                     () async {
                                                                   logFirebaseEvent(
-                                                                      'AUTH_RECOVER_PAGE_btn-signin_ON_TAP');
+                                                                      'AUTH_RECOVER_SENHA_btn-signin_ON_TAP');
                                                                   await authManager
                                                                       .updatePassword(
                                                                     newPassword:
@@ -742,14 +761,15 @@ class _AuthRecoverWidgetState extends State<AuthRecoverWidget>
                                                                             FocusManager.instance.primaryFocus?.unfocus();
                                                                           },
                                                                           child:
-                                                                              Toast04Widget(
-                                                                            titulo:
-                                                                                FFLocalizations.of(context).getText(
-                                                                              'rsong6b5' /* Successfully !! */,
-                                                                            ),
-                                                                            texto:
-                                                                                FFLocalizations.of(context).getText(
-                                                                              'rawi67ub' /* Password changed successfully!... */,
+                                                                              Container(
+                                                                            height:
+                                                                                100.0,
+                                                                            width:
+                                                                                300.0,
+                                                                            child:
+                                                                                Toast04Widget(
+                                                                              titulo: 'Sucesso !!!',
+                                                                              texto: 'Senha alterada com sucesso!!!',
                                                                             ),
                                                                           ),
                                                                         ),
@@ -757,17 +777,7 @@ class _AuthRecoverWidgetState extends State<AuthRecoverWidget>
                                                                     },
                                                                   );
 
-                                                                  safeSetState(
-                                                                      () {
-                                                                    _model
-                                                                        .txtRecoverPasswordTextController
-                                                                        ?.clear();
-                                                                    _model
-                                                                        .txtRecoverConfirmTextController
-                                                                        ?.clear();
-                                                                  });
-
-                                                                  context.pushNamedAuth(
+                                                                  context.goNamedAuth(
                                                                       AuthLoginWidget
                                                                           .routeName,
                                                                       context
